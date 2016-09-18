@@ -155,4 +155,10 @@
     from user
     where USERNAME = #{USERNAME,jdbcType=VARCHAR}
   </select>
+  <select id="selectIdRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from user where ID >= #{ST} and ID <= #{ED}
+    ]]>
+  </select>
+  
 </mapper>

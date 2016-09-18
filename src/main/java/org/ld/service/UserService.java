@@ -1,5 +1,7 @@
 package org.ld.service;
 
+import java.util.List;
+
 import org.ld.model.User;
 
 
@@ -13,4 +15,6 @@ public interface UserService {
 	
 	// 插入一个用户
 	int insert(User userInfo);
+	
+	List<User> selectUserRange(int st, int ed);
 }

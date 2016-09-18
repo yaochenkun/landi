@@ -6,8 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-
+import org.ld.app.CurEnv;
 /* 用户登录拦截器  */
 public class LoginIntercepter implements HandlerInterceptor{
 	
@@ -24,7 +23,7 @@ public class LoginIntercepter implements HandlerInterceptor{
 		
 		//判断session，用户是否登录
 		HttpSession session = request.getSession();
-		String name = (String) session.getAttribute("name");
+		CurEnv name = (CurEnv) session.getAttribute("CUR_ENV");
 		if(name != null){
 			//用户已登录，放行 
 			return true;

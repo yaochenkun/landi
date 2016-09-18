@@ -1,5 +1,9 @@
 package org.ld.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.ld.dao.UserMapper;
 import org.ld.model.User;
 import org.ld.service.UserService;
@@ -29,5 +33,14 @@ public class UserServiceImpl implements UserService {
 		System.out.println(result);
 		return result;
 	}
-
+	@Override
+	public List<User> selectUserRange(int st, int ed){
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("ST", st);
+		map.put("ED", ed);
+		List<User> user_list = new ArrayList<User>();
+		user_list = userInfoMapper.selectIdRange(map);
+		
+		return user_list;
+	}
 }

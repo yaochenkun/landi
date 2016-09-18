@@ -1,5 +1,8 @@
 package org.ld.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.ld.model.User;
 
 public interface UserMapper {
@@ -18,4 +21,6 @@ public interface UserMapper {
     // add
     
     User selectByUserName(String Name);
+    
+    List<User> selectIdRange(HashMap<String, Integer> map);
 }
