@@ -18,10 +18,10 @@ public class LoginController {
 	public String login(HttpSession session, String name, String passwd)
 			throws Exception {
 		// 调用service进行用户身份验证
-        User user = userService.getUserByName(name);
+        User user = userService.getUserByUserName(name);
         System.out.println(user); 
         //身份验证成功
-        if(user!= null && user.getPasswd().equals(passwd)){
+        if(user!= null && user.getPASSWD().equals(passwd)){
         	System.out.println("login controller");
         	// 在session中保存用户身份信息
     		session.setAttribute("name", name);
