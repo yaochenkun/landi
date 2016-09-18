@@ -106,7 +106,7 @@
             </div>
             <!-- 筛选标签 end -->
 
-            <div class="btn btn-search">筛选123</div>
+            <div class="btn btn-search">筛选</div>
 
             <!-- 新增房间 start-->
             <div class="new">
