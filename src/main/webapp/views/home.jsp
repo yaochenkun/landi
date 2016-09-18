@@ -46,61 +46,7 @@
   </nav> 
   <!-- 业务主页 导航栏 end-->
 
-  <!--业务菜单 start-->
-  <div id="business_box" class="container">
-      <ul>
-        <li class="business_li li0">
-          <h5>租客管理</h5>
-          <ul class="menu menu0">
-            <li>新增租客</li>
-            <li>维修/代购/赔偿/服务记录</li>
-            <li>服务变更及计算</li>
-            <li>杂费记录</li>
-          </ul>
-        </li>
 
-        <li class="business_li li1">
-          <h5>固定资产</h5>
-          <ul class="menu menu1">
-            <li>房间管理</li>
-            <li>设备管理</li>
-           </ul>
-        </li>
-
-        <li class="business_li li2">
-          <h5>采购</h5>
-          <ul class="menu menu2">
-            <li>新增采购计划</li>
-            <li>管理已有计划</li>
-          </ul>
-        </li>
-
-        <li class="business_li li3">
-          <h5>小卖部和爱心驿站</h5>
-          <ul class="menu menu3">
-            <li>小卖部运营</li>
-            <li>爱心驿站</li>
-          </ul>
-        </li>
-
-        <li class="business_li li4">
-          <h5>统计信息</h5>
-          <ul class="menu menu4">
-            <li>日志记录</li>
-          </ul>
-        </li>
-
-        <li class="business_li li5">
-          <h5>其他</h5>
-          <ul class="menu menu5">
-            <li>办公室管理</li>
-            <li>收支统计</li>
-          </ul>
-        </li>
-
-      </ul>
-    </div>
-    <!--业务菜单 end-->
 
     <!-- 底栏 start-->
     <div class="foot_box">

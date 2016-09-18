@@ -38,7 +38,9 @@ public class LoginController {
 	public String home(HttpSession session) throws Exception{
 		System.out.println("home controller");
 		//显示系统页面(.jsp)
-		return "/home";
+		//return "/home";
+		//临时显示房间管理页面
+		return "/admin/roomAsset";
 	}
 	//退出
 	@RequestMapping("/logout")
