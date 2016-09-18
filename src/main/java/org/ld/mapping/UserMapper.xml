@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.User" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="USERNAME" property="USERNAME" jdbcType="VARCHAR" />
+    <result column="PASSWD" property="PASSWD" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="NUM" property="NUM" jdbcType="VARCHAR" />
+    <result column="DEPART" property="DEPART" jdbcType="VARCHAR" />
+    <result column="ROLE" property="ROLE" jdbcType="INTEGER" />
+    <result column="AUTH" property="AUTH" jdbcType="INTEGER" />
+    <result column="CTIME" property="CTIME" jdbcType="DATE" />
+    <result column="LTIME" property="LTIME" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USERNAME, PASSWD, NAME, NUM, DEPART, ROLE, AUTH, CTIME, LTIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.User" >
+    insert into user (ID, USERNAME, PASSWD, 
+      NAME, NUM, DEPART, 
+      ROLE, AUTH, CTIME, LTIME
+      )
+    values (#{ID,jdbcType=INTEGER}, #{USERNAME,jdbcType=VARCHAR}, #{PASSWD,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{NUM,jdbcType=VARCHAR}, #{DEPART,jdbcType=VARCHAR}, 
+      #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="USERNAME != null" >
+        USERNAME,
+      </if>
+      <if test="PASSWD != null" >
+        PASSWD,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="NUM != null" >
+        NUM,
+      </if>
+      <if test="DEPART != null" >
+        DEPART,
+      </if>
+      <if test="ROLE != null" >
+        ROLE,
+      </if>
+      <if test="AUTH != null" >
+        AUTH,
+      </if>
+      <if test="CTIME != null" >
+        CTIME,
+      </if>
+      <if test="LTIME != null" >
+        LTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="USERNAME != null" >
+        #{USERNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PASSWD != null" >
+        #{PASSWD,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NUM != null" >
+        #{NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPART != null" >
+        #{DEPART,jdbcType=VARCHAR},
+      </if>
+      <if test="ROLE != null" >
+        #{ROLE,jdbcType=INTEGER},
+      </if>
+      <if test="AUTH != null" >
+        #{AUTH,jdbcType=INTEGER},
+      </if>
+      <if test="CTIME != null" >
+        #{CTIME,jdbcType=DATE},
+      </if>
+      <if test="LTIME != null" >
+        #{LTIME,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.User" >
+    update user
+    <set >
+      <if test="USERNAME != null" >
+        USERNAME = #{USERNAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PASSWD != null" >
+        PASSWD = #{PASSWD,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NUM != null" >
+        NUM = #{NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPART != null" >
+        DEPART = #{DEPART,jdbcType=VARCHAR},
+      </if>
+      <if test="ROLE != null" >
+        ROLE = #{ROLE,jdbcType=INTEGER},
+      </if>
+      <if test="AUTH != null" >
+        AUTH = #{AUTH,jdbcType=INTEGER},
+      </if>
+      <if test="CTIME != null" >
+        CTIME = #{CTIME,jdbcType=DATE},
+      </if>
+      <if test="LTIME != null" >
+        LTIME = #{LTIME,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.User" >
+    update user
+    set USERNAME = #{USERNAME,jdbcType=VARCHAR},
+      PASSWD = #{PASSWD,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      NUM = #{NUM,jdbcType=VARCHAR},
+      DEPART = #{DEPART,jdbcType=VARCHAR},
+      ROLE = #{ROLE,jdbcType=INTEGER},
+      AUTH = #{AUTH,jdbcType=INTEGER},
+      CTIME = #{CTIME,jdbcType=DATE},
+      LTIME = #{LTIME,jdbcType=DATE}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where USERNAME = #{USERNAME,jdbcType=VARCHAR}
+  </select>
+</mapper>
