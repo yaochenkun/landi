@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.SyslogMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Syslog" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="TIME" property="TIME" jdbcType="DATE" />
+    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="USERNAME" property="USERNAME" jdbcType="INTEGER" />
+    <result column="DETAIL" property="DETAIL" jdbcType="VARCHAR" />
+    <result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+    <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TIME, TYPE, USERNAME, DETAIL, ITEM, TOTAL, MONEY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from syslog
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from syslog
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Syslog" >
+    insert into syslog (ID, TIME, TYPE, 
+      USERNAME, DETAIL, ITEM, 
+      TOTAL, MONEY)
+    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=DATE}, #{TYPE,jdbcType=INTEGER}, 
+      #{USERNAME,jdbcType=INTEGER}, #{DETAIL,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, 
+      #{TOTAL,jdbcType=INTEGER}, #{MONEY,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Syslog" >
+    insert into syslog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="USERNAME != null" >
+        USERNAME,
+      </if>
+      <if test="DETAIL != null" >
+        DETAIL,
+      </if>
+      <if test="ITEM != null" >
+        ITEM,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+      <if test="MONEY != null" >
+        MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=DATE},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="USERNAME != null" >
+        #{USERNAME,jdbcType=INTEGER},
+      </if>
+      <if test="DETAIL != null" >
+        #{DETAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM != null" >
+        #{ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null" >
+        #{MONEY,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Syslog" >
+    update syslog
+    <set >
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=DATE},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="USERNAME != null" >
+        USERNAME = #{USERNAME,jdbcType=INTEGER},
+      </if>
+      <if test="DETAIL != null" >
+        DETAIL = #{DETAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM != null" >
+        ITEM = #{ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null" >
+        MONEY = #{MONEY,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Syslog" >
+    update syslog
+    set TIME = #{TIME,jdbcType=DATE},
+      TYPE = #{TYPE,jdbcType=INTEGER},
+      USERNAME = #{USERNAME,jdbcType=INTEGER},
+      DETAIL = #{DETAIL,jdbcType=VARCHAR},
+      ITEM = #{ITEM,jdbcType=VARCHAR},
+      TOTAL = #{TOTAL,jdbcType=INTEGER},
+      MONEY = #{MONEY,jdbcType=DOUBLE}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
