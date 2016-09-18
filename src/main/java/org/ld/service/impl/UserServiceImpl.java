@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
 		return userInfoMapper.selectByPrimaryKey(id);
 	}
 
-	public User getUserByName(String name){
-		return userInfoMapper.selectUserByName(name);
+	public User getUserByUserName(String name){
+		return userInfoMapper.selectByUserName(name);
 	}
 	@Override
 	public int insert(User userInfo) {
