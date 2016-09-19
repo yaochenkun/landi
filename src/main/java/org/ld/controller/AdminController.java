@@ -54,8 +54,12 @@ public class AdminController {
 		newUser.setID((Integer)userJson.get("ID"));
 		newUser.setUSERNAME((String)userJson.get("USERNAME"));
 		newUser.setNAME((String)userJson.get("NAME"));
+		newUser.setDEPART((String)userJson.get("DEPART"));
+		newUser.setROLE((Integer)userJson.get("ROLE"));
 		
 		System.out.println(newUser.getUSERNAME());
+		System.out.println(newUser.getDEPART());
+		System.out.println(newUser.getROLE());
 		//!!
 		//userService.insert(newUser);
 		
@@ -72,18 +76,18 @@ public class AdminController {
 		return Integer.parseInt(auth);
 	}
 	
-	@RequestMapping("/setRate")
+	@RequestMapping("/setRate/{role}")
 	public @ResponseBody String setRate(HttpSession session, ModelMap modelMap,
-			Integer role){
-		
-		Para tp = new Para();
-		tp.ReadParas("role", role.toString());
-		String auth = tp.getParas()[2];
+			@PathVariable Integer role){
+		System.out.println(role);
+//		Para tp = new Para();
+//		tp.ReadParas("role", role.toString());
+//		String auth = tp.getParas()[2];
 		return "setRate";
 	}
 	
 	@RequestMapping("/requestDepart")
-	public @ResponseBody List<String> departMenu()
+	public @ResponseBody Map<String,List<String>> departMenu()
 	{
 		Para tp = new Para();
 		Map<String, List<String> > temp = tp.getParaList("depart");
@@ -93,7 +97,10 @@ public class AdminController {
 			ans.add(x);
 		}
 		
-		return ans;
+		Map<String, List<String> > res =new  HashMap<String, List<String>>(); 
+		res.put("departList", ans);
+		
+		return res;
 	}
 	
 	@RequestMapping("/requestRole")

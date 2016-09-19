@@ -8,13 +8,21 @@ a,a:hover,a:link,a:visited{text-decoration: none; color: #5c5c5c;}
 .btn.btn-new{background-color: #38ae67; border-color: #38ae67; color:#fff;}
 .btn.btn-new:hover{background-color: #2faa60;}
 
+/* 蓝色返回按钮 */
 .btn.btn-goback{background-color: #4a9bee; border-color: #4a9bee; color:#fff;}
 .btn.btn-goback:hover{background-color: #328bef;}
 
+/* 粉色跳转按钮 */
 .btn.btn-other{background: #ffeeee; border-color: #fff4f4;}
 .btn.btn-other:hover{background: #ffe2e2;}
 .btn.btn-other a{color: #333;}
 
+/* 橘色变更按钮 */
+.btn.btn-change{background: #ff6625; border-color: #e87044;}
+.btn.btn-change:hover{background: #ff824d;}
+.btn.btn-change a{color: #fff;}
+
+/* 灰色编辑按钮 */
 .btn.btn-edit:hover{background-color: #eee;}
 /*************** 按钮样式 end******************/
 
@@ -33,7 +41,7 @@ header .header-content .dropdown-menu li{text-align: center;}
 /******************二级导航栏 start*****************/
 .main-nav{position: absolute; z-index: 20; left: 0; top:48px; bottom: 0; width: 160px; background: #eaedf4; border-right: solid #dedce5 1px;}
 .main-nav .aside-box{position: absolute; top:0; width: 100%}
-.main-nav .aside-box li{position: relative; height: 61px; line-height: 56px; padding: 2px 0; text-indent: 35px; font-size: 15px; border-bottom: 1px #d8dce5 solid;}
+.main-nav .aside-box li{position: relative; height: 61px; line-height: 56px; padding: 2px 0; text-indent: 25px; font-size: 15px; border-bottom: 1px #d8dce5 solid;}
 .main-nav .aside-box li:hover{background-color: #e0e4ed;}
 .main-nav .glyphicon{display: inline;}
 .main-nav .aside-box .liactive{background-color: #ced3e0;}

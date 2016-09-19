@@ -48,8 +48,8 @@
         <div class="aside-box">
             <ul>
                 <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="javascript:void(0);">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="javascript:void(0);">&nbsp;&nbsp;用户管理</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roomAsset.jsp">&nbsp;&nbsp;角色权限管理</a></li>
+                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;用户管理</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限管理</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;收费标准管理</a></li>
             </ul>
         </div>
@@ -70,57 +70,57 @@
         <!-- 新建用户 start-->
         <div class="col-lg-12">
             <h4>新建用户</h4>
-            <div class="btn btn-new btngoback" style="margin-top:-60px; margin-right:120px;">确认添加</div>
+            <div class="btn btn-new btngoback" onclick="requestAjaxAddUser();" style="margin-top:-60px; margin-right:120px;">确认添加</div>
             <div class="btn btn-goback btngoback" style="margin-top:-60px;"><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">返&nbsp;&nbsp;回</a></div>
         </div>
-        <form action="${pageContext.request.contextPath}/HomeAdmin/addUser.action" method="post">
-		    <div class="col-sm-12"></div>
-	        <div class="col-sm-12"></div>
-	        <div class="input-group-custom">
-	            <span class="span">用户名：</span>
-	            <div class="col-lg-4">
-	              <input type="text" class="form-control"/>
-	            </div>
-	        </div>
-	
-	        <div class="input-group-custom">
-	            <span class="span">姓名：</span>
-	            <div class="col-lg-4">
-	              <input type="text" class="form-control"/>
-	            </div>
-	        </div>
-	        <div class="col-sm-12"></div>
-	        <div class="col-sm-12"></div>
-	
-	        <div class="input-group-custom">
-	            <span class="span">工号：</span>
-	            <div class="col-lg-4">
-	              <input type="text" class="form-control"/>
-	            </div>
-	        </div>      
-	        <div class="col-sm-12"></div>
-	        <div class="col-sm-12"></div>
-	
-	        <div class="input-group-custom">
-	            <span class="span">部门：</span>
-	            <div class="col-lg-4">
-	                <div id="AdminDepart" onclick="requestAjaxDepart();" class="form-control">
-	                	<span class="caret"></span>
-	                </div>
-	                <div id="AdminDepartMenu" class="dropdownMenu"></div>
-	            </div>
-	        </div>
-	
-	        <div class="input-group-custom">
-	            <span class="span">角色：</span>
-	            <div class="col-lg-4">
-	                <div id="AdminRole" onclick="requestAjaxRole();" class="form-control">
-	                	<span class="caret"></span>
-	            	</div>
-	            <div id="AdminRoleMenu" class="dropdownMenu"></div>
-	            </div>
-	        </div>
-        </form>
+	    <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        
+        <div class="input-group-custom">
+            <span class="span">用户名：</span>
+            <div class="col-lg-4">
+              <input id="AdminUsername" type="text" class="form-control" value="Admin"/>
+            </div>
+        </div>
+
+        <div class="input-group-custom">
+            <span class="span">姓名：</span>
+            <div class="col-lg-4">
+              <input id="AdminName" type="text" class="form-control" value="Admin"/>
+            </div>
+        </div>
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+
+        <div class="input-group-custom">
+            <span class="span">工号：</span>
+            <div class="col-lg-4">
+              <input id="AdminNum" type="text" class="form-control" value="SYS_006"/>
+            </div>
+        </div>      
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+
+        <div class="input-group-custom">
+            <span class="span">部门：</span>
+            <div class="col-lg-4">
+                <div id="AdminDepart" onclick="requestAjaxDepart();" class="form-control">
+                	<span class="caret"></span>
+                </div>
+                <div id="AdminDepartMenu" class="dropdownMenu"></div>
+            </div>
+        </div>
+
+        <div class="input-group-custom">
+            <span class="span">角色：</span>
+            <div class="col-lg-4">
+                <div id="AdminRole" onclick="requestAjaxRole();" class="form-control">
+                	<span class="caret"></span>
+            	</div>
+            <div id="AdminRoleMenu" class="dropdownMenu"></div>
+            </div>
+        </div>
+        
         <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
         <!-- 新建用户  end-->

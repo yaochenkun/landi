@@ -23,7 +23,7 @@ var requestAjaxUserList = function(pageNum){
 		type:'post',
 		url: "/LD/HomeAdmin/searchUserList/"+ pageNum +'.action',
 		success:function(data){
-			//console.log(data);
+			console.log(data);
 			//?? 转成Json格式
 			var JsonData = data;
             //var JsonData = JSON.parse(data);
@@ -67,12 +67,20 @@ var requestAjaxUserList = function(pageNum){
 
 // 添加用户，发送Json格式数据
 var requestAjaxAddUser = function(){
+	let username = $("#AdminUsername").val();
+	let name = $("#AdminName").val();
+	let num = $("#AdminNum").val();
+	let depart = $("#AdminDepart").text();
+	let role = parseInt($("#AdminRoleSpan").text());
+
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/addUser.action',
 	    contentType:'application/json',
-		data:'{"ID":123,"USERNAME":"haha","NAME":"123","NUM":1,"DEPART":"123","ROLE":1,"AUTH":262143}',
-		dataType:'json',
+		//data:'{"ID":123,"USERNAME":"haha","NAME":"123","NUM":1,"DEPART":"123","ROLE":1,"AUTH":262143}',
+	    data:'{"USERNAME":"'+ username +'","NAME":"'+ name +'","NUM":"'+ num +'",'+
+	         '"DEPART":"'+ depart +'","ROLE":'+ role +',"AUTH":262143}',
+	    dataType:'json',
 		success:function(data){
 			console.log(data);
 		}
@@ -81,23 +89,22 @@ var requestAjaxAddUser = function(){
 
 // 获取部门信息
 var requestAjaxDepart = function(){
-//	$.ajax({
-//		type:'post',
-//		url:'/LD/HomeAdmin/requestDepart.action',
-//		success:function(data){
-//			console.log(data);
-//			// 将获取到的部门信息显示出来
-//			
-//		}
-//	});
-	// 清空部门下拉菜单
-	$("#AdminDepartMenu").html("");
-	$("#AdminDepartMenu").append("<ul id='AdminDepartUL'></ul>");
-	// 逐条添加部门列表
-	$("#AdminDepartUL").append("<li onclick='chooseAdminDepart(this);'>营业部</li>"+
-			"<li onclick='chooseAdminDepart(this);'>财务部</li>"+
-			"<li onclick='chooseAdminDepart(this);'>销售部</li>");
-	
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/requestDepart.action',
+		success:function(data){
+			//console.log(data);
+			
+			// 清空部门下拉菜单
+			$("#AdminDepartMenu").html("");
+			$("#AdminDepartMenu").append("<ul id='AdminDepartUL'></ul>");
+			// 逐条添加部门下拉菜单
+			for(var i=0; i<data.departList.length; i++){
+				//console.log(data.departList[i]);
+				$("#AdminDepartUL").append("<li onclick='chooseAdminDepart(this);'>"+ data.departList[i] +"</li>");
+			}
+		}
+	});			
 }
 
 // 选择用户部门
@@ -111,23 +118,26 @@ var chooseAdminDepart = function(li){
 
 //获取角色信息
 var requestAjaxRole = function(){
-//	$.ajax({
-//		type:'post',
-//		url:'/LD/HomeAdmin/requestDepart.action',
-//		success:function(data){
-//			console.log(data);
-//			// 将获取到的部门信息显示出来
-//			
-//		}
-//	});
-	// 清空角色下拉菜单
-	$("#AdminRoleMenu").html("");
-	$("#AdminRoleMenu").append("<ul id='AdminRoleUL'></ul>");
-	// 逐条添加角色列表
-	$("#AdminRoleUL").append("<li onclick='chooseAdminRole(this);'>采购员</li>"+
-			"<li onclick='chooseAdminRole(this);'>营业员</li>"+
-			"<li onclick='chooseAdminRole(this);'>服务员</li>");
-	
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/requestRole.action',
+		success:function(data){
+			// {,,,}
+			//console.log(data);
+			
+			// 清空角色下拉菜单
+			$("#AdminRoleMenu").html("");
+			$("#AdminRoleMenu").append("<ul id='AdminRoleUL'></ul>");
+			
+			//逐条添加角色下拉菜单
+			for(let item in data){
+				//console.log(item);   //key
+				//console.log(data[item]);  //value
+				$("#AdminRoleUL").append("<li id='AdminRole"+ item +"' "+
+				  "onclick='chooseAdminRole(this);'>"+ data[item] +"</li>");
+			}
+		}
+	});	
 }
 
 // 选择用户角色
@@ -135,6 +145,7 @@ var chooseAdminRole = function(li){
 	//console.log($(li).index());
 	//console.log($(li).text());
 	$("#AdminRole").html($(li).text()+"<span class='caret'></span>");
+	$("#AdminRole").append("<span style='display:none;' id='AdminRoleSpan'>"+ $(li).attr("id").substring(9) +"</span>")
 	// 清空角色下拉菜单
 	$("#AdminRoleMenu").html("");
 }
