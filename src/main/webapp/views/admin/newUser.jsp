@@ -64,37 +64,67 @@
         </div>
     </div>
     <!-- 二级导航栏 end-->
-    
+
     <!-- 页面内容 start-->
-    <div class="body-content">
-	    <div class="content">
-	        <section class="activities">
-	            <!-- 新建用户 start-->
-	            <div class="new">
-	                <a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
+    <div class="row">   
+        <!-- 新建用户 start-->
+        <div class="col-lg-12">
+            <h4>新建用户</h4>
+            <div class="btn btn-new btngoback" style="margin-top:-60px; margin-right:120px;">确认添加</div>
+            <div class="btn btn-goback btngoback" style="margin-top:-60px;"><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">返&nbsp;&nbsp;回</a></div>
+        </div>
+        <form action="${pageContext.request.contextPath}/HomeAdmin/addUser.action" method="post">
+		    <div class="col-sm-12"></div>
+	        <div class="col-sm-12"></div>
+	        <div class="input-group-custom">
+	            <span class="span">用户名：</span>
+	            <div class="col-lg-4">
+	              <input type="text" class="form-control"/>
 	            </div>
-	            <!-- 新建用户  end-->
+	        </div>
 	
-	            <!-- 用户table start-->
-	            <div class="nav-block">
-	                <table id="users_table" class="table"></table>
+	        <div class="input-group-custom">
+	            <span class="span">姓名：</span>
+	            <div class="col-lg-4">
+	              <input type="text" class="form-control"/>
 	            </div>
-	            <!-- 用户table end-->
+	        </div>
+	        <div class="col-sm-12"></div>
+	        <div class="col-sm-12"></div>
 	
-	            <!-- 用户页码 start-->
-	            <div id="userBottom" class="bottom"></div>
-	            <!-- 用户页码 end -->
-	       </section>
-	    </div>
+	        <div class="input-group-custom">
+	            <span class="span">工号：</span>
+	            <div class="col-lg-4">
+	              <input type="text" class="form-control"/>
+	            </div>
+	        </div>      
+	        <div class="col-sm-12"></div>
+	        <div class="col-sm-12"></div>
+	
+	        <div class="input-group-custom">
+	            <span class="span">部门：</span>
+	            <div class="col-lg-4">
+	                <div id="AdminDepart" onclick="requestAjaxDepart();" class="form-control">
+	                	<span class="caret"></span>
+	                </div>
+	                <div id="AdminDepartMenu" class="dropdownMenu"></div>
+	            </div>
+	        </div>
+	
+	        <div class="input-group-custom">
+	            <span class="span">角色：</span>
+	            <div class="col-lg-4">
+	                <div id="AdminRole" onclick="requestAjaxRole();" class="form-control">
+	                	<span class="caret"></span>
+	            	</div>
+	            <div id="AdminRoleMenu" class="dropdownMenu"></div>
+	            </div>
+	        </div>
+        </form>
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        <!-- 新建用户  end-->
     </div>
     <!-- 页面内容 end-->
-    
-    <!-- jsp页面初始化操作 -->
-    <script type="text/javascript">
-       // 请求第一页会员信息
-       $(function(){
-          requestFirstUser();
-       });
-    </script>
 </body>
 </html>

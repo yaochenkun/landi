@@ -27,7 +27,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown" id="user_dropdown">
-                             	 欢迎您，${name}
+                             	 欢迎您，${CUR_ENV.cur_user.USERNAME}
                               <span class="caret"></span>
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="user_dropdown" aria-expanded="false">
@@ -70,7 +70,7 @@
     </div>
     <!-- 二级导航栏 end-->
     
-     <!-- 页面内容 start-->
+    <!-- 页面内容 start-->
     <div class="body-content">
     <div class="content">
         <section class="activities">

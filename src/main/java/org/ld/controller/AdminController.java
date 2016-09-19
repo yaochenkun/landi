@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
 
 import org.ld.app.CurEnv;
 import org.ld.app.Para;
@@ -25,32 +28,41 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/searchUserList/{userId}")
-	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int userId,
-			int pageNumber, int eachPage){
+	@RequestMapping("/searchUserList/{pageNumber}")
+	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int pageNumber){
 		
+		int eachPage = 10;
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
 		int st = (pageNumber - 1) * eachPage;
 		List<User> user_list = userService.selectUserRange(st, st + eachPage - 1);
 		
 		res_map.put("pageList", user_list);
-		
+		res_map.put("pageNow", pageNumber);
+		//!! 获取一共有多少页
+		//res_map.put("pageTotal", pageTotal);
 		return res_map;
 	}
 	
 	@RequestMapping("/addUser")
-	public @ResponseBody String addUser(HttpSession session, ModelMap modelMap,
-			User newUser){
+	public @ResponseBody String addUser(@RequestBody String userString){
+		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 		
-		userService.insert(newUser);
+		User newUser = new User();
+		newUser.setID((Integer)userJson.get("ID"));
+		newUser.setUSERNAME((String)userJson.get("USERNAME"));
+		newUser.setNAME((String)userJson.get("NAME"));
+		
+		System.out.println(newUser.getUSERNAME());
+		//!!
+		//userService.insert(newUser);
 		
 		return "/addUser";
 	}
+		
 	
 	@RequestMapping("/checkRole")
 	public @ResponseBody Integer checkRole(HttpSession session, ModelMap modelMap,
 			Integer role){
-		
 		Para tp = new Para();
 		tp.ReadParas("role", role.toString());
 		String auth = tp.getParas()[2];

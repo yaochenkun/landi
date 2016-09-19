@@ -17,7 +17,14 @@ public class User {
 
     private Integer ROLE;
 
-    private Integer AUTH;
+    @Override
+	public String toString() {
+		return "User [ID=" + ID + ", USERNAME=" + USERNAME + ", PASSWD=" + PASSWD + ", NAME=" + NAME + ", NUM=" + NUM
+				+ ", DEPART=" + DEPART + ", ROLE=" + ROLE + ", AUTH=" + AUTH + ", CTIME=" + CTIME + ", LTIME=" + LTIME
+				+ "]";
+	}
+
+	private Integer AUTH;
 
     private Date CTIME;
 

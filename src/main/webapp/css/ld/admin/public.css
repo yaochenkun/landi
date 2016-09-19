@@ -41,7 +41,6 @@ header .header-content .dropdown-menu li{text-align: center;}
 .nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px;border-bottom: 1px #eee solid; background-color: #fafafa;}
 .nav-second .toolbar{width: 100%; padding-left: 172px; padding-right: 12px;}
 
-
 .nav-secondul ul{white-space: nowrap; height: 59px; margin-left: 10px;}
 .nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑"; cursor: pointer;}
 .nav-secondul .linormal a{color: #5c5c5c;}
@@ -66,7 +65,7 @@ header .header-content .dropdown-menu li{text-align: center;}
 /********table start***/
 .content .activities .nav-block{padding:55px 55px 10px 55px;}
 .content .activities .table{padding: 0px; white-space: nowrap; table-layout: fixed;}
-.table td{width:100%; overflow: hidden; text-overflow: ellipsis;}
+.table td{width:100%; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid #ddd;}
 .table td span{cursor:pointer; color:#666;}
 .table td span:hover{color:#000;}
 /********table end***/

@@ -1,0 +1,21 @@
+
+.main-nav .aside-box li{text-indent: 23px;}  /*修改左栏文字位置*/
+
+/*新建用户按钮位置*/
+.content .activities .new{position:relative; float:right; margin:15px 55px 10px 0;}
+
+/**********添加用户 页面开始位置*********/
+.row{margin-top:30px; margin-left:200px; width:80%;}
+.row h4{border-bottom:1px dashed #ddd;}
+
+.row {padding:0 20px;}
+.row .input-group-custom{margin-left: 80px;}
+.row .input-group-custom .span{float: left; line-height: 34px; width: 70px;}
+.row .input-group-custom .form-control{float: left; width:90%;}
+.row .input-group-custom .caret{float: right; margin-top: 8px;}
+
+/* 下拉菜单样式 */
+#AdminDepart{padding-left:20px;}
+.dropdownMenu ul{position: relative; float: left; width: 90%; margin-top: 1px; border: 1px #ccc solid; border-radius: 3px;}
+.dropdownMenu li{height: 34px; line-height: 34px; text-indent: 20px; border-bottom: 1px solid #ccc;}
+.dropdownMenu li:hover{background-color: #f4f4f4;}
