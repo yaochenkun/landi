@@ -1,8 +1,11 @@
 package org.ld.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
@@ -77,5 +80,43 @@ public class AdminController {
 		tp.ReadParas("role", role.toString());
 		String auth = tp.getParas()[2];
 		return "setRate";
+	}
+	
+	@RequestMapping("/requestDepart")
+	public @ResponseBody List<String> departMenu()
+	{
+		Para tp = new Para();
+		Map<String, List<String> > temp = tp.getParaList("depart");
+		List<String> ans = new ArrayList<String>();
+		for(String x: temp.keySet())
+		{
+			ans.add(x);
+		}
+		
+		return ans;
+	}
+	
+	@RequestMapping("/requestRole")
+	public @ResponseBody Map<Integer, String> departRole()
+	{
+		Para tp = new Para();
+		Map<String, List<String> > temp = tp.getParaList("role");
+		Map<Integer, String> ans = new HashMap<Integer, String>();
+		Iterator<Entry<String, List<String>>> it = temp.entrySet().iterator();
+		while(it.hasNext())
+		{
+			Map.Entry<String, List<String>> entry = it.next();
+			ans.put(Integer.parseInt(entry.getKey()), entry.getValue().get(0));
+		}
+		return ans;
+	}
+	
+	@RequestMapping("/requestCap")
+	public @ResponseBody Integer Cap(Integer role)
+	{
+		Para tp = new Para();
+		tp.ReadParas("role", role.toString());
+		String[] ps = tp.getParas();
+ 		return Integer.parseInt(ps[1]);
 	}
 }
