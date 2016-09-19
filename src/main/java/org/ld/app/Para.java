@@ -62,7 +62,7 @@ public class Para {
 				String [] tparas = temp.split(" ");
 				List<String> tl = new ArrayList<String>();
 				
-				for(int i = 1; i <= tparas.length; i++)
+				for(int i = 1; i < tparas.length; i++)
 				{
 					tl.add(tparas[i]);
 				}

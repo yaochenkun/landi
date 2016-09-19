@@ -111,12 +111,13 @@ public class AdminController {
 		return ans;
 	}
 	
-	@RequestMapping("/requestCap")
-	public @ResponseBody Integer Cap(Integer role)
+	@RequestMapping("/requestCap/{role}")
+	public @ResponseBody Integer Cap(@PathVariable Integer role)
 	{
 		Para tp = new Para();
 		tp.ReadParas("role", role.toString());
 		String[] ps = tp.getParas();
- 		return Integer.parseInt(ps[1]);
+	
+ 		return Integer.parseInt(ps[2]);
 	}
 }
