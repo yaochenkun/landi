@@ -1,6 +1,8 @@
 package org.ld.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +30,7 @@ import org.ld.app.Para;
 @Controller
 @RequestMapping("/HomeAdmin")
 public class AdminController {	
+	
 	@Autowired
 	private UserService userService;
 	
@@ -47,42 +50,32 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/addUser")
-	public @ResponseBody String addUser(@RequestBody String userString){
+	public @ResponseBody String addUser(@RequestBody String userString, HttpSession session){
 		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 		
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		Para tp = new Para();
 		User newUser = new User();
-		newUser.setID((Integer)userJson.get("ID"));
+		
+		newUser.setNUM((String)userJson.get("NUM"));
 		newUser.setUSERNAME((String)userJson.get("USERNAME"));
 		newUser.setNAME((String)userJson.get("NAME"));
 		newUser.setDEPART((String)userJson.get("DEPART"));
 		newUser.setROLE((Integer)userJson.get("ROLE"));
+		newUser.setPASSWD(cur_env.getSettings().get("default_passwd"));
+		newUser.setAUTH(Integer.parseInt(tp.ReadParaPair("role", ((Integer)userJson.get("ROLE")).toString(), 0, 2)[1]));
+		newUser.setCTIME(new Date());
+		newUser.setLTIME(new Date());
+		newUser.setSTATE(2);
 		
-		System.out.println(newUser.getUSERNAME());
-		System.out.println(newUser.getDEPART());
-		System.out.println(newUser.getROLE());
-		//!!
-		//userService.insert(newUser);
-		
+		userService.insert(newUser);
 		return "/addUser";
-	}
-		
-	
-	@RequestMapping("/checkRole")
-	public @ResponseBody Integer checkRole(HttpSession session, ModelMap modelMap,
-			Integer role){
-		Para tp = new Para();
-		tp.ReadParas("role", role.toString());
-		String auth = tp.getParas()[2];
-		return Integer.parseInt(auth);
 	}
 	
 	@RequestMapping("/setRate/{role}")
 	public @ResponseBody String setRate(HttpSession session, ModelMap modelMap,
 			@PathVariable Integer role){
-		System.out.println(role);
-//		Para tp = new Para();
-//		tp.ReadParas("role", role.toString());
-//		String auth = tp.getParas()[2];
+		
 		return "setRate";
 	}
 	
@@ -122,8 +115,7 @@ public class AdminController {
 	public @ResponseBody Integer Cap(@PathVariable Integer role)
 	{
 		Para tp = new Para();
-		tp.ReadParas("role", role.toString());
-		String[] ps = tp.getParas();
+		String[] ps = tp.ReadParas("role", role.toString());
 	
  		return Integer.parseInt(ps[2]);
 	}

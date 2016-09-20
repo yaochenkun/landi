@@ -12,9 +12,10 @@
     <result column="AUTH" property="AUTH" jdbcType="INTEGER" />
     <result column="CTIME" property="CTIME" jdbcType="DATE" />
     <result column="LTIME" property="LTIME" jdbcType="DATE" />
+    <result column="STATE" property="STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, USERNAME, PASSWD, NAME, NUM, DEPART, ROLE, AUTH, CTIME, LTIME
+    ID, USERNAME, PASSWD, NAME, NUM, DEPART, ROLE, AUTH, CTIME, LTIME, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,12 +30,12 @@
   <insert id="insert" parameterType="org.ld.model.User" >
     insert into user (ID, USERNAME, PASSWD, 
       NAME, NUM, DEPART, 
-      ROLE, AUTH, CTIME, LTIME
-      )
+      ROLE, AUTH, CTIME, LTIME, 
+      STATE)
     values (#{ID,jdbcType=INTEGER}, #{USERNAME,jdbcType=VARCHAR}, #{PASSWD,jdbcType=VARCHAR}, 
       #{NAME,jdbcType=VARCHAR}, #{NUM,jdbcType=VARCHAR}, #{DEPART,jdbcType=VARCHAR}, 
-      #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE}
-      )
+      #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE}, 
+      #{STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.User" >
     insert into user
@@ -69,6 +70,9 @@
       <if test="LTIME != null" >
         LTIME,
       </if>
+      <if test="STATE != null" >
+        STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -100,6 +104,9 @@
       </if>
       <if test="LTIME != null" >
         #{LTIME,jdbcType=DATE},
+      </if>
+      <if test="STATE != null" >
+        #{STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -133,6 +140,9 @@
       <if test="LTIME != null" >
         LTIME = #{LTIME,jdbcType=DATE},
       </if>
+      <if test="STATE != null" >
+        STATE = #{STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -146,7 +156,8 @@
       ROLE = #{ROLE,jdbcType=INTEGER},
       AUTH = #{AUTH,jdbcType=INTEGER},
       CTIME = #{CTIME,jdbcType=DATE},
-      LTIME = #{LTIME,jdbcType=DATE}
+      LTIME = #{LTIME,jdbcType=DATE},
+      STATE = #{STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -160,5 +171,4 @@
   	select * from user where ID >= #{ST} and ID <= #{ED}
     ]]>
   </select>
-  
 </mapper>

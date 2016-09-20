@@ -1,5 +1,7 @@
 package org.ld.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.ld.model.User;
@@ -20,14 +22,15 @@ public class LoginController {
 	public String login(HttpSession session, String name, String passwd)
 			throws Exception {
 		// 调用service进行用户身份验证
+		CurEnv cur_env = new CurEnv();
         User user = userService.getUserByUserName(name);
         System.out.println(user); 
         //身份验证成功
-        if(user!= null && user.getPASSWD().equals(passwd)){
+        if(user!= null && user.getPASSWD().equals(cur_env.myMD5(passwd))){
         	System.out.println("login controller");
         	// 在session中保存用户身份信息
-        	CurEnv cur_env = new CurEnv();
         	cur_env.setCur_user(user);
+        	user.setLTIME(new Date());
     		session.setAttribute("CUR_ENV", cur_env);
     		// 重定向到首页(.action)
     		

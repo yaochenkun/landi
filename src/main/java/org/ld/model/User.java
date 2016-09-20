@@ -17,18 +17,20 @@ public class User {
 
     private Integer ROLE;
 
+    private Integer AUTH;
+
+    private Date CTIME;
+
+    private Date LTIME;
+
+    private Integer STATE;
+    
     @Override
 	public String toString() {
 		return "User [ID=" + ID + ", USERNAME=" + USERNAME + ", PASSWD=" + PASSWD + ", NAME=" + NAME + ", NUM=" + NUM
 				+ ", DEPART=" + DEPART + ", ROLE=" + ROLE + ", AUTH=" + AUTH + ", CTIME=" + CTIME + ", LTIME=" + LTIME
 				+ "]";
 	}
-
-	private Integer AUTH;
-
-    private Date CTIME;
-
-    private Date LTIME;
 
     public Integer getID() {
         return ID;
@@ -108,5 +110,13 @@ public class User {
 
     public void setLTIME(Date LTIME) {
         this.LTIME = LTIME;
+    }
+
+    public Integer getSTATE() {
+        return STATE;
+    }
+
+    public void setSTATE(Integer STATE) {
+        this.STATE = STATE;
     }
 }
