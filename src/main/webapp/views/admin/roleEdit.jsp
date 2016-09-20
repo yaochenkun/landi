@@ -71,7 +71,7 @@
             <h4>角色</h4>
             <div id="RoleEdit" onclick="requestAjaxRoleChange();" class="form-control dropdownMenu"><span class="caret"></span></div>
             <div id="RoleEditMenu" class="dropdownMenu"></div>
-            <div onclick="requestEditRoleAuth();" class="btn btn-change btnchange"><a>确认变更</a></div>
+           <!-- <div onclick="requestEditRoleAuth();" class="btn btn-change btnchange"><a>确认变更</a></div> -->
         </div>
  
         <!-- body start-->
@@ -80,25 +80,25 @@
             <div class="body-first">
                 <h4>固定资产</h4>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role1" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role1" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role1"></label>  
                 </div>        
                 <div class="checkbox-text1">查看房屋信息</div>                
             
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role2" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role2" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role2"></label>  
                 </div>        
                 <div class="checkbox-text1">修改房屋信息</div>            
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role3" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role3" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role3"></label>  
                 </div>        
                 <div class="checkbox-text1">查看设备信息</div>   
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role4" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role4" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role4"></label>  
                 </div>        
                 <div class="checkbox-text1">修改设备信息</div>       
@@ -109,25 +109,25 @@
             <div class="body-second">
                 <h4>租客服务</h4>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role5" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role5" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role5"></label>  
                 </div>        
                 <div class="checkbox-text2">查看租客及合同信息</div>                
             
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role6" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role6" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role6"></label>  
                 </div>        
                 <div class="checkbox-text2">修改租客及合同信息</div>            
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role7" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role7" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role7"></label>  
                 </div>        
                 <div class="checkbox-text2">查看租客日常服务</div>   
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role8" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role8" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role8"></label>  
                 </div>        
                 <div class="checkbox-text2">修改租客日常服务</div>  
@@ -138,25 +138,25 @@
             <div class="body-third">
                 <h4>小卖部和爱心驿站</h4>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role9" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role9" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role9"></label>  
                 </div>        
                 <div class="checkbox-text3">查看小卖部</div>                
             
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role10" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role10" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role10"></label>  
                 </div>        
                 <div class="checkbox-text3">经营小卖部</div>            
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role11" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role11" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role11"></label>  
                 </div>        
                 <div class="checkbox-text3">查看爱心驿站</div>   
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role12" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role12" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role12"></label>  
                 </div>        
                 <div class="checkbox-text3">管理爱心驿站</div> 
@@ -167,13 +167,13 @@
             <div class="body-fourth">
                 <h4>采购</h4>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role13" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role13" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role13"></label>  
                 </div>        
                 <div class="checkbox-text4">查看采购情况</div>                
             
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role14" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role14" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role14"></label>  
                 </div>        
                 <div class="checkbox-text4">添加采购记录</div>            
@@ -184,25 +184,25 @@
             <div class="body-fifth">
                 <h4>其他</h4>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role15" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role15" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role15"></label>  
                 </div>        
                 <div class="checkbox-text5">查看系统日志</div>                
             
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role16" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role16" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role16"></label>  
                 </div>        
                 <div class="checkbox-text5">查看收支统计</div>            
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role17" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role17" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role17"></label>  
                 </div>        
                 <div class="checkbox-text5">查看办公室管理</div>   
 
                 <div class="checkbox-group">
-                    <input type="checkbox" id="checkbox_role18" class="checkbox" /> 
+                    <input type="checkbox" id="checkbox_role18" class="checkbox" disabled="disabled"/> 
                     <label for="checkbox_role18"></label>  
                 </div>        
                 <div class="checkbox-text5">记录办公室管理</div> 

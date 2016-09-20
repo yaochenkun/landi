@@ -20,10 +20,10 @@
 .checkbox-text2,.checkbox-text3,.checkbox-text5{width: 150px;}
 
 .checkbox{display: none;} 
-.checkbox + label{background-color: #FFF; border: 1px solid #C1CACA; 
+.checkbox + label{cursor: not-allowed; background-color: #FFF; border: 1px solid #C1CACA; 
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05); 
     padding: 9px; border-radius: 5px; display: inline-block;  position: relative; margin-right: 30px;} 
-.checkbox:checked + label {background-color: #ECF2F7; border: 1px solid #92A1AC; 
+.checkbox:checked + label {cursor: not-allowed; background-color: #ECF2F7; border: 1px solid #92A1AC; 
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1); 
     color: #243441; padding: 0px;} 
 .checkbox:checked + label:after { 

@@ -47,7 +47,7 @@ var requestAjaxUserList = function(pageNum){
             		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
             	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
             	     "<td>"+ peruser.role +"</td>"+"<td>"+ peruser.ltime +"</td>"+
-            	     "<td><span>修改</span></td></tr>");
+            	     "<td><span>重置密码&nbsp;&nbsp;</span><span>删除</span></td></tr>");
                 $("#users_table").append(tr);
             }
             
@@ -79,7 +79,7 @@ var requestAjaxAddUser = function(){
 	    contentType:'application/json',
 		//data:'{"ID":123,"USERNAME":"haha","NAME":"123","NUM":1,"DEPART":"123","ROLE":1,"AUTH":262143}',
 	    data:'{"USERNAME":"'+ username +'","NAME":"'+ name +'","NUM":"'+ num +'",'+
-	         '"DEPART":"'+ depart +'","ROLE":'+ role +',"AUTH":262143}',
+	         '"DEPART":"'+ depart +'","ROLE":'+ role +'}',
 	    dataType:'json',
 		success:function(data){
 			console.log(data);
@@ -89,6 +89,7 @@ var requestAjaxAddUser = function(){
 
 // 获取部门信息
 var requestAjaxDepart = function(){
+	console.log("request Ajax depart");
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/requestDepart.action',
@@ -118,6 +119,7 @@ var chooseAdminDepart = function(li){
 
 //获取角色信息
 var requestAjaxRole = function(){
+	console.log("request Ajax role");
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/requestRole.action',
@@ -151,6 +153,28 @@ var chooseAdminRole = function(li){
 }
 
 
+//设置下拉菜单隐藏事件
+$(function(){
+	$(document).bind("click",function(e){
+		var target = $(e.target);
+		//console.log(target);
+		//console.log(target.closest("#AdminDepart").length);
+		// 没有点击 AdminDepart
+		if(target.closest("#AdminDepart").length==0){
+			$("#AdminDepartMenu").hide();
+		}
+		else{
+			$("#AdminDepartMenu").show();
+		}
+		// 没有点击 AdminRole
+		if(target.closest("#AdminRole").length==0){
+			$("#AdminRoleMenu").hide();
+		}
+		else
+			$("#AdminRoleMenu").show();
+		
+	});
+});
 
 
 

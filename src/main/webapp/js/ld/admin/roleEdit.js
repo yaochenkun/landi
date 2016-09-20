@@ -67,28 +67,28 @@ var requestAjaxRoleAuth = function(role){
 	});
 }
 
-// 提交变更后的角色权限
-var requestEditRoleAuth = function(){
-	// 获取当前
-	var res = "";
-	for(let i=18; i>=1; i--){
-		if($("#checkbox_role" + i).is(":checked")){
-			res += 1;
-		}
-		else
-			res+=0;		
-	}
-	let role = parseInt(res,2);
+// 提交变更后的角色权限 !!目前系统不能变更角色权限
+//var requestEditRoleAuth = function(){
+//	// 获取当前
+//	var res = "";
+//	for(let i=18; i>=1; i--){
+//		if($("#checkbox_role" + i).is(":checked")){
+//			res += 1;
+//		}
+//		else
+//			res+=0;		
+//	}
+//	let role = parseInt(res,2);
 //	console.log(res);
 //	console.log(parseInt(res,2));
-	$.ajax({
-		type:'post',
-		url:'/LD/HomeAdmin/setRate/'+ role +'.action',
-		success:function(data){
-			//console.log(data);
-		}
-	});
-}
+//	$.ajax({
+//		type:'post',
+//		url:'/LD/HomeAdmin/setRate/'+ role +'.action',
+//		success:function(data){
+//			//console.log(data);
+//		}
+//	});
+//}
 
 
 
