@@ -30,6 +30,7 @@ import org.ld.app.Para;
 @Controller
 @RequestMapping("/HomeAdmin")
 public class AdminController {	
+	
 	@Autowired
 	private UserService userService;
 	
@@ -62,10 +63,10 @@ public class AdminController {
 		newUser.setDEPART((String)userJson.get("DEPART"));
 		newUser.setROLE((Integer)userJson.get("ROLE"));
 		newUser.setPASSWD(cur_env.getSettings().get("default_passwd"));
-		newUser.setAUTH(Integer.parseInt(tp.ReadParaPair("role", (String)userJson.get("ROLE"), 0, 2)[1]));
+		newUser.setAUTH(Integer.parseInt(tp.ReadParaPair("role", ((Integer)userJson.get("ROLE")).toString(), 0, 2)[1]));
 		newUser.setCTIME(new Date());
 		newUser.setLTIME(new Date());
-		newUser.setSTATE(1);
+		newUser.setSTATE(2);
 		
 		userService.insert(newUser);
 		return "/addUser";
