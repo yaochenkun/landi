@@ -9,25 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Para {
-	private String [] paras;
-	
-	public Para()
-	{
-		paras = null;
-	}
-	
-	public String[] getParas() {
-		return paras;
-	}
-
-	public void setParas(String[] paras) {
-		this.paras = paras;
-	}
-
-	public void ReadParas(String text, String key)
+	public String[] ReadParas(String text, String key)
 	{
 		String fname = "src/env/" + text + ".env";
-		
+
 		BufferedReader reader = null;
 		try{
 			reader = new BufferedReader(new FileReader(fname));
@@ -37,8 +22,7 @@ public class Para {
 				String [] tparas = temp.split(" ");
 				if(tparas[0].equals(key))
 				{
-					setParas(tparas);
-					break;
+					return tparas;
 				}
 			}
 			
@@ -46,6 +30,36 @@ public class Para {
 		} catch (IOException e){
 			e.printStackTrace();
 		}
+		
+		return null;
+	}
+	
+	public String[] ReadParaPair(String text, String key, int first, int second)
+	{
+		String fname = "src/env/" + text + ".env";
+
+		BufferedReader reader = null;
+		try{
+			reader = new BufferedReader(new FileReader(fname));
+			String temp = null;
+			while((temp = reader.readLine()) != null)
+			{
+				String [] tparas = temp.split(" ");
+				String [] ans = new String[2]; 
+				if(tparas[0].equals(key))
+				{
+					ans[0] = tparas[first];
+					ans[1] = tparas[second];
+					return ans;
+				}
+			}
+			
+			reader.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	public Map<String, List<String>> getParaList(String text)
@@ -78,15 +92,28 @@ public class Para {
 		return null;
 	}
 	
-	public void show()
+	public Map<String, String> getParaPair(String text, int first, int second)
 	{
-		if(paras != null){
-			for(String x: paras){
-				System.out.println(x);
+		String fname = "src/env/" + text + ".env";
+		
+		BufferedReader reader = null;
+		try{
+			Map<String, String> map = new HashMap<String, String>();
+			reader = new BufferedReader(new FileReader(fname));
+			String temp = null;
+			while((temp = reader.readLine()) != null)
+			{
+				String [] tparas = temp.split(" ");
+
+				map.put(tparas[first], tparas[second]);
 			}
+			
+			reader.close();
+			return map;
+		} catch (IOException e){
+			e.printStackTrace();
 		}
-		else{
-			System.out.println("Not Found");
-		}
+		
+		return null;
 	}
 }

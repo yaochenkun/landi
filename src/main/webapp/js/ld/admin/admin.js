@@ -79,7 +79,7 @@ var requestAjaxAddUser = function(){
 	    contentType:'application/json',
 		//data:'{"ID":123,"USERNAME":"haha","NAME":"123","NUM":1,"DEPART":"123","ROLE":1,"AUTH":262143}',
 	    data:'{"USERNAME":"'+ username +'","NAME":"'+ name +'","NUM":"'+ num +'",'+
-	         '"DEPART":"'+ depart +'","ROLE":'+ role +',"AUTH":262143}',
+	         '"DEPART":"'+ depart +'","ROLE":'+ role +'}',
 	    dataType:'json',
 		success:function(data){
 			console.log(data);
