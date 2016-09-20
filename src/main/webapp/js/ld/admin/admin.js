@@ -1,6 +1,27 @@
+// 定义全局对象保存 角色-名称 对应关系
+let roleMap = {};
+
 // 用户管理拉取第一页用户
 var requestFirstUser = function(){
 	requestAjaxUserList(parseInt(1));    
+}
+
+//获取角色信息保存至全局变量中
+let requestAjaxRoleArraySave = function(){
+	console.log("request Ajax role");
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/requestRole.action',
+		success:function(data){			
+			//逐条保存角色 数值-名称对应关系
+			for(let item in data){
+				//console.log(item);   //key
+				//console.log(data[item]);  //value
+				roleMap[item] = data[item];
+			}
+			requestFirstUser();
+		}
+	});	
 }
 
 // 拉取 上一页用户
@@ -43,11 +64,18 @@ var requestAjaxUserList = function(pageNum){
 			//添加每一行用户信息
             for(var i=0; i<JsonData.pageList.length; i++){
             	var peruser = JsonData.pageList[i];
+            	
+                // 将时间戳变为2016-12-12显示          	
+            	var date = new Date(peruser.ltime);
+            	var showDate = date.toLocaleDateString().replace(/\//g,"-");
+            	//console.log(showDate);
+            	
             	var tr = $("<tr><td>"+ peruser.id +"</td>"+
             		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
             	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
-            	     "<td>"+ peruser.role +"</td>"+"<td>"+ peruser.ltime +"</td>"+
-            	     "<td><span>重置密码&nbsp;&nbsp;</span><span>删除</span></td></tr>");
+            	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ showDate +"</td>"+
+            	     "<td><span onclick=\"resetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码&nbsp;&nbsp;</span>"+
+            	     "<span onclick=\"deleteUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>删除</span></td></tr>");
                 $("#users_table").append(tr);
             }
             
@@ -61,6 +89,56 @@ var requestAjaxUserList = function(pageNum){
             $("#userBottom").append(bottomPage);
 		}
 	});
+}
+
+// 重置密码
+var resetPasswd = function(id,username){
+	console.log(id);
+	console.log(username);
+	// 发送重置密码请求
+//	$.ajax({
+//		type:'post',
+//		url:'/LD/HomeAdmin/resetPasswd/'+ parseInt(id) +'.action',
+//		success:function(data){
+//			
+//		}
+//	});
+	showDialogPasswdSuccess(username);
+}
+
+// 显示重置密码成功界面
+var showDialogPasswdSuccess =function(username){
+	// $(".dialog-success").slideDown(1000);
+	$(".dialog-resetPasswd-success h4").html("用户&nbsp;"+ username +"&nbsp;密码重置成功！");
+	$(".dialog-resetPasswd-success").animate({top:"30%"},500);
+}
+// 隐藏重置密码成功界面
+var hideDialogPasswdSuccess = function(){
+	$(".dialog-resetPasswd-success").animate({top:"-20%"},500);
+}
+
+// 删除用户
+var deleteUser = function(id,username){
+	// 发出删除用户请求
+//	$.ajax({
+//		type:'post',
+//		url:'/LD/HomeAdmin/deleteUser/'+ parseInt(id) +'.action',
+//		success:function(data){
+//			
+//		}
+//	});
+	showDialogDeleteSuccess(username);
+}
+
+//显示成功删除用户界面
+showDialogDeleteSuccess = function(username){
+	$(".dialog-deleteUser-success h4").html("成功删除用户&nbsp;" + username);
+	$(".dialog-deleteUser-success").animate({top:"30%"},500);
+}
+
+//隐藏成功删除用户界面
+hideDialogDeleteSuccess = function(){
+	$(".dialog-deleteUser-success").animate({top:"-20%"},500);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -89,11 +89,41 @@
     </div>
     <!-- 页面内容 end-->
     
+    <!-- 重置密码弹出框 start -->
+    <div class="dialog-resetPasswd-success"> 
+        <div class="dialog-main">
+            <div class="dialog-title">
+                <a onclick="hideDialogPasswdSuccess();" class="close"><i>×</i></a>
+            </div>
+            <div class="dialog-body">
+                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
+                <div class="logo-success"></div>
+                <h4></h4>
+            </div>
+        </div>   
+    </div>
+    <!-- 重置密码弹出框 end -->
+    
+    <!-- 删除用户弹出框 start -->
+    <div class="dialog-deleteUser-success"> 
+        <div class="dialog-main">
+            <div class="dialog-title">
+                <a onclick="hideDialogDeleteSuccess();" class="close"><i>×</i></a>
+            </div>
+            <div class="dialog-body">
+                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
+                <div class="logo-success"></div>
+                <h4></h4>
+            </div>
+        </div>   
+    </div>
+    <!-- 删除用户弹出框 end -->
+    
     <!-- jsp页面初始化操作 -->
     <script type="text/javascript">
-       // 请求第一页会员信息
+       // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
-          requestFirstUser();
+    	  requestAjaxRoleArraySave();
        });
     </script>
 </body>

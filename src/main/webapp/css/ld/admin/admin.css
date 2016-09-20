@@ -19,3 +19,25 @@
 .dropdownMenu ul{position: relative; float: left; width: 90%; margin-top: 1px; border: 1px #ccc solid; border-radius: 3px;}
 .dropdownMenu li{height: 34px; line-height: 34px; text-indent: 20px; border-bottom: 1px solid #ccc;}
 .dropdownMenu li:hover{background-color: #f4f4f4;}
+
+/* 操作字体样式  */
+.table .spanblue{color: #0064a4;}
+.table .spanblue:hover{color:#0034a1;}
+.table .spanred{color: #d00;}
+.table .spanred:hover{color:#b00;}
+
+/* 弹出框样式 */
+.dialog-resetPasswd-success,.dialog-deleteUser-success{position: fixed; left: 50%; top: -20%; margin-left: -150px; margin-top: -50px; width: 300px; z-index: 100; border: 1px solid #dadde0; border-radius: 3px;}
+.dialog-main{position: relative; width: auto; height: 100%; background: #fff;}
+.dialog-title{height: 35px; position: relative; background: #38ae67;}
+.dialog-title .close{position: relative; display: inline-block; width: 30px; height: 30px; color: #b9bfc5; float: right;}
+.dialog-title .close i{position: absolute; font:normal 25px Tahoma; color: #000;}
+.dialog-body{height: 120px; padding: 20px; overflow: hidden;}
+/*.dialog-body span{display: inline-block; width: 25px; height: 25px;padding: 3px 1px 2px 5px; color: #35b558; border: 1px #35b558 solid; border-radius: 50%; }*/
+.dialog-body .logo-success{display: inline-block; line-height: 30px; width: 30px; height: 30px; margin-left: 115px; background: url("../../../img/success.svg");}
+.dialog-body h4{float: left; margin-top:20px; margin-top:20px; font-size:16px; text-align:center; width:100%;}
+
+
+
+
+
