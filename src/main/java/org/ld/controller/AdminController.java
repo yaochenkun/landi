@@ -37,15 +37,17 @@ public class AdminController {
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int pageNumber){
 		
-		int eachPage = 10;
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
+		
+		int pageTotal = userService.totalRow();
+		int eachPage = Integer.parseInt(cur_env.getSettings().get("list_size"));
 		int st = (pageNumber - 1) * eachPage;
 		List<User> user_list = userService.selectUserRange(st, st + eachPage - 1);
-		
+	
 		res_map.put("pageList", user_list);
 		res_map.put("pageNow", pageNumber);
-		//!! 获取一共有多少页
-		//res_map.put("pageTotal", pageTotal);
+		res_map.put("pageTotal", pageTotal);
 		return res_map;
 	}
 	

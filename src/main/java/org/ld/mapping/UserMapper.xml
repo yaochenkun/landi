@@ -171,4 +171,9 @@
   	select * from user where ID >= #{ST} and ID <= #{ED}
     ]]>
   </select>
+  <select id="totalRow" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from user
+  	]]>
+  </select>
 </mapper>

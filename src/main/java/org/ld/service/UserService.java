@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.ld.model.User;
 
-
 public interface UserService {
 
 	// 根据用户id查询用户
@@ -17,4 +16,6 @@ public interface UserService {
 	int insert(User userInfo);
 	
 	List<User> selectUserRange(int st, int ed);
+	
+	int totalRow();
 }

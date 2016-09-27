@@ -79,14 +79,14 @@
         <div class="input-group-custom">
             <span class="span">用户名：</span>
             <div class="col-lg-4">
-              <input id="AdminUsername" type="text" class="form-control" value="Admin"/>
+              <input id="AdminUsername" type="text" class="form-control" value="test"/>
             </div>
         </div>
 
         <div class="input-group-custom">
             <span class="span">姓名：</span>
             <div class="col-lg-4">
-              <input id="AdminName" type="text" class="form-control" value="Admin"/>
+              <input id="AdminName" type="text" class="form-control" value="test"/>
             </div>
         </div>
         <div class="col-sm-12"></div>
@@ -95,7 +95,7 @@
         <div class="input-group-custom">
             <span class="span">工号：</span>
             <div class="col-lg-4">
-              <input id="AdminNum" type="text" class="form-control" value="SYS_006"/>
+              <input id="AdminNum" type="text" class="form-control" value="TEST_"/>
             </div>
         </div>      
         <div class="col-sm-12"></div>

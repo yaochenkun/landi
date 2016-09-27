@@ -23,4 +23,6 @@ public interface UserMapper {
     User selectByUserName(String Name);
     
     List<User> selectIdRange(HashMap<String, Integer> map);
+    
+    int totalRow();
 }

@@ -43,4 +43,8 @@ public class UserServiceImpl implements UserService {
 		
 		return user_list;
 	}
+	@Override
+	public int totalRow(){
+		return userInfoMapper.totalRow();
+	}
 }
