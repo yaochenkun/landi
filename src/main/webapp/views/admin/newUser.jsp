@@ -8,12 +8,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/admin.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/admin/admin.css" rel="stylesheet" type="text/css"/>
-	<title>房间管理</title>
+	<link href="${pageContext.request.contextPath}/css/ld/admin/user.css" rel="stylesheet" type="text/css"/>
+	<title>添加用户</title>
 </head>
 <body>
 	<!-- 一级导航栏 start-->
@@ -23,12 +21,12 @@
                 <div class="header-logo">
                     <img src="${pageContext.request.contextPath}/img/logo.png">
                 </div>
-                <div class="navbar-collapse">
+                <!-- <div class="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <div class="dropdown-toggle" data-toggle="dropdown" id="user_dropdown">
                              	 欢迎您，${CUR_ENV.cur_user.USERNAME}
-                              <span class="caret"></span>
+                            <span class="caret"></span>
                             </div>
                             <ul class="dropdown-menu" aria-labelledby="user_dropdown" aria-expanded="false">
                               <li class="li"><a href="#">修改密码</a></li>
@@ -37,6 +35,10 @@
                             </ul>
                         </li>
                    </ul>
+                </div>-->
+                <div class="navbar-collapse">
+                                                               欢迎您，${CUR_ENV.cur_user.USERNAME}
+                     <div class="logoutDiv"><a title="退出" class="logoutImg" href="${pageContext.request.contextPath}/logout.action"></a></div>
                 </div>
             </div>
         </div>
@@ -47,9 +49,9 @@
     <div class="main-nav"> 
         <div class="aside-box">
             <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="javascript:void(0);">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;用户管理</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限管理</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;首页</a></li>
+                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/userList.jsp">&nbsp;&nbsp;用户管理</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限查看</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;收费标准管理</a></li>
             </ul>
         </div>
@@ -76,24 +78,31 @@
 	    <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
         
+        
         <div class="input-group-custom">
-            <span class="span">用户名：</span>
+            <div class="col-lg-4"><span class="span">用户名 ：</span></div>
             <div class="col-lg-4">
               <input id="AdminUsername" type="text" class="form-control" value="test"/>
             </div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
         </div>
-
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        
+        
         <div class="input-group-custom">
-            <span class="span">姓名：</span>
+            <div class="col-lg-4"><span class="span">姓名：</span></div>
             <div class="col-lg-4">
               <input id="AdminName" type="text" class="form-control" value="test"/>
             </div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
         </div>
         <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
 
+
         <div class="input-group-custom">
-            <span class="span">工号：</span>
+            <div class="col-lg-4"><span class="span">工号：</span></div>
             <div class="col-lg-4">
               <input id="AdminNum" type="text" class="form-control" value="TEST_"/>
             </div>
@@ -101,8 +110,9 @@
         <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
 
+
         <div class="input-group-custom">
-            <span class="span">部门：</span>
+            <div class="col-lg-4"><span class="span">部门：</span></div>
             <div class="col-lg-4">
                 <div id="AdminDepart" onclick="requestAjaxDepart();" class="form-control">
                 	<span class="caret"></span>
@@ -110,15 +120,19 @@
                 <div id="AdminDepartMenu" class="dropdownMenu"></div>
             </div>
         </div>
-
+        <div class="col-sm-12"></div>
+        <div class="col-sm-12"></div>
+        
+        
         <div class="input-group-custom">
-            <span class="span">角色：</span>
+            <div class="col-lg-4"><span class="span">角色：</span></div>
             <div class="col-lg-4">
                 <div id="AdminRole" onclick="requestAjaxRole();" class="form-control">
                 	<span class="caret"></span>
             	</div>
             <div id="AdminRoleMenu" class="dropdownMenu"></div>
             </div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span></div>
         </div>
         
         <div class="col-sm-12"></div>
@@ -126,5 +140,7 @@
         <!-- 新建用户  end-->
     </div>
     <!-- 页面内容 end-->
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
 </body>
 </html>

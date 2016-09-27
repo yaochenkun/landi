@@ -10,13 +10,15 @@
 
 .row {padding:0 20px;}
 .row .input-group-custom{margin-left: 80px;}
-.row .input-group-custom .span{float: left; line-height: 34px; width: 70px;}
-.row .input-group-custom .form-control{float: left; width:90%;}
+.row .input-group-custom .span{float: right; line-height: 34px;}
+.row .input-group-custom .spanright{float: left; line-height: 34px; color:red;}
+.row .input-group-custom .form-control{float: left; width:310px;}
+.form-control-red{border: 1px solid red;}
 .row .input-group-custom .caret{float: right; margin-top: 8px;}
 
 /* 下拉菜单样式 */
 #AdminDepart{padding-left:20px;}
-.dropdownMenu ul{position: relative; float: left; width: 90%; margin-top: 1px; border: 1px #ccc solid; border-radius: 3px;}
+.dropdownMenu ul{position: absolute; float: left; width:310px; margin-top: 35px; border: 1px #ccc solid; border-radius: 3px; background-color:#fff; z-index:100;}
 .dropdownMenu li{height: 34px; line-height: 34px; text-indent: 20px; border-bottom: 1px solid #ccc;}
 .dropdownMenu li:hover{background-color: #f4f4f4;}
 

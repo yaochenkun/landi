@@ -31,9 +31,11 @@ var requestBeforeUser = function(){
 	requestAjaxUserList(nowpage-1);
 }
 
-// 拉取 下一页用户
+// 拉取 下一页用户 （??当前处理，前端判断是否是最后一页）
 var requestNextUser = function(){
 	var nowpage = parseInt($("#userlist_nowpage").val());
+	var totalpage = parseInt($("#userlist_totalpage").text());
+	if(nowpage == totalpage) return;
 	requestAjaxUserList(nowpage+1);
 }
 
@@ -48,8 +50,7 @@ var requestAjaxUserList = function(pageNum){
 			//?? 转成Json格式
 			var JsonData = data;
             //var JsonData = JSON.parse(data);
-            //var totalPage = JsonData.pageTotal;
-            var totalPage =1;
+            var totalPage = JsonData.pageTotal;
             var nowPage = JsonData.pageNow;
             
             //清空 user的table 和页码
@@ -75,7 +76,7 @@ var requestAjaxUserList = function(pageNum){
             	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
             	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ showDate +"</td>"+
             	     "<td><span onclick=\"resetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码&nbsp;&nbsp;</span>"+
-            	     "<span onclick=\"deleteUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>删除</span></td></tr>");
+            	     "<span onclick=\"deleteUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
                 $("#users_table").append(tr);
             }
             
@@ -143,6 +144,11 @@ hideDialogDeleteSuccess = function(){
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
+$("#AdminName, #AdminUsername").change(function(){
+	console.log("12");
+	$("#AdminUsername").removeClass("form-control-red");
+});
+
 // 添加用户，发送Json格式数据
 var requestAjaxAddUser = function(){
 	let username = $("#AdminUsername").val();
@@ -150,6 +156,13 @@ var requestAjaxAddUser = function(){
 	let num = $("#AdminNum").val();
 	let depart = $("#AdminDepart").text();
 	let role = parseInt($("#AdminRoleSpan").text());
+	
+	if(username==""){
+		console.log("用户名为空！");
+		$("#AdminUsername").addClass("form-control-red");
+		return;
+	}
+	
 
 	$.ajax({
 		type:'post',

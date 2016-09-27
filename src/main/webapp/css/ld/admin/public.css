@@ -35,6 +35,9 @@ header .header-content .title{margin: 0; font-size :16px; display: inline-block;
 header .header-logo{position: absolute; left: 15px; top: 3px;}
 header .header-logo img{width: 568px; height:40px;}
 header .header-content .navbar-collapse{float: right; margin-right: 70px; margin-top: 15px;}
+header .header-content .navbar-collapse .logoutDiv{float: right;}
+header .header-content .navbar-collapse .logoutImg{width: 18px; height:18px; float:right; background:url('../../../img/logout.svg'); background-size:18px; margin-left:10px; cursor: pointer;}
+header .header-content .navbar-collapse .logoutImg:hover{background:url('../../../img/logoutHover.svg'); background-size:18px;}
 header .header-content .dropdown{cursor: pointer;}
 header .header-content .dropdown-menu li{text-align: center;}
 
@@ -98,3 +101,6 @@ header .header-content .dropdown-menu li{text-align: center;}
 .row .col-sm-12{height:15px;}
 .row .btn-edit{padding-left:15px; padding-right:15px;}
 /****************** 页面table样式 end********************/
+
+.red{color: red;}
+
