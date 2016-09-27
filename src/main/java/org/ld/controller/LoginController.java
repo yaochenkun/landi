@@ -31,6 +31,7 @@ public class LoginController {
         	// 在session中保存用户身份信息
         	cur_env.setCur_user(user);
         	user.setLTIME(new Date());
+        	userService.updateUserInfo(user);
     		session.setAttribute("CUR_ENV", cur_env);
     		// 重定向到首页(.action)
     		

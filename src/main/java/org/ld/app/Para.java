@@ -1,14 +1,19 @@
 package org.ld.app;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Para {
+	@SuppressWarnings("resource")
 	public String[] ReadParas(String text, String key)
 	{
 		String fname = "src/env/" + text + ".env";
@@ -34,6 +39,7 @@ public class Para {
 		return null;
 	}
 	
+	@SuppressWarnings("resource")
 	public String[] ReadParaPair(String text, String key, int first, int second)
 	{
 		String fname = "src/env/" + text + ".env";
@@ -45,6 +51,9 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
+				if(tparas.length == 0 || tparas[0].equals(""))
+					continue;
+				
 				String [] ans = new String[2]; 
 				if(tparas[0].equals(key))
 				{
@@ -74,6 +83,9 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
+				if(tparas.length == 0 || tparas[0].equals(""))
+					continue;
+				
 				List<String> tl = new ArrayList<String>();
 				
 				for(int i = 1; i < tparas.length; i++)
@@ -104,6 +116,8 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
+				if(tparas.length == 0 || tparas[0].equals(""))
+					continue;
 
 				map.put(tparas[first], tparas[second]);
 			}
@@ -115,5 +129,30 @@ public class Para {
 		}
 		
 		return null;
+	}
+	
+	public Integer setPair(String text, Map<String, String> map)
+	{
+		String fname = "src/env/" + text + ".env";
+		
+		BufferedWriter writer = null;
+		
+		try{
+			writer = new BufferedWriter(new FileWriter(fname));
+			
+			Iterator<Entry<String, String>> it = map.entrySet().iterator();
+			while(it.hasNext())
+			{
+				Map.Entry<String, String> entry = it.next();
+				writer.write(entry.getKey() + " " + entry.getValue() + "\n");
+			}
+			
+			writer.close();
+			return 1;
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		return 0;
 	}
 }
