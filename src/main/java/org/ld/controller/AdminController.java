@@ -1,6 +1,5 @@
 package org.ld.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,9 +39,9 @@ public class AdminController {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
 		
-		int pageTotal = userService.totalRow();
 		int eachPage = Integer.parseInt(cur_env.getSettings().get("list_size"));
-		int st = (pageNumber - 1) * eachPage;
+		int pageTotal = (int)Math.ceil((float)userService.totalRow()/eachPage);
+		int st = (pageNumber - 1) * eachPage + 1;
 		List<User> user_list = userService.selectUserRange(st, st + eachPage - 1);
 	
 		res_map.put("pageList", user_list);
