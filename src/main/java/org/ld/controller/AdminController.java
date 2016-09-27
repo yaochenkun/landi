@@ -41,6 +41,10 @@ public class AdminController {
 		
 		int eachPage = Integer.parseInt(cur_env.getSettings().get("list_size"));
 		int pageTotal = (int)Math.ceil((float)userService.totalRow()/eachPage);
+		
+		if(pageNumber > pageTotal)
+			pageNumber = pageTotal;
+		
 		int st = (pageNumber - 1) * eachPage + 1;
 		List<User> user_list = userService.selectUserRange(st, st + eachPage - 1);
 	
@@ -119,5 +123,39 @@ public class AdminController {
 		String[] ps = tp.ReadParas("role", role.toString());
 	
  		return Integer.parseInt(ps[2]);
+	}
+	
+	@RequestMapping("/resetPasswd")
+	public @ResponseBody Integer resetPasswd(HttpSession session, @RequestBody int user_id)
+	{
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		User temp = new User();
+		temp.setID(user_id);
+		temp.setPASSWD(cur_env.getSettings().get("default_passwd"));
+		return userService.updateUserInfo(temp);
+	}
+	
+	@RequestMapping("/fobidUser")
+	public @ResponseBody Integer forbidUser(HttpSession session, @RequestBody int user_id)
+	{
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		User temp = new User();
+		temp.setID(user_id);
+		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));
+		return userService.updateUserInfo(temp);
+	}
+	
+	@RequestMapping("/getRate")
+	public @ResponseBody Map<String, String> getRate(HttpSession session)
+	{
+		Para p = new Para();
+		return p.getParaPair("rate", 0, 1);
+	}
+	
+	@RequestMapping("/setRate")
+	public @ResponseBody Integer getRate(HttpSession session, @RequestBody Map<String, String> rate)
+	{
+		Para p = new Para();
+		return p.setPair("rate", rate);
 	}
 }

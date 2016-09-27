@@ -62,7 +62,7 @@
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>
-                    <li class="liactive">角色权限管理</li>
+                    <li class="liactive">角色权限查看</li>
                 </ul>
             </div>    
         </div>

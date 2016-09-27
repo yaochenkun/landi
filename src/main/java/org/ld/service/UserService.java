@@ -15,6 +15,8 @@ public interface UserService {
 	// 插入一个用户
 	int insert(User userInfo);
 	
+	int updateUserInfo(User userInfo);
+	
 	List<User> selectUserRange(int st, int ed);
 	
 	int totalRow();

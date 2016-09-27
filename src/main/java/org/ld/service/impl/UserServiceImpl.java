@@ -34,6 +34,13 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	@Override
+	public int updateUserInfo(User userInfo){
+		int result = userInfoMapper.updateByPrimaryKeySelective(userInfo);
+		System.out.println("#"+result);
+		
+		return result;
+	}
+	@Override
 	public List<User> selectUserRange(int st, int ed){
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ST", st);

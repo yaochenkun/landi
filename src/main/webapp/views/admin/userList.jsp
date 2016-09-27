@@ -8,10 +8,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/user.css" rel="stylesheet" type="text/css"/>
-	<title>添加用户</title>
+	<title>用户列表</title>
 </head>
 <body>
 	<!-- 一级导航栏 start-->
@@ -66,81 +68,67 @@
         </div>
     </div>
     <!-- 二级导航栏 end-->
-
+    
     <!-- 页面内容 start-->
-    <div class="row">   
-        <!-- 新建用户 start-->
-        <div class="col-lg-12">
-            <h4>新建用户</h4>
-            <div class="btn btn-new btngoback" onclick="requestAjaxAddUser();" style="margin-top:-60px; margin-right:120px;">确认添加</div>
-            <div class="btn btn-goback btngoback" style="margin-top:-60px;"><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">返&nbsp;&nbsp;回</a></div>
-        </div>
-	    <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-        
-        
-        <div class="input-group-custom">
-            <div class="col-lg-4"><span class="span">用户名 ：</span></div>
-            <div class="col-lg-4">
-              <input id="AdminUsername" type="text" class="form-control" value="test"/>
-            </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
-        </div>
-        <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-        
-        
-        <div class="input-group-custom">
-            <div class="col-lg-4"><span class="span">姓名：</span></div>
-            <div class="col-lg-4">
-              <input id="AdminName" type="text" class="form-control" value="test"/>
-            </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
-        </div>
-        <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-
-
-        <div class="input-group-custom">
-            <div class="col-lg-4"><span class="span">工号：</span></div>
-            <div class="col-lg-4">
-              <input id="AdminNum" type="text" class="form-control" value="TEST_"/>
-            </div>
-        </div>      
-        <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-
-
-        <div class="input-group-custom">
-            <div class="col-lg-4"><span class="span">部门：</span></div>
-            <div class="col-lg-4">
-                <div id="AdminDepart" onclick="requestAjaxDepart();" class="form-control">
-                	<span class="caret"></span>
-                </div>
-                <div id="AdminDepartMenu" class="dropdownMenu"></div>
-            </div>
-        </div>
-        <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-        
-        
-        <div class="input-group-custom">
-            <div class="col-lg-4"><span class="span">角色：</span></div>
-            <div class="col-lg-4">
-                <div id="AdminRole" onclick="requestAjaxRole();" class="form-control">
-                	<span class="caret"></span>
-            	</div>
-            <div id="AdminRoleMenu" class="dropdownMenu"></div>
-            </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span></div>
-        </div>
-        
-        <div class="col-sm-12"></div>
-        <div class="col-sm-12"></div>
-        <!-- 新建用户  end-->
+    <div class="body-content">
+	    <div class="content">
+	        <section class="activities">
+	            <!-- 新建用户 start-->
+	            <div class="new">
+	                <a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
+	            </div>
+	            <!-- 新建用户  end-->
+	
+	            <!-- 用户table start-->
+	            <div class="nav-block">
+	                <table id="users_table" class="table"></table>
+	            </div>
+	            <!-- 用户table end-->
+	
+	            <!-- 用户页码 start-->
+	            <div id="userBottom" class="bottom"></div>
+	            <!-- 用户页码 end -->
+	       </section>
+	    </div>
     </div>
     <!-- 页面内容 end-->
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
+    
+    <!-- 重置密码弹出框 start -->
+    <div class="dialog-resetPasswd-success"> 
+        <div class="dialog-main">
+            <div class="dialog-title">
+                <a onclick="hideDialogPasswdSuccess();" class="close"><i>×</i></a>
+            </div>
+            <div class="dialog-body">
+                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
+                <div class="logo-success"></div>
+                <h4></h4>
+            </div>
+        </div>   
+    </div>
+    <!-- 重置密码弹出框 end -->
+    
+    <!-- 删除用户弹出框 start -->
+    <div class="dialog-deleteUser-success"> 
+        <div class="dialog-main">
+            <div class="dialog-title">
+                <a onclick="hideDialogDeleteSuccess();" class="close"><i>×</i></a>
+            </div>
+            <div class="dialog-body">
+                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
+                <div class="logo-success"></div>
+                <h4></h4>
+            </div>
+        </div>   
+    </div>
+    <!-- 删除用户弹出框 end -->
+    
+    <!-- jsp页面初始化操作 -->
+    <script type="text/javascript">
+       // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
+       $(function(){
+    	  requestAjaxRoleArraySave();
+       });
+    </script>
 </body>
 </html>
