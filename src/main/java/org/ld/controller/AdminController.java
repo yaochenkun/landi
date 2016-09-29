@@ -35,12 +35,13 @@ public class AdminController {
 	
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int pageNumber){
-		
+				
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
 		
 		int eachPage = Integer.parseInt(cur_env.getSettings().get("list_size"));
 		int pageTotal = (int)Math.ceil((float)userService.totalRow()/eachPage);
+		
 		
 		if(pageNumber > pageTotal)
 			pageNumber = pageTotal;
@@ -55,7 +56,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/addUser")
-	public @ResponseBody String addUser(@RequestBody String userString, HttpSession session){
+	public @ResponseBody Integer addUser(@RequestBody String userString, HttpSession session){
 		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 		
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
@@ -74,7 +75,8 @@ public class AdminController {
 		newUser.setSTATE(2);
 		
 		userService.insert(newUser);
-		return "/addUser";
+		
+		return 1;
 	}
 	
 	@RequestMapping("/setRate/{role}")
@@ -83,7 +85,7 @@ public class AdminController {
 		
 		return "setRate";
 	}
-	
+		
 	@RequestMapping("/requestDepart")
 	public @ResponseBody Map<String,List<String>> departMenu()
 	{
@@ -125,8 +127,17 @@ public class AdminController {
  		return Integer.parseInt(ps[2]);
 	}
 	
-	@RequestMapping("/resetPasswd")
-	public @ResponseBody Integer resetPasswd(HttpSession session, @RequestBody int user_id)
+	@RequestMapping("/changePassword")
+	public @ResponseBody Integer changePassword(@RequestBody String stringPassword){
+		JSONObject passwordJson = (JSONObject) JSONObject.parse(stringPassword);
+		String password = passwordJson.getString("password");
+		System.out.println(password);
+		
+		return 1; 
+	}
+	
+	@RequestMapping("/resetPasswd/{user_id}")
+	public @ResponseBody Integer resetPasswd(HttpSession session, @PathVariable Integer user_id)
 	{
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		User temp = new User();
@@ -134,14 +145,14 @@ public class AdminController {
 		temp.setPASSWD(cur_env.getSettings().get("default_passwd"));
 		return userService.updateUserInfo(temp);
 	}
-	
-	@RequestMapping("/fobidUser")
-	public @ResponseBody Integer forbidUser(HttpSession session, @RequestBody int user_id)
+		
+	@RequestMapping("/forbidUser/{user_id}")
+	public @ResponseBody Integer forbidUser(HttpSession session, @PathVariable int user_id)
 	{
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));
+		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));	
 		return userService.updateUserInfo(temp);
 	}
 	
@@ -153,8 +164,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/setRate")
-	public @ResponseBody Integer getRate(HttpSession session, @RequestBody Map<String, String> rate)
-	{
+	public @ResponseBody Integer getRate(HttpSession session, @RequestBody Map<String,String> rate)
+	{		
 		Para p = new Para();
 		return p.setPair("rate", rate);
 	}

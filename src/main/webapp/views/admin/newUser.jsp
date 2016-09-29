@@ -52,7 +52,7 @@
                 <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;首页</a></li>
                 <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/userList.jsp">&nbsp;&nbsp;用户管理</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限查看</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;收费标准管理</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="${pageContext.request.contextPath}/views/admin/rateList.jsp">&nbsp;&nbsp;收费标准管理</a></li>
             </ul>
         </div>
     </div>
@@ -84,9 +84,16 @@
             <div class="col-lg-4">
               <input id="AdminUsername" type="text" class="form-control" value="test"/>
             </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span><span style="line-height:34px;">必填</span></div>
         </div>
-        <div class="col-sm-12"></div>
+        <div id="userNameNull" style="clear:both;">
+            <div class="col-sm-12"></div>
+	        <div style="display:none;" class="input-group-custom">
+	        	<div class="col-lg-4"></div>
+	        	<div class="col-lg-4"><span style="color:red;">！！不能为空</span></div>
+	        	<div class="col-lg-4"></div>
+	        </div>
+        </div>
         <div class="col-sm-12"></div>
         
         
@@ -95,9 +102,16 @@
             <div class="col-lg-4">
               <input id="AdminName" type="text" class="form-control" value="test"/>
             </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;必填</span></div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span><span style="line-height:34px;">必填</span></div>
         </div>
-        <div class="col-sm-12"></div>
+        <div id="nameNull" style="clear:both;">
+            <div class="col-sm-12"></div>
+	        <div style="display:none;" class="input-group-custom">
+	        	<div class="col-lg-4"></div>
+	        	<div class="col-lg-4"><span style="color:red;">！！不能为空</span></div>
+	        	<div class="col-lg-4"></div>
+	        </div>
+        </div>
         <div class="col-sm-12"></div>
 
 
@@ -132,10 +146,16 @@
             	</div>
             <div id="AdminRoleMenu" class="dropdownMenu"></div>
             </div>
-            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span></div>
+            <div class="col-lg-4"><span class="spanright">*&nbsp;&nbsp;</span><span style="line-height:34px;">必填</span></div>
+        </div>      
+        <div id="roleNull" style="clear:both;">
+            <div class="col-sm-12"></div>
+	        <div style="display:none;" class="input-group-custom">
+	        	<div class="col-lg-4"></div>
+	        	<div class="col-lg-4"><span style="color:red;">！！不能为空</span></div>
+	        	<div class="col-lg-4"></div>
+	        </div>
         </div>
-        
-        <div class="col-sm-12"></div>
         <div class="col-sm-12"></div>
         <!-- 新建用户  end-->
     </div>

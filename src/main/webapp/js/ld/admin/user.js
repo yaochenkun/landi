@@ -46,7 +46,7 @@ var requestAjaxUserList = function(pageNum){
 		type:'post',
 		url: "/LD/HomeAdmin/searchUserList/"+ pageNum +'.action',
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			//?? 转成Json格式
 			var JsonData = data;
             //var JsonData = JSON.parse(data);
@@ -75,8 +75,8 @@ var requestAjaxUserList = function(pageNum){
             		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
             	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
             	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ showDate +"</td>"+
-            	     "<td><span onclick=\"resetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码&nbsp;&nbsp;</span>"+
-            	     "<span onclick=\"deleteUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
+            	     "<td><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码&nbsp;&nbsp;</span>"+
+            	     "<span onclick=\"sureForbidUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
                 $("#users_table").append(tr);
             }
             
@@ -92,61 +92,92 @@ var requestAjaxUserList = function(pageNum){
 	});
 }
 
+// 是否确认重置密码
+var sureResetPasswd = function(id,username){
+	if(confirm("确定要重置用户" + username + "的密码吗？")){
+		resetPasswd(id,username);
+	}
+}
+
 // 重置密码
 var resetPasswd = function(id,username){
-	console.log(id);
-	console.log(username);
+	//console.log(id);
+	//console.log(username);
 	// 发送重置密码请求
-//	$.ajax({
-//		type:'post',
-//		url:'/LD/HomeAdmin/resetPasswd/'+ parseInt(id) +'.action',
-//		success:function(data){
-//			
-//		}
-//	});
-	showDialogPasswdSuccess(username);
+	
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/resetPasswd/'+ parseInt(id) +'.action',
+		success:function(data){
+			//console.log(data);
+			if(data){
+				console.log(data);
+				alert("密码重置成功！");
+			}
+		}
+	});
+	//showDialogPasswdSuccess(username);
 }
 
 // 显示重置密码成功界面
-var showDialogPasswdSuccess =function(username){
-	// $(".dialog-success").slideDown(1000);
-	$(".dialog-resetPasswd-success h4").html("用户&nbsp;"+ username +"&nbsp;密码重置成功！");
-	$(".dialog-resetPasswd-success").animate({top:"30%"},500);
-}
+//var showDialogPasswdSuccess =function(username){
+//	
+//	// $(".dialog-success").slideDown(1000);
+//	
+//	// 显示重置密码成功弹出框
+//	// $(".dialog-resetPasswd-success h4").html("用户&nbsp;"+ username +"&nbsp;密码重置成功！");
+//	// $(".dialog-resetPasswd-success").animate({top:"30%"},500);
+//}
+
 // 隐藏重置密码成功界面
-var hideDialogPasswdSuccess = function(){
-	$(".dialog-resetPasswd-success").animate({top:"-20%"},500);
+//var hideDialogPasswdSuccess = function(){
+//	$(".dialog-resetPasswd-success").animate({top:"-20%"},500);
+//}
+
+// 是否确定禁用用户
+var sureForbidUser = function(id,username){
+	if(confirm("确定要禁用用户" + username + "吗？")){
+		forbidUser(id,username);
+	}
 }
 
-// 删除用户
-var deleteUser = function(id,username){
+// 用户禁用
+var forbidUser = function(id,username){
 	// 发出删除用户请求
-//	$.ajax({
-//		type:'post',
-//		url:'/LD/HomeAdmin/deleteUser/'+ parseInt(id) +'.action',
-//		success:function(data){
-//			
-//		}
-//	});
-	showDialogDeleteSuccess(username);
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/forbidUser/'+ parseInt(id) +'.action',
+		success:function(data){
+			//console.log(data);
+			// data为int数组
+			if(data){
+				console.log(data);
+				alert("成功禁用用户！");
+			}
+		}
+	});
+	
+	// 显示删除用户对话框
+	//showDialogDeleteSuccess(username);
 }
 
 //显示成功删除用户界面
-showDialogDeleteSuccess = function(username){
-	$(".dialog-deleteUser-success h4").html("成功删除用户&nbsp;" + username);
-	$(".dialog-deleteUser-success").animate({top:"30%"},500);
-}
+//showDialogDeleteSuccess = function(username){
+//	$(".dialog-deleteUser-success h4").html("成功删除用户&nbsp;" + username);
+//	$(".dialog-deleteUser-success").animate({top:"30%"},500);
+//}
 
 //隐藏成功删除用户界面
-hideDialogDeleteSuccess = function(){
-	$(".dialog-deleteUser-success").animate({top:"-20%"},500);
-}
+//hideDialogDeleteSuccess = function(){
+//	$(".dialog-deleteUser-success").animate({top:"-20%"},500);
+//}
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-$("#AdminName, #AdminUsername").change(function(){
-	console.log("12");
-	$("#AdminUsername").removeClass("form-control-red");
+// 添加用户输入框文本内容改变，清除红框
+$("#AdminName, #AdminUsername, #AdminRole").click(function(){
+	//console.log("clear red border");
+	$(this).removeClass("form-control-red");
 });
 
 // 添加用户，发送Json格式数据
@@ -157,12 +188,31 @@ var requestAjaxAddUser = function(){
 	let depart = $("#AdminDepart").text();
 	let role = parseInt($("#AdminRoleSpan").text());
 	
-	if(username==""){
-		console.log("用户名为空！");
-		$("#AdminUsername").addClass("form-control-red");
+	// 初始化不能为空DOM
+	$("#userNameNull .input-group-custom, #nameNull .input-group-custom, #roleNull .input-group-custom").css("display","none");
+	$("#userNameNull .col-sm-12, #nameNull .col-sm-12, #roleNull .col-sm-12").css("display","block");
+
+	if(username=="" || name=="" || isNaN(role)){
+		if(username==""){
+			//console.log("用户名为空！");
+			$("#AdminUsername").addClass("form-control-red");
+			$("#userNameNull .input-group-custom").css("display","block");
+			$("#userNameNull .col-sm-12").css("display","none");
+		}
+		if(name==""){
+			//console.log("姓名为空！");
+			$("#AdminName").addClass("form-control-red");
+			$("#nameNull .input-group-custom").css("display","block");
+			$("#nameNull .col-sm-12").css("display","none");
+		}
+		if(isNaN(role)){
+			//console.log("角色为空！");
+			$("#AdminRole").addClass("form-control-red");
+			$("#roleNull .input-group-custom").css("display","block");
+			$("#roleNull .col-sm-12").css("display","none");
+		}
 		return;
-	}
-	
+	}	
 
 	$.ajax({
 		type:'post',
@@ -174,6 +224,14 @@ var requestAjaxAddUser = function(){
 	    dataType:'json',
 		success:function(data){
 			console.log(data);
+//			if(data["result"]=="success"){
+//				alert("用户添加成功！");
+//				// 返回用户列表界面
+//				window.location.href = "/LD/views/admin/userList.jsp";
+//			}		
+			alert("用户添加成功！");
+//			// 返回用户列表界面
+			window.location.href = "/LD/views/admin/userList.jsp";
 		}
 	});
 }

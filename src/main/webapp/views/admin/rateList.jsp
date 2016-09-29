@@ -9,11 +9,11 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/rate.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/admin/user.css" rel="stylesheet" type="text/css"/>
-	<title>用户列表</title>
+	<link href="${pageContext.request.contextPath}/css/ld/admin/rate.css" rel="stylesheet" type="text/css"/>
+	<title>收费标准</title>
 </head>
 <body>
 	<!-- 一级导航栏 start-->
@@ -52,83 +52,106 @@
         <div class="aside-box">
             <ul>
                 <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/userList.jsp">&nbsp;&nbsp;用户管理</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/userList.jsp">&nbsp;&nbsp;用户管理</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限查看</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="${pageContext.request.contextPath}/views/admin/rateList.jsp">&nbsp;&nbsp;收费标准管理</a></li>
+                <li class="liactive"><span class="glyphicon glyphicon-list-alt"></span><a href="${pageContext.request.contextPath}/views/admin/rateList.jsp">&nbsp;&nbsp;收费标准管理</a></li>
             </ul>
         </div>
     </div>
     <div class="nav-second">
         <div class="toolbar">
             <div class="nav-secondul">
-                <ul>               
-                <li class="liactive"><a href="javascript:void(0);">用户列表</a></li>
+                <ul>
+                    <li class="liactive">收费标准</li>
                 </ul>
             </div>    
         </div>
-    </div>
+       </div>
     <!-- 二级导航栏 end-->
-    
-    <!-- 页面内容 start-->
-    <div class="body-content">
-	    <div class="content">
-	        <section class="activities">
-	            <!-- 新建用户 start-->
-	            <div class="new">
-	                <a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
-	            </div>
-	            <!-- 新建用户  end-->
-	
-	            <!-- 用户table start-->
-	            <div class="nav-block">
-	                <table id="users_table" class="table"></table>
-	            </div>
-	            <!-- 用户table end-->
-	
-	            <!-- 用户页码 start-->
-	            <div id="userBottom" class="bottom"></div>
-	            <!-- 用户页码 end -->
-	       </section>
-	    </div>
+        <!-- 页面内容 start -->
+
+    <!-- 水费 start -->
+    <div class="content">
+        <div class="content-body">
+        <div class="water">
+            <div class="head">
+                <img src="${pageContext.request.contextPath}/img/water.svg"/>
+                <h3>水费</h3>
+            </div>
+            <div class="body">
+                <dl>
+                    <dt>一&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>二&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>三&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 水费 end -->
+
+        <!-- 电费 start -->
+        <div class="power">
+            <div class="head">
+                <img src="${pageContext.request.contextPath}/img/power.svg"/>
+                <h3>电费</h3>
+            </div>
+            <div class="body">
+                <dl>
+                    <dt>一&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>二&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>三&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 电费 end -->
+
+        <!-- 燃气费 start -->
+        <div class="gas">
+            <div class="head">
+                <img src="${pageContext.request.contextPath}/img/gas.svg"/>
+                <h3>燃气费</h3>
+            </div>
+            <div class="body">
+                <dl>
+                    <dt>一&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>二&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>三&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 燃气费 end-->
+        </div>
     </div>
+    <div id='editButton'><a class="btn btn-change btnchange" onclick="EditRatePage();">编&nbsp;&nbsp;辑</a></div>
     <!-- 页面内容 end-->
-    
-    <!-- 重置密码弹出框 start -->
-    <div class="dialog-resetPasswd-success"> 
-        <div class="dialog-main">
-            <div class="dialog-title">
-                <a onclick="hideDialogPasswdSuccess();" class="close"><i>×</i></a>
-            </div>
-            <div class="dialog-body">
-                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
-                <div class="logo-success"></div>
-                <h4></h4>
-            </div>
-        </div>   
-    </div>
-    <!-- 重置密码弹出框 end -->
-    
-    <!-- 删除用户弹出框 start -->
-    <div class="dialog-deleteUser-success"> 
-        <div class="dialog-main">
-            <div class="dialog-title">
-                <a onclick="hideDialogDeleteSuccess();" class="close"><i>×</i></a>
-            </div>
-            <div class="dialog-body">
-                <!-- <h4><span>&radic;</span>&nbsp;&nbsp;重置密码成功！</h4> -->
-                <div class="logo-success"></div>
-                <h4></h4>
-            </div>
-        </div>   
-    </div>
-    <!-- 删除用户弹出框 end -->
     
     <!-- jsp页面初始化操作 -->
     <script type="text/javascript">
-       // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
+       // 请求 收费标准
        $(function(){
-    	  requestAjaxRoleArraySave();
+    	   requestAjaxRate();
        });
     </script>
+    
 </body>
 </html>
