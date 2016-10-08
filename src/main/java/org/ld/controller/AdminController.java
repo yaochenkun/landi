@@ -128,12 +128,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/changePassword")
-	public @ResponseBody Integer changePassword(@RequestBody String stringPassword){
+	public @ResponseBody Integer changePassword(HttpSession session, @RequestBody String stringPassword){
 		JSONObject passwordJson = (JSONObject) JSONObject.parse(stringPassword);
 		String password = passwordJson.getString("password");
-		System.out.println(password);
-		
-		return 1; 
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		cur_env.getCur_user().setPASSWD(cur_env.myMD5(password));
+		return userService.updateUserInfo(cur_env.getCur_user());
 	}
 	
 	@RequestMapping("/resetPasswd/{user_id}")
@@ -153,6 +153,16 @@ public class AdminController {
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));	
+		return userService.updateUserInfo(temp);
+	}
+	
+	@RequestMapping("/enableUser/{user_id}")
+	public @ResponseBody Integer enableUser(HttpSession session, @PathVariable int user_id)
+	{
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		User temp = new User();
+		temp.setID(user_id);
+		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("normal_state")));	
 		return userService.updateUserInfo(temp);
 	}
 	

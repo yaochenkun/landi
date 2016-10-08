@@ -37,7 +37,7 @@ var changePassword = function(){
 		type:'post',
 		url:'/LD/HomeAdmin/changePassword.action',
 		contentType:'application/json',
-		data:'{"password":"123"}',
+		data:'{"password":"'+$("#editPassword input").eq(0).val() +'"}',
 		dataType:"json",
 		success:function(data){
 			console.log(data);

@@ -51,7 +51,7 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
-				if(tparas.length == 0 || tparas[0].equals(""))
+				if(tparas.length == 0 || tparas[0].equals("") || tparas[0].equals("#"))
 					continue;
 				
 				String [] ans = new String[2]; 
@@ -83,7 +83,7 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
-				if(tparas.length == 0 || tparas[0].equals(""))
+				if(tparas.length == 0 || tparas[0].equals("") || tparas[0].equals("#"))
 					continue;
 				
 				List<String> tl = new ArrayList<String>();
@@ -116,7 +116,7 @@ public class Para {
 			while((temp = reader.readLine()) != null)
 			{
 				String [] tparas = temp.split(" ");
-				if(tparas.length == 0 || tparas[0].equals(""))
+				if(tparas.length == 0 || tparas[0].equals("") || tparas[0].equals("#"))
 					continue;
 
 				map.put(tparas[first], tparas[second]);
