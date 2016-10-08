@@ -9,3 +9,5 @@
 hs_err_pid*
 
 log/
+
+log\
