@@ -37,7 +37,7 @@
       #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE}, 
       #{STATE,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.User" >
+  <insert id="insertSelective" parameterType="org.ld.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ID != null" >

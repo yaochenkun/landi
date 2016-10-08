@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+import org.ld.app.MyTest;
 import org.ld.dao.UserMapper;
 import org.ld.model.User;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /* 用户service实现类  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
+	
+	private static Logger logger = Logger.getLogger("logDev");
 	@Autowired
 	private UserMapper userInfoMapper;
 
@@ -28,17 +32,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int insert(User userInfo) {
 		
-		int result = userInfoMapper.insert(userInfo);
-		
-		System.out.println(result);
-		return result;
+		try{
+			userInfoMapper.insert(userInfo);
+			return 1;
+		} catch(Exception e)
+		{
+			logger.error(e);
+			return 0;
+		}
 	}
 	@Override
 	public int updateUserInfo(User userInfo){
-		int result = userInfoMapper.updateByPrimaryKeySelective(userInfo);
-		System.out.println("#"+result);
 		
-		return result;
+		try{
+			userInfoMapper.updateByPrimaryKeySelective(userInfo);
+			return 1;
+		} catch(Exception e)
+		{
+			logger.error(e);
+			return 0;
+		}
 	}
 	@Override
 	public List<User> selectUserRange(int st, int ed){

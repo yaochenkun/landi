@@ -9,14 +9,16 @@ import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.app.MyTest;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
 	private UserService userService;
+	private static Logger logger = Logger.getLogger("logRec");
 	//登录
 	@RequestMapping("/login")
 	public String login(HttpSession session, String name, String passwd)
@@ -34,6 +36,8 @@ public class LoginController {
         	userService.updateUserInfo(user);
     		session.setAttribute("CUR_ENV", cur_env);
     		// 重定向到首页(.action)
+    		
+    		logger.info("User Login: " + name);
     		
     		if(user.getROLE() == 0)
     			return "redirect:/homeAdmin.action";

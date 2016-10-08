@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 
+import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.app.MyTest;
 import org.ld.app.Para;
 
 @Controller
@@ -32,6 +34,7 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	private static Logger logger = Logger.getLogger("logRec");
 	
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int pageNumber){
@@ -74,9 +77,16 @@ public class AdminController {
 		newUser.setLTIME(new Date());
 		newUser.setSTATE(2);
 		
-		userService.insert(newUser);
-		
-		return 1;
+		if(userService.insert(newUser) == 1)
+		{
+			logger.info(cur_env.getCur_user().getNAME() + " create a new user " + newUser.getNAME());
+			return 1;
+		}
+		else
+		{
+			logger.error(cur_env.getCur_user().getNAME() + " failed to create the new user " + newUser.getNAME());
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/setRate/{role}")
@@ -133,7 +143,17 @@ public class AdminController {
 		String password = passwordJson.getString("password");
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		cur_env.getCur_user().setPASSWD(cur_env.myMD5(password));
-		return userService.updateUserInfo(cur_env.getCur_user());
+		
+		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		{
+			logger.info("Change password of " + cur_env.getCur_user().getNAME());
+			return 1;
+		}
+		else
+		{
+			logger.error("Failed to change password of " + cur_env.getCur_user().getNAME());
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/resetPasswd/{user_id}")
@@ -143,7 +163,17 @@ public class AdminController {
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setPASSWD(cur_env.getSettings().get("default_passwd"));
-		return userService.updateUserInfo(temp);
+		
+		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		{
+			logger.info("Reset password of " + cur_env.getCur_user().getNAME());
+			return 1;
+		}
+		else
+		{
+			logger.error("Failed to reset password of " + cur_env.getCur_user().getNAME());
+			return 0;
+		}
 	}
 		
 	@RequestMapping("/forbidUser/{user_id}")
@@ -153,7 +183,17 @@ public class AdminController {
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));	
-		return userService.updateUserInfo(temp);
+		
+		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		{
+			logger.info("Disable user " + cur_env.getCur_user().getNAME());
+			return 1;
+		}
+		else
+		{
+			logger.error("Failed to disable user " + cur_env.getCur_user().getNAME());
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/enableUser/{user_id}")
@@ -163,7 +203,17 @@ public class AdminController {
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("normal_state")));	
-		return userService.updateUserInfo(temp);
+		
+		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		{
+			logger.info("Enable user " + cur_env.getCur_user().getNAME());
+			return 1;
+		}
+		else
+		{
+			logger.error("Failed to enable user " + cur_env.getCur_user().getNAME());
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/getRate")
