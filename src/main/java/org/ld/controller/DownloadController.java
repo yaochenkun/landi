@@ -16,8 +16,10 @@ import sun.net.www.URLConnection;
 @Controller
 public class DownloadController {    
     @RequestMapping(value="/download-resource")
-    public void downloadResource(HttpServletResponse response, @RequestBody String fp, @RequestBody String fname) {
-        Path file = Paths.get(fp);
+   public void downloadResource(HttpServletResponse response, @RequestBody String fp, @RequestBody String fname) {
+//    public void downloadResource(HttpServletResponse response) { 
+//    	String fp = "log/rec", fname="rec.log";
+    	Path file = Paths.get(fp);
         if (Files.exists(file)) {
         	String mimeType = URLConnection.guessContentTypeFromName(fname);
         	if(mimeType == null)
