@@ -158,12 +158,12 @@ public class AdminController {
 		
 		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
 		{
-			logger.info("Reset password of " + cur_env.getCur_user().getNAME());
+			logger.info(cur_env.getCur_user().getNAME() + " reset password of " + user_id);
 			return 1;
 		}
 		else
 		{
-			logger.error("Failed to reset password of " + cur_env.getCur_user().getNAME());
+			logger.error(cur_env.getCur_user().getNAME() + " failed to reset password of " + user_id);
 			return 0;
 		}
 	}
@@ -178,12 +178,12 @@ public class AdminController {
 		
 		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
 		{
-			logger.info("Disable user " + cur_env.getCur_user().getNAME());
+			logger.info(cur_env.getCur_user().getNAME() + " disable user " + user_id);
 			return 1;
 		}
 		else
 		{
-			logger.error("Failed to disable user " + cur_env.getCur_user().getNAME());
+			logger.error(cur_env.getCur_user().getNAME() + " failed to disable user " + user_id);
 			return 0;
 		}
 	}
@@ -198,12 +198,12 @@ public class AdminController {
 		
 		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
 		{
-			logger.info("Enable user " + cur_env.getCur_user().getNAME());
+			logger.info(cur_env.getCur_user().getNAME() + " enable user " + user_id);
 			return 1;
 		}
 		else
 		{
-			logger.error("Failed to enable user " + cur_env.getCur_user().getNAME());
+			logger.error(cur_env.getCur_user().getNAME() + " failed to enable user " + user_id);
 			return 0;
 		}
 	}
@@ -218,8 +218,18 @@ public class AdminController {
 	@RequestMapping("/setRate")
 	public @ResponseBody Integer setRate(HttpSession session, @RequestBody Map<String,String> rate)
 	{		
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		Para p = new Para();
-		return p.setPair("rate", rate);
+		if(p.setPair("rate", rate) == 1)
+		{
+			logger.info(cur_env.getCur_user().getNAME() + " set rate " + rate.toString());
+			return 1;
+		}
+		else
+		{
+			logger.info(cur_env.getCur_user().getNAME() + " failed to set rate " + rate.toString());
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/getCharge")
@@ -232,7 +242,17 @@ public class AdminController {
 	@RequestMapping("/setCharge")
 	public @ResponseBody Integer setCharge(HttpSession session, @RequestBody Map<String,String> charge)
 	{		
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		Para p = new Para();
-		return p.setPair("charge", charge);
+		if(p.setPair("charge", charge) == 1)
+		{
+			logger.info(cur_env.getCur_user().getNAME() + " set charge " + charge.toString());
+			return 1;
+		}
+		else
+		{
+			logger.info(cur_env.getCur_user().getNAME() + " failed to set charge " + charge.toString());
+			return 0;
+		}
 	}
 }
