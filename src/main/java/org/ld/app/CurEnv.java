@@ -9,11 +9,13 @@ import org.ld.model.User;
 public class CurEnv {
 	private User cur_user;
 	private Map<String, String> settings;
+	private Map<String, Integer> auths;
 	
 	public CurEnv()
 	{
 		Para tp = new Para();
 		settings = tp.getParaPair("sys", 0, 1);
+		setAuths(tp.getParaPairInt("auth", 2, 0));
 	}
 	
 	public String myMD5(String md5)
@@ -50,5 +52,13 @@ public class CurEnv {
 
 	public void setSettings(Map<String, String> settings) {
 		this.settings = settings;
+	}
+
+	public Map<String, Integer> getAuths() {
+		return auths;
+	}
+
+	public void setAuths(Map<String, Integer> auths) {
+		this.auths = auths;
 	}
 }

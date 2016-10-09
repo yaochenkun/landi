@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	
 	private static Logger logger = Logger.getLogger("logDev");
+	
 	@Autowired
 	private UserMapper userInfoMapper;
 
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(int id) {
 		return userInfoMapper.selectByPrimaryKey(id);
 	}
-
+	@Override
 	public User getUserByUserName(String name){
 		return userInfoMapper.selectByUserName(name);
 	}

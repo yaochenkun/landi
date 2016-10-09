@@ -16,10 +16,13 @@ public class MyTest {
 	private static Logger logger = Logger.getLogger(MyTest.class);
 	public static void main(String[] args)
 	{
-		CurEnv temp = new CurEnv();
+		CurEnv cur_env = new CurEnv();
 		
 		MyFile f = new MyFile();
 		
-		Map<String, String> ans = f.getFilePath("log");
+		if((262141 & (0x01<<cur_env.getAuths().get("wRoom"))) != 0)
+			System.out.println(1);
+		else 
+			System.out.println("#"+ (262141 & (0x01<<cur_env.getAuths().get("wRoom"))));
 	}
 }

@@ -114,4 +114,32 @@
       COMM = #{COMM,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR}
+  </select>
+  <select id="getRoomByType" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where TYPE = #{TYPE,jdbcType=VARCHAR}
+  </select>
+  <select id="getRoomByState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from room
+    where STATE = #{STATE,jdbcType=INTEGER}
+  </select>
+  <select id="getAllRoom" resultMap="BaseResultMap" >
+    <![CDATA[
+  	select * from room
+  	]]>
+  </select>
+  <select id="totalRow" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from room
+  	]]>
+  </select>
 </mapper>
