@@ -25,7 +25,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
-import org.ld.app.MyTest;
 import org.ld.app.Para;
 
 @Controller
@@ -87,13 +86,6 @@ public class AdminController {
 			logger.error(cur_env.getCur_user().getNAME() + " failed to create the new user " + newUser.getNAME());
 			return 0;
 		}
-	}
-	
-	@RequestMapping("/setRate/{role}")
-	public @ResponseBody String setRate(HttpSession session, ModelMap modelMap,
-			@PathVariable Integer role){
-		
-		return "setRate";
 	}
 		
 	@RequestMapping("/requestDepart")
@@ -224,9 +216,23 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/setRate")
-	public @ResponseBody Integer getRate(HttpSession session, @RequestBody Map<String,String> rate)
+	public @ResponseBody Integer setRate(HttpSession session, @RequestBody Map<String,String> rate)
 	{		
 		Para p = new Para();
 		return p.setPair("rate", rate);
+	}
+	
+	@RequestMapping("/getCharge")
+	public @ResponseBody Map<String, String> getCharge(HttpSession session)
+	{
+		Para p = new Para();
+		return p.getParaPair("charge", 0, 1);
+	}
+	
+	@RequestMapping("/setCharge")
+	public @ResponseBody Integer setCharge(HttpSession session, @RequestBody Map<String,String> charge)
+	{		
+		Para p = new Para();
+		return p.setPair("charge", charge);
 	}
 }
