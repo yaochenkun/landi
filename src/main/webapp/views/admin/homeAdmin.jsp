@@ -82,16 +82,19 @@
                     <% 
                        CurEnv curenv = (CurEnv)session.getAttribute("CUR_ENV");
                        Date ctime = curenv.getCur_user().getCTIME();
+                       Date ltime = curenv.getCur_user().getLTIME();
                        
                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                       String localDate = sdf.format(ctime);
+                       String createLocalDate = sdf.format(ctime);
+                       String loginLocalDate = sdf.format(ltime);
                        
                        String stateString = "";
                        int state = curenv.getCur_user().getSTATE();
                        if(state==1)  stateString = "正常";
                        else if(state == 10) stateString = "禁用";
                        %>
-                    <dt>最近登录时间</dt><dd><%= localDate %></dd>
+                    <dt>创建用户时间</dt><dd><%= createLocalDate %></dd>
+                    <dt>最近登录时间</dt><dd><%= loginLocalDate %></dd>
                     <dt>状态</dt><dd><%= stateString %></dd>
                 </dl>
             </div>
@@ -110,7 +113,7 @@
 	      <div class="modal-body">
 	          <p>输入新密码：<input type="password" name ='password' class="form-control"/></p>
 	          <p>确认新密码：<input type="password" class="form-control"/></p>
-	          <p style="visibility:hidden; color:red">两次输入的密码不一致！！请重新输入！</p>
+	          <p style="visibility:hidden; color:red">输入错误提示！</p>
 	      </div>
 	      
 	      <div class="modal-footer">

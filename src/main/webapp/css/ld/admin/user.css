@@ -2,6 +2,9 @@
 
 /*新建用户按钮位置*/
 .content .activities .new{position:relative; float:right; margin:15px 55px 10px 0;}
+/* 设置用户表格每列大小 */
+table tr th:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(9){width: 6%;}
+table tr th:nth-child(7), table tr th:nth-child(8), table tr th:nth-child(10){width: 12%}
 
 /**********添加用户 页面开始位置*********/
 .row{margin-top:30px; margin-left:200px; width:80%;}
@@ -22,10 +25,12 @@
 .dropdownMenu li:hover{background-color: #f4f4f4;}
 
 /* 操作字体样式  */
-.table .spanblue{color: #0064a4;}
-.table .spanblue:hover{color:#0034a1;}
-.table .spanred{color: #d00;}
-.table .spanred:hover{color:#b00;}
+.table .spanblue{color: #008; margin-right: 10px;}
+.table .spanblue:hover{color: #00c; border-bottom: 1px solid;}
+.table .spanred{color: #a00;}
+.table .spanred:hover{color: #d00; border-bottom: 1px solid;}
+.table .spangreen{color: #090;}
+.table .spangreen:hover{color: #0b0; border-bottom: 1px solid;}
 
 /* 弹出框样式 */
 .dialog-resetPasswd-success,.dialog-deleteUser-success{position: fixed; left: 50%; top: -20%; margin-left: -150px; margin-top: -50px; width: 300px; z-index: 100; border: 1px solid #dadde0; border-radius: 3px;}
@@ -38,6 +43,7 @@
 /*.dialog-body span{display: inline-block; width: 25px; height: 25px;padding: 3px 1px 2px 5px; color: #35b558; border: 1px #35b558 solid; border-radius: 50%; }*/
 .dialog-body .logo-success{display: inline-block; line-height: 30px; width: 30px; height: 30px; margin-left: 115px; background: url("../../../img/success.svg");}
 .dialog-body h4{float: left; margin-top:20px; margin-top:20px; font-size:16px; text-align:center; width:100%;}
+
 
 
 

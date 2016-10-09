@@ -25,6 +25,10 @@ a,a:hover,a:link,a:visited{text-decoration: none; color: #5c5c5c;}
 /* 灰色编辑按钮 */
 .btn.btn-edit:hover{background-color: #eee;}
 
+/* 绿色首页按钮 */
+.btn.btn-green{background: #fff; color: #38ae67; border-color: #6ec884; transition: 1s;}
+.btn.btn-green:hover{background: #6ec884; color: #fff;}
+
 /* bootstrap 蓝色primary按钮*/
 .btn.btn-primary{background: #337ab7; border-color: #2e6da4; color: #fff;}
 .btn.btn-primary:hover{background: #286090; border-color: #207d4e;}
@@ -83,7 +87,10 @@ header .header-content .dropdown-menu li{text-align: center;}
 /********table start***/
 .content .activities .nav-block{padding:55px 55px 10px 55px;}
 .content .activities .table{padding: 0px; white-space: nowrap; table-layout: fixed;}
-.table td{width:100%; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid #ddd;}
+.table tr{border-bottom: 1px solid #ddd; border-top: 1px solid #ddd;}
+.table th{background: #fafafa; font-weight: normal; color:#000;}
+.table th, .table td{overflow: hidden; text-overflow: ellipsis;}
+.table tr:hover td{background-color: #f7faff; border-top: 1px solid #b2d7ff; border-bottom: 1px solid #b2d7ff;}
 .table td span{cursor:pointer; color:#666;}
 .table td span:hover{color:#000;}
 /********table end***/

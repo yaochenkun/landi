@@ -27,10 +27,14 @@ var changePassword = function(){
 	$("#editPassword p").eq(2).css("visibility","hidden");
 	if($("#editPassword input").eq(0).val()!=$("#editPassword input").eq(1).val()){
 		// 提醒两次输入的密码不一致
-		$("#editPassword p").eq(2).css("visibility","visible");
+		$("#editPassword p").eq(2).text("两次输入的密码不一致！！请重新输入！").css("visibility","visible");
 		return;
 	}
 		
+	if($("#editPassword input").eq(0).val()==""){
+		$("#editPassword p").eq(2).text("密码不能为空！！").css("visibility","visible");
+		return;
+	}
 	
 	$("#editPassword").modal("hide");
 	$.ajax({

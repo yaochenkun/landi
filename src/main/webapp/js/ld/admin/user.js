@@ -46,7 +46,7 @@ var requestAjaxUserList = function(pageNum){
 		type:'post',
 		url: "/LD/HomeAdmin/searchUserList/"+ pageNum +'.action',
 		success:function(data){
-			//console.log(data);
+			console.log(data);
 			//?? 转成Json格式
 			var JsonData = data;
             //var JsonData = JSON.parse(data);
@@ -58,8 +58,8 @@ var requestAjaxUserList = function(pageNum){
 			$("#userBottom").html("");
 			
 			// 添加用户表的title
-			var tabletitle = $("<tr><td>用户编号</td><td>用户名</td><td>姓名</td>"+
-                         "<td>工号</td><td>部门</td><td>职务（角色）</td><td>最近登录时间</td><td>操作</td></tr> ");
+			var tabletitle = $("<tr><th>编号</th><th>用户名</th><th>姓名</th><th>工号</th><th>部门</th>"+
+                         "<th>职务</th><th>创建用户时间</th><th>最近登录时间</th><th>状态</th><th>操作</th></tr> ");
 			$("#users_table").append(tabletitle);
 			
 			//添加每一行用户信息
@@ -67,16 +67,32 @@ var requestAjaxUserList = function(pageNum){
             	var peruser = JsonData.pageList[i];
             	
                 // 将时间戳变为2016-12-12显示          	
-            	var date = new Date(peruser.ltime);
-            	var showDate = date.toLocaleDateString().replace(/\//g,"-");
+            	var cdate = new Date(peruser.ctime);
+            	var createDate = cdate.toLocaleDateString().replace(/\//g,"-");
+            	
+            	var ldate = new Date(peruser.ltime);
+            	var loginDate = ldate.toLocaleDateString().replace(/\//g,"-");
             	//console.log(showDate);
             	
-            	var tr = $("<tr><td>"+ peruser.id +"</td>"+
-            		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
-            	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
-            	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ showDate +"</td>"+
-            	     "<td><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码&nbsp;&nbsp;</span>"+
-            	     "<span onclick=\"sureForbidUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
+            	// 正常状态
+            	if(peruser.state==1){
+            		var tr = $("<tr><td>"+ peruser.id +"</td>"+
+                   		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
+                   	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
+                   	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ createDate +"</td>"+ "<td>"+ loginDate +"</td>"+ "<td>正常</td>"+
+                   	     "<td><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码</span>"+
+                   	     "<span onclick=\"sureForbidUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
+            	}
+            	// 禁用状态
+            	else if(peruser.state==10){
+            		var tr = $("<tr><td>"+ peruser.id +"</td>"+
+                   		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
+                   	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
+                   	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ createDate +"</td>"+ "<td>"+ loginDate +"</td>"+ "<td>禁用</td>"+
+                   	     "<td><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码</span>"+
+                   	     "<span onclick=\"sureEnableUser("+ peruser.id +",'"+ peruser.username +"')\" class='spangreen'>启用</span></td></tr>");
+            	}
+            	
                 $("#users_table").append(tr);
             }
             
@@ -111,8 +127,14 @@ var resetPasswd = function(id,username){
 		success:function(data){
 			//console.log(data);
 			if(data){
+				console.log("重置密码后的回调返回值：");
 				console.log(data);
-				alert("密码重置成功！");
+				if(data==1){
+					alert("密码重置成功！");
+				}
+				else if(data==0){
+					alert("密码重置失败！");
+				}
 			}
 		}
 	});
@@ -151,8 +173,47 @@ var forbidUser = function(id,username){
 			//console.log(data);
 			// data为int数组
 			if(data){
+				console.log("禁用用户回调函数返回值：");
 				console.log(data);
-				alert("成功禁用用户！");
+				if(data==1){
+					alert("成功禁用用户！");
+				}
+				else if(data == 0){
+					alert("禁用用户失败！");
+				}
+			}
+		}
+	});
+	
+	// 显示删除用户对话框
+	//showDialogDeleteSuccess(username);
+}
+
+//是否确定启用用户
+var sureEnableUser = function(id,username){
+	if(confirm("确定要启用用户" + username + "吗？")){
+		enableUser(id,username);
+	}
+}
+
+// 启用用户
+var enableUser = function(id,username){
+	// 发出删除用户请求
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/enableUser/'+ parseInt(id) +'.action',
+		success:function(data){
+			//console.log(data);
+			// data为int数组
+			if(data){
+				console.log("启用用户回调函数返回值：");
+				console.log(data);
+				if(data==1){
+					alert("成功启用用户！");
+				}
+				else if(data == 0){
+					alert("启用用户失败！");
+				}
 			}
 		}
 	});
@@ -223,15 +284,16 @@ var requestAjaxAddUser = function(){
 	         '"DEPART":"'+ depart +'","ROLE":'+ role +'}',
 	    dataType:'json',
 		success:function(data){
+			console.log("添加用户回调函数返回值：");
 			console.log(data);
-//			if(data["result"]=="success"){
-//				alert("用户添加成功！");
-//				// 返回用户列表界面
-//				window.location.href = "/LD/views/admin/userList.jsp";
-//			}		
-			alert("用户添加成功！");
-//			// 返回用户列表界面
-			window.location.href = "/LD/views/admin/userList.jsp";
+ 	        if(data==1){
+ 	        	alert("用户添加成功！");
+ 				// 返回用户列表界面
+ 				window.location.href = "/LD/views/admin/userList.jsp";
+ 	        }
+ 	        else if(data==0){
+ 	        	alert("用户添加失败！");
+ 	        }
 		}
 	});
 }
