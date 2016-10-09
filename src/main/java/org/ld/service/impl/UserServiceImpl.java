@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			return 1;
 		} catch(Exception e)
 		{
-			logger.error(e);
+			logger.error(e.getCause());
 			return 0;
 		}
 	}
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 			return 1;
 		} catch(Exception e)
 		{
-			logger.error(e);
+			logger.error(e.getCause());
 			return 0;
 		}
 	}
