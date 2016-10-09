@@ -1,5 +1,7 @@
 package org.ld.app;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
@@ -16,15 +18,8 @@ public class MyTest {
 	{
 		CurEnv temp = new CurEnv();
 		
-		System.out.println(temp.getSettings().get("default_passwd"));
-		System.out.println(temp.myMD5("654321"));
+		MyFile f = new MyFile();
 		
-		logger.debug("Hello this is a debug message");
-		logger.info("Hello this is an info message");
-//		Para t = new Para();
-//		Map<String, String> ans = t.getParaPair("sys", 0, 1);
-//		System.out.println(ans.size());
-//		
-//		t.setPair("test", ans);
+		Map<String, String> ans = f.getFilePath("log");
 	}
 }

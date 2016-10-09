@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.RoomPicMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.RoomPic" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="TAG" property="TAG" jdbcType="VARCHAR" />
+    <result column="PATH" property="PATH" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_ID, TYPE, TAG, PATH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_pic
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from room_pic
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.RoomPic" >
+    insert into room_pic (ID, ROOM_ID, TYPE, 
+      TAG, PATH)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, 
+      #{TAG,jdbcType=VARCHAR}, #{PATH,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.RoomPic" >
+    insert into room_pic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_ID != null" >
+        ROOM_ID,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="TAG != null" >
+        TAG,
+      </if>
+      <if test="PATH != null" >
+        PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_ID != null" >
+        #{ROOM_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="TAG != null" >
+        #{TAG,jdbcType=VARCHAR},
+      </if>
+      <if test="PATH != null" >
+        #{PATH,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomPic" >
+    update room_pic
+    <set >
+      <if test="ROOM_ID != null" >
+        ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="TAG != null" >
+        TAG = #{TAG,jdbcType=VARCHAR},
+      </if>
+      <if test="PATH != null" >
+        PATH = #{PATH,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.RoomPic" >
+    update room_pic
+    set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=INTEGER},
+      TAG = #{TAG,jdbcType=VARCHAR},
+      PATH = #{PATH,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
