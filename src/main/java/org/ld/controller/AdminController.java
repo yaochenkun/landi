@@ -29,7 +29,7 @@ import org.ld.app.MyFile;
 import org.ld.app.Para;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/HomeAdmin")
 public class AdminController {	
 	
 	@Autowired

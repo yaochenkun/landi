@@ -67,10 +67,6 @@
 			<mvc:mapping path="/**"/>
 			<bean class="org.ld.interceptor.LoginIntercepter"></bean>
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/*([aA]dmin)*"/>
-			<bean class="org.ld.interceptor.AdminIntercepter"></bean>
-		</mvc:interceptor>
 	</mvc:interceptors>
 
 </beans>
