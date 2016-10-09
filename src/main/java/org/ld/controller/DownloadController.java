@@ -1,9 +1,10 @@
 package org.ld.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,23 +16,46 @@ import sun.net.www.URLConnection;
 
 @Controller
 public class DownloadController {    
-    @RequestMapping(value="/download-resource")
-    public void downloadResource(HttpServletResponse response, @RequestBody String fp, @RequestBody String fname) {
-        Path file = Paths.get(fp);
-        if (Files.exists(file)) {
-        	String mimeType = URLConnection.guessContentTypeFromName(fname);
+    @RequestMapping(value="/download")
+    public void downloadResource1(HttpServletResponse response, @RequestBody String fp) {
+        File file = new File(fp);
+        if (file.exists()) {
+        	String mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        	System.out.println(mimeType);
         	if(mimeType == null)
         		mimeType = "application/octet-stream";
             response.setContentType(mimeType);
             response.addHeader("Content-Disposition", 
-                    "attachment; filename=" + fname);
-/*
-如果文件名有中文的话，进行URL编码，让中文正常显示
-response.addHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
-*/
+                    "attachment; filename=" + file.getName());
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            // if using Java 7, use try-with-resources
             try {
-                Files.copy(file, response.getOutputStream());
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                OutputStream os = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    os.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
             } catch (IOException ex) {
+                // do something, 
+                // probably forward to an Error page
+            } finally {
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                    }
+                }
             }
         }
     }
