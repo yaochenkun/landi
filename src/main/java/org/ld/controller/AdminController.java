@@ -29,7 +29,7 @@ import org.ld.app.MyFile;
 import org.ld.app.Para;
 
 @Controller
-@RequestMapping("/HomeAdmin")
+@RequestMapping("/admin")
 public class AdminController {	
 	
 	@Autowired
@@ -158,7 +158,7 @@ public class AdminController {
 		temp.setID(user_id);
 		temp.setPASSWD(cur_env.getSettings().get("default_passwd"));
 		
-		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		if(userService.updateUserInfo(temp) == 1)
 		{
 			logger.info(cur_env.getCur_user().getNAME() + " reset password of " + user_id);
 			return 1;
@@ -178,7 +178,7 @@ public class AdminController {
 		temp.setID(user_id);
 		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));	
 		
-		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		if(userService.updateUserInfo(temp) == 1)
 		{
 			logger.info(cur_env.getCur_user().getNAME() + " disable user " + user_id);
 			return 1;
@@ -198,7 +198,7 @@ public class AdminController {
 		temp.setID(user_id);
 		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("normal_state")));	
 		
-		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
+		if(userService.updateUserInfo(temp) == 1)
 		{
 			logger.info(cur_env.getCur_user().getNAME() + " enable user " + user_id);
 			return 1;
