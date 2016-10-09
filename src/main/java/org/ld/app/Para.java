@@ -131,6 +131,33 @@ public class Para {
 		return null;
 	}
 	
+	public Map<String, Integer> getParaPairInt(String text, int first, int second)
+	{
+		String fname = "src/env/" + text + ".env";
+		
+		BufferedReader reader = null;
+		try{
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			reader = new BufferedReader(new FileReader(fname));
+			String temp = null;
+			while((temp = reader.readLine()) != null)
+			{
+				String [] tparas = temp.split(" ");
+				if(tparas.length == 0 || tparas[0].equals("") || tparas[0].equals("#"))
+					continue;
+
+				map.put(tparas[first], Integer.parseInt(tparas[second]));
+			}
+			
+			reader.close();
+			return map;
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public Integer setPair(String text, Map<String, String> map)
 	{
 		String fname = "src/env/" + text + ".env";

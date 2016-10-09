@@ -34,10 +34,11 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+	
 	private static Logger logger = Logger.getLogger("logRec");
 	
 	@RequestMapping("/searchUserList/{pageNumber}")
-	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, ModelMap modelMap, @PathVariable int pageNumber){
+	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, @PathVariable int pageNumber){
 				
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
