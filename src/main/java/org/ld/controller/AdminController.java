@@ -25,6 +25,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.app.MyFile;
 import org.ld.app.Para;
 
 @Controller
@@ -254,5 +255,14 @@ public class AdminController {
 			logger.info(cur_env.getCur_user().getNAME() + " failed to set charge " + charge.toString());
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/getLogs")
+	public @ResponseBody Map<String, String> getLogs()
+	{
+		MyFile fs = new MyFile();
+		Map<String, String> ans = fs.getFilePath("log/rec");
+		
+		return ans;
 	}
 }
