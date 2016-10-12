@@ -149,4 +149,9 @@
       STATE = #{STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getItems" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from room_item where ROOM_ID = #{room_id} and TYPE = #{type}
+    ]]>
+  </select>
 </mapper>

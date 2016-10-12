@@ -1,5 +1,6 @@
 package org.ld.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -7,7 +8,11 @@ import org.ld.dao.RoomItemMapper;
 import org.ld.dao.RoomMapper;
 import org.ld.dao.RoomMeterMapper;
 import org.ld.dao.RoomPicMapper;
+import org.ld.dao.RoomStateMapper;
 import org.ld.model.Room;
+import org.ld.model.RoomItem;
+import org.ld.model.RoomPic;
+import org.ld.model.RoomState;
 import org.ld.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +31,8 @@ public class RoomServiceImpl implements RoomService {
 	private RoomItemMapper roomItemMapper;
 	@Autowired
 	private RoomPicMapper roomPicMapper;
+	@Autowired
+	private RoomStateMapper roomStateMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -89,4 +96,24 @@ public class RoomServiceImpl implements RoomService {
 		return roomMapper.getAllRoom();
 	}
 	
+	@Override
+	public List<RoomState> getAllRoomState() {
+		// TODO Auto-generated method stub
+		return roomStateMapper.getAllRoomState();
+	}
+
+	@Override
+	public List<RoomItem> getItems(Integer rid, Integer type) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("room_id", rid);
+		map.put("type", type);
+		return roomItemMapper.getItems(map);
+	}
+	
+	@Override
+	public List<RoomPic> getPic(Integer rid) {
+		// TODO Auto-generated method stub
+		return roomPicMapper.getPicByRoomId(rid);
+	}
 }

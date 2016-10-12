@@ -2,8 +2,11 @@ package org.ld.app;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import org.apache.log4j.Logger;
 
 import org.ld.app.*;
@@ -18,11 +21,14 @@ public class MyTest {
 	{
 		CurEnv cur_env = new CurEnv();
 		
-		MyFile f = new MyFile();
+		Para p = new Para();
 		
-		if((262141 & (0x01<<cur_env.getAuths().get("wRoom"))) != 0)
-			System.out.println(1);
-		else 
-			System.out.println("#"+ (262141 & (0x01<<cur_env.getAuths().get("wRoom"))));
+		Map<String,String> ans = p.getParaPair("charge", 0, 1);
+		Iterator<Entry<String, String>> it = ans.entrySet().iterator();
+		while(it.hasNext())
+		{
+			Map.Entry<String, String> entry = it.next();
+			System.out.println(entry.getKey() + " " + entry.getValue());
+		}
 	}
 }

@@ -43,7 +43,7 @@ public class AdminController {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object > res_map = new HashMap<String, Object>(); 
 		
-		int eachPage = Integer.parseInt(cur_env.getSettings().get("list_size"));
+		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int pageTotal = (int)Math.ceil((float)userService.totalRow()/eachPage);
 		
 		
@@ -176,7 +176,7 @@ public class AdminController {
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("forbid_state")));	
+		temp.setSTATE(cur_env.getSettingsInt().get("forbid_state"));	
 		
 		if(userService.updateUserInfo(temp) == 1)
 		{
@@ -196,7 +196,7 @@ public class AdminController {
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(Integer.parseInt(cur_env.getSettings().get("normal_state")));	
+		temp.setSTATE(cur_env.getSettingsInt().get("normal_state"));	
 		
 		if(userService.updateUserInfo(temp) == 1)
 		{

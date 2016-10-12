@@ -1,5 +1,7 @@
 package org.ld.dao;
 
+import java.util.List;
+
 import org.ld.model.RoomPic;
 
 public interface RoomPicMapper {
@@ -14,4 +16,6 @@ public interface RoomPicMapper {
     int updateByPrimaryKeySelective(RoomPic record);
 
     int updateByPrimaryKey(RoomPic record);
+    
+    List<RoomPic> getPicByRoomId(Integer ROOM_ID);
 }
