@@ -1,0 +1,7 @@
+.log-content{margin: 100px 10px 20px 170px; padding: 0 60px;}
+
+.log-content .log-head{font-size: 17px; color: #5c5c5c; border-top: 1px solid #eee; border-bottom: 1px solid #eee; background: #f8f8f8; line-height: 50px; padding: 0 40px;}
+.log-content .log-detail{padding: 0 30px;}
+.perlog{padding: 30px 10px; border-bottom: 1px solid #ccc;}
+.perlog .log-title .normal-log{display: inline-block; padding: 2px 3px; font-size: 12px; background: #39ac6a; color: #fff; margin-right: 15px; border-radius: 2px;}
+.perlog .btndownload{float: right; margin-top: -20px;}

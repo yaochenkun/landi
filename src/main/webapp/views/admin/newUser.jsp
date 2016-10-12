@@ -14,58 +14,20 @@
 	<title>添加用户</title>
 </head>
 <body>
-	<!-- 一级导航栏 start-->
-    <header class="navbar navbar-fixed-top navbar-ld">
-        <div class="container-fluid">
-            <div class="header-content">
-                <div class="header-logo">
-                    <img src="${pageContext.request.contextPath}/img/logo.png">
-                </div>
-                <!-- <div class="navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <div class="dropdown-toggle" data-toggle="dropdown" id="user_dropdown">
-                             	 欢迎您，${CUR_ENV.cur_user.USERNAME}
-                            <span class="caret"></span>
-                            </div>
-                            <ul class="dropdown-menu" aria-labelledby="user_dropdown" aria-expanded="false">
-                              <li class="li"><a href="#">修改密码</a></li>
-                              <li role="separator" class="divider"></li>
-                              <li class="li"><a href="${pageContext.request.contextPath}/logout.action">退出</a></li>
-                            </ul>
-                        </li>
-                   </ul>
-                </div>-->
-                <div class="navbar-collapse">
-                                                               欢迎您，${CUR_ENV.cur_user.USERNAME}
-                     <div class="logoutDiv"><a title="退出" class="logoutImg" href="${pageContext.request.contextPath}/logout.action"></a></div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- 一级导航栏 end-->
-
-    <!-- 二级导航栏 start -->
-    <div class="main-nav"> 
-        <div class="aside-box">
-            <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/admin/homeAdmin.jsp">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/admin/userList.jsp">&nbsp;&nbsp;用户管理</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-lock"></span><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp">&nbsp;&nbsp;角色权限查看</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="${pageContext.request.contextPath}/views/admin/rateList.jsp">&nbsp;&nbsp;收费标准管理</a></li>
-            </ul>
-        </div>
-    </div>
+	<jsp:include page="_header.jsp"/>
+    <jsp:include page="_leftMenu.jsp"/>
+    
+    <!-- 右侧导航栏 start -->
     <div class="nav-second">
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
-                <li class="liactive"><a href="javascript:void(0);">用户列表</a></li>
+               	    <li class="liactive"><a href="javascript:void(0);">用户列表</a></li>
                 </ul>
             </div>    
         </div>
     </div>
-    <!-- 二级导航栏 end-->
+    <!-- 右侧导航栏 end -->
 
     <!-- 页面内容 start-->
     <div class="row">   
@@ -162,5 +124,10 @@
     <!-- 页面内容 end-->
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
+    <script type="text/javascript">
+       $(function(){
+    	  changeLeftMenu(1);
+       });
+    </script>
 </body>
 </html>

@@ -177,6 +177,7 @@ var forbidUser = function(id,username){
 				console.log(data);
 				if(data==1){
 					alert("成功禁用用户！");
+					window.location.href = "/LD/views/admin/userList.jsp";
 				}
 				else if(data == 0){
 					alert("禁用用户失败！");
@@ -210,6 +211,7 @@ var enableUser = function(id,username){
 				console.log(data);
 				if(data==1){
 					alert("成功启用用户！");
+					window.location.href = "/LD/views/admin/userList.jsp";
 				}
 				else if(data == 0){
 					alert("启用用户失败！");

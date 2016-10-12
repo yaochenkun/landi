@@ -1,5 +1,3 @@
-.main-nav .aside-box li{text-indent: 23px;}  /*修改左栏文字位置*/
-
 /*新建用户按钮位置*/
 .content .activities .new{position:relative; float:right; margin:15px 55px 10px 0;}
 /* 设置用户表格每列大小 */
@@ -26,11 +24,11 @@ table tr th:nth-child(7), table tr th:nth-child(8), table tr th:nth-child(10){wi
 
 /* 操作字体样式  */
 .table .spanblue{color: #008; margin-right: 10px;}
-.table .spanblue:hover{color: #00c; border-bottom: 1px solid;}
-.table .spanred{color: #a00;}
-.table .spanred:hover{color: #d00; border-bottom: 1px solid;}
-.table .spangreen{color: #090;}
-.table .spangreen:hover{color: #0b0; border-bottom: 1px solid;}
+.table .spanblue:hover{color: #008; border-bottom: 1px solid;}
+.table .spanred{color: #ad0040;}
+.table .spanred:hover{color: #ad0040; border-bottom: 1px solid;}
+.table .spangreen{color: #007f48;}
+.table .spangreen:hover{color: #007f48; border-bottom: 1px solid;}
 
 /* 弹出框样式 */
 .dialog-resetPasswd-success,.dialog-deleteUser-success{position: fixed; left: 50%; top: -20%; margin-left: -150px; margin-top: -50px; width: 300px; z-index: 100; border: 1px solid #dadde0; border-radius: 3px;}

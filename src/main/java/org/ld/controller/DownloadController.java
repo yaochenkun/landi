@@ -12,12 +12,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.alibaba.fastjson.JSONObject;
+
 import sun.net.www.URLConnection;
 
 @Controller
 public class DownloadController {    
     @RequestMapping(value="/download")
     public void downloadResource1(HttpServletResponse response, @RequestBody String fp) {
+    	
+    	JSONObject fpJson = (JSONObject) JSONObject.parse(fp);
+    	System.out.println(fpJson.getString("fp"));
+    	
         File file = new File(fp);
         if (file.exists()) {
         	String mimeType = URLConnection.guessContentTypeFromName(file.getName());

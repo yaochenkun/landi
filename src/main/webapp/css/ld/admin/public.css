@@ -55,14 +55,16 @@ header .header-content .dropdown-menu li{text-align: center;}
 /******************二级导航栏 start*****************/
 .main-nav{position: absolute; z-index: 20; left: 0; top:48px; bottom: 0; width: 160px; background: #eaedf4; border-right: solid #dedce5 1px;}
 .main-nav .aside-box{position: absolute; top:0; width: 100%}
-.main-nav .aside-box li{position: relative; height: 61px; line-height: 56px; padding: 2px 0; text-indent: 25px; font-size: 15px; border-bottom: 1px #d8dce5 solid;}
-.main-nav .aside-box li:hover{background-color: #e0e4ed;}
-.main-nav .glyphicon{display: inline;}
-.main-nav .aside-box .liactive{background-color: #ced3e0;}
+.aside-box li{height: 61px; line-height: 58px;}
+.aside-box li a{display: inline-block; padding: 2px 0; text-indent: 25px; font-size: 15px; border-bottom: 1px #d8dce5 solid; width: 100%; color: #444;}
+.aside-box li a:hover{background-color: #e0e4ed;}
+.aside-box .glyphicon{display: inline;}
+.aside-box .a-active{background-color: #ced3e0;}
+/******************二级导航栏 end*****************/
 
+/************** 右侧导航栏 start  **********/
 .nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px;border-bottom: 1px #eee solid; background-color: #fafafa;}
 .nav-second .toolbar{width: 100%; padding-left: 172px; padding-right: 12px;}
-
 .nav-secondul ul{white-space: nowrap; height: 59px; margin-left: 10px;}
 .nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑"; cursor: pointer;}
 .nav-secondul .linormal a{color: #5c5c5c;}
@@ -73,7 +75,7 @@ header .header-content .dropdown-menu li{text-align: center;}
 .nav-secondul .liactive{border-bottom: 2px solid #4a8bee;}
 
 .body-content{position: relative;  margin-left: 160px;}
-/******************二级导航栏 end*****************/
+/************** 右侧导航栏 start  **********/
 
 /****************** 页面table样式 start********************/
 .search .navbar-form-normal{position: relative; float: left; margin-right: 20px; padding: 4px; display: block; width: 100px; height: 35px; line-height: 25px; border:1px solid #e5e5e5; border-radius: 3px; background-color:#fff;}
