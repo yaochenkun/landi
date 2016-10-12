@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
+import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.User;
@@ -31,7 +32,7 @@ public class UserRoomController {
 	
 	private static Logger logger = Logger.getLogger("logRec");
 	
-	@RequestMapping("/getAllRoom/")
+	@RequestMapping("/getAllRoom")
 	public Map<String, Object> getAllRoom(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -49,7 +50,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/getAllRoomState/")
+	@RequestMapping("/getAllRoomState")
 	public Map<String, Object> getAllRoomState(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -67,7 +68,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/getRoomInfo/")
+	@RequestMapping("/getRoomInfo")
 	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody Integer rid, @RequestBody Integer op){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -117,7 +118,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/getPics/")
+	@RequestMapping("/getPics")
 	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -131,6 +132,23 @@ public class UserRoomController {
 		
 		List<RoomPic> pic = roomService.getPic(rid);
 		ans.put("pics", pic);
+		return ans;
+	}
+	
+	@RequestMapping("/getMeters")
+	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			ans.put("State", "Invalid");
+			return ans;
+		} else{
+			ans.put("State", "Valid");
+		}
+		
+		List<RoomMeter> meters = roomService.getMeters(rid, type);
+		ans.put("meters" + type, meters);
 		return ans;
 	}
 	

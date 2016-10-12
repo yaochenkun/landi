@@ -11,6 +11,7 @@ import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
+import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.service.RoomService;
@@ -115,5 +116,14 @@ public class RoomServiceImpl implements RoomService {
 	public List<RoomPic> getPic(Integer rid) {
 		// TODO Auto-generated method stub
 		return roomPicMapper.getPicByRoomId(rid);
+	}
+
+	@Override
+	public List<RoomMeter> getMeters(Integer rid, Integer type) {
+		// TODO Auto-generated method stub
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("room_id", rid);
+		map.put("type", type);
+		return roomMeterMapper.getMeters(map);
 	}
 }

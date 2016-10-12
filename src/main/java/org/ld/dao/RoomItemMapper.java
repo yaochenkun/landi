@@ -18,5 +18,6 @@ public interface RoomItemMapper {
 
     int updateByPrimaryKey(RoomItem record);
     
+    //add
     List<RoomItem> getItems(HashMap<String, Integer> map);
 }

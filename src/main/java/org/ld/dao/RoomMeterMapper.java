@@ -1,5 +1,8 @@
 package org.ld.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.ld.model.RoomMeter;
 
 public interface RoomMeterMapper {
@@ -14,4 +17,7 @@ public interface RoomMeterMapper {
     int updateByPrimaryKeySelective(RoomMeter record);
 
     int updateByPrimaryKey(RoomMeter record);
+    
+    //add
+    List<RoomMeter> getMeters(HashMap<String, Integer> map);
 }

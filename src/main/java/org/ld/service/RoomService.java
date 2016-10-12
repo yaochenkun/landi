@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
+import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 
@@ -30,4 +31,6 @@ public interface RoomService{
 	List<RoomItem> getItems(Integer rid, Integer type);
 	
 	List<RoomPic> getPic(Integer rid);
+	
+	List<RoomMeter> getMeters(Integer rid, Integer type);
 }

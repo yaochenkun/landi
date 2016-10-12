@@ -17,5 +17,6 @@ public interface RoomPicMapper {
 
     int updateByPrimaryKey(RoomPic record);
     
+    //add
     List<RoomPic> getPicByRoomId(Integer ROOM_ID);
 }
