@@ -1,5 +1,7 @@
 /*新建用户按钮位置*/
-.content .activities .new{position:relative; float:right; margin:15px 55px 10px 0;}
+.content .activities .new{position:relative; float:right; margin:15px 55px 15px 0;}
+.new .btn-edit{margin-right: 20px;}
+
 /* 设置用户表格每列大小 */
 table tr th:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(9){width: 6%;}
 table tr th:nth-child(7), table tr th:nth-child(8), table tr th:nth-child(10){width: 12%}

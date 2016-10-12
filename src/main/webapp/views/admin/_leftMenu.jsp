@@ -13,7 +13,7 @@
             <li><a href="${pageContext.request.contextPath}/views/admin/userList.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
             <li><a href="${pageContext.request.contextPath}/views/admin/roleEdit.jsp"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;角色权限查看</a></li>
             <li><a href="${pageContext.request.contextPath}/views/admin/rateList.jsp"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;收费标准管理</a></li>
-            <li><a href="${pageContext.request.contextPath}/views/admin/checkLog.jsp"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;查看日志</a></li>
+            <li><a href="${pageContext.request.contextPath}/views/admin/checkLog.jsp"><span class="glyphicon glyphicon-calendar"></span>&nbsp;&nbsp;日志查看</a></li>
         </ul>
     </div>
 </div>

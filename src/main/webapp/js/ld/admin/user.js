@@ -389,9 +389,32 @@ $(function(){
 	});
 });
 
-
-
-
+//导出用户列表至 excel中
+var exportUserList = function(){
+    var BB = self.Blob;
+    var fileName = "userList.csv";
+    var content = ",,,用户信息表\n编号,用户名,姓名,工号,部门,职务,创建用户时间,最近登录时间,状态\n";
+    $("#users_table tr").each(function(i){
+    	   if(i!=0){
+    		   content += $(this).children("td").eq(0).text() + "," + $(this).children("td").eq(1).text() + "," +
+    		              $(this).children("td").eq(2).text() + "," + $(this).children("td").eq(3).text() + "," +
+    		              $(this).children("td").eq(4).text() + "," + $(this).children("td").eq(5).text() + "," +
+    		              $(this).children("td").eq(6).text() + "," + $(this).children("td").eq(7).text() + "," +
+    		              $(this).children("td").eq(8).text() + "\n";
+    	   } 
+        }
+    );
+    //console.log(content)
+        
+    saveAs(
+          new BB(
+              // ["\ufeff" + document.getElementById("content").value] //\ufeff防止utf8 bom防止中文乱码
+              ["\ufeff" + content] //\ufeff防止utf8 bom防止中文乱码
+            , {type: "text/plain;charset=utf8"}
+        )
+        , fileName
+    );
+}
 
 
 

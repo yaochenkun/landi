@@ -6,10 +6,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/user.css" rel="stylesheet" type="text/css"/>
@@ -37,6 +33,7 @@
 	        <section class="activities">
 	            <!-- 新建用户 start-->
 	            <div class="new">
+	                <a class="btn btn-edit" onclick="exportUserList();">导出列表</a>
 	                <a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
 	            </div>
 	            <!-- 新建用户  end-->
@@ -84,7 +81,15 @@
         </div>   
     </div>
     <!-- 删除用户弹出框 end -->
-    
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/user.js"></script>
+		
     <script type="text/javascript">
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){

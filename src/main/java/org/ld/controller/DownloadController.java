@@ -19,11 +19,10 @@ import sun.net.www.URLConnection;
 @Controller
 public class DownloadController {    
     @RequestMapping(value="/download")
-    public void downloadResource1(HttpServletResponse response, @RequestBody String fp) {
-    	
-    	JSONObject fpJson = (JSONObject) JSONObject.parse(fp);
-    	
-        File file = new File(fpJson.getString("fp"));
+    public void downloadResource1(HttpServletResponse response,String fp) {
+    	File file = new File(fp);        
+        System.out.println(file);
+        
         if (file.exists()) {
         	String mimeType = URLConnection.guessContentTypeFromName(file.getName());
         	System.out.println(mimeType);
