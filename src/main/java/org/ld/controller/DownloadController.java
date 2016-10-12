@@ -22,9 +22,8 @@ public class DownloadController {
     public void downloadResource1(HttpServletResponse response, @RequestBody String fp) {
     	
     	JSONObject fpJson = (JSONObject) JSONObject.parse(fp);
-    	System.out.println(fpJson.getString("fp"));
     	
-        File file = new File(fp);
+        File file = new File(fpJson.getString("fp"));
         if (file.exists()) {
         	String mimeType = URLConnection.guessContentTypeFromName(file.getName());
         	System.out.println(mimeType);

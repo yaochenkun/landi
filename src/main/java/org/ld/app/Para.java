@@ -13,10 +13,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Para {
+	private String root = "src/env/";
 	@SuppressWarnings("resource")
 	public String[] ReadParas(String text, String key)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
 		try{
@@ -42,7 +43,7 @@ public class Para {
 	@SuppressWarnings("resource")
 	public String[] ReadParaPair(String text, String key, int first, int second)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
 		try{
@@ -73,7 +74,7 @@ public class Para {
 	
 	public Map<String, List<String>> getParaList(String text)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 		
 		BufferedReader reader = null;
 		try{
@@ -106,7 +107,7 @@ public class Para {
 	
 	public Map<String, String> getParaPair(String text, int first, int second)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 		
 		BufferedReader reader = null;
 		try{
@@ -133,7 +134,7 @@ public class Para {
 	
 	public Map<String, Integer> getParaPairInt(String text, int first, int second)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 		
 		BufferedReader reader = null;
 		try{
@@ -160,7 +161,7 @@ public class Para {
 	
 	public Integer setPair(String text, Map<String, String> map)
 	{
-		String fname = "src/env/" + text + ".env";
+		String fname = root + text + ".env";
 		
 		BufferedWriter writer = null;
 		

@@ -17,20 +17,30 @@ public class LoginIntercepter implements HandlerInterceptor{
 		//获取请求的URL
 		String url = request.getRequestURI();
 		//如果获取的是公开地址（登录），则放行
-		if(url.indexOf("login.action")>=0){			
+		if(url.endsWith("login.action")){			
 			return true;
 		}
 		
 		//判断session，用户是否登录
 		HttpSession session = request.getSession();
-		CurEnv name = (CurEnv) session.getAttribute("CUR_ENV");
-		if(name != null){
-			//用户已登录，放行 
-			return true;
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if(cur_env == null){
+			//没有登录
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);	
+			return false;
 		}
-		//需要身份认证，跳转登录 页面(.jsp)
-		request.getRequestDispatcher("/views/login.jsp").forward(request, response);		
-		return false;
+		else{
+			//用户不是管理员且要访问管理员页面
+			if(url.toLowerCase().indexOf("admin") >= 0 && cur_env.getCur_user().getROLE() > 0)
+			{	
+				request.getRequestDispatcher("/views/login.jsp").forward(request, response);	
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
 	}
 	
 	//进入Handler方法之后，返回modelAndView之前执行
@@ -39,7 +49,7 @@ public class LoginIntercepter implements HandlerInterceptor{
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		
-		System.out.println("LoginInterceptor...postHandle");
+//		System.out.println("LoginInterceptor...postHandle");
 		
 	}
 
@@ -50,7 +60,7 @@ public class LoginIntercepter implements HandlerInterceptor{
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		
-		System.out.println("LoginInterceptor...afterCompletion");
+//		System.out.println("LoginInterceptor...afterCompletion");
 	}
 
 }
