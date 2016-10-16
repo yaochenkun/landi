@@ -23,12 +23,12 @@ public class MyTest {
 		
 		Para p = new Para();
 		
-		Map<String,String> ans = p.getParaPair("charge", 0, 1);
-		Iterator<Entry<String, String>> it = ans.entrySet().iterator();
-		while(it.hasNext())
+		Map<String, Integer> map = p.getParaPairInt("sysint", 0, 1);
+		
+		for(Map.Entry<String, Integer> entry: map.entrySet())
 		{
-			Map.Entry<String, String> entry = it.next();
 			System.out.println(entry.getKey() + " " + entry.getValue());
 		}
+		System.out.println(MyTest.class.getClassLoader().getResource("env").getPath());
 	}
 }
