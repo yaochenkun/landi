@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyFile{
-	public ArrayList<File> getListFiles(Object obj){
+	public static ArrayList<File> getListFiles(Object obj){
 		File dir = null;
 		
 		if(obj instanceof File){
@@ -31,7 +31,7 @@ public class MyFile{
 		return files;
 	}
 	
-	public Map<String, String> getFilePath(String path)
+	public static Map<String, String> getFilePath(String path)
 	{
 		Map<String, String> ans = new HashMap<String, String>();
 		ArrayList<File> fs = getListFiles(path);
