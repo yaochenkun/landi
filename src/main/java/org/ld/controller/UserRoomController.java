@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
 
 @Controller
 @RequestMapping("/userRoom")
@@ -33,6 +36,7 @@ public class UserRoomController {
 	private static Logger logger = Logger.getLogger("logRec");
 	
 	@RequestMapping("/getAllRoom")
+	@ResponseBody
 	public Map<String, Object> getAllRoom(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -51,6 +55,7 @@ public class UserRoomController {
 	}
 	
 	@RequestMapping("/getAllRoomState")
+	@ResponseBody
 	public Map<String, Object> getAllRoomState(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -60,7 +65,7 @@ public class UserRoomController {
 			return ans;
 		} else{
 			ans.put("State", "Valid");
-		}
+                                 		}
 		
 		List<RoomState> rooms = roomService.getAllRoomState();
 		ans.put("roomStateList", rooms);
@@ -69,9 +74,16 @@ public class UserRoomController {
 	}
 	
 	@RequestMapping("/getRoomInfo")
-	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody Integer rid, @RequestBody Integer op){
+	@ResponseBody
+	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		int op = dataJson.getIntValue("op");		
+		int rid = dataJson.getIntValue("rid");
+		
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
+
 		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
 		{
 			ans.put("State", "Invalid");
@@ -119,6 +131,7 @@ public class UserRoomController {
 	}
 	
 	@RequestMapping("/getPics")
+	@ResponseBody
 	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -136,6 +149,7 @@ public class UserRoomController {
 	}
 	
 	@RequestMapping("/getMeters")
+	@ResponseBody
 	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
