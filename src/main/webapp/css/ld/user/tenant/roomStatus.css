@@ -1,0 +1,137 @@
+body,html{
+  font-family: "微软雅黑";
+  font-size: 14px;
+}
+*{font-family: "Microsoft YaHei",sans-serif;}
+ul{list-style: none; padding:0px; margin: 0;}
+a,a:hover,a:link,a:visited{text-decoration: none; color: #5c5c5c;}
+/****************页面导航栏 start******************/
+.navbar-ld{z-index:100;height: 50px; background-color:#fff; z-index: 101; border-bottom: solid #d8dce5 1px;}
+
+header .container-fluid{width: 100% !important;}
+header .header-content{position: relative; height: 50px; padding-left: 30px;}
+header .header-content .title{margin: 0; font-size :16px; display: inline-block; line-height: 50px; color: #5c5c5c; }
+header .header-logo{position: absolute; left: 15px; top: 3px;}
+header .header-logo img{width: 568px; height:40px;}
+header .header-content .navbar-collapse{float: right; margin-right: 2em; margin-top: 15px;}
+header .header-content .navbar-collapse .logoutDiv{float: right;}
+header .header-content .navbar-collapse .logoutImg{width: 18px; height: 18px; float: right; background: url('../../../img/logout.svg'); background-size: 18px; margin-left: 2em; cursor: pointer;}
+header .header-content .navbar-collapse .logoutImg:hover{background:url('../../../img/logoutHover.svg'); background-size: 18px;}
+header .header-content .dropdown{cursor: pointer;}
+header .header-content .dropdown-menu li{text-align: center;}
+
+/******************二级导航栏 start*****************/
+.main-nav{position: absolute; z-index: 20; left: 0; top:48px; bottom: 0; width: 160px; background: #eaedf4; border-right: solid #dedce5 1px;}
+.main-nav .aside-box{position: absolute; top:0; width: 100%}
+.main-nav .aside-box li{position: relative; height: 61px; line-height: 56px; padding: 2px 0; text-indent: 25px; font-size: 15px; border-bottom: 1px #d8dce5 solid;}
+.main-nav .aside-box li:hover{background-color: #e0e4ed;}
+.main-nav .glyphicon{display: inline;}
+.main-nav .aside-box .liactive{background-color: #ced3e0;}
+
+.nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px;border-bottom: 1px #eee solid; background-color: #fafafa;}
+.nav-second .toolbar{width: 100%; padding-left: 172px; padding-right: 12px;}
+
+.nav-secondul ul{white-space: nowrap; height: 59px; margin-left: 10px;}
+.nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑"; cursor: pointer;}
+.nav-secondul .linormal a{color: #5c5c5c;}
+.nav-secondul .liactive a{color: #000;}
+
+.nav-secondul li{font-size:14px;}
+.nav-secondul li:hover{border-bottom: 2px solid #4a8bee;}
+.nav-secondul .liactive{border-bottom: 2px solid #4a8bee;}
+
+/******************二级导航栏 end*****************/
+/* .body-content{
+	position: relative;  
+	margin: 0 auto;
+	text-align: center;
+	margin-left: 300px;
+} */
+
+.mod-wrap {
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	
+}
+
+.panel-tab {
+	position: fixed;
+	top: 50px;
+	z-index: 100;
+	width: 500px;
+	text-align: center;
+	/* background-color: #ced3e0; */
+	background-color: #fff;
+	margin: 0 auto;
+}
+.panel-tab ul {
+	margin: 0 auto;
+	display: block;
+}
+.panel-tab li {
+	float: left;
+	height: 100%;
+	line-height: 50px;
+	text-align: center;
+	width: 100px;
+	position: relative;
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.active-tab {
+	background-color: rgba(206, 211, 224, 0.6);
+	border-bottom: 3px solid #ced3e0;
+}
+.normal-tab {
+	background-color: white;
+	border: none;
+}
+
+.tab-wrap {
+	width: 1050px;
+	height: 100%;
+	margin-left: 230px;
+	margin-top: 100px;
+	position: relative;
+	text-align: center;
+	padding: 20px 30px;
+	
+}
+
+.tab-content {
+	border: 1px solid rgba(206, 211, 224, 0.6);
+	background-color: rgba(206, 211, 224, 0.2);
+	box-shadow: 5px 5px 5px rgba(206, 211, 224, 0.9);
+	margin-bottom: 20px;
+}
+
+.tab-header {
+	text-align: left;
+	margin-left: 30px;
+	border-bottom: 2px solid rgba(206, 211, 224, 0.3);
+}
+
+.tab-header h2 {
+	font-weight: normal;
+}
+
+.active-content {
+	height: 50px;
+	width: 100%;
+}
+
+#room-item {
+	margin: 0 auto;
+}
+
+#room-guest li{
+	line-height: 35px;
+}
+
+.inner-table {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+}
