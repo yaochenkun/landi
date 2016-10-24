@@ -84,6 +84,10 @@ header .header-content .dropdown-menu li{text-align: center;}
 	background-color: rgba(206, 211, 224, 0.6);
 	border-bottom: 3px solid #ced3e0;
 }
+.normal-tab {
+	background-color: white;
+	border: none;
+}
 
 .tab-wrap {
 	width: 1050px;
@@ -106,7 +110,7 @@ header .header-content .dropdown-menu li{text-align: center;}
 .tab-header {
 	text-align: left;
 	margin-left: 30px;
-	
+	border-bottom: 2px solid rgba(206, 211, 224, 0.3);
 }
 
 .tab-header h2 {
@@ -116,4 +120,18 @@ header .header-content .dropdown-menu li{text-align: center;}
 .active-content {
 	height: 50px;
 	width: 100%;
+}
+
+#room-item {
+	margin: 0 auto;
+}
+
+#room-guest li{
+	line-height: 35px;
+}
+
+.inner-table {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
 }
