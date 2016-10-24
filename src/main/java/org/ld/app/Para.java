@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Para {
-	private String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
+	private String root = Para.class.getClassLoader().getResource("/env/").getPath() + "/";
 	@SuppressWarnings("resource")
 	public String[] ReadParas(String text, String key)
 	{
