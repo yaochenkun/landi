@@ -32,5 +32,8 @@ public interface RoomService{
 	
 	List<RoomPic> getPic(Integer rid);
 	
+	// add by pq
+	int insertRoomPic(RoomPic roomPic);
+	
 	List<RoomMeter> getMeters(Integer rid, Integer type);
 }

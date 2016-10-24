@@ -49,8 +49,6 @@
   </nav> 
   <!-- 业务主页 导航栏 end-->
 
-
-
     <!-- 底栏 start-->
     <div class="foot_box">
         Copyright © BUPT. All rights reserved.

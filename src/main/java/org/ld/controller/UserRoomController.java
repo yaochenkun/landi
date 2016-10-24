@@ -1,11 +1,18 @@
 package org.ld.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.util.Streams;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.Room;
@@ -17,9 +24,20 @@ import org.ld.model.User;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/userRoom")
@@ -31,6 +49,47 @@ public class UserRoomController {
 	private RoomService roomService;
 	
 	private static Logger logger = Logger.getLogger("logRec");
+		
+	// 多文件上传
+    @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
+    public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
+    	System.out.println(request.getSession().getServletContext().getRealPath(""));
+    	System.out.println("room_id" + room_id);
+        // 遍历文件
+        for (MultipartFile mul:file){
+            System.out.println(mul.getName()+"---"+mul.getContentType()+"---"+mul.getOriginalFilename());
+            try {
+                if (!mul.isEmpty()){
+                    Streams.copy(mul.getInputStream(),new FileOutputStream(request.getSession().getServletContext().getRealPath("") + "/resources/room_pic/" +mul.getOriginalFilename()),true);
+                    
+                    RoomPic roompic = new RoomPic();
+                    roompic.setROOM_ID(room_id);
+                    roompic.setTYPE(1);;
+                    roompic.setCTIME(null);
+                    roompic.setNAME("1");
+                    roompic.setTAG("1");
+                    roompic.setPATH("/resources/room_pic/" + mul.getOriginalFilename());
+                    
+                    roomService.insertRoomPic(roompic);
+                }
+            } catch (IOException e) {
+                System.out.println("文件上传失败");
+                e.printStackTrace();
+            }
+        }
+        return "/user/roomAsset";
+    }
+    
+    // 获取房间图片路径(add by pq)
+	@RequestMapping(value="/getRoomPic",method={RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public List<RoomPic> getRoomPic(@RequestParam(value="id",required=true) Integer room_id)throws Exception {
+		
+		System.out.println(room_id);
+		List<RoomPic> roomPic = roomService.getPic(room_id);
+
+		return roomPic;
+	}
 	
 	@RequestMapping("/getAllRoom")
 	public Map<String, Object> getAllRoom(HttpSession session){

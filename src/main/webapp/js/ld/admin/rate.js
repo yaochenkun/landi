@@ -117,8 +117,18 @@ var setRate = function(){
 	});
 }
 
-
-
+// 获取其他费用管理信息
+var requestAjaxCharge = function(){
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeAdmin/getCharge.action',
+	    success:function(data){
+	    	console.log(data);
+	    	console.log(data["LE管理费_E-1"]);
+	    	
+	    }
+	});
+}
 
 
 

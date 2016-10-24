@@ -6,10 +6,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/roomAsset.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/roomAsset.css" rel="stylesheet" type="text/css"/>
@@ -47,14 +43,14 @@
     <div class="main-nav"> 
         <div class="aside-box">
             <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="javascript:void(0);">&nbsp;&nbsp;首页</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-user"></span><a href="javascript:void(0);">&nbsp;&nbsp;租客管理</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-usd"></span><a href="${pageContext.request.contextPath}/views/admin/roomAsset.jsp">&nbsp;&nbsp;固定资产</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;采购</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-shopping-cart"></span><a href="">&nbsp;&nbsp;小卖部</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-heart-empty"></span><a href="">&nbsp;&nbsp;爱心驿站</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-indent-left"></span><a href="">&nbsp;&nbsp;统计信息</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-plus"></span><a href="">&nbsp;&nbsp;其他</a></li>
+                <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a></li>
+                <li><a href="javascript:void(0);"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;租客管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/views/admin/roomAsset.jsp"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;固定资产</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;采购</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;小卖部</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;&nbsp;爱心驿站</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-indent-left"></span>&nbsp;&nbsp;统计信息</a></li>
+                <li><a href=""><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;其他</a></li>
             </ul>
         </div>
     </div>
@@ -72,107 +68,49 @@
     
     <!-- 页面内容 start-->
     <div class="body-content">
-    <div class="content">
-        <section class="activities">
-        <!-- 筛选标签 start -->
-            <div class="search">
-                <div id="search-form" class="navbar-form-normal">
-                    <div class="search-input-container">
-                        <div class="search-input-wrap">
-                            <div class="dropdown">
-                                <input type="search" class="search-input" placeholder="房间号">
-                            </div>
-                        </div>
+	    <div class="content" style="margin: 50px; float: right;">    	    
+		    <%--文件上传的话需要enctype="multipart/form-data"--%>
+		    <form modelAttribute="user" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath }/userRoom/uploadFiles.action">
+		        <%--这里设置文件上传--%>
+		        房间号：<input type="text" name="room_id" value="1"/>
+			    <input type="file" name="file" multiple="multiple"/>
+			    <input type="submit" value="提交"/>
+			</form>			
+	    </div>
+	    <div id="userRoomPic">
+	    	<div class="ban">
+                <!-- 大图 start -->
+                <div class="big_pic">
+                    <ul></ul>
+                </div>  
+                <!-- 大图 end -->
+
+                <!-- 小图 start -->               
+                <div class="min_pic">
+                    <div class="prev_btn"><</div> 
+                    <div class="num">
+                        <ul></ul>
                     </div>
+                    <div class="next_btn">></div>
                 </div>
-                <div id="search-form" class="navbar-form-normal">
-                    <div class="search-input-container">
-                        <div class="search-input-wrap">
-                            <div class="dropdown">
-                                <input type="search" class="search-input" placeholder="房型">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="search-form" class="navbar-form-normal">
-                    <div class="search-input-container">
-                        <div class="search-input-wrap">
-                            <div class="dropdown">
-                                <input type="search" class="search-input" placeholder="楼层">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- 小图 end -->
             </div>
-            <!-- 筛选标签 end -->
-
-            <div class="btn btn-search">筛选</div>
-
-            <!-- 新增房间 start-->
-            <div class="new">
-                <a href="/views/members/newMember.jsp" class="btn btn-new">新增房间</a>
-            </div>
-            <!-- 新增房间 end-->
-
-            <!-- 房间table start-->
-            <div class="nav-block">
-                <table class="table">
-                    <tr>
-                        <td>房间号</td>
-                        <td>房型</td>
-                        <td>楼层</td>
-                        <td>面积</td>
-                        <td>出租状态</td>
-                        <td>通水</td>
-                        <td>通电</td>
-                        <td>通气</td>
-                        <td>通网</td>
-                        <td>家具</td>
-                        <td>家电</td>
-                        <td>灯具</td>
-                        <td>窗具</td>
-                        <td>浴屏</td>
-                        <td>操作</td>
-                        <td>备品</td>
-                        <td>图片</td>
-                    </tr> 
-                    <tr><td>1</td>
-                        <td>哈哈</td>
-                        <td>3</td>
-                        <td>70平</td>
-                        <td>租出</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td>是</td>
-                        <td><span>修改</span></td>
-                        <td><span>查看</span></td>
-                        <td><span>预览</span></td>
-                    </tr>
-                </table>
-
-            </div>
-            <!-- 房间table end-->
-
-            <!-- 页码 start-->
-            <div class="bottom">
-                <div class="bottom-page"> 
-                    <span class="page-before" onclick="">上一页&nbsp;&nbsp;</span>
-                    <span><input type="text" class="input_num" value="1"></span>
-                    <span>/</span>
-                    <span id="total_page">12</span>
-                    <span class="page-next" onclick="">&nbsp;&nbsp;下一页</span>
-                </div>
-            </div>
-            <!-- 页码 end -->
-            </section></div>
+            <div id="bigimg"></div>
+            <div id="smalldiv"></div>
+	    </div>
     </div>
+    
     <!-- 页面内容 end-->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/roomAsset.js"></script>
+    <script>
+    	$(function(){
+    		// 查询房间号为1的房间图片
+    		requestRoomPic(1);
+    	})
+    </script>
     
 </body>
 </html>
