@@ -260,8 +260,7 @@ public class AdminController {
 	@RequestMapping("/getLogs")
 	public @ResponseBody Map<String, String> getLogs()
 	{
-		MyFile fs = new MyFile();
-		Map<String, String> ans = fs.getFilePath("log/rec");
+		Map<String, String> ans = MyFile.getFilePath("log/rec");
 		
 		return ans;
 	}

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.GroceryItemMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.GroceryItem" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="CAT" property="CAT" jdbcType="INTEGER" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+    <result column="TOTAL_LOSS" property="TOTAL_LOSS" jdbcType="INTEGER" />
+    <result column="TOTAL_SOLD" property="TOTAL_SOLD" jdbcType="INTEGER" />
+    <result column="TOTAL_BENIFIT" property="TOTAL_BENIFIT" jdbcType="DOUBLE" />
+    <result column="AVALIABLE" property="AVALIABLE" jdbcType="INTEGER" />
+    <result column="BUY_MONEY" property="BUY_MONEY" jdbcType="DOUBLE" />
+    <result column="SELL_MONEY" property="SELL_MONEY" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, TYPE, CAT, TOTAL, TOTAL_LOSS, TOTAL_SOLD, TOTAL_BENIFIT, AVALIABLE, BUY_MONEY, 
+    SELL_MONEY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from grocery_item
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from grocery_item
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.GroceryItem" >
+    insert into grocery_item (ID, NAME, TYPE, 
+      CAT, TOTAL, TOTAL_LOSS, 
+      TOTAL_SOLD, TOTAL_BENIFIT, AVALIABLE, 
+      BUY_MONEY, SELL_MONEY)
+    values (#{ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=INTEGER}, 
+      #{CAT,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, #{TOTAL_LOSS,jdbcType=INTEGER}, 
+      #{TOTAL_SOLD,jdbcType=INTEGER}, #{TOTAL_BENIFIT,jdbcType=DOUBLE}, #{AVALIABLE,jdbcType=INTEGER}, 
+      #{BUY_MONEY,jdbcType=DOUBLE}, #{SELL_MONEY,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.GroceryItem" >
+    insert into grocery_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="CAT != null" >
+        CAT,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+      <if test="TOTAL_LOSS != null" >
+        TOTAL_LOSS,
+      </if>
+      <if test="TOTAL_SOLD != null" >
+        TOTAL_SOLD,
+      </if>
+      <if test="TOTAL_BENIFIT != null" >
+        TOTAL_BENIFIT,
+      </if>
+      <if test="AVALIABLE != null" >
+        AVALIABLE,
+      </if>
+      <if test="BUY_MONEY != null" >
+        BUY_MONEY,
+      </if>
+      <if test="SELL_MONEY != null" >
+        SELL_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CAT != null" >
+        #{CAT,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_LOSS != null" >
+        #{TOTAL_LOSS,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_SOLD != null" >
+        #{TOTAL_SOLD,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_BENIFIT != null" >
+        #{TOTAL_BENIFIT,jdbcType=DOUBLE},
+      </if>
+      <if test="AVALIABLE != null" >
+        #{AVALIABLE,jdbcType=INTEGER},
+      </if>
+      <if test="BUY_MONEY != null" >
+        #{BUY_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="SELL_MONEY != null" >
+        #{SELL_MONEY,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.GroceryItem" >
+    update grocery_item
+    <set >
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="CAT != null" >
+        CAT = #{CAT,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_LOSS != null" >
+        TOTAL_LOSS = #{TOTAL_LOSS,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_SOLD != null" >
+        TOTAL_SOLD = #{TOTAL_SOLD,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_BENIFIT != null" >
+        TOTAL_BENIFIT = #{TOTAL_BENIFIT,jdbcType=DOUBLE},
+      </if>
+      <if test="AVALIABLE != null" >
+        AVALIABLE = #{AVALIABLE,jdbcType=INTEGER},
+      </if>
+      <if test="BUY_MONEY != null" >
+        BUY_MONEY = #{BUY_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="SELL_MONEY != null" >
+        SELL_MONEY = #{SELL_MONEY,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.GroceryItem" >
+    update grocery_item
+    set NAME = #{NAME,jdbcType=VARCHAR},
+      TYPE = #{TYPE,jdbcType=INTEGER},
+      CAT = #{CAT,jdbcType=INTEGER},
+      TOTAL = #{TOTAL,jdbcType=INTEGER},
+      TOTAL_LOSS = #{TOTAL_LOSS,jdbcType=INTEGER},
+      TOTAL_SOLD = #{TOTAL_SOLD,jdbcType=INTEGER},
+      TOTAL_BENIFIT = #{TOTAL_BENIFIT,jdbcType=DOUBLE},
+      AVALIABLE = #{AVALIABLE,jdbcType=INTEGER},
+      BUY_MONEY = #{BUY_MONEY,jdbcType=DOUBLE},
+      SELL_MONEY = #{SELL_MONEY,jdbcType=DOUBLE}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
