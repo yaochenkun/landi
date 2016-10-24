@@ -56,7 +56,7 @@ public class LoginController {
 		//显示系统页面(.jsp)
 		//return "/home";
 		//临时显示房间管理页面
-		return "/user/homeUser";
+		return "/user/home/homeUser";
 	}
 	
 	//管理员首页

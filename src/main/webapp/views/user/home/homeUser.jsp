@@ -11,22 +11,22 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/home.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/admin/home.css" rel="stylesheet" type="text/css"/>
-	<title>管理员首页</title>
+	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/home/home.css" rel="stylesheet" type="text/css"/>
+	<title>用户首页</title>
 </head>
 <body>
 	
-   <!--  <jsp:include page="_header.jsp"/>
-    <jsp:include page="_leftMenu.jsp"/>-->
+    <jsp:include page="../_header.jsp"/>
+    <jsp:include page="../_leftMenu.jsp"/>
     
     <!-- 页面内容 start-->
     <div class="content">
         <div class="title">
-            <img src="${pageContext.request.contextPath}/img/admin.svg" alt="">
+            <img src="${pageContext.request.contextPath}/img/user.svg" alt="">
             <h5>当前用户角色：<span id="roleTypeContent"></span><span id="roleTypeNum" style="display:none;">${CUR_ENV.cur_user.ROLE}</span></h5>
             <div class="btn btn-change btnchange"><a onclick="showEditPasswordModal();">修改密码</a></div>
         </div>

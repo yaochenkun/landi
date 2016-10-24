@@ -17,13 +17,12 @@
 	<title>租客管理</title>
 </head>
 <body>
-<jsp:include page="../_header.jsp"></jsp:include>
+	<jsp:include page="../_header.jsp"></jsp:include>
 	
-    <!-- 二级导航栏 start -->
-    <div class="main-nav"> 
+    <!-- 二级导航栏 start -->    <div class="main-nav"> 
         <div class="aside-box">
             <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="javascript:void(0);">&nbsp;&nbsp;首页</a></li>
+                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">&nbsp;&nbsp;首页</a></li>
                 <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">&nbsp;&nbsp;租客管理</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-usd"></span><a href="${pageContext.request.contextPath}/views/user/roomAsset.jsp">&nbsp;&nbsp;固定资产</a></li>
                 <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;采购</a></li>
@@ -40,6 +39,9 @@
                 <ul>               
                 <li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
                 <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp">租客一览表</a></li> 
+                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
+                <li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li> 
+                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomPic.jsp">上传查房图片</a></li> 
                 </ul>
             </div>    
         </div>

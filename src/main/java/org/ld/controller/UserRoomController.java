@@ -39,6 +39,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONObject;
+
 
 @Controller
 @RequestMapping("/userRoom")
@@ -51,7 +53,7 @@ public class UserRoomController {
 	
 	private static Logger logger = Logger.getLogger("logRec");
 		
-	// 多文件上传
+	// 多文件上传(add by pq)
     @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
     public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
     	System.out.println(request.getSession().getServletContext().getRealPath(""));
@@ -78,7 +80,7 @@ public class UserRoomController {
                 e.printStackTrace();
             }
         }
-        return "/user/roomAsset";
+        return "/user/tenant/roomPic";
     }
     
     // 获取房间图片路径(add by pq)
