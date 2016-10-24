@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.InvoiceMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Invoice" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="NUM" property="NUM" jdbcType="VARCHAR" />
+    <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
+    <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+    <result column="CTIME" property="CTIME" jdbcType="TIMESTAMP" />
+    <result column="TERM" property="TERM" jdbcType="INTEGER" />
+    <result column="OTHERS" property="OTHERS" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NUM, PLAN_ID, MONEY, CTIME, TERM, OTHERS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from invoice
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from invoice
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Invoice" >
+    insert into invoice (ID, NUM, PLAN_ID, 
+      MONEY, CTIME, TERM, 
+      OTHERS)
+    values (#{ID,jdbcType=INTEGER}, #{NUM,jdbcType=VARCHAR}, #{PLAN_ID,jdbcType=INTEGER}, 
+      #{MONEY,jdbcType=DOUBLE}, #{CTIME,jdbcType=TIMESTAMP}, #{TERM,jdbcType=INTEGER}, 
+      #{OTHERS,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Invoice" >
+    insert into invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="NUM != null" >
+        NUM,
+      </if>
+      <if test="PLAN_ID != null" >
+        PLAN_ID,
+      </if>
+      <if test="MONEY != null" >
+        MONEY,
+      </if>
+      <if test="CTIME != null" >
+        CTIME,
+      </if>
+      <if test="TERM != null" >
+        TERM,
+      </if>
+      <if test="OTHERS != null" >
+        OTHERS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="NUM != null" >
+        #{NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="PLAN_ID != null" >
+        #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null" >
+        #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="CTIME != null" >
+        #{CTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TERM != null" >
+        #{TERM,jdbcType=INTEGER},
+      </if>
+      <if test="OTHERS != null" >
+        #{OTHERS,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Invoice" >
+    update invoice
+    <set >
+      <if test="NUM != null" >
+        NUM = #{NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="PLAN_ID != null" >
+        PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null" >
+        MONEY = #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="CTIME != null" >
+        CTIME = #{CTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TERM != null" >
+        TERM = #{TERM,jdbcType=INTEGER},
+      </if>
+      <if test="OTHERS != null" >
+        OTHERS = #{OTHERS,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Invoice" >
+    update invoice
+    set NUM = #{NUM,jdbcType=VARCHAR},
+      PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      MONEY = #{MONEY,jdbcType=DOUBLE},
+      CTIME = #{CTIME,jdbcType=TIMESTAMP},
+      TERM = #{TERM,jdbcType=INTEGER},
+      OTHERS = #{OTHERS,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
