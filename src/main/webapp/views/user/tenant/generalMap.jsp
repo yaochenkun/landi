@@ -39,7 +39,7 @@
             <div class="nav-secondul">
                 <ul>               
                 <li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp">租客一览表</a></li> 
+                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp">租客一览表</a></li> 
                 </ul>
             </div>    
         </div>
@@ -52,18 +52,18 @@
 	        <table class="table table-bordered" style="border-top:none;border-right:none;" id="building">
 	            <tr>
 	              <td rowspan="2" colspan="2" style="border-left:none;"></td>
-	              <td style="border-top:1px solid #dddddd;" colspan="2" id="W35-1"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='W35-1'">姓名</a><br></td>
-	              <td style="border-top:1px solid #dddddd;" id="W35-2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='W35-2'">姓名</a></td>
+	              <td style="border-top:1px solid #dddddd;" colspan="2"><a id="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-1">姓名</a><br></td>
+	              <td style="border-top:1px solid #dddddd;"><a id="W35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-2">姓名</a></td>
 	              <td rowspan="66"></td>
-	              <td style="border-top:1px solid #dddddd;" id="E35-2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='E35-2'"></a></td>
-	              <td style="border-top:1px solid #dddddd;" colspan="2" id="E35-1"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='E35-1'"></a></td>
+	              <td style="border-top:1px solid #dddddd;"><a id="E35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-2"></a></td>
+	              <td style="border-top:1px solid #dddddd;" colspan="2"><a id="E35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-1"></a></td>
 	              <td rowspan="2" colspan="2"></td>
 	            </tr>
 	            <tr>
-	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='W35-1'">W35-1</a></td>
-	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='W35-2'">W35-2</a></td>
-	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='E35-2'">E35-2</a></td>
-	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomStatus.jsp?rid='E35-1'">E35-1</a></td>
+	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-1">W35-1</a></td>
+	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-2">W35-2</a></td>
+	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-2">E35-2</a></td>
+	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-1">E35-1</a></td>
 	            </tr>
 	        </table>
 	   </div>
