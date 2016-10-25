@@ -1,0 +1,35 @@
+/* 房间图片样式*/
+#userRoomPic{margin: 20px;}
+
+/* 最外层样式 div*/
+.ban{width: 500px; height: 500px; position: relative; overflow: hidden; margin-left: 20px; margin-top: 30px;}
+
+/* 大图样式 */ 
+.big_pic{width: 500px; height: 300px; position: relative; overflow: hidden;}
+.big_pic ul{position: absolute; left: 0; top: 0;}
+.big_pic ul li{width: 500px; height: 300px; float: left;}/* !!每个大图设置为浮动 */
+.big_pic li img{width: 500px; height: 300px;}
+
+
+/*小图样式*/
+.min_pic{width: 500px; padding-top: 10px;}
+.min_pic .num{height: 62px; overflow: hidden; width: 430px; position: relative; float: left;}
+.min_pic .num ul{position: absolute; left: 0; top: 0;}
+.min_pic .num ul li{width: 100px; height: 60px; margin-right: 7px; padding: 1px; float: left;}
+.min_pic .num ul .linormal{opacity: 0.4;}
+.min_pic .num ul .liactive{opacity: 1;}
+.min_pic .num ul li:hover{opacity: 1;}
+.min_pic .num ul li img{width: 100px; height: 60px; cursor: pointer;}
+
+
+/* 小图左右样式 */
+.min_pic .prev_btn, .min_pic .next_btn{width: 25px; text-align: center; height: 60px; cursor: pointer; background: #666; font-weight: bold; font-size: 20px; color: #fff; line-height: 60px;}
+.min_pic .prev_btn{margin: 1px 14px 0 0; float: left;}
+.min_pic .next_btn{margin: 1px 0 0 0; float: right;}
+.min_pic .prev_btn:hover, .min_pic .next_btn:hover{background: #333;}
+
+#bigimg img{width: 1000px; height: 600px; position: absolute;}
+#smalldiv{width: 250px; height: 150px; background: #fff; opacity: 0.5;}
+
+#bigimg{display: none; position: absolute; overflow: hidden;  width: 500px; height: 300px; left: 570px; top: 0px;}  
+#smalldiv{display: none; position: absolute;}

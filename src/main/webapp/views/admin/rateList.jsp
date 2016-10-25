@@ -13,7 +13,7 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/rate.css" rel="stylesheet" type="text/css"/>
-	<title>收费标准</title>
+	<title>能源费管理</title>
 </head>
 <body>
 	<jsp:include page="_header.jsp"/>
@@ -24,7 +24,8 @@
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>
-                    <li class="liactive">收费标准</li>
+                    <li class="liactive"><a href="${pageContext.request.contextPath }/views/admin/rateList.jsp">能源费管理</a></li>
+                    <li class="linormal"><a href="${pageContext.request.contextPath }/views/admin/rateOther.jsp">其他费用管理</a></li>
                 </ul>
             </div>    
         </div>

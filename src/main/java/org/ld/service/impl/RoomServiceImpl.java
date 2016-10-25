@@ -117,6 +117,11 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return roomPicMapper.getPicByRoomId(rid);
 	}
+	// add by pq
+	@Override
+	public int insertRoomPic(RoomPic roomPic){
+		return roomPicMapper.insertSelective(roomPic);
+	}
 
 	@Override
 	public List<RoomMeter> getMeters(Integer rid, Integer type) {
