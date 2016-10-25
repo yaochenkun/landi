@@ -19,7 +19,8 @@
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
 	
-    <!-- 二级导航栏 start -->    <div class="main-nav"> 
+    <!-- 二级导航栏 start -->    
+    <div class="main-nav"> 
         <div class="aside-box">
             <ul>
                 <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">&nbsp;&nbsp;首页</a></li>
