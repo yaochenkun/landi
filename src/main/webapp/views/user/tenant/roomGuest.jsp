@@ -15,31 +15,16 @@
 	<title>房间信息</title>
 </head>
 <body>
-<jsp:include page="../_header.jsp"></jsp:include>
-	
-    <!-- 二级导航栏 start -->
-    <div class="main-nav"> 
-        <div class="aside-box">
-            <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">&nbsp;&nbsp;租客管理</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-usd"></span><a href="${pageContext.request.contextPath}/views/user/roomAsset.jsp">&nbsp;&nbsp;固定资产</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;采购</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-shopping-cart"></span><a href="">&nbsp;&nbsp;小卖部</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-heart-empty"></span><a href="">&nbsp;&nbsp;爱心驿站</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-indent-left"></span><a href="">&nbsp;&nbsp;统计信息</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-plus"></span><a href="">&nbsp;&nbsp;其他</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- 二级导航栏 end-->
+    <jsp:include page="../_header.jsp"></jsp:include>
+	<jsp:include page="../_leftMenu.jsp"></jsp:include>
+
 	<div class="body-content">
 		<div class="mod-wrap">
 			<div class="panel-tab">
 				<ul class="clear">
 					<li id="tenant-header" class="active-tab"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp">租客信息</a></li>
 					<li id="asset-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp">物品信息</a></li>
-					<li id="check-header"><a href="${pageContext.request.contextPath}/views/user/tenant/checkRoom.jsp">查房状态</a></li>
+					<li id="check-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomCheck.jsp?rid=<%=request.getParameter("rid") %>">查房状态</a></li>
 					<li id="maintain-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomMaintain.jsp">维修状态</a></li>
 					<li id="others-header"><a href="#others">其他</a></li>
 				</ul>

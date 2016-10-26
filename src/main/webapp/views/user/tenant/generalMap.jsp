@@ -18,31 +18,16 @@
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
-	
-    <!-- 二级导航栏 start -->    
-    <div class="main-nav"> 
-        <div class="aside-box">
-            <ul>
-                <li class="linormal"><span class="glyphicon glyphicon-home"></span><a href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">&nbsp;&nbsp;首页</a></li>
-                <li class="liactive"><span class="glyphicon glyphicon-user"></span><a href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">&nbsp;&nbsp;租客管理</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-usd"></span><a href="${pageContext.request.contextPath}/views/user/roomAsset.jsp">&nbsp;&nbsp;固定资产</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-list-alt"></span><a href="">&nbsp;&nbsp;采购</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-shopping-cart"></span><a href="">&nbsp;&nbsp;小卖部</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-heart-empty"></span><a href="">&nbsp;&nbsp;爱心驿站</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-indent-left"></span><a href="">&nbsp;&nbsp;统计信息</a></li>
-                <li class="linormal"><span class="glyphicon glyphicon-plus"></span><a href="">&nbsp;&nbsp;其他</a></li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="../_leftMenu.jsp"></jsp:include>
+    
     <div class="nav-second">
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
-                <li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp">租客一览表</a></li>
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
-                <li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li> 
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/roomPic.jsp">上传查房图片</a></li> 
+	                <li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
+	                <li class="linormal"><a href="javascript:void(0);">租客一览表</a></li>
+	                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
+	                <li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li> 
                 </ul>
             </div>    
         </div>
