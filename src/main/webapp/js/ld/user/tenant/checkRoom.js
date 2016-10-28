@@ -2,7 +2,6 @@ $(function () {
     var count = 0;  
 
     $(".big_pic").mousemove(function (e) {  
-        //console.log("mousemove");
         var smalldiv = $("#smalldiv");  
         var ZoomSizeWidth = $("#bigimg img").width() / $(".big_pic img").width(); //宽放大的倍数  
         var ZoomSizeHeight = $("#bigimg img").height() / $(".big_pic img").height();//高放大的倍数  
@@ -57,25 +56,40 @@ var minPicNum = 0,
 
 // 查询某房间的图片信息
 var requestRoomPic = function(room_id){
-	$.ajax({
-		url:'/LD/userRoom/getRoomPic.action',
-		data:'id=' + room_id,
-		success:function(data){
-			//console.log(data);
-			for(var i=0; i<data.length; i++){
-				//console.log(data[i]);
-				perImgPath = data[i].path;
-				$(".big_pic ul").append("<li><img src= '"+window.document.location.origin +"/LD" + data[i].path +"' /></li>");
-			    $(".num ul").append("<li class='linormal' onclick='changeMinPic(this);'><img src= '"+window.document.location.origin +"/LD" + data[i].path +"' /></li>");
-			}
-			minPicNum = $(".num li").length;
-			// 初始化显示第一张图
+    // ???目前根据tag去查询
+    $.ajax({
+        url:'/LD/userRoom/getRoomPic.action',
+        data:'id=' + room_id,
+        success:function(data){
+            //console.log(data);
+            for(var i=0; i<data.length; i++){
+                //console.log(data[i]);
+                perImgPath = data[i].path;
+                $(".big_pic ul").append("<li><img src= '"+window.document.location.origin +"/LD" + data[i].path +"' /></li>");
+                $(".num ul").append("<li class='linormal' onclick='changeMinPic(this);'><img src= '"+window.document.location.origin +"/LD" + data[i].path +"' /></li>");
+            }
+            minPicNum = $(".num li").length;
+            // 初始化显示第一张图
             $(".num ul li:first-child").toggleClass("liactive").toggleClass("linormal");
             $("#bigimg").html("").append($(".num li").eq(0).html());
-            //$(".num li").mouseover
-		}
-	})
+        }
+    })
 }
+
+// 根据 roomNumber查询 roomID
+var getRoomIDByNumber = function(roomNumber){
+    $.ajax({
+        url:"/LD/userRoom/getRoomIDByNumber.action",
+        data:'roomNumber=' + roomNumber,
+        success:function(data){
+           // 保存 roomID
+           $(".uploadPic .head form").append("<input name='room_id' value='"+ data.id +"' style='display:none;'/>");
+           // 根据roomID查询房间照片
+           requestRoomPic(data.id);
+        }
+    })
+}
+
 
 // 点击小图切换
 var changeMinPic = function(element){
@@ -129,3 +143,13 @@ var setPicUL = function(index){
     $(".num ul").css("left", -(index*107)+"px");
     nowFirstPic = index;
 }
+
+$("#uploadRoomPic").change(function(){
+    var files = document.getElementById('uploadRoomPic').files;
+    for (var i = 0; i < files.length; i++) {
+        var fileLi = $("<li>"+ files[i].name +"</li>");
+        $(".fileContent ul").append(fileLi);
+    }
+    $("#uploadRoomPic").css("z-index",2);
+    $(".btn-upload").css("z-index",1);
+});

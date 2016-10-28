@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.util.Streams;
@@ -57,7 +58,8 @@ public class UserRoomController {
     @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
     public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
     	System.out.println(request.getSession().getServletContext().getRealPath(""));
-    	System.out.println("room_id" + room_id);
+    	System.out.println("room_id：" + room_id);
+    	String roomNumber = roomService.getRoomById(room_id).getROOM_NUMBER();
         // 遍历文件
         for (MultipartFile mul:file){
             System.out.println(mul.getName()+"---"+mul.getContentType()+"---"+mul.getOriginalFilename());
@@ -80,7 +82,8 @@ public class UserRoomController {
                 e.printStackTrace();
             }
         }
-        return "/user/tenant/roomPic";
+        
+        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ roomNumber ;
     }
     
     // 获取房间图片路径(add by pq)
@@ -92,6 +95,17 @@ public class UserRoomController {
 		List<RoomPic> roomPic = roomService.getPic(room_id);
 
 		return roomPic;
+	}
+	
+	// 根据roomNumber 查询 roomID(add by pq)
+	@RequestMapping(value="/getRoomIDByNumber")
+	@ResponseBody
+	public Room getRoomIDByNumber(@RequestParam(value="roomNumber",required=true) String roomNumber)throws Exception {
+		
+		System.out.println(roomNumber);
+		Room room = roomService.getRoomByNumber(roomNumber);
+
+		return room;
 	}
 	
 	@RequestMapping("/getAllRoom")

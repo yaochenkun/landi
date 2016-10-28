@@ -1,0 +1,56 @@
+/* 标题栏滚动样式 */
+.navbar-ld{transition: .8s;}
+.navbar-fixed-top{position: fixed;}
+.topNone{top: -50px;}
+.topNormal{top: 0px;}
+
+.content{margin: 30px 10px 10px 170px;}
+
+.tab-content{margin: 0px 120px; overflow: hidden;}
+.tab-content .tab-content-title{font-size: 20px; line-height: 32px; color: #333; padding-left: 5px;  word-break: keep-all;} 
+.tab-content .tab-content-title span{display: inline-block; font-size: 18px; width: 32px; border-radius: 50%; background: #ff4d4d; text-align: center; margin-right: 15px; color: #fff;}
+
+.extra-body{border-left: 2px dotted #e4e4e4; margin-left: 20px; height: 100%;}
+.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0px 80px 20px 70px;}
+
+.tab-content-body .form{background: url("../../../../img/rebc.gif"); padding: 20px 0;}
+.tab-content-body .item{line-height: 22px; padding: 5px 80px; white-space: nowrap;}
+.item .spanLabel{display: inline-block; color: #555; text-align: left; font-size: 14px; font-weight: normal; margin: 5px 0; white-space: nowrap;}
+.item .spanLabel .red{color: red;}
+.item .fl{display: inline-block; width: 70%;}
+.item .text{height: 22px; line-height: 22px; padding: 6px; width: 100%;}
+
+/*************** 租客信息 样式 start**************/
+.tab-content-guest .spanLabel{width: 17%;}
+.tab-content-guest .fl{width: 27%; margin-right: 13%;}
+.tab-content-guest .item-name .checkbox{display: inline-block; margin-right: 6%;}
+.tab-content-guest .item-room .spanLabel:nth-child(3),.tab-content-guest .item-company .spanLabel:nth-child(3),.tab-content-guest .item-car .spanLabel:nth-child(3){width: 10%;}
+.tab-content-guest .item-time .spanLabel:nth-child(3),.tab-content-guest .item-tel .spanLabel:nth-child(3){width: 15%;}
+.tab-content-guest .item-time .fl:nth-child(4),.tab-content-guest .item-tel .fl:nth-child(4){width: 22%;}
+/*************** 租客信息 样式 start**************/
+
+/**************** 业主 样式 start *****************/
+.tab-content-owner .spanLabel{width: 17%;}
+.tab-content-owner .fl{width: 27%; margin-right: 13%;}
+
+/***************** 中介 样式 start **************/
+.tab-content-agency .spanLabel{width: 22%;}
+.tab-content-agency .fl{width: 22%; margin-right: 13%;}
+
+/***************** 房款 样式 end ****************/
+.tab-content-housepay .item-list{margin-bottom: 20px}
+.tab-content-housepay .spanLabel{width: 17%;}
+.tab-content-housepay .spanLabel:nth-child(3){width: 14%;}
+.tab-content-housepay .fl{width: 24%; margin-right: 16%;}
+
+.step-nav{position: fixed; top: 50px; left: 295px;}
+.step-nav .list-icon-link{display: none; width: 32px; font-size: 18px; line-height: 32px; color: #fff; background: #ff4d4d; border-radius: 50%; text-align: center;}
+.step-nav .list-icon-text{display: none; position: absolute; left: 40px; width: 100px; height: 28px; line-height: 28px; color: #5c5c5b;}
+.step-nav .list-icon-text:nth-child(2){top: 1px;}
+.step-nav .list-icon-text:nth-child(4){top: 33px;}
+.step-nav .list-icon-text:nth-child(6){top: 65px;}
+.step-nav .list-icon-text:nth-child(8){top: 97px;}
+.step-nav .list-icon-text:nth-child(10){top: 129px;}
+.list-icon-text .inner{text-align: center; background-color: #fff; font-size: 12px; border: 1px solid #b3b7bf; border-radius: 2px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15);}
+
+.btnnew{margin: 50px 0 200px 220px;}
