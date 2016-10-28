@@ -46,7 +46,7 @@
 					</div>
 					<div class="inner-table">
 						<h3>家电信息</h3>
-						<table class="table table-striped">
+						<table id="item_electric" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
 								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
@@ -56,7 +56,7 @@
 					</div>
 					<div class="inner-table">
 						<h3>灯具信息</h3>
-						<table class="table table-striped">
+						<table id="item_light" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
 								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="inner-table">
 						<h3>窗帘及浴屏</h3>
-						<table class="table table-striped">
+						<table id="item_curtain" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
 								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
@@ -76,7 +76,7 @@
 					</div>
 					<div class="inner-table">
 						<h3>备品信息</h3>
-						<table class="table table-striped">
+						<table id="item_little" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
 								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
@@ -90,6 +90,7 @@
 		
 	</div>
 	<script>
+		
 		$(function(){
 			let params = window.location.search;
 			if (params.indexOf('rid')>=0) {
