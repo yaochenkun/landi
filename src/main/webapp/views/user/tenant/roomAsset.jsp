@@ -9,7 +9,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/roomGuest.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/roomAsset.js"></script>
 	<link href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	 <link href="${pageContext.request.contextPath }/css/ld/user/tenant/roomGuest.css" rel="stylesheet" type="text/css" />
 	<title>房间信息</title>
@@ -54,51 +53,49 @@
 				<div id="room-item">
 					<div class="inner-table">
 						<h3>家具信息</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
+						<table id="item_furniture" class="table table-striped">
+							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th>Teddy Bear</th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
 					<div class="inner-table">
 						<h3>家电信息</h3>
 						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
+							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
+								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
+								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
 					<div class="inner-table">
 						<h3>灯具信息</h3>
 						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
+							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
+								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
+								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
 					<div class="inner-table">
 						<h3>窗帘及浴屏</h3>
 						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
+							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
+								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
+								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
 					<div class="inner-table">
 						<h3>备品信息</h3>
 						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
+							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
+								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
+								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
@@ -108,72 +105,19 @@
 		
 	</div>
 	<script>
-		
-		
-		$("#asset-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").show();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").hide();
+		$(function(){
+			let params = window.location.search;
+			if (params.indexOf('rid')>=0) {
+				let roomId = params.replace('?','').split('&')[0].split('=')[1];
+				getFurniture(parseInt(roomId));
+				getElectric(parseInt(roomId));
+				getLight(parseInt(roomId));
+				getCurtain(parseInt(roomId));
+				getLittle(parseInt(roomId));
+			}
+			
+			
 		});
-		$("#tenant-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#check-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#maintain-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#others-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		
-		//getMeters();
-		// getItem();
-		
 	</script>
 </body>
 </html>

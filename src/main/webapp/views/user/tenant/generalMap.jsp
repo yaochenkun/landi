@@ -9,7 +9,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/roomAsset.js"></script>
 	<link href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<%-- <link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
 	 --%>
@@ -52,21 +51,21 @@
     <div class="body-content">
 	    <div class="general-map">
 	        <table class="table table-bordered" style="border-top:none;border-right:none;" id="building">
-	            <tr>
-	              <td rowspan="2" colspan="2" style="border-left:none;"></td>
-	              <td style="border-top:1px solid #dddddd;" colspan="2"><a id="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-1">姓名</a><br></td>
-	              <td style="border-top:1px solid #dddddd;"><a id="W35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-2">姓名</a></td>
-	              <td rowspan="66"></td>
-	              <td style="border-top:1px solid #dddddd;"><a id="E35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-2"></a></td>
-	              <td style="border-top:1px solid #dddddd;" colspan="2"><a id="E35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-1"></a></td>
-	              <td rowspan="2" colspan="2"></td>
-	            </tr>
-	            <tr>
-	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-1">W35-1</a></td>
-	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=W35-2">W35-2</a></td>
-	              <td style="border-top:none;"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-2">E35-2</a></td>
-	              <td style="border-top:none;" colspan="2"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=E35-1">E35-1</a></td>
-	            </tr>
+				<tr>
+					<td rowspan="2" colspan="2" style="border-left:none;"></td>
+					<td style="border-top:1px solid #dddddd;" colspan="2"><a class="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-1"></a><br></td>
+					<td style="border-top:1px solid #dddddd;"><a class="W35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-2"></a></td>
+					<td rowspan="66"></td>
+					<td style="border-top:1px solid #dddddd;"><a class="E35-2" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-2"></a></td>
+					<td style="border-top:1px solid #dddddd;" colspan="2"><a class="E35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-1"></a></td>
+					<td rowspan="2" colspan="2"></td>
+				</tr>
+				<tr>
+				  	<td style="border-top:none;" colspan="2"><a class="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-1">W35-1</a></td>
+					<td style="border-top:none;"><a class="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-2">W35-2</a></td>
+					<td style="border-top:none;"><a class="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-2">E35-2</a></td>
+					<td style="border-top:none;" colspan="2"><a class="W35-1" href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-1">E35-1</a></td>
+				</tr>
 	        </table>
 	   </div>
    </div>
@@ -74,7 +73,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/generalMap.js"></script>
 <script>
 	getRoomState();
-	getRoomInfo();
 </script>
 </body>
 </html>

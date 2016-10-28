@@ -9,7 +9,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/roomGuest.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/roomAsset.js"></script>
 	<link href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	 <link href="${pageContext.request.contextPath }/css/ld/user/tenant/roomGuest.css" rel="stylesheet" type="text/css" />
 	<title>房间信息</title>
@@ -38,7 +37,7 @@
 			<div class="panel-tab">
 				<ul class="clear">
 					<li id="tenant-header" class="active-tab"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp">租客信息</a></li>
-					<li id="asset-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp">物品信息</a></li>
+					<li id="asset-header"><a id="asset-link" href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp">物品信息</a></li>
 					<li id="check-header"><a href="${pageContext.request.contextPath}/views/user/tenant/checkRoom.jsp">查房状态</a></li>
 					<li id="maintain-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomMaintain.jsp">维修状态</a></li>
 					<li id="others-header"><a href="#others">其他</a></li>
@@ -154,77 +153,17 @@
 	</div>
 	<script>
 		$(function(){
-				$("#asset").hide();
-				$("#room-check").hide();
-				$("#maintain").hide();
-				$("#others").hide();
-				$("#tenant").show();
+			let params = window.location.search;
+			var rId;
+			var rNum;
+			var op;
+			if (params.indexOf('rid')>=0 && params.indexOf('cusId')>=0) {
+				let roomId = params.replace('?','').split('&')[0].split('=')[1];
+				// [TODO]获取租客信息
+				$("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId);
+			}
 		});
-		
-		$("#asset-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").show();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").hide();
-		});
-		$("#tenant-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#check-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#maintain-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#others-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		$("#others-header").click(function(){
-			$(this).attr("class", "active-tab");
-			$("#tenant-header").attr("class", "normal-tab");
-			$("#asset-header").attr("class", "normal-tab");
-			$("#maintain-header").attr("class", "normal-tab");
-			$("#check-header").attr("class", "normal-tab");
-			$("#asset").hide();
-			$("#room-check").hide();
-			$("#maintain").hide();
-			$("#others").hide();
-			$("#tenant").show();
-		});
-		
 		//getMeters();
-		// getItem();
-		
 	</script>
 </body>
 </html>
