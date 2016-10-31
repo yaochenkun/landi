@@ -49,8 +49,8 @@ var getRoomState = function () {
         let roomID = roomList[item].room_ID;
         let cusID = roomList[item].cus_ID;
         $("." + roomNum + ":eq(0)").text(userName);
-        console.log($("."+roomNum)[1].text)
-        $("." + roomNum).attr("href", "./roomGuest.jsp?rid="+roomID+"&cusId="+cusID)
+        console.log(roomNum,'roomNum')
+        $("." + roomNum).attr("href", "./roomGuest.jsp?rid="+roomID+"&cusId="+cusID+"&rNum="+roomNum)
         // For those have no returned room_ID, how to link to the RoomInfo page?
         // Test for transmitting the roomName as the request param.
         // /[^\d]/.test('W-132')
