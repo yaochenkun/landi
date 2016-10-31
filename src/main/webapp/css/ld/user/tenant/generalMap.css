@@ -1,5 +1,4 @@
 body,html{
-  width: 90%;
   height: 98%;
   font-family: "微软雅黑";
   font-size: 14px;
@@ -31,10 +30,10 @@ header .header-content .dropdown-menu li{text-align: center;}
 .main-nav .glyphicon{display: inline;}
 .main-nav .aside-box .liactive{background-color: #ced3e0;}
 
-.nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px;border-bottom: 1px #eee solid; background-color: #fafafa;}
-.nav-second .toolbar{width: 100%; padding-left: 172px; padding-right: 12px;}
+.nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px; border-bottom: 1px #eee solid; background-color: #fafafa;}
+.nav-second .toolbar{padding-left: 172px;}
 
-.nav-secondul ul{white-space: nowrap; height: 59px; margin-left: 10px;}
+.nav-secondul ul{white-space: nowrap;}
 .nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑"; cursor: pointer;}
 .nav-secondul .linormal a{color: #5c5c5c;}
 .nav-secondul .liactive a{color: #000;}
@@ -45,11 +44,11 @@ header .header-content .dropdown-menu li{text-align: center;}
 
 /******************二级导航栏 end*****************/
 
-.body-content{position: relative;  margin-left: 18%;}
+.body-content{position: relative;  margin-left: 120px;}
 
 .general-map {
-	margin-top:40px;
-	width: 1050px;
+	margin: 40px auto;
+	width: 950px;
 }
 .table td {
   text-align:center;
@@ -62,3 +61,13 @@ header .header-content .dropdown-menu li{text-align: center;}
 .free {
   background-color: yellow;
 }
+
+/* 修改  bootstrap下拉菜单样式  add by pq*/
+.navbar .nav>li>.dropdown-menu:before{display: none;}
+.dropdown-menu{margin-left: -4em;}
+
+
+
+
+
+

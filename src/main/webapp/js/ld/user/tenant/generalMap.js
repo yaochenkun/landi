@@ -35,6 +35,9 @@ $(function(){
   	}
   var last = '<tr><td colspan="2"><a class="W2-1" href="./roomGuest.jsp?rNum=W2-1"></a></td><td><a class="W2-2" href="./roomGuest.jsp?rNum=W2-2"></a></td><td><a class="W2-3" href="./roomGuest.jsp?rNum=W2-3"></a></td><td colspan="3" rowspan="2"></td><td><a class="E2-5" href="./roomGuest.jsp?rNum=E2-5"></a></td><td><a class="E2-3" href="./roomGuest.jsp?rNum=E2-3"></a></td><td><a class="E2-2" href="./roomGuest.jsp?rNum=E2-2"></a></td><td style="border-right:1px solid #ddd"><a class="E2-1" href="./roomGuest.jsp?rNum=E2-1"></a></td></tr><tr><td style="border-top:none" colspan="2"><a class="W2-1" href="./roomGuest.jsp?rNum=W2-1">W2-1</a></td><td style="border-top:none"><a class="W2-2" href="./roomGuest.jsp?rNum=W2-2">W2-2</a></td><td style="border-top:none"><a class="W2-3" href="./roomGuest.jsp?rNum=W2-3">W2-3</a></td><td style="border-top:none"><a class="E2-5" href="./roomGuest.jsp?rNum=E2-5">E2-5</a></td><td style="border-top:none"><a class="E2-3" href="./roomGuest.jsp?rNum=E2-3">E2-3</a></td><td style="border-top:none"><a class="E2-2" href="./roomGuest.jsp?rNum=E2-2">E2-2</a></td><td style="border-right:1px solid #ddd;border-top:none"><a class="E2-1" href="./roomGuest.jsp?rNum=E2-1">E2-1</a></td></tr>';
   $("#building").append(last);
+  
+    //设置左边栏的高度为文档的高度
+	$(".main-nav").css('height',parseInt($(document).height())-50);
 });
 
 var getRoomState = function () {

@@ -56,85 +56,8 @@
 						</ul>
 					</div>
 				</div>
-			</div>
-			<div class="tab-content" id="asset">
-				<div class="tab-header">
-					<div><h2>物品信息</h2></div>
-				</div>
-				<div class="active-content" style="display:none;"></div>
-				<div id="room-item">
-					<div class="inner-table">
-						<h3>家具信息</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
-							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th>Teddy Bear</th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="inner-table">
-						<h3>家电信息</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
-							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="inner-table">
-						<h3>灯具信息</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
-							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="inner-table">
-						<h3>窗帘及浴屏</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
-							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
-							</tbody>
-						</table>
-					</div>
-					<div class="inner-table">
-						<h3>备品信息</h3>
-						<table class="table table-striped">
-							<thead><tr><th>编号</th><th>分类</th><th>状态</th><th>品牌</th><tr></thead>
-							<tbody>
-								<tr><th>1</th><th>床</th><th>良好</th><th></th><tr>
-								<tr><th>2</th><th>衣柜</th><th>良好</th><th></th><tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div id="room-check" class="tab-content">
-				<div class="tab-header">
-					<div><h2>查房状态</h2></div>
-				</div>
-				<span><img src="${pageContext.request.contextPath }/img/carousel_1.png"/></span>
-			</div>
-			<div id="maintain" class="tab-content">
-				<div class="tab-header">
-					<div><h2>维修状态</h2></div>
-				</div>
-				<span><img src="${pageContext.request.contextPath }/img/carousel_2.png"/></span>
-			</div>
-			<div id="others" class="tab-content">
-				<div class="tab-header">
-					<div><h2>其他</h2></div>
-				</div>
-				<span><img src="${pageContext.request.contextPath }/img/carousel_3.png"/></span>
-			</div>
-		</div>
-		
+			</div>	
+			</div>	
 	</div>
 	<script>
 		$(function(){

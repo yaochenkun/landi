@@ -19,7 +19,7 @@
 	<jsp:include page="../_header.jsp"></jsp:include>
     <jsp:include page="../_leftMenu.jsp"></jsp:include>
     
-    <div class="nav-second">
+     <div class="nav-second">
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
@@ -32,9 +32,13 @@
         </div>
     </div>
     <!-- 二级导航栏 end-->
+    
+    
+    
+   
 
     <!-- 租客一览图 -->
-    <div class="body-content">
+     <div class="body-content">
 	    <div class="general-map">
 	        <table class="table table-bordered" style="border-top:none;border-right:none;" id="building">
 				<tr>
