@@ -217,7 +217,7 @@
   </select>
   <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     <![CDATA[
-  	select * from guest where GUEST_NAME like '%#{NAME}%'
+  	select * from guest where GUEST_NAME like #{NAME}
     ]]>
   </select>
 </mapper>

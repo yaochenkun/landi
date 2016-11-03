@@ -30,7 +30,7 @@ public class GuestServiceImpl implements GuestService {
 	@Override
 	public List<Guest> getGuestByName(String name) {
 		// TODO Auto-generated method stub
-		return guestMapper.selectByName(name);
+		return guestMapper.selectByName("%" + name + "%");
 	}
 	
 	@Override
