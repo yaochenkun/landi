@@ -25,7 +25,7 @@
 					<li id="asset-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">物品信息</a></li>
 					<li id="check-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomCheck.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">查房状态</a></li>
 					<li id="maintain-header"><a href="javascript:void(0);">维修状态</a></li>
-					<li id="others-header"><a href="#others">其他</a></li>
+					<li id="others-header"><a href="javascript:void(0);">其他</a></li>
 				</ul>
 			</div>
 		</div>

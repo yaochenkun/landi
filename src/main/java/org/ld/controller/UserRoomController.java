@@ -16,12 +16,14 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.model.Guest;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.User;
+import org.ld.service.GuestService;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,13 +53,15 @@ public class UserRoomController {
 	private UserService userService;
 	@Autowired
 	private RoomService roomService;
+	@Autowired
+	private GuestService guestService;
 	
 	private static Logger logger = Logger.getLogger("logRec");
 		
 	// 多文件上传(add by pq)
     @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
     public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
-    	System.out.println(request.getSession().getServletContext().getRealPath(""));
+    	//System.out.println(request.getSession().getServletContext().getRealPath(""));
     	System.out.println("room_id：" + room_id);
     	String roomNumber = roomService.getRoomById(room_id).getROOM_NUMBER();
         // 遍历文件
@@ -83,7 +87,7 @@ public class UserRoomController {
             }
         }
         
-        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ roomNumber ;
+        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ room_id + "&rNum=" + roomNumber ;
     }
     
     // 获取房间图片路径(add by pq)
@@ -153,6 +157,7 @@ public class UserRoomController {
 		
 		int op = dataJson.getIntValue("op");		
 		int rid = dataJson.getIntValue("rid");
+		String rn = dataJson.getString("rnum");
 		
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -171,6 +176,7 @@ public class UserRoomController {
 //		item_light 3
 //		item_curtain 4
 //		item_little 5
+//		guest_info 6
 		
 		switch(op)
 		{
@@ -197,6 +203,10 @@ public class UserRoomController {
 		case 5:
 			List<RoomItem> item_little = roomService.getItems(rid, cur_env.getSettingsInt().get("item_little"));
 			ans.put("item_little", item_little);
+			break;
+		case 6:
+			Guest guest = guestService.getGuestByRoomNumber(rn);
+			ans.put("guest_info", guest);
 			break;
 		}
 

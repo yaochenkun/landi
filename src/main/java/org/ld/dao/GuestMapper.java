@@ -1,5 +1,7 @@
 package org.ld.dao;
 
+import java.util.List;
+
 import org.ld.model.Guest;
 
 public interface GuestMapper {
@@ -14,4 +16,9 @@ public interface GuestMapper {
     int updateByPrimaryKeySelective(Guest record);
 
     int updateByPrimaryKey(Guest record);
+    
+    //add
+    List<Guest> selectByName(String name);
+    
+    Guest selectByRoomNumber(String rn);
 }
