@@ -57,7 +57,7 @@ public class UserRoomController {
 	// 多文件上传(add by pq)
     @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
     public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
-    	System.out.println(request.getSession().getServletContext().getRealPath(""));
+    	//System.out.println(request.getSession().getServletContext().getRealPath(""));
     	System.out.println("room_id：" + room_id);
     	String roomNumber = roomService.getRoomById(room_id).getROOM_NUMBER();
         // 遍历文件
@@ -83,7 +83,7 @@ public class UserRoomController {
             }
         }
         
-        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ roomNumber ;
+        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ room_id + "&rNum=" + roomNumber ;
     }
     
     // 获取房间图片路径(add by pq)

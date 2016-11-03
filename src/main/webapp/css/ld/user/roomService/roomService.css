@@ -1,0 +1,90 @@
+.content{margin: 50px 10px 20px 170px;}
+
+/************* 导航栏样式 start **********/
+.roomNav{border-bottom: 3px solid #2277da; margin-top: 50px;}
+.roomNav .roomNavInner{padding-top: 24px; width: 1000px; margin: auto; height: 60px;}
+.roomNavInner .nav-li{margin-left: 20px; float: left;  overflow: hidden;  }
+.roomNavInner .nav-li a{height: 37px; line-height: 37px; color: #5e5e5e; padding: 0 20px; font-size: 15px; cursor: pointer;}
+.roomNavInner .nav-li:hover a{color: #2277da;}
+/************* 导航栏样式 end **********/
+
+
+/***************** 客房服务类型 start ****************/
+.roomNavInner .dropMenu{float: left; height: 40px;}
+.dropMenu .nav_title{width: 200px; height: 37px; line-height: 37px; text-align: center; font-size: 16px; color: #fff; float: left; background: url(../../../../img/roomService/bottom.png)  #2277da no-repeat 170px 16px;}
+.dropMenu .index{display: none; position: absolute; top: 113px; width: 201px; height: 320px; border-left: 2px solid #2277da; background-color: #fff; box-shadow: 2px 2px 2px rgba(0,0,0,0.2); z-index: 50;}
+.index .plate{position: relative;}
+.plate img{width: 40px;}
+.plate-title{height: 80px; border-bottom: 1px solid #2277da; border-right: 2px solid #2277da; position: relative; 
+	     background: url(../../../../img/bg_plate_inner.gif) no-repeat 170px 32px; z-index: 100; background-color: #fff;}
+.plate-title .title-head{padding: 20px 10px;}
+.plate-title .title-head span{font-size: 15px;}
+
+.plate-content{display: none; width: 580px; height: 323px; border: 2px solid #2277da; border-left: none; position: absolute; left: 197px; background: #fff; box-shadow: 2px 2px 2px rgba(0,0,0,0.2);}  
+.content-title{margin: 4em 1em 2em 2em; height: 250px; background-size: 150px 150px; background-position: 360px 100px; background-repeat: no-repeat;}	    
+.content-title ul{}
+.content-title ul li{height: 30px; float: left; padding: 0 50px; cursor: pointer;} 
+.content-title ul li:last-child{border-bottom: none;}
+.content-title ul li span{display: inline-block;}
+.content-title .icon{float: left; width: 10px; height: 10px; border-radius: 50%; background: #2888da; margin: 5px 1.5em 5px .5em;}
+.content-title ul li:hover span{color: #ff8a01; animation: icon-jump 1s ease-in-out forwards infinite;}
+.content-title ul li:hover .icon{background: #ff7d31; animation: icon-jump 1s ease-in-out forwards infinite;}
+@keyframes icon-jump{0%{transform: translateY(3px);}50%{transform: translateY(-3px);}100%{transform: translateY(3px);}}
+
+.plate-roomService .plate-content{top: -2px;}
+.plate-roomService .content-title li{margin: .5em 1em; width: 40%;}
+.plate-repair img{border-radius: 50%;}
+.plate-repair .plate-content{top: -82px;}
+.plate-repair .content-title li, .plate-resource .content-title li, .plate-other .content-title li{margin: 1em 10em; width: 80%;}
+.plate-resource .plate-content{top: -162px;}
+.plate-other .plate-content{top: -242px;}
+
+.dropMenu .nav-title-active{background: url(../../../../img/roomService/top.png) #2277da no-repeat 170px 16px;}
+.plate-title-active{border-right: 2px solid #fff;}
+/***************** 客房服务类型 end ****************/
+
+/****************** 页面内容 start *****************************/
+.main{width: 1000px; margin: 0 auto;}
+.main-page{margin: 10px 0;}
+.main-page .nav-path{padding: 20px 0; line-height: 22px;}
+.main-page a{color: #2277da;}
+.icon-home{display: inline-block; background-image: url(../../../../img/roomService/index.png); width: 14px; height: 13px; background-position: -68px -59px;}
+.icon-path{margin: 0 5px; display: inline-block; background-image: url(../../../../img/roomService/index.png); width: 8px; height: 11px; background-position: -84px -59px;}
+
+.bill-table{margin: 1em 0;}
+.bill-table table{width: 100%;}
+.bill-table thead tr{height: 20px; line-height: 20px; border-bottom: 1px solid #e5e5e5; font-size: 15px; background-color: #eee;}
+.bill-table thead tr th{text-align: center; color: #555; position: relative;}
+.bill-table thead tr th span{display: inline-block; padding: 15px 0 5px 0;}
+.bill-table thead tr th p{font-weight: normal; color: #777; font-size: 10px;}
+.bill-table thead tr th:nth-child(1){width: 10%;}
+.search-roomNo{position: absolute; width: 1000px; height: 0; background: #fafafa; border-bottom: 1px dashed #279; top: 70px; transition:  height .5s ease-in-out; color: #111; cursor: pointer; overflow: hidden;}
+.search-customerName{position: absolute; height: 70px; left: -83%; height: 0; width: 1000px; background: #fafafa; border-bottom: 1px dashed #279; top: 70px; transition:  height .5s ease; color: #111; cursor: pointer; overflow: hidden;}
+.search-items{position: absolute; height: 70px; left: -268px; height: 0; width: 1000px; background: #fafafa; border-bottom: 1px dashed #279; top: 70px; transition:  height .5s ease; color: #111; cursor: pointer; overflow: hidden;}
+
+.search-wrap{position: relative; float: left; margin: 1.2em 2.2em;}
+.search-wrap .search-input{width: 245px; height: 34px; line-height: 34px; border: 1px solid #e6e6e6; border-radius: 3px; color: #5e5e5e; font-style: normal; font-weight: normal; font-size: 14px; padding: 10px;}
+.search-wrap .search-btn{position: absolute; right: 80px; bottom: 0; display: block; width: 34px; height: 34px; background: url(../../../../img/roomService/search-bg.png) no-repeat; cursor: pointer;}
+.search-wrap .btnedit{height: 34px; margin-left: 1em; color: #555;}
+
+.bill-table thead tr th:nth-child(2){width: 12%;}
+.bill-table thead tr th:nth-child(3){width: 10%;}
+.bill-table thead tr th:nth-child(4){width: 10%;}
+.bill-table thead tr th:nth-child(5){width: 15%;}
+.bill-table thead tr th:nth-child(6){width: 10%;}
+.bill-table thead tr th:nth-child(7){width: 15%;}
+
+.bill-table tbody tr{text-align: center; line-height: 4em; border-bottom: 1px solid #eee;}
+.bill-table tbody tr td:nth-child(5){color: #ff5722;}
+/*.bill-table tbody tr td:nth-child(1) span{display: inline-block; background: #ffb987; border-radius: 50%; color: #333; padding: 4px; width: 25px; height: 22px; line-height: 15px;}*/
+.page-bottom{font-size: 14px; color: #a5a5a5; height: 40px; margin: 20px 0;}
+.page-bottom .page-wrap{background-color: #fff; float: right; line-height: 40px;}
+.page-wrap a{float: left; text-align: center; width: 38px; height: 38px; line-height: 38px; border:1px solid #e6e6e6; color: #5e5e5e;}
+.page-wrap a:hover{background: #2277da; color: #fff; border-color: #2277da;}
+.page-wrap .down-page{width: 98px; position: relative; float: left;}
+.page-wrap .down-page em{font-style: normal;}
+.page-wrap .down-page .next-i, .page-wrap .down-page .prev-i{font-style: normal; font-size: 16px;}
+.page-wrap .down-page .next-i{padding: 0 0 0 8px;}
+.page-wrap span{color: #5e5e5e; float: left; padding: 0 14px;}
+/****************** 页面内容 start *****************************/
+
