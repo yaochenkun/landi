@@ -20,6 +20,24 @@ var checkNull = function (obj) {
 	});
 }
 
+var getGuestInfo = function (rid, rNum) {
+	$.ajax({
+		type: 'POST',
+		url: '/LD/userRoom/getRoomInfo.action',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: '{"rid": ' + rid + ', "rNum": '+ rNum +'"op": 6}',
+		success: function (data) {
+			if (data.guest_info) {
+				let info = data.guest_info;
+				for (let item in info) {
+					
+				}
+			}
+		}
+		
+	});
+}
 var getFurniture = function (rid) {
 	$.ajax({
 		type: 'POST',

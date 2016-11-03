@@ -57,8 +57,6 @@
 						<table id="item_electric" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
-								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
@@ -67,8 +65,6 @@
 						<table id="item_light" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
-								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
@@ -77,8 +73,6 @@
 						<table id="item_curtain" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
-								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
@@ -87,8 +81,6 @@
 						<table id="item_little" class="table table-striped">
 							<thead><tr><th>编号</th><th>名称</th><th>品牌</th><th>类别</th><th>标签</th><th>备注</th><tr></thead>
 							<tbody>
-								<tr><th>1</th><th></th><th></th><th></th><th></th><th></th><tr>
-								<tr><th>2</th><th></th><th></th><th></th><th></th><th></th><tr>
 							</tbody>
 						</table>
 					</div>
@@ -98,7 +90,6 @@
 		
 	</div>
 	<script>
-		
 		$(function(){
 			let params = window.location.search;
 			if (params.indexOf('rid')>=0) {

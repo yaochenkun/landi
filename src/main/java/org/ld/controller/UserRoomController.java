@@ -148,7 +148,7 @@ public class UserRoomController {
 		
 		int op = dataJson.getIntValue("op");		
 		int rid = dataJson.getIntValue("rid");
-		String rn = dataJson.getString("rnum");
+		String rn = dataJson.getString("rNum");
 		
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
@@ -257,7 +257,7 @@ public class UserRoomController {
 		
 		int type = dataJson.getIntValue("type");		
 		int pageNumber = dataJson.getIntValue("pageNum");
-		String rn = dataJson.getString("rnum");
+		String rn = dataJson.getString("rNum");
 		
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalRow(rn, type);
