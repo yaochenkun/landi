@@ -6,20 +6,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
 	<link href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<%-- <link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
-	 --%>
-	 <link href="${pageContext.request.contextPath }/css/ld/user/tenant/generalMap.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath }/css/ld/user/tenant/generalMap.css" rel="stylesheet" type="text/css" />
 	<title>租客管理</title>
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
     <jsp:include page="../_leftMenu.jsp"></jsp:include>
     
-     <div class="nav-second">
+    <!-- 三级导航栏 start--> 
+    <div class="nav-second">
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
@@ -31,11 +27,7 @@
             </div>    
         </div>
     </div>
-    <!-- 二级导航栏 end-->
-    
-    
-    
-   
+    <!-- 三级导航栏 end--> 
 
     <!-- 租客一览图 -->
      <div class="body-content">
@@ -60,9 +52,12 @@
 	   </div>
    </div>
     
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/generalMap.js"></script>
-<script>
-	getRoomState();
-</script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/generalMap.js"></script>
+	<script>
+		getRoomState();
+	</script>
 </body>
 </html>

@@ -56,12 +56,23 @@ var minPicNum = 0,
 
 // 查询某房间的图片信息
 var requestRoomPic = function(room_id){
-    // ???目前根据tag去查询
+	console.log(room_id);
+	// ?? 目前不存在该房间信息（数据表）
+	if(!room_id){
+		//console.log("数据库中没有房间Id和Num对应信息");
+		$(".content").html("不存在该房间信息！");
+		return;
+	}
     $.ajax({
         url:'/LD/userRoom/getRoomPic.action',
         data:'id=' + room_id,
         success:function(data){
             //console.log(data);
+        	if(!data.length){
+        		console.log("data.length = " + data.length);
+        		$(".roomPic").html("不存在查房状态！")
+        		return;
+        	}
             for(var i=0; i<data.length; i++){
                 //console.log(data[i]);
                 perImgPath = data[i].path;
@@ -78,6 +89,7 @@ var requestRoomPic = function(room_id){
 
 // 根据 roomNumber查询 roomID
 var getRoomIDByNumber = function(roomNumber){
+	console.log(roomNumber);
     $.ajax({
         url:"/LD/userRoom/getRoomIDByNumber.action",
         data:'roomNumber=' + roomNumber,
@@ -144,6 +156,7 @@ var setPicUL = function(index){
     nowFirstPic = index;
 }
 
+// 选择上传文件 绑定事件
 $("#uploadRoomPic").change(function(){
     var files = document.getElementById('uploadRoomPic').files;
     for (var i = 0; i < files.length; i++) {

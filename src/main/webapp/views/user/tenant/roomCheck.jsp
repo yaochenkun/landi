@@ -20,10 +20,10 @@
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
-	                <li id="tenant-header" class="active-tab"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?">租客信息</a></li>
-					<li id="asset-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp">物品信息</a></li>
+	                <li id="tenant-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">租客信息</a></li>
+					<li id="asset-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">物品信息</a></li>
 					<li id="check-header" class="liactive"><a href="${pageContext.request.contextPath}/views/user/tenant/roomCheck.jsp?rid=<%=request.getParameter("rid") %>">查房状态</a></li>
-					<li id="maintain-header"><a href="${pageContext.request.contextPath}/views/user/tenant/roomMaintain.jsp">维修状态</a></li>
+					<li id="maintain-header"><a href="javascript:void(0);">维修状态</a></li>
 					<li class="linormal"><a href="javascript:void(0);">其他</a></li>
                 </ul>
             </div>    
@@ -52,7 +52,7 @@
             <!-- 上传图片 start -->
             <div class="uploadPic">
                 <div class="head">
-                    <span class="spanbig"><%=request.getParameter("rid") %></span><span class="spansmall">&nbsp;&nbsp;房间</span>
+                    <span class="spanbig"><%=request.getParameter("rNum") %></span><span class="spansmall">&nbsp;&nbsp;房间</span>
                     <form modelAttribute="user" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath }/userRoom/uploadFiles.action">
                         <div class="btn btn-upload">+ 上传图片</div>
                         <input id="uploadRoomPic" type="file" name="file" multiple="multiple"/>
@@ -74,8 +74,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/checkRoom.js"></script>
 	<script>
     	$(function(){
-            // ?? 先根据 房间Number查询房间ID
-    		getRoomIDByNumber("<%=request.getParameter("rid") %>");
+    		// ！！目前同意采用 rNum查询查房图片
+			getRoomIDByNumber("<%=request.getParameter("rNum") %>");
     	})
     </script>
 </body>
