@@ -138,4 +138,14 @@
       RTIME = #{RTIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getTotalRow" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select count(*) from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE}
+    ]]>
+  </select>
+  <select id="getDailyServiceRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE} limit #{ST}, #{EACH}
+    ]]>
+  </select>
 </mapper>

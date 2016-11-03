@@ -1,5 +1,8 @@
 package org.ld.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.ld.model.DailyService;
 
 public interface DailyServiceMapper {
@@ -14,4 +17,9 @@ public interface DailyServiceMapper {
     int updateByPrimaryKeySelective(DailyService record);
 
     int updateByPrimaryKey(DailyService record);
+    
+    //add
+    int getTotalRow(Map<String, Object> map);
+    
+    List<DailyService> getDailyServiceRange(Map<String, Object> map);
 }

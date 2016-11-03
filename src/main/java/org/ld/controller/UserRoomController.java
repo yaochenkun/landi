@@ -1,40 +1,29 @@
 package org.ld.controller;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.util.Streams;
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.model.DailyService;
 import org.ld.model.Guest;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
-import org.ld.model.User;
 import org.ld.service.GuestService;
 import org.ld.service.RoomService;
+import org.ld.service.ServerService;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,6 +44,8 @@ public class UserRoomController {
 	private RoomService roomService;
 	@Autowired
 	private GuestService guestService;
+	@Autowired
+	private ServerService serverService;
 	
 	private static Logger logger = Logger.getLogger("logRec");
 		
@@ -249,6 +240,53 @@ public class UserRoomController {
 		return ans;
 	}
 	
+	@RequestMapping("/roomSearchBill")
+	@ResponseBody
+	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			ans.put("State", "Invalid");
+			return ans;
+		} else{
+			ans.put("State", "Valid");
+		}
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		int type = dataJson.getIntValue("type");		
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String rn = dataJson.getString("rnum");
+		
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int pageTotal = (int)Math.ceil((float)serverService.getTotalRow(rn, type)/eachPage);
+		
+		if(pageNumber > pageTotal)
+			pageNumber = pageTotal;
+		
+		int st = (pageNumber - 1) * eachPage;
+		List<DailyService> record = serverService.searchBill(rn, type, st, eachPage);
+
+		ans.put("pageList", record);
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		
+		return ans;
+	}
+	
+	
+	@RequestMapping("/test")
+	@ResponseBody
+	public Map<String, Object> test(HttpSession session){
+		Map<String, Object> ans = new HashMap<String, Object>();
+		
+		List<Guest> guest = guestService.getGuestByName("i");
+		ans.put("guest_info", guest);
+		
+		return ans;
+	}
+	
 	@RequestMapping("/Model/")
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -261,8 +299,8 @@ public class UserRoomController {
 			ans.put("State", "Valid");
 		}
 		
-		
-		
 		return ans;
 	}
+	
+	
 }
