@@ -260,7 +260,8 @@ public class UserRoomController {
 		String rn = dataJson.getString("rnum");
 		
 		int eachPage = cur_env.getSettingsInt().get("list_size");
-		int pageTotal = (int)Math.ceil((float)serverService.getTotalRow(rn, type)/eachPage);
+		int recordTotal = serverService.getTotalRow(rn, type);
+		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
 		
 		if(pageNumber > pageTotal)
 			pageNumber = pageTotal;
@@ -271,10 +272,10 @@ public class UserRoomController {
 		ans.put("pageList", record);
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
 		
 		return ans;
 	}
-	
 	
 	@RequestMapping("/test")
 	@ResponseBody
@@ -301,6 +302,4 @@ public class UserRoomController {
 		
 		return ans;
 	}
-	
-	
 }
