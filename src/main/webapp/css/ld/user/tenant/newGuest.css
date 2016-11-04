@@ -11,7 +11,7 @@
 .tab-content .tab-content-title span{display: inline-block; font-size: 18px; width: 32px; border-radius: 50%; background: #ff4d4d; text-align: center; margin-right: 15px; color: #fff;}
 
 .extra-body{border-left: 2px dotted #e4e4e4; margin-left: 20px; height: 100%;}
-.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0px 80px 20px 70px;}
+.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0 0 20px 70px;}
 
 .tab-content-body .form{background: url("../../../../img/rebc.gif"); padding: 20px 0;}
 .tab-content-body .item{line-height: 22px; padding: 5px 80px; white-space: nowrap;}
@@ -20,29 +20,46 @@
 .item .fl{display: inline-block; width: 70%;}
 .item .text{height: 22px; line-height: 22px; padding: 6px; width: 100%;}
 
-/*************** 租客信息 样式 start**************/
+/**** 租客信息 样式 ****/
 .tab-content-guest .spanLabel{width: 17%;}
 .tab-content-guest .fl{width: 27%; margin-right: 13%;}
 .tab-content-guest .item-name .checkbox{display: inline-block; margin-right: 6%;}
 .tab-content-guest .item-room .spanLabel:nth-child(3),.tab-content-guest .item-company .spanLabel:nth-child(3),.tab-content-guest .item-car .spanLabel:nth-child(3){width: 10%;}
 .tab-content-guest .item-time .spanLabel:nth-child(3),.tab-content-guest .item-tel .spanLabel:nth-child(3){width: 15%;}
 .tab-content-guest .item-time .fl:nth-child(4),.tab-content-guest .item-tel .fl:nth-child(4){width: 22%;}
-/*************** 租客信息 样式 start**************/
-
-/**************** 业主 样式 start *****************/
+/**** 业主 样式  ****/
 .tab-content-owner .spanLabel{width: 17%;}
 .tab-content-owner .fl{width: 27%; margin-right: 13%;}
-
-/***************** 中介 样式 start **************/
+/**** 中介 样式  ****/
 .tab-content-agency .spanLabel{width: 22%;}
 .tab-content-agency .fl{width: 22%; margin-right: 13%;}
-
-/***************** 房款 样式 end ****************/
+/**** 房款 样式 ****/
 .tab-content-housepay .item-list{margin-bottom: 20px}
 .tab-content-housepay .spanLabel{width: 17%;}
 .tab-content-housepay .spanLabel:nth-child(3){width: 14%;}
 .tab-content-housepay .fl{width: 24%; margin-right: 16%;}
+/**** 服务样式 ****/
+.tab-content-service .form{padding: 20px;}
+.tab-content-service .form table{width: 100%; text-align: center;}
+.tab-content-service .form table thead th{font-style: normal; font-weight: normal; text-align: center;}
+.tab-content-service thead th, .tab-content-service tbody td{border: 1px solid #ccc; height: 2em; line-height: 2em;}
 
+
+thead tr:nth-child(1) th:nth-child(1), thead tr:nth-child(1) th:nth-child(2), thead tr:nth-child(1) th:nth-child(3){width: 23%;}
+thead tr:nth-child(1) th:nth-child(4), thead tr:nth-child(1) th:nth-child(5), thead tr:nth-child(1) th:nth-child(6){width: 10%;}
+thead tr:nth-child(1) th:nth-child(1){color: #777;}
+tbody td:nth-child(1),tbody td:nth-child(2){}
+tbody .rowOne{width: 2%; padding: 10px; color: #777;}
+tbody .td-hover{background: #eee;}
+tbody .col-LE, tbody .col-wash, tbody .col-consume, tbody .col-car, tbody .col-light, tbody .col-tax{color: #ff7e10;}
+tbody .col-lunch-choose td:nth-child(2){cursor: pointer; color: #ff4d4d;}
+tbody .col-lunch-choose td:nth-child(2):hover{color: #ec0000;}
+tbody .col-lunch td:nth-child(1){color: #279;}
+tbody .title{color: #222;}
+tbody .col-resource .checkbox{float: left; margin-top: 8px; margin-left: 15%; margin-right: -15%;}
+td input[type="text"]{width: 100%; height: 100%; border: none; text-align: center; background: transparent; color: #888;}
+
+/***************************** 左侧 珠串样式 start *********************************/
 .step-nav{position: fixed; top: 50px; left: 295px;}
 .step-nav .list-icon-link{display: none; width: 32px; font-size: 18px; line-height: 32px; color: #fff; background: #ff4d4d; border-radius: 50%; text-align: center;}
 .step-nav .list-icon-text{display: none; position: absolute; left: 40px; width: 100px; height: 28px; line-height: 28px; color: #5c5c5b;}
@@ -52,5 +69,25 @@
 .step-nav .list-icon-text:nth-child(8){top: 97px;}
 .step-nav .list-icon-text:nth-child(10){top: 129px;}
 .list-icon-text .inner{text-align: center; background-color: #fff; font-size: 12px; border: 1px solid #b3b7bf; border-radius: 2px; box-shadow: 1px 1px 3px rgba(0,0,0,0.15);}
+/***************************** 左侧 珠串样式 end *********************************/
 
-.btnnew{margin: 50px 0 200px 220px;}
+/******* 确认添加  样式 *******/
+.newGuestBtn{margin: 4em 130px 6em 220px; height: 6em;}
+.btnnew{width: 20em; border: 1px solid #ff4d4d; border-radius: 5px; position: absolute; text-align: center; margin-left: 21%; height: 4em; line-height: 4em; font-size: 15px; background: #ff4d4d; color: #fff;}
+.btnnew:hover{margin-top: 3px; color: #fff;}
+
+
+/********* 选择饭店样式 *************/
+.thick-div{display: none; position: fixed; top: 0; left: 0; z-index: 1000; width: 100%; height: 100%; background: #000; opacity: .2; border: 0;}
+.thick-box{display: none; position: fixed; left: 30%; top: 20%; width: 40%; background: #fff; z-index: 1001; padding: 0; border: 2px solid rgba(0,0,0,.2); border-radius: 10px;}
+.thick-box .thick-wrap{height: 100%; overflow: hidden;}
+.thick-wrap .thick-title{height: 40px; line-height: 40px; font-size: 15px; padding: 0 20px; background: #f3f3f3; border-bottom: 1px solid #ddd; border-top-left-radius: 10px; border-top-right-radius: 10px;} 
+.thick-title span{float: right; font-size: 18px; cursor: pointer;}
+.thick-title span:hover{color: #999;}
+
+.thick-wrap .thick-body{padding: 0 20px;}
+.thick-body .restaurant{width: 80%; margin: 5% auto;}
+.restaurant .a{width: 100px; display: inline-block; text-align: center;  border-radius: 4px; border: 1px solid #555; color: #777; margin-bottom: 5%; margin-left: 4%; padding: 2px 7px;} 
+.restaurant .a-active{color: #ff4d4d; border-color: #ff4d4d;}
+.restaurant .btnedit{height: 2em; line-height: 2em; padding: 0 1em; margin-left: 4%; background: #ebebeb; color: #222; border: 1px solid #888;}
+.restaurant .btnedit:hover{color: #333;}
