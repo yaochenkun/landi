@@ -149,7 +149,7 @@ public class UserRoomController {
 		int op = dataJson.getIntValue("op");		
 		int rid = dataJson.getIntValue("rid");
 		String rn = dataJson.getString("rNum");
-		
+
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
 
