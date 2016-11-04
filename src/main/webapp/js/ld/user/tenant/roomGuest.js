@@ -26,9 +26,7 @@ var getGuestInfo = function (rid, rNum) {
 		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-//		data: '{"rid": '+rid+', "op": 6}',
 		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 6}',
-//		data: '{"rid": '+ rid +', "op": 6, "rNum": '+ rNum +'}',
 		success: function (data) {
 			console.log(data);
 			if (data.guest_info) {
