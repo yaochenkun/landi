@@ -1,0 +1,136 @@
+// 客房服务--代购费
+
+// 初始绑定搜索键盘事件
+$(function(){
+	$(".search-input").keydown(function(e){
+		// 回车键
+		if(e.keyCode==13){
+			requestFirstShoppingByRoomNum(this);
+		}
+	})
+});
+
+
+//拉取第一页 代购费信息
+var requestFirstShopping = function(){
+	requestAjaxShopping(parseInt(1));    
+}
+
+//拉取上一页 代购费信息
+var requestBeforeShopping = function(){
+	var nowpage = parseInt($("#shoppinglist_nowpage").val());
+	if(nowpage == 1) return;
+	requestAjaxShopping(nowpage-1);
+}
+
+// 拉取下一页 代购费信息（??当前处理，前端判断是否是最后一页）
+var requestNextShopping = function(){
+	var nowpage = parseInt($("#shoppinglist_nowpage").val());
+	var totalpage = parseInt($("#shoppinglist_totalpage").text());
+	if(nowpage == totalpage) return;
+	requestAjaxShopping(nowpage+1);
+}
+
+// 查询系统代购费信息(代购费信息 type为4)
+var requestAjaxShopping = function(pageNum){
+	var type = parseInt(4); 
+	console.log("请求第"+ pageNum + "页代购费信息");
+	
+//	$.ajax({
+//		url:'/LD/userRoom/roomSearchBill.action',
+//		type:'post',
+//		contentType:'application/json',
+//		data:'{"pageNum":"'+ pageNum +'","type":"'+ type +'"}',
+//		dataType:'json',
+//		success:function(data){
+//			console.log(data);
+			// 清空列表和页码
+			$("#shoppingTbody").html("");
+			$("#serviceShoppingBottom").html("");
+			
+			for(var i=0; i<20; i++){
+				$("#shoppingTbody").append("<tr><td><span>1</span></td><td>Ada</td><td>衣服</td><td>1</td>"+
+						"<td>2016-3-30</td><td>2,000&nbsp;元</td><td>无</td></tr>");
+			}	
+			// 添加代购费 底部页码
+			$("#serviceShoppingBottom").append("<div class='bottom-page'>"+
+		        	"<span class='page-before' onclick='requestBeforeShopping();'>上一页&nbsp;&nbsp;</span>"+
+		        	"<span><input id='shoppinglist_nowpage' value='1' type='text' class='input_num'></span>"+
+		        	"<span>&nbsp;/&nbsp;</span>"+
+		        	"<span id='userlist_totalpage'>2</span>"+
+		            "<span class='page-next' onclick='requestNextShopping();'>&nbsp;&nbsp;下一页</span>" +
+		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
+//		}
+//	});
+}
+
+////////////////////////////////////////////////////////////////条件查询 代购费信息 start
+//根据房间号 拉取第一页 代购费信息
+var requestFirstShoppingByRoomNum = function(element){
+	$(".search-roomNo").css("height","0");
+	var roomNum = $(element).parent().children("input").val();
+	
+	requestAjaxShoppingByRoomNum(roomNum,parseInt(1));    
+}
+
+//根据房间号 拉取上一页 代购费信息
+var requestBeforeShoppingByRoomNum = function(){
+	var roomNum = $(".searchRoomNum").text();
+	//console.log("roomId:"+room_id);
+	var nowpage = parseInt($("#shoppinglist_nowpage").val());
+	if(nowpage == 1) return;
+	
+	requestAjaxShoppingByRoomNum(roomNum,nowpage-1);
+}
+
+//根据房间号 拉取下一页 代购费信息（??当前处理，前端判断是否是最后一页）
+var requestNextShoppingByRoomNum = function(){
+	var roomNum = $(".searchRoomNum").text();
+	//console.log("roomId:"+room_id);
+	var nowpage = parseInt($("#shoppinglist_nowpage").val());
+	var totalpage = parseInt($("#shoppinglist_totalpage").text());
+	if(nowpage == totalpage) return;
+	
+	requestAjaxShoppingByRoomNum(roomNum,nowpage+1);
+}
+
+
+// 根据房间号查询系统代购费信息(代购费信息type为4)
+var requestAjaxShoppingByRoomNum = function(roomNum,pageNum){
+	console.log("请求房间："+ roomNum +"  第" + pageNum + "页的代购费信息");
+	
+	var type = parseInt(4);
+	
+//	$.ajax({
+//		url:'/LD/userRoom/roomSearchBill.action',
+//		type:'post',
+//		contentType:'application/json',
+//		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","roomNum":"'+ roomNum +'"}',
+//		dataType:'json',
+//		success:function(data){
+//			console.log(data);
+			
+			$("#shoppingTbody").html("");
+			$("#serviceShoppingBottom").html("");
+			
+			for(var i=0; i<20; i++){
+				$("#shoppingTbody").append("<tr><td><span>1</span></td><td>Ada</td><td>衣服</td><td>1</td>"+
+						"<td>2016-3-30</td><td>2,000&nbsp;元</td><td>无</td></tr>");
+			}	
+			// 添加代购费 底部页码
+			$("#serviceShoppingBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
+			$("#serviceShoppingBottom").append("<div class='bottom-page'>"+
+		        	"<span class='page-before' onclick='requestBeforeShoppingByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
+		        	"<span><input id='shoppinglist_nowpage' value='1' type='text' class='input_num'></span>"+
+		        	"<span>&nbsp;/&nbsp;</span>"+
+		        	"<span id='userlist_totalpage'>2</span>"+
+		            "<span class='page-next' onclick='requestNextShoppingByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
+		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
+//		}
+//	});
+}
+////////////////////////////////////////////////////////////////条件查询 代购费信息 end
+
+
+
+

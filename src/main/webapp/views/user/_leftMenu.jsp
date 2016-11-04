@@ -8,7 +8,7 @@
             <ul>
                 <li><a class="linormal" href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a></li>
                 <li><a class="linormal" href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;租客管理</a></li>
-                <li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomService/roomService.jsp"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;客房服务管理</a></li>
+                <li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomService/service/serviceTakeaway.jsp"><span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;客房服务管理</a></li>
                 <li><a class="linormal" href="javascript:void(0);"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;客房物品管理</a></li>
                 <li><a class="linormal" href="javascript:void(0);"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;办公室管理</a></li>
                 <li><a class="linormal" href="javascript:void(0);"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;其他</a></li>

@@ -49,7 +49,7 @@
                             <span class="spanLabel"><span class="red">*&nbsp;</span>房间号：</span>
                             <div class="fl"><input type="text" class="text" value="W12" /></div>
                             <span class="spanLabel"><span class="red">*&nbsp;</span>户型：</span>
-                            <div class="fl"><input type="text" class="text" value="大户型" /></div>
+                            <div class="fl"></div>
                         </div>
                         <div class="item item-tel">
                             <span class="spanLabel"><span class="red">*&nbsp;</span>合同编号：</span>
@@ -211,23 +211,188 @@
         <!-- 房款收付日期 end -->
 
         <!-- 服务 start -->
-        <div class="tab-content">
+        <div class="tab-content tab-content-service">
             <div class="tab-content-title"><span>5</span>服务</div>
-            <!--  extra body start
+            <!--  extra body start -->
             <div class="extra-body">
                 <div class="tab-content-body">
-                    <div class="form"></div>
+                    <div class="form">
+                       <table>
+                           <thead>
+                                <tr><th rowspan="2" colspan="3">服务名称</th>
+                                    <th colspan="2">LE租赁条件书</th>
+                                    <th colspan="2">SPC租赁条件书</th>
+                                    <th rowspan="2">周期</th>
+                                    <th rowspan="2">备注</th>
+                                    <th rowspan="2">赠送</th>
+                                </tr>
+                                <tr><th>费用</th><th>数量</th>
+                                    <th>费用</th><th>数量</th>
+                                </tr>
+                           </thead>
+                           <tbody>
+                                <tr class="col-LE">
+                                    <td rowspan="9" class="rowOne">基本费用</td>
+                                    <td colspan="2" class="title">LE管理费</td>
+                                    <td>1</td><td>1</td><td>1</td><td>1</td>
+                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-wash">
+                                    <td colspan="2" class="title">布草洗涤费</td>
+                                    <td>1</td><td>1</td><td></td><td></td>
+                                    <td>1</td><td>1</td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-consume">
+                                    <td colspan="2" class="title">布草消耗费</td>
+                                    <td>1</td><td></td><td></td><td></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-car">
+                                    <td colspan="2" class="title">车费</td>
+                                    <td>1</td><td>1</td><td>1</td><td></td>
+                                    <td>1</td><td>1</td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-light">
+                                    <td colspan="2" class="title">灯泡费</td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-tax">
+                                    <td colspan="2" class="title">税金</td><td></td><td></td><td></td><td></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-Int">
+                                    <td colspan="2" class="title">网费</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-resource">
+                                    <td class="title">能源费</td>
+                                    <td><input type="checkbox" class="checkbox"/><span>自费</span></td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-breakfast">
+                                    <td colspan="2" class="title">早餐人数</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+
+                                <tr class="col-park">
+                                    <td rowspan="9" class="rowOne">其他费用</td>
+                                    <td colspan="2" class="title">停车费</td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-tv">
+                                    <td colspan="2" class="title">电视费</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-newspaper">
+                                    <td colspan="2" class="title">报刊杂志费</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-cloth">
+                                    <td colspan="2" class="title">洗衣费</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-lunch-choose">
+                                    <td class="title">餐券</td>
+                                    <td onclick="showChooseRestaurant();">选择饭店</td> 
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="col-break">
+                                    <td colspan="2" class="title">早餐费</td>                                    
+                                   <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-shopping">
+                                    <td colspan="2" class="title">购物卡</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-water">
+                                    <td colspan="2" class="title">饮用水</td>                                    
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                                <tr class="col-daily">
+                                    <td colspan="2" class="title">日用品</td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1000"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="1"/></td>
+                                    <td><input type="text" value="无"/></td>
+                                    <td><input type="checkbox"/></td>
+                                </tr>
+                           </tbody>
+                       </table>
+                    </div>
                 </div>
             </div>
-             extra body end-->
+            <!-- extra body end-->
         </div>
         <!-- 服务 end -->
 
-        <div class="btn btn-new btnnew" onclick="addGuest();">确认添加</div>
+        <div class="newGuestBtn"><a class="btnnew" onclick="addGuest();">确认添加</a></div>
 
     </div>   
     <!-- 页面内容 end-->
 
+    <!-- 珠串 start -->
     <div class="step-nav">
         <div class="icon-group">
             <a class="list-icon-link" href="javascript:void(0);">1</a>
@@ -242,6 +407,27 @@
             <div class="list-icon-text"><div class="inner">服务</div></div>
         </div>
     </div>
+    <!-- 珠串 start -->
+
+    <!-- 选择饭店 start -->
+    <div class="thick-div"></div>
+    <div class="thick-box">
+        <div class="thick-wrap">
+            <div class="thick-title">请选择饭店<span>×</span></div>
+            <div class="thick-body">
+                <div class="restaurant">   
+                    <a class="a" href="javascript:void(0);">香格里拉</a>
+                    <a class="a" href="javascript:void(0);">Plaza</a>
+                    <a class="a" href="javascript:void(0);">阿拉伯之塔</a>
+                    <a class="a" href="javascript:void(0);">香格里拉</a>
+                    <a class="a" href="javascript:void(0);">Plaza</a>
+                    <a class="a" href="javascript:void(0);">阿拉伯之塔</a>
+                    <div class="btn btn-edit btnedit" onclick="chooseRestaurant();">确定</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 选择饭店 end -->
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

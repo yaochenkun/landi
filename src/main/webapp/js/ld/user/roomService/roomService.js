@@ -19,7 +19,7 @@ $(function(){
  
     // 搜索房间下拉菜单
 	$(".bill-table tr th:nth-child(1)").hover(function(){
-		$(".search-roomNo").css("height","70px");
+		$(".search-roomNo").css("height","100px");
 	},function(){
 		$(".search-roomNo").css("height","0");
 	})
