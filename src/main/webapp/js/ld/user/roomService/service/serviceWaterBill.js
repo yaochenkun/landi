@@ -40,7 +40,7 @@ var requestAjaxWaterBill = function(pageNum){
 //		url:'/LD/userRoom/roomSearchBill.action',
 //		type:'post',
 //		contentType:'application/json',
-//		data:'{"pageNum":"'+ pageNum +'","type":"'+ type +'"}',
+//		data:'{"pageNum":"'+ pageNum +'","type":"'+ type +'","rnum":0}',
 //		dataType:'json',
 //		success:function(data){
 //			console.log(data);
@@ -57,7 +57,7 @@ var requestAjaxWaterBill = function(pageNum){
 		        	"<span class='page-before' onclick='requestBeforeWaterBill();'>上一页&nbsp;&nbsp;</span>"+
 		        	"<span><input id='waterBilllist_nowpage' value='1' type='text' class='input_num'></span>"+
 		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='userlist_totalpage'>2</span>"+
+		        	"<span id='waterBilllist_totalpage'>2</span>"+
 		            "<span class='page-next' onclick='requestNextWaterBill();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
 //		}
@@ -101,33 +101,46 @@ var requestAjaxWaterBillByRoomNum = function(roomNum,pageNum){
 	
 	var type = parseInt(2);
 	
-//	$.ajax({
-//		url:'/LD/userRoom/roomSearchBill.action',
-//		type:'post',
-//		contentType:'application/json',
-//		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","roomNum":"'+ roomNum +'"}',
-//		dataType:'json',
-//		success:function(data){
-//			console.log(data);
-			
-			$("#waterBillTbody").html("");
-			$("#serviceWaterBillBottom").html("");
-			
-			for(var i=0; i<20; i++){
-				$("#waterBillTbody").append("<tr><td><span>1</span></td><td>Ada</td><td>衣服</td><td>1</td>"+
-						"<td>2016-3-30</td><td>2,000&nbsp;元</td><td>无</td></tr>");
-			}	
-			// 添加桶装水费 底部页码
-			$("#serviceWaterBillBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
-			$("#serviceWaterBillBottom").append("<div class='bottom-page'>"+
-		        	"<span class='page-before' onclick='requestBeforeWaterBillByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
-		        	"<span><input id='waterBilllist_nowpage' value='1' type='text' class='input_num'></span>"+
-		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='userlist_totalpage'>2</span>"+
-		            "<span class='page-next' onclick='requestNextWaterBillByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-//		}
-//	});
+	$.ajax({
+		url:'/LD/userRoom/roomSearchBill.action',
+		type:'post',
+		contentType:'application/json',
+		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rnum":"'+ roomNum +'"}',
+		dataType:'json',
+		success:function(data){
+			// console.log(data);
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退。");
+				return;
+			}
+			else if(data.State == "Valid"){
+				$("#waterBillTbody").html("");
+				$("#serviceWaterBillBottom").html("");
+				
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					// 将时间戳变为2016-12-12显示          	
+            		var dDate = new Date(perRecord.rtime);
+            		var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#waterBillTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
+						    "<td>"+ perRecord.guest_NAME +"</td><td>" + perRecord.item + "</td>"+
+						    "<td>"+ perRecord.count +"</td><td>"+ deliveryDate +"</td>"+
+							"<td>"+ perRecord.money +"&nbsp;元</td><td>"+ perRecord.comment +"</td></tr>");
+				}	
+				// 添加餐费 底部页码
+				$("#serviceWaterBillBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
+				$("#serviceWaterBillBottom").append("<div class='bottom-page'>"+
+			        	"<span class='page-before' onclick='requestBeforeWaterBillByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
+			        	"<span><input id='waterBilllist_nowpage' value='" + data.pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span>&nbsp;/&nbsp;</span>"+
+			        	"<span id='waterBilllist_totalpage'>"+ data.pageTotal +"</span>"+
+			            "<span class='page-next' onclick='requestNextWaterBillByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共"+ data.recordTotal +"条记录</div>");
+			}
+		}
+	});
 }
 ////////////////////////////////////////////////////////////////条件查询 桶装水费信息 end
 

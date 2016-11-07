@@ -26,12 +26,12 @@
 	 						<div class="content-title">
 	 							<ul>
 	 								<li><div class="icon"></div><a>洗衣单收费</a></li>
-	 								<li><div class="icon"></div><a href="serviceTakeaway.jsp">餐费</a></li>
-	 								<li><div class="icon"></div><a href="serviceWaterBill.jsp">桶装水费</a></li>
-	 								<li><div class="icon"></div><a href="serviceShoeCleaning.jsp">擦鞋费</a></li>
-	 								<li><div class="icon"></div><a href="serviceShopping.jsp">代购费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceTakeaway.jsp">餐费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceWaterBill.jsp">桶装水费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceShoeCleaning.jsp">擦鞋费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceShopping.jsp">代购费</a></li>
 	 								<li><div class="icon"></div><a>车费</a></li>
-	 								<li><div class="icon"></div><a>其他</a></li>
+	 								<!--<li><div class="icon"></div><a>其他</a></li>-->
 	 							</ul>						
 	 							<div class="xb-icon"></div>	
 	 						</div>
@@ -66,9 +66,9 @@
 	 					<div class="plate-content">
 	 					    <div class="content-title">
 	 							<ul>
-	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/">水费</a></li>
-	 								<li><div class="icon"></div><a>电费</a></li>
-	 								<li><div class="icon"></div><a>燃气费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/source/sourceWater.jsp">水费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/source/sourceElec.jsp">电费</a></li>
+	 								<li><div class="icon"></div><a href="${pageContext.request.contextPath}/views/user/roomService/source/sourceGas.jsp">燃气费</a></li>
 	 							</ul>
 	 					    </div>
 	 					</div>

@@ -18,11 +18,11 @@
  	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="">客房服务</a>
+				<a href="serviceIndex.jsp">客房服务</a>
 				<i class="icon-path"></i>
-				<a href="">代购费</a>
+				<a href="serviceShopping.jsp">代购费</a>
 			</div>
 			<a class="btn btn-new btnnew" href="serviceNew.jsp?type=4">新增代购费记录</a>
 			<div class="bill-area">

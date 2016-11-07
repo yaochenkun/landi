@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 
 @Controller
@@ -262,7 +263,7 @@ public class UserRoomController {
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalRow(rn, type);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-		
+
 		if(pageNumber > pageTotal)
 			pageNumber = pageTotal;
 		

@@ -21,9 +21,9 @@
 .plate-title .title-head span{font-size: 15px;}
 
 .plate-content{display: none; width: 580px; height: 323px; border: 2px solid #2277da; border-left: none; position: absolute; left: 197px; background: #fff; box-shadow: 2px 2px 2px rgba(0,0,0,0.2);}  
-.content-title{margin: 4em 1em 2em 2em; height: 250px; background-size: 150px 150px; background-position: 360px 100px; background-repeat: no-repeat;}	    
+.content-title{margin: 5em 1em 2em 2em;}	    
 .content-title ul{}
-.content-title ul li{height: 30px; float: left; padding-left: 50px; cursor: pointer;} 
+.content-title ul li{height: 30px; float: left; padding-left: 50px;} 
 .content-title ul li:last-child{border-bottom: none;}
 .content-title ul li a{display: inline-block;}
 .content-title .icon{float: left; width: 10px; height: 10px; border-radius: 50%; background: #2888da; margin: 5px 1.5em 5px .5em;}
@@ -51,7 +51,8 @@
 
 /**** 表格上方样式  ****/
 .main-page .nav-path{padding: 20px 0; line-height: 22px;}
-.main-page a{color: #2277da;}
+.nav-path a{color: #2277da;}
+.nav-path a:hover{border-bottom: 1px solid #2277da;}
 .icon-home{display: inline-block; background-image: url(../../../../img/roomService/index.png); width: 14px; height: 13px; background-position: -68px -59px;}
 .icon-path{margin: 0 5px; display: inline-block; background-image: url(../../../../img/roomService/index.png); width: 8px; height: 11px; background-position: -84px -59px;}
 .btnnew{position: absolute; right: 0; top: 16px;}
@@ -81,6 +82,7 @@
 .bill-table thead tr th:nth-child(7){width: 15%;}
 
 .bill-table tbody tr{text-align: center; line-height: 4em; border-bottom: 1px solid #eee;}
+.bill-table tbody tr:hover{background: #f7f7f7;}
 .bill-table tbody tr td:nth-child(6){color: #ff5722;}
 /*.bill-table tbody tr td:nth-child(1) span{display: inline-block; background: #ffb987; border-radius: 50%; color: #333; padding: 4px; width: 25px; height: 22px; line-height: 15px;}*/
 

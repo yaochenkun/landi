@@ -1,0 +1,10 @@
+.search-roomNo{top: 50px;}
+
+.bill-table thead tr{height: 50px;}
+.bill-table thead tr th span{padding: 0;}
+
+.bill-table thead tr th:nth-child(3){width: 8%;}
+
+.bill-table tbody tr td:nth-child(4),.bill-table tbody tr td:nth-child(5){color: #19007c;}
+.bill-table tbody tr td:nth-child(6){color: #0099d6;}
+.bill-table tbody tr td:nth-child(7){color: #ff5722;}

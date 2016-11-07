@@ -18,11 +18,11 @@
  	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="">客房服务</a>
+				<a href="serviceIndex.jsp">客房服务</a>
 				<i class="icon-path"></i>
-				<a href="">桶装水费</a>
+				<a href="serviceWaterBill.jsp">桶装水费</a>
 			</div>
 			<a class="btn btn-new btnnew" href="serviceNew.jsp?type=2">新增桶装水费记录</a>
 			<div class="bill-area">

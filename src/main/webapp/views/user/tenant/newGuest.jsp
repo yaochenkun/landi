@@ -293,7 +293,7 @@
                                 </tr>
 
                                 <tr class="col-park">
-                                    <td rowspan="9" class="rowOne">其他费用</td>
+                                    <td rowspan="10" class="rowOne">其他费用</td>
                                     <td colspan="2" class="title">停车费</td>
                                     <td><input type="text" value="1000"/></td>
                                     <td><input type="text" value="1"/></td>
@@ -378,6 +378,7 @@
                                     <td><input type="text" value="无"/></td>
                                     <td><input type="checkbox"/></td>
                                 </tr>
+                                <tr><td colspan="8"></td><td onclick="addServiceTr();">增加项目</td></tr>
                            </tbody>
                        </table>
                     </div>
@@ -415,6 +416,7 @@
         <div class="thick-wrap">
             <div class="thick-title">请选择饭店<span>×</span></div>
             <div class="thick-body">
+                <div class="red warning">最多选三家</div>
                 <div class="restaurant">   
                     <a class="a" href="javascript:void(0);">香格里拉</a>
                     <a class="a" href="javascript:void(0);">Plaza</a>

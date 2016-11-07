@@ -9,73 +9,57 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css"/>
-	<title>餐费</title>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceWater.css" rel="stylesheet" type="text/css"/>
+	<title>水费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
     <jsp:include page="../_head.jsp"></jsp:include>
+
     <!-- 页面内容 strat -->
  	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="serviceIndex.jsp">客房服务</a>
+				<a href="sourceIndex.jsp">能源费结算</a>
 				<i class="icon-path"></i>
-				<a href="serviceTakeaway.jsp">餐费</a>
+				<a href="sourceWater.jsp">水费</a>
 			</div>
-			<a class="btn btn-new btnnew" href="serviceNew.jsp?type=1">新增餐费记录</a>
+			<a class="btn btn-new btnnew" href="sourceNew.jsp?type=1">新增水费记录</a>
 			<div class="bill-area">
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
 							<tr>
-							<th><span>房间号</span><p>Room No.</p>
+							<th><span>房间号</span>
 								<div class="search-roomNo">
 									<div class="search-wrap">
 										<input type="text" class="search-input" placeholder="请输入房间号..." />
 										<a class="search-btn" href=""></a>
-										<a class="btn btn-edit btnedit" onclick="requestFirstTakeawayByRoomNum(this)">搜索餐费</a>
+										<a class="btn btn-edit btnedit" onclick="requestFirstWaterByRoomNum(this)">搜索水费</a>
 									</div>
 								</div>
 							</th>
-							<th><span>客人姓名</span><p>Customer Name</p>
-								<!--<div class="search-customerName">
-									<div class="search-wrap">
-										<input type="text" class="search-input" placeholder="请输入客户姓名..." />
-										<a class="search-btn" href=""></a>
-										<a class="btn btn-edit btnedit">搜索</a>
-									</div>
-								</div>-->
+							<th><span>客人姓名</span>
 							</th>
-							<th><span>物品</span><p>Items</p>
-								<!--<div class="search-items"></div>-->
-							</th>
-							<th><span>数量</span><p>Quantity</p></th>
-							<th><span>送交时间</span><p>Time for delivery</p></th>
-							<th><span>金额</span><p>Sum</p></th>
-							<th><span>备注</span><p>Note</p></th>
+							<th><span>表号</span></th>
+							<th><span>年初表数</span></th>
+							<th><span>上月表数</span></th>
+							<th><span>本月表数</span></th>
+							<th><span>费用</span></th>
+							<th><span>抄表</span></th>
+							<th><span>抄表日期</span></th>
 							</tr>
 						</thead>
-						<tbody id="takeawayTbody"></tbody>
+						<tbody id="waterTbody"></tbody>
 					</table>
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="serviceTakeawayBottom" class="bottom"></div>
+					<div id="serviceWaterBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
-					
-					<!--<div class="page-bottom">
-						<div class="page-wrap">
-							<a data-target="1" href="">1</a>
-							<a data-target="2" href="">2</a>
-							<span>...</span>
-							<a data-target="3" href="">3</a>
-							<a data-target="2" href="" class="down-page"><em>下一页</em><i class="next-i">></i></a>
-							<span>共15条记录</span>
-						</div>
-					</div>-->
 				</div>
 			</div>
 		</div>
@@ -86,10 +70,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceTakeaway.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceWater.js"></script>
 	<script type="text/javascript">
 	    // 拉取第一页餐费信息
-		requestFirstTakeaway();
+		requestFirstWater();
 	</script>
 </body>
 </html>

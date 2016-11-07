@@ -9,41 +9,37 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css"/>
-	<title>餐费</title>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceIndex.css" rel="stylesheet" type="text/css"/>
+	<title>能源费结算</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
     <jsp:include page="../_head.jsp"></jsp:include>
+	
     <!-- 页面内容 strat -->
  	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="serviceIndex.jsp">客房服务</a>
-				<i class="icon-path"></i>
-				<a href="serviceTakeaway.jsp">餐费</a>
-				<i class="icon-path"></i>
-				<% String type = request.getParameter("type"); 
-				   String content = "";
-				   if(type.matches("1")) content = "新增餐费记录";
-				   else if(type.matches("2")) content = "新增桶装水费记录"; 
-				   else if(type.matches("3")) content = "新增擦鞋费记录";
-				   else if(type.matches("4")) content = "新增代购费记录"; 
-				%>
-				<a href="serviceTakeaway.jsp"><%=content %></a>
-							
+				<a href="sourceIndex.jsp">能源费结算</a>
+			</div>
+			<div class="body">
+			<div class="content-title content-title-index">
+				<ul>
+					<li><div class="icon"></div><a href="sourceWater.jsp">水&nbsp;费</a></li>
+					<li><div class="icon"></div><a href="sourceElec.jsp">电&nbsp;费</a></li>
+					<li><div class="icon"></div><a href="sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>
+				</ul>
+			</div>
 			</div>
 		</div>
 	</div>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceNew.js"></script>
-	<script type="text/javascript">
-	    // 拉取第一页餐费信息
-		//requestFirstTakeaway();
-	</script>
 </body>
 </html>

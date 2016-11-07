@@ -138,7 +138,7 @@
       RTIME = #{RTIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
-  <select id="getTotalRow" resultMap="BaseResultMap" parameterType="map">
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
   	<![CDATA[
   	select count(*) from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE}
     ]]>
