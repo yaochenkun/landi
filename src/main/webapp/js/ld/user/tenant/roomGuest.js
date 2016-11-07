@@ -1,7 +1,7 @@
 var getMeters = function () {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getMeters.action',
+		url: '/userRoom/getMeters.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": 1, "type": 2}',
@@ -20,10 +20,50 @@ var checkNull = function (obj) {
 	});
 }
 
+var getGuestInfo = function (rid, rNum) {
+	$.ajax({
+		type: 'POST',
+		url: '/userRoom/getRoomInfo.action',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 6}',
+		success: function (data) {
+			console.log(data);
+			if (data.guest_info) {
+				let info = data.guest_info;
+				let roomNum = info.room_NUMBER;
+				let name = info.guest_NAME;
+				let roomType = info.room_TYPE;
+				let tel = info.tel;
+				let company = info.company;
+				let title = info.title;
+				let persons = info.persons;
+				let comming = info.coming;
+				let charge = info.charge;
+				let car = info.car;
+				let parking = info.parking;
+				let comment = info.comment;
+				$("#guestName").text(name);
+				$("#roomNum").text(roomNum);
+				$("#roomType").text(roomType);
+				$("#telNum").text(tel);
+				$("#company").text(company);
+				$("#position").text(title);
+				$("#totalNum").text(persons);
+				$("#inDate").text(comming);
+				$("#charge").text(charge);
+				$("#park").text(parking);
+				$("#comment").text(comment);
+
+			}
+		}
+		
+	});
+}
 var getFurniture = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
+		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 1}',
@@ -56,7 +96,7 @@ var getFurniture = function (rid) {
 var getElectric = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
+		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 2}',
@@ -88,7 +128,7 @@ var getElectric = function (rid) {
 var getLight = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
+		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 3}',
@@ -120,7 +160,7 @@ var getLight = function (rid) {
 var getCurtain = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
+		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 4}',
@@ -152,7 +192,7 @@ var getCurtain = function (rid) {
 var getLittle = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
+		url: '/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 5}',

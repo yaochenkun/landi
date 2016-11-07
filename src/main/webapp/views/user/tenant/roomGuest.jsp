@@ -37,22 +37,22 @@
 				<div id="room-guest" style="display:flex;text-align:left;margin:10px 60px;">
 					<div style="flex:1;">
 						<ul>
-							<li>租客姓名：<span>彭于晏</span></li>
-							<li>房间号：<span>707</span></li>
-							<li>户型：<span>总统套房</span></li>
-							<li>联系电话：<span>18811384115</span></li>
-							<li>所在公司：<span>光线传媒</span></li>
-							<li>职务：<span>CEO</span></li>
-							<li>入住人数：<span>2</span></li>
+							<li>租客姓名：<span id="guestName"></span></li>
+							<li>房间号：<span id="roomNum"></span></li>
+							<li>户型：<span id="roomType"></span></li>
+							<li>联系电话：<span id="telNum"></span></li>
+							<li>所在公司：<span id="company"></span></li>
+							<li>职务：<span id="position"></span></li>
+							<li>入住人数：<span id="totalNum"></span></li>
 						</ul>
 					</div>
 					<div style="flex:1;">
 						<ul>
-							<li>入住日期：<span>2016-09-01</span></li>
-							<li>到期时间：<span>2018-01-01</span></li>
-							<li>租金：<span>80000</span></li>
-							<li>车位：<span>京P6864B</span></li>
-							<li>备注：<span>无</span></li>	
+							<li>入住日期：<span id="inDate"></span></li>
+							<!-- <li>到期时间：<span id="dueDate">2018-01-01</span></li> -->
+							<li>租金：<span id="charge"></span></li>
+							<li>车位：<span id="park"></span></li>
+							<li>备注：<span id="comment"></span></li>	
 						</ul>
 					</div>
 				</div>
@@ -65,10 +65,12 @@
 			var rId;
 			var rNum;
 			var op;
-			if (params.indexOf('rid')>=0 && params.indexOf('cusId')>=0) {
+			if (params.indexOf('rid')>=0) {
 				let roomId = params.replace('?','').split('&')[0].split('=')[1];
+				let roomNum = params.replace('?','').split('&')[1].split('=')[1];
 				// [TODO]获取租客信息
-				$("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId);
+				getGuestInfo(parseInt(roomId), roomNum);
+				$("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId + "rNum=" + roomNum);
 			}
 		});
 		//getMeters();

@@ -43,7 +43,7 @@ $(function(){
 var getRoomState = function () {
   $.ajax({
     type: 'GET',
-    url: '/LD/userRoom/getAllRoomState.action',
+    url: '/userRoom/getAllRoomState.action',
     success: function(data) {
       let roomList = data.roomStateList;
       for (let item in roomList) {
@@ -53,7 +53,7 @@ var getRoomState = function () {
         let cusID = roomList[item].cus_ID;
         $("." + roomNum + ":eq(0)").text(userName);
         console.log(roomNum,'roomNum')
-        $("." + roomNum).attr("href", "./roomGuest.jsp?rid="+roomID+"&cusId="+cusID+"&rNum="+roomNum)
+        $("." + roomNum).attr("href", "./roomGuest.jsp?rid="+roomID+"&rNum="+roomNum)
         // For those have no returned room_ID, how to link to the RoomInfo page?
         // Test for transmitting the roomName as the request param.
         // /[^\d]/.test('W-132')
