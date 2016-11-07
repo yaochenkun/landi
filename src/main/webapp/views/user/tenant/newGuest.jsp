@@ -42,20 +42,20 @@
                     <div class="form">
                         <div class="item item-name">
                             <span class="spanLabel"><span class="red">*&nbsp;</span>租客姓名：</span>
-                            <div class="fl"><input type="text" class="text" value="Ada" /></div>
+                            <div class="fl"><input id="guest_name" type="text" class="text" value="Ada" /></div>
                             <div class="fl"><input type="checkbox" class="checkbox" /><span>即将入住</span></div>
                         </div>
                         <div class="item item-room">
                             <span class="spanLabel"><span class="red">*&nbsp;</span>房间号：</span>
-                            <div class="fl"><input type="text" class="text" value="W12" /></div>
+                            <div class="fl"><input id="guest_roomNumber" type="text" class="text" value="W12" /></div>
                             <span class="spanLabel"><span class="red">*&nbsp;</span>户型：</span>
                             <div class="fl"></div>
                         </div>
                         <div class="item item-tel">
                             <span class="spanLabel"><span class="red">*&nbsp;</span>合同编号：</span>
-                            <div class="fl"><input type="text" class="text" value="S131" /></div>
+                            <div class="fl"><input id="guest_contractID" type="text" class="text" value="S131" /></div>
                             <span class="spanLabel"><span class="red">*&nbsp;</span>联系电话：</span>
-                            <div class="fl"><input type="text" class="text" value="13581818113" /></div>
+                            <div class="fl"><input id="guest_tel" type="text" class="text" value="13581818113" /></div>
                         </div>
                         <div class="item item-company">
                             <span class="spanLabel">所在公司：</span>
@@ -225,6 +225,7 @@
                                     <th rowspan="2">周期</th>
                                     <th rowspan="2">备注</th>
                                     <th rowspan="2">赠送</th>
+                                    <th rowspan="2">操作</th>
                                 </tr>
                                 <tr><th>费用</th><th>数量</th>
                                     <th>费用</th><th>数量</th>
@@ -235,30 +236,30 @@
                                     <td rowspan="9" class="rowOne">基本费用</td>
                                     <td colspan="2" class="title">LE管理费</td>
                                     <td>1</td><td>1</td><td>1</td><td>1</td>
-                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td><td class="operation"></td>
                                 </tr>
                                 <tr class="col-wash">
                                     <td colspan="2" class="title">布草洗涤费</td>
                                     <td>1</td><td>1</td><td></td><td></td>
-                                    <td>1</td><td>1</td><td><input type="checkbox"/></td>
+                                    <td>1</td><td>1</td><td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-consume">
                                     <td colspan="2" class="title">布草消耗费</td>
                                     <td>1</td><td></td><td></td><td></td>
-                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-car">
                                     <td colspan="2" class="title">车费</td>
                                     <td>1</td><td>1</td><td>1</td><td></td>
-                                    <td>1</td><td>1</td><td><input type="checkbox"/></td>
+                                    <td>1</td><td>1</td><td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-light">
                                     <td colspan="2" class="title">灯泡费</td><td></td><td></td><td></td><td></td>
-                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-tax">
                                     <td colspan="2" class="title">税金</td><td></td><td></td><td></td><td></td>
-                                    <td></td><td></td><td><input type="checkbox"/></td>
+                                    <td></td><td></td><td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-Int">
                                     <td colspan="2" class="title">网费</td>                                    
@@ -268,7 +269,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-resource">
                                     <td class="title">能源费</td>
@@ -279,7 +280,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-breakfast">
                                     <td colspan="2" class="title">早餐人数</td>                                    
@@ -289,7 +290,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
 
                                 <tr class="col-park">
@@ -301,7 +302,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-tv">
                                     <td colspan="2" class="title">电视费</td>                                    
@@ -311,7 +312,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-newspaper">
                                     <td colspan="2" class="title">报刊杂志费</td>                                    
@@ -321,7 +322,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-cloth">
                                     <td colspan="2" class="title">洗衣费</td>                                    
@@ -331,12 +332,12 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-lunch-choose">
                                     <td class="title">餐券</td>
                                     <td onclick="showChooseRestaurant();">选择饭店</td> 
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <td colspan="8"></td>
                                 </tr>
                                 <tr class="col-break">
                                     <td colspan="2" class="title">早餐费</td>                                    
@@ -346,7 +347,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-shopping">
                                     <td colspan="2" class="title">购物卡</td>                                    
@@ -356,7 +357,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-water">
                                     <td colspan="2" class="title">饮用水</td>                                    
@@ -366,7 +367,7 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
                                 <tr class="col-daily">
                                     <td colspan="2" class="title">日用品</td>
@@ -376,9 +377,9 @@
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="1"/></td>
                                     <td><input type="text" value="无"/></td>
-                                    <td><input type="checkbox"/></td>
+                                    <td><input type="checkbox"/></td><td></td>
                                 </tr>
-                                <tr><td colspan="8"></td><td onclick="addServiceTr();">增加项目</td></tr>
+                                <tr class="col-add-add"><td colspan="2" class="addService" onclick="addServiceTr();">+&nbsp;增加项目</td><td colspan="8"></td></tr>
                            </tbody>
                        </table>
                     </div>
@@ -416,7 +417,7 @@
         <div class="thick-wrap">
             <div class="thick-title">请选择饭店<span>×</span></div>
             <div class="thick-body">
-                <div class="red warning">最多选三家</div>
+                <div class="red warning">！最多选三家</div>
                 <div class="restaurant">   
                     <a class="a" href="javascript:void(0);">香格里拉</a>
                     <a class="a" href="javascript:void(0);">Plaza</a>
@@ -430,6 +431,13 @@
         </div>
     </div>
     <!-- 选择饭店 end -->
+
+    <!-- 回到顶部底部 start-->
+    <div class="bar">
+        <a class="bar-top">顶部</a>
+        <a class="bar-bottom">底部</a>
+    </div>
+    <!-- 回到顶部底部 end-->
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

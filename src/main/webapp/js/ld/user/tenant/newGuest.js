@@ -34,6 +34,14 @@ $(function(){
 			// }
 		}
 	);
+    // 点击回到顶部底部事件
+    $(".bar-top").click(function(){
+    	$(window).scrollTop(0);
+    })
+    $(".bar-bottom").click(function(){
+    	$(window).scrollTop($(document).height()-$(window).height());
+    });
+
 	// 点击珠串定位事件
 	$(".list-icon-link").click(function(element){
 		//console.log($(element.toElement).index()/2);
@@ -47,30 +55,42 @@ $(function(){
 
     // 服务表格滑过事件
 	$("tbody tr").hover(function(){
+		if($(this).hasClass("col-add-add")||$(this).hasClass("col-lunch-choose")) return;
 		$(this).children("td").toggleClass("td-hover");
 		$(this).children(".rowOne").toggleClass("td-hover");
 	},function(){
+		if($(this).hasClass("col-add-add")||$(this).hasClass("col-lunch-choose"))	return;
 		$(this).children("td").toggleClass("td-hover");
 		$(this).children(".rowOne").toggleClass("td-hover");
 	});
 
-	// 选择饭店
+	// 选择饭店按钮
 	$(".thick-title span").click(function(){
 		$(".thick-div").css("display","none");
 		$(".thick-box").css("display","none");
 	});
+
+	// 点击具体饭店
 	$(".restaurant a").click(function(){
+
 		if($(this).hasClass("a-active")){
 			$(this).toggleClass("a-active");
 		}
 		else{
 			if($(".restaurant .a-active").length >= 3){
-				$(".warning").toggleClass("warning-animation");
+				$(".warning").addClass("warning-animation");
+				setTimeout(function(){$(".warning").removeClass("warning-animation");},1000);
 				return;
 			}
 			$(this).toggleClass("a-active");
 		}		
 	});
+
+
+	// 判断为空
+    $("#guest_name,#guest_roomNumber,#guest_contractID,#guest_tel").focus(function(){
+    	$(this).removeClass("border-red");
+    });
 
 	// 输入房间号
 	$(".item-room input").keyup(function(){
@@ -110,7 +130,7 @@ var showChooseRestaurant = function(){
 
 //选择饭店
 var chooseRestaurant = function(){
-	var restaurantCount = $(".restaurant .a-active").length;
+	var restaurantCount = Number($(".restaurant .a-active").length);
 	$(".thick-div").css("display","none");
 	$(".thick-box").css("display","none");
 	if(restaurantCount == 0) return;
@@ -118,42 +138,49 @@ var chooseRestaurant = function(){
 	// 清空餐券
 	$(".col-lunch-choose").remove();
 	$(".col-lunch").remove();
+
 	$(".col-break").before("<tr class='col-lunch-choose'><td class='title' rowspan='"+ (restaurantCount + 1) +"'>餐券</td>"+
-        "<td onclick='showChooseRestaurant();'>重新选择饭店</td><td></td>"+
-        "<td></td><td></td><td></td><td></td><td></td><td></td></tr>");
+        "<td onclick='showChooseRestaurant();'>重新选择饭店</td><td colspan='8'></td></tr>");
 	// 逐条添加饭店
 	$(".restaurant .a-active").each(function(){
 		$(".col-break").before("<tr class='col-lunch'><td>"+ $(this).text() +"</td>"+
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td></tr>");
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td><td></td></tr>");
 	});
 
     // 其他费用列数增加
-	$(".col-park td:nth-child(1)").attr("rowspan",restaurantCount+10);
+    var nowRowSpan = Number($(".col-park td:nth-child(1)").attr("rowspan"));
+	$(".col-park td:nth-child(1)").attr("rowspan",nowRowSpan + restaurantCount);
 }
 
 // 增加其他费用项目
 var addServiceTr = function(){
-	var nowRow = $(".col-park td:nth-child(1)").attr("rowspan");
-	$(".col-park td:nth-child(1)").attr("rowspan",nowRow+1);
+	var nowRow = Number($(".col-park td:nth-child(1)").attr("rowspan"));
+	$(".col-park td:nth-child(1)").attr("rowspan", nowRow + 1);
 	if($(".col-add").length==0){
 		$(".col-daily").after("<tr class='col-add'><td colspan='2'><input type='text' value='费用项目'/></td>"+
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td></tr>");
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td>"+
+	            "<td class='operation' onclick='deleteServiceAdd(this)'>删除</td></tr>");
 	}
 	else{
 		$(".col-add:last").after("<tr class='col-add'><td colspan='2'><input type='text' value='费用项目'/></td>"+
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td></tr>");
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td>"+
+	            "<td class='operation' onclick='deleteServiceAdd(this)'>删除</td></tr>");
 	}
 }
 
+// 删除添加的项目
+var deleteServiceAdd = function(element){
+	$(element).parent().remove();
+}
 
 // 改变珠串样式
 var changeTabContent = function(index){
@@ -175,6 +202,29 @@ var addGuest = function(){
 	var type = $(".tab-content-guest .item-room input").eq(1).val();
 	var contractID = $(".tab-content-guest .item-tel input").eq(0).val();
 	var tel = $(".tab-content-guest .item-tel input").eq(1).val();
+
+	// 判断必填项不能为空
+	if(name == "" || roomID == "" || contractID == "" || tel == ""){
+		if(name == ""){
+			//console.log("租客姓名为空！");
+			$("#guest_name").addClass("border-red");
+		}
+		if(roomID == ""){
+			//console.log("房间号为空！");
+			$("#guest_roomNumber").addClass("border-red");
+		}
+		if(contractID == ""){
+			//console.log("合同编号为空！");
+			$("#guest_contractID").addClass("border-red");
+		}
+		if(tel == ""){
+			//console.log("联系电话为空！");
+			$("#guest_tel").addClass("border-red");
+		}
+		$(window).scrollTop(0);
+		return;
+	}
+
 	var company = $(".tab-content-guest .item-company input").eq(0).val();
 	var position = $(".tab-content-guest .item-company input").eq(1).val();
 	var guestNumber = $(".tab-content-guest .item-guestnumber input").eq(0).val();
@@ -403,6 +453,8 @@ var addGuest = function(){
 	$.ajax({
 		url:"/",
 		type:"post",
+		dataType:'json',
+		contentType:'application/json',
 		data:'{' + guestData + hostData + internData + rentData
 
 		    +'"service":{' + IntData + resourceData + breakfastData + parkData + tvData + newspaperData + clothData 

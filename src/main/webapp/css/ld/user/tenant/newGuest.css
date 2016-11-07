@@ -11,7 +11,7 @@
 .tab-content .tab-content-title span{display: inline-block; font-size: 18px; width: 32px; border-radius: 50%; background: #ff4d4d; text-align: center; margin-right: 15px; color: #fff;}
 
 .extra-body{border-left: 2px dotted #e4e4e4; margin-left: 20px; height: 100%;}
-.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0 0 20px 70px;}
+.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0 5px 20px 70px;}
 
 .tab-content-body .form{background: url("../../../../img/rebc.gif"); padding: 20px 0;}
 .tab-content-body .item{line-height: 22px; padding: 5px 80px; white-space: nowrap;}
@@ -27,6 +27,7 @@
 .tab-content-guest .item-room .spanLabel:nth-child(3),.tab-content-guest .item-company .spanLabel:nth-child(3),.tab-content-guest .item-car .spanLabel:nth-child(3){width: 10%;}
 .tab-content-guest .item-time .spanLabel:nth-child(3),.tab-content-guest .item-tel .spanLabel:nth-child(3){width: 15%;}
 .tab-content-guest .item-time .fl:nth-child(4),.tab-content-guest .item-tel .fl:nth-child(4){width: 22%;}
+.border-red{border: 1px solid red;}
 /**** 业主 样式  ****/
 .tab-content-owner .spanLabel{width: 17%;}
 .tab-content-owner .fl{width: 27%; margin-right: 13%;}
@@ -46,7 +47,9 @@
 
 
 thead tr:nth-child(1) th:nth-child(1), thead tr:nth-child(1) th:nth-child(2), thead tr:nth-child(1) th:nth-child(3){width: 23%;}
-thead tr:nth-child(1) th:nth-child(4), thead tr:nth-child(1) th:nth-child(5), thead tr:nth-child(1) th:nth-child(6){width: 10%;}
+thead tr:nth-child(1) th:nth-child(4), thead tr:nth-child(1) th:nth-child(5), thead tr:nth-child(1) th:nth-child(6){width: 8%;}
+thead tr:nth-child(1) th:nth-child(7){width: 6%;}
+
 thead tr:nth-child(1) th:nth-child(1){color: #777;}
 tbody td:nth-child(1),tbody td:nth-child(2){}
 tbody .rowOne{width: 2%; padding: 10px; color: #777;}
@@ -55,9 +58,12 @@ tbody .col-LE, tbody .col-wash, tbody .col-consume, tbody .col-car, tbody .col-l
 tbody .col-lunch-choose td:nth-child(2){cursor: pointer; color: #ff4d4d;}
 tbody .col-lunch-choose td:nth-child(2):hover{color: #ec0000;}
 tbody .col-lunch td:nth-child(1){color: #279;}
+tbody .col-lunch:hover td, tbody .col-add:hover td{background: #eee;}
 tbody .title{color: #222;}
 tbody .col-resource .checkbox{float: left; margin-top: 8px; margin-left: 15%; margin-right: -15%;}
 td input[type="text"]{width: 100%; height: 100%; border: none; text-align: center; background: transparent; color: #888;}
+tbody .operation{cursor: pointer; color: #279;}
+tbody .operation:hover{color: #008cc3;}
 
 /***************************** 左侧 珠串样式 start *********************************/
 .step-nav{position: fixed; top: 50px; left: 275px;}
@@ -92,15 +98,26 @@ td input[type="text"]{width: 100%; height: 100%; border: none; text-align: cente
 .restaurant .btnedit{width: 100px; padding: 2px 7px; margin-top: -2px; margin-left: 4%; background: #ebebeb; color: #222; border: 1px solid #888;}
 .restaurant .btnedit:hover{color: #333; background: #eee;}
 
+/* 最多选三个饭店样式 */
 .warning-animation{animation: waggle 1s linear;}
 @keyframes waggle{0%{transform: translateX(0px);}
-				  10%{transform: translateX(50px);}
-				  20%{transform: translateX(-50px);}
-				  30%{transform: translateX(40px);}
-				  40%{transform: translateX(-40px);}
-				  50%{transform: translateX(30px);}
-				  60%{transform: translateX(-30px);}
-				  70%{transform: translateX(20px);}
-				  80%{transform: translateX(-20px);}
-                  90%{transform: translateX(10px);}
+				  10%{transform: translateX(25px);}
+				  20%{transform: translateX(-25px);}
+				  30%{transform: translateX(20px);}
+				  40%{transform: translateX(-20px);}
+				  50%{transform: translateX(15px);}
+				  60%{transform: translateX(-15px);}
+				  70%{transform: translateX(10px);}
+				  80%{transform: translateX(-10px);}
+                  90%{transform: translateX(5px);}
                   100%{transform: translateX(0px);}}
+
+/* 增加项目 */
+.addService{cursor: pointer; color: #ff4d4d;}
+
+/* 右侧回到顶部底部 */
+.bar{position: fixed; top: 80%; left: 95%;}
+.bar .bar-top, .bar .bar-bottom{display: block; width: 45px; height: 45px; background-color: #ff4d4d; color: #fff; text-align: center; margin-bottom: 5px; cursor: pointer;}
+.bar-top{line-height: 55px; background: url(../../../../img/roomService/top.png) no-repeat 18px 7px;}
+.bar-bottom{line-height: 35px; background: url(../../../../img/roomService/bottom.png) no-repeat 18px 34px;}
+.bar .bar-top:hover, .bar .bar-bottom:hover{background-color: #fb6a6a;}

@@ -41,7 +41,7 @@ a,a:hover,a:link,a:visited{text-decoration: none; color: #5c5c5c;}
 .navbar-ld{z-index:100;height: 50px; background-color:#fff; z-index: 101; border-bottom: solid #d8dce5 1px;}
 
 header .container-fluid{width: 100% !important;}
-header .header-content{position: relative; height: 50px; padding-left: 30px;}
+header .header-content{position: relative; padding-left: 30px;}
 header .header-content .title{margin: 0; font-size :16px; display: inline-block; line-height: 50px; color: #5c5c5c; }
 header .header-logo{position: absolute; left: 15px; top: 3px;}
 header .header-logo img{width: 568px; height:40px;}

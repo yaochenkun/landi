@@ -43,7 +43,7 @@ $(function(){
 var getRoomState = function () {
   $.ajax({
     type: 'GET',
-    url: '/userRoom/getAllRoomState.action',
+    url: '/LD/userRoom/getAllRoomState.action',
     success: function(data) {
       let roomList = data.roomStateList;
       for (let item in roomList) {

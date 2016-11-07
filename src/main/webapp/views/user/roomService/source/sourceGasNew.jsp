@@ -10,7 +10,7 @@
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceNew.css" rel="stylesheet" type="text/css"/>
-	<title>添加能源费结算</title>
+	<title>添加燃气费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
@@ -22,19 +22,10 @@
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
 				<a href="sourceIndex.jsp">能源费结算</a>
-				<% String type = request.getParameter("type"); 
-				   String contentOne = "", contentTwo = "", contentThree = "";
-				   if(type.matches("1")){
-				   		contentOne = "水费"; contentTwo = "新增水费记录"; 
-				   		contentThree = "sourceWater.jsp";}
-				   else if(type.matches("2")){
-				        contentOne = "电费"; contentTwo = "新增电费记录"; 
-				        contentThree = "sourceElec.jsp";} 
-				%>
 				<i class="icon-path"></i>
-				<a id="sourceType" href="<%=contentThree %>"><%=contentOne %></a>
+				<a id="sourceType" href="sourceGas.jsp">燃气费</a>
 				<i class="icon-path"></i>
-				<a href="javascript:void(0);"><%=contentTwo %></a>							
+				<a href="javascript:void(0);">新增燃气费记录</a>							
 			</div>
 			<div class="body">
 				<div class="body-content">
@@ -42,12 +33,22 @@
 						<li><span class="span">房间号：</span><input id="sourceRoomNumber" type="text" value="W35-1"/><span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">租客：</span><input type="text" value="Alice"/></li>
+						<li><span class="span">抄表日期：</span><input type="text" value="2016-11-12"/></li>
+
+						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;一</li>
 						<li><span class="span">表号：</span><input type="text" value="1"/></li>
 						<li><span class="span">本月表数：</span><input type="text" value="48.5"/></li>
 						<li><span class="span">费用：</span><input type="text" value="12"/></li>
 						<li><span class="span">抄表：</span><input type="text" value="Vicky"/></li>
-						<li><span class="span">抄表日期：</span><input type="text" value="2016-11-12"/></li>
-						<li><span class="span"></span><a onclick="addsource();" class="btn btn-goback goback">确认添加</a></li>
+						
+						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;二</li>
+						<li><span class="span">表号：</span><input type="text" value="1"/></li>
+						<li><span class="span">本月表数：</span><input type="text" value="48.5"/></li>
+						<li><span class="span">费用：</span><input type="text" value="12"/></li>
+						<li><span class="span">抄表：</span><input type="text" value="Vicky"/></li>
+
+
+						<li><span class="span"></span><a onclick="addSourceGas();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,6 +58,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceNew.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceGasNew.js"></script>
 </body>
 </html>

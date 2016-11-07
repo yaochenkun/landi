@@ -26,7 +26,7 @@
 				<i class="icon-path"></i>
 				<a href="sourceGas.jsp">燃气费</a>
 			</div>
-			<a class="btn btn-new btnnew" href="sourceNew.jsp?type=1">新增燃气费记录</a>
+			<a class="btn btn-new btnnew" href="sourceGasNew.jsp">新增燃气费记录</a>
 			<div class="bill-area">
 				<div class="bill-table">
 					<!-- 费用 table start -->

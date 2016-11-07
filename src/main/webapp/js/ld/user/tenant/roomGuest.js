@@ -1,7 +1,7 @@
 var getMeters = function () {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getMeters.action',
+		url: '/LD/userRoom/getMeters.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": 1, "type": 2}',
@@ -23,7 +23,7 @@ var checkNull = function (obj) {
 var getGuestInfo = function (rid, rNum) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 6}',
@@ -63,7 +63,7 @@ var getGuestInfo = function (rid, rNum) {
 var getFurniture = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 1}',
@@ -96,7 +96,7 @@ var getFurniture = function (rid) {
 var getElectric = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 2}',
@@ -128,7 +128,7 @@ var getElectric = function (rid) {
 var getLight = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 3}',
@@ -160,7 +160,7 @@ var getLight = function (rid) {
 var getCurtain = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 4}',
@@ -192,7 +192,7 @@ var getCurtain = function (rid) {
 var getLittle = function (rid) {
 	$.ajax({
 		type: 'POST',
-		url: '/userRoom/getRoomInfo.action',
+		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: '{"rid": '+rid+', "op": 5}',
