@@ -28,7 +28,6 @@ var getGuestInfo = function (rid, rNum) {
 		dataType: 'json',
 		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 6}',
 		success: function (data) {
-			console.log(data);
 			if (data.guest_info) {
 				let info = data.guest_info;
 				let roomNum = info.room_NUMBER;
@@ -55,18 +54,33 @@ var getGuestInfo = function (rid, rNum) {
 				$("#park").text(parking);
 				$("#comment").text(comment);
 
+			}else{
+				var tip = "暂无信息";
+				$("#guestName").text(tip);
+				$("#roomNum").text(tip);
+				$("#roomType").text(tip);
+				$("#telNum").text(tip);
+				$("#company").text(tip);
+				$("#position").text(tip);
+				$("#totalNum").text(tip);
+				$("#inDate").text(tip);
+				$("#charge").text(tip);
+				$("#park").text(tip);
+				$("#comment").text(tip);
 			}
 		}
 		
 	});
 }
-var getFurniture = function (rid) {
+var getFurniture = function (rid, rNum) {
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 1}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 1}';
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-		data: '{"rid": '+rid+', "op": 1}',
+//		data: '{"rid": '+rid+', "op": 1}',
+		data: postData,
 		success: function (data) {
 			if (data.item_funiture) {
 				let items = data.item_funiture;
@@ -93,13 +107,14 @@ var getFurniture = function (rid) {
 	});
 }
 
-var getElectric = function (rid) {
+var getElectric = function (rid, rNum) {
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 2}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 2}';
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-		data: '{"rid": '+rid+', "op": 2}',
+		data: postData,
 		success: function (data) {
 			if (data.item_funiture) {
 				let items = data.item_electric;
@@ -125,13 +140,14 @@ var getElectric = function (rid) {
 	});
 }
 
-var getLight = function (rid) {
+var getLight = function (rid, rNum) {
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 3}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 3}';
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-		data: '{"rid": '+rid+', "op": 3}',
+		data: postData,
 		success: function (data) {
 			if (data.item_light) {
 				let items = data.item_light;
@@ -157,13 +173,14 @@ var getLight = function (rid) {
 	});
 }
 
-var getCurtain = function (rid) {
+var getCurtain = function (rid, rNum) {
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 4}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 4}';
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-		data: '{"rid": '+rid+', "op": 4}',
+		data: postData,
 		success: function (data) {
 			if (data.item_curtain) {
 				let items = data.item_curtain;
@@ -189,13 +206,15 @@ var getCurtain = function (rid) {
 	});
 }
 
-var getLittle = function (rid) {
+var getLittle = function (rid, rNum) {
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 5}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 5}';
+	
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
 		contentType: 'application/json',
 		dataType: 'json',
-		data: '{"rid": '+rid+', "op": 5}',
+		data: postData,
 		success: function (data) {
 			if (data.item_little) {
 				let items = data.item_little;
