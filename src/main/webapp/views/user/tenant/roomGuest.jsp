@@ -68,9 +68,22 @@
 			if (params.indexOf('rid')>=0) {
 				let roomId = params.replace('?','').split('&')[0].split('=')[1];
 				let roomNum = params.replace('?','').split('&')[1].split('=')[1];
-				// [TODO]获取租客信息
 				getGuestInfo(parseInt(roomId), roomNum);
 				$("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId + "rNum=" + roomNum);
+			}else {
+				// No RoomInfo
+				var tip = "暂无信息";
+				$("#guestName").text(tip);
+				$("#roomNum").text(tip);
+				$("#roomType").text(tip);
+				$("#telNum").text(tip);
+				$("#company").text(tip);
+				$("#position").text(tip);
+				$("#totalNum").text(tip);
+				$("#inDate").text(tip);
+				$("#charge").text(tip);
+				$("#park").text(tip);
+				$("#comment").text(tip);
 			}
 		});
 		//getMeters();

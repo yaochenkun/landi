@@ -86,11 +86,17 @@
 			let params = window.location.search;
 			if (params.indexOf('rid')>=0) {
 				let roomId = params.replace('?','').split('&')[0].split('=')[1];
-				getFurniture(parseInt(roomId));
-				getElectric(parseInt(roomId));
-				getLight(parseInt(roomId));
-				getCurtain(parseInt(roomId));
-				getLittle(parseInt(roomId));
+				let roomNum = params.replace('?','').split('&')[1].split('=')[1];
+				if (roomId == '' || roomId == null || !roomId) {
+					roomId = "";
+				}else{
+					roomId = parseInt(roomId);
+				}
+				getFurniture(roomId,roomNum);
+				getElectric(roomId,roomNum);
+				getLight(roomId,roomNum);
+				getCurtain(roomId,roomNum);
+				getLittle(roomId,roomNum);
 			}
 			
 			
