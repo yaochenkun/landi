@@ -10,7 +10,7 @@ $(function(){
 	});
 	
 	// 设置左边栏的高度为文档的高度
-	$(".main-nav").css('height',parseInt($(document).height())-50);
+	$(".main-nav").css('height',parseInt($(document).height()));
 });
 
 // 改变左边栏样式

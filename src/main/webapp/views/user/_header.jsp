@@ -6,6 +6,10 @@
     <header class="navbar navbar-fixed-top navbar-ld">
         <div class="container-fluid">
             <div class="header-content">
+                <div class="homeMenu">
+                  <span class="glyphicon glyphicon-align-justify"></span>
+                  <span class="span">菜单</span>
+                </div>
                 <div class="header-logo">
                     <img src="${pageContext.request.contextPath}/img/logo.png">
                 </div>

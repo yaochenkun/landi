@@ -43,6 +43,7 @@ a,a:hover,a:link,a:visited{text-decoration: none; color: #5c5c5c;}
 header .container-fluid{width: 100% !important;}
 header .header-content{position: relative; padding-left: 30px;}
 header .header-content .title{margin: 0; font-size :16px; display: inline-block; line-height: 50px; color: #5c5c5c; }
+header .homeMenu {display: none;}
 header .header-logo{position: absolute; left: 15px; top: 3px;}
 header .header-logo img{width: 568px; height:40px;}
 header .header-content .navbar-collapse{float: right; margin-right: 2em; margin-top: 15px;}
@@ -53,9 +54,10 @@ header .header-content .dropdown{cursor: pointer;}
 header .header-content .dropdown-menu li{text-align: center;}
 
 /******************二级导航栏 start*****************/
-.main-nav{position: absolute; z-index: 20; left: 0; top:48px; bottom: 0; width: 160px; background: #eaedf4; border-right: solid #dedce5 1px;}
+.main-nav{position: absolute; z-index: 20; left: 0; top: 48px; white-space: nowrap; width: 160px; overflow: hidden; background: #eaedf4; border-right: solid #dedce5 1px;}
 .main-nav .aside-box{position: absolute; top:0; width: 100%}
-.aside-box li{height: 61px; line-height: 58px;}
+.aside-box .menuOne{display: none;}
+.aside-box li{height: 61px; line-height: 58px; overflow: hidden;}
 .aside-box li a{display: inline-block; padding: 2px 0; text-indent: 25px; font-size: 15px; border-bottom: 1px #d8dce5 solid; width: 100%; color: #444;}
 .aside-box li a:hover{background-color: #e0e4ed;}
 .aside-box .glyphicon{display: inline;}

@@ -6,12 +6,12 @@
 
 .content{margin: 30px 10px 10px 170px;}
 
-.tab-content{margin: 0px 100px; overflow: hidden;}
+.tab-content{margin: 0px 50px; overflow: hidden;}
 .tab-content .tab-content-title{font-size: 20px; line-height: 32px; color: #333; padding-left: 5px;  word-break: keep-all;} 
 .tab-content .tab-content-title span{display: inline-block; font-size: 18px; width: 32px; border-radius: 50%; background: #ff4d4d; text-align: center; margin-right: 15px; color: #fff;}
 
 .extra-body{border-left: 2px dotted #e4e4e4; margin-left: 20px; height: 100%;}
-.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0 5px 20px 70px;}
+.tab-content .tab-content-body{overflow: hidden; padding: 20px 10px; margin: 0 50px 20px 50px;}
 
 .tab-content-body .form{background: url("../../../../img/rebc.gif"); padding: 20px 0;}
 .tab-content-body .item{line-height: 22px; padding: 5px 80px; white-space: nowrap;}
@@ -66,7 +66,7 @@ tbody .operation{cursor: pointer; color: #279;}
 tbody .operation:hover{color: #008cc3;}
 
 /***************************** 左侧 珠串样式 start *********************************/
-.step-nav{position: fixed; top: 50px; left: 275px;}
+.step-nav{position: fixed; top: 50px; left: 225px;}
 .step-nav .list-icon-link{display: none; width: 32px; font-size: 18px; line-height: 32px; color: #fff; background: #ff4d4d; border-radius: 50%; text-align: center;}
 .step-nav .list-icon-text{display: none; position: absolute; left: 40px; width: 100px; height: 28px; line-height: 28px; color: #5c5c5b;}
 .step-nav .list-icon-text:nth-child(2){top: 1px;}
@@ -78,8 +78,8 @@ tbody .operation:hover{color: #008cc3;}
 /***************************** 左侧 珠串样式 end *********************************/
 
 /******* 确认添加  样式 *******/
-.newGuestBtn{margin: 4em 130px 6em 220px; height: 6em;}
-.btnnew{width: 20em; border: 1px solid #ff4d4d; border-radius: 5px; position: absolute; text-align: center; margin-left: 21%; height: 4em; line-height: 4em; font-size: 15px; background: #ff4d4d; color: #fff;}
+.newGuestBtn{margin: 4em 0; height: 6em;}
+.btnnew{width: 20em; border: 1px solid #ff4d4d; border-radius: 5px; position: absolute; text-align: center; margin-left: 35%; height: 4em; line-height: 4em; font-size: 15px; background: #ff4d4d; color: #fff;}
 .btnnew:hover{margin-top: 3px; color: #fff;}
 
 /********* 选择饭店样式 *************/

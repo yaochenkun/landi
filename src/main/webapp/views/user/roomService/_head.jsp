@@ -97,7 +97,7 @@
 
 			<li class="nav-li"><a href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">首页</a></li>
 			<li class="nav-li"><a href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">租客管理</a></li>
-			<li class="nav-li"><a href="javascript:voic(0);">客房物品管理</a></li>
+			<li class="nav-li"><a href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品管理</a></li>
 			<li class="nav-li"><a href="javascript:voic(0);">办公室管理</a></li>
 			<li class="nav-li"><a href="javascript:voic(0);">其他</a></li>
 		</ul>

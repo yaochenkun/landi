@@ -9,10 +9,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/home.css" rel="stylesheet" type="text/css"/>
@@ -86,7 +82,10 @@
 	</div><!-- /.modal -->
     <!-- 修改密码模态框 end -->
     
-    <!-- jsp页面初始化操作 -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
     <script type="text/javascript">
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
