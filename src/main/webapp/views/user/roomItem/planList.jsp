@@ -12,8 +12,8 @@
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css" rel="stylesheet" type="text/css"/>
-	<title>客房物品总览</title>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css" rel="stylesheet" type="text/css"/>
+	<title>采购计划管理</title>
 </head>
 <body>
 	
@@ -24,9 +24,9 @@
         <div class="toolbar">
             <div class="nav-secondul">
                 <ul>               
-                <li class="liactive"><a href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品总览</a></li>
+                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品总览</a></li>
                 <li class="linormal"><a href="javascript:void(0);">客房物品移动</a></li> 
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>  
+                <li class="liactive"><a href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>  
                 </ul>
             </div>    
         </div>
@@ -36,47 +36,44 @@
  	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<span class="span">物品种类：</span>
+				<span class="span">订单号：</span>
 				<div class="itemType">
 				 	<span class="span"></span>
 					<div class="itemTypeMenu">
 						<ul>
-							<li>全&nbsp;&nbsp;部</li>
-							<li>家&nbsp;&nbsp;电</li>
-							<li>家&nbsp;&nbsp;具</li>
-							<li>灯&nbsp;&nbsp;具</li>
-							<li>窗&nbsp;&nbsp;帘</li>
-							<li>浴&nbsp;&nbsp;屏</li>
-							<li>备&nbsp;&nbsp;品</li>
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>6</li>
+							<li>7</li>
 						</ul>
 					</div>
 				</div>
 			</div>		
-			<!-- <a class="btn btn-new btnnew" href="sourceNew.jsp?type=2">新增电费记录</a> -->
+			<a class="btn btn-new btnnew" href="planNew.jsp">新增采购计划</a>
 			<div class="bill-area">
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
 							<tr>
-							<th><span>种类ID</span></th>
-							<th><span>物品种类</span></th>
-							<th><span>物品类别</span></th>
-							<th><span>品牌</span></th>
-							<th><span>型号</span></th>
-							<th><span>库存</span></th>
-							<th><span>消耗</span></th>
-							<th><span>所属单位</span></th>
-							<th><span>备注</span></th>
-							<th><span>查看明细</span></th>
+							<th><span>订单号</span></th>
+							<th><span>订单负责人</span></th>
+							<th><span>时间</span></th>
+							<th><span>明细</span></th>
+							<th><span>已入库物品数量</span></th>
+							<th><span>存放位置</span></th>
+							<th><span>发票</span></th>
 							</tr>
 						</thead>
-						<tbody id="itemOverviewTbody"></tbody>
+						<tbody id="planListTbody"></tbody>
 					</table>
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="itemOverviewBottom" class="bottom"></div>
+					<div id="planListBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
 				</div>
 			</div>
@@ -88,10 +85,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/planList.js"></script>
 	<script>
 	    // 请求第一页客房物品信息
-		requestItemOverview(1);
+		requestPlanList(1);
 	</script>
 </body>
 </html>

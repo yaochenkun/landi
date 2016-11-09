@@ -1,0 +1,34 @@
+.planTitle{margin-top: 1em;}
+
+.planTitle h4{float: left; margin-bottom: 1em; color: #4a9bee;}
+.planTitle .goback{float: right; margin-top: 4px;}
+.planTitle .red{margin-left: .5em; line-height: 22px;}
+.planTitle .ul{clear: both; border-top: 1px dashed #4a9bee;}
+.planTitle .li{height: 30px; margin: 3em 0; font-size: 15px; float: left; margin-right: 3em;}
+.planTitle .li:first-child .span{border-left: 4px solid #4a9bee;}
+.planTitle .li:last-child{margin-right: 0;}
+.planTitle .li .span{display: inline-block; padding-left: .5em;}
+.planTitle .li input{width: 120px; margin-left: .5em; padding: 0 .5em;}
+.planTitle .li .note{width: 182px;}
+.planTitle .border-red{border: 1px solid red;}
+
+/* 计划采购物品 */
+.planContent{margin-bottom: 10em;}
+.itemList{clear: left; margin-top: 3em; margin-bottom: 6em; width: 100%;}
+.itemList h3{font-size: 15px; border-left: 4px solid #4a9bee; padding-left: .5em; margin-bottom: 1.5em; height: 21px; line-height: 20px;}
+.itemList table{width: 100%;}
+.itemList .addItem{cursor: pointer;}
+.itemList table thead tr{height: 40px; background: #ffeaea; border-top: 1px solid #ff8888; border-bottom: 1px solid #ff8888;}
+.itemList table thead th{font-weight: normal; font-size: 15px; text-align: center;}
+.itemList table thead th:nth-child(1){width: 5%;}
+.itemList table thead th:nth-child(5),
+.itemList table thead th:nth-child(2),.itemList table thead th:nth-child(3),.itemList table thead th:nth-child(4),
+.itemList table thead th:nth-child(6),.itemList table thead th:nth-child(7),.itemList table thead th:nth-child(8),
+.itemList table thead th:nth-child(10){width: 10%;}
+
+.itemList table tbody tr:hover{background: #fffbfb;}
+.itemList table tbody td{text-align: center; font-size: 15px; height: 40px; border-bottom: 1px solid #f7caca;}
+.itemList table tbody td input{border: none; width: 100%; text-align: center; background: transparent;}
+.itemList table tbody .operation{color: #ff2020; cursor: pointer;}
+.planContent .submit{margin-left: 41%; height: 40px; line-height: 25px; width: 200px; font-size: 16px; background-color: #ff4d4d; border-color: #fff0f0;}
+.planContent .submit:hover{background-color: #ff5e5e;}
