@@ -54,6 +54,10 @@
                     <dt>三&nbsp;阶</dt><dd></dd>
                     <dt>数&nbsp;额</dt><dd></dd>
                 </dl>
+                <dl>
+                    <dt>四&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
             </div>
         </div>
         <!-- 水费 end -->
@@ -77,6 +81,10 @@
                     <dt>三&nbsp;阶</dt><dd></dd>
                     <dt>数&nbsp;额</dt><dd></dd>
                 </dl>
+                <dl>
+                    <dt>四&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
             </div>
         </div>
         <!-- 电费 end -->
@@ -98,6 +106,10 @@
                 </dl>
                 <dl>
                     <dt>三&nbsp;阶</dt><dd></dd>
+                    <dt>数&nbsp;额</dt><dd></dd>
+                </dl>
+                <dl>
+                    <dt>四&nbsp;阶</dt><dd></dd>
                     <dt>数&nbsp;额</dt><dd></dd>
                 </dl>
             </div>

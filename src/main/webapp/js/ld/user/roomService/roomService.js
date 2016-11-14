@@ -22,5 +22,16 @@ $(function(){
 		$(".search-roomNo").css("height","100px");
 	},function(){
 		$(".search-roomNo").css("height","0");
-	})
+	});
+
+	// 手风琴单击事件
+	$(".index-list").hover(function(){
+		if($(this).next().hasClass("active")){
+			return;
+		}
+		$(this).next().stop().animate({"width":"350px"},500).parent().children(".active").stop().animate({"width":"0px"},500);
+		$(this).parent().children(".active").removeClass("active")
+		$(this).next().addClass("active");
+	});
+
 });

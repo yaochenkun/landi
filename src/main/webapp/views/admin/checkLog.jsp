@@ -27,6 +27,7 @@
     <div class="log-content">
         <div class="log-head">系统日志列表</div>
         <div class="log-detail"></div>
+        <div id="log-bottom"></div>
     </div>
     <!-- 页面内容 end -->
 

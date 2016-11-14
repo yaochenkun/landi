@@ -91,7 +91,7 @@ tbody .operation:hover{color: #008cc3;}
 .thick-title span:hover{color: #999;}
 
 .thick-wrap .thick-body{padding: 0 20px;}
-.thick-body .warning{margin-left: 6em; margin-top: 2em;}
+.thick-body .warning{width: 80%; margin: 4% auto; padding-left: 2%;}
 .thick-body .restaurant{width: 80%; margin: 4% auto;}
 .restaurant .a{width: 100px; display: inline-block; text-align: center;  border-radius: 4px; border: 1px solid #555; color: #777; margin-bottom: 5%; margin-left: 4%; padding: 2px 7px;} 
 .restaurant .a-active{color: #ff4d4d; border-color: #ff4d4d;}

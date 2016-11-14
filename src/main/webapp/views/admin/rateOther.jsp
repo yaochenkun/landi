@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css"/>
-	<link href="${pageContext.request.contextPath}/css/ld/admin/rate.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/admin/rateOther.css" rel="stylesheet" type="text/css"/>
 	<title>其他费用管理</title>
 </head>
 <body>
@@ -27,6 +27,181 @@
         </div>
     </div>
     <!-- 右侧菜单 start  -->
+    
+    <!-- 页面内容 start -->
+    <div class="content">
+        <div class="bill-table">
+            <!-- 其他费用 W start -->
+            <table>
+                <thead>
+                    <tr><th>项目</th><th>W-1</th><th>W-2</th><th>W-3</th><th>W-4</th><th>W-5</th>
+                        <th>W-6</th><th>W-7</th><th>W-8</th><th>W-9</th><th>W-10</th><th>W-11</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="LE-W">
+                        <td>LE管理费</td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="wash-W">
+                        <td>布草洗涤费</td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="waste-W">
+                        <td>布草消耗费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="car-W">
+                        <td>车费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="light-W">
+                        <td>灯泡费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="tax-W">
+                        <td>税金</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="int-W">
+                        <td>网费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="resource-W">
+                        <td>能源费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 其他费用 W end -->
+
+            <!-- 其他费用 E start -->
+            <table>
+                <thead>
+                    <tr><th>项目</th><th>E-1</th><th>E-2</th><th>E-3</th><th>E-4</th><th>E-5</th>
+                        <th>E-6</th><th>E-7</th><th>E-8</th><th>E-9</th><th>E-10</th><th>E-11</th><th>E-12</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="LE-E">
+                        <td>LE管理费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="wash-E">
+                        <td>布草洗涤费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="waste-E">
+                        <td>布草消耗费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="car-E">
+                        <td>车费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="light-E">
+                        <td>灯泡费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="tax-E">
+                        <td>税金</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="int-E">
+                        <td>网费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                    <tr class="resource-E">
+                        <td>能源费</td> 
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                        <td><input type="text" value="1" /></td><td><input type="text" value="1" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 其他费用 E end -->
+            <div class="btn btn-submit" onclick="setCharge();">提&nbsp;交&nbsp;修&nbsp;改</div>
+        </div>
+    </div>
+    <!-- 页面内容 end -->
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

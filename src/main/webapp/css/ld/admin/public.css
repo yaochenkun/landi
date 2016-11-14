@@ -66,7 +66,8 @@ header .header-content .dropdown-menu li{text-align: center;}
 .nav-second{position: relative; z-index: 6; width: 100%; margin-top:50px;border-bottom: 1px #eee solid; background-color: #fafafa;}
 .nav-second .toolbar{width: 100%; padding-left: 172px; padding-right: 12px;}
 .nav-secondul ul{white-space: nowrap; height: 59px; margin-left: 10px;}
-.nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑"; cursor: pointer;}
+.nav-secondul li{display: inline-block; height:59px; line-height: 58px; margin:0px 10px; padding:7px 10px 0 10px;font-size: 16px; font-family: "微软雅黑";}
+.nav-secondul li a{width: 100%; display: inline-block;}
 .nav-secondul .linormal a{color: #5c5c5c;}
 .nav-secondul .liactive a{color: #000;}
 

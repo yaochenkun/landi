@@ -24,19 +24,20 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><div class="logo"></div>客房服务</li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/shirt.svg">
+								<span>客房服务</span></li>
 						</ul>
 					</div>
-					<div class="content-title content-title-index">
+				</div>
+				<div class="content-title content-title-index active content-wash">
 						<ul>
-							<li><div class="icon"></div><a href="">洗衣单收费</a></li>
-							<li><div class="icon"></div><a href="service/serviceTakeaway.jsp">餐费</a></li>
-							<li><div class="icon"></div><a href="service/serviceWaterBill.jsp">桶装水费</a></li>
-							<li><div class="icon"></div><a href="service/serviceShoeCleaning.jsp">擦鞋费</a></li>
-							<li><div class="icon"></div><a href="service/serviceShopping.jsp">代购费</a></li>
-							<li><div class="icon"></div><a href="">车费</a></li>
+							<li><a href="">洗衣单收费</a></li>
+							<li><a href="service/serviceTakeaway.jsp">餐费</a></li>
+							<li><a href="service/serviceWaterBill.jsp">桶装水费</a></li>
+							<li><a href="service/serviceShoeCleaning.jsp">擦鞋费</a></li>
+							<li><a href="service/serviceShopping.jsp">代购费</a></li>
+							<li><a href="">车费</a></li>
 						</ul>
-					</div>
 				</div>
 				<!-- 客房服务 end -->
 
@@ -44,16 +45,17 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><div class="logo"></div>客房维修</li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/tools.svg">
+								<span>客房维修</span></li>
 						</ul>
 					</div>
-					<div class="content-title content-title-index">
-						<ul>
-							<li><div class="icon"></div><a href="">维修报修</a></li>
-							<li><div class="icon"></div><a href="">维修管理</a></li>
-							<li><div class="icon"></div><a href="">维修统计</a></li>
-						</ul>
-					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="">维修报修</a></li>
+						<li><a href="">维修管理</a></li>
+						<li><a href="">维修统计</a></li>
+					</ul>
 				</div>
 				<!-- 客房维修 end -->
 
@@ -61,16 +63,17 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><div class="logo"></div>能源费结算</li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/drops.svg">
+								<span>能源费结算</span></li>
 						</ul>
 					</div>
-					<div class="content-title content-title-index">
-						<ul>
-							<li><div class="icon"></div><a href="source/sourceWater.jsp">水&nbsp;费</a></li>
-							<li><div class="icon"></div><a href="source/sourceElec.jsp">电&nbsp;费</a></li>
-							<li><div class="icon"></div><a href="source/sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>
-						</ul>
-					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="source/sourceWater.jsp">水&nbsp;费</a></li>
+						<li><a href="source/sourceElec.jsp">电&nbsp;费</a></li>
+						<li><a href="source/sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>
+					</ul>
 				</div>
 				<!-- 能源费结算 end -->
 				
@@ -78,15 +81,16 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><div class="logo"></div>客房费用结算</li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/calculate.svg">
+								<span>客房费用结算</span></li>
 						</ul>
 					</div>
-					<div class="content-title content-title-index">
-						<ul>
-							<li><div class="icon"></div><a href="">统计费用</a></li>
-							<li><div class="icon"></div><a href="">其他费用</a></li>
-						</ul>
-					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="">统计费用</a></li>
+						<li><a href="">其他费用</a></li>
+					</ul>
 				</div>
 				<!-- 客房费用结算 end -->
 			</div>
