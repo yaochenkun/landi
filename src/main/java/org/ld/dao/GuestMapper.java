@@ -21,4 +21,6 @@ public interface GuestMapper {
     List<Guest> selectByName(String name);
     
     Guest selectByRoomNumber(String rn);
+    
+    Guest selectByContract(String ct);
 }

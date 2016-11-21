@@ -148,4 +148,9 @@
   	select * from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
   </select>
+  <select id="getAllDailyServiceRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from daily_service where TYPE = #{TYPE} limit #{ST}, #{EACH}
+    ]]>
+  </select>
 </mapper>

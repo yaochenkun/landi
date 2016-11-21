@@ -1,5 +1,7 @@
 package org.ld.model;
 
+import java.util.Date;
+
 public class Guest {
     private Integer ID;
 
@@ -28,6 +30,10 @@ public class Guest {
     private String COMMENT;
 
     private Double CHARGE;
+
+    private Date TIMEIN;
+
+    private Date TIMEOUT;
 
     private Integer SYS_STATE;
 
@@ -141,6 +147,22 @@ public class Guest {
 
     public void setCHARGE(Double CHARGE) {
         this.CHARGE = CHARGE;
+    }
+
+    public Date getTIMEIN() {
+        return TIMEIN;
+    }
+
+    public void setTIMEIN(Date TIMEIN) {
+        this.TIMEIN = TIMEIN;
+    }
+
+    public Date getTIMEOUT() {
+        return TIMEOUT;
+    }
+
+    public void setTIMEOUT(Date TIMEOUT) {
+        this.TIMEOUT = TIMEOUT;
     }
 
     public Integer getSYS_STATE() {

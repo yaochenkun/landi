@@ -1,5 +1,8 @@
 package org.ld.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.ld.model.Sources;
 
 public interface SourcesMapper {
@@ -14,4 +17,11 @@ public interface SourcesMapper {
     int updateByPrimaryKeySelective(Sources record);
 
     int updateByPrimaryKey(Sources record);
+    
+    //add
+    int getTotalRow(Map<String, Object> map);
+    
+    List<Sources> getSourcesRange(Map<String, Object> map);
+    
+    List<Sources> getAllSourcesRange(Map<String, Object> map);
 }

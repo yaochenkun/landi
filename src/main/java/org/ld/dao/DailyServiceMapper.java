@@ -22,4 +22,6 @@ public interface DailyServiceMapper {
     int getTotalRow(Map<String, Object> map);
     
     List<DailyService> getDailyServiceRange(Map<String, Object> map);
+    
+    List<DailyService> getAllDailyServiceRange(Map<String, Object> map);
 }

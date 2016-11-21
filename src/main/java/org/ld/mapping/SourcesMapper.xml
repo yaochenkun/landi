@@ -149,4 +149,19 @@
       MONEY = #{MONEY,jdbcType=DOUBLE}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from sources where ROOM_NUMBER = #{RN} and TYPE = #{TYPE}
+    ]]>
+  </select>
+  <select id="getSourcesRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from sources where ROOM_NUMBER = #{RN} and TYPE = #{TYPE} limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  <select id="getAllSourcesRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from sources where TYPE = #{TYPE} limit #{ST}, #{EACH}
+    ]]>
+  </select>
 </mapper>

@@ -16,11 +16,13 @@
     <result column="CAR" property="CAR" jdbcType="VARCHAR" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="CHARGE" property="CHARGE" jdbcType="DOUBLE" />
+    <result column="TIMEIN" property="TIMEIN" jdbcType="TIMESTAMP" />
+    <result column="TIMEOUT" property="TIMEOUT" jdbcType="TIMESTAMP" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, GUEST_NAME, ROOM_NUMBER, ROOM_TYPE, CONTRACT_NUMBER, TEL, COMPANY, TITLE, PERSONS, 
-    COMING, PARKING, CAR, COMMENT, CHARGE, SYS_STATE
+    COMING, PARKING, CAR, COMMENT, CHARGE, TIMEIN, TIMEOUT, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,14 +39,14 @@
       ROOM_TYPE, CONTRACT_NUMBER, TEL, 
       COMPANY, TITLE, PERSONS, 
       COMING, PARKING, CAR, 
-      COMMENT, CHARGE, SYS_STATE
-      )
+      COMMENT, CHARGE, TIMEIN, 
+      TIMEOUT, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
       #{ROOM_TYPE,jdbcType=VARCHAR}, #{CONTRACT_NUMBER,jdbcType=VARCHAR}, #{TEL,jdbcType=VARCHAR}, 
       #{COMPANY,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, #{PERSONS,jdbcType=INTEGER}, 
       #{COMING,jdbcType=INTEGER}, #{PARKING,jdbcType=VARCHAR}, #{CAR,jdbcType=VARCHAR}, 
-      #{COMMENT,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER}
-      )
+      #{COMMENT,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, #{TIMEIN,jdbcType=TIMESTAMP}, 
+      #{TIMEOUT,jdbcType=TIMESTAMP}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Guest" >
     insert into guest
@@ -90,6 +92,12 @@
       </if>
       <if test="CHARGE != null" >
         CHARGE,
+      </if>
+      <if test="TIMEIN != null" >
+        TIMEIN,
+      </if>
+      <if test="TIMEOUT != null" >
+        TIMEOUT,
       </if>
       <if test="SYS_STATE != null" >
         SYS_STATE,
@@ -138,6 +146,12 @@
       <if test="CHARGE != null" >
         #{CHARGE,jdbcType=DOUBLE},
       </if>
+      <if test="TIMEIN != null" >
+        #{TIMEIN,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TIMEOUT != null" >
+        #{TIMEOUT,jdbcType=TIMESTAMP},
+      </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
       </if>
@@ -185,6 +199,12 @@
       <if test="CHARGE != null" >
         CHARGE = #{CHARGE,jdbcType=DOUBLE},
       </if>
+      <if test="TIMEIN != null" >
+        TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TIMEOUT != null" >
+        TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
+      </if>
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
       </if>
@@ -206,6 +226,8 @@
       CAR = #{CAR,jdbcType=VARCHAR},
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
       CHARGE = #{CHARGE,jdbcType=DOUBLE},
+      TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
+      TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -219,5 +241,11 @@
     <![CDATA[
   	select * from guest where GUEST_NAME like #{NAME}
     ]]>
+  </select>
+  <select id="selectByContract" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from guest
+    where CONTRACT_NUMBER = #{CT,jdbcType=VARCHAR}
   </select>
 </mapper>

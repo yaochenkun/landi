@@ -18,7 +18,8 @@ import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
-import org.ld.service.GuestService;
+import org.ld.model.Sources;
+import org.ld.service.GuestMissionService;
 import org.ld.service.RoomService;
 import org.ld.service.ServerService;
 import org.ld.service.UserService;
@@ -44,7 +45,7 @@ public class UserRoomController {
 	@Autowired
 	private RoomService roomService;
 	@Autowired
-	private GuestService guestService;
+	private GuestMissionService guestService;
 	@Autowired
 	private ServerService serverService;
 	
@@ -261,7 +262,7 @@ public class UserRoomController {
 		String rn = dataJson.getString("rNum");
 		
 		int eachPage = cur_env.getSettingsInt().get("list_size");
-		int recordTotal = serverService.getTotalRow(rn, type);
+		int recordTotal = serverService.getTotalDailyServiceRow(rn, type);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
 
 		if(pageNumber > pageTotal)
@@ -270,6 +271,44 @@ public class UserRoomController {
 		int st = (pageNumber - 1) * eachPage;
 		List<DailyService> record = serverService.searchBill(rn, type, st, eachPage);
 
+		ans.put("pageList", record);
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
+		return ans;
+	}
+	
+	@RequestMapping("/roomSearchSource")
+	@ResponseBody
+	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			ans.put("State", "Invalid");
+			return ans;
+		} else{
+			ans.put("State", "Valid");
+		}
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		// 1 water 2 power 3 gas
+		int type = dataJson.getIntValue("type");		
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String rn = dataJson.getString("rNum");
+		
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = serverService.getTotalSourcesRow(rn, type);
+		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
+
+		if(pageNumber > pageTotal)
+			pageNumber = pageTotal;
+		
+		int st = (pageNumber - 1) * eachPage;
+		List<Sources> record = serverService.searchSource(rn, type, st, eachPage);
+		
 		ans.put("pageList", record);
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
@@ -290,6 +329,7 @@ public class UserRoomController {
 	}
 	
 	@RequestMapping("/Model/")
+	@ResponseBody
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
