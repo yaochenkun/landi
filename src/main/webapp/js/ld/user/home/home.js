@@ -1,23 +1,23 @@
-//??获取角色信息保存至全局变量中
+// 获取角色信息保存至全局变量中
 let requestAjaxRoleArraySave = function(){
-	console.log("request Ajax role");
+	// console.log("request Ajax role");
 	
-	// ?? 暂时
-	$("#roleTypeContent").text("用户");
-//	$.ajax({
-//		type:'post',
-//		url:'/LD/HomeUser/requestRole.action',
-//		success:function(data){			
-//			//逐条保存角色 数值-名称对应关系
-//			for(let item in data){
-//				console.log(item);   //key
-//				console.log(data[item]);  //value
-//				//if($("#roleTypeNum").text()==item)
-//				//	$("#roleTypeContent").text(data[item]);
-//			}
-//			
-//		}
-//	});	
+	$.ajax({
+		type:'post',
+		url:'/LD/HomeUser/requestRole.action',
+		success:function(data){			
+			console.log(data);
+			//逐条保存角色 数值-名称对应关系
+			for(let item in data){
+				// console.log(item);   //key
+				// console.log(data[item]);  //value
+				if($("#roleTypeNum").text()==item){
+					$("#roleTypeContent").text(data[item]);
+				}
+			}
+			
+		}
+	});	
 }
 
 // 触发修改密码模态框

@@ -37,7 +37,7 @@
         <div class="main-page">
             <div class="planTitle">
                 <h4>新增采购计划</h4>
-                <a class="btn btn-goback goback" href="planList.jsp">返&nbsp;回</a>
+                <a class="btn btn-goback goback" href="planList.jsp">返&nbsp;&nbsp;&nbsp;回</a>
                 <ul class="ul">
                     <li class="li li-num">
                         <span class="span">订单号：</span>

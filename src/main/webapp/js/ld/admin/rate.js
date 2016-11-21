@@ -120,17 +120,21 @@ var setRate = function(){
 	
 	
 	$.ajax({
-		type:'post',
 		url:'/LD/HomeAdmin/setRate.action',
+		type:'post',
 	    contentType:'application/json',
-		data:'{"wp1":'+wp1+',"wc1":'+wc1+',"wp2":'+wp2+',"wc2":'+wc2+',"wp3":'+wp3+',"wc3":'+wc3+'"wp4":'+wp4+',"wc4:"'+wc4+','
-		+'"pp1":'+pp1+',"pc1":'+pc1+',"pp2":'+pp2+',"pc2":'+pc2+',"pp3":'+pp3+',"pc3":'+pc3+'"pp4":'+pp4+',"pc4:"'+pc4+',' 
-		+'"gp1":'+gp1+',"gc1":'+gc1+',"gp2":'+gp2+',"gc2":'+gc2+',"gp3":'+gp3+',"gc3":'+gc3+'"gp4":'+gp4+',"gc4:"'+gc4+'}',
+		data:'{"wp1":'+wp1+',"wc1":'+wc1+',"wp2":'+wp2+',"wc2":'+wc2+',"wp3":'+wp3+',"wc3":'+wc3+',"wp4":'+wp4+',"wc4":'+wc4+','
+		+'"pp1":'+pp1+',"pc1":'+pc1+',"pp2":'+pp2+',"pc2":'+pc2+',"pp3":'+pp3+',"pc3":'+pc3+',"pp4":'+pp4+',"pc4":'+pc4+',' 
+		+'"gp1":'+gp1+',"gc1":'+gc1+',"gp2":'+gp2+',"gc2":'+gc2+',"gp3":'+gp3+',"gc3":'+gc3+',"gp4":'+gp4+',"gc4":'+gc4+'}',
 		dataType:'json',
 	    success:function(data){
-	    	console.log(data);
-	    	alert("收费标准变更成功！");
-	    	window.location.href = "/LD/views/admin/rateList.jsp";
+	    	//console.log(data);
+	    	if(data == 1) {
+				alert("收费标准变更成功！");
+	    		window.location.href = "/LD/views/admin/rateList.jsp";
+	    	} else if (data == 0){
+	    		alert("收费标准变更失败！");
+	    	}
 	    }
 	});
 }
@@ -672,8 +676,13 @@ var setCharge = function(){
 		     +'}',
 		dataType:'json',
 	    success:function(data){
-	    	//console.log(data);
-	    	//alert("收费标准变更成功！");
+	    	console.log(data);
+	    	if (data == 1) {
+	    		alert("收费标准变更成功！");
+	    		window.location.href = "/LD/views/admin/rateOther.jsp";
+	    	} else if (data == 0){
+	    		alert("收费标准变更失败！");
+	    	}
 	    }
 	});
 }
