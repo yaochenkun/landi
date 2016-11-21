@@ -90,7 +90,7 @@
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
     	    requestAjaxRoleArraySave();
-	    	changeLeftMenu(0);
+	    	  changeLeftMenu(0);
        });
     </script>
 
