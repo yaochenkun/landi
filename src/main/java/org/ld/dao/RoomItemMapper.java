@@ -20,4 +20,18 @@ public interface RoomItemMapper {
     
     //add
     List<RoomItem> getItems(HashMap<String, Integer> map);
+    
+    List<RoomItem> getAllItems(HashMap<String, Integer> map);
+    
+    List<RoomItem> getItemsByType(HashMap<String, Integer> map);
+    
+    List<RoomItem> getItemsByRoom(HashMap<String, Integer> map);
+    
+    int getTotal(HashMap<String, Integer> map);
+    
+    int getTotal();
+    
+    int getTotalByType(int type);
+    
+    int getTotalByRoom(int rid);
 }
