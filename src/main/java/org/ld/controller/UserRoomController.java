@@ -2,6 +2,9 @@ package org.ld.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +108,7 @@ public class UserRoomController {
 		return room;
 	}
 	
-	@RequestMapping("/getAllRoom")
+	@RequestMapping("/getAllRoom") // 所有房间
 	@ResponseBody
 	public Map<String, Object> getAllRoom(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -224,7 +227,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/getMeters")
+	@RequestMapping("/getMeters") // 所有房间表概览
 	@ResponseBody
 	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -242,7 +245,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/roomSearchBill")
+	@RequestMapping("/roomSearchBill") // 明细流水
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -279,7 +282,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/roomSearchSource")
+	@RequestMapping("/roomSearchSource") // 明细流水
 	@ResponseBody
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -295,7 +298,7 @@ public class UserRoomController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
 		// 1 water 2 power 3 gas
-		int type = dataJson.getIntValue("type");		
+		int type = dataJson.getIntValue("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 		
@@ -316,16 +319,143 @@ public class UserRoomController {
 		
 		return ans;
 	}
+
 	
-	@RequestMapping("/test")
+	@RequestMapping("/addService")
 	@ResponseBody
-	public Map<String, Object> test(HttpSession session){
-		Map<String, Object> ans = new HashMap<String, Object>();
-		
-		List<Guest> guest = guestService.getGuestByName("i");
-		ans.put("guest_info", guest);
-		
-		return ans;
+	public Integer addService(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			return 0;
+		}
+		try {
+			JSONObject dataJson = JSONObject.parseObject(data);
+			DailyService newDS = new DailyService();
+			newDS.setCOUNT(dataJson.getInteger("count"));
+			newDS.setGUEST_NAME(dataJson.getString("guestName"));
+			newDS.setITEM(dataJson.getString("item"));
+			newDS.setCOMMENT(dataJson.getString("note"));
+			newDS.setROOM_NUMBER(dataJson.getString("roomNumber"));
+			newDS.setMONEY(dataJson.getDouble("sum"));
+			newDS.setTYPE(dataJson.getInteger("type"));
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			Date date;
+			date = ft.parse(dataJson.getString("delivery"));
+			newDS.setRTIME(date);
+			
+			return serverService.addDailyService(newDS);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/addSource")
+	@ResponseBody
+	public Integer addSource(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			return 0;
+		}
+		try {
+			JSONObject dataJson = JSONObject.parseObject(data);
+			RoomMeter meter = roomService.getMeter(dataJson.getString("meterNo"));
+			Sources newSrc = new Sources();
+			newSrc.setROOM_NUMBER(dataJson.getString("roomNumber"));
+			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
+			newSrc.setCURRENT_DATA(dataJson.getDouble("thisMonthNum"));
+			newSrc.setMONEY(dataJson.getDouble("charge"));
+			newSrc.setTYPE(dataJson.getInteger("type"));
+			newSrc.setMETER(dataJson.getString("meterNo"));
+			newSrc.setLAST_DATA(meter.getCUR_VAL());
+			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
+
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			Date date;
+			date = ft.parse(dataJson.getString("meterDate"));
+			newSrc.setTIME(date);
+			
+			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+			meter.setCUR_TIME(newSrc.getTIME());
+			
+			if(serverService.addSources(newSrc) == 1)
+			{
+				return roomService.updateMeter(meter);
+			} else {
+				return 0;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/addSourceGas")
+	@ResponseBody
+	public Integer addSourceGas(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		{
+			return 0;
+		}
+		try {
+			JSONObject dataJson = JSONObject.parseObject(data);
+			RoomMeter meter = roomService.getMeter(dataJson.getString("firstMeterNo"));
+			Sources newSrc = new Sources();
+			newSrc.setROOM_NUMBER(dataJson.getString("roomNumber"));
+			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
+			newSrc.setCURRENT_DATA(dataJson.getDouble("firstthisMonthNum"));
+			newSrc.setMONEY(dataJson.getDouble("firstCharge"));
+			newSrc.setTYPE((Integer)cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setMETER(dataJson.getString("firstMeterNo"));
+			newSrc.setLAST_DATA(meter.getCUR_VAL());
+			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
+
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			Date date;
+			date = ft.parse(dataJson.getString("meterDate"));
+			newSrc.setTIME(date);
+			
+			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+			meter.setCUR_TIME(newSrc.getTIME());
+			
+			if(serverService.addSources(newSrc) == 1)
+			{
+				roomService.updateMeter(meter);
+			} else {
+				return 0;
+			}
+			
+			meter = roomService.getMeter(dataJson.getString("secondMeterNo"));
+			newSrc.setCURRENT_DATA(dataJson.getDouble("secondthisMonthNum"));
+			newSrc.setMONEY(dataJson.getDouble("secondCharge"));
+			newSrc.setTYPE((Integer)cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setMETER(dataJson.getString("secondMeterNo"));
+			newSrc.setLAST_DATA(meter.getCUR_VAL());
+			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
+
+			ft = new SimpleDateFormat ("yyyy-MM-dd");
+			date = ft.parse(dataJson.getString("meterDate"));
+			newSrc.setTIME(date);
+			
+			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+			meter.setCUR_TIME(newSrc.getTIME());
+			
+			if(serverService.addSources(newSrc) == 1)
+			{
+				return roomService.updateMeter(meter);
+			} else {
+				return 0;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 	@RequestMapping("/Model/")

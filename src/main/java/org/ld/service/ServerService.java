@@ -14,4 +14,8 @@ public interface ServerService {
 	List<DailyService> searchBill(String rn, int type, int st, int eachPage);
 	
 	List<Sources> searchSource(String rn, int type, int st, int eachPage);
+	
+	int addDailyService(DailyService service);
+	
+	int addSources(Sources source);
 }

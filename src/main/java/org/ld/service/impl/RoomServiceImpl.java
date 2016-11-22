@@ -84,6 +84,19 @@ public class RoomServiceImpl implements RoomService {
 			return 0;
 		}
 	}
+	
+	@Override
+	public int updateMeter(RoomMeter meterInfo) {
+		// TODO Auto-generated method stub
+		try{
+			roomMeterMapper.updateByPrimaryKeySelective(meterInfo);
+			return 1;
+		} catch(Exception e)
+		{
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
 
 	@Override
 	public int totalRow() {
@@ -130,5 +143,11 @@ public class RoomServiceImpl implements RoomService {
 		map.put("room_id", rid);
 		map.put("type", type);
 		return roomMeterMapper.getMeters(map);
+	}
+
+	@Override
+	public RoomMeter getMeter(String mn) {
+		// TODO Auto-generated method stub
+		return roomMeterMapper.getMeter(mn);
 	}
 }

@@ -26,6 +26,8 @@ public interface RoomService{
 	
 	int update(Room roomInfo);
 	
+	int updateMeter(RoomMeter MeterInfo);
+	
 	int totalRow();
 	
 	List<RoomItem> getItems(Integer rid, Integer type);
@@ -36,4 +38,6 @@ public interface RoomService{
 	int insertRoomPic(RoomPic roomPic);
 	
 	List<RoomMeter> getMeters(Integer rid, Integer type);
+	
+	RoomMeter getMeter(String mn);
 }

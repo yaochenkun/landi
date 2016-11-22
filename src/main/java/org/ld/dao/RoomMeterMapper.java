@@ -20,4 +20,6 @@ public interface RoomMeterMapper {
     
     //add
     List<RoomMeter> getMeters(HashMap<String, Integer> map);
+    
+    RoomMeter getMeter(String mn);
 }

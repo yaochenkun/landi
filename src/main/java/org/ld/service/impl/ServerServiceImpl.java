@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.ld.dao.DailyServiceMapper;
-import org.ld.dao.RoomMapper;
 import org.ld.dao.SourcesMapper;
 import org.ld.model.DailyService;
 import org.ld.model.Sources;
@@ -73,5 +72,31 @@ public class ServerServiceImpl implements ServerService {
 		map.put("RN", rn);
 		map.put("TYPE", type);
 		return sourcesMapper.getTotalRow(map);
+	}
+
+	@Override
+	public int addDailyService(DailyService service) {
+		// TODO Auto-generated method stub
+		try{
+			dailyServiceMapper.insert(service);
+			return 1;
+		} catch(Exception e)
+		{
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int addSources(Sources source) {
+		// TODO Auto-generated method stub
+		try{
+			sourcesMapper.insert(source);
+			return 1;
+		} catch(Exception e)
+		{
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 }

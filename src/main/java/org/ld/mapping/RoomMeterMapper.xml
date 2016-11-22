@@ -125,9 +125,14 @@
       CUR_TIME = #{CUR_TIME,jdbcType=DATE}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
-  <select id="getMeters" resultMap="BaseResultMap" parameterType="map">
+  <select id="getMeters" resultMap="BaseResultMap" parameterType="java.lang.String">
   	<![CDATA[
   	select * from room_meter where ROOM_ID = #{room_id} and TYPE = #{type}
+    ]]>
+  </select>
+  <select id="getMeter" resultMap="BaseResultMap" parameterType="org.">
+  	<![CDATA[
+  	select * from room_meter where METER_NUMBER = #{MN,jdbcType=VARCHAR}
     ]]>
   </select>
 </mapper>
