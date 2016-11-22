@@ -6,16 +6,18 @@
     <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
     <result column="NAME" property="NAME" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="PROVIDER" property="PROVIDER" jdbcType="INTEGER" />
+    <result column="LECHARGE" property="LECHARGE" jdbcType="DOUBLE" />
+    <result column="LECOUNT" property="LECOUNT" jdbcType="INTEGER" />
+    <result column="SPCHARGE" property="SPCHARGE" jdbcType="DOUBLE" />
+    <result column="SPCOUNT" property="SPCOUNT" jdbcType="INTEGER" />
     <result column="TURN" property="TURN" jdbcType="INTEGER" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="TAG" property="TAG" jdbcType="VARCHAR" />
     <result column="FREE" property="FREE" jdbcType="INTEGER" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, GUEST_ID, ROOM_NUMBER, NAME, TYPE, PROVIDER, TURN, COMMENT, TAG, FREE, SYS_STATE
+    ID, GUEST_ID, ROOM_NUMBER, NAME, LECHARGE, LECOUNT, SPCHARGE, SPCOUNT, TURN, COMMENT, 
+    FREE, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,13 +31,15 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.GuestService" >
     insert into guest_service (ID, GUEST_ID, ROOM_NUMBER, 
-      NAME, TYPE, PROVIDER, 
-      TURN, COMMENT, TAG, 
-      FREE, SYS_STATE)
+      NAME, LECHARGE, LECOUNT, 
+      SPCHARGE, SPCOUNT, TURN, 
+      COMMENT, FREE, SYS_STATE
+      )
     values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=INTEGER}, #{PROVIDER,jdbcType=INTEGER}, 
-      #{TURN,jdbcType=INTEGER}, #{COMMENT,jdbcType=VARCHAR}, #{TAG,jdbcType=VARCHAR}, 
-      #{FREE,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER})
+      #{NAME,jdbcType=VARCHAR}, #{LECHARGE,jdbcType=DOUBLE}, #{LECOUNT,jdbcType=INTEGER}, 
+      #{SPCHARGE,jdbcType=DOUBLE}, #{SPCOUNT,jdbcType=INTEGER}, #{TURN,jdbcType=INTEGER}, 
+      #{COMMENT,jdbcType=VARCHAR}, #{FREE,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.GuestService" >
     insert into guest_service
@@ -52,20 +56,23 @@
       <if test="NAME != null" >
         NAME,
       </if>
-      <if test="TYPE != null" >
-        TYPE,
+      <if test="LECHARGE != null" >
+        LECHARGE,
       </if>
-      <if test="PROVIDER != null" >
-        PROVIDER,
+      <if test="LECOUNT != null" >
+        LECOUNT,
+      </if>
+      <if test="SPCHARGE != null" >
+        SPCHARGE,
+      </if>
+      <if test="SPCOUNT != null" >
+        SPCOUNT,
       </if>
       <if test="TURN != null" >
         TURN,
       </if>
       <if test="COMMENT != null" >
         COMMENT,
-      </if>
-      <if test="TAG != null" >
-        TAG,
       </if>
       <if test="FREE != null" >
         FREE,
@@ -87,20 +94,23 @@
       <if test="NAME != null" >
         #{NAME,jdbcType=VARCHAR},
       </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+      <if test="LECHARGE != null" >
+        #{LECHARGE,jdbcType=DOUBLE},
       </if>
-      <if test="PROVIDER != null" >
-        #{PROVIDER,jdbcType=INTEGER},
+      <if test="LECOUNT != null" >
+        #{LECOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="SPCHARGE != null" >
+        #{SPCHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SPCOUNT != null" >
+        #{SPCOUNT,jdbcType=INTEGER},
       </if>
       <if test="TURN != null" >
         #{TURN,jdbcType=INTEGER},
       </if>
       <if test="COMMENT != null" >
         #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="TAG != null" >
-        #{TAG,jdbcType=VARCHAR},
       </if>
       <if test="FREE != null" >
         #{FREE,jdbcType=INTEGER},
@@ -122,20 +132,23 @@
       <if test="NAME != null" >
         NAME = #{NAME,jdbcType=VARCHAR},
       </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+      <if test="LECHARGE != null" >
+        LECHARGE = #{LECHARGE,jdbcType=DOUBLE},
       </if>
-      <if test="PROVIDER != null" >
-        PROVIDER = #{PROVIDER,jdbcType=INTEGER},
+      <if test="LECOUNT != null" >
+        LECOUNT = #{LECOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="SPCHARGE != null" >
+        SPCHARGE = #{SPCHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SPCOUNT != null" >
+        SPCOUNT = #{SPCOUNT,jdbcType=INTEGER},
       </if>
       <if test="TURN != null" >
         TURN = #{TURN,jdbcType=INTEGER},
       </if>
       <if test="COMMENT != null" >
         COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="TAG != null" >
-        TAG = #{TAG,jdbcType=VARCHAR},
       </if>
       <if test="FREE != null" >
         FREE = #{FREE,jdbcType=INTEGER},
@@ -151,11 +164,12 @@
     set GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       NAME = #{NAME,jdbcType=VARCHAR},
-      TYPE = #{TYPE,jdbcType=INTEGER},
-      PROVIDER = #{PROVIDER,jdbcType=INTEGER},
+      LECHARGE = #{LECHARGE,jdbcType=DOUBLE},
+      LECOUNT = #{LECOUNT,jdbcType=INTEGER},
+      SPCHARGE = #{SPCHARGE,jdbcType=DOUBLE},
+      SPCOUNT = #{SPCOUNT,jdbcType=INTEGER},
       TURN = #{TURN,jdbcType=INTEGER},
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      TAG = #{TAG,jdbcType=VARCHAR},
       FREE = #{FREE,jdbcType=INTEGER},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}

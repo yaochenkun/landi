@@ -84,7 +84,7 @@ public class GuestController {
 			newGuest.setPARKING(obj.getString("STR_Carport"));
 			newGuest.setCAR(null); // need to add ?
 			newGuest.setCOMMENT(obj.getString("STR_Remark"));
-			newGuest.setCHARGE(obj.getDouble("INT_Rent")); // double ?
+			newGuest.setCHARGE(obj.getDouble("DOU_Rent")); // double ?
 			newGuest.setSYS_STATE(0);
 			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
 			Date date;
@@ -111,10 +111,10 @@ public class GuestController {
 		try{
 			newHost.setGUEST_ID(newGuest.getID());
 			newHost.setHOST_NAME(obj.getString("STR_Name"));
-			newHost.setRENT_CHARGE(obj.getDouble("INT_Rent"));
-			newHost.setSERVICE_CHARGE(obj.getDouble("INT_Service"));
-			newHost.setRETURN_MONEY(obj.getDouble("INT_Return"));
-			newHost.setOTHER_CHARGE(obj.getDouble("INT_OTHER")); // other is charge
+			newHost.setRENT_CHARGE(obj.getDouble("DOU_Rent"));
+			newHost.setSERVICE_CHARGE(obj.getDouble("DOU_Service"));
+			newHost.setRETURN_MONEY(obj.getDouble("DOU_Return"));
+			newHost.setOTHER_CHARGE(obj.getDouble("DOU_OTHER")); // other is charge
 			newHost.setSYS_STATE(0);
 			
 			if(guestMissionService.addHost(newHost) == 1) {
@@ -161,9 +161,18 @@ public class GuestController {
 		obj = objs.getJSONObject("balance");
 		try{
 			newBalance.setGUEST_ID(newGuest.getID());
+			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
+			newBalance.setCHARGE_DAY(obj.getInteger("STR_RentNumber"));
+			newBalance.setCHARGE_TURN(obj.getInteger("STR_RentCycle"));
+			newBalance.setCHARGE_WAY(obj.getInteger("STR_RentWay"));
+			newBalance.setRETURN_DAY(obj.getInteger("STR_ReturnNumber"));
+			newBalance.setRETURN_TURN(obj.getInteger("STR_ReturnCycle"));
+			newBalance.setINVOICE_DAY(obj.getInteger("STR_BillNumber"));
+			newBalance.setINVOICE_TURN(obj.getInteger("STR_BillCycle"));
+			newBalance.setINVOICE_AHEAD(obj.getInteger("STR_BillTime"));
+			newBalance.setSYS_STATE(0);
 			
-			
-			if(guestMissionService.addIntern(newIntern) == 1) {
+			if(guestMissionService.addGuestBalance(newBalance) == 1) {
 				
 			} else {
 				ans.remove("State");
@@ -175,6 +184,99 @@ public class GuestController {
 			ans.remove("State");
 			ans.put("State", "Invalid");
 			return ans;
+		}
+		
+		obj = objs.getJSONObject("service");
+		newService.setGUEST_ID(newGuest.getID());
+		newService.setROOM_NUMBER(newGuest.getROOM_NUMBER());
+		for(String key : obj.keySet()) {
+			try{
+				JSONObject obj2 = obj.getJSONObject(key);
+				if(key.equals("OBJ_lunchMap")) {
+					newService.setSYS_STATE(1);
+					for(String key2 : obj2.keySet()) {
+						JSONObject obj3 = obj2.getJSONObject(key2);
+						newService.setNAME(obj3.getString("STR_RName"));
+						newService.setLECHARGE(obj3.getDouble("DOU_LECharge"));
+						newService.setLECOUNT(obj3.getInteger("INT_LECount"));
+						newService.setSPCHARGE(obj3.getDouble("DOU_SPCCharge"));
+						newService.setSPCOUNT(obj3.getInteger("INT_SPCCount"));
+						newService.setTURN(obj3.getInteger("INT_Cycle"));
+						newService.setCOMMENT(obj3.getString("STR_Note"));
+						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
+						
+						if(guestMissionService.addGuestService(newService) == 1) {
+							
+						} else {
+							ans.remove("State");
+							ans.put("State", "Invalid");
+							return ans;
+						}
+					}
+				} else if (key.equals("OBJ_ADDLIST")) {
+					newService.setSYS_STATE(3);
+					for(String key2 : obj2.keySet()) {
+						JSONObject obj3 = obj2.getJSONObject(key2);
+						newService.setNAME(obj3.getString("STR_ADD_NAME"));
+						newService.setLECHARGE(obj3.getDouble("DOU_LECharge"));
+						newService.setLECOUNT(obj3.getInteger("INT_LECount"));
+						newService.setSPCHARGE(obj3.getDouble("DOU_SPCCharge"));
+						newService.setSPCOUNT(obj3.getInteger("INT_SPCCount"));
+						newService.setTURN(obj3.getInteger("INT_Cycle"));
+						newService.setCOMMENT(obj3.getString("STR_Note"));
+						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
+						
+						if(guestMissionService.addGuestService(newService) == 1) {
+							
+						} else {
+							ans.remove("State");
+							ans.put("State", "Invalid");
+							return ans;
+						}
+					}
+				} else if (key.equals("resource")) {
+					newService.setSYS_STATE(obj2.getBooleanValue("BOOL_Selfpay") ? 5 : 7);
+					newService.setNAME(obj2.getString("resource"));
+					newService.setLECHARGE(obj2.getDouble("DOU_LECharge"));
+					newService.setLECOUNT(obj2.getInteger("INT_LECount"));
+					newService.setSPCHARGE(obj2.getDouble("DOU_SPCCharge"));
+					newService.setSPCOUNT(obj2.getInteger("INT_SPCCount"));
+					newService.setTURN(obj2.getInteger("INT_Cycle"));
+					newService.setCOMMENT(obj2.getString("STR_Note"));
+					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
+					
+					if(guestMissionService.addGuestService(newService) == 1) {
+						
+					} else {
+						ans.remove("State");
+						ans.put("State", "Invalid");
+						return ans;
+					}
+				} else {
+					newService.setSYS_STATE(9);
+					newService.setNAME(obj2.getString(key));
+					newService.setLECHARGE(obj2.getDouble("DOU_LECharge"));
+					newService.setLECOUNT(obj2.getInteger("INT_LECount"));
+					newService.setSPCHARGE(obj2.getDouble("DOU_SPCCharge"));
+					newService.setSPCOUNT(obj2.getInteger("INT_SPCCount"));
+					newService.setTURN(obj2.getInteger("INT_Cycle"));
+					newService.setCOMMENT(obj2.getString("STR_Note"));
+					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
+					
+					if(guestMissionService.addGuestService(newService) == 1) {
+						
+					} else {
+						ans.remove("State");
+						ans.put("State", "Invalid");
+						return ans;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				ans.remove("State");
+				ans.put("State", "Invalid");
+				return ans;
+			}
 		}
 		
 		return ans;

@@ -9,15 +9,17 @@ public class GuestService {
 
     private String NAME;
 
-    private Integer TYPE;
+    private Double LECHARGE;
 
-    private Integer PROVIDER;
+    private Integer LECOUNT;
+
+    private Double SPCHARGE;
+
+    private Integer SPCOUNT;
 
     private Integer TURN;
 
     private String COMMENT;
-
-    private String TAG;
 
     private Integer FREE;
 
@@ -55,20 +57,36 @@ public class GuestService {
         this.NAME = NAME == null ? null : NAME.trim();
     }
 
-    public Integer getTYPE() {
-        return TYPE;
+    public Double getLECHARGE() {
+        return LECHARGE;
     }
 
-    public void setTYPE(Integer TYPE) {
-        this.TYPE = TYPE;
+    public void setLECHARGE(Double LECHARGE) {
+        this.LECHARGE = LECHARGE;
     }
 
-    public Integer getPROVIDER() {
-        return PROVIDER;
+    public Integer getLECOUNT() {
+        return LECOUNT;
     }
 
-    public void setPROVIDER(Integer PROVIDER) {
-        this.PROVIDER = PROVIDER;
+    public void setLECOUNT(Integer LECOUNT) {
+        this.LECOUNT = LECOUNT;
+    }
+
+    public Double getSPCHARGE() {
+        return SPCHARGE;
+    }
+
+    public void setSPCHARGE(Double SPCHARGE) {
+        this.SPCHARGE = SPCHARGE;
+    }
+
+    public Integer getSPCOUNT() {
+        return SPCOUNT;
+    }
+
+    public void setSPCOUNT(Integer SPCOUNT) {
+        this.SPCOUNT = SPCOUNT;
     }
 
     public Integer getTURN() {
@@ -85,14 +103,6 @@ public class GuestService {
 
     public void setCOMMENT(String COMMENT) {
         this.COMMENT = COMMENT == null ? null : COMMENT.trim();
-    }
-
-    public String getTAG() {
-        return TAG;
-    }
-
-    public void setTAG(String TAG) {
-        this.TAG = TAG == null ? null : TAG.trim();
     }
 
     public Integer getFREE() {
