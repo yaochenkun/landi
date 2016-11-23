@@ -221,7 +221,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/roomSearchBill") // 明细流水
+	@RequestMapping("/roomSearchBill") // 明细流水（客房服务）
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -239,18 +239,21 @@ public class UserRoomController {
 		int type = dataJson.getIntValue("type");		
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
-		
+
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalDailyServiceRow(rn, type);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-
-		if(pageNumber > pageTotal)
-			pageNumber = pageTotal;
 		
-		int st = (pageNumber - 1) * eachPage;
-		List<DailyService> record = serverService.searchBill(rn, type, st, eachPage);
+		if(recordTotal!=0){
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<DailyService> record = serverService.searchBill(rn, type, st, eachPage);
+			
+			ans.put("pageList", record);
+		}
 
-		ans.put("pageList", record);
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
@@ -258,7 +261,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/roomSearchSource") // 明细流水
+	@RequestMapping("/roomSearchSource") // 明细流水（能源费结算）
 	@ResponseBody
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -281,14 +284,17 @@ public class UserRoomController {
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalSourcesRow(rn, type);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-
-		if(pageNumber > pageTotal)
-			pageNumber = pageTotal;
 		
-		int st = (pageNumber - 1) * eachPage;
-		List<Sources> record = serverService.searchSource(rn, type, st, eachPage);
-		
-		ans.put("pageList", record);
+		if(recordTotal!=0){
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<Sources> record = serverService.searchSource(rn, type, st, eachPage);
+			
+			ans.put("pageList", record);
+		}
+	
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
@@ -297,7 +303,7 @@ public class UserRoomController {
 	}
 
 	
-	@RequestMapping("/addService")
+	@RequestMapping("/addService") // 添加客房服务
 	@ResponseBody
 	public Integer addService(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -327,7 +333,7 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/addSource")
+	@RequestMapping("/addSource") // 添加水费电费
 	@ResponseBody
 	public Integer addSource(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -345,21 +351,22 @@ public class UserRoomController {
 			newSrc.setMONEY(dataJson.getDouble("charge"));
 			newSrc.setTYPE(dataJson.getInteger("type"));
 			newSrc.setMETER(dataJson.getString("meterNo"));
-			newSrc.setLAST_DATA(meter.getCUR_VAL());
-			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
+			//newSrc.setLAST_DATA(meter.getCUR_VAL());
+			//newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
 
 			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
 			
-			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-			meter.setCUR_TIME(newSrc.getTIME());
+//			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+//			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+//			meter.setCUR_TIME(newSrc.getTIME());
 			
 			if(serverService.addSources(newSrc) == 1)
 			{
-				return roomService.updateMeter(meter);
+				//return roomService.updateMeter(meter);
+				return 1;
 			} else {
 				return 0;
 			}
@@ -369,7 +376,7 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/addSourceGas")
+	@RequestMapping("/addSourceGas") // 添加燃气费
 	@ResponseBody
 	public Integer addSourceGas(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 

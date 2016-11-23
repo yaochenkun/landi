@@ -54,12 +54,10 @@
 						<li><span class="span">租客：</span><input type="text"
 							value="Alice" /></li>
 						<li><span class="span">表号：</span><input type="text" value="1" /></li>
-						<li><span class="span">本月表数：</span><input type="text"
-							value="48.5" /></li>
-						<li><span class="span">费用：</span><input type="text"
-							value="12" /></li>
 						<li><span class="span">抄表：</span><input type="text"
-							value="Vicky" /></li>
+							value="12.4" /></li>
+						<li><span class="span">费用：</span><input type="text"
+							value="12.5" /></li>
 						<li><span class="span">抄表日期：</span><input type="text"
 							value="2016-11-12" /></li>
 						<li><span class="span"></span><a onclick="addsource();"

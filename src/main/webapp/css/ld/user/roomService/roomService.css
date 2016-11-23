@@ -49,8 +49,7 @@
 	font-size: 16px;
 	color: #fff;
 	float: left;
-	background: url(../../../../img/roomService/bottom.png) #2277da
-		no-repeat 170px 16px;
+	background: url(../../../../img/roomService/bottom.png) #2277da	no-repeat 170px 16px;
 }
 
 .dropMenu .index {
@@ -144,24 +143,15 @@
 	animation: icon-jump 1s ease-in-out forwards infinite;
 }
 
-@
-keyframes icon-jump { 0%{
+@keyframes icon-jump { 0%{
 	transform: translateY(3px);
 }
 
 50%{
-transform
-:
- 
-translateY
-(-3px);
+transform:translateY(-3px);
 }
 100%{
-transform
-:
- 
-translateY
-(3px);
+transform:translateY(3px);
 }
 }
 .plate-roomService .plate-content {
@@ -207,8 +197,7 @@ translateY
 }
 
 .dropMenu .nav-title-active {
-	background: url(../../../../img/roomService/top.png) #2277da no-repeat
-		170px 16px;
+	background: url(../../../../img/roomService/top.png) #2277da no-repeat 170px 16px;
 }
 
 .plate-title-active {

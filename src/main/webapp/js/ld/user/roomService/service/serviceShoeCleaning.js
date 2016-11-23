@@ -37,32 +37,56 @@ var requestAjaxShoeCleaning = function(pageNum){
 	var type = parseInt(3); 
 	console.log("请求第"+ pageNum + "页擦鞋费信息");
 	
-//	$.ajax({
-//		url:'/LD/userRoom/roomSearchBill.action',
-//		type:'post',
-//		contentType:'application/json',
-//		data:'{"pageNum":"'+ pageNum +'","type":"'+ type +'","rnum":0}',
-//		dataType:'json',
-//		success:function(data){
-//			console.log(data);
-			// 清空列表和页码
-			$("#shoeCleaningTbody").html("");
-			$("#serviceShoeCleaningBottom").html("");
-			
-			for(var i=0; i<20; i++){
-				$("#shoeCleaningTbody").append("<tr><td><span>1</span></td><td>Ada</td><td>衣服</td><td>1</td>"+
-						"<td>2016-3-30</td><td>2,000&nbsp;元</td><td>无</td></tr>");
-			}	
-			// 添加擦鞋费 底部页码
-			$("#serviceShoeCleaningBottom").append("<div class='bottom-page'>"+
-		        	"<span class='page-before' onclick='requestBeforeShoeCleaning();'>上一页&nbsp;&nbsp;</span>"+
-		        	"<span><input id='shoeCleaninglist_nowpage' value='1' type='text' class='input_num'></span>"+
-		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='shoeCleaninglist_totalpage'>2</span>"+
-		            "<span class='page-next' onclick='requestNextShoeCleaning();'>&nbsp;&nbsp;下一页</span>" +
-		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-//		}
-//	});
+	$.ajax({
+		url:'/LD/userRoom/roomSearchBill.action',
+		type:'post',
+		contentType:'application/json',
+		data:'{"pageNum":"'+ pageNum +'","type":"'+ type +'"}',
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退！");
+				return;
+			}
+			else if(data.State == "Valid"){
+				// 清空列表和页码
+				$("#shoeCleaningTbody").html("");
+				$("#serviceShoeCleaningBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#shoeCleaningTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
+				
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					// 将时间戳变为2016-12-12显示          	
+            		var dDate = new Date(perRecord.rtime);
+            		var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#shoeCleaningTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.item +"</td>"+
+						"<td>"+ perRecord.count +"</td><td>"+ deliveryDate +"</td>"+
+						"<td>"+ perRecord.money +"&nbsp;元</td><td>"+ perRecord.comment +"</td></tr>");
+				}	
+				// 添加擦鞋费 底部页码
+				$("#serviceShoeCleaningBottom").append("<div class='bottom-page'>"+
+			        	"<span class='page-before' onclick='requestBeforeShoeCleaning();'>上一页&nbsp;&nbsp;</span>"+
+			        	"<span><input id='shoeCleaninglist_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span>&nbsp;/&nbsp;</span>"+
+			        	"<span id='shoeCleaninglist_totalpage'>"+ pageTotal +"</span>"+
+			            "<span class='page-next' onclick='requestNextShoeCleaning();'>&nbsp;&nbsp;下一页</span>" +
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 
 ////////////////////////////////////////////////////////////////条件查询 擦鞋费信息 start
@@ -106,7 +130,7 @@ var requestAjaxShoeCleaningByRoomNum = function(roomNum,pageNum){
 		url:'/LD/userRoom/roomSearchBill.action',
 		type:'post',
 		contentType:'application/json',
-		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rnum":"'+ roomNum +'"}',
+		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rNum":"'+ roomNum +'"}',
 		dataType:'json',
 		success:function(data){
 			// console.log(data);
@@ -117,6 +141,15 @@ var requestAjaxShoeCleaningByRoomNum = function(roomNum,pageNum){
 			else if(data.State == "Valid"){
 				$("#shoeCleaningTbody").html("");
 				$("#serviceShoeCleaningBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+				if (recordTotal == 0) {
+					$("#shoeCleaningTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
 				
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
@@ -134,11 +167,11 @@ var requestAjaxShoeCleaningByRoomNum = function(roomNum,pageNum){
 				$("#serviceShoeCleaningBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
 				$("#serviceShoeCleaningBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforeShoeCleaningByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
-			        	"<span><input id='shoeCleaninglist_nowpage' value='" + data.pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span><input id='shoeCleaninglist_nowpage' value='" + pageNow +"' type='text' class='input_num'></span>"+
 			        	"<span>&nbsp;/&nbsp;</span>"+
-			        	"<span id='shoeCleaninglist_totalpage'>"+ data.pageTotal +"</span>"+
+			        	"<span id='shoeCleaninglist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextShoeCleaningByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共"+ data.recordTotal +"条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
 		}
 	});
