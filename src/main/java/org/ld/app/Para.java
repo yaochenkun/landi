@@ -7,10 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class Para {
 	private String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
@@ -98,6 +100,29 @@ public class Para {
 			
 			reader.close();
 			return map;
+		} catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public Set<String> getPara(String text)
+	{
+		String fname = root + text + ".env";
+		
+		BufferedReader reader = null;
+		try{
+			Set<String> set = new HashSet<String>();
+			reader = new BufferedReader(new FileReader(fname));
+			String temp = null;
+			while((temp = reader.readLine()) != null)
+			{
+				set.add(temp);
+			}
+			
+			reader.close();
+			return set;
 		} catch (IOException e){
 			e.printStackTrace();
 		}

@@ -30,7 +30,7 @@ public interface RoomService{
 	
 	int totalRow();
 	
-	List<RoomItem> getItems(Integer rid, Integer type);
+	List<RoomItem> getItems(Integer rid, String type);
 	
 	List<RoomPic> getPic(Integer rid);
 	

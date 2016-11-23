@@ -103,4 +103,20 @@
       COMMENT = #{COMMENT,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getPlans" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from plan limit #{ST}, #{EACH};
+    ]]>
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from plan;
+    ]]>
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan
+    where NAME = #{S,jdbcType=VARCHAR}
+  </select>
 </mapper>

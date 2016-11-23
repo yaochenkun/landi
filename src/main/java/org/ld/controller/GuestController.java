@@ -55,7 +55,7 @@ public class GuestController {
 	public Map<String, Object> Model(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wCustom"))) == 0)
 		{
 			ans.put("State", "Invalid");
 			return ans;

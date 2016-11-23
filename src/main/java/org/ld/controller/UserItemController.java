@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +17,10 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.DailyService;
+import org.ld.model.FacSta;
 import org.ld.model.Guest;
+import org.ld.model.Plan;
+import org.ld.model.PlanDetail;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -55,12 +60,12 @@ public class UserItemController {
 	
 	private static Logger logger = Logger.getLogger("logRec");
 	
-	@RequestMapping("/searchItemOverview") // 明细流水
+	@RequestMapping("/searchItemOverview") // 所有物品，room和type可为null
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rFac"))) == 0)
 		{
 			ans.put("State", "Invalid");
 			return ans;
@@ -70,7 +75,7 @@ public class UserItemController {
 		
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		int type = dataJson.getIntValue("type");
+		String type = dataJson.getString("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 		int rid = roomService.getRoomByNumber(rn).getID();
@@ -91,5 +96,131 @@ public class UserItemController {
 		ans.put("recordTotal", recordTotal);
 		
 		return ans;
+	}
+	
+	@RequestMapping("/searchPlanList") // 所有采购计划
+	@ResponseBody
+	public Map<String, Object> searchPlanList(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rBuy"))) == 0)
+		{
+			ans.put("State", "Invalid");
+			return ans;
+		} else{
+			ans.put("State", "Valid");
+		}
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		int pageNumber = dataJson.getIntValue("pageNum");
+		
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = itemService.getTotalPlan();
+		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
+
+		if(pageNumber > pageTotal)
+			pageNumber = pageTotal;
+		
+		int st = (pageNumber - 1) * eachPage;
+		List<Plan> record = itemService.getPlans(st, eachPage);
+
+		ans.put("pageList", record);
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
+		return ans;
+	}
+	
+	@RequestMapping("/getItemType") // 所有采购计划
+	@ResponseBody
+	public Set<String> getItemType(HttpSession session){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		return cur_env.getItem_type();
+	}
+	
+	@RequestMapping("/getItemCat") // 所有采购计划
+	@ResponseBody
+	public Set<String> getItemCat(HttpSession session, @RequestBody String type){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		return cur_env.getItem_cat().get(type);
+	}
+	
+	@RequestMapping("/getItemCom") // 所有采购计划
+	@ResponseBody
+	public Set<String> getItemCom(HttpSession session, @RequestBody String type){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		return cur_env.getItem_com().get(type);
+	}
+	
+	@RequestMapping("/newPlan") // 所有采购计划
+	@ResponseBody
+	public Integer newPlan(HttpSession session, @RequestBody String data){
+		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wBuy"))) == 0)
+		{
+			return 0;
+		}
+		
+		try{
+			JSONObject dataJson = JSONObject.parseObject(data);
+			Plan newPlan = new Plan();
+			newPlan.setNAME(dataJson.getString("planID"));
+			newPlan.setMONEY(dataJson.getDouble("money")); // zongjia
+			newPlan.setSTAFF(dataJson.getString("planManager"));
+			newPlan.setCOMMENT(dataJson.getString("note"));
+			
+			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			Date date;
+			date = ft.parse(dataJson.getString("delivery"));
+			newPlan.setCTIME(date);
+			
+			if(itemService.addNewPlan(newPlan) == 1) {
+				newPlan = itemService.getPlanByName(dataJson.getString("planName"));
+				JSONObject obj = dataJson.getJSONObject("itemList");
+				PlanDetail pd = new PlanDetail();
+				pd.setPLAN_ID(newPlan.getID());
+				for(String key : obj.keySet()) {
+					JSONObject obj2 = obj.getJSONObject(key);
+					pd.setALL_MONEY(obj2.getDouble("totalPrice"));
+					pd.setCOMMENT(obj2.getString("comment"));
+					pd.setTOTAL(obj2.getInteger("count"));
+					
+					Integer ID = obj2.getIntValue("FAC_ID");
+					
+					if(ID == 0) {
+						FacSta newFs = new FacSta();
+						
+						newFs.setNAME(obj2.getString("FAC_NAME"));
+						newFs.setCAT(obj2.getString("FAC_CAT"));
+						newFs.setCOMMENT("");
+						newFs.setCOMPANY(obj2.getString("FAC_BRAND"));
+						newFs.setFAC_NUMBER(obj2.getString("FAC_NUMBER"));
+						newFs.setTYPE(obj2.getString("FAC_TYPE"));
+						newFs.setFREE(0);
+						newFs.setBAD(0);
+						newFs.setWORKING(0);
+						newFs.setTOTAL(0);
+						
+						itemService.addNewFac(newFs);
+						newFs = itemService.getFacByNumber(obj2.getString("FAC_NUM"));
+						ID = newFs.getID();	
+					}
+					
+					pd.setFAC_ID(ID);
+					pd.setFAC_NAME(obj2.getString("FAC_NAME"));
+					pd.setFAC_NUMBER(obj2.getString("FAC_NUMBER"));
+					
+					itemService.addNewPlanDetail(pd);
+				}
+				return 1;
+			}
+			else
+				return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 }

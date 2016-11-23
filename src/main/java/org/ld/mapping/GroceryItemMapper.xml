@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="org.ld.model.GroceryItem" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="NAME" property="NAME" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="CAT" property="CAT" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
     <result column="TOTAL_LOSS" property="TOTAL_LOSS" jdbcType="INTEGER" />
     <result column="TOTAL_SOLD" property="TOTAL_SOLD" jdbcType="INTEGER" />
@@ -33,8 +33,8 @@
       CAT, TOTAL, TOTAL_LOSS, 
       TOTAL_SOLD, TOTAL_BENIFIT, AVALIABLE, 
       BUY_MONEY, SELL_MONEY)
-    values (#{ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=INTEGER}, 
-      #{CAT,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, #{TOTAL_LOSS,jdbcType=INTEGER}, 
+    values (#{ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, 
+      #{CAT,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER}, #{TOTAL_LOSS,jdbcType=INTEGER}, 
       #{TOTAL_SOLD,jdbcType=INTEGER}, #{TOTAL_BENIFIT,jdbcType=DOUBLE}, #{AVALIABLE,jdbcType=INTEGER}, 
       #{BUY_MONEY,jdbcType=DOUBLE}, #{SELL_MONEY,jdbcType=DOUBLE})
   </insert>
@@ -83,10 +83,10 @@
         #{NAME,jdbcType=VARCHAR},
       </if>
       <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+        #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        #{CAT,jdbcType=INTEGER},
+        #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
@@ -118,10 +118,10 @@
         NAME = #{NAME,jdbcType=VARCHAR},
       </if>
       <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+        TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        CAT = #{CAT,jdbcType=INTEGER},
+        CAT = #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
@@ -150,8 +150,8 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.GroceryItem" >
     update grocery_item
     set NAME = #{NAME,jdbcType=VARCHAR},
-      TYPE = #{TYPE,jdbcType=INTEGER},
-      CAT = #{CAT,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      CAT = #{CAT,jdbcType=VARCHAR},
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       TOTAL_LOSS = #{TOTAL_LOSS,jdbcType=INTEGER},
       TOTAL_SOLD = #{TOTAL_SOLD,jdbcType=INTEGER},

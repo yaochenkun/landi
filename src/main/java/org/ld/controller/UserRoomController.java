@@ -151,7 +151,7 @@ public class UserRoomController {
 	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody String data){
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		int op = dataJson.getIntValue("op");		
+		String op = dataJson.getString("op");		
 		int rid = dataJson.getIntValue("rid");
 		String rn = dataJson.getString("rNum");
 
@@ -166,43 +166,19 @@ public class UserRoomController {
 			ans.put("State", "Valid");
 		}
 		
-//		item_room 0
-//		item_furniture 1
-//		item_electric 2
-//		item_light 3
-//		item_curtain 4
-//		item_little 5
-//		guest_info 6
-		
 		switch(op)
 		{
-		case 0:
+		case "room":
 			Room room = roomService.getRoomById(rid);
 			ans.put("room", room);
 			break;
-		case 1:
-			List<RoomItem> item_furniture = roomService.getItems(rid, cur_env.getSettingsInt().get("item_furniture"));
-			ans.put("item_funiture", item_furniture);
-			break;
-		case 2:
-			List<RoomItem> item_electric = roomService.getItems(rid, cur_env.getSettingsInt().get("item_electric"));
-			ans.put("item_electric", item_electric);
-			break;
-		case 3:
-			List<RoomItem> item_light = roomService.getItems(rid, cur_env.getSettingsInt().get("item_light"));
-			ans.put("item_light", item_light);
-			break;
-		case 4:
-			List<RoomItem> item_curtain = roomService.getItems(rid, cur_env.getSettingsInt().get("item_curtain"));
-			ans.put("item_curtain", item_curtain);
-			break;
-		case 5:
-			List<RoomItem> item_little = roomService.getItems(rid, cur_env.getSettingsInt().get("item_little"));
-			ans.put("item_little", item_little);
-			break;
-		case 6:
+		case "guest":
 			Guest guest = guestService.getGuestByRoomNumber(rn);
 			ans.put("guest_info", guest);
+			break;
+		default:
+			List<RoomItem> item = roomService.getItems(rid, op);
+			ans.put(op, item);
 			break;
 		}
 
@@ -250,7 +226,7 @@ public class UserRoomController {
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rDaily"))) == 0)
 		{
 			ans.put("State", "Invalid");
 			return ans;
@@ -287,7 +263,7 @@ public class UserRoomController {
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rDaily"))) == 0)
 		{
 			ans.put("State", "Invalid");
 			return ans;
@@ -325,7 +301,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addService(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
 		{
 			return 0;
 		}
@@ -355,7 +331,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addSource(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
 		{
 			return 0;
 		}
@@ -397,7 +373,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addSourceGas(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
+		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
 		{
 			return 0;
 		}

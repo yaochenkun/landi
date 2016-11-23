@@ -117,9 +117,9 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<RoomItem> getItems(Integer rid, Integer type) {
+	public List<RoomItem> getItems(Integer rid, String type) {
 		// TODO Auto-generated method stub
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("room_id", rid);
 		map.put("type", type);
 		return roomItemMapper.getItems(map);

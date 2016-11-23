@@ -18,20 +18,21 @@ public interface RoomItemMapper {
 
     int updateByPrimaryKey(RoomItem record);
     
-    //add
-    List<RoomItem> getItems(HashMap<String, Integer> map);
+    //add 
+    List<RoomItem> getItems(HashMap<String, Object> map);
     
-    List<RoomItem> getAllItems(HashMap<String, Integer> map);
+    List<RoomItem> getAllItems(HashMap<String, Object> map);
     
-    List<RoomItem> getItemsByType(HashMap<String, Integer> map);
+    List<RoomItem> getItemsByType(HashMap<String, Object> map);
     
-    List<RoomItem> getItemsByRoom(HashMap<String, Integer> map);
+    List<RoomItem> getItemsByRoom(HashMap<String, Object> map);
     
-    int getTotal(HashMap<String, Integer> map);
+    int getTotal(HashMap<String, Object> map);
     
-    int getTotal();
+    int getAllTotal();
     
-    int getTotalByType(int type);
+    int getTotalByType(String type);
     
     int getTotalByRoom(int rid);
+
 }

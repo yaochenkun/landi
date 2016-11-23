@@ -7,8 +7,8 @@
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="NAME" property="NAME" jdbcType="VARCHAR" />
     <result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="CAT" property="CAT" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
     <result column="BAD" property="BAD" jdbcType="INTEGER" />
     <result column="FREE" property="FREE" jdbcType="INTEGER" />
@@ -33,8 +33,8 @@
       CAT, TOTAL, BAD, FREE, 
       WORKING)
     values (#{ID,jdbcType=INTEGER}, #{FAC_NUMBER,jdbcType=VARCHAR}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR}, #{TYPE,jdbcType=INTEGER}, 
-      #{CAT,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, #{BAD,jdbcType=INTEGER}, #{FREE,jdbcType=INTEGER}, 
+      #{NAME,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, 
+      #{CAT,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER}, #{BAD,jdbcType=INTEGER}, #{FREE,jdbcType=INTEGER}, 
       #{WORKING,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.FacSta" >
@@ -91,10 +91,10 @@
         #{COMPANY,jdbcType=VARCHAR},
       </if>
       <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+        #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        #{CAT,jdbcType=INTEGER},
+        #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
@@ -126,10 +126,10 @@
         COMPANY = #{COMPANY,jdbcType=VARCHAR},
       </if>
       <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+        TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        CAT = #{CAT,jdbcType=INTEGER},
+        CAT = #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
@@ -152,12 +152,23 @@
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
       NAME = #{NAME,jdbcType=VARCHAR},
       COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      TYPE = #{TYPE,jdbcType=INTEGER},
-      CAT = #{CAT,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      CAT = #{CAT,jdbcType=VARCHAR},
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       BAD = #{BAD,jdbcType=INTEGER},
       FREE = #{FREE,jdbcType=INTEGER},
       WORKING = #{WORKING,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getFacByTypeCatBand" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND}
+    ]]>
+  </select>
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fac_sta
+    where FAC_NUMBER = #{NUMBER,jdbcType=VARCHAR}
+  </select>
 </mapper>

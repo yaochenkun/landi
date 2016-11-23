@@ -4,9 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
@@ -27,16 +29,19 @@ public class MyTest {
 	private static Logger logger = Logger.getLogger(MyTest.class);
 	public static void main(String[] args)
 	{
-		CurEnv cur_env = new CurEnv();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-	     String input = args.length == 0 ? "1818-11-11" : args[0];
-	     System.out.print(input + " Parses as ");
-	     Date t;
-	     try {
-	          t = ft.parse(input);
-	          System.out.println(t);
-	     } catch (Exception e) {
-	          System.out.println("Unparseable using " + ft);
-	      }  
+		Para tp = new Para();
+		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
+		
+		for(String key : temp.keySet()){
+			String list = temp.get(key);
+			
+			String[] ans = list.split("[,]");
+			Set<String> news = new HashSet<String>();
+			System.out.println(key);
+			for(int i = 0; i < ans.length; i++) {
+				news.add(ans[i]);
+				System.out.print(ans[i] + " ");
+			}
+		}
 	}
 }

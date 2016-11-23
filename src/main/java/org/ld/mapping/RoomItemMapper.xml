@@ -5,8 +5,8 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
     <result column="ITEM_ID" property="ITEM_ID" jdbcType="INTEGER" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="CAT" property="CAT" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
     <result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
     <result column="NAME" property="NAME" jdbcType="VARCHAR" />
     <result column="TAG" property="TAG" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
       NAME, TAG, COMM, STATE
       )
     values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{ITEM_ID,jdbcType=INTEGER}, 
-      #{TYPE,jdbcType=INTEGER}, #{CAT,jdbcType=INTEGER}, #{COMPANY,jdbcType=VARCHAR}, 
+      #{TYPE,jdbcType=VARCHAR}, #{CAT,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR}, 
       #{NAME,jdbcType=VARCHAR}, #{TAG,jdbcType=VARCHAR}, #{COMM,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}
       )
   </insert>
@@ -81,10 +81,10 @@
         #{ITEM_ID,jdbcType=INTEGER},
       </if>
       <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+        #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        #{CAT,jdbcType=INTEGER},
+        #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="COMPANY != null" >
         #{COMPANY,jdbcType=VARCHAR},
@@ -113,10 +113,10 @@
         ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
       </if>
       <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+        TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="CAT != null" >
-        CAT = #{CAT,jdbcType=INTEGER},
+        CAT = #{CAT,jdbcType=VARCHAR},
       </if>
       <if test="COMPANY != null" >
         COMPANY = #{COMPANY,jdbcType=VARCHAR},
@@ -140,8 +140,8 @@
     update room_item
     set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
       ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
-      TYPE = #{TYPE,jdbcType=INTEGER},
-      CAT = #{CAT,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      CAT = #{CAT,jdbcType=VARCHAR},
       COMPANY = #{COMPANY,jdbcType=VARCHAR},
       NAME = #{NAME,jdbcType=VARCHAR},
       TAG = #{TAG,jdbcType=VARCHAR},
@@ -176,7 +176,7 @@
   </select>
   <select id="getTotalByType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
   	<![CDATA[
-  	select count(*) from room_item where TYPE = #{TYPE,jdbcType=INTEGER}
+  	select count(*) from room_item where TYPE = #{TYPE,jdbcType=VARCHAR}
     ]]>
   </select>
   <select id="getTotalByRoom" resultType="java.lang.Integer" parameterType="java.lang.Integer">
@@ -184,10 +184,9 @@
   	select count(*) from room_item where ROOM_ID = #{RID,jdbcType=INTEGER}
     ]]>
   </select>
-  <select id="getTotal" resultType="java.lang.Integer">
+  <select id="getAllTotal" resultType="java.lang.Integer">
   	<![CDATA[
   	select count(*) from room_item;
     ]]>
   </select>
-  
 </mapper>

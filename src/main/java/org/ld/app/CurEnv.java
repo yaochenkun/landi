@@ -2,7 +2,9 @@ package org.ld.app;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.ld.model.User;
 
@@ -11,6 +13,9 @@ public class CurEnv {
 	private Map<String, String> settings;
 	private Map<String, Integer> settingsInt;
 	private Map<String, Integer> auths;
+	private Set<String> item_type;
+	private Map<String, Set<String>> item_cat;
+	private Map<String, Set<String>> item_com;
 	
 	public CurEnv()
 	{
@@ -18,6 +23,37 @@ public class CurEnv {
 		settings = tp.getParaPair("sysstr", 0, 1);
 		settingsInt = tp.getParaPairInt("sysint", 0, 1);
 		auths = tp.getParaPairInt("auth", 2, 0);
+		item_type = tp.getPara("item_type");
+		
+		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
+		
+		for(String key : temp.keySet()){
+			String list = temp.get(key);
+			
+			String[] ans = list.split("[,]");
+			Set<String> news = new HashSet<String>();
+			
+			for(int i = 0; i < ans.length; i++) {
+				news.add(ans[i]);
+			}
+			
+			item_cat.put(key, news);
+		}
+		
+		temp = tp.getParaPair("item_com", 0, 1);
+		
+		for(String key : temp.keySet()){
+			String list = temp.get(key);
+			
+			String[] ans = list.split("[,]");
+			Set<String> news = new HashSet<String>();
+			
+			for(int i = 0; i < ans.length; i++) {
+				news.add(ans[i]);
+			}
+			
+			item_com.put(key, news);
+		}
 	}
 	
 	public String myMD5(String md5)
@@ -70,5 +106,29 @@ public class CurEnv {
 
 	public void setAuths(Map<String, Integer> auths) {
 		this.auths = auths;
-	}	
+	}
+	
+	public Set<String> getItem_type() {
+		return item_type;
+	}
+
+	public void setItem_type(Set<String> item_type) {
+		this.item_type = item_type;
+	}
+
+	public Map<String, Set<String>> getItem_cat() {
+		return item_cat;
+	}
+
+	public void setItem_cat(Map<String, Set<String>> item_cat) {
+		this.item_cat = item_cat;
+	}
+
+	public Map<String, Set<String>> getItem_com() {
+		return item_com;
+	}
+
+	public void setItem_com(Map<String, Set<String>> item_com) {
+		this.item_com = item_com;
+	}
 }

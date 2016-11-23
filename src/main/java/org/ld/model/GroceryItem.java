@@ -5,9 +5,9 @@ public class GroceryItem {
 
     private String NAME;
 
-    private Integer TYPE;
+    private String TYPE;
 
-    private Integer CAT;
+    private String CAT;
 
     private Integer TOTAL;
 
@@ -39,20 +39,20 @@ public class GroceryItem {
         this.NAME = NAME == null ? null : NAME.trim();
     }
 
-    public Integer getTYPE() {
+    public String getTYPE() {
         return TYPE;
     }
 
-    public void setTYPE(Integer TYPE) {
-        this.TYPE = TYPE;
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE == null ? null : TYPE.trim();
     }
 
-    public Integer getCAT() {
+    public String getCAT() {
         return CAT;
     }
 
-    public void setCAT(Integer CAT) {
-        this.CAT = CAT;
+    public void setCAT(String CAT) {
+        this.CAT = CAT == null ? null : CAT.trim();
     }
 
     public Integer getTOTAL() {
