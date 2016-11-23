@@ -1,145 +1,151 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.RoomMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.Room" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
-    <result column="AREA" property="AREA" jdbcType="DOUBLE" />
-    <result column="RENT" property="RENT" jdbcType="INTEGER" />
-    <result column="STATE" property="STATE" jdbcType="INTEGER" />
-    <result column="COMM" property="COMM" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, TYPE, AREA, RENT, STATE, COMM
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from room
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from room
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.Room" >
-    insert into room (ID, ROOM_NUMBER, TYPE, 
-      AREA, RENT, STATE, COMM
-      )
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, 
-      #{AREA,jdbcType=DOUBLE}, #{RENT,jdbcType=INTEGER}, #{STATE,jdbcType=INTEGER}, #{COMM,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.Room" >
-    insert into room
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER,
-      </if>
-      <if test="TYPE != null" >
-        TYPE,
-      </if>
-      <if test="AREA != null" >
-        AREA,
-      </if>
-      <if test="RENT != null" >
-        RENT,
-      </if>
-      <if test="STATE != null" >
-        STATE,
-      </if>
-      <if test="COMM != null" >
-        COMM,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="AREA != null" >
-        #{AREA,jdbcType=DOUBLE},
-      </if>
-      <if test="RENT != null" >
-        #{RENT,jdbcType=INTEGER},
-      </if>
-      <if test="STATE != null" >
-        #{STATE,jdbcType=INTEGER},
-      </if>
-      <if test="COMM != null" >
-        #{COMM,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Room" >
-    update room
-    <set >
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="AREA != null" >
-        AREA = #{AREA,jdbcType=DOUBLE},
-      </if>
-      <if test="RENT != null" >
-        RENT = #{RENT,jdbcType=INTEGER},
-      </if>
-      <if test="STATE != null" >
-        STATE = #{STATE,jdbcType=INTEGER},
-      </if>
-      <if test="COMM != null" >
-        COMM = #{COMM,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.Room" >
-    update room
-    set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      TYPE = #{TYPE,jdbcType=VARCHAR},
-      AREA = #{AREA,jdbcType=DOUBLE},
-      RENT = #{RENT,jdbcType=INTEGER},
-      STATE = #{STATE,jdbcType=INTEGER},
-      COMM = #{COMM,jdbcType=VARCHAR}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from room
-    where ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR}
-  </select>
-  <select id="getRoomByType" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from room
-    where TYPE = #{TYPE,jdbcType=VARCHAR}
-  </select>
-  <select id="getRoomByState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from room
-    where STATE = #{STATE,jdbcType=INTEGER}
-  </select>
-  <select id="getAllRoom" resultMap="BaseResultMap" >
+<mapper namespace="org.ld.dao.RoomMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.Room">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+		<result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+		<result column="AREA" property="AREA" jdbcType="DOUBLE" />
+		<result column="RENT" property="RENT" jdbcType="INTEGER" />
+		<result column="STATE" property="STATE" jdbcType="INTEGER" />
+		<result column="COMM" property="COMM" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ROOM_NUMBER, TYPE, AREA, RENT, STATE, COMM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from room
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from room
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.Room">
+		insert into room (ID, ROOM_NUMBER, TYPE,
+		AREA, RENT, STATE, COMM
+		)
+		values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR},
+		#{TYPE,jdbcType=VARCHAR},
+		#{AREA,jdbcType=DOUBLE}, #{RENT,jdbcType=INTEGER}, #{STATE,jdbcType=INTEGER},
+		#{COMM,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.Room">
+		insert into room
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER,
+			</if>
+			<if test="TYPE != null">
+				TYPE,
+			</if>
+			<if test="AREA != null">
+				AREA,
+			</if>
+			<if test="RENT != null">
+				RENT,
+			</if>
+			<if test="STATE != null">
+				STATE,
+			</if>
+			<if test="COMM != null">
+				COMM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_NUMBER != null">
+				#{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="TYPE != null">
+				#{TYPE,jdbcType=VARCHAR},
+			</if>
+			<if test="AREA != null">
+				#{AREA,jdbcType=DOUBLE},
+			</if>
+			<if test="RENT != null">
+				#{RENT,jdbcType=INTEGER},
+			</if>
+			<if test="STATE != null">
+				#{STATE,jdbcType=INTEGER},
+			</if>
+			<if test="COMM != null">
+				#{COMM,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Room">
+		update room
+		<set>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="TYPE != null">
+				TYPE = #{TYPE,jdbcType=VARCHAR},
+			</if>
+			<if test="AREA != null">
+				AREA = #{AREA,jdbcType=DOUBLE},
+			</if>
+			<if test="RENT != null">
+				RENT = #{RENT,jdbcType=INTEGER},
+			</if>
+			<if test="STATE != null">
+				STATE = #{STATE,jdbcType=INTEGER},
+			</if>
+			<if test="COMM != null">
+				COMM = #{COMM,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.Room">
+		update room
+		set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+		TYPE = #{TYPE,jdbcType=VARCHAR},
+		AREA = #{AREA,jdbcType=DOUBLE},
+		RENT = #{RENT,jdbcType=INTEGER},
+		STATE = #{STATE,jdbcType=INTEGER},
+		COMM = #{COMM,jdbcType=VARCHAR}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<select id="selectByNumber" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from room
+		where ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR}
+	</select>
+	<select id="getRoomByType" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from room
+		where TYPE = #{TYPE,jdbcType=VARCHAR}
+	</select>
+	<select id="getRoomByState" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from room
+		where STATE = #{STATE,jdbcType=INTEGER}
+	</select>
+	<select id="getAllRoom" resultMap="BaseResultMap">
     <![CDATA[
   	select * from room
   	]]>
-  </select>
-  <select id="totalRow" resultType="java.lang.Integer">
+	</select>
+	<select id="totalRow" resultType="java.lang.Integer">
   	<![CDATA[
   	select count(*) from room
   	]]>
-  </select>
+	</select>
 </mapper>

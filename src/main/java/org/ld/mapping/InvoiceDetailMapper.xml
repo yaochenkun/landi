@@ -1,93 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.InvoiceDetailMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.InvoiceDetail" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="INV_ID" property="INV_ID" jdbcType="INTEGER" />
-    <result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
-    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
-    <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, INV_ID, ITEM, TOTAL, ALL_MONEY
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from invoice_detail
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from invoice_detail
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.InvoiceDetail" >
-    insert into invoice_detail (ID, INV_ID, ITEM, 
-      TOTAL, ALL_MONEY)
-    values (#{ID,jdbcType=INTEGER}, #{INV_ID,jdbcType=INTEGER}, #{ITEM,jdbcType=VARCHAR}, 
-      #{TOTAL,jdbcType=INTEGER}, #{ALL_MONEY,jdbcType=DOUBLE})
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.InvoiceDetail" >
-    insert into invoice_detail
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="INV_ID != null" >
-        INV_ID,
-      </if>
-      <if test="ITEM != null" >
-        ITEM,
-      </if>
-      <if test="TOTAL != null" >
-        TOTAL,
-      </if>
-      <if test="ALL_MONEY != null" >
-        ALL_MONEY,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="INV_ID != null" >
-        #{INV_ID,jdbcType=INTEGER},
-      </if>
-      <if test="ITEM != null" >
-        #{ITEM,jdbcType=VARCHAR},
-      </if>
-      <if test="TOTAL != null" >
-        #{TOTAL,jdbcType=INTEGER},
-      </if>
-      <if test="ALL_MONEY != null" >
-        #{ALL_MONEY,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.InvoiceDetail" >
-    update invoice_detail
-    <set >
-      <if test="INV_ID != null" >
-        INV_ID = #{INV_ID,jdbcType=INTEGER},
-      </if>
-      <if test="ITEM != null" >
-        ITEM = #{ITEM,jdbcType=VARCHAR},
-      </if>
-      <if test="TOTAL != null" >
-        TOTAL = #{TOTAL,jdbcType=INTEGER},
-      </if>
-      <if test="ALL_MONEY != null" >
-        ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.InvoiceDetail" >
-    update invoice_detail
-    set INV_ID = #{INV_ID,jdbcType=INTEGER},
-      ITEM = #{ITEM,jdbcType=VARCHAR},
-      TOTAL = #{TOTAL,jdbcType=INTEGER},
-      ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
+<mapper namespace="org.ld.dao.InvoiceDetailMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.InvoiceDetail">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="INV_ID" property="INV_ID" jdbcType="INTEGER" />
+		<result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
+		<result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+		<result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, INV_ID, ITEM, TOTAL, ALL_MONEY
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from invoice_detail
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from invoice_detail
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.InvoiceDetail">
+		insert into invoice_detail (ID, INV_ID, ITEM,
+		TOTAL, ALL_MONEY)
+		values (#{ID,jdbcType=INTEGER}, #{INV_ID,jdbcType=INTEGER},
+		#{ITEM,jdbcType=VARCHAR},
+		#{TOTAL,jdbcType=INTEGER}, #{ALL_MONEY,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.InvoiceDetail">
+		insert into invoice_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="INV_ID != null">
+				INV_ID,
+			</if>
+			<if test="ITEM != null">
+				ITEM,
+			</if>
+			<if test="TOTAL != null">
+				TOTAL,
+			</if>
+			<if test="ALL_MONEY != null">
+				ALL_MONEY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="INV_ID != null">
+				#{INV_ID,jdbcType=INTEGER},
+			</if>
+			<if test="ITEM != null">
+				#{ITEM,jdbcType=VARCHAR},
+			</if>
+			<if test="TOTAL != null">
+				#{TOTAL,jdbcType=INTEGER},
+			</if>
+			<if test="ALL_MONEY != null">
+				#{ALL_MONEY,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.InvoiceDetail">
+		update invoice_detail
+		<set>
+			<if test="INV_ID != null">
+				INV_ID = #{INV_ID,jdbcType=INTEGER},
+			</if>
+			<if test="ITEM != null">
+				ITEM = #{ITEM,jdbcType=VARCHAR},
+			</if>
+			<if test="TOTAL != null">
+				TOTAL = #{TOTAL,jdbcType=INTEGER},
+			</if>
+			<if test="ALL_MONEY != null">
+				ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.InvoiceDetail">
+		update invoice_detail
+		set INV_ID = #{INV_ID,jdbcType=INTEGER},
+		ITEM = #{ITEM,jdbcType=VARCHAR},
+		TOTAL = #{TOTAL,jdbcType=INTEGER},
+		ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
 </mapper>

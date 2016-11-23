@@ -1,15 +1,50 @@
-.body{width: 800px; margin: 2em auto; margin-bottom: 9em;}
+.body {
+	width: 800px;
+	margin: 2em auto;
+	margin-bottom: 9em;
+}
 
-.body-content{margin-left: 180px;}
+.body-content {
+	margin-left: 180px;
+}
 
-.body-content li{height: 3.5em; font-size: 15px;}
-.body-content li .span{width: 8em; display: inline-block;}
-.body-content li input{width: 20em; padding: .1em .8em;}
+.body-content li {
+	height: 3.5em;
+	font-size: 15px;
+}
 
-.red-right{margin-left: 2em;}
-#roomIdWarning{display: none; position: absolute; margin-top: -25px; margin-left: 25px; font-size: 12px;}
-.border-red{border: 1px solid red;}
+.body-content li .span {
+	width: 8em;
+	display: inline-block;
+}
+
+.body-content li input {
+	width: 20em;
+	padding: .1em .8em;
+}
+
+.red-right {
+	margin-left: 2em;
+}
+
+#roomIdWarning {
+	display: none;
+	position: absolute;
+	margin-top: -25px;
+	margin-left: 25px;
+	font-size: 12px;
+}
+
+.border-red {
+	border: 1px solid red;
+}
 
 /* 添加燃气费样式 */
-.gasName{margin-top: 2em; color: #279;}
-.goback{margin-top: 1.5em;}
+.gasName {
+	margin-top: 2em;
+	color: #279;
+}
+
+.goback {
+	margin-top: 1.5em;
+}

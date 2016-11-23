@@ -1,138 +1,143 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.RoomMeterMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.RoomMeter" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="METER_NUMBER" property="METER_NUMBER" jdbcType="VARCHAR" />
-    <result column="YEAR_INIT_VAL" property="YEAR_INIT_VAL" jdbcType="DOUBLE" />
-    <result column="LAST_MONTH_VAL" property="LAST_MONTH_VAL" jdbcType="DOUBLE" />
-    <result column="CUR_VAL" property="CUR_VAL" jdbcType="DOUBLE" />
-    <result column="CUR_TIME" property="CUR_TIME" jdbcType="DATE" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ROOM_ID, TYPE, METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_VAL, CUR_TIME
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from room_meter
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from room_meter
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.RoomMeter" >
-    insert into room_meter (ID, ROOM_ID, TYPE, 
-      METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, 
-      CUR_VAL, CUR_TIME)
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, 
-      #{METER_NUMBER,jdbcType=VARCHAR}, #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE}, 
-      #{CUR_VAL,jdbcType=DOUBLE}, #{CUR_TIME,jdbcType=DATE})
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.RoomMeter" >
-    insert into room_meter
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="ROOM_ID != null" >
-        ROOM_ID,
-      </if>
-      <if test="TYPE != null" >
-        TYPE,
-      </if>
-      <if test="METER_NUMBER != null" >
-        METER_NUMBER,
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        YEAR_INIT_VAL,
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        LAST_MONTH_VAL,
-      </if>
-      <if test="CUR_VAL != null" >
-        CUR_VAL,
-      </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_ID != null" >
-        #{ROOM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="METER_NUMBER != null" >
-        #{METER_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        #{LAST_MONTH_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="CUR_VAL != null" >
-        #{CUR_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="CUR_TIME != null" >
-        #{CUR_TIME,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomMeter" >
-    update room_meter
-    <set >
-      <if test="ROOM_ID != null" >
-        ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="METER_NUMBER != null" >
-        METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="CUR_VAL != null" >
-        CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME = #{CUR_TIME,jdbcType=DATE},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.RoomMeter" >
-    update room_meter
-    set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
-      TYPE = #{TYPE,jdbcType=INTEGER},
-      METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
-      YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
-      CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
-      CUR_TIME = #{CUR_TIME,jdbcType=DATE}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <select id="getMeters" resultMap="BaseResultMap" parameterType="java.lang.String">
+<mapper namespace="org.ld.dao.RoomMeterMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.RoomMeter">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
+		<result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+		<result column="METER_NUMBER" property="METER_NUMBER" jdbcType="VARCHAR" />
+		<result column="YEAR_INIT_VAL" property="YEAR_INIT_VAL"
+			jdbcType="DOUBLE" />
+		<result column="LAST_MONTH_VAL" property="LAST_MONTH_VAL"
+			jdbcType="DOUBLE" />
+		<result column="CUR_VAL" property="CUR_VAL" jdbcType="DOUBLE" />
+		<result column="CUR_TIME" property="CUR_TIME" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ROOM_ID, TYPE, METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_VAL,
+		CUR_TIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from room_meter
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from room_meter
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.RoomMeter">
+		insert into room_meter (ID, ROOM_ID, TYPE,
+		METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL,
+		CUR_VAL, CUR_TIME)
+		values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER},
+		#{TYPE,jdbcType=INTEGER},
+		#{METER_NUMBER,jdbcType=VARCHAR}, #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE},
+		#{CUR_VAL,jdbcType=DOUBLE}, #{CUR_TIME,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.RoomMeter">
+		insert into room_meter
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="ROOM_ID != null">
+				ROOM_ID,
+			</if>
+			<if test="TYPE != null">
+				TYPE,
+			</if>
+			<if test="METER_NUMBER != null">
+				METER_NUMBER,
+			</if>
+			<if test="YEAR_INIT_VAL != null">
+				YEAR_INIT_VAL,
+			</if>
+			<if test="LAST_MONTH_VAL != null">
+				LAST_MONTH_VAL,
+			</if>
+			<if test="CUR_VAL != null">
+				CUR_VAL,
+			</if>
+			<if test="CUR_TIME != null">
+				CUR_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_ID != null">
+				#{ROOM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="TYPE != null">
+				#{TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="METER_NUMBER != null">
+				#{METER_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="YEAR_INIT_VAL != null">
+				#{YEAR_INIT_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="LAST_MONTH_VAL != null">
+				#{LAST_MONTH_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="CUR_VAL != null">
+				#{CUR_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="CUR_TIME != null">
+				#{CUR_TIME,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomMeter">
+		update room_meter
+		<set>
+			<if test="ROOM_ID != null">
+				ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="TYPE != null">
+				TYPE = #{TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="METER_NUMBER != null">
+				METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="YEAR_INIT_VAL != null">
+				YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="LAST_MONTH_VAL != null">
+				LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="CUR_VAL != null">
+				CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
+			</if>
+			<if test="CUR_TIME != null">
+				CUR_TIME = #{CUR_TIME,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.RoomMeter">
+		update room_meter
+		set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+		TYPE = #{TYPE,jdbcType=INTEGER},
+		METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
+		YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
+		LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
+		CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
+		CUR_TIME = #{CUR_TIME,jdbcType=DATE}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<select id="getMeters" resultMap="BaseResultMap" parameterType="java.lang.String">
   	<![CDATA[
   	select * from room_meter where ROOM_ID = #{room_id} and TYPE = #{type}
     ]]>
-  </select>
-  <select id="getMeter" resultMap="BaseResultMap" parameterType="org.">
+	</select>
+	<select id="getMeter" resultMap="BaseResultMap" parameterType="java.lang.String">
   	<![CDATA[
   	select * from room_meter where METER_NUMBER = #{MN,jdbcType=VARCHAR}
     ]]>
-  </select>
+	</select>
 </mapper>

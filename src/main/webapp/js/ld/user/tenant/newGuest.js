@@ -230,39 +230,39 @@ var addGuest = function(){
 	    guestNumber = $(".tab-content-guest .item-guestnumber input").eq(0).val(),
 		timeIn = $(".tab-content-guest .item-time input").eq(0).val(),
 		timeOut = $(".tab-content-guest .item-time input").eq(1).val(),
-		rent = $(".tab-content-guest .item-car input").eq(0).val(),
+		rent = Number($(".tab-content-guest .item-car input").eq(0).val()),
 		carport = $(".tab-content-guest .item-car input").eq(1).val(),
 		remark = $(".tab-content-guest .item-remark input").eq(0).val();
 
 	let guestData = '"guest":{"STR_Name":"'+ name +'","BOOL_Checkin":'+ checkin +',"STR_RommID":"'+ roomID +'","STR_Type":"'+ type +'",'
 		    +'"STR_ContractID":"'+ contractID +'","STR_Tel":"'+ tel +'","STR_Company":"'+ company +'",'
 		    +'"STR_Position":"'+ position +'","INT_GuestNumber":'+ guestNumber +','
-		    +'"STR_TimeIn":"'+ timeIn +'","STR_TimeOut":"'+ timeOut +'","INT_Rent":'+ rent +',"STR_Carport":"'+ carport +'",'
+		    +'"STR_TimeIn":"'+ timeIn +'","STR_TimeOut":"'+ timeOut +'","DOU_Rent":'+ rent +',"STR_Carport":"'+ carport +'",'
 		    +'"STR_Remark":"'+ remark +'"},';
 
 
 
 	// 获取业主信息
 	var Name = $(".tab-content-owner .item-name input").eq(0).val(),
-		Rent = $(".tab-content-owner .item-rent input").eq(0).val(),
-		Service = $(".tab-content-owner .item-rent input").eq(1).val(),
-		Return = $(".tab-content-owner .item-other input").eq(0).val(),
+		Rent = Number($(".tab-content-owner .item-rent input").eq(0).val()),
+		Service = Number($(".tab-content-owner .item-rent input").eq(1).val()),
+		Return = Number($(".tab-content-owner .item-other input").eq(0).val()),
 		Other = $(".tab-content-owner .item-other input").eq(1).val();
 
-	let hostData = '"host":{"STR_Name":"'+ Name +'","INT_Rent":'+ Rent +',"INT_Service":'+ Service +','
-		    +'"INT_Return:":'+ Return +',"STR_Other":"'+ Other +'"},';
+	let hostData = '"host":{"STR_Name":"'+ Name +'","DOU_Rent":'+ Rent +',"DOU_Service":'+ Service +','
+		    +'"DOU_Return":'+ Return +',"STR_Other":"'+ Other +'"},';
 
 
 	// 获取中介信息
 	var agentCompany = $(".tab-content-agency .item-company input").eq(0).val(),
-		agentFirst = $(".tab-content-agency .item-first input").eq(0).val(),
-		agentSecond = $(".tab-content-agency .item-second input").eq(0).val(),
-		agentThird = $(".tab-content-agency .item-third input").eq(0).val(),
-		agentFourth = $(".tab-content-agency .item-fourth input").eq(0).val(),
-		LEFirst = $(".tab-content-agency .item-first input").eq(1).val(),
-		LESecond = $(".tab-content-agency .item-second input").eq(1).val(),
-		LEThird = $(".tab-content-agency .item-third input").eq(1).val(),
-		LEFourth = $(".tab-content-agency .item-fourth input").eq(1).val();
+		agentFirst = Number($(".tab-content-agency .item-first input").eq(0).val()),
+		agentSecond = Number($(".tab-content-agency .item-second input").eq(0).val()),
+		agentThird = Number($(".tab-content-agency .item-third input").eq(0).val()),
+		agentFourth = Number($(".tab-content-agency .item-fourth input").eq(0).val()),
+		LEFirst = Number($(".tab-content-agency .item-first input").eq(1).val()),
+		LESecond = Number($(".tab-content-agency .item-second input").eq(1).val()),
+		LEThird = Number($(".tab-content-agency .item-third input").eq(1).val()),
+		LEFourth = Number($(".tab-content-agency .item-fourth input").eq(1).val());
 
 	let internData = '"intern":{"STR_Company":"'+ agentCompany +'","DOU_AgentFirst":'+ agentFirst +',"DOU_AgentSecond":'+ agentSecond +','
 		    +'"DOU_AgentThird":'+ agentThird +',"DOU_AgentFourth":'+ agentFourth +',"DOU_LEFirst":'+ LEFirst +','
@@ -270,18 +270,18 @@ var addGuest = function(){
 
 
 	// 获取房款收付信息
-	var RentNumber = $(".tab-content-housepay .item-rent .item-date input").eq(0).val(),
-		RentCycle = $(".tab-content-housepay .item-rent .item-cycle input").eq(0).val(),
+	var RentNumber = Number($(".tab-content-housepay .item-rent .item-date input").eq(0).val()),
+		RentCycle = Number($(".tab-content-housepay .item-rent .item-cycle input").eq(0).val()),
 		RentWay = $(".tab-content-housepay .item-rent .item-cycle input").eq(1).val(),
-		ReturnNumber = $(".tab-content-housepay .item-return .item-date input").eq(0).val(),
-		ReturnCycle = $(".tab-content-housepay .item-return .item-cycle input").eq(0).val(),
-		BillNumber = $(".tab-content-housepay .item-bill .item-date input").eq(0).val(),
-		BillCycle = $(".tab-content-housepay .item-bill .item-cycle input").eq(0).val(),
-		BillTime = $(".tab-content-housepay .item-bill .item-cycle input").eq(1).val();
+		ReturnNumber = Number($(".tab-content-housepay .item-return .item-date input").eq(0).val()),
+		ReturnCycle = Number($(".tab-content-housepay .item-return .item-cycle input").eq(0).val()),
+		BillNumber = Number($(".tab-content-housepay .item-bill .item-date input").eq(0).val()),
+		BillCycle = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(0).val()),
+		BillTime = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(1).val());
 
-	let rentData = '"balance":{"STR_RentNumber":"'+ RentNumber +'","STR_RentCycle":"'+ RentCycle +'","STR_RentWay":"'+ RentWay +'",'
-            +'"STR_ReturnNumber":"'+ ReturnNumber +'","STR_ReturnCycle":"'+ ReturnCycle +'",'
-		    +'"STR_BillNumber":"'+ BillNumber +'","STR_BillCycle":"'+ BillCycle +'","STR_BillTime":"'+ BillTime +'"},';	
+	let rentData = '"balance":{"INT_RentNumber":'+ RentNumber +',"INT_RentCycle":'+ RentCycle +',"STR_RentWay":"'+ RentWay +'",'
+            +'"INT_ReturnNumber":'+ ReturnNumber +',"INT_ReturnCycle":'+ ReturnCycle +','
+		    +'"INT_BillNumber":'+ BillNumber +',"INT_BillCycle":'+ BillCycle +',"INT_BillTime":'+ BillTime +'},';	
 
 	// 获取服务信息
 	// 网费
@@ -290,13 +290,13 @@ var addGuest = function(){
 		IntLECount = serviceIntInput.eq(1).val(),
 		IntSPCCharge = serviceIntInput.eq(2).val(),
 		IntSPCCount = serviceIntInput.eq(3).val(),
-		IntCycle = serviceIntInput.eq(4).val(),
+		IntCycle = Number(serviceIntInput.eq(4).val()),
 		IntNote = serviceIntInput.eq(5).val(),
 		IntGive = Number($(".tab-content-service .col-Int input[type='checkbox']").is(":checked"));
 
-	let IntData = '"DOU_IntLECharge":'+ IntLECharge +',"INT_IntLECount":'+ IntLECount +','
-		    +'"DOU_IntSPCCharge":'+ IntSPCCharge +',"INT_IntSPCCount":'+ IntSPCCount+','
-		    +'"STR_IntCycle":"'+ IntCycle +'","STR_IntNote":"'+ IntNote +'","BOOL_IntGive":'+ IntGive +',';
+	let IntData = '"DOU_LECharge":'+ IntLECharge +',"INT_LECount":'+ IntLECount +','
+		    +'"DOU_SPCCharge":'+ IntSPCCharge +',"INT_SPCCount":'+ IntSPCCount+','
+		    +'"INT_Cycle":'+ IntCycle +',"STR_Note":"'+ IntNote +'","BOOL_Give":'+ IntGive;
 
     // 能源费
     var serviceResourceInput = $(".tab-content-service .col-resource input"),
@@ -309,10 +309,10 @@ var addGuest = function(){
 		resourceNote = serviceResourceInput.eq(6).val(),
 		resourceGive = Number(serviceResourceInput.eq(7).is(":checked"));
 
-	let resourceData = '"BOOL_resourceSelfpay":'+ resourceSelfpay+','
-			+'"DOU_resourceLECharge":'+ resourceLECharge +',"INT_resourceLECount":'+ resourceLECount +','
-		    +'"DOU_resourceSPCCharge":'+ resourceSPCCharge +',"INT_resourceSPCCount":'+ resourceSPCCount+','
-		    +'"STR_resourceCycle":"'+ resourceCycle +'","STR_resourceNote":"'+ resourceNote +'","BOOL_resourceGive":'+ resourceGive +',';
+	let resourceData = '"BOOL_Selfpay":'+ resourceSelfpay+','
+			+'"DOU_LECharge":'+ resourceLECharge +',"INT_LECount":'+ resourceLECount +','
+		    +'"DOU_SPCCharge":'+ resourceSPCCharge +',"INT_SPCCount":'+ resourceSPCCount+','
+		    +'"INT_Cycle":'+ resourceCycle +',"STR_Note":"'+ resourceNote +'","BOOL_Give":'+ resourceGive;
 
 	// 早餐人数
 	var serviceBFInput = $(".tab-content-service .col-breakfast input"),
@@ -324,9 +324,9 @@ var addGuest = function(){
 		breakfastNote = serviceBFInput.eq(5).val(),
 		breakfastGive = Number($(".tab-content-service .col-breakfast input[type='checkbox']").is(":checked"));
 
-	let breakfastData = '"DOU_breakfastLECharge":'+ breakfastLECharge +',"INT_breakfastLECount":'+ breakfastLECount +','
-		    +'"DOU_breakfastSPCCharge":'+ breakfastSPCCharge +',"INT_breakfastSPCCount":'+ breakfastSPCCount+','
-		    +'"STR_breakfastCycle":"'+ breakfastCycle +'","STR_breakfastNote":"'+ breakfastNote +'","BOOL_breakfastGive":'+ breakfastGive +',';
+	let breakfastData = '"DOU_LECharge":'+ breakfastLECharge +',"INT_LECount":'+ breakfastLECount +','
+		    +'"DOU_SPCCharge":'+ breakfastSPCCharge +',"INT_SPCCount":'+ breakfastSPCCount+','
+		    +'"INT_Cycle":'+ breakfastCycle +',"STR_Note":"'+ breakfastNote +'","BOOL_Give":'+ breakfastGive;
 
 	// 停车费
 	var serviceParkInput = $(".tab-content-service .col-park input"),
@@ -338,9 +338,9 @@ var addGuest = function(){
 		parkNote = serviceParkInput.eq(5).val(),
 		parkGive = Number($(".tab-content-service .col-park input[type='checkbox']").is(":checked"));
 
-	let parkData = '"DOU_parkLECharge":'+ parkLECharge +',"INT_parkLECount":'+ parkLECount +','
-		    +'"DOU_parkSPCCharge":'+ parkSPCCharge +',"INT_parkSPCCount":'+ parkSPCCount+','
-		    +'"STR_parkCycle":"'+ parkCycle +'","STR_parkNote":"'+ parkNote +'","BOOL_parkGive":'+ parkGive +',';
+	let parkData = '"DOU_LECharge":'+ parkLECharge +',"INT_LECount":'+ parkLECount +','
+		    +'"DOU_SPCCharge":'+ parkSPCCharge +',"INT_SPCCount":'+ parkSPCCount+','
+		    +'"INT_Cycle":'+ parkCycle +',"STR_Note":"'+ parkNote +'","BOOL_Give":'+ parkGive;
 
 	// 电视费
 	var serviceTVInput = $(".tab-content-service .col-tv input"),
@@ -352,9 +352,9 @@ var addGuest = function(){
 		tvNote = serviceTVInput.eq(5).val(),
 		tvGive = Number($(".tab-content-service .col-tv input[type='checkbox']").is(":checked"));
 
-	let tvData = '"DOU_tvLECharge":'+ tvLECharge +',"INT_tvLECount":'+ tvLECount +','
-		    +'"DOU_tvSPCCharge":'+ tvSPCCharge +',"INT_tvSPCCount":'+ tvSPCCount+','
-		    +'"STR_tvCycle":"'+ tvCycle +'","STR_tvNote":"'+ tvNote +'","BOOL_tvGive":'+ tvGive +',';
+	let tvData = '"DOU_LECharge":'+ tvLECharge +',"INT_LECount":'+ tvLECount +','
+		    +'"DOU_SPCCharge":'+ tvSPCCharge +',"INT_SPCCount":'+ tvSPCCount+','
+		    +'"INT_Cycle":'+ tvCycle +',"STR_Note":"'+ tvNote +'","BOOL_Give":'+ tvGive;
 
 	// 报刊杂志费
 	var serviceNPInput = $(".tab-content-service .col-newspaper input"),
@@ -366,9 +366,9 @@ var addGuest = function(){
 		newspaperNote = serviceNPInput.eq(5).val(),
 		newspaperGive = Number($(".tab-content-service .col-newspaper input[type='checkbox']").is(":checked"));
 
-	let newspaperData = '"DOU_newspaperLECharge":'+ newspaperLECharge +',"INT_newspaperLECount":'+ newspaperLECount +','
-		    +'"DOU_newspaperSPCCharge":'+ newspaperSPCCharge +',"INT_newspaperSPCCount":'+ newspaperSPCCount+','
-		    +'"STR_newspaperCycle":"'+ newspaperCycle +'","STR_newspaperNote":"'+ newspaperNote +'","BOOL_newspaperGive":'+ newspaperGive +',';
+	let newspaperData = '"DOU_LECharge":'+ newspaperLECharge +',"INT_LECount":'+ newspaperLECount +','
+		    +'"DOU_SPCCharge":'+ newspaperSPCCharge +',"INT_SPCCount":'+ newspaperSPCCount+','
+		    +'"INT_Cycle":'+ newspaperCycle +',"STR_Note":"'+ newspaperNote +'","BOOL_Give":'+ newspaperGive;
 
     // 洗衣费
 	var clothLECharge = $(".tab-content-service .col-cloth input").eq(0).val(),
@@ -379,9 +379,9 @@ var addGuest = function(){
 		clothNote = $(".tab-content-service .col-cloth input").eq(5).val(),
 		clothGive = Number($(".tab-content-service .col-cloth input[type='checkbox']").is(":checked"));
 
-	let clothData = '"DOU_clothLECharge":'+ clothLECharge +',"cloth_clothLECount":'+ clothLECount +','
-		    +'"DOU_clothSPCCharge":'+ clothSPCCharge +',"cloth_clothSPCCount":'+ clothSPCCount+','
-		    +'"STR_clothCycle":"'+ clothCycle +'","STR_clothNote":"'+ clothNote +'","BOOL_clothGive":'+ clothGive +',';
+	let clothData = '"DOU_LECharge":'+ clothLECharge +',"INT_LECount":'+ clothLECount +','
+		    +'"DOU_SPCCharge":'+ clothSPCCharge +',"INT_SPCCount":'+ clothSPCCount+','
+		    +'"INT_Cycle":'+ clothCycle +',"STR_Note":"'+ clothNote +'","BOOL_Give":'+ clothGive;
 
 	// 餐券
 	var lunchData = "";
@@ -392,7 +392,7 @@ var addGuest = function(){
 		    +'{"STR_RName":"'+  $(".tab-content-service .col-lunch").eq(i-1).children("td").eq(0).text() +'",'
 		    +'"DOU_LECharge":'+ R.eq(0).val() +',"INT_LECount":'+ R.eq(1).val() +','
 		    +'"DOU_SPCCharge":' + R.eq(2).val() +',"INT_SPCCount":'+ R.eq(3).val() +','
-		    +'"STR_Cycle":"'+ R.eq(4).val() +'","STR_Note":"'+ R.eq(5).val() +'",'
+		    +'"INT_Cycle":'+ R.eq(4).val() +',"STR_Note":"'+ R.eq(5).val() +'",'
 		    +'"BOOL_Give":'+ Number($(".tab-content-service .col-lunch:nth-child("+ i +") td input[type='checkbox']").is("checked")) +'},';
 		lunchData += perRestaurant;
 	}
@@ -445,7 +445,7 @@ var addGuest = function(){
     		var perAdd = '"OBJ_PERADD'+ i +'":{"STR_ADD_NAME":"'+ A.eq(0).val() +'",'
     		+'"DOU_LECharge":'+ A.eq(1).val() +',"INT_LECount":'+ A.eq(2).val() +','
 		    +'"DOU_SPCCharge":' + A.eq(3).val() +',"INT_SPCCount":'+ A.eq(4).val() +','
-		    +'"STR_Cycle":"'+ A.eq(5).val() +'","STR_Note":"'+ A.eq(6).val() +'",'
+		    +'"INT_Cycle":'+ A.eq(5).val() +',"STR_Note":"'+ A.eq(6).val() +'",'
 		    +'"BOOL_Give":'+ Number($(".tab-content-service .col-add:nth-child("+ i +") td input[type='checkbox']").is("checked")) +'},';
     	    
     	    addData += perAdd;
@@ -456,29 +456,32 @@ var addGuest = function(){
 	$.ajax({
 		url:"/",
 		type:"post",
-		dataType:'json',
-		contentType:'application/json',
+		//dataType:'json',
+		//contentType:'application/json',
 		data:'{' + guestData + hostData + internData + rentData
 
-		    +'"service":{' + IntData + resourceData + breakfastData + parkData + tvData + newspaperData + clothData 
+		    +'"service":{' 
+            +'"Int":{'+ IntData +'},' + '"resource":{'+ resourceData +'},' + '"breakfast":{'+ breakfastData +'},' 
+            +'"park":{'+ parkData +'},' + '"tv":{'+ tvData +'},' + '"newspaper":{'+ newspaperData +'},' 
+            +'"cloth":{'+ clothData +'},'  
 		    //午餐
 			+'"OBJ_lunchMap":{'+ lunchData +'},'
 
-		    +'"DOU_breakLECharge":'+ breakLECharge +',"INT_breakLECount":'+ breakLECount +','
-		    +'"DOU_breakSPCCharge":'+ breakSPCCharge +',"INT_breakSPCCount":'+ breakSPCCount+','
-		    +'"STR_breakCycle":"'+ breakCycle +'","STR_breakNote":"'+ breakNote +'","BOOL_breakGive":'+ breakGive +','
+		    +'"break":{"DOU_LECharge":'+ breakLECharge +',"INT_LECount":'+ breakLECount +','
+		    +'"DOU_SPCCharge":'+ breakSPCCharge +',"INT_SPCCount":'+ breakSPCCount+','
+		    +'"INT_Cycle":'+ breakCycle +',"STR_Note":"'+ breakNote +'","BOOL_Give":'+ breakGive +'},'
 		    // 购物卡
-		    +'"DOU_shoppingLECharge":'+ shoppingLECharge +',"INT_shoppingLECount":'+ shoppingLECount +','
-		    +'"DOU_shoppingSPCCharge":'+ shoppingSPCCharge +',"INT_shoppingSPCCount":'+ shoppingSPCCount+','
-		    +'"STR_shoppingCycle":"'+ shoppingCycle +'","STR_shoppingNote":"'+ shoppingNote +'","BOOL_shoppingGive":'+ shoppingGive +','
+		    +'"shopping":{"DOU_LECharge":'+ shoppingLECharge +',"INT_LECount":'+ shoppingLECount +','
+		    +'"DOU_SPCCharge":'+ shoppingSPCCharge +',"INT_SPCCount":'+ shoppingSPCCount+','
+		    +'"INT_Cycle":'+ shoppingCycle +',"STR_Note":"'+ shoppingNote +'","BOOL_Give":'+ shoppingGive +'},'
 		    // 饮用水
-		    +'"DOU_waterLECharge":'+ waterLECharge +',"INT_waterLECount":'+ waterLECount +','
-		    +'"DOU_waterSPCCharge":'+ waterSPCCharge +',"INT_waterSPCCount":'+ waterSPCCount+','
-		    +'"STR_waterCycle":"'+ waterCycle +'","STR_waterNote":"'+ waterNote +'","BOOL_waterGive":'+ waterGive +','
+		    +'"water":{"DOU_LECharge":'+ waterLECharge +',"INT_LECount":'+ waterLECount +','
+		    +'"DOU_SPCCharge":'+ waterSPCCharge +',"INT_rSPCCount":'+ waterSPCCount+','
+		    +'"INT_Cycle":'+ waterCycle +',"STR_Note":"'+ waterNote +'","BOOL_Give":'+ waterGive +'},'
 		    //日用品
-			+'"DOU_dailyLECharge":'+ dailyLECharge +',"INT_dailyLECount":'+ dailyLECount +','
-		    +'"DOU_dailySPCCharge":'+ dailySPCCharge +',"INT_dailySPCCount":'+ dailySPCCount+','
-		    +'"STR_dailyCycle":"'+ dailyCycle +'","STR_dailyNote":"'+ dailyNote +'","BOOL_dailyGive":'+ dailyGive +','
+			+'"daily":{"DOU_LECharge":'+ dailyLECharge +',"INT_LECount":'+ dailyLECount +','
+		    +'"DOU_SPCCharge":'+ dailySPCCharge +',"INT_SPCCount":'+ dailySPCCount+','
+		    +'"INT_Cycle":'+ dailyCycle +',"STR_Note":"'+ dailyNote +'","BOOL_Give":'+ dailyGive +'},'
 		    +'"OBJ_ADDLIST":{'+ addData +'}'
 		    +'}'
 		    

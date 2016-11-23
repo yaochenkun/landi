@@ -1,4 +1,14 @@
-.bill-table thead tr th:nth-child(1){width: 10%;}
-.bill-table thead tr th:nth-child(2),.bill-table thead tr th:nth-child(3),
-.bill-table thead tr th:nth-child(5),.bill-table thead tr th:nth-child(7){width: 15%; }
-.bill-table thead tr th:nth-child(4),.bill-table thead tr th:nth-child(6){width: 18%;}
+.bill-table thead tr th:nth-child(1) {
+	width: 10%;
+}
+
+.bill-table thead tr th:nth-child(2), .bill-table thead tr th:nth-child(3),
+	.bill-table thead tr th:nth-child(5), .bill-table thead tr th:nth-child(7)
+	{
+	width: 15%;
+}
+
+.bill-table thead tr th:nth-child(4), .bill-table thead tr th:nth-child(6)
+	{
+	width: 18%;
+}

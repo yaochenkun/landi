@@ -1,156 +1,162 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.DailyServiceMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.DailyService" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
-    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
-    <result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
-    <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
-    <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
-    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="RTIME" property="RTIME" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, TYPE, ROOM_NUMBER, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from daily_service
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from daily_service
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.DailyService" >
-    insert into daily_service (ID, TYPE, ROOM_NUMBER, 
-      GUEST_NAME, ITEM, COUNT, 
-      MONEY, COMMENT, RTIME
-      )
-    values (#{ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
-      #{GUEST_NAME,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, 
-      #{MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, #{RTIME,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.DailyService" >
-    insert into daily_service
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="TYPE != null" >
-        TYPE,
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER,
-      </if>
-      <if test="GUEST_NAME != null" >
-        GUEST_NAME,
-      </if>
-      <if test="ITEM != null" >
-        ITEM,
-      </if>
-      <if test="COUNT != null" >
-        COUNT,
-      </if>
-      <if test="MONEY != null" >
-        MONEY,
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT,
-      </if>
-      <if test="RTIME != null" >
-        RTIME,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="GUEST_NAME != null" >
-        #{GUEST_NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="ITEM != null" >
-        #{ITEM,jdbcType=VARCHAR},
-      </if>
-      <if test="COUNT != null" >
-        #{COUNT,jdbcType=INTEGER},
-      </if>
-      <if test="MONEY != null" >
-        #{MONEY,jdbcType=DOUBLE},
-      </if>
-      <if test="COMMENT != null" >
-        #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="RTIME != null" >
-        #{RTIME,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.DailyService" >
-    update daily_service
-    <set >
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="GUEST_NAME != null" >
-        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="ITEM != null" >
-        ITEM = #{ITEM,jdbcType=VARCHAR},
-      </if>
-      <if test="COUNT != null" >
-        COUNT = #{COUNT,jdbcType=INTEGER},
-      </if>
-      <if test="MONEY != null" >
-        MONEY = #{MONEY,jdbcType=DOUBLE},
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="RTIME != null" >
-        RTIME = #{RTIME,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.DailyService" >
-    update daily_service
-    set TYPE = #{TYPE,jdbcType=INTEGER},
-      ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
-      ITEM = #{ITEM,jdbcType=VARCHAR},
-      COUNT = #{COUNT,jdbcType=INTEGER},
-      MONEY = #{MONEY,jdbcType=DOUBLE},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      RTIME = #{RTIME,jdbcType=TIMESTAMP}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+<mapper namespace="org.ld.dao.DailyServiceMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.DailyService">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+		<result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+		<result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+		<result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
+		<result column="COUNT" property="COUNT" jdbcType="INTEGER" />
+		<result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+		<result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+		<result column="RTIME" property="RTIME" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TYPE, ROOM_NUMBER, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from daily_service
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from daily_service
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.DailyService">
+		insert into daily_service (ID, TYPE, ROOM_NUMBER,
+		GUEST_NAME, ITEM, COUNT,
+		MONEY, COMMENT, RTIME
+		)
+		values (#{ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER},
+		#{ROOM_NUMBER,jdbcType=VARCHAR},
+		#{GUEST_NAME,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER},
+		#{MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR},
+		#{RTIME,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.DailyService">
+		insert into daily_service
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="TYPE != null">
+				TYPE,
+			</if>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER,
+			</if>
+			<if test="GUEST_NAME != null">
+				GUEST_NAME,
+			</if>
+			<if test="ITEM != null">
+				ITEM,
+			</if>
+			<if test="COUNT != null">
+				COUNT,
+			</if>
+			<if test="MONEY != null">
+				MONEY,
+			</if>
+			<if test="COMMENT != null">
+				COMMENT,
+			</if>
+			<if test="RTIME != null">
+				RTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="TYPE != null">
+				#{TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_NUMBER != null">
+				#{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="GUEST_NAME != null">
+				#{GUEST_NAME,jdbcType=VARCHAR},
+			</if>
+			<if test="ITEM != null">
+				#{ITEM,jdbcType=VARCHAR},
+			</if>
+			<if test="COUNT != null">
+				#{COUNT,jdbcType=INTEGER},
+			</if>
+			<if test="MONEY != null">
+				#{MONEY,jdbcType=DOUBLE},
+			</if>
+			<if test="COMMENT != null">
+				#{COMMENT,jdbcType=VARCHAR},
+			</if>
+			<if test="RTIME != null">
+				#{RTIME,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.DailyService">
+		update daily_service
+		<set>
+			<if test="TYPE != null">
+				TYPE = #{TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="GUEST_NAME != null">
+				GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+			</if>
+			<if test="ITEM != null">
+				ITEM = #{ITEM,jdbcType=VARCHAR},
+			</if>
+			<if test="COUNT != null">
+				COUNT = #{COUNT,jdbcType=INTEGER},
+			</if>
+			<if test="MONEY != null">
+				MONEY = #{MONEY,jdbcType=DOUBLE},
+			</if>
+			<if test="COMMENT != null">
+				COMMENT = #{COMMENT,jdbcType=VARCHAR},
+			</if>
+			<if test="RTIME != null">
+				RTIME = #{RTIME,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.DailyService">
+		update daily_service
+		set TYPE = #{TYPE,jdbcType=INTEGER},
+		ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+		GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+		ITEM = #{ITEM,jdbcType=VARCHAR},
+		COUNT = #{COUNT,jdbcType=INTEGER},
+		MONEY = #{MONEY,jdbcType=DOUBLE},
+		COMMENT = #{COMMENT,jdbcType=VARCHAR},
+		RTIME = #{RTIME,jdbcType=TIMESTAMP}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<select id="getTotalRow" resultType="java.lang.Integer"
+		parameterType="map">
   	<![CDATA[
   	select count(*) from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE}
     ]]>
-  </select>
-  <select id="getDailyServiceRange" resultMap="BaseResultMap" parameterType="map">
+	</select>
+	<select id="getDailyServiceRange" resultMap="BaseResultMap"
+		parameterType="map">
   	<![CDATA[
   	select * from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
-  </select>
-  <select id="getAllDailyServiceRange" resultMap="BaseResultMap" parameterType="map">
+	</select>
+	<select id="getAllDailyServiceRange" resultMap="BaseResultMap"
+		parameterType="map">
   	<![CDATA[
   	select * from daily_service where TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
-  </select>
+	</select>
 </mapper>

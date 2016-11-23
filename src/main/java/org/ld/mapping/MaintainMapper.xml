@@ -1,234 +1,239 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.MaintainMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.Maintain" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
-    <result column="STIME" property="STIME" jdbcType="TIMESTAMP" />
-    <result column="FTIME" property="FTIME" jdbcType="TIMESTAMP" />
-    <result column="ETIME" property="ETIME" jdbcType="TIMESTAMP" />
-    <result column="LEVEL" property="LEVEL" jdbcType="INTEGER" />
-    <result column="PROBLEM" property="PROBLEM" jdbcType="VARCHAR" />
-    <result column="PRO_TYPE" property="PRO_TYPE" jdbcType="INTEGER" />
-    <result column="PRO_CAUSE" property="PRO_CAUSE" jdbcType="INTEGER" />
-    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="PIC" property="PIC" jdbcType="VARCHAR" />
-    <result column="CHARGE" property="CHARGE" jdbcType="DOUBLE" />
-    <result column="TIMES" property="TIMES" jdbcType="INTEGER" />
-    <result column="DEPART" property="DEPART" jdbcType="VARCHAR" />
-    <result column="FOLLOW" property="FOLLOW" jdbcType="VARCHAR" />
-    <result column="STATE" property="STATE" jdbcType="INTEGER" />
-    <result column="PAY" property="PAY" jdbcType="BIT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, STIME, FTIME, ETIME, LEVEL, PROBLEM, PRO_TYPE, PRO_CAUSE, COMMENT, 
-    PIC, CHARGE, TIMES, DEPART, FOLLOW, STATE, PAY
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from maintain
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from maintain
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.Maintain" >
-    insert into maintain (ID, ROOM_NUMBER, STIME, 
-      FTIME, ETIME, LEVEL, 
-      PROBLEM, PRO_TYPE, PRO_CAUSE, 
-      COMMENT, PIC, CHARGE, 
-      TIMES, DEPART, FOLLOW, 
-      STATE, PAY)
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{STIME,jdbcType=TIMESTAMP}, 
-      #{FTIME,jdbcType=TIMESTAMP}, #{ETIME,jdbcType=TIMESTAMP}, #{LEVEL,jdbcType=INTEGER}, 
-      #{PROBLEM,jdbcType=VARCHAR}, #{PRO_TYPE,jdbcType=INTEGER}, #{PRO_CAUSE,jdbcType=INTEGER}, 
-      #{COMMENT,jdbcType=VARCHAR}, #{PIC,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, 
-      #{TIMES,jdbcType=INTEGER}, #{DEPART,jdbcType=VARCHAR}, #{FOLLOW,jdbcType=VARCHAR}, 
-      #{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT})
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.Maintain" >
-    insert into maintain
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER,
-      </if>
-      <if test="STIME != null" >
-        STIME,
-      </if>
-      <if test="FTIME != null" >
-        FTIME,
-      </if>
-      <if test="ETIME != null" >
-        ETIME,
-      </if>
-      <if test="LEVEL != null" >
-        LEVEL,
-      </if>
-      <if test="PROBLEM != null" >
-        PROBLEM,
-      </if>
-      <if test="PRO_TYPE != null" >
-        PRO_TYPE,
-      </if>
-      <if test="PRO_CAUSE != null" >
-        PRO_CAUSE,
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT,
-      </if>
-      <if test="PIC != null" >
-        PIC,
-      </if>
-      <if test="CHARGE != null" >
-        CHARGE,
-      </if>
-      <if test="TIMES != null" >
-        TIMES,
-      </if>
-      <if test="DEPART != null" >
-        DEPART,
-      </if>
-      <if test="FOLLOW != null" >
-        FOLLOW,
-      </if>
-      <if test="STATE != null" >
-        STATE,
-      </if>
-      <if test="PAY != null" >
-        PAY,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_NUMBER != null" >
-        #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="STIME != null" >
-        #{STIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="FTIME != null" >
-        #{FTIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ETIME != null" >
-        #{ETIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="LEVEL != null" >
-        #{LEVEL,jdbcType=INTEGER},
-      </if>
-      <if test="PROBLEM != null" >
-        #{PROBLEM,jdbcType=VARCHAR},
-      </if>
-      <if test="PRO_TYPE != null" >
-        #{PRO_TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="PRO_CAUSE != null" >
-        #{PRO_CAUSE,jdbcType=INTEGER},
-      </if>
-      <if test="COMMENT != null" >
-        #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="PIC != null" >
-        #{PIC,jdbcType=VARCHAR},
-      </if>
-      <if test="CHARGE != null" >
-        #{CHARGE,jdbcType=DOUBLE},
-      </if>
-      <if test="TIMES != null" >
-        #{TIMES,jdbcType=INTEGER},
-      </if>
-      <if test="DEPART != null" >
-        #{DEPART,jdbcType=VARCHAR},
-      </if>
-      <if test="FOLLOW != null" >
-        #{FOLLOW,jdbcType=VARCHAR},
-      </if>
-      <if test="STATE != null" >
-        #{STATE,jdbcType=INTEGER},
-      </if>
-      <if test="PAY != null" >
-        #{PAY,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Maintain" >
-    update maintain
-    <set >
-      <if test="ROOM_NUMBER != null" >
-        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="STIME != null" >
-        STIME = #{STIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="FTIME != null" >
-        FTIME = #{FTIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ETIME != null" >
-        ETIME = #{ETIME,jdbcType=TIMESTAMP},
-      </if>
-      <if test="LEVEL != null" >
-        LEVEL = #{LEVEL,jdbcType=INTEGER},
-      </if>
-      <if test="PROBLEM != null" >
-        PROBLEM = #{PROBLEM,jdbcType=VARCHAR},
-      </if>
-      <if test="PRO_TYPE != null" >
-        PRO_TYPE = #{PRO_TYPE,jdbcType=INTEGER},
-      </if>
-      <if test="PRO_CAUSE != null" >
-        PRO_CAUSE = #{PRO_CAUSE,jdbcType=INTEGER},
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="PIC != null" >
-        PIC = #{PIC,jdbcType=VARCHAR},
-      </if>
-      <if test="CHARGE != null" >
-        CHARGE = #{CHARGE,jdbcType=DOUBLE},
-      </if>
-      <if test="TIMES != null" >
-        TIMES = #{TIMES,jdbcType=INTEGER},
-      </if>
-      <if test="DEPART != null" >
-        DEPART = #{DEPART,jdbcType=VARCHAR},
-      </if>
-      <if test="FOLLOW != null" >
-        FOLLOW = #{FOLLOW,jdbcType=VARCHAR},
-      </if>
-      <if test="STATE != null" >
-        STATE = #{STATE,jdbcType=INTEGER},
-      </if>
-      <if test="PAY != null" >
-        PAY = #{PAY,jdbcType=BIT},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.Maintain" >
-    update maintain
-    set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      STIME = #{STIME,jdbcType=TIMESTAMP},
-      FTIME = #{FTIME,jdbcType=TIMESTAMP},
-      ETIME = #{ETIME,jdbcType=TIMESTAMP},
-      LEVEL = #{LEVEL,jdbcType=INTEGER},
-      PROBLEM = #{PROBLEM,jdbcType=VARCHAR},
-      PRO_TYPE = #{PRO_TYPE,jdbcType=INTEGER},
-      PRO_CAUSE = #{PRO_CAUSE,jdbcType=INTEGER},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      PIC = #{PIC,jdbcType=VARCHAR},
-      CHARGE = #{CHARGE,jdbcType=DOUBLE},
-      TIMES = #{TIMES,jdbcType=INTEGER},
-      DEPART = #{DEPART,jdbcType=VARCHAR},
-      FOLLOW = #{FOLLOW,jdbcType=VARCHAR},
-      STATE = #{STATE,jdbcType=INTEGER},
-      PAY = #{PAY,jdbcType=BIT}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
+<mapper namespace="org.ld.dao.MaintainMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.Maintain">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+		<result column="STIME" property="STIME" jdbcType="TIMESTAMP" />
+		<result column="FTIME" property="FTIME" jdbcType="TIMESTAMP" />
+		<result column="ETIME" property="ETIME" jdbcType="TIMESTAMP" />
+		<result column="LEVEL" property="LEVEL" jdbcType="INTEGER" />
+		<result column="PROBLEM" property="PROBLEM" jdbcType="VARCHAR" />
+		<result column="PRO_TYPE" property="PRO_TYPE" jdbcType="INTEGER" />
+		<result column="PRO_CAUSE" property="PRO_CAUSE" jdbcType="INTEGER" />
+		<result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+		<result column="PIC" property="PIC" jdbcType="VARCHAR" />
+		<result column="CHARGE" property="CHARGE" jdbcType="DOUBLE" />
+		<result column="TIMES" property="TIMES" jdbcType="INTEGER" />
+		<result column="DEPART" property="DEPART" jdbcType="VARCHAR" />
+		<result column="FOLLOW" property="FOLLOW" jdbcType="VARCHAR" />
+		<result column="STATE" property="STATE" jdbcType="INTEGER" />
+		<result column="PAY" property="PAY" jdbcType="BIT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ROOM_NUMBER, STIME, FTIME, ETIME, LEVEL, PROBLEM, PRO_TYPE,
+		PRO_CAUSE, COMMENT,
+		PIC, CHARGE, TIMES, DEPART, FOLLOW, STATE, PAY
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from maintain
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from maintain
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.Maintain">
+		insert into maintain (ID, ROOM_NUMBER, STIME,
+		FTIME, ETIME, LEVEL,
+		PROBLEM, PRO_TYPE, PRO_CAUSE,
+		COMMENT, PIC, CHARGE,
+		TIMES, DEPART, FOLLOW,
+		STATE, PAY)
+		values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR},
+		#{STIME,jdbcType=TIMESTAMP},
+		#{FTIME,jdbcType=TIMESTAMP}, #{ETIME,jdbcType=TIMESTAMP}, #{LEVEL,jdbcType=INTEGER},
+		#{PROBLEM,jdbcType=VARCHAR}, #{PRO_TYPE,jdbcType=INTEGER},
+		#{PRO_CAUSE,jdbcType=INTEGER},
+		#{COMMENT,jdbcType=VARCHAR}, #{PIC,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE},
+		#{TIMES,jdbcType=INTEGER}, #{DEPART,jdbcType=VARCHAR},
+		#{FOLLOW,jdbcType=VARCHAR},
+		#{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT})
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.Maintain">
+		insert into maintain
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER,
+			</if>
+			<if test="STIME != null">
+				STIME,
+			</if>
+			<if test="FTIME != null">
+				FTIME,
+			</if>
+			<if test="ETIME != null">
+				ETIME,
+			</if>
+			<if test="LEVEL != null">
+				LEVEL,
+			</if>
+			<if test="PROBLEM != null">
+				PROBLEM,
+			</if>
+			<if test="PRO_TYPE != null">
+				PRO_TYPE,
+			</if>
+			<if test="PRO_CAUSE != null">
+				PRO_CAUSE,
+			</if>
+			<if test="COMMENT != null">
+				COMMENT,
+			</if>
+			<if test="PIC != null">
+				PIC,
+			</if>
+			<if test="CHARGE != null">
+				CHARGE,
+			</if>
+			<if test="TIMES != null">
+				TIMES,
+			</if>
+			<if test="DEPART != null">
+				DEPART,
+			</if>
+			<if test="FOLLOW != null">
+				FOLLOW,
+			</if>
+			<if test="STATE != null">
+				STATE,
+			</if>
+			<if test="PAY != null">
+				PAY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_NUMBER != null">
+				#{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="STIME != null">
+				#{STIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="FTIME != null">
+				#{FTIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ETIME != null">
+				#{ETIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="LEVEL != null">
+				#{LEVEL,jdbcType=INTEGER},
+			</if>
+			<if test="PROBLEM != null">
+				#{PROBLEM,jdbcType=VARCHAR},
+			</if>
+			<if test="PRO_TYPE != null">
+				#{PRO_TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="PRO_CAUSE != null">
+				#{PRO_CAUSE,jdbcType=INTEGER},
+			</if>
+			<if test="COMMENT != null">
+				#{COMMENT,jdbcType=VARCHAR},
+			</if>
+			<if test="PIC != null">
+				#{PIC,jdbcType=VARCHAR},
+			</if>
+			<if test="CHARGE != null">
+				#{CHARGE,jdbcType=DOUBLE},
+			</if>
+			<if test="TIMES != null">
+				#{TIMES,jdbcType=INTEGER},
+			</if>
+			<if test="DEPART != null">
+				#{DEPART,jdbcType=VARCHAR},
+			</if>
+			<if test="FOLLOW != null">
+				#{FOLLOW,jdbcType=VARCHAR},
+			</if>
+			<if test="STATE != null">
+				#{STATE,jdbcType=INTEGER},
+			</if>
+			<if test="PAY != null">
+				#{PAY,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Maintain">
+		update maintain
+		<set>
+			<if test="ROOM_NUMBER != null">
+				ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+			</if>
+			<if test="STIME != null">
+				STIME = #{STIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="FTIME != null">
+				FTIME = #{FTIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ETIME != null">
+				ETIME = #{ETIME,jdbcType=TIMESTAMP},
+			</if>
+			<if test="LEVEL != null">
+				LEVEL = #{LEVEL,jdbcType=INTEGER},
+			</if>
+			<if test="PROBLEM != null">
+				PROBLEM = #{PROBLEM,jdbcType=VARCHAR},
+			</if>
+			<if test="PRO_TYPE != null">
+				PRO_TYPE = #{PRO_TYPE,jdbcType=INTEGER},
+			</if>
+			<if test="PRO_CAUSE != null">
+				PRO_CAUSE = #{PRO_CAUSE,jdbcType=INTEGER},
+			</if>
+			<if test="COMMENT != null">
+				COMMENT = #{COMMENT,jdbcType=VARCHAR},
+			</if>
+			<if test="PIC != null">
+				PIC = #{PIC,jdbcType=VARCHAR},
+			</if>
+			<if test="CHARGE != null">
+				CHARGE = #{CHARGE,jdbcType=DOUBLE},
+			</if>
+			<if test="TIMES != null">
+				TIMES = #{TIMES,jdbcType=INTEGER},
+			</if>
+			<if test="DEPART != null">
+				DEPART = #{DEPART,jdbcType=VARCHAR},
+			</if>
+			<if test="FOLLOW != null">
+				FOLLOW = #{FOLLOW,jdbcType=VARCHAR},
+			</if>
+			<if test="STATE != null">
+				STATE = #{STATE,jdbcType=INTEGER},
+			</if>
+			<if test="PAY != null">
+				PAY = #{PAY,jdbcType=BIT},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.Maintain">
+		update maintain
+		set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+		STIME = #{STIME,jdbcType=TIMESTAMP},
+		FTIME = #{FTIME,jdbcType=TIMESTAMP},
+		ETIME = #{ETIME,jdbcType=TIMESTAMP},
+		LEVEL = #{LEVEL,jdbcType=INTEGER},
+		PROBLEM = #{PROBLEM,jdbcType=VARCHAR},
+		PRO_TYPE = #{PRO_TYPE,jdbcType=INTEGER},
+		PRO_CAUSE = #{PRO_CAUSE,jdbcType=INTEGER},
+		COMMENT = #{COMMENT,jdbcType=VARCHAR},
+		PIC = #{PIC,jdbcType=VARCHAR},
+		CHARGE = #{CHARGE,jdbcType=DOUBLE},
+		TIMES = #{TIMES,jdbcType=INTEGER},
+		DEPART = #{DEPART,jdbcType=VARCHAR},
+		FOLLOW = #{FOLLOW,jdbcType=VARCHAR},
+		STATE = #{STATE,jdbcType=INTEGER},
+		PAY = #{PAY,jdbcType=BIT}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
 </mapper>

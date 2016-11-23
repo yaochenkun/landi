@@ -6,6 +6,7 @@ $(function(){
 		// 回车键
 		if(e.keyCode==13){
 			requestFirstTakeawayByRoomNum(this);
+			return false;
 		}
 	})
 });
