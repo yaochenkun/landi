@@ -49,6 +49,7 @@
 				<span class="span">物品种类：</span>
 				<div class="itemType">
 					<span class="span"></span>
+					<div id="itemTypeName" style="display:none;"></div>
 					<div class="itemTypeMenu">
 						<ul>
 							<li>全&nbsp;&nbsp;部</li>

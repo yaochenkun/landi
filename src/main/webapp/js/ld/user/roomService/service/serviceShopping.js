@@ -171,7 +171,7 @@ var requestAjaxShoppingByRoomNum = function(roomNum,pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='shoppinglist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextShoppingByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共"+ recordTotal +"条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
 		}
 	});

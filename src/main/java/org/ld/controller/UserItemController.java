@@ -78,19 +78,26 @@ public class UserItemController {
 		String type = dataJson.getString("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
-		int rid = roomService.getRoomByNumber(rn).getID();
+		int rid = 0;
+		if(rn!=null){
+			rid = roomService.getRoomByNumber(rn).getID();
+			System.out.println(rid);
+		}
 		
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotal(rid, type);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-
-		if(pageNumber > pageTotal)
-			pageNumber = pageTotal;
 		
-		int st = (pageNumber - 1) * eachPage;
-		List<RoomItem> record = itemService.getItems(rid, type, st, eachPage);
+		if(recordTotal!=0){
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<RoomItem> record = itemService.getItems(rid, type, st, eachPage);
 
-		ans.put("pageList", record);
+			ans.put("pageList", record);
+		}
+
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
@@ -98,7 +105,7 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/searchPlanList") // 所有采购计划
+	@RequestMapping("/searchPlanList") // 查询所有采购计划
 	@ResponseBody
 	public Map<String, Object> searchPlanList(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -118,14 +125,17 @@ public class UserItemController {
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotalPlan();
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-
-		if(pageNumber > pageTotal)
-			pageNumber = pageTotal;
 		
-		int st = (pageNumber - 1) * eachPage;
-		List<Plan> record = itemService.getPlans(st, eachPage);
+		if(recordTotal!=0){
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<Plan> record = itemService.getPlans(st, eachPage);
 
-		ans.put("pageList", record);
+			ans.put("pageList", record);
+		}
+
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
@@ -133,28 +143,46 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/getItemType") // 所有采购计划
+	@RequestMapping("/searchPlanByPlanId") // 根据采购计划ID查询采购计划
+	@ResponseBody
+	public Map<String,Plan> searchPlanByPlanId(HttpSession session, @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int PlanId = dataJson.getIntValue("PlanId");
+		Plan plan = itemService.searchPlanByPlanid(PlanId);
+		
+		Map<String, Plan> res = new HashMap<String, Plan>();
+		res.put("plan", plan);
+		return res;
+	}
+	
+	@RequestMapping("/getItemType") // 查询系统物品种类（家电、家具）
 	@ResponseBody
 	public Set<String> getItemType(HttpSession session){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		return cur_env.getItem_type();
 	}
 	
-	@RequestMapping("/getItemCat") // 所有采购计划
+	@RequestMapping("/getItemCat") // 根据物品种类type查询物品类别Cat
 	@ResponseBody
-	public Set<String> getItemCat(HttpSession session, @RequestBody String type){
+	public Set<String> getItemCat(HttpSession session, @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String type = dataJson.getString("type");
+
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		return cur_env.getItem_cat().get(type);
 	}
 	
-	@RequestMapping("/getItemCom") // 所有采购计划
+	@RequestMapping("/getItemCom") // 根据物品种类type查询物品品牌Com
 	@ResponseBody
-	public Set<String> getItemCom(HttpSession session, @RequestBody String type){
+	public Set<String> getItemCom(HttpSession session, @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String type = dataJson.getString("type");
+		
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
 		return cur_env.getItem_com().get(type);
 	}
 	
-	@RequestMapping("/newPlan") // 所有采购计划
+	@RequestMapping("/newPlan") // 新增采购计划
 	@ResponseBody
 	public Integer newPlan(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -167,7 +195,7 @@ public class UserItemController {
 			JSONObject dataJson = JSONObject.parseObject(data);
 			Plan newPlan = new Plan();
 			newPlan.setNAME(dataJson.getString("planID"));
-			newPlan.setMONEY(dataJson.getDouble("money")); // zongjia
+			newPlan.setMONEY(dataJson.getDouble("money")); // 总价
 			newPlan.setSTAFF(dataJson.getString("planManager"));
 			newPlan.setCOMMENT(dataJson.getString("note"));
 			

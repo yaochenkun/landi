@@ -9,17 +9,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
 	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
 	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
 	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css"
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css"
 	rel="stylesheet" type="text/css" />
 <title>采购计划管理</title>
 </head>
@@ -46,21 +42,8 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<span class="span">订单号：</span>
-				<div class="itemType">
-					<span class="span"></span>
-					<div class="itemTypeMenu">
-						<ul>
-							<li>1</li>
-							<li>2</li>
-							<li>3</li>
-							<li>4</li>
-							<li>5</li>
-							<li>6</li>
-							<li>7</li>
-						</ul>
-					</div>
-				</div>
+				<span class="span">采购计划编号：</span>
+				<input type="text" value="1" id="plan_id" />
 			</div>
 			<a class="btn btn-new btnnew" href="planNew.jsp">新增采购计划</a>
 			<div class="bill-area">
@@ -69,13 +52,13 @@
 					<table>
 						<thead>
 							<tr>
-								<th><span>订单号</span></th>
-								<th><span>订单负责人</span></th>
-								<th><span>时间</span></th>
-								<th><span>明细</span></th>
-								<th><span>已入库物品数量</span></th>
-								<th><span>存放位置</span></th>
-								<th><span>发票</span></th>
+								<th><span>计划编号</span></th>
+								<th><span>计划名称</span></th>
+								<th><span>计划负责人</span></th>
+								<th><span>计划创建时间</span></th>
+								<th><span>计划总价</span></th>
+								<th><span>备注</span></th>
+								<th><span>操作</span></th>
 							</tr>
 						</thead>
 						<tbody id="planListTbody"></tbody>

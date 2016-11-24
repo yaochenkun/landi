@@ -49,14 +49,14 @@
 				<h4>新增采购计划</h4>
 				<a class="btn btn-goback goback" href="planList.jsp">返&nbsp;&nbsp;&nbsp;回</a>
 				<ul class="ul">
-					<li class="li li-num"><span class="span">订单号：</span> <input
-						type="text" value="1" /><span class="red">*</span></li>
-					<li class="li"><span class="span">订单负责人：</span><input
-						type="text" value="Alice" /></li>
-					<li class="li"><span class="span">时间：</span><input type="text"
-						value="2016-11-5" /></li>
-					<li class="li"><span class="span">备注：</span><input
-						class="note" type="text" value="无" /></li>
+					<li class="li li-num"><span class="span">计划编号：</span> 
+						<input type="text" value="1" /><span class="red">*</span></li>
+					<li class="li"><span class="span">计划名称：</span> 
+					    <input type="text" value="阶段一" /></li>
+					<li class="li"><span class="span">计划负责人：</span>
+						<input type="text" value="Alice" /></li>
+					<li class="li"><span class="span">备注：</span>
+					    <input class="note" type="text" value="无" /></li>
 				</ul>
 			</div>
 			<div class="planContent">
@@ -72,7 +72,6 @@
 								<th>物品型号</th>
 								<th>数量</th>
 								<th>单价</th>
-								<th>总价</th>
 								<th>备注</th>
 								<th>操作</th>
 							</tr>
@@ -85,6 +84,56 @@
 					</table>
 				</div>
 				<a class="btn btn-goback submit" onclick="addPlan();">确认添加采购计划</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="shadow"></div>
+	<div class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				添加采购计划中物品
+				<span>×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-type" class="item">
+					<span class="span">物品种类：</span>
+					<div class="item-content"></div>
+				</div>
+
+				<div id="item-cat" class="item">
+						<span class="span">物品名称：</span>
+					<div class="item-content"></div>
+				</div>
+   				<div id="item-com" class="item">
+   					<span class="span">物品品牌：</span>
+					<div class="item-content"></div>
+   				</div>
+				
+				<div id="item-brand" class="item">
+					<span class="span">物品型号：</span>
+					<div class="item-content"><input type="text" value="1" /></div>
+				</div>
+
+				<div id="item-count" class="item">
+					<span class="span">数量：</span>
+					<div class="item-content"><input type="text" value="10" /></div>
+				</div>
+
+				<div id="item-perPrice" class="item">
+					<span class="span">单价：</span>
+					<div class="item-content"><input type="text" value="1.52" /></div>
+				</div>
+
+				<div id="item-comment" class="item">
+					<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="无" /></div>
+				</div>
+
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="addOneItem();">确定</a>
 			</div>
 		</div>
 	</div>

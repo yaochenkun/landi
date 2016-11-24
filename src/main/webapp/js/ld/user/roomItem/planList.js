@@ -1,46 +1,70 @@
 (function(){
-    // 选择订单号
-    $(".itemTypeMenu li").click(function(){
-    	$(".itemType .span").html($(this).text());
-    	$(".itemTypeMenu").fadeOut(300);
-    	requestItemByItemType($(this).index(),1);
-    });
-
-    // 物品种类
-    $(".itemType").hover(function(){
-    	$(".itemTypeMenu").fadeIn(300);
-    },function(){
-    	$(".itemTypeMenu").fadeOut(300);
+    // 根据采购计划编号查询采购计划
+    $("#plan_id").keyup(function(e){
+    	if(e.keyCode == 13){
+    		if(isNaN($("#plan_id").val())){
+    			return false;
+    		}
+    		requestItemByItemType($("#plan_id").val());
+    		return false;
+    	}
     });
 })();
 
 // 请求采购计划
 var requestPlanList = function(pageNum){
 	console.log("请求第" + pageNum + "页采购计划信息");
-	// $.ajax({
-	// 	url:'/LD/searchOverview.action',
-	// 	type:'post',
-	// 	data:'pageNum='+ pageNum,
-	// 	success:function(data){
-	// 		console.log(data);
+	$.ajax({
+		url:'/LD/userItem/searchPlanList.action',
+		type:'post',
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"pageNum":'+ pageNum + '}',
+		success:function(data){
+			console.log(data);
 
-	 		// 清空表格和页码
-			$("#planListTbody").html("")
-			$("#planListBottom").html("");
-			for(var i=0; i<5; i++){
-				$("#planListTbody").append("<tr><td>1</td><td>1</td><td>1</td><td>1</td>"+
-					"<td>1</td><td>1</td><td>1</td></tr>");
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退！");
+				return;
 			}
-			// 添加采购计划 底部页码
-			$("#planListBottom").append("<div class='bottom-page'>"+
-		        	"<span class='page-before' onclick='requestBeforePlanList();'>上一页&nbsp;&nbsp;</span>"+
-		        	"<span><input id='planList_nowpage' value='1' type='text' class='input_num'></span>"+
-		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='planList_totalpage'>2</span>"+
-		            "<span class='page-next' onclick='requestNextplanList();'>&nbsp;&nbsp;下一页</span>" +
-		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-	// 	}
-	// });
+			else if(data.State == "Valid"){
+
+		 		// 清空表格和页码
+				$("#planListTbody").html("")
+				$("#planListBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#planListTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
+
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					var cDate = new Date(perRecord.ctime);
+            		var ccDate = cDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#planListTbody").append("<tr><td>"+ perRecord.id +"</td>"+
+						"<td>"+ perRecord.name +"</td><td>"+ perRecord.staff +"</td>"+
+						"<td>"+ ccDate +"</td><td>"+ perRecord.money +"&nbsp;元</td>"+
+						"<td>"+ perRecord.comment +"</td><td><a>详细</a></td></tr>");
+				}
+				// 添加采购计划 底部页码
+				$("#planListBottom").append("<div class='bottom-page'>"+
+			        	"<span class='page-before' onclick='requestBeforePlanList();'>上一页&nbsp;&nbsp;</span>"+
+			        	"<span><input id='planList_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span>&nbsp;/&nbsp;</span>"+
+			        	"<span id='planList_totalpage'>"+ pageTotal +"</span>"+
+			            "<span class='page-next' onclick='requestNextplanList();'>&nbsp;&nbsp;下一页</span>" +
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 
 //根据房间号 拉取上一页 采购计划信息
@@ -61,38 +85,36 @@ var requestNextplanList = function(){
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// 根据物品种类筛选
-var requestItemByItemType = function(type,pageNum){
-	    // 请求全部物品信息
-		if(type == 0){
-			requestPlanList(1);
-			return;
-		}
-		console.log("请求第" + pageNum + "页 type:"+ type + "采购计划信息");
-	// $.ajax({
-	// 	url:'/LD/searchItemByItemType.action',
-	// 	type:'post',
-	// 	data:'pageNum='+ pageNum +'&type=' + type,
-	// 	success:function(data){
-	// 		console.log(data);
+// 根据采购计划编号查询采购计划
+var requestItemByItemType = function(plan_id){
+	$.ajax({
+		url:'/LD/userItem/searchPlanByPlanId.action',
+		type:'post',
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"PlanId":"'+ plan_id +'"}',
+		success:function(data){
+			console.log(data);
 
-	 		// 清空表格和页码
+			// 清空表格和页码
 			$("#planListTbody").html("")
 			$("#planListBottom").html("");
-			for(var i=0; i<5; i++){
-				$("#planListTbody").append("<tr><td>1</td><td>家具</td><td>1</td><td>1</td>"+
-					"<td>1</td><td>1</td><td>1</td></tr>");
+
+			if(data.plan == null){
+				$("#planListTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
 			}
-			// 添加采购计划 底部页码
-			$("#planListBottom").append("<div class='bottom-page'>"+
-		        	"<span class='page-before' onclick='requestBeforeItemByType();'>上一页&nbsp;&nbsp;</span>"+
-		        	"<span><input id='planList_nowpage' value='1' type='text' class='input_num'></span>"+
-		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='planList_totalpage'>2</span>"+
-		            "<span class='page-next' onclick='requestNextItemByType();'>&nbsp;&nbsp;下一页</span>" +
-		            "&nbsp;&nbsp;&nbsp;&nbsp;共12条记录</div>");
-	// 	}
-	// });
+
+			var cDate = new Date(data.plan.ctime);
+            var ccDate = cDate.toLocaleDateString().replace(/\//g,"-");
+
+			$("#planListTbody").append("<tr><td>"+ data.plan.id +"</td>"+
+						"<td>"+ data.plan.name +"</td><td>"+ data.plan.staff +"</td>"+
+						"<td>"+ ccDate +"</td><td>"+ data.plan.money +"&nbsp;元</td>"+
+						"<td>"+ data.plan.comment +"</td><td><a>详细</a></td></tr>");
+		}
+	});
 }
 
 //根据物品种类拉取

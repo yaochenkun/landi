@@ -36,7 +36,7 @@
 	margin: 3em 0;
 	font-size: 15px;
 	float: left;
-	margin-right: 3em;
+	margin-right: 2em;
 }
 
 .planTitle .li:first-child .span {
@@ -54,12 +54,11 @@
 
 .planTitle .li input {
 	width: 120px;
-	margin-left: .5em;
 	padding: 0 .5em;
 }
 
 .planTitle .li .note {
-	width: 182px;
+	width: 198px;
 }
 
 .planTitle .border-red {
@@ -114,13 +113,10 @@
 	width: 5%;
 }
 
-.itemList table thead th:nth-child(5), .itemList table thead th:nth-child(2),
-	.itemList table thead th:nth-child(3), .itemList table thead th:nth-child(4),
-	.itemList table thead th:nth-child(6), .itemList table thead th:nth-child(7),
-	.itemList table thead th:nth-child(8), .itemList table thead th:nth-child(10)
-	{
-	width: 10%;
-}
+.itemList table thead th:nth-child(2), .itemList table thead th:nth-child(3),
+.itemList table thead th:nth-child(4), .itemList table thead th:nth-child(5),
+.itemList table thead th:nth-child(6), .itemList table thead th:nth-child(7),
+.itemList table thead th:nth-child(8), .itemList table thead th:nth-child(9){width: 10%;}
 
 .itemList table tbody tr:hover {
 	background: #f4fbff;
@@ -160,3 +156,24 @@
 	background-color: #2277da;
 }
 /********** 计划采购物品 表格样式 start ********/
+
+/************  添加物品弹框 **************/
+.shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
+.addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff; 
+	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
+.addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
+.addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}
+.addItemDiv .fac-title span:hover{color: #666;}
+
+.fac-body{max-height: 425px; overflow-y: auto; padding: 30px 0;}
+.fac-body .item{padding: 0 40px;}
+.fac-body .span{width: 15%; font-weight: bold; float: left; clear: left; min-height: 50px;}
+.fac-body .item-content{float: left; width: 85%; margin-bottom: 20px;}
+.fac-body .item-content input{padding: 0 10px;}
+.fac-body .btn-item{width: 90px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
+.fac-body .btn-item:hover{border-color: #2277da; color: #2277da; background: #fff;}
+.addItemDiv .item-content .item-active{border: 1px solid #2277da; color: #fff; background: #2277da;}
+
+.fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
+.fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
+.fac-foot .btn-submit:hover{color: #fff; border-color: #2277da; background: #2277da;}
