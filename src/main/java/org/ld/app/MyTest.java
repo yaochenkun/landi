@@ -29,19 +29,9 @@ public class MyTest {
 	private static Logger logger = Logger.getLogger(MyTest.class);
 
 	public static void main(String[] args) {
-		Para tp = new Para();
-		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
-
-		for (String key : temp.keySet()) {
-			String list = temp.get(key);
-
-			String[] ans = list.split("[,]");
-			Set<String> news = new HashSet<String>();
-			System.out.println(key);
-			for (int i = 0; i < ans.length; i++) {
-				news.add(ans[i]);
-				System.out.print(ans[i] + " ");
-			}
-		}
+//		Para tp = new Para();
+		String root = "env/";
+		
+		System.out.println(root);
 	}
 }

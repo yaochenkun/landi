@@ -2,6 +2,7 @@ package org.ld.app;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +24,8 @@ public class CurEnv {
 		settingsInt = tp.getParaPairInt("sysint", 0, 1);
 		auths = tp.getParaPairInt("auth", 2, 0);
 		item_type = tp.getPara("item_type");
+		item_cat = new HashMap<String, Set<String>>();
+		item_com = new HashMap<String, Set<String>>();
 
 		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
 
