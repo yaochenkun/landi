@@ -60,7 +60,7 @@ public class UserItemController {
 	
 	private static Logger logger = Logger.getLogger("logRec");
 	
-	@RequestMapping("/searchItemOverview") // 所有物品，room和type可为null
+	@RequestMapping("/searchItemOverview") // 查看房间的物品信息
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -195,7 +195,7 @@ public class UserItemController {
 			JSONObject dataJson = JSONObject.parseObject(data);
 			Plan newPlan = new Plan();
 			newPlan.setNAME(dataJson.getString("planID"));
-			newPlan.setMONEY(dataJson.getDouble("money")); // 总价
+			//newPlan.setMONEY(dataJson.getDouble("money")); // 总价
 			newPlan.setSTAFF(dataJson.getString("planManager"));
 			newPlan.setCOMMENT(dataJson.getString("note"));
 			

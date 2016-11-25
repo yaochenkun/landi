@@ -9,6 +9,7 @@
 				$("#item-type .item-content").html("");
 				$("#item-cat .item-content").html("");
 				$("#item-com .item-content").html("");
+				$("#item-name .item-content").html("");
 				if(data != null){
 					for(var i=0; i<data.length; i++){
 						$("#item-type .item-content").append("<a class='btn btn-item' onclick='chooseItemType(this);'>"+ data[i] +"</a>");
@@ -38,8 +39,10 @@ var chooseItemType = function(element){
 	$("#item-type .btn-item").removeClass("item-active");
 	$(element).addClass("item-active");
 
+	// 清空物品子类、物品品牌和物品名称
 	$("#item-cat .item-content").html("");
 	$("#item-com .item-content").html("");
+	$("#item-name .item-content").html("");
 
 	// 获取物品名称
 	$.ajax({
