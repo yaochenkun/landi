@@ -62,6 +62,7 @@ var requestItemOverview = function(pageNum){
 			            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
+		}
 	});
 }
 
