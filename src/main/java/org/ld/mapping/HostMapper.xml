@@ -1,133 +1,129 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.HostMapper">
-	<resultMap id="BaseResultMap" type="org.ld.model.Host">
-		<id column="ID" property="ID" jdbcType="INTEGER" />
-		<result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
-		<result column="HOST_NAME" property="HOST_NAME" jdbcType="VARCHAR" />
-		<result column="RENT_CHARGE" property="RENT_CHARGE" jdbcType="DOUBLE" />
-		<result column="SERVICE_CHARGE" property="SERVICE_CHARGE"
-			jdbcType="DOUBLE" />
-		<result column="RETURN_MONEY" property="RETURN_MONEY" jdbcType="DOUBLE" />
-		<result column="OTHER_CHARGE" property="OTHER_CHARGE" jdbcType="DOUBLE" />
-		<result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		ID, GUEST_ID, HOST_NAME, RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY,
-		OTHER_CHARGE,
-		SYS_STATE
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from host
-		where ID = #{ID,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from host
-		where ID = #{ID,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="org.ld.model.Host">
-		insert into host (ID, GUEST_ID, HOST_NAME,
-		RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY,
-		OTHER_CHARGE, SYS_STATE)
-		values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER},
-		#{HOST_NAME,jdbcType=VARCHAR},
-		#{RENT_CHARGE,jdbcType=DOUBLE}, #{SERVICE_CHARGE,jdbcType=DOUBLE}, #{RETURN_MONEY,jdbcType=DOUBLE},
-		#{OTHER_CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
-	</insert>
-	<insert id="insertSelective" parameterType="org.ld.model.Host">
-		insert into host
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="ID != null">
-				ID,
-			</if>
-			<if test="GUEST_ID != null">
-				GUEST_ID,
-			</if>
-			<if test="HOST_NAME != null">
-				HOST_NAME,
-			</if>
-			<if test="RENT_CHARGE != null">
-				RENT_CHARGE,
-			</if>
-			<if test="SERVICE_CHARGE != null">
-				SERVICE_CHARGE,
-			</if>
-			<if test="RETURN_MONEY != null">
-				RETURN_MONEY,
-			</if>
-			<if test="OTHER_CHARGE != null">
-				OTHER_CHARGE,
-			</if>
-			<if test="SYS_STATE != null">
-				SYS_STATE,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="ID != null">
-				#{ID,jdbcType=INTEGER},
-			</if>
-			<if test="GUEST_ID != null">
-				#{GUEST_ID,jdbcType=INTEGER},
-			</if>
-			<if test="HOST_NAME != null">
-				#{HOST_NAME,jdbcType=VARCHAR},
-			</if>
-			<if test="RENT_CHARGE != null">
-				#{RENT_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="SERVICE_CHARGE != null">
-				#{SERVICE_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="RETURN_MONEY != null">
-				#{RETURN_MONEY,jdbcType=DOUBLE},
-			</if>
-			<if test="OTHER_CHARGE != null">
-				#{OTHER_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="SYS_STATE != null">
-				#{SYS_STATE,jdbcType=INTEGER},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Host">
-		update host
-		<set>
-			<if test="GUEST_ID != null">
-				GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
-			</if>
-			<if test="HOST_NAME != null">
-				HOST_NAME = #{HOST_NAME,jdbcType=VARCHAR},
-			</if>
-			<if test="RENT_CHARGE != null">
-				RENT_CHARGE = #{RENT_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="SERVICE_CHARGE != null">
-				SERVICE_CHARGE = #{SERVICE_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="RETURN_MONEY != null">
-				RETURN_MONEY = #{RETURN_MONEY,jdbcType=DOUBLE},
-			</if>
-			<if test="OTHER_CHARGE != null">
-				OTHER_CHARGE = #{OTHER_CHARGE,jdbcType=DOUBLE},
-			</if>
-			<if test="SYS_STATE != null">
-				SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
-			</if>
-		</set>
-		where ID = #{ID,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="org.ld.model.Host">
-		update host
-		set GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
-		HOST_NAME = #{HOST_NAME,jdbcType=VARCHAR},
-		RENT_CHARGE = #{RENT_CHARGE,jdbcType=DOUBLE},
-		SERVICE_CHARGE = #{SERVICE_CHARGE,jdbcType=DOUBLE},
-		RETURN_MONEY = #{RETURN_MONEY,jdbcType=DOUBLE},
-		OTHER_CHARGE = #{OTHER_CHARGE,jdbcType=DOUBLE},
-		SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
-		where ID = #{ID,jdbcType=INTEGER}
-	</update>
+<mapper namespace="org.ld.dao.HostMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Host" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="HOST_NAME" property="HOST_NAME" jdbcType="VARCHAR" />
+    <result column="RENT_CHARGE" property="RENT_CHARGE" jdbcType="DOUBLE" />
+    <result column="SERVICE_CHARGE" property="SERVICE_CHARGE" jdbcType="DOUBLE" />
+    <result column="RETURN_MONEY" property="RETURN_MONEY" jdbcType="DOUBLE" />
+    <result column="OTHER_CHARGE" property="OTHER_CHARGE" jdbcType="DOUBLE" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUEST_ID, HOST_NAME, RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, OTHER_CHARGE, 
+    SYS_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from host
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from host
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Host" >
+    insert into host (ID, GUEST_ID, HOST_NAME, 
+      RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, 
+      OTHER_CHARGE, SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{HOST_NAME,jdbcType=VARCHAR}, 
+      #{RENT_CHARGE,jdbcType=DOUBLE}, #{SERVICE_CHARGE,jdbcType=DOUBLE}, #{RETURN_MONEY,jdbcType=DOUBLE}, 
+      #{OTHER_CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Host" >
+    insert into host
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="HOST_NAME != null" >
+        HOST_NAME,
+      </if>
+      <if test="RENT_CHARGE != null" >
+        RENT_CHARGE,
+      </if>
+      <if test="SERVICE_CHARGE != null" >
+        SERVICE_CHARGE,
+      </if>
+      <if test="RETURN_MONEY != null" >
+        RETURN_MONEY,
+      </if>
+      <if test="OTHER_CHARGE != null" >
+        OTHER_CHARGE,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="HOST_NAME != null" >
+        #{HOST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RENT_CHARGE != null" >
+        #{RENT_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SERVICE_CHARGE != null" >
+        #{SERVICE_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="RETURN_MONEY != null" >
+        #{RETURN_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="OTHER_CHARGE != null" >
+        #{OTHER_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Host" >
+    update host
+    <set >
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="HOST_NAME != null" >
+        HOST_NAME = #{HOST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RENT_CHARGE != null" >
+        RENT_CHARGE = #{RENT_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SERVICE_CHARGE != null" >
+        SERVICE_CHARGE = #{SERVICE_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="RETURN_MONEY != null" >
+        RETURN_MONEY = #{RETURN_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="OTHER_CHARGE != null" >
+        OTHER_CHARGE = #{OTHER_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Host" >
+    update host
+    set GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      HOST_NAME = #{HOST_NAME,jdbcType=VARCHAR},
+      RENT_CHARGE = #{RENT_CHARGE,jdbcType=DOUBLE},
+      SERVICE_CHARGE = #{SERVICE_CHARGE,jdbcType=DOUBLE},
+      RETURN_MONEY = #{RETURN_MONEY,jdbcType=DOUBLE},
+      OTHER_CHARGE = #{OTHER_CHARGE,jdbcType=DOUBLE},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
 </mapper>

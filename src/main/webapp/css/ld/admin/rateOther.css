@@ -1,70 +1,16 @@
-.content {
-	margin: 40px 40px 60px 200px;
-}
+.content{margin: 40px 40px 60px 200px;}
 
-.content .bill-table {
-	
-}
+.content .bill-table{}
+.content .bill-table table{width: 100%; text-align: center; margin-bottom: 5em; }
 
-.content .bill-table table {
-	width: 100%;
-	text-align: center;
-	margin-bottom: 5em;
-}
-
-table thead tr th {
-	
-}
-
-table thead tr th {
-	width: 7%;
-	height: 40px;
-	background: #ff9393;
-	font-weight: normal;
-	white-space: nowrap;
-	overflow: hidden;
-	color: #fff;
-	text-align: center;
-}
-
-table thead tr th:nth-child(1) {
-	width: 10%;
-}
-
-table tbody tr {
-	height: 30px;
-}
-
-table tbody tr:hover {
-	background: #fff5f5;
-}
-
-table tbody tr td {
-	border-bottom: 1px solid #ccc;
-	white-space: nowrap;
-}
-
-table tbody tr td input {
-	width: 100%;
-	border: none;
-	text-align: center;
-	background: transparent;
-}
+table thead tr th{}
+table thead tr th{width: 7%; height: 40px; background: #ff9393; font-weight: normal; white-space: nowrap; overflow: hidden; color: #fff; text-align: center;}
+table thead tr th:nth-child(1){width: 10%;}
+table tbody tr{height: 30px;}
+table tbody tr:hover{background: #fff5f5;}
+table tbody tr td{border-bottom: 1px solid #ccc; white-space: nowrap;}
+table tbody tr td input{width: 100%; border: none; text-align: center; background: transparent;}
 
 /******* 提交修改 样式 ********/
-.btn-submit {
-	float: right;
-	background: #ff6565;
-	color: #fff;
-	border-color: #fffafa;
-	margin-bottom: 7em;
-	width: 220px;
-	height: 40px;
-	line-height: 28px;
-	font-size: 15px;
-}
-
-.btn-submit:hover {
-	background: #ff4c4c;
-	color: #fff;
-}
+.btn-submit{float: right; background: #ff6565; color: #fff; border-color: #fffafa; margin-bottom: 7em; width: 220px; height: 40px; line-height: 28px; font-size: 15px;}
+.btn-submit:hover{background: #ff4c4c; color: #fff;}

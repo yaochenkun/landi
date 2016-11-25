@@ -29,7 +29,7 @@ $(function(){
 		if($(this).next().hasClass("active")){
 			return;
 		}
-		$(this).next().stop().animate({"width":"320px"},500).parent().children(".active").stop().animate({"width":"0px"},500);
+		$(this).next().stop().animate({"width":"350px"},500).parent().children(".active").stop().animate({"width":"0px"},500);
 		$(this).parent().children(".active").removeClass("active")
 		$(this).next().addClass("active");
 	});

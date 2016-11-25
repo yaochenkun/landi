@@ -60,7 +60,7 @@ public class UserItemController {
 	
 	private static Logger logger = Logger.getLogger("logRec");
 	
-	@RequestMapping("/searchItemOverview") // 查看房间的物品信息
+	@RequestMapping("/searchItemOverview") // 物品统计
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
 		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
@@ -77,15 +77,11 @@ public class UserItemController {
 		
 		String type = dataJson.getString("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
-		String rn = dataJson.getString("rNum");
-		int rid = 0;
-		if(rn!=null){
-			rid = roomService.getRoomByNumber(rn).getID();
-			System.out.println(rid);
-		}
+		String cat = dataJson.getString("cat");
+		String band = dataJson.getString("band");
 		
 		int eachPage = cur_env.getSettingsInt().get("list_size");
-		int recordTotal = itemService.getTotal(rid, type);
+		int recordTotal = itemService.getTotal(type, cat, band);
 		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
 		
 		if(recordTotal!=0){
@@ -93,7 +89,7 @@ public class UserItemController {
 				pageNumber = pageTotal;
 			
 			int st = (pageNumber - 1) * eachPage;
-			List<RoomItem> record = itemService.getItems(rid, type, st, eachPage);
+			List<FacSta> record = itemService.getFacByTypeCatBand(type, cat, band, st, eachPage);
 
 			ans.put("pageList", record);
 		}
@@ -195,7 +191,6 @@ public class UserItemController {
 			JSONObject dataJson = JSONObject.parseObject(data);
 			Plan newPlan = new Plan();
 			newPlan.setNAME(dataJson.getString("planID"));
-			//newPlan.setMONEY(dataJson.getDouble("money")); // 总价
 			newPlan.setSTAFF(dataJson.getString("planManager"));
 			newPlan.setCOMMENT(dataJson.getString("note"));
 			
@@ -205,6 +200,7 @@ public class UserItemController {
 			newPlan.setCTIME(date);
 			
 			if(itemService.addNewPlan(newPlan) == 1) {
+				double sum = 0;
 				newPlan = itemService.getPlanByName(dataJson.getString("planName"));
 				JSONObject obj = dataJson.getJSONObject("itemList");
 				PlanDetail pd = new PlanDetail();
@@ -214,6 +210,7 @@ public class UserItemController {
 					pd.setALL_MONEY(obj2.getDouble("totalPrice"));
 					pd.setCOMMENT(obj2.getString("comment"));
 					pd.setTOTAL(obj2.getInteger("count"));
+					sum += obj2.getDouble("totalPrice");
 					
 					Integer ID = obj2.getIntValue("FAC_ID");
 					
@@ -242,6 +239,8 @@ public class UserItemController {
 					
 					itemService.addNewPlanDetail(pd);
 				}
+				
+				newPlan.setMONEY(sum);
 				return 1;
 			}
 			else

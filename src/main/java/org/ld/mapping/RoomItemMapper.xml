@@ -169,7 +169,7 @@
 	</select>
 	<select id="getAllItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item limit #{ST}, #{EACH};
+  	select * from room_item limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getTotal" resultType="java.lang.Integer" parameterType="map">
@@ -189,7 +189,7 @@
 	</select>
 	<select id="getAllTotal" resultType="java.lang.Integer">
   	<![CDATA[
-  	select count(*) from room_item;
+  	select count(*) from room_item
     ]]>
 	</select>
 </mapper>

@@ -1,24 +1,6 @@
-.body {
-	width: 900px;
-	margin: 4em auto;
-}
+.body{width: 900px; margin: 4em auto;}
 
-.content-title-index {
-	margin: 0;
-	margin-left: 8em;
-}
-
-.content-title-index ul li {
-	font-size: 15px;
-	width: 200px;
-	margin: 0 20px;
-}
-
-.content-title-index ul li a {
-	width: 70%;
-}
-
-.content-title-index .icon {
-	width: 14px;
-	height: 14px;
-}
+.content-title-index{margin: 0; margin-left: 8em;}
+.content-title-index ul li{font-size: 15px; width: 200px; margin: 0 20px;}
+.content-title-index ul li a{width: 70%;}
+.content-title-index .icon{width: 14px; height: 14px;}

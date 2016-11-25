@@ -16,10 +16,9 @@ import java.util.Set;
 
 public class Para {
 	private String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
-	    
 	@SuppressWarnings("resource")
 	public String[] ReadParas(String text, String key)
-	{	
+	{
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;

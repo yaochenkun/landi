@@ -1,29 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
-<%@ page import="java.util.Date, java.text.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="java.util.Date, java.text.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css"
-	rel="stylesheet" type="text/css" />
-<title>采购计划管理</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css" rel="stylesheet" type="text/css"/>
+	<title>采购计划管理</title>
 </head>
 <body>
-
-	<jsp:include page="../_header.jsp" />
-	<jsp:include page="../_leftMenu.jsp" />
-
+	
+    <jsp:include page="../_header.jsp"/>
+	<jsp:include page="../_leftMenu.jsp"/>
+	
 	<div class="nav-second">
 		<div class="toolbar">
 			<div class="nav-secondul">
@@ -36,13 +32,26 @@
 		</div>
 	</div>
 
-	<!-- 页面内容 strat -->
-	<div class="main">
+    <!-- 页面内容 strat -->
+ 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<span class="span">采购计划编号：</span>
-				<input type="text" value="1" id="plan_id" />
-			</div>
+				<span class="span">订单号：</span>
+				<div class="itemType">
+				 	<span class="span"></span>
+					<div class="itemTypeMenu">
+						<ul>
+							<li>1</li>
+							<li>2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>6</li>
+							<li>7</li>
+						</ul>
+					</div>
+				</div>
+			</div>		
 			<a class="btn btn-new btnnew" href="planNew.jsp">新增采购计划</a>
 			<div class="bill-area">
 				<div class="bill-table">
@@ -50,13 +59,13 @@
 					<table>
 						<thead>
 							<tr>
-								<th><span>计划编号</span></th>
-								<th><span>计划名称</span></th>
-								<th><span>计划负责人</span></th>
-								<th><span>计划创建时间</span></th>
-								<th><span>计划总价</span></th>
-								<th><span>备注</span></th>
-								<th><span>操作</span></th>
+							<th><span>订单号</span></th>
+							<th><span>订单负责人</span></th>
+							<th><span>时间</span></th>
+							<th><span>明细</span></th>
+							<th><span>已入库物品数量</span></th>
+							<th><span>存放位置</span></th>
+							<th><span>发票</span></th>
 							</tr>
 						</thead>
 						<tbody id="planListTbody"></tbody>
@@ -69,19 +78,14 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 页面内容 end -->
+ 	</div>
+    <!-- 页面内容 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomItem/planList.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/planList.js"></script>
 	<script>
 	    // 请求第一页客房物品信息
 		requestPlanList(1);

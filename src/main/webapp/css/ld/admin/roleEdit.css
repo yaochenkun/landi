@@ -1,150 +1,46 @@
-.content {
-	margin: 50px 100px 50px 240px;
-}
+.content{margin:50px 100px 50px 240px;}
 
-.title {
-	float: left;
-	width: 100%;
-	padding-bottom: 15px;
-	border-bottom: 1px dotted #ccc;
-}
+.title{float: left; width: 100%; padding-bottom:15px; border-bottom: 1px dotted #ccc;}
+.title h4{float: left; font-size: 17px;}
+.title .dropdownMenu{float:left; width:140px; margin-left: 30px;}
+.title span{float: right; margin-top: 8px;}
+.title .btnchange{float:right;}
 
-.title h4 {
-	float: left;
-	font-size: 17px;
-}
-
-.title .dropdownMenu {
-	float: left;
-	width: 140px;
-	margin-left: 30px;
-}
-
-.title span {
-	float: right;
-	margin-top: 8px;
-}
-
-.title .btnchange {
-	float: right;
-}
-
-.body {
-	position: absolute;
-	margin-top: 110px;
-}
-
-.body h4 {
-	font-size: 18px;
-	font-weight: 600;
-	font-family: "宋体";
-	color: #555;
-	margin-bottom: 30px;
-}
-
-.body-first, .body-second, .body-third, .body-fourth {
-	float: left;
-	border-right: 1px dashed #ccc;
-	margin-right: 30px;
-	height: 230px;
-}
-
-.body-fifth {
-	float: left;
-	margin-right: 30px;
-	height: 230px;
-}
-
-.body-first, .body-fourth {
-	width: 160px;
-}
-
-.body-second, .body-third, .body-fifth {
-	width: 190px;
-}
+.body{position: absolute; margin-top: 110px;}
+.body h4{font-size: 18px; font-weight: 600;font-family: "宋体"; color:#555; margin-bottom: 30px;}
+.body-first,.body-second,.body-third,.body-fourth{float: left; border-right: 1px dashed #ccc; margin-right: 30px; height: 230px;}
+.body-fifth{float: left; margin-right: 30px; height: 230px;}
+.body-first,.body-fourth{width: 160px;}
+.body-second,.body-third,.body-fifth{width: 190px;}
 
 /******************** 复选框样式 start ******************************/
-.checkbox-group {
-	float: left;
-	width: 35px;
-	height: 36px;
-}
+.checkbox-group{float: left; width: 35px; height: 36px;}
+.checkbox-text1,.checkbox-text2,.checkbox-text3,.checkbox-text4,.checkbox-text5{float: left; height: 36px;}
+.checkbox-text1,.checkbox-text4{width: 120px;}
+.checkbox-text2,.checkbox-text3,.checkbox-text5{width: 150px;}
 
-.checkbox-text1, .checkbox-text2, .checkbox-text3, .checkbox-text4,
-	.checkbox-text5 {
-	float: left;
-	height: 36px;
-}
-
-.checkbox-text1, .checkbox-text4 {
-	width: 120px;
-}
-
-.checkbox-text2, .checkbox-text3, .checkbox-text5 {
-	width: 150px;
-}
-
-.checkbox {
-	display: none;
-}
-
-.checkbox+label {
-	cursor: not-allowed;
-	background-color: #FFF;
-	border: 1px solid #C1CACA;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
-		rgba(0, 0, 0, 0.05);
-	padding: 9px;
-	border-radius: 5px;
-	display: inline-block;
-	position: relative;
-	margin-right: 30px;
-}
-
-.checkbox:checked+label {
-	cursor: not-allowed;
-	background-color: #ECF2F7;
-	border: 1px solid #92A1AC;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
-		rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-	color: #243441;
-	padding: 0px;
-}
-
-.checkbox:checked+label:after {
-	content: '\2714'; //
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	color: #758794;
-	width: 100%;
-	text-align: center;
-	font-size: 1em;
-	padding: 0px 3px 0px 4px;
-	vertical-align: text-top;
-}
+.checkbox{display: none;} 
+.checkbox + label{cursor: not-allowed; background-color: #FFF; border: 1px solid #C1CACA; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05); 
+    padding: 9px; border-radius: 5px; display: inline-block;  position: relative; margin-right: 30px;} 
+.checkbox:checked + label {cursor: not-allowed; background-color: #ECF2F7; border: 1px solid #92A1AC; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1); 
+    color: #243441; padding: 0px;} 
+.checkbox:checked + label:after { 
+    content: '\2714'; //
+    position: absolute; top: 0px; left: 0px; color: #758794; width: 100%; text-align: center; 
+    font-size: 1em; padding: 0px 3px 0px 4px; vertical-align: text-top; } 
 /******************** 复选框样式 end   ******************************/
-
+    
 /* 下拉菜单样式 */
-#RoleEditMenu {
-	position: absolute;
-	margin: 35px 64px;
-	z-index: 50;
-	background: #fff;
-}
+#RoleEditMenu{position:absolute; margin:35px 64px; z-index:50; background:#fff;}
+.dropdownMenu ul{border: 1px #ccc solid; border-radius: 3px;}
+.dropdownMenu li{height: 34px; line-height: 34px; text-indent: 20px; border-bottom: 1px solid #ccc;}
+.dropdownMenu li:hover{background-color: #f4f4f4;}
 
-.dropdownMenu ul {
-	border: 1px #ccc solid;
-	border-radius: 3px;
-}
 
-.dropdownMenu li {
-	height: 34px;
-	line-height: 34px;
-	text-indent: 20px;
-	border-bottom: 1px solid #ccc;
-}
 
-.dropdownMenu li:hover {
-	background-color: #f4f4f4;
-}
+
+
+
+

@@ -25,7 +25,6 @@ public class LoginController {
 			throws Exception {
 		// 调用service进行用户身份验证
 		CurEnv cur_env = new CurEnv();
-		System.out.println(cur_env.getSettings());
         User user = userService.getUserByUserName(name);
         System.out.println(user); 
         //身份验证成功

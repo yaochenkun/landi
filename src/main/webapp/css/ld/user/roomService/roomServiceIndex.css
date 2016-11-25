@@ -1,128 +1,18 @@
-.main {
-	width: 1000px;
-	height: 50px;
-}
+.main{width: 1000px; height: 50px;}
+.index-list{height: 300px; border-left: 2px dotted #ccc; background: #fafafa; width: 161px; float: left; height: 300px; margin-top: 6em; cursor: pointer;}
 
-.main .title {
-	margin: 3.5em 0;
-	height: 10px;
-}
+.left-index{font-size: 16px; margin-top: 1.5em;}
+.left-index li{text-align: center;}
+.left-index .circle{border: 1px solid #716f6f; border-radius: 50%; width: 13px; height: 13px; display: inline-block; margin-right: .5em;}
+.left-index span{display: inline-block; text-align: center; color: #716f6f; font-size: 17px;}
+.left-index img{width: 60px; height: 60px; margin: 3em 38px 4em;}
 
-.main .title .right {
-	position: absolute;
-	right: 12px;
-	margin-top: .8em;
-	color: #999;
-}
+.content-title-index{float: left; width: 0; height: 300px; overflow: hidden; font-size: 14px; margin: 0; margin-top: 6em;}
+.content-title-index ul{width: 245px; margin: 2em auto;}
+.content-title-index ul li{width: 245px; font-size: 14px; margin-top: 35px; padding-left: 85px;}
+.content-title-index ul li a{width: 100%; color: #2277da;}
+.content-title-index .icon{width: 12px; height: 12px;}
 
-.main .title .right .span {
-	cursor: pointer;
-	color: #999;
-}
-
-.main .title .right .span:hover {
-	color: #555;
-	border-bottom: 1px solid #555;
-}
-
-/****************** 手风琴菜单样式 start  ***************************/
-.body .index-list {
-	height: 300px;
-	border: 1px solid #ccc;
-	background: #f9f9f9;
-	width: 161px;
-	float: left;
-	height: 300px;
-	margin-left: 8px;
-}
-
-.body .index-list:nth-child(1) {
-	margin-left: 0;
-}
-
-.body .active {
-	border-right: 1px solid #ccc;
-}
-
-/************** 琴键样式  *************/
-.left-index {
-	font-size: 16px;
-	margin-top: 1.5em;
-}
-
-.left-index li {
-	text-align: center;
-}
-
-.left-index .circle {
-	border: 1px solid #716f6f;
-	border-radius: 50%;
-	width: 13px;
-	height: 13px;
-	display: inline-block;
-	margin-right: .5em;
-}
-
-.left-index span {
-	display: inline-block;
-	text-align: center;
-	color: #716f6f;
-	font-size: 17px;
-}
-
-.left-index img {
-	width: 60px;
-	height: 60px;
-	margin: 3em 38px 4em;
-}
-
-/*************** 琴身样式 *******************/
-.content-title-index {
-	float: left;
-	width: 0;
-	height: 300px;
-	overflow: hidden;
-	font-size: 14px;
-	margin: 0;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.content-title-index ul {
-	width: 245px;
-	margin: 2em auto;
-}
-
-.content-title-index ul li {
-	width: 245px;
-	font-size: 14px;
-	margin-top: 35px;
-	padding-left: 95px;
-}
-
-.content-title-index ul li a {
-	width: 100%;
-	color: #2277da;
-}
-
-.content-title-index .icon {
-	width: 12px;
-	height: 12px;
-}
-
-/********  客房服务样式  **********/
-.content-wash {
-	width: 320px;
-}
-
-.content-wash ul {
-	width: 300px;
-	margin: 2.5em 0;
-}
-
-.content-wash ul li {
-	display: inline-block;
-	width: 150px;
-	padding-left: 60px;
-}
-/****************** 手风琴菜单样式 end   ***************************/
+.content-wash{width: 350px;}
+.content-wash ul{width: 300px; margin: 2.5em 0;}
+.content-wash ul li{display: inline-block; width: 150px; padding-left: 65px;}

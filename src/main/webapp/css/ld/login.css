@@ -1,37 +1,8 @@
-* {
-	font-family: "Microsoft YaHei", sans-serif;
-}
+*{font-family: "Microsoft YaHei",sans-serif;}
+.login_navbar{height:80px;box-shadow:2px 2px 3px #aaaaaa;}
+.login_navbar .login_nav_head{margin-top:10px;text-shadow:#000 1px 1px 1px;}
+.login_body_container{margin-top:180px;}
+.login_body_container .login_carousel{padding:0;}
+.login_body_container .login_form{padding:40px;}
 
-.login_navbar {
-	height: 80px;
-	box-shadow: 2px 2px 3px #aaaaaa;
-}
-
-.login_navbar .login_nav_head {
-	margin-top: 10px;
-	text-shadow: #000 1px 1px 1px;
-}
-
-.login_body_container {
-	margin-top: 180px;
-}
-
-.login_body_container .login_carousel {
-	padding: 0;
-}
-
-.login_body_container .login_form {
-	padding: 40px;
-}
-
-.foot_box {
-	background-color: #f5f5f5;
-	position: fixed;
-	bottom: 0px;
-	left: 0;
-	right: 0;
-	height: 70px;
-	line-height: 70px;
-	width: auto;
-	text-align: center;
-}
+.foot_box{background-color:#f5f5f5;position:fixed;bottom:0px;left:0;right:0;height:70px;line-height:70px;width:auto;text-align:center;}

@@ -1,208 +1,48 @@
-.content {
-	width: 1050px;
-	margin: 40px auto;
-	position: relative;
-}
+.content{width: 1050px; margin: 40px auto; position: relative;}
 
 /* 图片整体样式 */
-.roomPic {
-	position: relative;
-	display: inline-block;
-}
+.roomPic{position: relative; display: inline-block;}
+.ban{width: 500px; height: 500px; position: relative; overflow: hidden;}
 
-.ban {
-	width: 500px;
-	height: 500px;
-	position: relative;
-	overflow: hidden;
-}
+/* 大图样式 */ 
+.big_pic{width: 500px; height: 300px; position: relative; overflow: hidden;}
+.big_pic ul{position: absolute; left: 0; top: 0;}
+.big_pic ul li{width: 500px; height: 300px; float: left;}
+.big_pic li img{width: 500px; height: 300px;}
 
-/* 大图样式 */
-.big_pic {
-	width: 500px;
-	height: 300px;
-	position: relative;
-	overflow: hidden;
-}
-
-.big_pic ul {
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
-.big_pic ul li {
-	width: 500px;
-	height: 300px;
-	float: left;
-}
-
-.big_pic li img {
-	width: 500px;
-	height: 300px;
-}
 
 /*小图样式*/
-.min_pic {
-	width: 500px;
-	padding-top: 10px;
-}
+.min_pic{width: 500px; padding-top: 10px;}
+.min_pic .num{height: 62px; overflow: hidden; width: 430px; position: relative; float: left;}
+.min_pic .num ul{position: absolute; left: 0; top: 0;}
+.min_pic .num ul li{width: 100px; height: 60px; margin-right: 7px; padding: 1px; float: left;}
+.min_pic .num ul .linormal{opacity: 0.4;}
+.min_pic .num ul .liactive{opacity: 1;}
+.min_pic .num ul li:hover{opacity: 1;}
+.min_pic .num ul li img{width: 100px; height: 60px; cursor: pointer;}
 
-.min_pic .num {
-	height: 62px;
-	overflow: hidden;
-	width: 430px;
-	position: relative;
-	float: left;
-}
-
-.min_pic .num ul {
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
-.min_pic .num ul li {
-	width: 100px;
-	height: 60px;
-	margin-right: 7px;
-	padding: 1px;
-	float: left;
-}
-
-.min_pic .num ul .linormal {
-	opacity: 0.4;
-}
-
-.min_pic .num ul .liactive {
-	opacity: 1;
-}
-
-.min_pic .num ul li:hover {
-	opacity: 1;
-}
-
-.min_pic .num ul li img {
-	width: 100px;
-	height: 60px;
-	cursor: pointer;
-}
 
 /* 小图左右样式 */
-.min_pic .prev_btn, .min_pic .next_btn {
-	width: 25px;
-	height: 60px;
-	line-height: 60px;
-	text-align: center;
-	cursor: pointer;
-	background: #666;
-	font-weight: bold;
-	font-size: 20px;
-	color: #fff;
-}
+.min_pic .prev_btn, .min_pic .next_btn{width: 25px; height: 60px; line-height: 60px; text-align: center; cursor: pointer; background: #666; font-weight: bold; font-size: 20px; color: #fff;}
+.min_pic .prev_btn{margin: 1px 14px 0 0; float: left;}
+.min_pic .next_btn{margin: 1px 0 0 0; float: right;}
+.min_pic .prev_btn:hover, .min_pic .next_btn:hover{background: #333;}
 
-.min_pic .prev_btn {
-	margin: 1px 14px 0 0;
-	float: left;
-}
-
-.min_pic .next_btn {
-	margin: 1px 0 0 0;
-	float: right;
-}
-
-.min_pic .prev_btn:hover, .min_pic .next_btn:hover {
-	background: #333;
-}
-
-#bigimg {
-	display: none;
-	position: absolute;
-	overflow: hidden;
-	width: 500px;
-	height: 300px;
-	left: 550px;
-	top: 0px;
-	z-index: 30;
-}
-
-#bigimg img {
-	width: 1000px;
-	height: 600px;
-	position: absolute;
-}
-
-#smalldiv {
-	display: none;
-	width: 250px;
-	height: 150px;
-	position: absolute;
-	background: #fff;
-	opacity: 0.5;
-}
+#bigimg{display: none; position: absolute; overflow: hidden;  width: 500px; height: 300px; left: 550px; top: 0px; z-index: 30;}  
+#bigimg img{width: 1000px; height: 600px; position: absolute;}
+#smalldiv{display: none; width: 250px; height: 150px; position: absolute; background: #fff; opacity: 0.5;}
 
 /** 上传图片样式 **/
-.uploadPic {
-	position: absolute;
-	top: 0;
-	left: 550px;
-	width: 480px;
-}
+.uploadPic{position: absolute; top: 0; left: 550px; width: 480px;}
 
-.uploadPic .head {
-	border-bottom: 1px solid #ddd;
-	width: 400px;
-	margin: 0 auto;
-	padding: 0 20px 15px;
-}
+.uploadPic .head{border-bottom: 1px solid #ddd; width: 400px; margin: 0 auto; padding: 0 20px 15px;}
+.uploadPic .head .spanbig{color: #c98656; font-size: 2em;}
+.uploadPic .head .spansmall{color: #cb8d68; font-size: 1em;}
+.head form{position: absolute; margin: -35px 0 0 240px;}
+.head input[type="file"]{position: absolute; opacity: 0; z-index: 20; width: 120px; height: 30px;}
+.head .btn-upload, .head .btn-submit{position: absolute; width: 120px; line-height: 30px; padding: 0; background: #289073; border-color: #207d4e; color: #fff;}
+.head .btn-upload{z-index: 10;}
+.head .btn-submit{z-index: 5;}
 
-.uploadPic .head .spanbig {
-	color: #c98656;
-	font-size: 2em;
-}
-
-.uploadPic .head .spansmall {
-	color: #cb8d68;
-	font-size: 1em;
-}
-
-.head form {
-	position: absolute;
-	margin: -35px 0 0 240px;
-}
-
-.head input[type="file"] {
-	position: absolute;
-	opacity: 0;
-	z-index: 20;
-	width: 120px;
-	height: 30px;
-}
-
-.head .btn-upload, .head .btn-submit {
-	position: absolute;
-	width: 120px;
-	line-height: 30px;
-	padding: 0;
-	background: #289073;
-	border-color: #207d4e;
-	color: #fff;
-}
-
-.head .btn-upload {
-	z-index: 10;
-}
-
-.head .btn-submit {
-	z-index: 5;
-}
-
-.uploadPic .fileContent {
-	margin: 30px auto;
-	width: 320px;
-}
-
-.fileContent li {
-	border-bottom: 1px dashed #7cc3a6;
-	padding: 8px 20px;
-}
+.uploadPic .fileContent{margin: 30px auto; width: 320px;}
+.fileContent li{border-bottom: 1px dashed #7cc3a6; padding: 8px 20px;}

@@ -1,5 +1,5 @@
 (function() {
-	// 点击添加物品按钮(显示添加物品弹框)
+	// 点击添加物品按钮
 	$(".addItem").click(function(){
 		$.ajax({
 			url:'/LD/userItem/getItemType.action',
@@ -24,13 +24,6 @@
 	// 改变必填项选中
 	$(".li-num input").focus(function(){
 		$(".li-num input").removeClass("border-red");
-	});
-
-	///////////////////// 添加物品弹出框
-	// 1. 关闭弹出框
-	$(".addItemDiv .fac-title span").click(function(){
-		$(".shadow").css("display","none");
-		$(".addItemDiv").css("display","none");
 	});
 })();
 
@@ -139,7 +132,7 @@ var deleteOneItem = function(element){
 		$(this).children("td").children(".no").text(Number($(this).children("td").children(".no").text())-1);
 	});
 	$(element).parent().remove();
-};
+}
 
 
 // 添加采购计划
@@ -152,11 +145,9 @@ var addPlan = function(){
 	}
 
 	var planID = $(".li-num input").val(),
-	    planName = $(".planTitle input").eq(1).val(),
-	    planManager = $(".planTitle input").eq(2).val(),
-	    note = $(".planTitle input").eq(3).val(),
-	    money = 1000,
-	    ctime = "2016-11-29";	    
+	    planManager = $(".planTitle input").eq(1).val(),
+	    ctime = $(".planTitle input").eq(2).val(),
+	    note = $(".planTitle input").eq(3).val();
 
 	// 计划采购物品
 	var itemList = "";
@@ -167,15 +158,15 @@ var addPlan = function(){
 		    +'"FAC_MODEL":"'+ I.eq(3).val() +'","count":'+ I.eq(4).val() +',"unitPrice":'+ I.eq(5).val()+','
 		    +'"totalPrice":'+ I.eq(6).val() +',"comment":"'+ I.eq(7).val() +'"},';
 		itemList += perItem;
-	};
+	}
 
 	if(itemList.length !=0) itemList = itemList.substring(0,itemList.length-1);
 
 	$.ajax({
-		url:'/LD/userItem/newPlan.action',
+		url:'/LD/addPlan.action',
 		type:'post',
 		data:'{"planID":'+ planID +',"planManager":"'+ planManager +'","ctime":"'+ ctime +'",'
-			+'"note":"'+ note +'","money:"'+ money +',"planName":"'+ planName +'","itemList":{'+ itemList +'}}',
+			+'"note":"'+ note +'","itemList":{'+ itemList +'}}',
 		dataType:'json',
 		contentType:'application/json',
 		success:function(data){
@@ -188,4 +179,4 @@ var addPlan = function(){
 			// }
 		}
 	});
-};
+}

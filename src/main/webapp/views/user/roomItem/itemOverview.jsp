@@ -1,33 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
-<%@ page import="java.util.Date, java.text.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="java.util.Date, java.text.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css"
-	rel="stylesheet" type="text/css" />
-<title>客房物品总览</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css"/>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css" rel="stylesheet" type="text/css"/>
+	<title>客房物品总览</title>
 </head>
 <body>
-
-	<jsp:include page="../_header.jsp" />
-	<jsp:include page="../_leftMenu.jsp" />
-
+	
+    <jsp:include page="../_header.jsp"/>
+	<jsp:include page="../_leftMenu.jsp"/>
+	
 	<div class="nav-second">
 		<div class="toolbar">
 			<div class="nav-secondul">
@@ -40,14 +32,13 @@
 		</div>
 	</div>
 
-	<!-- 页面内容 strat -->
-	<div class="main">
+    <!-- 页面内容 strat -->
+ 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
 				<span class="span">物品种类：</span>
 				<div class="itemType">
-					<span class="span"></span>
-					<div id="itemTypeName" style="display:none;"></div>
+				 	<span class="span"></span>
 					<div class="itemTypeMenu">
 						<ul>
 							<li>全&nbsp;&nbsp;部</li>
@@ -60,7 +51,7 @@
 						</ul>
 					</div>
 				</div>
-			</div>
+			</div>		
 			<!-- <a class="btn btn-new btnnew" href="sourceNew.jsp?type=2">新增电费记录</a> -->
 			<div class="bill-area">
 				<div class="bill-table">
@@ -89,19 +80,14 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- 页面内容 end -->
+ 	</div>
+    <!-- 页面内容 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
 	<script>
 	    // 请求系统物品信息
 		//requestAllItem(1);
