@@ -18,11 +18,11 @@ public interface RoomMapper {
 	int updateByPrimaryKey(Room record);
 
 	// add
-	Room selectByNumber(String rn);
+	Room selectByNumber(String RN);
 
-	List<Room> getRoomByType(String type);
+	List<Room> getRoomByType(String TYPE);
 
-	List<Room> getRoomByState(int state);
+	List<Room> getRoomByState(int STATE);
 
 	List<Room> getAllRoom();
 

@@ -154,17 +154,17 @@
 	</update>
 	<select id="getItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where ROOM_ID = #{room_id} and TYPE = #{type} limit #{ST}, #{EACH}
+  	select * from room_item where ROOM_ID = #{ROOM_ID} and TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getItemsByType" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where TYPE = #{type} limit #{ST}, #{EACH}
+  	select * from room_item where TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getItemsByRoom" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where ROOM_ID = #{room_id} limit #{ST}, #{EACH}
+  	select * from room_item where ROOM_ID = #{ROOM_ID} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getAllItems" resultMap="BaseResultMap" parameterType="map">
@@ -174,7 +174,7 @@
 	</select>
 	<select id="getTotal" resultType="java.lang.Integer" parameterType="map">
   	<![CDATA[
-  	select count(*) from room_item where ROOM_ID = #{room_id} and TYPE = #{type}
+  	select count(*) from room_item where ROOM_ID = #{ROOM_ID} and TYPE = #{TYPE}
     ]]>
 	</select>
 	<select id="getTotalByType" resultType="java.lang.Integer" parameterType="java.lang.String">

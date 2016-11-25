@@ -117,6 +117,6 @@
     select 
     <include refid="Base_Column_List" />
     from plan
-    where NAME = #{S,jdbcType=VARCHAR}
+    where NAME = #{NAME,jdbcType=VARCHAR}
   </select>
 </mapper>

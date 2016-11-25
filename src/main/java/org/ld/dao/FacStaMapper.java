@@ -27,7 +27,7 @@ public interface FacStaMapper {
 
 	List<FacSta> getFacByTypeCat(HashMap<String, Object> map);
 
-	FacSta selectByNumber(String number);
+	FacSta selectByNumber(String NUMBER);
 
 	int getAllTotal();
 

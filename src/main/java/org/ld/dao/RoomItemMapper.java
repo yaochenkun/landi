@@ -31,8 +31,8 @@ public interface RoomItemMapper {
 
 	int getAllTotal();
 
-	int getTotalByType(String type);
+	int getTotalByType(String TYPE);
 
-	int getTotalByRoom(int rid);
+	int getTotalByRoom(int RID);
 
 }

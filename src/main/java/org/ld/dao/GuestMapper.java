@@ -18,9 +18,9 @@ public interface GuestMapper {
 	int updateByPrimaryKey(Guest record);
 
 	// add
-	List<Guest> selectByName(String name);
+	List<Guest> selectByName(String NAME);
 
-	Guest selectByRoomNumber(String rn);
+	Guest selectByRoomNumber(String RN);
 
-	Guest selectByContract(String ct);
+	Guest selectByContract(String CT);
 }

@@ -20,7 +20,7 @@ public interface UserMapper {
 
 	// add
 
-	User selectByUserName(String Name);
+	User selectByUserName(String USERNAME);
 
 	List<User> selectIdRange(HashMap<String, Integer> map);
 

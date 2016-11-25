@@ -139,9 +139,10 @@
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
-  	<![CDATA[
-  	select count(*) from daily_service where ROOM_NUMBER = #{RN} and TYPE = #{TYPE}
-    ]]>
+  	select count(*) from daily_service where 
+  	 <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER = #{RN} and
+     </if> TYPE = #{TYPE}
   </select>
   <select id="getDailyServiceRange" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[

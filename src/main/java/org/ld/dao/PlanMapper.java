@@ -23,5 +23,5 @@ public interface PlanMapper {
 
 	int getTotal();
 
-	Plan selectByName(String s);
+	Plan selectByName(String NAME);
 }
