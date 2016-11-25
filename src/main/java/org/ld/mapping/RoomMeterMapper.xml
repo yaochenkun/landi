@@ -130,7 +130,7 @@
   	select * from room_meter where ROOM_ID = #{room_id} and TYPE = #{type}
     ]]>
   </select>
-  <select id="getMeter" resultMap="BaseResultMap" parameterType="org.">
+  <select id="getMeter" resultMap="BaseResultMap" parameterType="java.lang.String">
   	<![CDATA[
   	select * from room_meter where METER_NUMBER = #{MN,jdbcType=VARCHAR}
     ]]>
