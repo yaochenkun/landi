@@ -167,19 +167,15 @@ public class UserRoomController {
 			ans.put("State", "Valid");
 		}
 
-		switch (op) {
-		case "room":
+		if(op.equals("room")) {
 			Room room = roomService.getRoomById(rid);
 			ans.put("room", room);
-			break;
-		case "guest":
+		} else if(op.equals("guest")) {
 			Guest guest = guestService.getGuestByRoomNumber(rn);
 			ans.put("guest_info", guest);
-			break;
-		default:
+		} else {
 			List<RoomItem> item = roomService.getItems(rid, op);
 			ans.put(op, item);
-			break;
 		}
 
 		return ans;

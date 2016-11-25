@@ -66,8 +66,6 @@ var requestItemOverview = function(pageNum){
 			            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
-		}
-	});
 }
 
 //根据房间号 拉取上一页 物品总览信息
