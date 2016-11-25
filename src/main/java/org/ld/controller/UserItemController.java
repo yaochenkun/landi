@@ -99,7 +99,7 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/searchItemList") // 物品统计
+	@RequestMapping("/searchItemList") // 根据物品种类、子类、品牌获取物品名称
 	@ResponseBody
 	public Map<String, Object> searchItemList(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
