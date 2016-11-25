@@ -37,21 +37,39 @@ var addSourceType = function(type){
 	var roomNumber = $("#sourceRoomNumber").val();
 	var guestName = $(".body-content input").eq(1).val();
 	var meterNo = $(".body-content input").eq(2).val();
-	var thisMonthNum = $(".body-content input").eq(3).val();
-	var charge = $(".body-content input").eq(4).val();
-	var meterReading = $(".body-content input").eq(5).val();
-	var meterDate = $(".body-content input").eq(6).val();
+	var charge = $(".body-content input").eq(3).val();
+	var thisMonthNum = $(".body-content input").eq(4).val();
+	var meterDate = $(".body-content input").eq(5).val();
 
 	$.ajax({
-		url:'/LD/addSource.action',
+		url:'/LD/userRoom/addSource.action',
 		type:'post',
 		contentType:'application/json',
-		data:'{"type":'+ type +',"roomNumber":"'+ roomNumber +'","guestName":"'+ guestName +'",'
-				+'"meterNo":'+ meterNo +',"thisMonthNum":'+ thisMonthNum +',"charge":'+ charge +','
-				+'"meterReading":"'+ meterReading +'","meterDate":"'+ meterDate +'"}',
+		data:'{"type":'+ Number(type) +',"roomNumber":"'+ roomNumber +'","guestName":"'+ guestName +'",'
+				+'"meterNo":"'+ meterNo +'","thisMonthNum":'+ thisMonthNum +',"charge":'+ charge +','
+				+'"meterDate":"'+ meterDate +'"}',
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			if(data == 1){
+				alert("添加成功！");
+				switch($("#sourceType").text()){
+					case "水费":
+					    window.location.href = "http://" + window.location.host +
+					    	"/LD/views/user/roomService/source/sourceWater.jsp";
+						break;
+					case "电费":
+						  window.location.href = "http://" + window.location.host +
+					    	"/LD/views/user/roomService/source/sourceElec.jsp";
+						break;
+
+					default:
+					    console.log("没有匹配的费用！");
+						break;
+				}
+			}else if(data == 0){
+				alert("添加失败！");
+			}
 		}
 	});
 }

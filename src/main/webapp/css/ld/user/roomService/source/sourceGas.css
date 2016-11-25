@@ -1,22 +1,67 @@
-.search-roomNo{top: 80px;}
-.search-wrap .search-btn{right: 110px;}
+.search-roomNo {
+	top: 80px;
+}
 
-.bill-table thead tr:nth-child(1){height: 40px;}
-.bill-table thead tr:nth-child(2){height: 40px;}
-.bill-table thead tr th{font-weight: normal;}
-.bill-table thead tr th span{padding: 0;}
-.bill-table thead tr:nth-child(1) th:nth-child(1){width: 5%;}
-.bill-table thead tr:nth-child(1) th:nth-child(2){width: 6%;}
-.bill-table thead tr:nth-child(1) th:nth-child(5){width: 6%;}
+.search-wrap .search-btn {
+	right: 110px;
+}
 
-.bill-table thead .gasOne{color: #777;}
-.bill-table thead .gasTwo{color: #7a7a7a;}
-.bill-table thead tr:nth-child(2) th{width: 5%; font-size: 14px; font-weight: normal;}
+.bill-table thead tr:nth-child(1) {
+	height: 40px;
+}
 
-.bill-table tbody tr td:nth-child(3),.bill-table tbody tr td:nth-child(4),.bill-table tbody tr td:nth-child(5),
-.bill-table tbody tr td:nth-child(6),.bill-table tbody tr td:nth-child(7),.bill-table tbody tr td:nth-child(8){color: #01458c;}
+.bill-table thead tr:nth-child(2) {
+	height: 40px;
+}
 
-.bill-table tbody tr td:nth-child(9),.bill-table tbody tr td:nth-child(10),.bill-table tbody tr td:nth-child(11),
-.bill-table tbody tr td:nth-child(12),.bill-table tbody tr td:nth-child(13),.bill-table tbody tr td:nth-child(14){color: #f1551a;}
+.bill-table thead tr th {
+	font-weight: normal;
+}
 
-.bill-table tbody tr td:nth-child(9){}
+.bill-table thead tr th span {
+	padding: 0;
+}
+
+.bill-table thead tr:nth-child(1) th:nth-child(1) {
+	width: 5%;
+}
+
+.bill-table thead tr:nth-child(1) th:nth-child(2) {
+	width: 6%;
+}
+
+.bill-table thead tr:nth-child(1) th:nth-child(5) {
+	width: 6%;
+}
+
+.bill-table thead .gasOne {
+	color: #777;
+}
+
+.bill-table thead .gasTwo {
+	color: #7a7a7a;
+}
+
+.bill-table thead tr:nth-child(2) th {
+	width: 5%;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.bill-table tbody tr td:nth-child(3), .bill-table tbody tr td:nth-child(4),
+	.bill-table tbody tr td:nth-child(5), .bill-table tbody tr td:nth-child(6),
+	.bill-table tbody tr td:nth-child(7), .bill-table tbody tr td:nth-child(8)
+	{
+	color: #01458c;
+}
+
+.bill-table tbody tr td:nth-child(9), .bill-table tbody tr td:nth-child(10),
+	.bill-table tbody tr td:nth-child(11), .bill-table tbody tr td:nth-child(12),
+	.bill-table tbody tr td:nth-child(13), .bill-table tbody tr td:nth-child(14)
+	{
+	color: #f1551a;
+}
+
+.bill-table tbody tr td:nth-child(9) {
+	
+}

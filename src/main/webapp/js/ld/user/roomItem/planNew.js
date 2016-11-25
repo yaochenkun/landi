@@ -1,5 +1,5 @@
 (function() {
-	// 点击添加物品按钮
+	// 点击添加物品按钮(显示添加物品弹框)
 	$(".addItem").click(function(){
 		$.ajax({
 			url:'/LD/userItem/getItemType.action',
@@ -9,7 +9,6 @@
 				$("#item-type .item-content").html("");
 				$("#item-cat .item-content").html("");
 				$("#item-com .item-content").html("");
-				$("#item-name .item-content").html("");
 				if(data != null){
 					for(var i=0; i<data.length; i++){
 						$("#item-type .item-content").append("<a class='btn btn-item' onclick='chooseItemType(this);'>"+ data[i] +"</a>");
@@ -25,6 +24,13 @@
 	$(".li-num input").focus(function(){
 		$(".li-num input").removeClass("border-red");
 	});
+
+	///////////////////// 添加物品弹出框
+	// 1. 关闭弹出框
+	$(".addItemDiv .fac-title span").click(function(){
+		$(".shadow").css("display","none");
+		$(".addItemDiv").css("display","none");
+	});
 })();
 
 // 2. 选择物品种类
@@ -32,10 +38,8 @@ var chooseItemType = function(element){
 	$("#item-type .btn-item").removeClass("item-active");
 	$(element).addClass("item-active");
 
-	// 清空物品子类、物品品牌和物品名称
 	$("#item-cat .item-content").html("");
 	$("#item-com .item-content").html("");
-	$("#item-name .item-content").html("");
 
 	// 获取物品名称
 	$.ajax({
@@ -125,6 +129,19 @@ var addOneItem = function(){
 	$(".addItemDiv").css("display","none");
 };
 
+var request = function(){
+	$.ajax({
+		url:'/LD/userItem/searchItemList.action',
+		type:'post',
+		data:'{"type":"家具","cat":"桌子","band":"宜家"}',
+		dataType:'json',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+		}
+	});
+}
+
 // 删除一项物品
 var deleteOneItem = function(element){
 	$(element).parent().nextAll(".eachItem").each(function(){
@@ -132,7 +149,7 @@ var deleteOneItem = function(element){
 		$(this).children("td").children(".no").text(Number($(this).children("td").children(".no").text())-1);
 	});
 	$(element).parent().remove();
-}
+};
 
 
 // 添加采购计划
@@ -145,9 +162,11 @@ var addPlan = function(){
 	}
 
 	var planID = $(".li-num input").val(),
-	    planManager = $(".planTitle input").eq(1).val(),
-	    ctime = $(".planTitle input").eq(2).val(),
-	    note = $(".planTitle input").eq(3).val();
+	    planName = $(".planTitle input").eq(1).val(),
+	    planManager = $(".planTitle input").eq(2).val(),
+	    note = $(".planTitle input").eq(3).val(),
+	    money = 1000,
+	    ctime = "2016-11-29";	    
 
 	// 计划采购物品
 	var itemList = "";
@@ -158,15 +177,15 @@ var addPlan = function(){
 		    +'"FAC_MODEL":"'+ I.eq(3).val() +'","count":'+ I.eq(4).val() +',"unitPrice":'+ I.eq(5).val()+','
 		    +'"totalPrice":'+ I.eq(6).val() +',"comment":"'+ I.eq(7).val() +'"},';
 		itemList += perItem;
-	}
+	};
 
 	if(itemList.length !=0) itemList = itemList.substring(0,itemList.length-1);
 
 	$.ajax({
-		url:'/LD/addPlan.action',
+		url:'/LD/userItem/newPlan.action',
 		type:'post',
 		data:'{"planID":'+ planID +',"planManager":"'+ planManager +'","ctime":"'+ ctime +'",'
-			+'"note":"'+ note +'","itemList":{'+ itemList +'}}',
+			+'"note":"'+ note +'","money:"'+ money +',"planName":"'+ planName +'","itemList":{'+ itemList +'}}',
 		dataType:'json',
 		contentType:'application/json',
 		success:function(data){
@@ -179,4 +198,4 @@ var addPlan = function(){
 			// }
 		}
 	});
-}
+};

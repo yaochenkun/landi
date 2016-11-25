@@ -15,28 +15,7 @@ var addservice = function(){
 		console.log("房间号为空！");
 		return;
 	}
-	switch($("#serviceType").text()){
-		case "餐费":
-		    //console.log("添加餐费");
-			addServiceType(1);
-			break;
-
-		case "桶装水费":
-			addServiceType(2);
-			break;
-
-		case "擦鞋费":
-		    addServiceType(3);
-		    break;
-
-		case "代购费":
-			addServiceType(4);
-			break;
-
-		default:
-		    console.log("没有匹配的费用！");
-			break;
-	}
+	addServiceType(ServiceType());
 }
 
 // 添加客房服务 
@@ -51,7 +30,7 @@ var addServiceType = function(type){
 	var note = $(".body-content input").eq(6).val();
 
 	$.ajax({
-		url:'/LD/addServie.action',
+		url:'/LD/userRoom/addService.action',
 		type:'post',
 		contentType:'application/json',
 		data:'{"type":'+ type +',"roomNumber":"'+ roomNumber +'","guestName":"'+ guestName +'","item":"'+ item +'",'
@@ -59,6 +38,62 @@ var addServiceType = function(type){
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			if(data == 1){
+				alert("添加成功！");
+				switch($("#serviceType").text()){
+					case "餐费":
+					    window.location.href = "http://" +
+					        window.location.host + "/LD/views/user/roomService/service/serviceTakeaway.jsp";
+						break;
+
+					case "桶装水费":
+						window.location.href = "http://" +
+					        window.location.host + "/LD/views/user/roomService/service/serviceWaterBill.jsp";
+						break;
+
+					case "擦鞋费":
+					    window.location.href = "http://" +
+					        window.location.host + "/LD/views/user/roomService/service/serviceShoeCleaning.jsp";
+					    break;
+
+					case "代购费":
+						window.location.href = "http://" +
+					        window.location.host + "/LD/views/user/roomService/service/serviceShopping.jsp";
+						break;
+
+					default:
+					    console.log("没有匹配的费用！");
+						break;
+				}
+			}else if(data == 0){
+				alert("添加失败！");
+			}
 		}
 	});
+}
+
+var ServiceType = function(){
+	var type = 0;
+	switch($("#serviceType").text()){
+		case "餐费":
+		    type = 1;
+			break;
+
+		case "桶装水费":
+			type = 2;
+			break;
+
+		case "擦鞋费":
+		    type = 3;
+		    break;
+
+		case "代购费":
+			type = 4;
+			break;
+
+		default:
+		    console.log("没有匹配的费用！");
+			break;
+	}
+	return type;
 }

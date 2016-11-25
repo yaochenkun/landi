@@ -44,7 +44,7 @@ var requestAjaxTakeaway = function(pageNum){
 		data:'{"pageNum":'+ pageNum +',"type":'+ type + '}',
 		dataType:'json',
 		success:function(data){
-			//console.log(data);
+			console.log(data);
 			if(data.State == "Invalid"){
 				alert("您没有权限访问本页数据，请尝试升级权限或回退！");
 				return;
