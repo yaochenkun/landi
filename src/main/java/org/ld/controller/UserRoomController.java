@@ -38,7 +38,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
-
 @Controller
 @RequestMapping("/userRoom")
 public class UserRoomController {
@@ -51,123 +50,124 @@ public class UserRoomController {
 	private GuestMissionService guestService;
 	@Autowired
 	private ServerService serverService;
-	
+
 	private static Logger logger = Logger.getLogger("logRec");
-		
+
 	// 多文件上传(add by pq)
-    @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
-    public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request){
-    	//System.out.println(request.getSession().getServletContext().getRealPath(""));
-    	System.out.println("room_id：" + room_id);
-    	String roomNumber = roomService.getRoomById(room_id).getROOM_NUMBER();
-        // 遍历文件
-        for (MultipartFile mul:file){
-            System.out.println(mul.getName()+"---"+mul.getContentType()+"---"+mul.getOriginalFilename());
-            try {
-                if (!mul.isEmpty()){
-                    Streams.copy(mul.getInputStream(),new FileOutputStream(request.getSession().getServletContext().getRealPath("") + "/resources/room_pic/" +mul.getOriginalFilename()),true);
-                    
-                    RoomPic roompic = new RoomPic();
-                    roompic.setROOM_ID(room_id);
-                    roompic.setTYPE(1);;
-                    roompic.setCTIME(null);
-                    roompic.setNAME("1");
-                    roompic.setTAG("1");
-                    roompic.setPATH("/resources/room_pic/" + mul.getOriginalFilename());
-                    
-                    roomService.insertRoomPic(roompic);
-                }
-            } catch (IOException e) {
-                System.out.println("文件上传失败");
-                e.printStackTrace();
-            }
-        }
-        
-        return "forward:/views/user/tenant/roomCheck.jsp?rid="+ room_id + "&rNum=" + roomNumber ;
-    }
-    
-    // 获取房间图片路径(add by pq)
-	@RequestMapping(value="/getRoomPic",method={RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
+	public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request) {
+		// System.out.println(request.getSession().getServletContext().getRealPath(""));
+		System.out.println("room_id：" + room_id);
+		String roomNumber = roomService.getRoomById(room_id).getROOM_NUMBER();
+		// 遍历文件
+		for (MultipartFile mul : file) {
+			System.out.println(mul.getName() + "---" + mul.getContentType() + "---" + mul.getOriginalFilename());
+			try {
+				if (!mul.isEmpty()) {
+					Streams.copy(mul.getInputStream(),
+							new FileOutputStream(request.getSession().getServletContext().getRealPath("")
+									+ "/resources/room_pic/" + mul.getOriginalFilename()),
+							true);
+
+					RoomPic roompic = new RoomPic();
+					roompic.setROOM_ID(room_id);
+					roompic.setTYPE(1);
+					;
+					roompic.setCTIME(null);
+					roompic.setNAME("1");
+					roompic.setTAG("1");
+					roompic.setPATH("/resources/room_pic/" + mul.getOriginalFilename());
+
+					roomService.insertRoomPic(roompic);
+				}
+			} catch (IOException e) {
+				System.out.println("文件上传失败");
+				e.printStackTrace();
+			}
+		}
+
+		return "forward:/views/user/tenant/roomCheck.jsp?rid=" + room_id + "&rNum=" + roomNumber;
+	}
+
+	// 获取房间图片路径(add by pq)
+	@RequestMapping(value = "/getRoomPic", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
-	public List<RoomPic> getRoomPic(@RequestParam(value="id",required=true) Integer room_id)throws Exception {
-		
+	public List<RoomPic> getRoomPic(@RequestParam(value = "id", required = true) Integer room_id) throws Exception {
+
 		System.out.println(room_id);
 		List<RoomPic> roomPic = roomService.getPic(room_id);
 
 		return roomPic;
 	}
-	
+
 	// 根据roomNumber 查询 roomID(add by pq)
-	@RequestMapping(value="/getRoomIDByNumber")
+	@RequestMapping(value = "/getRoomIDByNumber")
 	@ResponseBody
-	public Room getRoomIDByNumber(@RequestParam(value="roomNumber",required=true) String roomNumber)throws Exception {
-		
+	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
+			throws Exception {
+
 		System.out.println(roomNumber);
 		Room room = roomService.getRoomByNumber(roomNumber);
 
 		return room;
 	}
-	
+
 	@RequestMapping("/getAllRoom") // 所有房间
 	@ResponseBody
-	public Map<String, Object> getAllRoom(HttpSession session){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> getAllRoom(HttpSession session) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		List<Room> rooms = roomService.getAllRoom();
 		ans.put("roomList", rooms);
-		
+
 		return ans;
 	}
-	
+
 	@RequestMapping("/getAllRoomState")
 	@ResponseBody
-	public Map<String, Object> getAllRoomState(HttpSession session){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> getAllRoomState(HttpSession session) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
-                                 		}
-		
+		}
+
 		List<RoomState> rooms = roomService.getAllRoomState();
 		ans.put("roomStateList", rooms);
-		
+
 		return ans;
 	}
-	
+
 	@RequestMapping("/getRoomInfo")
 	@ResponseBody
-	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody String data){
+	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
-		
-		String op = dataJson.getString("op");		
+
+		String op = dataJson.getString("op");
 		int rid = dataJson.getIntValue("rid");
 		String rn = dataJson.getString("rNum");
 
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
-		switch(op)
-		{
+
+		switch (op) {
 		case "room":
 			Room room = roomService.getRoomById(rid);
 			ans.put("room", room);
@@ -184,131 +184,125 @@ public class UserRoomController {
 
 		return ans;
 	}
-	
+
 	@RequestMapping("/getPics")
 	@ResponseBody
-	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		List<RoomPic> pic = roomService.getPic(rid);
 		ans.put("pics", pic);
 		return ans;
 	}
-	
+
 	@RequestMapping("/getMeters") // 所有房间表概览
 	@ResponseBody
-	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		List<RoomMeter> meters = roomService.getMeters(rid, type);
 		ans.put("meters" + type, meters);
 		return ans;
 	}
-	
+
 	@RequestMapping("/roomSearchBill") // 明细流水（客房服务）
 	@ResponseBody
-	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rDaily"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		JSONObject dataJson = JSONObject.parseObject(data);
-		
-		int type = dataJson.getIntValue("type");		
+
+		int type = dataJson.getIntValue("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalDailyServiceRow(rn, type);
-		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-		
-		if(recordTotal!=0){
-			if(pageNumber > pageTotal)
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
 				pageNumber = pageTotal;
-			
+
 			int st = (pageNumber - 1) * eachPage;
 			List<DailyService> record = serverService.searchBill(rn, type, st, eachPage);
-			
+
 			ans.put("pageList", record);
 		}
 
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
-		
+
 		return ans;
 	}
-	
+
 	@RequestMapping("/roomSearchSource") // 明细流水（能源费结算）
 	@ResponseBody
-	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rDaily"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		JSONObject dataJson = JSONObject.parseObject(data);
-		
+
 		// 1 water 2 power 3 gas
 		int type = dataJson.getIntValue("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
-		
+
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalSourcesRow(rn, type);
-		int pageTotal = (int)Math.ceil((float)recordTotal/eachPage);
-		
-		if(recordTotal!=0){
-			if(pageNumber > pageTotal)
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
 				pageNumber = pageTotal;
-			
+
 			int st = (pageNumber - 1) * eachPage;
 			List<Sources> record = serverService.searchSource(rn, type, st, eachPage);
-			
+
 			ans.put("pageList", record);
 		}
-	
+
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
-		
+
 		return ans;
 	}
 
-	
 	@RequestMapping("/addService") // 添加客房服务
 	@ResponseBody
-	public Integer addService(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
-		{
+	public Integer addService(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -321,24 +315,23 @@ public class UserRoomController {
 			newDS.setROOM_NUMBER(dataJson.getString("roomNumber"));
 			newDS.setMONEY(dataJson.getDouble("sum"));
 			newDS.setTYPE(dataJson.getInteger("type"));
-			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("delivery"));
 			newDS.setRTIME(date);
-			
+
 			return serverService.addDailyService(newDS);
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return 0;
 		}
 	}
-	
+
 	@RequestMapping("/addSource") // 添加水费电费
 	@ResponseBody
-	public Integer addSource(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
-		{
+	public Integer addSource(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -351,21 +344,21 @@ public class UserRoomController {
 			newSrc.setMONEY(dataJson.getDouble("charge"));
 			newSrc.setTYPE(dataJson.getInteger("type"));
 			newSrc.setMETER(dataJson.getString("meterNo"));
-			//newSrc.setLAST_DATA(meter.getCUR_VAL());
-			//newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
+			// newSrc.setLAST_DATA(meter.getCUR_VAL());
+			// newSrc.setCOUNT(newSrc.getCURRENT_DATA() -
+			// newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
-			
-//			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-//			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-//			meter.setCUR_TIME(newSrc.getTIME());
-			
-			if(serverService.addSources(newSrc) == 1)
-			{
-				//return roomService.updateMeter(meter);
+
+			// meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+			// meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+			// meter.setCUR_TIME(newSrc.getTIME());
+
+			if (serverService.addSources(newSrc) == 1) {
+				// return roomService.updateMeter(meter);
 				return 1;
 			} else {
 				return 0;
@@ -375,13 +368,12 @@ public class UserRoomController {
 			return 0;
 		}
 	}
-	
+
 	@RequestMapping("/addSourceGas") // 添加燃气费
 	@ResponseBody
-	public Integer addSourceGas(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wDaily"))) == 0)
-		{
+	public Integer addSourceGas(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -392,45 +384,43 @@ public class UserRoomController {
 			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("firstthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("firstCharge"));
-			newSrc.setTYPE((Integer)cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setTYPE((Integer) cur_env.getSettingsInt().get("source_gas"));
 			newSrc.setMETER(dataJson.getString("firstMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
-			
+
 			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
 			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
 			meter.setCUR_TIME(newSrc.getTIME());
-			
-			if(serverService.addSources(newSrc) == 1)
-			{
+
+			if (serverService.addSources(newSrc) == 1) {
 				roomService.updateMeter(meter);
 			} else {
 				return 0;
 			}
-			
+
 			meter = roomService.getMeter(dataJson.getString("secondMeterNo"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("secondthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("secondCharge"));
-			newSrc.setTYPE((Integer)cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setTYPE((Integer) cur_env.getSettingsInt().get("source_gas"));
 			newSrc.setMETER(dataJson.getString("secondMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
 
-			ft = new SimpleDateFormat ("yyyy-MM-dd");
+			ft = new SimpleDateFormat("yyyy-MM-dd");
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
-			
+
 			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
 			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
 			meter.setCUR_TIME(newSrc.getTIME());
-			
-			if(serverService.addSources(newSrc) == 1)
-			{
+
+			if (serverService.addSources(newSrc) == 1) {
 				return roomService.updateMeter(meter);
 			} else {
 				return 0;
@@ -440,20 +430,19 @@ public class UserRoomController {
 			return 0;
 		}
 	}
-	
+
 	@RequestMapping("/Model/")
 	@ResponseBody
-	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		return ans;
 	}
 }

@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
 /* 用户service实现类  */
 @Service("roomService")
 public class RoomServiceImpl implements RoomService {
-	
+
 	private static Logger logger = Logger.getLogger("logDev");
-	
+
 	@Autowired
 	private RoomMapper roomMapper;
 	@Autowired
@@ -62,11 +62,10 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public int insert(Room roomInfo) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			roomMapper.insert(roomInfo);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
@@ -75,24 +74,22 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public int update(Room roomInfo) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			roomMapper.updateByPrimaryKeySelective(roomInfo);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
 	}
-	
+
 	@Override
 	public int updateMeter(RoomMeter meterInfo) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			roomMeterMapper.updateByPrimaryKeySelective(meterInfo);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
@@ -109,7 +106,7 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return roomMapper.getAllRoom();
 	}
-	
+
 	@Override
 	public List<RoomState> getAllRoomState() {
 		// TODO Auto-generated method stub
@@ -124,15 +121,16 @@ public class RoomServiceImpl implements RoomService {
 		map.put("type", type);
 		return roomItemMapper.getItems(map);
 	}
-	
+
 	@Override
 	public List<RoomPic> getPic(Integer rid) {
 		// TODO Auto-generated method stub
 		return roomPicMapper.getPicByRoomId(rid);
 	}
+
 	// add by pq
 	@Override
-	public int insertRoomPic(RoomPic roomPic){
+	public int insertRoomPic(RoomPic roomPic) {
 		return roomPicMapper.insertSelective(roomPic);
 	}
 

@@ -24,47 +24,45 @@ import org.springframework.stereotype.Service;
 /* 用户service实现类  */
 @Service("itemService")
 public class ItemServiceImpl implements ItemService {
-	
+
 	private static Logger logger = Logger.getLogger("logDev");
-	
+
 	@Autowired
 	private DailyServiceMapper dailyServiceMapper;
-	
+
 	@Autowired
 	private FacStaMapper facStaMapper;
-	
+
 	@Autowired
 	private RoomItemMapper roomItemMapper;
-	
+
 	@Autowired
 	private PlanMapper planMapper;
-	
+
 	@Autowired
 	private PlanDetailMapper planDetailMapper;
-	
+
 	@Override
 	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ST", st);
 		map.put("EACH", eachPage);
-		if(rid == 0 && type == null) {
+		if (rid == 0 && type == null) {
 			return roomItemMapper.getAllItems(map);
-		} else if(rid != 0 && type != null) {			
-				map.put("room_id", rid);
-				map.put("type", type);
-				return roomItemMapper.getItems(map);
-		}
-		else if(rid != 0){
+		} else if (rid != 0 && type != null) {
+			map.put("room_id", rid);
+			map.put("type", type);
+			return roomItemMapper.getItems(map);
+		} else if (rid != 0) {
 			map.put("room_id", rid);
 			return roomItemMapper.getItemsByRoom(map);
-		}
-		else{
+		} else {
 			map.put("type", type);
 			return roomItemMapper.getItemsByType(map);
 		}
 	}
-	
+
 	// 获取房间物品总数
 	@Override
 	public int getTotal(String type, String cat, String band) {
@@ -74,19 +72,19 @@ public class ItemServiceImpl implements ItemService {
 		map.put("type", type);
 		map.put("cat", cat);
 		map.put("band", band);
-		
-		if(type == null)
+
+		if (type == null)
 			return facStaMapper.getAllTotal();
 		else {
-			if(cat == null && band == null)
+			if (cat == null && band == null)
 				return facStaMapper.getTotalByType(map);
-			else if(cat != null && band == null)
+			else if (cat != null && band == null)
 				return facStaMapper.getTotalByTypeCat(map);
 			else
 				return facStaMapper.getTotalByTypeCatBand(map);
 		}
 	}
-	
+
 	// 获取所有采购计划
 	@Override
 	public List<Plan> getPlans(Integer st, Integer eachPage) {
@@ -96,13 +94,13 @@ public class ItemServiceImpl implements ItemService {
 		map.put("EACH", eachPage);
 		return planMapper.getPlans(map);
 	}
-	
+
 	// 根据采购计划ID获取采购计划(add by pq)
 	@Override
-	public Plan searchPlanByPlanid(Integer plan_id){
+	public Plan searchPlanByPlanid(Integer plan_id) {
 		return planMapper.selectByPrimaryKey(plan_id);
 	}
-	
+
 	// 获取采购计划总数
 	@Override
 	public int getTotalPlan() {
@@ -113,7 +111,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int addNewPlan(Plan p) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			planMapper.insert(p);
 			return 1;
 		} catch (Exception e) {
@@ -125,7 +123,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int addNewPlanDetail(PlanDetail d) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			planDetailMapper.insert(d);
 			return 1;
 		} catch (Exception e) {
@@ -143,7 +141,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int addNewFac(FacSta f) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			facStaMapper.insert(f);
 			return 1;
 		} catch (Exception e) {
@@ -161,15 +159,15 @@ public class ItemServiceImpl implements ItemService {
 		map.put("band", band);
 		map.put("st", st);
 		map.put("each", eachPage);
-		
-		if(type == null)
+
+		if (type == null)
 			return facStaMapper.getAllFac(map);
 		else {
-			if(cat == null && band == null)
+			if (cat == null && band == null)
 				return facStaMapper.getFacByType(map);
-			else if(cat != null && band == null)
+			else if (cat != null && band == null)
 				return facStaMapper.getFacByTypeCat(map);
-			else 
+			else
 				return facStaMapper.getFacByTypeCatBand(map);
 		}
 	}
@@ -179,10 +177,20 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return facStaMapper.selectByPrimaryKey(id);
 	}
-	
+
 	@Override
 	public FacSta getFacByNumber(String no) {
 		// TODO Auto-generated method stub
 		return facStaMapper.selectByNumber(no);
-	}	
+	}
+
+	@Override
+	public List<FacSta> getFacByTypeCatBandAll(String type, String cat, String band) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("cat", cat);
+		map.put("band", band);
+		return facStaMapper.getFacByTypeCatBand(map);
+	}
 }

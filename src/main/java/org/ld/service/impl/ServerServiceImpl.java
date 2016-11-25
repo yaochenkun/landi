@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 /* 用户service实现类  */
 @Service("serverService")
 public class ServerServiceImpl implements ServerService {
-	
+
 	private static Logger logger = Logger.getLogger("logDev");
-	
+
 	@Autowired
 	private DailyServiceMapper dailyServiceMapper;
-	
+
 	@Autowired
 	private SourcesMapper sourcesMapper;
 
@@ -37,15 +37,15 @@ public class ServerServiceImpl implements ServerService {
 	public List<DailyService> searchBill(String rn, int type, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("RN", rn);
 		map.put("TYPE", type);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
-		
-		if(rn != null) 
+
+		if (rn != null)
 			return dailyServiceMapper.getDailyServiceRange(map);
-		else 
+		else
 			return dailyServiceMapper.getAllDailyServiceRange(map);
 	}
 
@@ -53,18 +53,18 @@ public class ServerServiceImpl implements ServerService {
 	public List<Sources> searchSource(String rn, int type, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("RN", rn);
 		map.put("TYPE", type);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
-		
-		if(rn != null)
+
+		if (rn != null)
 			return sourcesMapper.getSourcesRange(map);
-		else 
+		else
 			return sourcesMapper.getAllSourcesRange(map);
 	}
-	
+
 	@Override
 	public int getTotalSourcesRow(String rn, int type) {
 		// TODO Auto-generated method stub
@@ -77,11 +77,10 @@ public class ServerServiceImpl implements ServerService {
 	@Override
 	public int addDailyService(DailyService service) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			dailyServiceMapper.insert(service);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
@@ -90,11 +89,10 @@ public class ServerServiceImpl implements ServerService {
 	@Override
 	public int addSources(Sources source) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			sourcesMapper.insert(source);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}

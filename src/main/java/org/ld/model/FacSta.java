@@ -1,113 +1,113 @@
 package org.ld.model;
 
 public class FacSta {
-    private Integer ID;
+	private Integer ID;
 
-    private String FAC_NUMBER;
+	private String FAC_NUMBER;
 
-    private String COMMENT;
+	private String COMMENT;
 
-    private String NAME;
+	private String NAME;
 
-    private String COMPANY;
+	private String COMPANY;
 
-    private String TYPE;
+	private String TYPE;
 
-    private String CAT;
+	private String CAT;
 
-    private Integer TOTAL;
+	private Integer TOTAL;
 
-    private Integer BAD;
+	private Integer BAD;
 
-    private Integer FREE;
+	private Integer FREE;
 
-    private Integer WORKING;
+	private Integer WORKING;
 
-    public Integer getID() {
-        return ID;
-    }
+	public Integer getID() {
+		return ID;
+	}
 
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
+	public void setID(Integer ID) {
+		this.ID = ID;
+	}
 
-    public String getFAC_NUMBER() {
-        return FAC_NUMBER;
-    }
+	public String getFAC_NUMBER() {
+		return FAC_NUMBER;
+	}
 
-    public void setFAC_NUMBER(String FAC_NUMBER) {
-        this.FAC_NUMBER = FAC_NUMBER == null ? null : FAC_NUMBER.trim();
-    }
+	public void setFAC_NUMBER(String FAC_NUMBER) {
+		this.FAC_NUMBER = FAC_NUMBER == null ? null : FAC_NUMBER.trim();
+	}
 
-    public String getCOMMENT() {
-        return COMMENT;
-    }
+	public String getCOMMENT() {
+		return COMMENT;
+	}
 
-    public void setCOMMENT(String COMMENT) {
-        this.COMMENT = COMMENT == null ? null : COMMENT.trim();
-    }
+	public void setCOMMENT(String COMMENT) {
+		this.COMMENT = COMMENT == null ? null : COMMENT.trim();
+	}
 
-    public String getNAME() {
-        return NAME;
-    }
+	public String getNAME() {
+		return NAME;
+	}
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME == null ? null : NAME.trim();
-    }
+	public void setNAME(String NAME) {
+		this.NAME = NAME == null ? null : NAME.trim();
+	}
 
-    public String getCOMPANY() {
-        return COMPANY;
-    }
+	public String getCOMPANY() {
+		return COMPANY;
+	}
 
-    public void setCOMPANY(String COMPANY) {
-        this.COMPANY = COMPANY == null ? null : COMPANY.trim();
-    }
+	public void setCOMPANY(String COMPANY) {
+		this.COMPANY = COMPANY == null ? null : COMPANY.trim();
+	}
 
-    public String getTYPE() {
-        return TYPE;
-    }
+	public String getTYPE() {
+		return TYPE;
+	}
 
-    public void setTYPE(String TYPE) {
-        this.TYPE = TYPE == null ? null : TYPE.trim();
-    }
+	public void setTYPE(String TYPE) {
+		this.TYPE = TYPE == null ? null : TYPE.trim();
+	}
 
-    public String getCAT() {
-        return CAT;
-    }
+	public String getCAT() {
+		return CAT;
+	}
 
-    public void setCAT(String CAT) {
-        this.CAT = CAT == null ? null : CAT.trim();
-    }
+	public void setCAT(String CAT) {
+		this.CAT = CAT == null ? null : CAT.trim();
+	}
 
-    public Integer getTOTAL() {
-        return TOTAL;
-    }
+	public Integer getTOTAL() {
+		return TOTAL;
+	}
 
-    public void setTOTAL(Integer TOTAL) {
-        this.TOTAL = TOTAL;
-    }
+	public void setTOTAL(Integer TOTAL) {
+		this.TOTAL = TOTAL;
+	}
 
-    public Integer getBAD() {
-        return BAD;
-    }
+	public Integer getBAD() {
+		return BAD;
+	}
 
-    public void setBAD(Integer BAD) {
-        this.BAD = BAD;
-    }
+	public void setBAD(Integer BAD) {
+		this.BAD = BAD;
+	}
 
-    public Integer getFREE() {
-        return FREE;
-    }
+	public Integer getFREE() {
+		return FREE;
+	}
 
-    public void setFREE(Integer FREE) {
-        this.FREE = FREE;
-    }
+	public void setFREE(Integer FREE) {
+		this.FREE = FREE;
+	}
 
-    public Integer getWORKING() {
-        return WORKING;
-    }
+	public Integer getWORKING() {
+		return WORKING;
+	}
 
-    public void setWORKING(Integer WORKING) {
-        this.WORKING = WORKING;
-    }
+	public void setWORKING(Integer WORKING) {
+		this.WORKING = WORKING;
+	}
 }

@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 /* 用户service实现类  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-	
+
 	private static Logger logger = Logger.getLogger("logDev");
-	
+
 	@Autowired
 	private UserMapper userInfoMapper;
 
@@ -26,46 +26,49 @@ public class UserServiceImpl implements UserService {
 	public User getUserById(int id) {
 		return userInfoMapper.selectByPrimaryKey(id);
 	}
+
 	@Override
-	public User getUserByUserName(String name){
+	public User getUserByUserName(String name) {
 		return userInfoMapper.selectByUserName(name);
 	}
+
 	@Override
 	public int insert(User userInfo) {
-		
-		try{
+
+		try {
 			userInfoMapper.insert(userInfo);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
 	}
+
 	@Override
-	public int updateUserInfo(User userInfo){
-		
-		try{
+	public int updateUserInfo(User userInfo) {
+
+		try {
 			userInfoMapper.updateByPrimaryKeySelective(userInfo);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
 	}
+
 	@Override
-	public List<User> selectUserRange(int st, int ed){
+	public List<User> selectUserRange(int st, int ed) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ST", st);
 		map.put("ED", ed);
 		List<User> user_list = new ArrayList<User>();
 		user_list = userInfoMapper.selectIdRange(map);
-		
+
 		return user_list;
 	}
+
 	@Override
-	public int totalRow(){
+	public int totalRow() {
 		return userInfoMapper.totalRow();
 	}
 }

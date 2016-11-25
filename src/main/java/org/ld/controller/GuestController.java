@@ -43,35 +43,34 @@ public class GuestController {
 	private RoomService roomService;
 	@Autowired
 	private GuestMissionService guestMissionService;
-	
+
 	private static Logger logger = Logger.getLogger("logRec");
-	
+
 	/**
 	 * @param obj
 	 * @param s
 	 */
-	
+
 	@RequestMapping("/addGuest")
-	public Map<String, Object> Model(HttpSession session, @RequestBody String data){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+	public Map<String, Object> Model(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("wCustom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wCustom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		JSONObject objs = JSON.parseObject(data);
 		Guest newGuest = new Guest();
 		Host newHost = new Host();
 		Intern newIntern = new Intern();
 		GuestBalance newBalance = new GuestBalance();
 		GuestService newService = new GuestService();
-		
+
 		JSONObject obj = objs.getJSONObject("guest");
-		try{
+		try {
 			newGuest.setGUEST_NAME(obj.getString("STR_Name"));
 			newGuest.setROOM_NUMBER(obj.getString("STR_RommID"));
 			newGuest.setROOM_TYPE(roomService.getRoomByNumber(obj.getString("STR_RommID")).getTYPE());
@@ -86,14 +85,14 @@ public class GuestController {
 			newGuest.setCOMMENT(obj.getString("STR_Remark"));
 			newGuest.setCHARGE(obj.getDouble("DOU_Rent")); // double ?
 			newGuest.setSYS_STATE(0);
-			SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(obj.getString("STR_TimeIn"));
 			newGuest.setTIMEIN(date);
 			date = ft.parse(obj.getString("STR_TimeOut"));
 			newGuest.setTIMEOUT(date);
-			
-			if(guestMissionService.addGuest(newGuest) == 1) {
+
+			if (guestMissionService.addGuest(newGuest) == 1) {
 				newGuest = guestMissionService.getGuestByContract(obj.getString("STR_ContractID"));
 			} else {
 				ans.remove("State");
@@ -106,19 +105,20 @@ public class GuestController {
 			ans.put("State", "Invalid");
 			return ans;
 		}
-			
+
 		obj = objs.getJSONObject("guest");
-		try{
+		try {
 			newHost.setGUEST_ID(newGuest.getID());
 			newHost.setHOST_NAME(obj.getString("STR_Name"));
 			newHost.setRENT_CHARGE(obj.getDouble("DOU_Rent"));
 			newHost.setSERVICE_CHARGE(obj.getDouble("DOU_Service"));
 			newHost.setRETURN_MONEY(obj.getDouble("DOU_Return"));
-			newHost.setOTHER_CHARGE(obj.getDouble("DOU_OTHER")); // other is charge
+			newHost.setOTHER_CHARGE(obj.getDouble("DOU_OTHER")); // other is
+																	// charge
 			newHost.setSYS_STATE(0);
-			
-			if(guestMissionService.addHost(newHost) == 1) {
-				
+
+			if (guestMissionService.addHost(newHost) == 1) {
+
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
@@ -130,9 +130,9 @@ public class GuestController {
 			ans.put("State", "Invalid");
 			return ans;
 		}
-		
+
 		obj = objs.getJSONObject("intern");
-		try{
+		try {
 			newIntern.setGUEST_ID(newGuest.getID());
 			newIntern.setLE_1(obj.getDouble("DOU_LEFirst"));
 			newIntern.setLE_2(obj.getDouble("DOU_LESecond"));
@@ -141,11 +141,12 @@ public class GuestController {
 			newIntern.setIN_1(obj.getDouble("DOU_AgentFirst"));
 			newIntern.setIN_2(obj.getDouble("DOU_AgentSecond"));
 			newIntern.setIN_3(obj.getDouble("DOU_AgentThird"));
-			newIntern.setIN_SERVICE(obj.getDouble("DOU_AgentFourth")); // fourth ?
+			newIntern.setIN_SERVICE(obj.getDouble("DOU_AgentFourth")); // fourth
+																		// ?
 			newIntern.setSYS_STATE(0);
-			
-			if(guestMissionService.addIntern(newIntern) == 1) {
-				
+
+			if (guestMissionService.addIntern(newIntern) == 1) {
+
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
@@ -157,9 +158,9 @@ public class GuestController {
 			ans.put("State", "Invalid");
 			return ans;
 		}
-		
+
 		obj = objs.getJSONObject("balance");
-		try{
+		try {
 			newBalance.setGUEST_ID(newGuest.getID());
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
 			newBalance.setCHARGE_DAY(obj.getInteger("STR_RentNumber"));
@@ -171,9 +172,9 @@ public class GuestController {
 			newBalance.setINVOICE_TURN(obj.getInteger("STR_BillCycle"));
 			newBalance.setINVOICE_AHEAD(obj.getInteger("STR_BillTime"));
 			newBalance.setSYS_STATE(0);
-			
-			if(guestMissionService.addGuestBalance(newBalance) == 1) {
-				
+
+			if (guestMissionService.addGuestBalance(newBalance) == 1) {
+
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
@@ -185,16 +186,16 @@ public class GuestController {
 			ans.put("State", "Invalid");
 			return ans;
 		}
-		
+
 		obj = objs.getJSONObject("service");
 		newService.setGUEST_ID(newGuest.getID());
 		newService.setROOM_NUMBER(newGuest.getROOM_NUMBER());
-		for(String key : obj.keySet()) {
-			try{
+		for (String key : obj.keySet()) {
+			try {
 				JSONObject obj2 = obj.getJSONObject(key);
-				if(key.equals("OBJ_lunchMap")) {
+				if (key.equals("OBJ_lunchMap")) {
 					newService.setSYS_STATE(1);
-					for(String key2 : obj2.keySet()) {
+					for (String key2 : obj2.keySet()) {
 						JSONObject obj3 = obj2.getJSONObject(key2);
 						newService.setNAME(obj3.getString("STR_RName"));
 						newService.setLECHARGE(obj3.getDouble("DOU_LECharge"));
@@ -204,9 +205,9 @@ public class GuestController {
 						newService.setTURN(obj3.getInteger("INT_Cycle"));
 						newService.setCOMMENT(obj3.getString("STR_Note"));
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
-						
-						if(guestMissionService.addGuestService(newService) == 1) {
-							
+
+						if (guestMissionService.addGuestService(newService) == 1) {
+
 						} else {
 							ans.remove("State");
 							ans.put("State", "Invalid");
@@ -215,7 +216,7 @@ public class GuestController {
 					}
 				} else if (key.equals("OBJ_ADDLIST")) {
 					newService.setSYS_STATE(3);
-					for(String key2 : obj2.keySet()) {
+					for (String key2 : obj2.keySet()) {
 						JSONObject obj3 = obj2.getJSONObject(key2);
 						newService.setNAME(obj3.getString("STR_ADD_NAME"));
 						newService.setLECHARGE(obj3.getDouble("DOU_LECharge"));
@@ -225,9 +226,9 @@ public class GuestController {
 						newService.setTURN(obj3.getInteger("INT_Cycle"));
 						newService.setCOMMENT(obj3.getString("STR_Note"));
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
-						
-						if(guestMissionService.addGuestService(newService) == 1) {
-							
+
+						if (guestMissionService.addGuestService(newService) == 1) {
+
 						} else {
 							ans.remove("State");
 							ans.put("State", "Invalid");
@@ -244,9 +245,9 @@ public class GuestController {
 					newService.setTURN(obj2.getInteger("INT_Cycle"));
 					newService.setCOMMENT(obj2.getString("STR_Note"));
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
-					
-					if(guestMissionService.addGuestService(newService) == 1) {
-						
+
+					if (guestMissionService.addGuestService(newService) == 1) {
+
 					} else {
 						ans.remove("State");
 						ans.put("State", "Invalid");
@@ -262,9 +263,9 @@ public class GuestController {
 					newService.setTURN(obj2.getInteger("INT_Cycle"));
 					newService.setCOMMENT(obj2.getString("STR_Note"));
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
-					
-					if(guestMissionService.addGuestService(newService) == 1) {
-						
+
+					if (guestMissionService.addGuestService(newService) == 1) {
+
 					} else {
 						ans.remove("State");
 						ans.put("State", "Invalid");
@@ -278,24 +279,21 @@ public class GuestController {
 				return ans;
 			}
 		}
-		
+
 		return ans;
 	}
-	
+
 	@RequestMapping("/Model/")
-	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
-		
-		
+
 		return ans;
 	}
 }

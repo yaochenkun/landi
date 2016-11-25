@@ -16,63 +16,60 @@ public class CurEnv {
 	private Set<String> item_type;
 	private Map<String, Set<String>> item_cat;
 	private Map<String, Set<String>> item_com;
-	
-	public CurEnv()
-	{
+
+	public CurEnv() {
 		Para tp = new Para();
 		settings = tp.getParaPair("sysstr", 0, 1);
 		settingsInt = tp.getParaPairInt("sysint", 0, 1);
 		auths = tp.getParaPairInt("auth", 2, 0);
 		item_type = tp.getPara("item_type");
-		
+
 		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
-		
-		for(String key : temp.keySet()){
+
+		for (String key : temp.keySet()) {
 			String list = temp.get(key);
-			
+
 			String[] ans = list.split("[,]");
 			Set<String> news = new HashSet<String>();
-			
-			for(int i = 0; i < ans.length; i++) {
+
+			for (int i = 0; i < ans.length; i++) {
 				news.add(ans[i]);
 			}
-			
+
 			item_cat.put(key, news);
 		}
-		
+
 		temp = tp.getParaPair("item_com", 0, 1);
-		
-		for(String key : temp.keySet()){
+
+		for (String key : temp.keySet()) {
 			String list = temp.get(key);
-			
+
 			String[] ans = list.split("[,]");
 			Set<String> news = new HashSet<String>();
-			
-			for(int i = 0; i < ans.length; i++) {
+
+			for (int i = 0; i < ans.length; i++) {
 				news.add(ans[i]);
 			}
-			
+
 			item_com.put(key, news);
 		}
 	}
-	
-	public String myMD5(String md5)
-	{
-		try{
+
+	public String myMD5(String md5) {
+		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] arr = md.digest(md5.getBytes());
 			StringBuffer sb = new StringBuffer();
-			
-			for(int i = 0; i < arr.length; i++)
-			{
-				sb.append(Integer.toHexString(arr[i] & 0xFF | 0x100).substring(1,3));
+
+			for (int i = 0; i < arr.length; i++) {
+				sb.append(Integer.toHexString(arr[i] & 0xFF | 0x100).substring(1, 3));
 			}
-			
+
 			return sb.toString();
 		} catch (NoSuchAlgorithmException e) {
-			
+
 		}
-		
+
 		return null;
 	}
 
@@ -107,7 +104,7 @@ public class CurEnv {
 	public void setAuths(Map<String, Integer> auths) {
 		this.auths = auths;
 	}
-	
+
 	public Set<String> getItem_type() {
 		return item_type;
 	}

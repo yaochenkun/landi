@@ -35,55 +35,49 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private RoomService roomService;
-	
+
 	private static Logger logger = Logger.getLogger("logRec");
-	
+
 	@RequestMapping("/requestRole")
-	public @ResponseBody Map<Integer, String> departRole()
-	{
+	public @ResponseBody Map<Integer, String> departRole() {
 		Para tp = new Para();
-		Map<String, List<String> > temp = tp.getParaList("role");
+		Map<String, List<String>> temp = tp.getParaList("role");
 		Map<Integer, String> ans = new HashMap<Integer, String>();
 		Iterator<Entry<String, List<String>>> it = temp.entrySet().iterator();
-		while(it.hasNext())
-		{
+		while (it.hasNext()) {
 			Map.Entry<String, List<String>> entry = it.next();
 			ans.put(Integer.parseInt(entry.getKey()), entry.getValue().get(0));
 		}
 		return ans;
 	}
-	
+
 	@RequestMapping("/changePassword")
-	public @ResponseBody Integer changePassword(HttpSession session, @RequestBody String stringPassword){
+	public @ResponseBody Integer changePassword(HttpSession session, @RequestBody String stringPassword) {
 		JSONObject passwordJson = (JSONObject) JSONObject.parse(stringPassword);
 		String password = passwordJson.getString("password");
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV");
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		cur_env.getCur_user().setPASSWD(cur_env.myMD5(password));
-		
-		if(userService.updateUserInfo(cur_env.getCur_user()) == 1)
-		{
+
+		if (userService.updateUserInfo(cur_env.getCur_user()) == 1) {
 			logger.info("Change password of " + cur_env.getCur_user().getNAME());
 			return 1;
-		}
-		else
-		{
+		} else {
 			logger.error("Failed to change password of " + cur_env.getCur_user().getNAME());
 			return 0;
 		}
 	}
-	
+
 	@RequestMapping("/Model/")
-	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid){
-		CurEnv cur_env = (CurEnv)session.getAttribute("CUR_ENV"); 
+	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if((cur_env.getCur_user().getAUTH() & (0x01<<cur_env.getAuths().get("rRoom"))) == 0)
-		{
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else{
+		} else {
 			ans.put("State", "Valid");
 		}
-		
+
 		return ans;
 	}
 }

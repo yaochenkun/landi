@@ -6,20 +6,20 @@ import java.util.List;
 import org.ld.model.RoomMeter;
 
 public interface RoomMeterMapper {
-    int deleteByPrimaryKey(Integer ID);
+	int deleteByPrimaryKey(Integer ID);
 
-    int insert(RoomMeter record);
+	int insert(RoomMeter record);
 
-    int insertSelective(RoomMeter record);
+	int insertSelective(RoomMeter record);
 
-    RoomMeter selectByPrimaryKey(Integer ID);
+	RoomMeter selectByPrimaryKey(Integer ID);
 
-    int updateByPrimaryKeySelective(RoomMeter record);
+	int updateByPrimaryKeySelective(RoomMeter record);
 
-    int updateByPrimaryKey(RoomMeter record);
-    
-    //add
-    List<RoomMeter> getMeters(HashMap<String, Integer> map);
-    
-    RoomMeter getMeter(String mn);
+	int updateByPrimaryKey(RoomMeter record);
+
+	// add
+	List<RoomMeter> getMeters(HashMap<String, Integer> map);
+
+	RoomMeter getMeter(String mn);
 }

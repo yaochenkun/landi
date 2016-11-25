@@ -3,15 +3,15 @@ package org.ld.dao;
 import org.ld.model.InvoiceDetail;
 
 public interface InvoiceDetailMapper {
-    int deleteByPrimaryKey(Integer ID);
+	int deleteByPrimaryKey(Integer ID);
 
-    int insert(InvoiceDetail record);
+	int insert(InvoiceDetail record);
 
-    int insertSelective(InvoiceDetail record);
+	int insertSelective(InvoiceDetail record);
 
-    InvoiceDetail selectByPrimaryKey(Integer ID);
+	InvoiceDetail selectByPrimaryKey(Integer ID);
 
-    int updateByPrimaryKeySelective(InvoiceDetail record);
+	int updateByPrimaryKeySelective(InvoiceDetail record);
 
-    int updateByPrimaryKey(InvoiceDetail record);
+	int updateByPrimaryKey(InvoiceDetail record);
 }

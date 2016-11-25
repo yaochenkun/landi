@@ -8,36 +8,36 @@ import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 
-public interface RoomService{
-	
+public interface RoomService {
+
 	Room getRoomById(int id);
-	
+
 	Room getRoomByNumber(String rn);
-	
+
 	List<Room> getRoomByType(String type);
-	
+
 	List<Room> getRoomByState(int state);
-	
+
 	List<Room> getAllRoom();
-	
+
 	List<RoomState> getAllRoomState();
-	
+
 	int insert(Room roomInfo);
-	
+
 	int update(Room roomInfo);
-	
+
 	int updateMeter(RoomMeter MeterInfo);
-	
+
 	int totalRow();
-	
+
 	List<RoomItem> getItems(Integer rid, String type);
-	
+
 	List<RoomPic> getPic(Integer rid);
-	
+
 	// add by pq
 	int insertRoomPic(RoomPic roomPic);
-	
+
 	List<RoomMeter> getMeters(Integer rid, Integer type);
-	
+
 	RoomMeter getMeter(String mn);
 }

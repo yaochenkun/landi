@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
 public class GuestMissionServiceImpl implements GuestMissionService {
 
 	private static Logger logger = Logger.getLogger("logDev");
-	
+
 	@Autowired
 	private GuestMapper guestMapper;
-	
+
 	@Autowired
 	private HostMapper hostMapper;
-	
+
 	@Override
 	public Guest getGuestById(int id) {
 		// TODO Auto-generated method stub
@@ -40,7 +40,7 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 		// TODO Auto-generated method stub
 		return guestMapper.selectByName("%" + name + "%");
 	}
-	
+
 	@Override
 	public Guest getGuestByRoomNumber(String s) {
 		// TODO Auto-generated method stub
@@ -56,11 +56,10 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 	@Override
 	public int addGuest(Guest t) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			guestMapper.insert(t);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
@@ -69,11 +68,10 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 	@Override
 	public int addHost(Host t) {
 		// TODO Auto-generated method stub
-		try{
+		try {
 			hostMapper.insert(t);
 			return 1;
-		} catch(Exception e)
-		{
+		} catch (Exception e) {
 			logger.error(e.getCause());
 			return 0;
 		}
