@@ -1,18 +1,82 @@
-.content{margin: 90px 10px 40px 170px; padding:30px 10px;}
-.content .content-body{margin: auto; width: 1000px;}
+.content {
+	margin: 90px 10px 40px 170px;
+	padding: 30px 10px;
+}
 
-.water, .power, .gas{float: left; width: 300px; padding-bottom: 20px;} 
-.water, .power{border-right: 1px #ccc dashed; margin-right: 20px;} 
+.content .content-body {
+	margin: auto;
+	width: 1000px;
+}
 
-.head, .body{margin-bottom: 40px;}
-.head img{width: 25px; float: left; margin-left: 100px; margin-right: 10px;}
-.head h3{font-family: "宋体"; font-weight: bold; color: #454a51;}
+.water, .power, .gas {
+	float: left;
+	width: 300px;
+	padding-bottom: 20px;
+}
 
-.body dl{clear: both; left: 50%; position: relative; margin-left: -88px; font-size: 15px;}
-.body dl dt{float: left; margin-right: 10px; margin-bottom: 20px; color: #73777b;}
-.body dl dd{float: left; margin-right: 30px; color: #ff824d;}
-.body dl dd input{width: 40px; border:1px #bad1de solid; padding:0 4px;}
+.water, .power {
+	border-right: 1px #ccc dashed;
+	margin-right: 20px;
+}
 
-.btnchange{width: 80px; position: absolute; margin-left: -880px; margin-top: -140px;}
-.btngoback{width:80px; position: absolute; margin-left:-110px; margin-top:-140px;}
-#editButton a{color: #fff;}
+.head, .body {
+	margin-bottom: 40px;
+}
+
+.head img {
+	width: 25px;
+	float: left;
+	margin-left: 100px;
+	margin-right: 10px;
+}
+
+.head h3 {
+	font-family: "宋体";
+	font-weight: bold;
+	color: #454a51;
+}
+
+.body dl {
+	clear: both;
+	left: 50%;
+	position: relative;
+	margin-left: -88px;
+	font-size: 15px;
+}
+
+.body dl dt {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	color: #73777b;
+}
+
+.body dl dd {
+	float: left;
+	margin-right: 30px;
+	color: #ff824d;
+}
+
+.body dl dd input {
+	width: 40px;
+	border: 1px #bad1de solid;
+	padding: 0 4px;
+}
+
+.btnchange {
+	width: 80px;
+	position: absolute;
+	margin-left: -880px;
+	margin-top: -140px;
+}
+
+.btngoback {
+	width: 80px;
+	position: absolute;
+	margin-left: -110px;
+	margin-top: -140px;
+}
+
+#editButton a {
+	color: #fff;
+}

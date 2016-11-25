@@ -17,6 +17,8 @@ public interface ItemService {
 	
 	List<Plan> getPlans(Integer st, Integer eachPage);
 	
+	Plan searchPlanByPlanid(Integer plan_id);
+	
 	int getTotalPlan();
 	
 	int addNewPlan(Plan p);

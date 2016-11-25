@@ -1,192 +1,195 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.RoomItemMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.RoomItem" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
-    <result column="ITEM_ID" property="ITEM_ID" jdbcType="INTEGER" />
-    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
-    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
-    <result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
-    <result column="TAG" property="TAG" jdbcType="VARCHAR" />
-    <result column="COMM" property="COMM" jdbcType="VARCHAR" />
-    <result column="STATE" property="STATE" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ROOM_ID, ITEM_ID, TYPE, CAT, COMPANY, NAME, TAG, COMM, STATE
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from room_item
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from room_item
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.RoomItem" >
-    insert into room_item (ID, ROOM_ID, ITEM_ID, 
-      TYPE, CAT, COMPANY, 
-      NAME, TAG, COMM, STATE
-      )
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{ITEM_ID,jdbcType=INTEGER}, 
-      #{TYPE,jdbcType=VARCHAR}, #{CAT,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{TAG,jdbcType=VARCHAR}, #{COMM,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.RoomItem" >
-    insert into room_item
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="ROOM_ID != null" >
-        ROOM_ID,
-      </if>
-      <if test="ITEM_ID != null" >
-        ITEM_ID,
-      </if>
-      <if test="TYPE != null" >
-        TYPE,
-      </if>
-      <if test="CAT != null" >
-        CAT,
-      </if>
-      <if test="COMPANY != null" >
-        COMPANY,
-      </if>
-      <if test="NAME != null" >
-        NAME,
-      </if>
-      <if test="TAG != null" >
-        TAG,
-      </if>
-      <if test="COMM != null" >
-        COMM,
-      </if>
-      <if test="STATE != null" >
-        STATE,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="ROOM_ID != null" >
-        #{ROOM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="ITEM_ID != null" >
-        #{ITEM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="CAT != null" >
-        #{CAT,jdbcType=VARCHAR},
-      </if>
-      <if test="COMPANY != null" >
-        #{COMPANY,jdbcType=VARCHAR},
-      </if>
-      <if test="NAME != null" >
-        #{NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="TAG != null" >
-        #{TAG,jdbcType=VARCHAR},
-      </if>
-      <if test="COMM != null" >
-        #{COMM,jdbcType=VARCHAR},
-      </if>
-      <if test="STATE != null" >
-        #{STATE,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomItem" >
-    update room_item
-    <set >
-      <if test="ROOM_ID != null" >
-        ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="ITEM_ID != null" >
-        ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
-      </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="CAT != null" >
-        CAT = #{CAT,jdbcType=VARCHAR},
-      </if>
-      <if test="COMPANY != null" >
-        COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      </if>
-      <if test="NAME != null" >
-        NAME = #{NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="TAG != null" >
-        TAG = #{TAG,jdbcType=VARCHAR},
-      </if>
-      <if test="COMM != null" >
-        COMM = #{COMM,jdbcType=VARCHAR},
-      </if>
-      <if test="STATE != null" >
-        STATE = #{STATE,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.RoomItem" >
-    update room_item
-    set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
-      ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
-      TYPE = #{TYPE,jdbcType=VARCHAR},
-      CAT = #{CAT,jdbcType=VARCHAR},
-      COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      NAME = #{NAME,jdbcType=VARCHAR},
-      TAG = #{TAG,jdbcType=VARCHAR},
-      COMM = #{COMM,jdbcType=VARCHAR},
-      STATE = #{STATE,jdbcType=INTEGER}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <select id="getItems" resultMap="BaseResultMap" parameterType="map">
+<mapper namespace="org.ld.dao.RoomItemMapper">
+	<resultMap id="BaseResultMap" type="org.ld.model.RoomItem">
+		<id column="ID" property="ID" jdbcType="INTEGER" />
+		<result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
+		<result column="ITEM_ID" property="ITEM_ID" jdbcType="INTEGER" />
+		<result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+		<result column="CAT" property="CAT" jdbcType="VARCHAR" />
+		<result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
+		<result column="NAME" property="NAME" jdbcType="VARCHAR" />
+		<result column="TAG" property="TAG" jdbcType="VARCHAR" />
+		<result column="COMM" property="COMM" jdbcType="VARCHAR" />
+		<result column="STATE" property="STATE" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ROOM_ID, ITEM_ID, TYPE, CAT, COMPANY, NAME, TAG, COMM, STATE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from room_item
+		where ID = #{ID,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from room_item
+		where ID = #{ID,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="org.ld.model.RoomItem">
+		insert into room_item (ID, ROOM_ID, ITEM_ID,
+		TYPE, CAT, COMPANY,
+		NAME, TAG, COMM, STATE
+		)
+		values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER},
+		#{ITEM_ID,jdbcType=INTEGER},
+		#{TYPE,jdbcType=VARCHAR}, #{CAT,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR},
+		#{NAME,jdbcType=VARCHAR}, #{TAG,jdbcType=VARCHAR},
+		#{COMM,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="org.ld.model.RoomItem">
+		insert into room_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				ID,
+			</if>
+			<if test="ROOM_ID != null">
+				ROOM_ID,
+			</if>
+			<if test="ITEM_ID != null">
+				ITEM_ID,
+			</if>
+			<if test="TYPE != null">
+				TYPE,
+			</if>
+			<if test="CAT != null">
+				CAT,
+			</if>
+			<if test="COMPANY != null">
+				COMPANY,
+			</if>
+			<if test="NAME != null">
+				NAME,
+			</if>
+			<if test="TAG != null">
+				TAG,
+			</if>
+			<if test="COMM != null">
+				COMM,
+			</if>
+			<if test="STATE != null">
+				STATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="ID != null">
+				#{ID,jdbcType=INTEGER},
+			</if>
+			<if test="ROOM_ID != null">
+				#{ROOM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="ITEM_ID != null">
+				#{ITEM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="TYPE != null">
+				#{TYPE,jdbcType=VARCHAR},
+			</if>
+			<if test="CAT != null">
+				#{CAT,jdbcType=VARCHAR},
+			</if>
+			<if test="COMPANY != null">
+				#{COMPANY,jdbcType=VARCHAR},
+			</if>
+			<if test="NAME != null">
+				#{NAME,jdbcType=VARCHAR},
+			</if>
+			<if test="TAG != null">
+				#{TAG,jdbcType=VARCHAR},
+			</if>
+			<if test="COMM != null">
+				#{COMM,jdbcType=VARCHAR},
+			</if>
+			<if test="STATE != null">
+				#{STATE,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomItem">
+		update room_item
+		<set>
+			<if test="ROOM_ID != null">
+				ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="ITEM_ID != null">
+				ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
+			</if>
+			<if test="TYPE != null">
+				TYPE = #{TYPE,jdbcType=VARCHAR},
+			</if>
+			<if test="CAT != null">
+				CAT = #{CAT,jdbcType=VARCHAR},
+			</if>
+			<if test="COMPANY != null">
+				COMPANY = #{COMPANY,jdbcType=VARCHAR},
+			</if>
+			<if test="NAME != null">
+				NAME = #{NAME,jdbcType=VARCHAR},
+			</if>
+			<if test="TAG != null">
+				TAG = #{TAG,jdbcType=VARCHAR},
+			</if>
+			<if test="COMM != null">
+				COMM = #{COMM,jdbcType=VARCHAR},
+			</if>
+			<if test="STATE != null">
+				STATE = #{STATE,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.ld.model.RoomItem">
+		update room_item
+		set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
+		ITEM_ID = #{ITEM_ID,jdbcType=INTEGER},
+		TYPE = #{TYPE,jdbcType=VARCHAR},
+		CAT = #{CAT,jdbcType=VARCHAR},
+		COMPANY = #{COMPANY,jdbcType=VARCHAR},
+		NAME = #{NAME,jdbcType=VARCHAR},
+		TAG = #{TAG,jdbcType=VARCHAR},
+		COMM = #{COMM,jdbcType=VARCHAR},
+		STATE = #{STATE,jdbcType=INTEGER}
+		where ID = #{ID,jdbcType=INTEGER}
+	</update>
+	<select id="getItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select * from room_item where ROOM_ID = #{room_id} and TYPE = #{type} limit #{ST}, #{EACH}
     ]]>
-  </select>
-  <select id="getItemsByType" resultMap="BaseResultMap" parameterType="map">
+	</select>
+	<select id="getItemsByType" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select * from room_item where TYPE = #{type} limit #{ST}, #{EACH}
     ]]>
-  </select>
-  <select id="getItemsByRoom" resultMap="BaseResultMap" parameterType="map">
+	</select>
+	<select id="getItemsByRoom" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select * from room_item where ROOM_ID = #{room_id} limit #{ST}, #{EACH}
     ]]>
-  </select>
-  <select id="getAllItems" resultMap="BaseResultMap" parameterType="map">
+	</select>
+	<select id="getAllItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select * from room_item limit #{ST}, #{EACH}
     ]]>
-  </select>
-  <select id="getTotal" resultType="java.lang.Integer" parameterType="map">
+	</select>
+	<select id="getTotal" resultType="java.lang.Integer" parameterType="map">
   	<![CDATA[
   	select count(*) from room_item where ROOM_ID = #{room_id} and TYPE = #{type}
     ]]>
-  </select>
-  <select id="getTotalByType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+	</select>
+	<select id="getTotalByType" resultType="java.lang.Integer" parameterType="java.lang.String">
   	<![CDATA[
   	select count(*) from room_item where TYPE = #{TYPE,jdbcType=VARCHAR}
     ]]>
-  </select>
-  <select id="getTotalByRoom" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+	</select>
+	<select id="getTotalByRoom" resultType="java.lang.Integer" parameterType="java.lang.Integer">
   	<![CDATA[
   	select count(*) from room_item where ROOM_ID = #{RID,jdbcType=INTEGER}
     ]]>
-  </select>
-  <select id="getAllTotal" resultType="java.lang.Integer">
+	</select>
+	<select id="getAllTotal" resultType="java.lang.Integer">
   	<![CDATA[
   	select count(*) from room_item
     ]]>
-  </select>
+	</select>
 </mapper>

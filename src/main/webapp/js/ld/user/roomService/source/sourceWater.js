@@ -36,38 +36,57 @@ var requestAjaxWater = function(pageNum){
 	var type = parseInt(1); 
 	console.log("请求第"+ pageNum + "页水费信息");
 	
-	// $.ajax({
-	// 	url:'/LD/userRoom/roomSearchBill.action',
-	// 	type:'post',
-	// 	contentType:'application/json',
-	// 	data:'{"pageNum":'+ pageNum +',"type":'+ type +',"rnum":0}',
-	// 	dataType:'json',
-	// 	success:function(data){
-	// 		console.log(data);
-	// 		if(data.State == "Invalid"){
-	// 			alert("您没有权限访问本页数据，请尝试升级权限或回退。");
-	// 			return;
-	// 		}
-	// 		else if(data.State == "Valid"){
+	$.ajax({
+		url:'/LD/userRoom/roomSearchSource.action',
+		type:'post',
+		contentType:'application/json',
+		data:'{"pageNum":'+ pageNum +',"type":'+ type +'}',
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退。");
+				return;
+			}
+			else if(data.State == "Valid"){
 				// 清空列表和页码
 				$("#waterTbody").html("");
 				$("#serviceWaterBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#waterTbody").append("<tr><td class='no-data' colspan='9' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
 				
-				for(var i=0; i<20; i++){
-					$("#waterTbody").append("<tr><td>1</td><td>Ada</td><td>1</td><td>1200</td>"+
-							"<td>1455</td><td>2300</td><td>34.6</td><td>Alice</td><td>2016-6-1</td></tr>");
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					// 将时间戳变为2016-12-12显示          	
+            		var dDate = new Date(perRecord.time);
+            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
+						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
+						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
+						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
 				}	
 				// 添加水费 底部页码
 				$("#serviceWaterBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforeWater();'>上一页&nbsp;&nbsp;</span>"+
-			        	"<span><input id='waterlist_nowpage' value='1' type='text' class='input_num'></span>"+
+			        	"<span><input id='waterlist_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
 			        	"<span>&nbsp;/&nbsp;</span>"+
-			        	"<span id='waterlist_totalpage'>2</span>"+
+			        	"<span id='waterlist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextWater();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-	// 		}
-	// 	}
-	// });
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 
 ////////////////////////////////////////////////////////////////条件查询 水费信息 start
@@ -106,38 +125,58 @@ var requestAjaxWaterByRoomNum = function(roomNum,pageNum){
 	console.log("请求房间："+ roomNum +"  第" + pageNum + "页的水费信息");
 	var type = parseInt(1);
 	
-	// $.ajax({
-	// 	url:'/LD/userRoom/roomSearchBill.action',
-	// 	type:'post',
-	// 	contentType:'application/json',
-	// 	data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rnum":"'+ roomNum +'"}',
-	// 	dataType:'json',
-	// 	success:function(data){
-	// 		// console.log(data);
-	// 		if(data.State == "Invalid"){
-	// 			alert("您没有权限访问本页数据，请尝试升级权限或回退。");
-	// 			return;
-	// 		}
-	// 		else if(data.State == "Valid"){
+	$.ajax({
+		url:'/LD/userRoom/roomSearchSource.action',
+		type:'post',
+		contentType:'application/json',
+		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rNum":"'+ roomNum +'"}',
+		dataType:'json',
+		success:function(data){
+			// console.log(data);
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退。");
+				return;
+			}
+			else if(data.State == "Valid"){
 				$("#waterTbody").html("");
 				$("#serviceWaterBottom").html("");
 				
-					for(var i=0; i<20; i++){
-					$("#waterTbody").append("<tr><td>W2-1</td><td>Ada</td><td>1</td><td>1200</td>"+
-							"<td>1455</td><td>2300</td><td>34.6</td><td>Alice</td><td>2016-6-1</td></tr>");
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#waterTbody").append("<tr><td class='no-data' colspan='9' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
+				
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					// 将时间戳变为2016-12-12显示          	
+            		var dDate = new Date(perRecord.time);
+            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
+						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
+						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
+						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
 				}	
+
 				// 添加水费 底部页码
 				$("#serviceWaterBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
 				$("#serviceWaterBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforeWaterByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
-			        	"<span><input id='waterlist_nowpage' value='1' type='text' class='input_num'></span>"+
+			        	"<span><input id='waterlist_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
 			        	"<span>&nbsp;/&nbsp;</span>"+
-			        	"<span id='waterlist_totalpage'>2</span>"+
+			        	"<span id='waterlist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextWaterByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共12条记录</div>");
-	// 		}
-	// 	}
-	// });
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 ////////////////////////////////////////////////////////////////条件查询 水费信息 end
 

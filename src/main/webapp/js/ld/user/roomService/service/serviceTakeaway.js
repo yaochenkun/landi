@@ -6,6 +6,7 @@ $(function(){
 		// 回车键
 		if(e.keyCode==13){
 			requestFirstTakeawayByRoomNum(this);
+			return false;
 		}
 	})
 });
@@ -31,46 +32,64 @@ var requestNextTakeaway = function(){
 	requestAjaxTakeaway(nowpage+1);
 }
 
-// 查询系统餐费信息(??餐费信息 type为1)
+// 查询系统餐费信息(??餐费信息 type为1 rNum不传递，为null)
 var requestAjaxTakeaway = function(pageNum){
 	var type = parseInt(1); 
 	console.log("请求第"+ pageNum + "页餐费信息");
 	
-	// $.ajax({
-	// 	url:'/LD/userRoom/roomSearchBill.action',
-	// 	type:'post',
-	// 	contentType:'application/json',
-	// 	data:'{"pageNum":'+ pageNum +',"type":'+ type +',"rnum":0}',
-	// 	dataType:'json',
-	// 	success:function(data){
-	// 		console.log(data);
-	// 		if(data.State == "Invalid"){
-	// 			alert("您没有权限访问本页数据，请尝试升级权限或回退。");
-	// 			return;
-	// 		}
-	// 		else if(data.State == "Valid"){
+	$.ajax({
+		url:'/LD/userRoom/roomSearchBill.action',
+		type:'post',
+		contentType:'application/json',
+		data:'{"pageNum":'+ pageNum +',"type":'+ type + '}',
+		dataType:'json',
+		success:function(data){
+			//console.log(data);
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退！");
+				return;
+			}
+			else if(data.State == "Valid"){
 				// 清空列表和页码
 				$("#takeawayTbody").html("");
 				$("#serviceTakeawayBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#takeawayTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
 				
-				for(var i=0; i<20; i++){
-					$("#takeawayTbody").append("<tr><td>1</td><td>Ada</td><td>衣服</td><td>1</td>"+
-							"<td>2016-3-30</td><td>2,000&nbsp;元</td><td>无</td></tr>");
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					// 将时间戳变为2016-12-12显示          	
+            		var dDate = new Date(perRecord.rtime);
+            		var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+
+					$("#takeawayTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.item +"</td>"+
+						"<td>"+ perRecord.count +"</td><td>"+ deliveryDate +"</td>"+
+						"<td>"+ perRecord.money +"&nbsp;元</td><td>"+ perRecord.comment +"</td></tr>");
 				}	
 				// 添加餐费 底部页码
 				$("#serviceTakeawayBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforeTakeaway();'>上一页&nbsp;&nbsp;</span>"+
-			        	"<span><input id='takeawaylist_nowpage' value='1' type='text' class='input_num'></span>"+
+			        	"<span><input id='takeawaylist_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
 			        	"<span>&nbsp;/&nbsp;</span>"+
-			        	"<span id='takeawaylist_totalpage'>2</span>"+
+			        	"<span id='takeawaylist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextTakeaway();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-	// 		}
-	// 	}
-	// });
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 
-////////////////////////////////////////////////////////////////条件查询 餐费信息 start
+///////////////////////////////////////////////////条件查询 餐费信息 start
 //根据房间号 拉取第一页 餐费信息
 var requestFirstTakeawayByRoomNum = function(element){
 	$(".search-roomNo").css("height","0");
@@ -110,10 +129,10 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 		url:'/LD/userRoom/roomSearchBill.action',
 		type:'post',
 		contentType:'application/json',
-		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rnum":"'+ roomNum +'"}',
+		data:'{"type":"'+ type +'","pageNum":"'+ pageNum +'","rNum":"'+ roomNum +'"}',
 		dataType:'json',
 		success:function(data){
-			// console.log(data);
+		    console.log(data);
 			if(data.State == "Invalid"){
 				alert("您没有权限访问本页数据，请尝试升级权限或回退。");
 				return;
@@ -122,6 +141,15 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 				$("#takeawayTbody").html("");
 				$("#serviceTakeawayBottom").html("");
 				
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+				if (recordTotal == 0) {
+					$("#takeawayTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 
@@ -138,11 +166,11 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 				$("#serviceTakeawayBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");
 				$("#serviceTakeawayBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforeTakeawayByRoomNum();'>上一页&nbsp;&nbsp;</span>"+
-			        	"<span><input id='takeawaylist_nowpage' value='" + data.pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span><input id='takeawaylist_nowpage' value='" + pageNow +"' type='text' class='input_num'></span>"+
 			        	"<span>&nbsp;/&nbsp;</span>"+
-			        	"<span id='takeawaylist_totalpage'>"+ data.pageTotal +"</span>"+
+			        	"<span id='takeawaylist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextTakeawayByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共"+ data.recordTotal +"条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
 		}
 	});

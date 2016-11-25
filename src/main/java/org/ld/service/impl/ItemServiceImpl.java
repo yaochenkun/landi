@@ -46,25 +46,30 @@ public class ItemServiceImpl implements ItemService {
 	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("st", st);
-		map.put("each", eachPage);
-		if(rid == null && type == null) {
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		if(rid == 0 && type == null) {
 			return roomItemMapper.getAllItems(map);
-		} else if(rid != null && type != null) {
-				
+		} else if(rid != 0 && type != null) {			
 				map.put("room_id", rid);
 				map.put("type", type);
 				return roomItemMapper.getItems(map);
 		}
-		else if(rid != null)
+		else if(rid != 0){
+			map.put("room_id", rid);
 			return roomItemMapper.getItemsByRoom(map);
-		else
+		}
+		else{
+			map.put("type", type);
 			return roomItemMapper.getItemsByType(map);
+		}
 	}
-
+	
+	// 获取房间物品总数
 	@Override
 	public int getTotal(String type, String cat, String band) {
 		// TODO Auto-generated method stub
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("cat", cat);
@@ -81,16 +86,24 @@ public class ItemServiceImpl implements ItemService {
 				return facStaMapper.getTotalByTypeCatBand(map);
 		}
 	}
-
+	
+	// 获取所有采购计划
 	@Override
 	public List<Plan> getPlans(Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("st", st);
-		map.put("each", eachPage);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
 		return planMapper.getPlans(map);
 	}
-
+	
+	// 根据采购计划ID获取采购计划(add by pq)
+	@Override
+	public Plan searchPlanByPlanid(Integer plan_id){
+		return planMapper.selectByPrimaryKey(plan_id);
+	}
+	
+	// 获取采购计划总数
 	@Override
 	public int getTotalPlan() {
 		// TODO Auto-generated method stub

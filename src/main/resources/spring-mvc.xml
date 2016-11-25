@@ -24,8 +24,8 @@
 			</list>
 		</property>
 	</bean>
- 
-          
+
+
 	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -36,7 +36,7 @@
 			</list>
 		</property>
 	</bean>
-    
+
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -60,13 +60,13 @@
 			<value>4096</value>
 		</property>
 	</bean>
-	
+
 	<!--拦截器 -->
 	<mvc:interceptors>
 		<!--多个拦截器,顺序执行 -->
-		<!-- 登录认证拦截器 /** 拦截所有url包括子url路径-->
+		<!-- 登录认证拦截器 /** 拦截所有url包括子url路径 -->
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/**" />
 			<bean class="org.ld.interceptor.LoginIntercepter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
