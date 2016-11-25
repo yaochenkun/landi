@@ -14,25 +14,21 @@
     });
 })();
 
-//请求客房物品总览
+//请求物品统计信息
 var requestItemOverview = function(pageNum){
-	console.log("请求第" + pageNum + "页物品总览信息");
-	// $.ajax({
-	// 	url:'/LD/searchOverview.action',
-	// 	type:'post',
-	// 	data:'pageNum='+ pageNum,
-	// 	success:function(data){
-	// 		console.log(data);
+	console.log("请求第" + pageNum + "页物品统计信息");
+	$.ajax({
+		url:'/LD/searchItemOverview.action',
+		type:'post',
+		data:'pageNum='+ pageNum,
+		success:function(data){
+			console.log(data);
 
-	 		// 清空表格和页码
-			$("#itemOverviewTbody").html("")
-			$("#itemOverviewBottom").html("");
-			for(var i=0; i<5; i++){
-				$("#itemOverviewTbody").append("<tr><td>1</td><td>1</td><td>1</td><td>1</td>"+
-					"<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>");
+			if(data.State == "Invalid"){
+				alert("您没有权限访问本页数据，请尝试升级权限或回退！");
+				return;
 			}
-				if(data.State == "Valid"){
-
+			else if(data.State == "Valid"){				
 		 		// 清空表格和页码
 				$("#itemOverviewTbody").html("")
 				$("#itemOverviewBottom").html("");
@@ -66,6 +62,8 @@ var requestItemOverview = function(pageNum){
 			            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
 			}
+		}
+	});
 }
 
 //根据房间号 拉取上一页 物品总览信息
