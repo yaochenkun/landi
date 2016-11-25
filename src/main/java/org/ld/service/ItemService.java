@@ -13,7 +13,7 @@ public interface ItemService {
 
 	List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage);
 	
-	int getTotal(Integer rid, String type);
+	int getTotal(String type, String cat, String band);
 	
 	List<Plan> getPlans(Integer st, Integer eachPage);
 	
@@ -27,7 +27,7 @@ public interface ItemService {
 	
 	int addNewFac(FacSta f);
 	
-	List<FacSta> getFacByTypeCatBand(String type, String cat, String band);
+	List<FacSta> getFacByTypeCatBand(String type, String cat, String band, int st, int eachPage);
 	
 	FacSta getFac(Integer id);
 	

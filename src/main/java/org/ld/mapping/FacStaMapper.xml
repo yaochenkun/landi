@@ -162,7 +162,7 @@
   </update>
   <select id="getFacByTypeCatBand" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND}
+  	select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND} limit #{ST}, #{EACH}
     ]]>
   </select>
   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -171,4 +171,39 @@
     from fac_sta
     where FAC_NUMBER = #{NUMBER,jdbcType=VARCHAR}
   </select>
+  <select id="getFacByType" resultMap="BaseResultMap" parameterType="map" >
+    <![CDATA[
+  	select * from fac_sta where TYPE = #{TYPE} limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  <select id="getFacByTypeCat" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  <select id="getAllFac" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from fac_sta limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  <select id="getAllTotal" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from fac_sta
+    ]]>
+   </select>
+   <select id="getTotalByType" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from fac_sta where TYPE = #{TYPE}
+    ]]>
+   </select>
+   <select id="getTotalByTypeCat" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from fac_sta where TYPE = #{TYPE} and CAT = #{CAT}
+    ]]>
+   </select>
+   <select id="getTotalByTypeCatBand" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND}
+    ]]>
+   </select>
 </mapper>

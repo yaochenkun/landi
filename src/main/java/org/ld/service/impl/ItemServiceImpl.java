@@ -63,20 +63,23 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int getTotal(Integer rid, String type) {
+	public int getTotal(String type, String cat, String band) {
 		// TODO Auto-generated method stub
-		if(rid == null && type == null) {
-			return roomItemMapper.getAllTotal();
-		} else if(rid != null && type != null) {
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("room_id", rid);
-				map.put("type", type);
-				return roomItemMapper.getTotal(map);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("cat", cat);
+		map.put("band", band);
+		
+		if(type == null)
+			return facStaMapper.getAllTotal();
+		else {
+			if(cat == null && band == null)
+				return facStaMapper.getTotalByType(map);
+			else if(cat != null && band == null)
+				return facStaMapper.getTotalByTypeCat(map);
+			else
+				return facStaMapper.getTotalByTypeCatBand(map);
 		}
-		else if(rid != null)
-			return roomItemMapper.getTotalByRoom(rid);
-		else
-			return roomItemMapper.getTotalByType(type);
 	}
 
 	@Override
@@ -137,13 +140,25 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<FacSta> getFacByTypeCatBand(String type, String cat, String band) {
+	public List<FacSta> getFacByTypeCatBand(String type, String cat, String band, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("cat", cat);
 		map.put("band", band);
-		return facStaMapper.getFacByTypeCatBand(map);
+		map.put("st", st);
+		map.put("each", eachPage);
+		
+		if(type == null)
+			return facStaMapper.getAllFac(map);
+		else {
+			if(cat == null && band == null)
+				return facStaMapper.getFacByType(map);
+			else if(cat != null && band == null)
+				return facStaMapper.getFacByTypeCat(map);
+			else 
+				return facStaMapper.getFacByTypeCatBand(map);
+		}
 	}
 
 	@Override
