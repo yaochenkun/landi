@@ -202,7 +202,7 @@ public class UserRoomController {
 		return ans;
 	}
 
-	@RequestMapping("/getMeters") // 所有房间表概览
+	@RequestMapping("/getMeters") // 查meter（一行）
 	@ResponseBody
 	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
@@ -258,7 +258,7 @@ public class UserRoomController {
 		return ans;
 	}
 
-	@RequestMapping("/roomSearchSource") // 明细流水（能源费结算）
+	@RequestMapping("/roomSearchSource") // 查 sources
 	@ResponseBody
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");

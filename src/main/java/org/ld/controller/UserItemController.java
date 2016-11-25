@@ -210,6 +210,7 @@ public class UserItemController {
 
 		try {
 			JSONObject dataJson = JSONObject.parseObject(data);
+
 			Plan newPlan = new Plan();
 			newPlan.setNAME(dataJson.getString("planID"));
 			newPlan.setSTAFF(dataJson.getString("planManager"));

@@ -21,16 +21,16 @@
 	<jsp:include page="../_leftMenu.jsp"/>
 	
 	<div class="nav-second">
-        <div class="toolbar">
-            <div class="nav-secondul">
-                <ul>               
-                <li class="liactive"><a href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品总览</a></li>
-                <li class="linormal"><a href="javascript:void(0);">客房物品移动</a></li> 
-                <li class="linormal"><a href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>  
-                </ul>
-            </div>    
-        </div>
-    </div>
+		<div class="toolbar">
+			<div class="nav-secondul">
+				<ul>
+					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
+					<li class="linormal"><a href="javascript:void(0);">客房物品分配</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
     <!-- 页面内容 strat -->
  	<div class="main">
@@ -59,16 +59,15 @@
 					<table>
 						<thead>
 							<tr>
-							<th><span>种类ID</span></th>
-							<th><span>物品种类</span></th>
-							<th><span>物品类别</span></th>
-							<th><span>品牌</span></th>
-							<th><span>型号</span></th>
-							<th><span>库存</span></th>
-							<th><span>消耗</span></th>
-							<th><span>所属单位</span></th>
-							<th><span>备注</span></th>
-							<th><span>查看明细</span></th>
+								<th><span>种类ID</span></th>
+								<th><span>物品种类</span></th>
+								<th><span>物品类别</span></th>
+								<th><span>品牌</span></th>
+								<th><span>型号</span></th>
+								<th><span>库存</span></th>
+								<th><span>消耗</span></th>
+								<th><span>备注</span></th>
+								<th><span>查看明细</span></th>
 							</tr>
 						</thead>
 						<tbody id="itemOverviewTbody"></tbody>
@@ -90,8 +89,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
 	<script>
-	    // 请求第一页客房物品信息
-		requestItemOverview(1);
+	    // 请求系统物品信息
+		//requestAllItem(1);
 	</script>
 </body>
 </html>

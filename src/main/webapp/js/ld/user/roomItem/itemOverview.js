@@ -14,7 +14,7 @@
     });
 })();
 
-// 请求客房物品总览
+//请求客房物品总览
 var requestItemOverview = function(pageNum){
 	console.log("请求第" + pageNum + "页物品总览信息");
 	// $.ajax({
@@ -31,16 +31,43 @@ var requestItemOverview = function(pageNum){
 				$("#itemOverviewTbody").append("<tr><td>1</td><td>1</td><td>1</td><td>1</td>"+
 					"<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>");
 			}
-			// 添加物品总览 底部页码
-			$("#itemOverviewBottom").append("<div class='bottom-page'>"+
-		        	"<span class='page-before' onclick='requestBeforeItemOverview();'>上一页&nbsp;&nbsp;</span>"+
-		        	"<span><input id='itemOverview_nowpage' value='1' type='text' class='input_num'></span>"+
-		        	"<span>&nbsp;/&nbsp;</span>"+
-		        	"<span id='itemOverview_totalpage'>2</span>"+
-		            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
-		            "&nbsp;&nbsp;&nbsp;&nbsp;共83条记录</div>");
-	// 	}
-	// });
+				if(data.State == "Valid"){
+
+		 		// 清空表格和页码
+				$("#itemOverviewTbody").html("")
+				$("#itemOverviewBottom").html("");
+
+				var pageNow = data.pageNow;
+				var pageTotal = data.pageTotal;
+				var recordTotal = data.recordTotal;
+
+				if (recordTotal == 0) {
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
+						"没有相关数据！</td></tr>");
+					return;
+				}
+
+				for(var i=0; i<data.pageList.length; i++){
+					var perRecord = data.pageList[i];
+
+					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.item_ID +"</td>"+
+						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
+						"<td>"+ perRecord.tag +"</td><td>"+ perRecord.state +"</td>"+
+						"<td>"+ perRecord.state +"</td><td>"+ perRecord.state +"</td>"+
+						"<td>"+ perRecord.comm +"</td>"+
+						"<td>查看</td></tr>");
+				}
+				// 添加物品总览 底部页码
+				$("#itemOverviewBottom").append("<div class='bottom-page'>"+
+			        	"<span class='page-before' onclick='requestBeforeItemOverview();'>上一页&nbsp;&nbsp;</span>"+
+			        	"<span><input id='itemOverview_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+
+			        	"<span>&nbsp;/&nbsp;</span>"+
+			        	"<span id='itemOverview_totalpage'>"+ pageTotal +"</span>"+
+			            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			}
+		}
+	});
 }
 
 //根据房间号 拉取上一页 物品总览信息
