@@ -71,10 +71,10 @@ var requestAjaxWater = function(pageNum){
             		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
 
 					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
-						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
-						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
-						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
-						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
+						"<td>"+ perRecord.last_DATA + "</td>" +
+						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"&nbsp;元</td>"+
+						"<td>"+ cbDate +"</td></tr>");
 				}	
 				// 添加水费 底部页码
 				$("#serviceWaterBottom").append("<div class='bottom-page'>"+
@@ -159,10 +159,10 @@ var requestAjaxWaterByRoomNum = function(roomNum,pageNum){
             		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
 
 					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
-						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
-						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
-						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
-						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
+						"<td>"+ perRecord.last_DATA + "</td>" +
+						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"&nbsp;元</td>"+
+						"<td>"+ cbDate +"</td></tr>");
 				}	
 
 				// 添加水费 底部页码

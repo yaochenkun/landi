@@ -50,22 +50,18 @@
 										</div>
 									</div></th>
 								<th rowspan="2"><span>客人姓名</span></th>
-								<th colspan="6"><span>燃&nbsp;气&nbsp;表&nbsp;一</span></th>
-								<th colspan="6"><span>燃&nbsp;气&nbsp;表&nbsp;二</span></th>
+								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;一</span></th>
+								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;二</span></th>
 								<th rowspan="2">抄表日期</th>
 							</tr>
 							<tr>
 								<th class="gasOne">表 号</th>
-								<th class="gasOne">年初表数</th>
 								<th class="gasOne">上月表数</th>
-								<th class="gasOne">本月表数</th>
 								<th class="gasOne">费用</th>
 								<th class="gasOne">抄表</th>
 
 								<th class="gasTwo">表 号</th>
-								<th class="gasTwo">年初表数</th>
 								<th class="gasTwo">上月表数</th>
-								<th class="gasTwo">本月表数</th>
 								<th class="gasTwo">费用</th>
 								<th class="gasTwo">抄表</th>
 							</tr>

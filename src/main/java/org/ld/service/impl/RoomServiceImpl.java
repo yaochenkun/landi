@@ -117,8 +117,8 @@ public class RoomServiceImpl implements RoomService {
 	public List<RoomItem> getItems(Integer rid, String type) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("room_id", rid);
-		map.put("type", type);
+		map.put("ROOM_ID", rid);
+		map.put("TYPE", type);
 		return roomItemMapper.getItems(map);
 	}
 
@@ -138,8 +138,8 @@ public class RoomServiceImpl implements RoomService {
 	public List<RoomMeter> getMeters(Integer rid, Integer type) {
 		// TODO Auto-generated method stub
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("room_id", rid);
-		map.put("type", type);
+		map.put("ROOM_ID", rid);
+		map.put("TYPE", type);
 		return roomMeterMapper.getMeters(map);
 	}
 

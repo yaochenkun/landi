@@ -51,14 +51,14 @@ public class ItemServiceImpl implements ItemService {
 		if (rid == 0 && type == null) {
 			return roomItemMapper.getAllItems(map);
 		} else if (rid != 0 && type != null) {
-			map.put("room_id", rid);
-			map.put("type", type);
+			map.put("ROOM_ID", rid);
+			map.put("TYPE", type);
 			return roomItemMapper.getItems(map);
 		} else if (rid != 0) {
-			map.put("room_id", rid);
+			map.put("ROOM_ID", rid);
 			return roomItemMapper.getItemsByRoom(map);
 		} else {
-			map.put("type", type);
+			map.put("TYPE", type);
 			return roomItemMapper.getItemsByType(map);
 		}
 	}
@@ -69,9 +69,9 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("type", type);
-		map.put("cat", cat);
-		map.put("band", band);
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("BAND", band);
 
 		if (type == null)
 			return facStaMapper.getAllTotal();
@@ -154,11 +154,11 @@ public class ItemServiceImpl implements ItemService {
 	public List<FacSta> getFacByTypeCatBand(String type, String cat, String band, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("type", type);
-		map.put("cat", cat);
-		map.put("band", band);
-		map.put("st", st);
-		map.put("each", eachPage);
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("BAND", band);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
 
 		if (type == null)
 			return facStaMapper.getAllFac(map);
@@ -188,9 +188,9 @@ public class ItemServiceImpl implements ItemService {
 	public List<FacSta> getFacByTypeCatBandAll(String type, String cat, String band) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("type", type);
-		map.put("cat", cat);
-		map.put("band", band);
-		return facStaMapper.getFacByTypeCatBand(map);
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("BAND", band);
+		return facStaMapper.getFacByTypeCatBandAll(map);
 	}
 }

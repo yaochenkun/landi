@@ -200,7 +200,7 @@ public class UserRoomController {
 
 	@RequestMapping("/getMeters") // 查meter（一行）
 	@ResponseBody
-	public Map<String, Object> getMeters(HttpSession session, @RequestBody Integer rid, @RequestBody Integer type) {
+	public Map<String, Object> getMeters(HttpSession session, Integer rid, Integer type) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
 		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
@@ -340,22 +340,20 @@ public class UserRoomController {
 			newSrc.setMONEY(dataJson.getDouble("charge"));
 			newSrc.setTYPE(dataJson.getInteger("type"));
 			newSrc.setMETER(dataJson.getString("meterNo"));
-			// newSrc.setLAST_DATA(meter.getCUR_VAL());
-			// newSrc.setCOUNT(newSrc.getCURRENT_DATA() -
-			// newSrc.getLAST_DATA());
+			newSrc.setLAST_DATA(meter.getCUR_VAL());
+			newSrc.setCOUNT(newSrc.getCURRENT_DATA()-newSrc.getLAST_DATA());
 
 			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
 
-			// meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-			// meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-			// meter.setCUR_TIME(newSrc.getTIME());
+			 meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
+			 meter.setCUR_VAL(newSrc.getCURRENT_DATA());
+			 meter.setCUR_TIME(newSrc.getTIME());
 
 			if (serverService.addSources(newSrc) == 1) {
-				// return roomService.updateMeter(meter);
-				return 1;
+				 return roomService.updateMeter(meter);
 			} else {
 				return 0;
 			}

@@ -71,10 +71,10 @@ var requestAjaxElec = function(pageNum){
             		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
 
 					$("#elecTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
-						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
-						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
+						"<td>"+ perRecord.last_DATA +
 						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
-						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
+						"<td>"+ cbDate +"</td></tr>");
 				}	
 
 				// 添加电费 底部页码
@@ -160,10 +160,10 @@ var requestAjaxElecByRoomNum = function(roomNum,pageNum){
             		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
 
 					$("#elecTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
-						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.id +"</td>"+
-						"<td>"+ perRecord.last_DATA +"</td>"+"<td>"+ perRecord.last_DATA +"</td>"+
+						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
+						"<td>"+ perRecord.last_DATA +"</td>"+
 						"<td>"+ perRecord.current_DATA +"</td><td>"+ perRecord.money +"</td>"+
-						"<td>"+ perRecord.meter +"</td><td>"+ cbDate +"</td></tr>");
+						"<td>"+ cbDate +"</td></tr>");
 				}	
 				// 添加电费 底部页码
 				$("#serviceElecBottom").append("<div class='searchRoomNum' style='display:none;'>"+ roomNum +"</div>");

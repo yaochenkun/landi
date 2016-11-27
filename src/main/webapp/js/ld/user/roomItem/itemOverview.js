@@ -68,7 +68,7 @@ var requestItemOverview = function(pageNum){
 				var recordTotal = data.recordTotal;
 
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
@@ -76,12 +76,11 @@ var requestItemOverview = function(pageNum){
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 
-					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.item_ID +"</td>"+
+					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
-						"<td>"+ perRecord.tag +"</td><td>"+ perRecord.state +"</td>"+
-						"<td>"+ perRecord.state +"</td><td>"+ perRecord.state +"</td>"+
-						"<td>"+ perRecord.company +"</td><td>"+ perRecord.comm +"</td>"+
-						"<td>查看</td></tr>");
+						"<td>"+ perRecord.company +"</td><td>"+ perRecord.total +"</td>"+
+						"<td>"+ perRecord.working +"</td><td>"+ perRecord.comment +"</td>"+
+						"</tr>");
 				}
 				// 添加物品总览 底部页码
 				$("#itemOverviewBottom").append("<div class='bottom-page'>"+
@@ -149,19 +148,18 @@ var requestItemByItemType = function(pageNum){
 				var pageTotal = data.pageTotal;
 				var recordTotal = data.recordTotal;
 				if (recordTotal == 0) {
-					$("#shoppingTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
 				
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
-					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.item_ID +"</td>"+
-							"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
-							"<td>"+ perRecord.tag +"</td><td>"+ perRecord.state +"</td>"+
-							"<td>"+ perRecord.state +"</td><td>"+ perRecord.state +"</td>"+
-							"<td>"+ perRecord.company +"</td><td>"+ perRecord.comm +"</td>"+
-							"<td>查看</td></tr>");
+					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
+						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
+						"<td>"+ perRecord.company +"</td><td>"+ perRecord.total +"</td>"+
+						"<td>"+ perRecord.working +"</td><td>"+ perRecord.comment +"</td>"+
+						"</tr>");
 				}
 				// 添加物品总览 底部页码
 				$("#itemOverviewBottom").append("<div class='bottom-page'>"+

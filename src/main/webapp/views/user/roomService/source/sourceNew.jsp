@@ -46,14 +46,13 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li><span class="span">房间号：</span><input
-							id="sourceRoomNumber" type="text" value="W35-1" /><span
+						<li><span class="span">房间号：</span><input id="sourceRoomNumber" type="text" value="W34-1" /><span
 							class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span
 							class="red">不能为空！</span></li>
 						<li><span class="span">租客：</span><input type="text"
 							value="Alice" /></li>
-						<li><span class="span">表号：</span><input type="text" value="1" /></li>
+						<li><span class="span">表号：</span><input id="meter" type="text" value="0010101" /></li>
 						<li><span class="span">抄表：</span><input type="text"
 							value="12.4" /></li>
 						<li><span class="span">费用：</span><input type="text"

@@ -9,18 +9,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/planNew.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planNew.css" rel="stylesheet" type="text/css" />
 <title>新增采购计划</title>
 </head>
 <body>
@@ -32,11 +24,9 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="linormal"><a
-						href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品总览</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
+					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 					<li class="linormal"><a href="javascript:void(0);">客房物品移动</a></li>
-					<li class="liactive"><a
-						href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
 			</div>
 		</div>
@@ -67,11 +57,11 @@
 							<tr>
 								<th>序号</th>
 								<th>物品种类</th>
-								<th>物品名称</th>
+								<th>物品子类</th>
 								<th>物品品牌</th>
-								<th>物品型号</th>
+								<th>物品名称</th>
 								<th>数量</th>
-								<th>单价</th>
+								<th>总价</th>
 								<th>备注</th>
 								<th>操作</th>
 							</tr>
@@ -101,28 +91,26 @@
 					<span class="span">物品种类：</span>
 					<div class="item-content"></div>
 				</div>
-
 				<div id="item-cat" class="item">
-						<span class="span">物品名称：</span>
+						<span class="span">物品子类：</span>
 					<div class="item-content"></div>
 				</div>
    				<div id="item-com" class="item">
    					<span class="span">物品品牌：</span>
 					<div class="item-content"></div>
    				</div>
-				
-				<div id="item-brand" class="item">
-					<span class="span">物品型号：</span>
-					<div class="item-content"><input type="text" value="1" /></div>
-				</div>
+   				<div id="item-name" class="item">
+   					<span class="span">物品名称：</span>
+					<div class="item-content"></div>
+   				</div>
 
 				<div id="item-count" class="item">
 					<span class="span">数量：</span>
 					<div class="item-content"><input type="text" value="10" /></div>
 				</div>
 
-				<div id="item-perPrice" class="item">
-					<span class="span">单价：</span>
+				<div id="item-totalPrice" class="item">
+					<span class="span">总价：</span>
 					<div class="item-content"><input type="text" value="1.52" /></div>
 				</div>
 

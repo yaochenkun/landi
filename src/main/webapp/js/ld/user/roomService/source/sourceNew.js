@@ -1,7 +1,65 @@
 (function(){
-	$("#sourceRoomNumber").focus(function(){
-		$(this).removeClass("border-red");
-		$("#roomIdWarning").css("display","none");
+	$("#sourceRoomNumber").on({
+		focus: function(){
+			$(this).removeClass("border-red");
+			$("#roomIdWarning").css("display","none");
+		},
+		keyup: function(){
+			var rNumber = $(this).val();
+			var rid = 0;
+			$.ajax({
+				url:'/LD/userRoom/getRoomIDByNumber.action',
+				type:'post',
+				data:'roomNumber=' + rNumber ,
+				success:function(data){
+					//console.log(data);
+					if(!data){
+						return;
+					}
+					rid = data.id;
+					var type = 1;
+
+					switch($("#sourceType").text()){
+						case "水费":
+						    type = 1;
+							break;
+
+						case "电费":
+							type = 2;
+							break;
+
+						default:
+						    console.log("没有匹配的费用！");
+							break;
+					}
+
+					$.ajax({
+						url:'/LD/userRoom/getMeters.action',
+						type:'post',
+						data:'rid='+ rid +'&type='+ type,
+						success:function(data){
+							//console.log(data);
+							var type = data.meters1 == null ? 2 : 1;
+							console.log(type);
+							// 房间水表表号
+							if(type == 1){
+								if(data.meters1.length == 0){
+									return;
+								}
+								$("#meter").val(data.meters1[0].meter_NUMBER);
+							}
+							// 房间电表
+							else if(type == 2){
+								if(data.meters2.length == 0){
+									return;
+								}
+								$("#meter").val(data.meters2[0].meter_NUMBER);
+							}
+						}
+					});
+				}
+			});
+		}
 	});
 })();
 

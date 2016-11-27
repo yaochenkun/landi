@@ -170,7 +170,7 @@
 .fac-body .span{width: 15%; font-weight: bold; float: left; clear: left; min-height: 50px;}
 .fac-body .item-content{float: left; width: 85%; margin-bottom: 20px;}
 .fac-body .item-content input{padding: 0 10px;}
-.fac-body .btn-item{width: 90px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
+.fac-body .btn-item{width: 130px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
 .fac-body .btn-item:hover{border-color: #2277da; color: #2277da; background: #fff;}
 .addItemDiv .item-content .item-active{border: 1px solid #2277da; color: #fff; background: #2277da;}
 

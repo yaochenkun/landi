@@ -37,5 +37,5 @@ public interface FacStaMapper {
 
 	int getTotalByTypeCatBand(HashMap<String, Object> map);
 
-	int getFacByTypeCatBandAll(HashMap<String, Object> map);
+	List<FacSta> getFacByTypeCatBandAll(HashMap<String, Object> map);
 }

@@ -36,8 +36,7 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li><span class="span">房间号：</span><input
-							id="sourceRoomNumber" type="text" value="W35-1" /><span
+						<li><span class="span">房间号：</span><input id="sourceRoomNumber" type="text" value="W34-1" /><span
 							class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span
 							class="red">不能为空！</span></li>
@@ -47,22 +46,14 @@
 							value="2016-11-12" /></li>
 
 						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;一</li>
-						<li><span class="span">表号：</span><input type="text" value="1" /></li>
-						<li><span class="span">本月表数：</span><input type="text"
-							value="48.5" /></li>
-						<li><span class="span">费用：</span><input type="text"
-							value="12" /></li>
-						<li><span class="span">抄表：</span><input type="text"
-							value="Vicky" /></li>
+						<li><span class="span">表号：</span><input id="meterOne" type="text" value="0010101" /></li>
+						<li><span class="span">抄表：</span><input type="text" value="12.5" /></li>
+						<li><span class="span">费用：</span><input type="text" value="12" /></li>
 
 						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;二</li>
-						<li><span class="span">表号：</span><input type="text" value="1" /></li>
-						<li><span class="span">本月表数：</span><input type="text"
-							value="48.5" /></li>
-						<li><span class="span">费用：</span><input type="text"
-							value="12" /></li>
-						<li><span class="span">抄表：</span><input type="text"
-							value="Vicky" /></li>
+						<li><span class="span">表号：</span><input id="meterTwo" type="text" value="0010101" /></li>
+						<li><span class="span">抄表：</span><input type="text" value="12.5" /></li>
+						<li><span class="span">费用：</span><input type="text" value="12" /></li>
 
 
 						<li><span class="span"></span><a onclick="addSourceGas();"

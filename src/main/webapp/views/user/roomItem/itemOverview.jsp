@@ -9,18 +9,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css"	rel="stylesheet" type="text/css" />
 <title>客房物品总览</title>
 </head>
 <body>
@@ -32,11 +24,9 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="liactive"><a
-						href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品总览</a></li>
+					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 					<li class="linormal"><a href="javascript:void(0);">客房物品移动</a></li>
-					<li class="linormal"><a
-						href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
 			</div>
 		</div>
@@ -72,14 +62,11 @@
 							<tr>
 								<th><span>种类ID</span></th>
 								<th><span>物品种类</span></th>
-								<th><span>物品类别</span></th>
+								<th><span>物品子类</span></th>
 								<th><span>品牌</span></th>
-								<th><span>型号</span></th>
 								<th><span>库存</span></th>
 								<th><span>消耗</span></th>
-								<th><span>所属单位</span></th>
 								<th><span>备注</span></th>
-								<th><span>查看明细</span></th>
 							</tr>
 						</thead>
 						<tbody id="itemOverviewTbody"></tbody>

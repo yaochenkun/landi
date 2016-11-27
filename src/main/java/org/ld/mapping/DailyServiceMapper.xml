@@ -140,7 +140,7 @@
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
   	select count(*) from daily_service where 
-  	 <if test="ROOM_NUMBER != null" >
+  	 <if test="RN != null" >
         ROOM_NUMBER = #{RN} and
      </if> TYPE = #{TYPE}
   </select>
