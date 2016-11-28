@@ -16,6 +16,7 @@ import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
 import org.ld.model.RoomItem;
 import org.ld.model.Sources;
+import org.ld.model.User;
 import org.ld.service.ItemService;
 import org.ld.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +114,18 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		try {
 			planMapper.insert(p);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+	
+	@Override
+	public int updatePlan(Plan p) {
+
+		try {
+			planMapper.updateByPrimaryKeySelective(p);
 			return 1;
 		} catch (Exception e) {
 			logger.error(e.getCause());

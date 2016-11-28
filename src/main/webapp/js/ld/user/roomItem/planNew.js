@@ -221,15 +221,7 @@ var deleteOneItem = function(element){
 
 // 添加采购计划
 var addPlan = function(){
-	// 检测必填项
-	if($(".li-num input").val() == ""){
-		$(".li-num input").addClass("border-red");
-		$(window).scrollTop(0);
-		return;
-	}
-
-	var planID = $(".li-num input").val(),
-	    planName = $(".planTitle input").eq(1).val(),
+	var planName = $(".planTitle input").eq(1).val(),
 	    planManager = $(".planTitle input").eq(2).val(),
 	    note = $(".planTitle input").eq(3).val(),
 	    money = 1000,
@@ -251,7 +243,7 @@ var addPlan = function(){
 	$.ajax({
 		url:'/LD/userItem/newPlan.action',
 		type:'post',
-		data:'{"planID":"'+ planID +'","planManager":"'+ planManager +'","delivery":"'+ ctime +'",'
+		data:'{"planManager":"'+ planManager +'","delivery":"'+ ctime +'",'
 			+'"note":"'+ note +'","planName":"'+ planName +'","itemList":{'+ itemList +'}}',
 		dataType:'json',
 		contentType:'application/json',

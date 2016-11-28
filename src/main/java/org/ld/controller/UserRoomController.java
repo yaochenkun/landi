@@ -311,7 +311,7 @@ public class UserRoomController {
 			newDS.setROOM_NUMBER(dataJson.getString("roomNumber"));
 			newDS.setMONEY(dataJson.getDouble("sum"));
 			newDS.setTYPE(dataJson.getInteger("type"));
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date;
 			date = ft.parse(dataJson.getString("delivery"));
 			newDS.setRTIME(date);
@@ -343,7 +343,7 @@ public class UserRoomController {
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA()-newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
@@ -383,7 +383,7 @@ public class UserRoomController {
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date;
 			date = ft.parse(dataJson.getString("meterDate"));
 			newSrc.setTIME(date);
@@ -405,10 +405,6 @@ public class UserRoomController {
 			newSrc.setMETER(dataJson.getString("secondMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
-
-			ft = new SimpleDateFormat("yyyy-MM-dd");
-			date = ft.parse(dataJson.getString("meterDate"));
-			newSrc.setTIME(date);
 
 			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
 			meter.setCUR_VAL(newSrc.getCURRENT_DATA());

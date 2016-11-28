@@ -22,6 +22,8 @@ public interface ItemService {
 	int getTotalPlan();
 
 	int addNewPlan(Plan p);
+	
+	int updatePlan(Plan p);
 
 	int addNewPlanDetail(PlanDetail d);
 

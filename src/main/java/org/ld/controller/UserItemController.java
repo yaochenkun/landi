@@ -212,18 +212,18 @@ public class UserItemController {
 			JSONObject dataJson = JSONObject.parseObject(data);
 
 			Plan newPlan = new Plan();
-			newPlan.setNAME(dataJson.getString("planID"));
+			String name = dataJson.getString("delivery") + dataJson.getString("planName");
+			newPlan.setNAME(name);
 			newPlan.setSTAFF(dataJson.getString("planManager"));
 			newPlan.setCOMMENT(dataJson.getString("note"));
 
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-			Date date;
-			date = ft.parse(dataJson.getString("delivery"));
+//			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
 			newPlan.setCTIME(date);
 
 			if (itemService.addNewPlan(newPlan) == 1) {
 				double sum = 0;
-				newPlan = itemService.getPlanByName(dataJson.getString("planName"));
+				newPlan = itemService.getPlanByName(name);
 				JSONObject obj = dataJson.getJSONObject("itemList");
 				PlanDetail pd = new PlanDetail();
 				pd.setPLAN_ID(newPlan.getID());
@@ -263,6 +263,7 @@ public class UserItemController {
 				}
 
 				newPlan.setMONEY(sum);
+				itemService.updatePlan(newPlan);
 				return 1;
 			} else
 				return 0;

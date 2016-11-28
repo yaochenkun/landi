@@ -39,10 +39,8 @@
 				<h4>新增采购计划</h4>
 				<a class="btn btn-goback goback" href="planList.jsp">返&nbsp;&nbsp;&nbsp;回</a>
 				<ul class="ul">
-					<li class="li li-num"><span class="span">计划编号：</span> 
-						<input type="text" value="1" /><span class="red">*</span></li>
 					<li class="li"><span class="span">计划名称：</span> 
-					    <input type="text" value="阶段一" /></li>
+					    <input type="text" value="采购冰箱" /></li>
 					<li class="li"><span class="span">计划负责人：</span>
 						<input type="text" value="Alice" /></li>
 					<li class="li"><span class="span">备注：</span>
