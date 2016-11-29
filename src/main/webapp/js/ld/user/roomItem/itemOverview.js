@@ -78,8 +78,11 @@ var requestItemOverview = function(pageNum){
 
 					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
-						"<td>"+ perRecord.company +"</td><td>"+ perRecord.total +"</td>"+
-						"<td>"+ perRecord.working +"</td><td>"+ perRecord.comment +"</td>"+
+						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
+						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
+						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
+						"<td>"+ perRecord.comment +"</td>"+
+						"<td><span class='item_detail' onclick='showItemDetail(this);'>物品分配信息</span></td>"+
 						"</tr>");
 				}
 				// 添加物品总览 底部页码
@@ -89,10 +92,19 @@ var requestItemOverview = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='itemOverview_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextitemOverview();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});
+}
+
+// 显示物品详细信息
+var showItemDetail = function(element){
+	var itemID = $(element).parent().parent().children("td").eq(0).text();
+	var itemName = $(element).parent().parent().children("td").eq(4).text();
+	console.log("请求物品ID" + itemID + " 名称" + itemName + "的详细信息");
+	window.location.href = "http://" + window.location.host
+	 	+ "/LD/views/user/roomItem/itemDetail.jsp?itemID=" + itemID + "&itemName=" + itemName;
 }
 
 //根据房间号 拉取上一页 物品总览信息
@@ -157,8 +169,10 @@ var requestItemByItemType = function(pageNum){
 					var perRecord = data.pageList[i];
 					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
-						"<td>"+ perRecord.company +"</td><td>"+ perRecord.total +"</td>"+
-						"<td>"+ perRecord.working +"</td><td>"+ perRecord.comment +"</td>"+
+						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
+						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
+						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
+						"<td>"+ perRecord.comment +"</td><td><span class='item_detail'>详细信息</span></td>"+
 						"</tr>");
 				}
 				// 添加物品总览 底部页码
@@ -168,7 +182,7 @@ var requestItemByItemType = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='itemOverview_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextItemByType();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});

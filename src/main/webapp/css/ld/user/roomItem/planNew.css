@@ -6,7 +6,7 @@
 
 /******************* 新增采购计划 样式  start ***************************/
 .planTitle {
-	margin-top: 5em;
+	margin-top: 60px;
 }
 
 .planTitle h4 {
@@ -20,7 +20,11 @@
 	width: 100px;
 	height: 30px;
 	line-height: 16px;
+	background: #fff;
+	color: #2277da;
 }
+
+.planTitle .goback:hover{background: #2277da; color: #fff;}
 
 .planTitle .red {
 	margin-left: .5em;
@@ -39,22 +43,18 @@
 	margin-right: 2em;
 }
 
-.planTitle .li:first-child .span {
-	border-left: 4px solid #2277da;
-}
-
 .planTitle .li:last-child {
 	margin-right: 0;
 }
 
 .planTitle .li .span {
 	display: inline-block;
-	padding-left: .5em;
 }
 
 .planTitle .li input {
 	width: 120px;
 	padding: 0 .5em;
+	color: #e45e00;
 }
 
 .planTitle .li .note {
@@ -80,8 +80,6 @@
 
 .itemList h3 {
 	font-size: 15px;
-	border-left: 4px solid #2277da;
-	padding-left: .5em;
 	margin-bottom: 1.5em;
 	height: 21px;
 	line-height: 20px;
@@ -96,7 +94,7 @@
 }
 
 .itemList table thead tr {
-	height: 40px;
+	height: 50px;
 	color: #fff;
 	background: #2277da;
 	border-top: 1px solid #00324e;
@@ -124,8 +122,9 @@
 
 .itemList table tbody td {
 	text-align: center;
-	font-size: 15px;
-	height: 40px;
+	font-size: 14px;
+	height: 50px;
+	line-height: 50px;
 	border-bottom: 1px solid #b2d6ea;
 }
 
@@ -137,7 +136,7 @@
 }
 
 .itemList table tbody .operation {
-	color: #ff2020;
+	color: #e45e00;
 	cursor: pointer;
 }
 
@@ -147,13 +146,14 @@
 	line-height: 25px;
 	width: 200px;
 	font-size: 16px;
-	background-color: #2277da;
-	border-color: #fff0f0;
+	background-color: #fff;
+	border-color: #2277da;
+	color: #2277da;
 }
 
 .planContent .submit:hover {
 	transform: translateY(3px);
-	background-color: #2277da;
+	background: #fff;
 }
 /********** 计划采购物品 表格样式 start ********/
 
@@ -176,4 +176,4 @@
 
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
-.fac-foot .btn-submit:hover{color: #fff; border-color: #2277da; background: #2277da;}
+.fac-foot .btn-submit:hover{background: #ccc;}

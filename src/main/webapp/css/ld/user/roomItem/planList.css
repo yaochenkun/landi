@@ -1,3 +1,4 @@
+/************* 计划列表样式 start **********/
 .bill-table thead tr th:nth-child(1) {width: 10%;}
 
 .bill-table thead tr th:nth-child(2), .bill-table thead tr th:nth-child(3),
@@ -6,5 +7,9 @@
 
 .bill-table tbody tr td:nth-child(6){color: #444;}
 .bill-table tbody tr td:nth-child(5){color: #ff5722;}
+
+#planListTbody .plan_detail{color: #2277da; cursor: pointer;}
+#planListTbody .plan_detail:hover{border-bottom: 1px solid #2277da;}
+/************* 计划列表样式 end **********/
 
 .nav-path #plan_id{height: 25px; margin-top: -4px; padding: 0 4px;}

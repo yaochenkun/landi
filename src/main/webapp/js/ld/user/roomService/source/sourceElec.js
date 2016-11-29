@@ -84,7 +84,7 @@ var requestAjaxElec = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='eleclist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextElec();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});
@@ -173,7 +173,7 @@ var requestAjaxElecByRoomNum = function(roomNum,pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='eleclist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextElecByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});

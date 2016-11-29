@@ -472,6 +472,9 @@ header .header-content .dropdown-menu li {
 .button-bottom .btn-cancel {
 	float: right;
 }
+.bottom-page .recordTotal{
+	color: #2277da;
+}
 
 .row .col-sm-12 {
 	height: 15px;

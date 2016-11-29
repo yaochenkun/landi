@@ -1,0 +1,18 @@
+.main{margin: 80px auto;}
+
+.main .fac-title{margin-bottom: 30px;}
+.main .fac-title .span{font-size: 15px;}
+.main .fac-title .name{color: #ff5200;}
+.main .btngoback{float: right; height: 25px; line-height: 12px; width: 100px; background: #fff; color: #2277da; border-color: #2277da;}
+.main .btngoback:hover{background: #2277da; color: #fff;}
+
+.main .fac-sta{margin-bottom: 20px; text-align: center;}
+.fac-sta .text{margin-right: 40px; font-size: 14px;}
+.fac-sta .count{color: #ff5200; font-weight: bold; font-size: 16px;}
+
+#facDetailTbody .blue{color: #004596; margin-right: 10px; cursor: pointer;}
+#facDetailTbody .gray{color: #666; cursor: pointer;}
+#facDetailTbody .blue:hover, #facDetailTbody .gray:hover{border-bottom-style: solid; border-bottom-width: 1px;}
+
+.bill-table thead tr th span{line-height: 40px;}
+.bill-table tbody tr{line-height: 40px;}

@@ -90,7 +90,7 @@ var requestAjaxGas = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='gaslist_totalpage'>"+ Math.ceil(pageTotal)+"</span>"+
 			            "<span class='page-next' onclick='requestNextGas();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ Math.ceil(recordTotal/2) +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ Math.ceil(recordTotal/2) +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});
@@ -187,7 +187,7 @@ var requestAjaxGasByRoomNum = function(roomNum,pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='gaslist_totalpage'>"+ Math.ceil(pageTotal/2) +"</span>"+
 			            "<span class='page-next' onclick='requestNextGasByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ Math.ceil(recordTotal/2) +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ Math.ceil(recordTotal/2) +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});

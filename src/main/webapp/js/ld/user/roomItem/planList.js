@@ -11,7 +11,7 @@
     });
 })();
 
-// 请求采购计划
+// 请求采购计划列表
 var requestPlanList = function(pageNum){
 	console.log("请求第" + pageNum + "页采购计划信息");
 	$.ajax({
@@ -52,8 +52,10 @@ var requestPlanList = function(pageNum){
 					$("#planListTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.name +"</td><td>"+ perRecord.staff +"</td>"+
 						"<td>"+ ccDate +"</td><td>"+ perRecord.money +"&nbsp;元</td>"+
-						"<td>"+ perRecord.comment +"</td><td><a>详细</a></td></tr>");
+						"<td>"+ perRecord.comment +"</td>"+
+						"<td><span class='plan_detail' onclick='requestPlanDetail(this);'>计划执行信息</span></td></tr>");
 				}
+
 				// 添加采购计划 底部页码
 				$("#planListBottom").append("<div class='bottom-page'>"+
 			        	"<span class='page-before' onclick='requestBeforePlanList();'>上一页&nbsp;&nbsp;</span>"+
@@ -61,7 +63,7 @@ var requestPlanList = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='planList_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextplanList();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});
@@ -75,13 +77,22 @@ var requestBeforePlanList = function(){
 	requestPlanList(nowpage-1);
 }
 
-//根据房间号 拉取下一页 采购计划信息（??当前处理，前端判断是否是最后一页）
+//根据房间号 拉取下一页 采购计划信息
 var requestNextplanList = function(){
 	var nowpage = parseInt($("#planList_nowpage").val());
 	var totalpage = parseInt($("#planList_totalpage").text());
 	if(nowpage == totalpage) return;
 	
 	requestPlanList(nowpage+1);
+}
+
+// 点击详细，显示计划详情
+var requestPlanDetail = function(element){
+	var planID = $(element).parent().parent().children("td").eq(0).text();
+	var planName = $(element).parent().parent().children("td").eq(1).text();
+	console.log("显示计划：" + planID + planName + "的详细信息");
+	window.location.href = "http://" + window.location.host 
+		 + "/LD/views/user/roomItem/planDetail.jsp?planID=" + planID + "&planName=" + planName;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -112,7 +123,7 @@ var requestItemByItemType = function(plan_id){
 			$("#planListTbody").append("<tr><td>"+ data.plan.id +"</td>"+
 						"<td>"+ data.plan.name +"</td><td>"+ data.plan.staff +"</td>"+
 						"<td>"+ ccDate +"</td><td>"+ data.plan.money +"&nbsp;元</td>"+
-						"<td>"+ data.plan.comment +"</td><td><a>详细</a></td></tr>");
+						"<td>"+ data.plan.comment +"</td><td><a>计划执行信息</a></td></tr>");
 		}
 	});
 }

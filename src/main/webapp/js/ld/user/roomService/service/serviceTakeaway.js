@@ -83,7 +83,7 @@ var requestAjaxTakeaway = function(pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='takeawaylist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextTakeaway();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});
@@ -170,7 +170,7 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 			        	"<span>&nbsp;/&nbsp;</span>"+
 			        	"<span id='takeawaylist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextTakeawayByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
-			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>"+ recordTotal +"</span>条记录</div>");
+			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
 			}
 		}
 	});

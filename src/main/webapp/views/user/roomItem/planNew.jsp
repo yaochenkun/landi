@@ -26,7 +26,6 @@
 				<ul>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
 					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
-					<li class="linormal"><a href="javascript:void(0);">客房物品移动</a></li>
 				</ul>
 			</div>
 		</div>

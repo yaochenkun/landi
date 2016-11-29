@@ -1,0 +1,43 @@
+.main{width: 1100px; margin: 60px auto;}
+
+.main .planHead .planName{display: inline-block; margin: 20px 50px 20px 0; font-size: 15px;}
+.main .planHead .planName .title{color: #111; margin-right: 1em;}
+.main .planHead .goback{width: 120px; float: right; margin-top: 14px; background: #fff; color: #64aafa; height: 25px; line-height: 12px; border-color: #64aafa;}
+.main .planHead .goback:hover{background: #64aafa; color: #fff;}
+
+.content{margin-bottom: 60px; background: #fafafa;}
+.content .head{background: #2277da; color: #fff; height: 40px; line-height: 40px; text-align: center; font-size: 15px;}
+
+/* 计划采购物品表格 样式 */
+.content .body{padding: 30px 0;}
+table{width: 90%; text-align: center; padding: 20px 0; margin: 0 auto;}
+table thead th{font-weight: normal; text-align: center; height: 40px; line-height: 40px;}
+table tbody td{height:30px; line-height: 30px; border-top: 1px solid #ccc;}
+
+.body .perProgress{width: 90%; padding: 8px 40px; border-bottom: 1px solid #ccc; margin: 0 auto; overflow-x: auto;}
+.body .perProgress .time, .body .perProgress .term, .body .perProgress .user, .body .perProgress .item{margin-right: 3em;}
+.body .perProgress .user, .body .perProgress .item, .body .perProgress .count {color: #2277da;}
+
+#facTbody .caigou{color: #2277da; cursor: pointer;}
+#facTbody .caigou:hover{border-bottom: 1px solid #2277da;}
+
+/************  添加物品弹框 **************/
+.shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
+.addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff; 
+	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
+.addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
+.addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}
+.addItemDiv .fac-title span:hover{color: #666;}
+
+.fac-body{max-height: 425px; overflow-y: auto; padding: 30px 0;}
+.fac-body .item{padding: 0 40px;}
+.fac-body .span{width: 30%; font-weight: bold; float: left; clear: left; min-height: 50px;}
+.fac-body .item-content{float: left; width: 70%; margin-bottom: 20px;}
+.fac-body .item-content input{padding: 0 10px;}
+.fac-body .btn-item{width: 130px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
+.fac-body .btn-item:hover{border-color: #2277da; color: #2277da; background: #fff;}
+.addItemDiv .item-content .item-active{border: 1px solid #2277da; color: #fff; background: #2277da;}
+
+.fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
+.fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
+.fac-foot .btn-submit:hover{background: #ccc;}

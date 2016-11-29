@@ -10,7 +10,7 @@
 
 .roomNav .roomNavInner {
 	padding-top: 24px;
-	width: 1000px;
+	width: 1100px;
 	margin: auto;
 	height: 60px;
 }
@@ -207,7 +207,7 @@ transform:translateY(3px);
 
 /****************** 页面内容 start *****************************/
 .main {
-	width: 1000px;
+	width: 1100px;
 	margin: 0 auto;
 }
 
@@ -293,7 +293,7 @@ transform:translateY(3px);
 
 .search-roomNo {
 	position: absolute;
-	width: 1000px;
+	width: 1100px;
 	height: 0;
 	background: #fafafa;
 	border-bottom: 1px dashed #279;
@@ -309,7 +309,7 @@ transform:translateY(3px);
 	height: 70px;
 	left: -83%;
 	height: 0;
-	width: 1000px;
+	width: 1100px;
 	background: #fafafa;
 	border-bottom: 1px dashed #279;
 	top: 70px;

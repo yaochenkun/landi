@@ -1,5 +1,5 @@
 .main {
-	width: 1000px;
+	width: 1100px;
 	height: 50px;
 }
 
@@ -30,10 +30,10 @@
 	height: 300px;
 	border: 1px solid #ccc;
 	background: #f9f9f9;
-	width: 161px;
+	width: 168px;
 	float: left;
 	height: 300px;
-	margin-left: 8px;
+	margin-left: 10px;
 }
 
 .body .index-list:nth-child(1) {
@@ -112,7 +112,7 @@
 
 /********  客房服务样式  **********/
 .content-wash {
-	width: 320px;
+	width: 390px;
 }
 
 .content-wash ul {
@@ -123,6 +123,6 @@
 .content-wash ul li {
 	display: inline-block;
 	width: 150px;
-	padding-left: 60px;
+	padding-left: 80px;
 }
 /****************** 手风琴菜单样式 end   ***************************/

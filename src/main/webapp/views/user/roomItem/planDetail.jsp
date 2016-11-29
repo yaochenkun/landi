@@ -1,0 +1,122 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
+<%@ page import="java.util.Date, java.text.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planDetail.css" rel="stylesheet" type="text/css" />
+<title>采购计划详情</title>
+</head>
+<body>
+
+	<jsp:include page="../_header.jsp" />
+	<jsp:include page="../_leftMenu.jsp" />
+
+	<% String planID = request.getParameter("planID"); %>
+	<% String planName = request.getParameter("planName"); %>
+
+	<div class="main">
+		<div class="planHead">
+			<div class="planName">
+				<span class="title">计划名称：<%=planName%></span>
+				<span id="planID" style="display:none;"><%=planID%></span>
+			</div>
+			<a class="btn goback" href="planList.jsp">返&nbsp;回</a>
+		</div>
+		<div class="content">
+			<div class="head">1.&nbsp;&nbsp;计划采购物品明细</div>
+			<div class="body">
+				<!-- 费用 table start -->
+				<table>
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>物品种类</th>
+							<th>物品子类</th>
+							<th>物品品牌</th>
+							<th>物品名称</th>
+							<th>数量</th>
+							<th>总价</th>
+							<th>备注</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="facTbody">
+						<tr><td>12</td><td>12</td><td>12</td><td>12</td><td>12</td><td>12</td>
+							<td>12</td><td>12</td><td><span class="caigou" onclick="caigouFac(this);">采购</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- 费用 table end -->
+			</div>
+		</div>
+		<div class="content">
+			<div class="head">2.&nbsp;&nbsp;计划执行情况</div>
+			<div class="body" id="planProgressBody"></div>
+		</div>
+	</div>
+	
+	<div class="shadow"></div>
+	<div class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				执行采购计划
+				<span>×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-type" class="item">
+					<span class="span">计划名称：</span>
+					<div class="item-content"></div>
+				</div>
+				<div id="item-cat" class="item">
+						<span class="span">阶段：</span>
+					<div class="item-content"></div>
+				</div>
+				<div id="item-name" class="item">
+   					<span class="span">物品名称：</span>
+					<div class="item-content"></div>
+   				</div>
+   				<div id="item-count" class="item">
+					<span class="span">采购人员：</span>
+					<div class="item-content"><input type="text" value="10" /></div>
+				</div>
+				<div id="item-count" class="item">
+					<span class="span">采购物品数量：</span>
+					<div class="item-content"><input type="text" value="10" /></div>
+				</div>
+
+				<div id="item-totalPrice" class="item">
+					<span class="span">总价：</span>
+					<div class="item-content"><input type="text" value="1.52" /></div>
+				</div>
+				<div id="item-comment" class="item">
+					<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="无" /></div>
+				</div>
+
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="closeDiv();">确定</a>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/planDetail.js"></script>
+	<script>(function(){
+			requestPlanDetail();
+		})();
+	</script>
+</body>
+</html>

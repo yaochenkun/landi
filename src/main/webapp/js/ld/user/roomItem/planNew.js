@@ -9,6 +9,7 @@
 				$("#item-type .item-content").html("");
 				$("#item-cat .item-content").html("");
 				$("#item-com .item-content").html("");
+				$("#item-name .item-content").html("");
 				if(data != null){
 					for(var i=0; i<data.length; i++){
 						$("#item-type .item-content").append("<a class='btn btn-item' onclick='chooseItemType(this);'>"+ data[i] +"</a>");
@@ -221,12 +222,12 @@ var deleteOneItem = function(element){
 
 // 添加采购计划
 var addPlan = function(){
-	var planName = $(".planTitle input").eq(1).val(),
-	    planManager = $(".planTitle input").eq(2).val(),
-	    note = $(".planTitle input").eq(3).val(),
+	var planName = $(".planTitle input").eq(0).val(),
+	    planManager = $(".planTitle input").eq(1).val(),
+	    note = $(".planTitle input").eq(2).val(),
 	    money = 1000,
 	    ctime = "2016-11-29";	    
-
+	console.log(planName);
 	// 计划采购物品
 	var itemList = "";
 	for(var i=1; i<=$(".eachItem").length; i++){
