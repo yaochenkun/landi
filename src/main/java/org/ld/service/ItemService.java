@@ -6,6 +6,7 @@ import org.ld.model.DailyService;
 import org.ld.model.FacSta;
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
+import org.ld.model.PlanProgress;
 import org.ld.model.RoomItem;
 import org.ld.model.Sources;
 
@@ -26,6 +27,14 @@ public interface ItemService {
 	int updatePlan(Plan p);
 
 	int addNewPlanDetail(PlanDetail d);
+	
+	int getTotalPlanDetail(int pid);
+	
+	List<PlanDetail> getPlanDetails(int pid, int st, int eachPage);
+	
+	int getTotalPlanProgress(int pid);
+	
+	List<PlanProgress> getPlanProgresses(int pid, int st, int eachPage);
 
 	Plan getPlanByName(String s);
 

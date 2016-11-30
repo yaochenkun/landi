@@ -21,6 +21,7 @@ import org.ld.model.FacSta;
 import org.ld.model.Guest;
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
+import org.ld.model.PlanProgress;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -256,8 +257,6 @@ public class UserItemController {
 					}
 
 					pd.setFAC_ID(ID);
-					pd.setFAC_NAME(obj2.getString("FAC_NAME"));
-					pd.setFAC_NUMBER(obj2.getString("FAC_NUMBER"));
 
 					itemService.addNewPlanDetail(pd);
 				}
@@ -271,5 +270,77 @@ public class UserItemController {
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/searchPlanDetail") // 查询计划采购物品（plan_detail表）
+	@ResponseBody
+	public Map<String, Object> searchPlanDetail(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rBuy"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		int pid = dataJson.getIntValue("planID");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = itemService.getTotalPlanDetail(pid);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			
+			List<PlanDetail> record = itemService.getPlanDetails(pid, 0, eachPage);
+			
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		return ans;
+	}
+	
+	@RequestMapping("/searchPlanProgress") // 查询计划采购物品（plan_detail表）
+	@ResponseBody
+	public Map<String, Object> searchPlanProgress(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rBuy"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		int pid = dataJson.getIntValue("planID");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = itemService.getTotalPlanProgress(pid);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			
+			List<PlanProgress> record = itemService.getPlanProgresses(pid, 0, eachPage);
+			
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		return ans;
 	}
 }

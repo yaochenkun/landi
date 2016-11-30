@@ -6,33 +6,32 @@ import java.util.List;
 import org.ld.model.RoomItem;
 
 public interface RoomItemMapper {
-	int deleteByPrimaryKey(Integer ID);
+    int deleteByPrimaryKey(Integer ID);
 
-	int insert(RoomItem record);
+    int insert(RoomItem record);
 
-	int insertSelective(RoomItem record);
+    int insertSelective(RoomItem record);
 
-	RoomItem selectByPrimaryKey(Integer ID);
+    RoomItem selectByPrimaryKey(Integer ID);
 
-	int updateByPrimaryKeySelective(RoomItem record);
+    int updateByPrimaryKeySelective(RoomItem record);
 
-	int updateByPrimaryKey(RoomItem record);
+    int updateByPrimaryKey(RoomItem record);
+    
+    // add
+ 	List<RoomItem> getItems(HashMap<String, Object> map);
 
-	// add
-	List<RoomItem> getItems(HashMap<String, Object> map);
+ 	List<RoomItem> getAllItems(HashMap<String, Object> map);
 
-	List<RoomItem> getAllItems(HashMap<String, Object> map);
+ 	List<RoomItem> getItemsByType(HashMap<String, Object> map);
 
-	List<RoomItem> getItemsByType(HashMap<String, Object> map);
+ 	List<RoomItem> getItemsByRoom(HashMap<String, Object> map);
 
-	List<RoomItem> getItemsByRoom(HashMap<String, Object> map);
+ 	int getTotal(HashMap<String, Object> map);
 
-	int getTotal(HashMap<String, Object> map);
+ 	int getAllTotal();
 
-	int getAllTotal();
+ 	int getTotalByType(String TYPE);
 
-	int getTotalByType(String TYPE);
-
-	int getTotalByRoom(int RID);
-
+ 	int getTotalByRoom(int RID);
 }

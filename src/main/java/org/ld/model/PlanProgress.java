@@ -20,6 +20,14 @@ public class PlanProgress {
 	private Double ALL_MONEY;
 
 	private String COMMENT;
+	
+	private String TYPE;
+    
+    private String CAT;
+    
+    private String BAND;
+    
+    private String NAME;
 
 	public Integer getID() {
 		return ID;
@@ -91,5 +99,37 @@ public class PlanProgress {
 
 	public void setCOMMENT(String COMMENT) {
 		this.COMMENT = COMMENT == null ? null : COMMENT.trim();
+	}
+
+	public String getTYPE() {
+		return TYPE;
+	}
+
+	public void setTYPE(String tYPE) {
+		TYPE = tYPE;
+	}
+
+	public String getCAT() {
+		return CAT;
+	}
+
+	public void setCAT(String cAT) {
+		CAT = cAT;
+	}
+
+	public String getBAND() {
+		return BAND;
+	}
+
+	public void setBAND(String bAND) {
+		BAND = bAND;
+	}
+
+	public String getNAME() {
+		return NAME;
+	}
+
+	public void setNAME(String nAME) {
+		NAME = nAME;
 	}
 }

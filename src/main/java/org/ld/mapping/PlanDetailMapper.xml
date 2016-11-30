@@ -1,130 +1,135 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.PlanDetailMapper">
-	<resultMap id="BaseResultMap" type="org.ld.model.PlanDetail">
-		<id column="ID" property="ID" jdbcType="INTEGER" />
-		<result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
-		<result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
-		<result column="FAC_NUMBER" property="FAC_NUMBER" jdbcType="VARCHAR" />
-		<result column="FAC_NAME" property="FAC_NAME" jdbcType="VARCHAR" />
-		<result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
-		<result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
-		<result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		ID, PLAN_ID, FAC_ID, FAC_NUMBER, FAC_NAME, TOTAL, ALL_MONEY, COMMENT
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from plan_detail
-		where ID = #{ID,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from plan_detail
-		where ID = #{ID,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="org.ld.model.PlanDetail">
-		insert into plan_detail (ID, PLAN_ID, FAC_ID,
-		FAC_NUMBER, FAC_NAME, TOTAL,
-		ALL_MONEY, COMMENT)
-		values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER},
-		#{FAC_ID,jdbcType=INTEGER},
-		#{FAC_NUMBER,jdbcType=VARCHAR}, #{FAC_NAME,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER},
-		#{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="org.ld.model.PlanDetail">
-		insert into plan_detail
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="ID != null">
-				ID,
-			</if>
-			<if test="PLAN_ID != null">
-				PLAN_ID,
-			</if>
-			<if test="FAC_ID != null">
-				FAC_ID,
-			</if>
-			<if test="FAC_NUMBER != null">
-				FAC_NUMBER,
-			</if>
-			<if test="FAC_NAME != null">
-				FAC_NAME,
-			</if>
-			<if test="TOTAL != null">
-				TOTAL,
-			</if>
-			<if test="ALL_MONEY != null">
-				ALL_MONEY,
-			</if>
-			<if test="COMMENT != null">
-				COMMENT,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="ID != null">
-				#{ID,jdbcType=INTEGER},
-			</if>
-			<if test="PLAN_ID != null">
-				#{PLAN_ID,jdbcType=INTEGER},
-			</if>
-			<if test="FAC_ID != null">
-				#{FAC_ID,jdbcType=INTEGER},
-			</if>
-			<if test="FAC_NUMBER != null">
-				#{FAC_NUMBER,jdbcType=VARCHAR},
-			</if>
-			<if test="FAC_NAME != null">
-				#{FAC_NAME,jdbcType=VARCHAR},
-			</if>
-			<if test="TOTAL != null">
-				#{TOTAL,jdbcType=INTEGER},
-			</if>
-			<if test="ALL_MONEY != null">
-				#{ALL_MONEY,jdbcType=DOUBLE},
-			</if>
-			<if test="COMMENT != null">
-				#{COMMENT,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="org.ld.model.PlanDetail">
-		update plan_detail
-		<set>
-			<if test="PLAN_ID != null">
-				PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
-			</if>
-			<if test="FAC_ID != null">
-				FAC_ID = #{FAC_ID,jdbcType=INTEGER},
-			</if>
-			<if test="FAC_NUMBER != null">
-				FAC_NUMBER = #{FAC_NUMBER,jdbcType=VARCHAR},
-			</if>
-			<if test="FAC_NAME != null">
-				FAC_NAME = #{FAC_NAME,jdbcType=VARCHAR},
-			</if>
-			<if test="TOTAL != null">
-				TOTAL = #{TOTAL,jdbcType=INTEGER},
-			</if>
-			<if test="ALL_MONEY != null">
-				ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-			</if>
-			<if test="COMMENT != null">
-				COMMENT = #{COMMENT,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where ID = #{ID,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="org.ld.model.PlanDetail">
-		update plan_detail
-		set PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
-		FAC_ID = #{FAC_ID,jdbcType=INTEGER},
-		FAC_NUMBER = #{FAC_NUMBER,jdbcType=VARCHAR},
-		FAC_NAME = #{FAC_NAME,jdbcType=VARCHAR},
-		TOTAL = #{TOTAL,jdbcType=INTEGER},
-		ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-		COMMENT = #{COMMENT,jdbcType=VARCHAR}
-		where ID = #{ID,jdbcType=INTEGER}
-	</update>
+<mapper namespace="org.ld.dao.PlanDetailMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.PlanDetail" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
+    <result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+    <result column="ALREADY" property="ALREADY" jdbcType="INTEGER" />
+    <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
+    <result column="BAND" property="BAND" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PLAN_ID, FAC_ID, TOTAL, ALREADY, ALL_MONEY, COMMENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_detail
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_detail
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.PlanDetail" >
+    insert into plan_detail (ID, PLAN_ID, FAC_ID, 
+      TOTAL, ALREADY, ALL_MONEY, 
+      COMMENT)
+    values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER}, #{FAC_ID,jdbcType=INTEGER}, 
+      #{TOTAL,jdbcType=INTEGER}, #{ALREADY,jdbcType=INTEGER}, #{ALL_MONEY,jdbcType=DOUBLE}, 
+      #{COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.PlanDetail" >
+    insert into plan_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="PLAN_ID != null" >
+        PLAN_ID,
+      </if>
+      <if test="FAC_ID != null" >
+        FAC_ID,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+      <if test="ALREADY != null" >
+        ALREADY,
+      </if>
+      <if test="ALL_MONEY != null" >
+        ALL_MONEY,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="PLAN_ID != null" >
+        #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="FAC_ID != null" >
+        #{FAC_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="ALREADY != null" >
+        #{ALREADY,jdbcType=INTEGER},
+      </if>
+      <if test="ALL_MONEY != null" >
+        #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.PlanDetail" >
+    update plan_detail
+    <set >
+      <if test="PLAN_ID != null" >
+        PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="FAC_ID != null" >
+        FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="ALREADY != null" >
+        ALREADY = #{ALREADY,jdbcType=INTEGER},
+      </if>
+      <if test="ALL_MONEY != null" >
+        ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.PlanDetail" >
+    update plan_detail
+    set PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+      TOTAL = #{TOTAL,jdbcType=INTEGER},
+      ALREADY = #{ALREADY,jdbcType=INTEGER},
+      ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from plan_detail where PLAN_ID = #{PID,jdbcType=INTEGER}
+    ]]>
+  </select>
+  <select id="getPlanDetails" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select plan_detail.ID as ID, plan_detail.PLAN_ID as PLAN_ID, plan_detail.FAC_ID as FAC_ID, plan_detail.TOTAL as TOTAL, 
+  		plan_detail.ALREADY as ALREADY, plan_detail.ALL_MONEY as ALL_MONEY, plan_detail.COMMENT as COMMENT,
+  		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.COMPANY as BAND, fac_sta.NAME as NAME
+  	from plan_detail left join fac_sta on plan_detail.FAC_ID = fac_sta.ID 
+  	where plan_detail.PLAN_ID = #{PID} limit #{ST}, #{EACH};
+    ]]>
+  </select>
 </mapper>

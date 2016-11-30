@@ -8,12 +8,14 @@ import org.ld.dao.DailyServiceMapper;
 import org.ld.dao.FacStaMapper;
 import org.ld.dao.PlanDetailMapper;
 import org.ld.dao.PlanMapper;
+import org.ld.dao.PlanProgressMapper;
 import org.ld.dao.RoomItemMapper;
 import org.ld.dao.SourcesMapper;
 import org.ld.model.DailyService;
 import org.ld.model.FacSta;
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
+import org.ld.model.PlanProgress;
 import org.ld.model.RoomItem;
 import org.ld.model.Sources;
 import org.ld.model.User;
@@ -42,6 +44,9 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private PlanDetailMapper planDetailMapper;
+	
+	@Autowired
+	private PlanProgressMapper planProgressMapper;
 
 	@Override
 	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
@@ -205,5 +210,38 @@ public class ItemServiceImpl implements ItemService {
 		map.put("CAT", cat);
 		map.put("BAND", band);
 		return facStaMapper.getFacByTypeCatBandAll(map);
+	}
+
+	@Override
+	public int getTotalPlanDetail(int pid) {
+		// TODO Auto-generated method stub
+		
+		return planDetailMapper.getTotalByPlanId(pid);
+	}
+
+	@Override
+	public List<PlanDetail> getPlanDetails(int pid, int st, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("PID", pid);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return planDetailMapper.getPlanDetails(map);
+	}
+
+	@Override
+	public int getTotalPlanProgress(int pid) {
+		// TODO Auto-generated method stub
+		return planProgressMapper.getTotalByPlanId(pid);
+	}
+
+	@Override
+	public List<PlanProgress> getPlanProgresses(int pid, int st, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("PID", pid);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return planProgressMapper.getPlanProgresses(map);
 	}
 }

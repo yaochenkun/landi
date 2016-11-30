@@ -1,5 +1,9 @@
 package org.ld.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
+import org.ld.model.PlanDetail;
 import org.ld.model.PlanProgress;
 
 public interface PlanProgressMapper {
@@ -14,4 +18,9 @@ public interface PlanProgressMapper {
 	int updateByPrimaryKeySelective(PlanProgress record);
 
 	int updateByPrimaryKey(PlanProgress record);
+	
+	//add
+    int getTotalByPlanId(Integer PID);
+    
+    List<PlanProgress> getPlanProgresses(HashMap<String, Object> map);
 }
