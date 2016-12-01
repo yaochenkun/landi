@@ -274,4 +274,25 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return planDetailMapper.selectByPrimaryKey(id);
 	}
+
+	@Override
+	public int updateFac(FacSta fs) {
+		// TODO Auto-generated method stub
+		try {
+			facStaMapper.updateByPrimaryKeySelective(fs);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int totalItemByRoomType(int rid, String type) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_ID", rid);
+		map.put("TYPE", type);
+		return roomItemMapper.getTotal(map);
+	}
 }

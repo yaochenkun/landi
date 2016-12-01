@@ -23,6 +23,7 @@ import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.Sources;
 import org.ld.service.GuestMissionService;
+import org.ld.service.ItemService;
 import org.ld.service.RoomService;
 import org.ld.service.ServerService;
 import org.ld.service.UserService;
@@ -50,6 +51,8 @@ public class UserRoomController {
 	private GuestMissionService guestService;
 	@Autowired
 	private ServerService serverService;
+	@Autowired
+	private ItemService itemService;
 
 	private static Logger logger = Logger.getLogger("logRec");
 
@@ -174,8 +177,26 @@ public class UserRoomController {
 			Guest guest = guestService.getGuestByRoomNumber(rn);
 			ans.put("guest_info", guest);
 		} else {
-			List<RoomItem> item = roomService.getItems(rid, op);
-			ans.put(op, item);
+			String type = dataJson.getString("type");
+			int pageNumber = dataJson.getIntValue("pageNum");
+
+			int eachPage = cur_env.getSettingsInt().get("list_size");
+			int recordTotal = itemService.totalItemByRoomType(rid, type);
+			int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+			if (recordTotal != 0) {
+				if (pageNumber > pageTotal)
+					pageNumber = pageTotal;
+
+				int st = (pageNumber - 1) * eachPage;
+				List<RoomItem> record = roomService.getItems(rid, op, st, eachPage);
+
+				ans.put("pageList", record);
+			}
+
+			ans.put("pageNow", pageNumber);
+			ans.put("pageTotal", pageTotal);
+			ans.put("recordTotal", recordTotal);
 		}
 
 		return ans;

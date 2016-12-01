@@ -383,4 +383,115 @@ public class UserItemController {
 
 		return 1;
 	}
+	
+	@RequestMapping("/searchFacDetail") // 根据物品ID查询物品分配到房间的情况
+	@ResponseBody
+	public Map<String, Object> searchFacDetail(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		Integer facID = dataJson.getInteger("facID");
+		int pageNumber = dataJson.getIntValue("pageNum");
+
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = roomService.totalRowByItem(facID);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<RoomItem> record = roomService.getItemByItemID(facID, st, eachPage);
+
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/searchFacSta") // 获取指定FacSta
+	@ResponseBody
+	public Map<String, Object> searchFacSta(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		Integer facID = dataJson.getInteger("facID");
+		FacSta newFs = itemService.getFac(facID);
+		ans.put("fac", newFs);
+		return ans;
+	}
+	
+	@RequestMapping("/transferFac") // 移动物品到其他房间
+	@ResponseBody
+	public Integer transferFac(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Integer recID = dataJson.getInteger("recID");
+		RoomItem ri = roomService.getCertainRIRec(recID);
+		
+		ri.setID(null);
+		Integer newRoomId = roomService.getRoomByNumber(dataJson.getString("rNum")).getID();
+		ri.setROOM_ID(newRoomId);
+		
+		if(roomService.insertRI(ri) == 1) {
+			roomService.deleteRI(recID);
+		} else {
+			return 0;
+		}
+
+		return 1;
+	}
+	
+	@RequestMapping("/facBad") // 物品点击报废
+	@ResponseBody
+	public Integer facBad(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Integer recID = dataJson.getInteger("recID");
+		RoomItem ri = roomService.getCertainRIRec(recID);
+		FacSta fs = itemService.getFac(ri.getITEM_ID());
+		
+		fs.setBAD(fs.getBAD() + 1);
+		fs.setWORKING(fs.getWORKING() - 1);
+		
+		if(roomService.deleteRI(recID) == 1)
+		{
+			itemService.updateFac(fs);
+		} else {
+			return 0;
+		}
+		
+		return 1;
+	}
 }

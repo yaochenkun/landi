@@ -51,6 +51,10 @@ public interface ItemService {
 	List<FacSta> getFacByTypeCatBandAll(String type, String cat, String band);
 
 	FacSta getFac(Integer id);
+	
+	int updateFac(FacSta fs);
 
 	FacSta getFacByNumber(String no);
+	
+	int totalItemByRoomType(int rid, String type);
 }

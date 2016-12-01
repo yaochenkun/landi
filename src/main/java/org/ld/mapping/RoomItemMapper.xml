@@ -129,6 +129,11 @@
   	select * from room_item where ROOM_ID = #{ROOM_ID} limit #{ST}, #{EACH}
     ]]>
 	</select>
+	<select id="getItemsByItemID" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from room_item where ITEM_ID = #{ITEM_ID} limit #{ST}, #{EACH}
+    ]]>
+	</select>
 	<select id="getAllItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select * from room_item limit #{ST}, #{EACH}
@@ -152,6 +157,11 @@
 	<select id="getAllTotal" resultType="java.lang.Integer">
   	<![CDATA[
   	select count(*) from room_item
+    ]]>
+	</select>
+	<select id="getTotalByItemID" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from room_item where ITEM_ID = #{ITEM_ID,jdbcType=INTEGER}
     ]]>
 	</select>
 </mapper>

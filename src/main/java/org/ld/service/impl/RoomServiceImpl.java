@@ -114,11 +114,13 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<RoomItem> getItems(Integer rid, String type) {
+	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("ROOM_ID", rid);
 		map.put("TYPE", type);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
 		return roomItemMapper.getItems(map);
 	}
 
@@ -147,5 +149,51 @@ public class RoomServiceImpl implements RoomService {
 	public RoomMeter getMeter(String mn) {
 		// TODO Auto-generated method stub
 		return roomMeterMapper.getMeter(mn);
+	}
+
+	@Override
+	public int totalRowByItem(Integer item_id) {
+		// TODO Auto-generated method stub
+		return roomItemMapper.getTotalByItemID(item_id);
+	}
+
+	@Override
+	public List<RoomItem> getItemByItemID(Integer item_id, Integer st, Integer eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ITEM_ID", item_id);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return roomItemMapper.getItemsByItemID(map);
+	}
+
+	@Override
+	public RoomItem getCertainRIRec(Integer id) {
+		// TODO Auto-generated method stub
+		return roomItemMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int insertRI(RoomItem ri) {
+		// TODO Auto-generated method stub
+		try {
+			roomItemMapper.insert(ri);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int deleteRI(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			roomMeterMapper.deleteByPrimaryKey(id);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 }

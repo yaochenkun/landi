@@ -26,6 +26,8 @@ public interface RoomItemMapper {
  	List<RoomItem> getItemsByType(HashMap<String, Object> map);
 
  	List<RoomItem> getItemsByRoom(HashMap<String, Object> map);
+ 	
+ 	List<RoomItem> getItemsByItemID(HashMap<String, Object> map);
 
  	int getTotal(HashMap<String, Object> map);
 
@@ -34,4 +36,6 @@ public interface RoomItemMapper {
  	int getTotalByType(String TYPE);
 
  	int getTotalByRoom(int RID);
+ 	
+ 	int getTotalByItemID(int ITEM_ID);
 }

@@ -30,7 +30,7 @@ public interface RoomService {
 
 	int totalRow();
 
-	List<RoomItem> getItems(Integer rid, String type);
+	List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage);
 
 	List<RoomPic> getPic(Integer rid);
 
@@ -40,4 +40,16 @@ public interface RoomService {
 	List<RoomMeter> getMeters(Integer rid, Integer type);
 
 	RoomMeter getMeter(String mn);
+	
+	// add
+	
+	int totalRowByItem(Integer item_id);
+	
+	List<RoomItem> getItemByItemID(Integer item_id, Integer st, Integer eachPage);
+	
+	RoomItem getCertainRIRec(Integer id);
+	
+	int insertRI(RoomItem ri);
+	
+	int deleteRI(Integer id);
 }
