@@ -28,11 +28,17 @@ public interface ItemService {
 
 	int addNewPlanDetail(PlanDetail d);
 	
+	PlanDetail getPlanDetailByID(int id);
+	
+	int updatePlanDetain(PlanDetail d);
+	
 	int getTotalPlanDetail(int pid);
 	
 	List<PlanDetail> getPlanDetails(int pid, int st, int eachPage);
 	
 	int getTotalPlanProgress(int pid);
+	
+	int addNewPlanProgress(PlanProgress pg);
 	
 	List<PlanProgress> getPlanProgresses(int pid, int st, int eachPage);
 

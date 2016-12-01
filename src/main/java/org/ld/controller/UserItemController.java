@@ -343,4 +343,44 @@ public class UserItemController {
 		ans.put("recordTotal", recordTotal);
 		return ans;
 	}
+	
+	@RequestMapping("/addPlanProgress") // 查询计划采购物品（plan_detail表）
+	@ResponseBody
+	public Integer addPlanProgress(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wBuy"))) == 0) {
+			return 0;
+		};
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+		PlanProgress newPg = new PlanProgress();
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date;
+		try {
+			date = ft.parse(dataJson.getString("time"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		
+		newPg.setTIME(date);
+		newPg.setPLAN_ID(dataJson.getInteger("planID"));
+		newPg.setFAC_ID(dataJson.getInteger("facID"));
+		newPg.setTERM(dataJson.getInteger("term"));
+		newPg.setTOTAL(dataJson.getInteger("total"));
+		newPg.setSTAFF(dataJson.getString("staff"));
+		newPg.setALL_MONEY(dataJson.getDouble("all_money"));
+		newPg.setCOMMENT(dataJson.getString("comment"));
+		
+		if(itemService.addNewPlanProgress(newPg) == 1) {
+			PlanDetail pd = itemService.getPlanDetailByID(dataJson.getIntValue("pdID"));
+			pd.setALREADY(pd.getALREADY() + newPg.getTOTAL());
+			itemService.updatePlanDetain(pd);
+		} else {
+			return 0;
+		}
+
+		return 1;
+	}
 }

@@ -244,4 +244,34 @@ public class ItemServiceImpl implements ItemService {
 		map.put("EACH", eachPage);
 		return planProgressMapper.getPlanProgresses(map);
 	}
+
+	@Override
+	public int updatePlanDetain(PlanDetail d) {
+		// TODO Auto-generated method stub
+		try {
+			planDetailMapper.updateByPrimaryKeySelective(d);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int addNewPlanProgress(PlanProgress pg) {
+		// TODO Auto-generated method stub
+		try {
+			planProgressMapper.insert(pg);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public PlanDetail getPlanDetailByID(int id) {
+		// TODO Auto-generated method stub
+		return planDetailMapper.selectByPrimaryKey(id);
+	}
 }
