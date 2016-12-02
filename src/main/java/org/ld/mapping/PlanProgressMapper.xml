@@ -147,14 +147,14 @@
   	select count(*) from plan_progress where PLAN_ID = #{PID,jdbcType=INTEGER}
     ]]>
   </select>
-  <select id="getPlanDetails" resultMap="BaseResultMap" parameterType="map">
+  <select id="getPlanProgresses" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
   	select plan_progress.TIME as TIME, plan_progress.PLAN_ID as PLAN_ID, plan_progress.FAC_ID as FAC_ID,
   		plan_progress.TERM as TERM, plan_progress.TOTAL as TOTAL, plan_progress.STAFF as STAFF,
   		plan_progress.ALL_MONEY as ALL_MONEY, plan_progress.COMMENT as COMMENT, 
   		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.COMPANY as BAND, fac_sta.NAME as NAME
   	from plan_progress left join fac_sta on plan_progress.FAC_ID = fac_sta.ID 
-  	where plan_detail.PLAN_ID = #{PID} limit #{ST}, #{EACH};
+  	where plan_progress.PLAN_ID = #{PID} limit #{ST}, #{EACH};
     ]]>
   </select>
 </mapper>

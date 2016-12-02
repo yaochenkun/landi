@@ -9,14 +9,26 @@
 .content .head{background: #2277da; color: #fff; height: 40px; line-height: 40px; text-align: center; font-size: 15px;}
 
 /* 计划采购物品表格 样式 */
-.content .body{padding: 30px 0;}
-table{width: 90%; text-align: center; padding: 20px 0; margin: 0 auto;}
-table thead th{font-weight: normal; text-align: center; height: 40px; line-height: 40px;}
-table tbody td{height:30px; line-height: 30px; border-top: 1px solid #ccc;}
+.content .body{padding: 40px 0;}
+table{width: 90%; text-align: center; margin: 0 auto;}
+table thead th{font-size: 15px; color: #444; text-align: center; line-height: 42px; border-bottom: 2px solid #ccc;  border-top: 2px solid #ccc;}
+table tbody td{line-height: 40px; border-bottom: 1px solid #ccc;}
+table tbody td:nth-child(7){color: #ff6a00;}
+table .money{font-weight: bold;}
 
-.body .perProgress{width: 90%; padding: 8px 40px; border-bottom: 1px solid #ccc; margin: 0 auto; overflow-x: auto;}
-.body .perProgress .time, .body .perProgress .term, .body .perProgress .user, .body .perProgress .item{margin-right: 3em;}
-.body .perProgress .user, .body .perProgress .item, .body .perProgress .count {color: #2277da;}
+/* 计划执行情况 样式 */
+.body .perProgress{width: 90%; padding: 0 10px; border-top: 1px solid #ccc; margin: 0 auto; overflow-x: auto; padding: 30px 0;}
+.perProgress .user{background: url(../../../../img/progress_user.jpg) left center no-repeat; background-size: 20px; float: left;}
+.perProgress .user span{padding-left: 30px; font-size: 15px;}
+.perProgress .time{float: right;}
+.clearfix:after{content: ""; display: block; clear: both;}
+.clearfix{zoom:1;}
+.progress_item{float: left; margin: 20px 30px 0 30px;}
+.progress_item dt{float: left; width: 90px; margin: 5px 0; color: #444;}
+.progress_item dt:nth-child(9){clear: left;}
+.progress_item dd{float: left; width: 135px; margin: 5px 0; color: #2277da;}
+.progress_item .money{color: #ff6a00;}
+.progress_item .moneyNum{font-weight: bold;}
 
 #facTbody .caigou{color: #2277da; cursor: pointer;}
 #facTbody .caigou:hover{border-bottom: 1px solid #2277da;}
@@ -28,7 +40,7 @@ table tbody td{height:30px; line-height: 30px; border-top: 1px solid #ccc;}
 .addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
 .addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}
 .addItemDiv .fac-title span:hover{color: #666;}
-
+P
 .fac-body{max-height: 425px; overflow-y: auto; padding: 30px 0;}
 .fac-body .item{padding: 0 40px;}
 .fac-body .span{width: 30%; font-weight: bold; float: left; clear: left; min-height: 50px;}

@@ -6,9 +6,11 @@
 <div class="main-nav">
 	<div class="aside-box">
 		<ul>
-			<li class="menuOne"><span class="span"> <i class="i1"><</i>
-					<i class="i2"><</i> <i class="i3"><</i> 收起
-			</span></li>
+			<li class="menuOne">
+				<span class="span">
+					<i class="i1">&lt;</i>&nbsp;<i class="i2">&lt;</i>&nbsp;<i class="i3">&lt;</i>&nbsp;收起
+				</span>
+			</li>
 			<li><a class="linormal"
 				href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp"><span
 					class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a></li>

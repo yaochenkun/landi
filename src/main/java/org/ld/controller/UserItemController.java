@@ -308,7 +308,7 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/searchPlanProgress") // 查询计划采购物品（plan_detail表）
+	@RequestMapping("/searchPlanProgress") // 查询计划执行情况（plan_progress表）
 	@ResponseBody
 	public Map<String, Object> searchPlanProgress(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
@@ -333,7 +333,7 @@ public class UserItemController {
 			
 			int st = (pageNumber - 1) * eachPage;
 			
-			List<PlanProgress> record = itemService.getPlanProgresses(pid, 0, eachPage);
+			List<PlanProgress> record = itemService.getPlanProgresses(pid, st, eachPage);
 			
 			ans.put("pageList", record);
 		}
@@ -344,7 +344,7 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/addPlanProgress") // 查询计划采购物品（plan_detail表）
+	@RequestMapping("/addPlanProgress") // 添加计划执行情况
 	@ResponseBody
 	public Integer addPlanProgress(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
@@ -380,7 +380,6 @@ public class UserItemController {
 		} else {
 			return 0;
 		}
-
 		return 1;
 	}
 	

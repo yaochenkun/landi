@@ -43,17 +43,14 @@
 							<th>物品子类</th>
 							<th>物品品牌</th>
 							<th>物品名称</th>
-							<th>数量</th>
-							<th>总价</th>
+							<th>计划采购数量</th>
+							<th>计划采购总价</th>
+							<th>已采购数量</th>
 							<th>备注</th>
 							<th>操作</th>
 						</tr>
 					</thead>
-					<tbody id="facTbody">
-						<tr><td>12</td><td>12</td><td>12</td><td>12</td><td>12</td><td>12</td>
-							<td>12</td><td>12</td><td><span class="caigou" onclick="caigouFac(this);">采购</span></td>
-						</tr>
-					</tbody>
+					<tbody id="facTbody"></tbody>
 				</table>
 				<!-- 费用 table end -->
 			</div>
@@ -69,42 +66,44 @@
 		<div class="facContent">
 			<div class="fac-title">
 				执行采购计划
-				<span>×</span>
+				<span onclick="closeCaigouDiv();">×</span>
 			</div>
 			<div class="fac-body">
-				<div id="item-type" class="item">
+				<div id="pd-id" style="display:none;"></div>
+				<div id="fac-id" style="display:none;"></div>
+				<div id="plan-name" class="item">
 					<span class="span">计划名称：</span>
-					<div class="item-content"></div>
+					<div class="item-content"><%=planName%></div>
 				</div>
-				<div id="item-cat" class="item">
-						<span class="span">阶段：</span>
-					<div class="item-content"></div>
+				<div id="fac-term" class="item">
+						<span class="span">阶段名称：</span>
+					<div class="item-content"><input type="text" value="10" /></div>
 				</div>
-				<div id="item-name" class="item">
+				<div id="fac-name" class="item">
    					<span class="span">物品名称：</span>
 					<div class="item-content"></div>
    				</div>
-   				<div id="item-count" class="item">
+   				<div id="fac-staff" class="item">
 					<span class="span">采购人员：</span>
-					<div class="item-content"><input type="text" value="10" /></div>
+					<div class="item-content"><input type="text" value="Alice" /></div>
 				</div>
-				<div id="item-count" class="item">
+				<div id="fac-total" class="item">
 					<span class="span">采购物品数量：</span>
-					<div class="item-content"><input type="text" value="10" /></div>
+					<div class="item-content"><input type="text" value="1" /></div>
 				</div>
 
-				<div id="item-totalPrice" class="item">
+				<div id="fac-money" class="item">
 					<span class="span">总价：</span>
 					<div class="item-content"><input type="text" value="1.52" /></div>
 				</div>
-				<div id="item-comment" class="item">
+				<div id="fac-comment" class="item">
 					<span class="span">备注：</span>
 					<div class="item-content"><input type="text" value="无" /></div>
 				</div>
 
 			</div>
 			<div class="fac-foot">
-				<a class="btn btn-submit" onclick="closeDiv();">确定</a>
+				<a class="btn btn-submit" onclick="addPlanProgress();">确认采购</a>
 			</div>
 		</div>
 	</div>
@@ -116,6 +115,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/planDetail.js"></script>
 	<script>(function(){
 			requestPlanDetail();
+			requestPlanProgress(1);
 		})();
 	</script>
 </body>

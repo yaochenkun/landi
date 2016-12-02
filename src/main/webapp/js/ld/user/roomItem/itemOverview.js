@@ -96,16 +96,15 @@ var requestItemOverview = function(pageNum){
 			}
 		}
 	});
-}
+};
 
 // 显示物品详细信息
 var showItemDetail = function(element){
 	var itemID = $(element).parent().parent().children("td").eq(0).text();
-	var itemName = $(element).parent().parent().children("td").eq(4).text();
-	console.log("请求物品ID" + itemID + " 名称" + itemName + "的详细信息");
+	console.log("请求物品ID" + itemID + "的详细信息");
 	window.location.href = "http://" + window.location.host
-	 	+ "/LD/views/user/roomItem/itemDetail.jsp?itemID=" + itemID + "&itemName=" + itemName;
-}
+	 	+ "/LD/views/user/roomItem/itemDetail.jsp?itemID=" + itemID;
+};
 
 //根据房间号 拉取上一页 物品总览信息
 var requestBeforeItemOverview = function(){
@@ -113,7 +112,7 @@ var requestBeforeItemOverview = function(){
 	if(nowpage == 1) return;
 	
 	requestItemOverview(nowpage-1);
-}
+};
 
 //根据房间号 拉取下一页 物品总览信息（??当前处理，前端判断是否是最后一页）
 var requestNextitemOverview = function(){
@@ -122,7 +121,7 @@ var requestNextitemOverview = function(){
 	if(nowpage == totalpage) return;
 	
 	requestItemOverview(nowpage+1);
-}
+};
 
 ////////////////////////////////////////////////////////////////////////////
 // 根据物品种类筛选
@@ -172,7 +171,8 @@ var requestItemByItemType = function(pageNum){
 						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
 						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
 						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
-						"<td>"+ perRecord.comment +"</td><td><span class='item_detail'>详细信息</span></td>"+
+						"<td>"+ perRecord.comment +"</td>"+
+						"<td><span class='item_detail' onclick='showItemDetail(this);'>物品分配信息</span></td>"+
 						"</tr>");
 				}
 				// 添加物品总览 底部页码
@@ -186,7 +186,7 @@ var requestItemByItemType = function(pageNum){
 			}
 		}
 	});
-}
+};
 
 //根据物品种类拉取
 var requestBeforeItemByType = function(){
@@ -194,7 +194,7 @@ var requestBeforeItemByType = function(){
 	if(nowpage == 1) return;
 	
 	requestItemByItemType(nowpage-1);
-}
+};
 
 //根据房间号 拉取下一页 物品总览信息（??当前处理，前端判断是否是最后一页）
 var requestNextItemByType = function(){
@@ -203,4 +203,4 @@ var requestNextItemByType = function(){
 	if(nowpage == totalpage) return;
 	
 	requestItemByItemType(nowpage+1);
-}
+};
