@@ -19,7 +19,8 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../_head.jsp"></jsp:include>
+	<jsp:include page="../../_leftMenu.jsp" />
+
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">

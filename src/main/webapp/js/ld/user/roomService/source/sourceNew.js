@@ -14,6 +14,7 @@
 				success:function(data){
 					//console.log(data);
 					if(!data){
+						$("#meter").html("不存在该房间！");
 						return;
 					}
 					rid = data.id;
@@ -46,14 +47,14 @@
 								if(data.meters1.length == 0){
 									return;
 								}
-								$("#meter").val(data.meters1[0].meter_NUMBER);
+								$("#meter").text(data.meters1[0].meter_NUMBER);
 							}
 							// 房间电表
 							else if(type == 2){
 								if(data.meters2.length == 0){
 									return;
 								}
-								$("#meter").val(data.meters2[0].meter_NUMBER);
+								$("#meter").text(data.meters2[0].meter_NUMBER);
 							}
 						}
 					});
@@ -94,10 +95,15 @@ var addSourceType = function(type){
 	console.log("新增能源费类别为：" + type);
 	var roomNumber = $("#sourceRoomNumber").val();
 	var guestName = $(".body-content input").eq(1).val();
-	var meterNo = $(".body-content input").eq(2).val();
-	var charge = $(".body-content input").eq(3).val();
-	var thisMonthNum = $(".body-content input").eq(4).val();
-	var meterDate = $(".body-content input").eq(5).val();
+	var charge = $(".body-content input").eq(2).val();
+	var thisMonthNum = $(".body-content input").eq(3).val();
+
+	// 抄表时间为当前系统时间
+	var date = new Date();
+	var meterDate = formatDate(date);
+
+	// 表号
+	var meterNo = $("#meter").text();
 
 	$.ajax({
 		url:'/LD/userRoom/addSource.action',

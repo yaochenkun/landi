@@ -1,38 +1,104 @@
+/* 导航栏样式 */
+header .header-logo {
+	left: 45%;
+}
+
+header .homeMenu {
+	margin-top: 15px;
+	margin-left: -20px;
+	display: inline-block;
+	cursor: pointer;
+	width: 160px;
+	height: 30px;
+}
+
+header .homeMenu .span {
+	margin-left: .5em;
+}
+
+/* 一级菜单样式 */
+.main-nav {
+	position: fixed;
+	z-index: 200;
+	box-shadow: 2px 0 16px rgba(0, 0, 0, .2);
+	top: 0;
+	width: 0;
+}
+
+.main-nav .menuOne {
+	display: block;
+	height: 49px;
+	line-height: 50px;
+	background: #fafafa;
+	cursor: pointer;
+	font-size: 13px;
+	color: #0057bd;
+}
+
+.main-nav .menuOne i {
+	font-size: 15px;
+	font-style: normal;
+}
+
+.main-nav .menuOne i:nth-child(1) {
+	margin-left: 80px;
+}
+
+.main-nav .menuOne i:nth-child(2), .main-nav .menuOne i:nth-child(3) {
+	margin-left: -5px;
+}
+
+/* 二级菜单样式 */
+.nav-second .toolbar {
+	width: 1100px;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.toolbar ul {
+	margin-left: -30px;
+}
+
+.toolbar li {
+	margin: 0 30px;
+}
+
 .content {
 	margin: 50px 10px 20px 170px;
 }
 
 /************* 导航栏样式 start **********/
-.roomNav {
-	border-bottom: 3px solid #2277da;
-	margin-top: 50px;
-}
+// .roomNav {
+// 	border-bottom: 3px solid #2277da;
+// 	margin-top: 50px;
+// }
 
-.roomNav .roomNavInner {
-	padding-top: 24px;
-	width: 1100px;
-	margin: auto;
-	height: 60px;
-}
+// .roomNav .roomNavInner {
+// 	padding-top: 24px;
+// 	width: 1100px;
+// 	margin: auto;
+// 	height: 60px;
+// }
 
-.roomNavInner .nav-li {
-	margin-left: 20px;
-	float: left;
-	overflow: hidden;
-}
+// .roomNavInner .nav-li {
+// 	margin-left: 20px;
+// 	float: left;
+// 	overflow: hidden;
+// }
 
-.roomNavInner .nav-li a {
-	height: 37px;
-	line-height: 37px;
-	color: #5e5e5e;
-	padding: 0 20px;
-	font-size: 15px;
-	cursor: pointer;
-}
+// .roomNavInner .nav-li a {
+// 	height: 37px;
+// 	line-height: 37px;
+// 	color: #5e5e5e;
+// 	padding: 0 20px;
+// 	font-size: 15px;
+// 	cursor: pointer;
+// }
 
-.roomNavInner .nav-li:hover a {
-	color: #2277da;
-}
+// .roomNavInner .nav-li:hover a {
+// 	color: #2277da;
+// }
 /************* 导航栏样式 end **********/
 
 /***************** 客房服务类型 start ****************/
@@ -208,7 +274,7 @@ transform:translateY(3px);
 /****************** 页面内容 start *****************************/
 .main {
 	width: 1100px;
-	margin: 0 auto;
+	margin: 65px auto;
 }
 
 .main-page {
@@ -262,7 +328,7 @@ transform:translateY(3px);
 	width: 100%;
 }
 
-.bill-table thead tr {
+thead tr {
 	height: 20px;
 	line-height: 20px;
 	border-bottom: 1px solid #e5e5e5;
@@ -270,24 +336,24 @@ transform:translateY(3px);
 	background-color: #eee;
 }
 
-.bill-table thead tr th {
+thead th {
 	text-align: center;
 	color: #555;
 	position: relative;
 }
 
-.bill-table thead tr th span {
+thead th span {
 	display: inline-block;
 	padding: 15px 0 5px 0;
 }
 
-.bill-table thead tr th p {
+thead th p {
 	font-weight: normal;
 	color: #777;
 	font-size: 10px;
 }
 
-.bill-table thead tr th:nth-child(1) {
+thead th:nth-child(1) {
 	width: 10%;
 }
 
@@ -370,43 +436,40 @@ transform:translateY(3px);
 	color: #555;
 }
 
-.bill-table thead tr th:nth-child(2) {
+thead th:nth-child(2) {
 	width: 12%;
 }
 
-.bill-table thead tr th:nth-child(3) {
+thead th:nth-child(3) {
 	width: 10%;
 }
 
-.bill-table thead tr th:nth-child(4) {
+thead th:nth-child(4) {
 	width: 10%;
 }
 
-.bill-table thead tr th:nth-child(5) {
+thead th:nth-child(5) {
 	width: 15%;
 }
 
-.bill-table thead tr th:nth-child(6) {
+thead th:nth-child(6) {
 	width: 10%;
 }
 
-.bill-table thead tr th:nth-child(7) {
+thead th:nth-child(7) {
 	width: 15%;
 }
 
-.bill-table tbody tr {
+tbody tr {
 	text-align: center;
 	line-height: 4em;
 	border-bottom: 1px solid #eee;
 }
 
-.bill-table tbody tr:hover {
+tbody tr:hover {
 	background: #f7f7f7;
 }
 
-.bill-table tbody tr td:nth-child(6) {
-	color: #ff5722;
-}
 /*.bill-table tbody tr td:nth-child(1) span{display: inline-block; background: #ffb987; border-radius: 50%; color: #333; padding: 4px; width: 25px; height: 22px; line-height: 15px;}*/
 
 /**** 页码 样式 ****/

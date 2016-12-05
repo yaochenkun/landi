@@ -11,6 +11,24 @@ $(function(){
 	
 	// 设置左边栏的高度为文档的高度
 	$(".main-nav").css('height',parseInt($(document).height()));
+
+    // 展开左栏菜单
+    $(".homeMenu").click(function(){
+        $(".main-nav").animate({width:"160px"}, 100);
+        // 菜单箭头样式
+        setInterval(function(){$("i:nth-child(3)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500);
+          setTimeout(function(){
+              setInterval(function(){$("i:nth-child(2)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500); 
+              setTimeout(function(){
+                 setInterval(function(){$("i:nth-child(1)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);
+            },2500);},400);},200
+        );
+    });
+
+    // 收起左栏菜单
+    $(".menuOne").click(function(){
+        $(".main-nav").animate({width:"0"}, 100);
+    });
 });
 
 // 改变左边栏样式

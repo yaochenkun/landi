@@ -1,6 +1,77 @@
+/* 导航栏样式 */
+header .header-logo {
+	left: 45%;
+}
+
+header .homeMenu {
+	margin-top: 15px;
+	margin-left: -20px;
+	display: inline-block;
+	cursor: pointer;
+	width: 160px;
+	height: 30px;
+}
+
+header .homeMenu .span {
+	margin-left: .5em;
+}
+
+/* 一级菜单样式 */
+.main-nav {
+	position: fixed;
+	z-index: 200;
+	box-shadow: 2px 0 16px rgba(0, 0, 0, .2);
+	top: 0;
+	width: 0;
+}
+
+.main-nav .menuOne {
+	display: block;
+	height: 49px;
+	line-height: 50px;
+	background: #fafafa;
+	cursor: pointer;
+	font-size: 13px;
+	color: #0057bd;
+}
+
+.main-nav .menuOne i {
+	font-size: 15px;
+	font-style: normal;
+}
+
+.main-nav .menuOne i:nth-child(1) {
+	margin-left: 80px;
+}
+
+.main-nav .menuOne i:nth-child(2), .main-nav .menuOne i:nth-child(3) {
+	margin-left: -5px;
+}
+
+/* 二级菜单样式 */
+.nav-second .toolbar {
+	width: 1100px;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.toolbar ul {
+	margin-left: -30px;
+}
+
+.toolbar li {
+	margin: 0 30px;
+}
+
+.content {
+	margin: 50px 10px 20px 170px;
+}
+
 /* ******* 管理员界面样式  *******  */
 .content {
-	margin: 60px 10px 20px 170px;
+	width: 1100px;
+	margin: 60px auto;
 }
 
 .content .title {
@@ -23,6 +94,8 @@
 
 .title h5 {
 	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px; 
 }
 
 .title h5 span {

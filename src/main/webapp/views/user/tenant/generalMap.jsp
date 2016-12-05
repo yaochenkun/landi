@@ -6,13 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath }/css/ld/user/tenant/generalMap.css"
-	rel="stylesheet" type="text/css" />
-<title>租客管理</title>
+
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/css/ld/user/tenant/generalMap.css" rel="stylesheet" type="text/css" />
+<title>租客一览图</title>
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
@@ -37,45 +36,14 @@
 	<!-- 租客一览图 -->
 	<div class="body-content">
 		<div class="general-map">
-			<table class="table table-bordered"
-				style="border-top: none; border-right: none;" id="building">
-				<tr>
-					<td rowspan="2" colspan="2" style="border-left: none;"></td>
-					<td style="border-top: 1px solid #dddddd;" colspan="2"><a
-						class="W35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-1"></a><br></td>
-					<td style="border-top: 1px solid #dddddd;"><a class="W35-2"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-2"></a></td>
-					<td rowspan="66"></td>
-					<td style="border-top: 1px solid #dddddd;"><a class="E35-2"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-2"></a></td>
-					<td style="border-top: 1px solid #dddddd;" colspan="2"><a
-						class="E35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-1"></a></td>
-					<td rowspan="2" colspan="2"></td>
-				</tr>
-				<tr>
-					<td style="border-top: none;" colspan="2"><a class="W35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-1">W35-1</a></td>
-					<td style="border-top: none;"><a class="W35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=W35-2">W35-2</a></td>
-					<td style="border-top: none;"><a class="W35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-2">E35-2</a></td>
-					<td style="border-top: none;" colspan="2"><a class="W35-1"
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rNum=E35-1">E35-1</a></td>
-				</tr>
-			</table>
+			<table id="building"></table>
 		</div>
 	</div>
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/tenant/generalMap.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/generalMap.js"></script>
 	<script>
 		getRoomState();
 	</script>

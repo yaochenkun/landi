@@ -1,3 +1,73 @@
+// 获取租客信息（guest表）
+var getGuestInfo = function (rid, rNum) {
+	$.ajax({
+		type: 'POST',
+		url: '/LD/userRoom/getRoomInfo.action',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": "guest"}',
+		success: function (data) {
+			console.log(data);
+			if (data.guest_info) {
+				let info = data.guest_info;
+				let name = info.guest_NAME;
+				let tel = info.tel;
+				let company = info.company;
+				let title = info.title;
+				let persons = info.persons;
+				let comming = info.coming;
+				let charge = info.charge;
+				let car = info.car;
+				let parking = info.parking;
+				let comment = info.comment;
+				$("#guestName").text(name);
+				$("#telNum").text(tel);
+				$("#company").text(company);
+				$("#position").text(title);
+				$("#totalNum").text(persons);
+				$("#inDate").text(comming);
+				$("#charge").text(charge);
+				$("#park").text(parking);
+				$("#comment").text(comment);
+
+			}else{
+				console.log("无信息");
+			}
+		}
+		
+	});
+}
+
+// 获取房间基本信息（room表）
+var getRoomInfo = function (rid, rNum) {
+	$.ajax({
+		type: 'POST',
+		url: '/LD/userRoom/getRoomInfo.action',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": "room"}',
+		success: function (data) {
+			console.log(data);
+			if (data.room) {
+				let info = data.room;
+				let roomNo = info.room_NUMBER;
+				let area = info.area;
+				let state = info.state;
+				let comm = info.comm;
+				let rent = info.rent;
+				$(".roomInfo .roomNo").text(roomNo);
+				$(".roomInfo .area").text(area);
+				$(".roomInfo .state").text(state);
+				$(".roomInfo .comm").text(comm);
+				$(".roomInfo .rent").text(rent);
+			}else{
+				console.log("无信息");
+			}
+		}
+		
+	});
+}
+
 var getMeters = function () {
 	$.ajax({
 		type: 'POST',
@@ -20,60 +90,8 @@ var checkNull = function (obj) {
 	});
 }
 
-var getGuestInfo = function (rid, rNum) {
-	$.ajax({
-		type: 'POST',
-		url: '/LD/userRoom/getRoomInfo.action',
-		contentType: 'application/json',
-		dataType: 'json',
-		data: '{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 6}',
-		success: function (data) {
-			if (data.guest_info) {
-				let info = data.guest_info;
-				let roomNum = info.room_NUMBER;
-				let name = info.guest_NAME;
-				let roomType = info.room_TYPE;
-				let tel = info.tel;
-				let company = info.company;
-				let title = info.title;
-				let persons = info.persons;
-				let comming = info.coming;
-				let charge = info.charge;
-				let car = info.car;
-				let parking = info.parking;
-				let comment = info.comment;
-				$("#guestName").text(name);
-				$("#roomNum").text(roomNum);
-				$("#roomType").text(roomType);
-				$("#telNum").text(tel);
-				$("#company").text(company);
-				$("#position").text(title);
-				$("#totalNum").text(persons);
-				$("#inDate").text(comming);
-				$("#charge").text(charge);
-				$("#park").text(parking);
-				$("#comment").text(comment);
-
-			}else{
-				var tip = "暂无信息";
-				$("#guestName").text(tip);
-				$("#roomNum").text(tip);
-				$("#roomType").text(tip);
-				$("#telNum").text(tip);
-				$("#company").text(tip);
-				$("#position").text(tip);
-				$("#totalNum").text(tip);
-				$("#inDate").text(tip);
-				$("#charge").text(tip);
-				$("#park").text(tip);
-				$("#comment").text(tip);
-			}
-		}
-		
-	});
-}
 var getFurniture = function (rid, rNum) {
-	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": 1}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": 1}';
+	let postData = rid == "" ? '{"rNum": "'+ rNum +'", "op": "家具","type":"家具","pageNum":1}':'{"rid": ' + rid + ', "rNum": "'+ rNum +'", "op": "家具","pageNum":1,"type":"家具"}';
 	$.ajax({
 		type: 'POST',
 		url: '/LD/userRoom/getRoomInfo.action',
@@ -82,7 +100,8 @@ var getFurniture = function (rid, rNum) {
 //		data: '{"rid": '+rid+', "op": 1}',
 		data: postData,
 		success: function (data) {
-			if (data.item_funiture) {
+			console.log(data);
+			if (data.pageList) {
 				let items = data.item_funiture;
 				for (let index in items) {
 					let obj = {}

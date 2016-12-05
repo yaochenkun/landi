@@ -25,9 +25,12 @@ var addServiceType = function(type){
 	var guestName = $(".body-content input").eq(1).val();
 	var item = $(".body-content input").eq(2).val();
 	var count = $(".body-content input").eq(3).val();
-	var delivery = $(".body-content input").eq(4).val();
-	var sum = $(".body-content input").eq(5).val();
-	var note = $(".body-content input").eq(6).val();
+	var sum = $(".body-content input").eq(4).val();
+	var note = $(".body-content input").eq(5).val();
+
+	// 送交时间为当前时间 YYYY-mm-dd hh:mm:ss
+	var date = new Date();
+	var delivery = formatDate(date);
 
 	$.ajax({
 		url:'/LD/userRoom/addService.action',

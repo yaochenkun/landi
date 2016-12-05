@@ -22,14 +22,18 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../_head.jsp"></jsp:include>
-	<!-- 页面内容 strat -->
+	<jsp:include page="../../_leftMenu.jsp" />
+
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
+
+			<!-- 面包屑导航 start -->
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i
-					class="icon-home"></i></a> <i class="icon-path"></i> <a
-					href="sourceIndex.jsp">能源费结算</a>
+				<a href="../roomServiceIndex.jsp" title="回到首页">
+				<i class="icon-home"></i></a> <i class="icon-path"></i> 
+				<a href="sourceIndex.jsp">能源费结算</a>
+				
 				<% String type = request.getParameter("type"); 
 				   String contentOne = "", contentTwo = "", contentThree = "";
 				   if(type.matches("1")){
@@ -39,42 +43,45 @@
 				        contentOne = "电费"; contentTwo = "新增电费记录"; 
 				        contentThree = "sourceElec.jsp";} 
 				%>
-				<i class="icon-path"></i> <a id="sourceType"
-					href="<%=contentThree %>"><%=contentOne %></a> <i class="icon-path"></i>
+				<i class="icon-path"></i> 
+				<a id="sourceType" href="<%=contentThree %>"><%=contentOne %></a> 
+				<i class="icon-path"></i>
 				<a href="javascript:void(0);"><%=contentTwo %></a>
 			</div>
+			<!-- 面包屑导航 end -->
+
+			<!-- 添加燃气费页面 start -->
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li><span class="span">房间号：</span><input id="sourceRoomNumber" type="text" value="W34-1" /><span
-							class="red red-right">*&nbsp;必填</span></li>
-						<li id="roomIdWarning"><span class="span"></span><span
-							class="red">不能为空！</span></li>
-						<li><span class="span">租客：</span><input type="text"
-							value="Alice" /></li>
-						<li><span class="span">表号：</span><input id="meter" type="text" value="0010101" /></li>
-						<li><span class="span">抄表：</span><input type="text"
-							value="12.4" /></li>
-						<li><span class="span">费用：</span><input type="text"
-							value="12.5" /></li>
-						<li><span class="span">抄表日期：</span><input type="text"
-							value="2016-11-12" /></li>
-						<li><span class="span"></span><a onclick="addsource();"
-							class="btn btn-goback goback">确认添加</a></li>
+						<li><span class="span">房间号：</span>
+							<input id="sourceRoomNumber" type="text" value="W34" />
+							<span class="red red-right">*&nbsp;必填</span>
+						</li>
+						<li id="roomIdWarning">
+							<span class="span"></span>
+							<span class="red">不能为空！</span>
+						</li>
+						<li><span class="span">租客：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">表号：</span><span id="meter">不存在该房间！</span></li>
+						<li><span class="span">抄表：</span><input type="text" value="12.4" /></li>
+						<li><span class="span">费用：</span><input type="text" value="12.5" /></li>
+						<li><span class="span"></span>
+							<a onclick="addsource();" class="btn btn-goback goback">确认添加</a>
+						</li>
 					</ul>
 				</div>
 			</div>
+			<!-- 添加燃气费内容 end -->
+
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceNew.js"></script>
+	<!-- 页面内容 end -->
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceNew.js"></script>
 </body>
 </html>

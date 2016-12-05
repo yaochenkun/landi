@@ -133,7 +133,7 @@ public class UserRoomController {
 		return ans;
 	}
 
-	@RequestMapping("/getAllRoomState")
+	@RequestMapping("/getAllRoomState") // 获取所有房间状态信息（租客一览表）
 	@ResponseBody
 	public Map<String, Object> getAllRoomState(HttpSession session) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
@@ -151,7 +151,7 @@ public class UserRoomController {
 		return ans;
 	}
 
-	@RequestMapping("/getRoomInfo")
+	@RequestMapping("/getRoomInfo") // 获取房间详细信息
 	@ResponseBody
 	public Map<String, Object> getOneRoom(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);

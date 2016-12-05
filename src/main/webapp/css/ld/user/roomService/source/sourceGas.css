@@ -14,10 +14,6 @@
 	height: 40px;
 }
 
-.bill-table thead tr th {
-	font-weight: normal;
-}
-
 .bill-table thead tr th span {
 	padding: 0;
 }
@@ -30,8 +26,9 @@
 	width: 6%;
 }
 
+/* 抄表日期 宽度 */
 .bill-table thead tr:nth-child(1) th:nth-child(5) {
-	width: 6%;
+	width: 8%;
 }
 
 .bill-table thead .gasOne {
@@ -42,26 +39,25 @@
 	color: #7a7a7a;
 }
 
-.bill-table thead tr:nth-child(2) th {
+#trTwo th {
 	width: 5%;
 	font-size: 14px;
-	font-weight: normal;
 }
 
-.bill-table tbody tr td:nth-child(3), .bill-table tbody tr td:nth-child(4),
-	.bill-table tbody tr td:nth-child(5), .bill-table tbody tr td:nth-child(6),
-	.bill-table tbody tr td:nth-child(7), .bill-table tbody tr td:nth-child(8)
-	{
+// #trOne th:nth-child(3), #trOne th:nth-child(4),
+// #trOne th:nth-child(5), #trTwo th:nth-child(1),
+// #trTwo th:nth-child(5), #trTwo th:nth-child(9){border-left: 2px solid #bf845e;}
+
+/* 燃气表 表格样式  start */
+tbody td:nth-child(3), tbody td:nth-child(4),
+tbody td:nth-child(6), tbody td:nth-child(7),
+tbody td:nth-child(8), tbody td:nth-child(10)
+{
 	color: #01458c;
 }
 
-.bill-table tbody tr td:nth-child(9), .bill-table tbody tr td:nth-child(10),
-	.bill-table tbody tr td:nth-child(11), .bill-table tbody tr td:nth-child(12),
-	.bill-table tbody tr td:nth-child(13), .bill-table tbody tr td:nth-child(14)
-	{
-	color: #f1551a;
-}
+tbody td:nth-child(5), tbody td:nth-child(9){ color: #f1551a;}
 
-.bill-table tbody tr td:nth-child(9) {
-	
-}
+// tbody td:nth-child(3), tbody td:nth-child(7),
+// tbody td:nth-child(11) { border-left: 2px solid #bf845e; }
+/* 燃气表 表格样式  start */

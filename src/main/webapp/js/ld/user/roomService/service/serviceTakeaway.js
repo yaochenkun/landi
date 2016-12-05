@@ -69,7 +69,8 @@ var requestAjaxTakeaway = function(pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.rtime);
-            		var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var deliveryDate = formatDate(dDate);
 
 					$("#takeawayTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.item +"</td>"+
@@ -155,7 +156,8 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.rtime);
-            		var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var deliveryDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var deliveryDate = formatDate(dDate);
 
 					$("#takeawayTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						    "<td>"+ perRecord.guest_NAME +"</td><td>" + perRecord.item + "</td>"+

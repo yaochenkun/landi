@@ -9,9 +9,9 @@
 <link
 	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
 	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
 	rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
 <link
 	href="${pageContext.request.contextPath }/css/ld/user/tenant/checkRoom.css"
 	rel="stylesheet" type="text/css" />
@@ -20,19 +20,18 @@
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
 	<jsp:include page="../_leftMenu.jsp"></jsp:include>
+	
+	<% String rid = request.getParameter("rid"); %>
+	<% String rNum = request.getParameter("rNum"); %>
 
 	<!-- 三级导航栏 start -->
 	<div class="nav-second">
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li id="tenant-header"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">租客信息</a></li>
-					<li id="asset-header"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">物品信息</a></li>
-					<li id="check-header" class="liactive"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomCheck.jsp?rid=<%=request.getParameter("rid") %>">查房状态</a></li>
-					<li id="maintain-header"><a href="javascript:void(0);">维修状态</a></li>
+					<li><a href="roomGuest.jsp?rid=<%=rid%>&rNum=<%=rNum%>">房间信息</a></li>
+					<li class="liactive"><a href="javascript:void(0);">查房状态</a></li>
+					<li><a href="javascript:void(0);">维修状态</a></li>
 					<li class="linormal"><a href="javascript:void(0);">其他</a></li>
 				</ul>
 			</div>
@@ -85,14 +84,10 @@
 	</div>
 	<!-- 页面内容 end-->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/tenant/checkRoom.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/checkRoom.js"></script>
 	<script>
     	$(function(){
     		// ！！目前同意采用 rNum查询查房图片

@@ -2,27 +2,26 @@
 	top: 50px;
 }
 
-.bill-table thead tr {
+thead tr {
 	height: 50px;
 }
 
-.bill-table thead tr th span {
+thead th span {
 	padding: 0;
 }
 
-.bill-table thead tr th:nth-child(3) {
+thead th:nth-child(3) {
 	width: 8%;
 }
 
-.bill-table tbody tr td:nth-child(4), .bill-table tbody tr td:nth-child(5)
-	{
+tbody td:nth-child(3), tbody td:nth-child(4){
 	color: #19007c;
 }
 
-.bill-table tbody tr td:nth-child(6) {
+tbody td:nth-child(5) {
 	color: #0099d6;
 }
 
-.bill-table tbody tr td:nth-child(7) {
-	color: #ff5722;
+tbody td:nth-child(6) {
+	color: #f1551a;
 }

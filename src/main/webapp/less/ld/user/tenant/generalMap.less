@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+@contentWidth:1100px;
+
+/* 维护 less 文件*/
+////////// 导航栏样式  
+// header {
+// 	.header-logo{ left: 45%; }
+// 	.homeMenu{
+// 		margin-top: 15px;
+// 		margin-left: -20px;
+// 		display: inline-block;
+// 		cursor: pointer;
+// 		width: 160px;
+// 		height: 30px;
+// 	}
+// 	.span{ margin-left: .5em; }
+// }
+
+// ////////// 一级菜单样式 
+// .main-nav {
+// 	position: fixed;
+// 	z-index: 200;
+// 	box-shadow: 2px 0 16px rgba(0, 0, 0, .2);
+// 	top: 0;
+// 	width: 0;
+
+// 	.menuOne {
+// 		display: block;
+// 		height: 49px;
+// 		line-height: 50px;
+// 		background: #fafafa;
+// 		cursor: pointer;
+// 		font-size: 13px;
+// 		color: #0057bd;
+// 		i {
+// 			font-size: 15px;
+// 			font-style: normal;
+// 		}
+// 		i:nth-child(1) { margin-left: 80px;	}
+// 		i:nth-child(2), i:nth-child(3) { margin-left: -5px; }
+// 	}
+// }
+
+// /////////// 二级菜单样式 
+// .nav-second {
+// 	.toolbar{
+// 		width: @contentWidth;
+// 		padding: 0;
+// 		margin: 0 auto;
+// 		text-align: center;
+// 		ul { margin-left: -30px; }
+// 		li { margin: 0 30px; }
+// 	}	
+// }
+
+///////// 租客一览图样式
+.body-content{
+	width: @contentWidth;
+	margin: 50px auto;
+}
+
+table{	
+	width: 100%;
+	tbody tr{
+		height: 30px;
+		td{
+			padding: 10px 5px;
+			border: 2px solid #555;
+			text-align: center;
+			min-width: 30px;
+			width: 8%;
+		}
+		.userName{
+			margin: 10px 0 0 0;
+			min-height: 20px;
+			color: #0076ff;
+		}
+	}
+	.floor35 {
+		td:nth-child(1), td:nth-child(2), td:nth-child(5), td:nth-child(8){border:none;}
+	}
+}

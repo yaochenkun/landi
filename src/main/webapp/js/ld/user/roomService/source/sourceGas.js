@@ -68,10 +68,12 @@ var requestAjaxGas = function(pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.time);
-            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate = formatDate(dDate);
 
             		var dDate2 = new Date(perRecord2.time);
-            		var cbDate2 = dDate2.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate2 = dDate2.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate2 = formatDate(dDate2);
 
 					$("#gasTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
@@ -165,10 +167,12 @@ var requestAjaxGasByRoomNum = function(roomNum,pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.time);
-            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate = formatDate(dDate);
 
             		var dDate2 = new Date(perRecord2.time);
-            		var cbDate2 = dDate2.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate2 = dDate2.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate2 = formatDate(dDate2);
 
 					$("#gasTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+

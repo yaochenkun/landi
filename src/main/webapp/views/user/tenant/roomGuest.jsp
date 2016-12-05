@@ -6,97 +6,216 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/ld/user/tenant/roomGuest.js"></script>
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/tenant/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath }/css/ld/user/tenant/roomGuest.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/css/ld/user/tenant/roomGuest.css" rel="stylesheet" type="text/css" />
 <title>房间信息</title>
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
 	<jsp:include page="../_leftMenu.jsp"></jsp:include>
 
-	<div class="body-content">
-		<div class="mod-wrap">
-			<div class="panel-tab">
-				<ul class="clear">
-					<li id="tenant-header" class="active-tab"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomGuest.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">租客信息</a></li>
-					<li id="asset-header"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomAsset.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">物品信息</a></li>
-					<li id="check-header"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/roomCheck.jsp?rid=<%=request.getParameter("rid") != null ? request.getParameter("rid") : "" %>&rNum=<%=request.getParameter("rNum") %>">查房状态</a></li>
-					<li id="maintain-header"><a href="javascript:void(0);">维修状态</a></li>
-					<li id="others-header"><a href="javascript:void(0);">其他</a></li>
+	<% String rid = request.getParameter("rid"); %>
+	<% String rNum = request.getParameter("rNum"); %>
+	
+	<!-- 三级导航栏 start -->
+	<div class="nav-second">
+		<div class="toolbar">
+			<div class="nav-secondul">
+				<ul>
+					<li class="liactive"><a href="javascript:void(0);">房间信息</a></li>
+					<li><a href="roomCheck.jsp?rid=<%=rid%>&rNum=<%=rNum%>">查房状态</a></li>
+					<li><a href="javascript:void(0);">维修状态</a></li>
+					<li class="linormal"><a href="javascript:void(0);">其他</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="tab-wrap">
-			<div id="tenant" class="tab-content">
-				<div class="tab-header">
-					<div>
-						<h2>租客信息</h2>
-					</div>
+	</div>
+	<!-- 三级导航栏 end-->
+
+	<div class="body-content">
+		<!-- 房间信息 start -->
+		<div class="tab-content">
+			<div class="tab-header">
+				<div>
+					<span class="flag">1</span>
+					<h3>房间信息</h3>
 				</div>
-				<div id="room-guest"
-					style="display: flex; text-align: left; margin: 10px 60px;">
-					<div style="flex: 1;">
-						<ul>
-							<li>租客姓名：<span id="guestName"></span></li>
-							<li>房间号：<span id="roomNum"></span></li>
-							<li>户型：<span id="roomType"></span></li>
-							<li>联系电话：<span id="telNum"></span></li>
-							<li>所在公司：<span id="company"></span></li>
-							<li>职务：<span id="position"></span></li>
-							<li>入住人数：<span id="totalNum"></span></li>
-						</ul>
-					</div>
-					<div style="flex: 1;">
-						<ul>
-							<li>入住日期：<span id="inDate"></span></li>
-							<!-- <li>到期时间：<span id="dueDate">2018-01-01</span></li> -->
-							<li>租金：<span id="charge"></span></li>
-							<li>车位：<span id="park"></span></li>
-							<li>备注：<span id="comment"></span></li>
-						</ul>
-					</div>
+			</div>
+			<div id="room-guest" class="roomInfo">
+				<div class="ul">
+					<ul>
+						<li><span class="span">房间号：</span><span class="roomNo"></span></li>
+						<li><span class="span">面积：</span><span class="area"></span></li>
+					</ul>
+				</div>
+				<div class="ul">
+					<ul>
+						<li><span class="span">房间状态：</span><span class="state"></span></li>
+						<li><span class="span">备注：</span><span class="comm"></span></li>
+					</ul>
+				</div>
+				<div class="ul">
+					<ul>
+						<li><span class="span">租金：</span><span class="rent"></span></li>
+					</ul>
 				</div>
 			</div>
 		</div>
+		<!-- 房间信息 end -->
+
+		<!-- 租客信息 start -->
+		<div class="tab-content">
+			<div class="tab-header">
+				<div>
+					<span class="flag">2</span>
+					<h3>租客信息</h3>
+				</div>
+			</div>
+			<div id="room-guest">
+				<div class="ul">
+					<ul>
+						<li><span class="span">租客姓名：</span><span id="guestName"></span></li>
+						<li><span class="span">职务：</span><span id="position"></span></li>
+						<li><span class="span">租金：</span><span id="charge"></span></li>
+					</ul>
+				</div>
+				<div class="ul">
+					<ul>
+						<li><span class="span">联系电话：</span><span id="telNum"></span></li>
+						<li><span class="span">入住日期：</span><span id="inDate"></span></li>
+						<li><span class="span">车位：</span><span id="park"></span></li>
+					</ul>
+				</div>
+				<div class="ul">
+					<ul>
+						<li><span class="span">所在公司：</span><span id="company"></span></li>
+						<li><span class="span">入住人数：</span><span id="totalNum"></span></li>
+						<li><span class="span">备注：</span><span id="comment"></span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 租客信息 start -->
+
+		<!-- 物品信息 start -->
+		<div class="tab-content">
+			<div class="tab-header">
+				<div>
+					<span class="flag">3</span>
+					<h3>物品信息</h3>
+				</div>
+			</div>
+			<div id="room-item">
+				<div class="inner-table">
+					<h3>家具信息</h3>
+					<table id="item_furniture" class="table table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>名称</th>
+								<th>品牌</th>
+								<th>类别</th>
+								<th>标签</th>
+								<th>备注</th>
+							<tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="inner-table">
+					<h3>家电信息</h3>
+					<table id="item_electric" class="table table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>名称</th>
+								<th>品牌</th>
+								<th>类别</th>
+								<th>标签</th>
+								<th>备注</th>
+							<tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="inner-table">
+					<h3>灯具信息</h3>
+					<table id="item_light" class="table table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>名称</th>
+								<th>品牌</th>
+								<th>类别</th>
+								<th>标签</th>
+								<th>备注</th>
+							<tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="inner-table">
+					<h3>窗帘及浴屏</h3>
+					<table id="item_curtain" class="table table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>名称</th>
+								<th>品牌</th>
+								<th>类别</th>
+								<th>标签</th>
+								<th>备注</th>
+							<tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<div class="inner-table">
+					<h3>备品信息</h3>
+					<table id="item_little" class="table table-striped">
+						<thead>
+							<tr>
+								<th>编号</th>
+								<th>名称</th>
+								<th>品牌</th>
+								<th>类别</th>
+								<th>标签</th>
+								<th>备注</th>
+							<tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- 物品信息 start -->
 	</div>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/roomGuest.js"></script>
 	<script>
 		$(function(){
-			let params = window.location.search;
-			var rId;
-			var rNum;
-			var op;
-			if (params.indexOf('rid')>=0) {
-				let roomId = params.replace('?','').split('&')[0].split('=')[1];
-				let roomNum = params.replace('?','').split('&')[1].split('=')[1];
-				getGuestInfo(parseInt(roomId), roomNum);
-				$("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId + "rNum=" + roomNum);
-			}else {
-				// No RoomInfo
-				var tip = "暂无信息";
-				$("#guestName").text(tip);
-				$("#roomNum").text(tip);
-				$("#roomType").text(tip);
-				$("#telNum").text(tip);
-				$("#company").text(tip);
-				$("#position").text(tip);
-				$("#totalNum").text(tip);
-				$("#inDate").text(tip);
-				$("#charge").text(tip);
-				$("#park").text(tip);
-				$("#comment").text(tip);
+			if (<%=rid%>!=null) {
+				// 获取房屋信息
+				getRoomInfo(parseInt(<%=rid%>), "<%=rNum%>");
+				// 获取租客信息
+				getGuestInfo(parseInt(<%=rid%>), "<%=rNum%>");
+				// $("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId + "rNum=" + roomNum);
+
+				getFurniture(parseInt(<%=rid%>), "<%=rNum%>");
+				getElectric(parseInt(<%=rid%>), "<%=rNum%>");
+				getLight(parseInt(<%=rid%>), "<%=rNum%>");
+				getCurtain(parseInt(<%=rid%>), "<%=rNum%>");
+				getLittle(parseInt(<%=rid%>), "<%=rNum%>");
 			}
 		});
 		//getMeters();

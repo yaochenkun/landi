@@ -1,26 +1,9 @@
-/* 标题栏滚动样式 */
-.navbar-ld {
-	transition: .8s;
-}
-
-.navbar-fixed-top {
-	position: fixed;
-}
-
-.topNone {
-	top: -50px;
-}
-
-.topNormal {
-	top: 0px;
-}
-
 .content {
-	margin: 30px 10px 10px 170px;
+	width: 1100px;
+	margin: 40px auto;
 }
 
 .tab-content {
-	margin: 0px 50px;
 	overflow: hidden;
 }
 
@@ -28,7 +11,6 @@
 	font-size: 20px;
 	line-height: 32px;
 	color: #333;
-	padding-left: 5px;
 	word-break: keep-all;
 }
 
@@ -45,14 +27,14 @@
 
 .extra-body {
 	border-left: 2px dotted #e4e4e4;
-	margin-left: 20px;
+	margin-left: 16px;
 	height: 100%;
 }
 
 .tab-content .tab-content-body {
 	overflow: hidden;
 	padding: 20px 10px;
-	margin: 0 50px 20px 50px;
+	margin: 0 0 20px 50px;
 }
 
 .tab-content-body .form {
@@ -92,6 +74,71 @@
 	width: 100%;
 }
 
+/***************************** 左侧 珠串样式 start *********************************/
+.step-nav {
+	position: fixed;
+	width: 100%;
+	top: 50px;
+	left: 0;
+}
+
+.step-nav .icon-group{
+	width: 1100px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.step-nav .list-icon-link {
+	display: none;
+	width: 32px;
+	font-size: 18px;
+	line-height: 32px;
+	color: #fff;
+	background: #ff4d4d;
+	border-radius: 50%;
+	text-align: center;
+}
+
+.step-nav .list-icon-text {
+	display: none;
+	position: absolute;
+	left: 40px;
+	width: 100px;
+	height: 28px;
+	line-height: 28px;
+	color: #5c5c5b;
+}
+
+.step-nav .list-icon-text:nth-child(2) {
+	top: 1px;
+}
+
+.step-nav .list-icon-text:nth-child(4) {
+	top: 33px;
+}
+
+.step-nav .list-icon-text:nth-child(6) {
+	top: 65px;
+}
+
+.step-nav .list-icon-text:nth-child(8) {
+	top: 97px;
+}
+
+.step-nav .list-icon-text:nth-child(10) {
+	top: 129px;
+}
+
+.list-icon-text .inner {
+	text-align: center;
+	background-color: #fff;
+	font-size: 12px;
+	border: 1px solid #b3b7bf;
+	border-radius: 2px;
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+}
+/***************************** 左侧 珠串样式 end *********************************/
+
 /**** 租客信息 样式 ****/
 .tab-content-guest .spanLabel {
 	width: 17%;
@@ -118,10 +165,7 @@
 	width: 15%;
 }
 
-.tab-content-guest .item-time .fl:nth-child(4), .tab-content-guest .item-tel .fl:nth-child(4)
-	{
-	width: 22%;
-}
+.tab-content-guest .item-time .fl:nth-child(4), .tab-content-guest .item-tel .fl:nth-child(4){width: 22%;}
 
 .border-red {
 	border: 1px solid red;
@@ -184,26 +228,16 @@
 }
 
 thead tr:nth-child(1) th:nth-child(1), thead tr:nth-child(1) th:nth-child(2),
-	thead tr:nth-child(1) th:nth-child(3) {
-	width: 23%;
-}
+	thead tr:nth-child(1) th:nth-child(3) {	width: 23%;}
 
 thead tr:nth-child(1) th:nth-child(4), thead tr:nth-child(1) th:nth-child(5),
-	thead tr:nth-child(1) th:nth-child(6) {
-	width: 8%;
-}
+	thead tr:nth-child(1) th:nth-child(6) {	width: 8%;}
 
-thead tr:nth-child(1) th:nth-child(7) {
-	width: 6%;
-}
+thead tr:nth-child(1) th:nth-child(7) {	width: 6%;}
 
-thead tr:nth-child(1) th:nth-child(1) {
-	color: #777;
-}
+thead tr:nth-child(1) th:nth-child(1) {	color: #777;}
 
-tbody td:nth-child(1), tbody td:nth-child(2) {
-	
-}
+tbody td:nth-child(1), tbody td:nth-child(2) {}
 
 tbody .rowOne {
 	width: 2%;
@@ -266,77 +300,19 @@ tbody .operation:hover {
 	color: #008cc3;
 }
 
-/***************************** 左侧 珠串样式 start *********************************/
-.step-nav {
-	position: fixed;
-	top: 50px;
-	left: 225px;
-}
-
-.step-nav .list-icon-link {
-	display: none;
-	width: 32px;
-	font-size: 18px;
-	line-height: 32px;
-	color: #fff;
-	background: #ff4d4d;
-	border-radius: 50%;
-	text-align: center;
-}
-
-.step-nav .list-icon-text {
-	display: none;
-	position: absolute;
-	left: 40px;
-	width: 100px;
-	height: 28px;
-	line-height: 28px;
-	color: #5c5c5b;
-}
-
-.step-nav .list-icon-text:nth-child(2) {
-	top: 1px;
-}
-
-.step-nav .list-icon-text:nth-child(4) {
-	top: 33px;
-}
-
-.step-nav .list-icon-text:nth-child(6) {
-	top: 65px;
-}
-
-.step-nav .list-icon-text:nth-child(8) {
-	top: 97px;
-}
-
-.step-nav .list-icon-text:nth-child(10) {
-	top: 129px;
-}
-
-.list-icon-text .inner {
-	text-align: center;
-	background-color: #fff;
-	font-size: 12px;
-	border: 1px solid #b3b7bf;
-	border-radius: 2px;
-	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-}
-/***************************** 左侧 珠串样式 end *********************************/
-
 /******* 确认添加  样式 *******/
 .newGuestBtn {
 	margin: 4em 0;
 	height: 6em;
+	text-align: center;
 }
 
 .btnnew {
+	display: inline-block;
 	width: 20em;
 	border: 1px solid #ff4d4d;
 	border-radius: 5px;
-	position: absolute;
 	text-align: center;
-	margin-left: 35%;
 	height: 4em;
 	line-height: 4em;
 	font-size: 15px;
@@ -454,81 +430,18 @@ tbody .operation:hover {
 	animation: waggle 1s linear;
 }
 
-@
-keyframes waggle { 0%{
-	transform: translateX(0px);
-}
-
-10%{
-transform
-:
- 
-translateX
-(25px);
-}
-20%{
-transform
-:
- 
-translateX
-(-25px);
-}
-30%{
-transform
-:
- 
-translateX
-(20px);
-}
-40%{
-transform
-:
- 
-translateX
-(-20px);
-}
-50%{
-transform
-:
- 
-translateX
-(15px);
-}
-60%{
-transform
-:
- 
-translateX
-(-15px);
-}
-70%{
-transform
-:
- 
-translateX
-(10px);
-}
-80%{
-transform
-:
- 
-translateX
-(-10px);
-}
-90%{
-transform
-:
- 
-translateX
-(5px);
-}
-100%{
-transform
-:
- 
-translateX
-(0px);
-}
+@keyframes waggle { 
+	0%{	transform: translateX(0px);}
+	10%{transform:translateX(25px);}
+	20%{transform:translateX(-25px);}
+	30%{transform:translateX(20px);}
+	40%{transform:translateX(-20px);}
+	50%{transform:translateX(15px);}
+	60%{transform:translateX(-15px);}
+	70%{transform:translateX(10px);}
+	80%{transform:translateX(-10px);}
+	90%{transform:translateX(5px);}
+	100%{transform:translateX(0px);}
 }
 
 /* 增加项目 */

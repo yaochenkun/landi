@@ -13,6 +13,7 @@
 	font-size: 15px;
 }
 
+.body-content li:first-child .span{width: 116px;}
 .body-content li .span {
 	width: 8em;
 	display: inline-block;

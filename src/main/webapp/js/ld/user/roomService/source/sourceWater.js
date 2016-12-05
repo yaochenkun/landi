@@ -68,7 +68,8 @@ var requestAjaxWater = function(pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.time);
-            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate = formatDate(dDate);
 
 					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+
@@ -156,7 +157,8 @@ var requestAjaxWaterByRoomNum = function(roomNum,pageNum){
 
 					// 将时间戳变为2016-12-12显示          	
             		var dDate = new Date(perRecord.time);
-            		var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		// var cbDate = dDate.toLocaleDateString().replace(/\//g,"-");
+            		var cbDate = formatDate(dDate);
 
 					$("#waterTbody").append("<tr><td>"+ perRecord.room_NUMBER +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.meter +"</td>"+

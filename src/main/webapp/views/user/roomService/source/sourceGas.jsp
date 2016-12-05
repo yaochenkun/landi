@@ -22,7 +22,7 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../_head.jsp"></jsp:include>
+	<jsp:include page="../../_leftMenu.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -39,7 +39,7 @@
 					<!-- 费用 table start -->
 					<table>
 						<thead>
-							<tr>
+							<tr id="trOne">
 								<th rowspan="2"><span>房间号</span>
 									<div class="search-roomNo">
 										<div class="search-wrap">
@@ -54,7 +54,7 @@
 								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;二</span></th>
 								<th rowspan="2">抄表日期</th>
 							</tr>
-							<tr>
+							<tr id="trTwo">
 								<th class="gasOne">表 号</th>
 								<th class="gasOne">上月表数</th>
 								<th class="gasOne">费用</th>

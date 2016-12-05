@@ -6,23 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <title>添加客房服务</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../_head.jsp"></jsp:include>
+	<jsp:include page="../../_leftMenu.jsp" />
+	
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
@@ -52,18 +45,16 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li><span class="span">房间号：</span><input
-							id="serviceRoomNumber" type="text" value="W35-1" /><span
-							class="red red-right">*&nbsp;必填</span></li>
+						<li><span class="span">房间号：</span>
+							<input id="serviceRoomNumber" type="text" value="W35-1" />
+							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
 						<li><span class="span">物品：</span><input type="text" value="衣服" /></li>
 						<li><span class="span">数量：</span><input type="text" value="1" /></li>
-						<li><span class="span">送交时间：</span><input type="text" value="2016-11-12" /></li>
 						<li><span class="span">金额：</span><input type="text" value="12.5" /></li>
 						<li><span class="span">备注：</span><input type="text" value="无" /></li>
-						<li><span class="span"></span><a onclick="addservice();"
-							class="btn btn-goback goback">确认添加</a></li>
+						<li><span class="span"></span><a onclick="addservice();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
 			</div>

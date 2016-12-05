@@ -13,6 +13,8 @@
 				success:function(data){
 					//console.log(data);
 					if(!data){
+						$("#meterOne").text("不存在该房间！");
+						$("#meterTwo").text("不存在该房间！");
 						return;
 					}
 					rid = data.id;
@@ -27,8 +29,8 @@
 							if(data.meters3.length == 0){
 								return;
 							}
-							$("#meterOne").val(data.meters3[0].meter_NUMBER);
-							$("#meterTwo").val(data.meters3[1].meter_NUMBER);			
+							$("#meterOne").text(data.meters3[0].meter_NUMBER);
+							$("#meterTwo").text(data.meters3[1].meter_NUMBER);			
 						}
 					});
 				}
@@ -40,17 +42,30 @@
 // 添加燃气费 
 var addSourceGas = function(){
 
+	 // 判断房间号是否为空
+	if($("#sourceRoomNumber").val() == ""){
+		$("#roomIdWarning").css("display","block");
+		$("#sourceRoomNumber").addClass("border-red");
+		console.log("房间号为空！");
+		return;
+	}
+
 	var roomNumber = $("#sourceRoomNumber").val();
 	var guestName = $(".body-content input").eq(1).val();
-	var meterDate = $(".body-content input").eq(2).val();
 
-	var firstMeterNo = $(".body-content input").eq(3).val();
-	var firstthisMonthNum = $(".body-content input").eq(4).val();
-	var firstCharge = $(".body-content input").eq(5).val();
+	var firstthisMonthNum = $(".body-content input").eq(2).val();
+	var firstCharge = $(".body-content input").eq(3).val();
 
-	var secondMeterNo = $(".body-content input").eq(6).val();
-	var secondthisMonthNum = $(".body-content input").eq(7).val();
-	var secondCharge = $(".body-content input").eq(8).val();
+	var secondthisMonthNum = $(".body-content input").eq(4).val();
+	var secondCharge = $(".body-content input").eq(5).val();
+
+	// 表号
+	var firstMeterNo = $("#meterOne").text();
+	var secondMeterNo = $("#meterTwo").text();
+
+	// 抄表日期
+	var date = new Date();
+	var meterDate = formatDate(date);
 
 	$.ajax({
 		url:'/LD/userRoom/addSourceGas.action',
