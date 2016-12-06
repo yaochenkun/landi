@@ -1,3 +1,5 @@
+@orangeColor:#2277da;
+
 .clearfix{
 	zoom:1;
 	&:after{
@@ -9,21 +11,46 @@
 
 .body-content{
 	width: 1100px;
-	margin: 20px auto;
+	margin: 10px auto;
 	.tab-content{
-		margin-bottom: 40px;
+		margin-bottom: 60px;
+		.tab-header{
+			margin-bottom: 10px;
+		}
 	}
-}
-
-.flag{
-	width: 30px;
-	height: 30px;
-	background-color: #2277da;
-	border-radius: 50%;
-	color: #fff;
-	padding: 2px 9px;
-	font-size: 18px;
-	margin-right: 12px;
+	.tenant-title{
+		text-align: center;
+		padding-top: 20px;
+		color: @orangeColor;
+		.roomNumber{
+			font-size: 22px;
+			font-weight: bold;
+		}
+	}
+	.flag{
+		height: 25px;
+		width: 25px;
+		display: inline-block;
+		background-color: #444;
+		color: #fff;
+		border-radius: 50%;
+		font-size: 15px;
+		margin-right: 10px;
+		padding: 2px 8px;
+	}
+	.btngoback{
+		width: 120px;
+		height: 28px;
+		color: #222;
+		border-color: #222;
+		float: right;
+		margin-top: -30px;
+		line-height: 14px;
+		&:hover{
+			background-color: #444;
+			color: #fff;
+		}
+	}
 }
 
 h3{
@@ -31,11 +58,8 @@ h3{
 	display: inline-block;
 }
 
-#room-guest{
-	margin: 10px 82px;
-	padding: 15px 0px 15px 120px;
-	background: url(../../../../img/rebc.gif);
-	.clearfix;
+.room-guest{
+	background: #fafafa;
 	.ul{
 		float: left;
 		width: 33%;
@@ -47,4 +71,59 @@ h3{
 	li{
 		line-height: 35px;
 	}
+	& .userInfo,& .roomInfo{
+		.clearfix;
+		padding: 15px 0px 15px 200px;
+		display: none;
+	}
+	.noData{
+		display: none;
+		text-align: center;
+		padding: 30px;
+		color: @orangeColor;
+	}
+}
+
+// 物品信息
+.inner-table{
+	padding: 10px 0px 100px;
+	h4{
+		text-align: center;
+		font-size: 18px;
+		color: #666;
+		font-weight: bold;
+	}
+	table{
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	th{
+		background: #f7f7f7;
+		text-align: center;
+		color: #111;
+		line-height: 45px;
+		font-weight: normal;
+		border-bottom: 2px solid #ccc;
+		border-top: 2px solid #ccc;
+	}
+	td{
+		background: #fff;
+		text-align: center;
+		line-height: 45px;
+		border-bottom: 1px solid #ccc;
+	}
+	tr:hover td{
+		background: #fdfdfd;
+	}
+}
+
+.bottom-page{
+	margin-right: 0;
+	.recordTotal{
+		color: @orangeColor;
+	}
+}
+
+.no-data{
+	color: @orangeColor;
 }

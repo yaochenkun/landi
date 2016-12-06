@@ -188,7 +188,7 @@ var changeTabContent = function(index){
     $(".tab-content").eq(index).prevAll(".tab-content").children(".tab-content-title").children("span").css("visibility","hidden");
     $(".tab-content").eq(index).nextAll(".tab-content").children(".tab-content-title").children("span").css("visibility","visible");
 
-	$(".icon-group .list-icon-link").eq(index).css("display","block").css("display","block").css("background","#ff4d4d");
+	$(".icon-group .list-icon-link").eq(index).css("display","block").css("display","block").css("background","#2277da");
 	$(".icon-group .list-icon-link").eq(index).prevAll("a").css("display","block").css("background","#ccc");
 	$(".icon-group .list-icon-link").eq(index).nextAll("a").css("display","none");
 }

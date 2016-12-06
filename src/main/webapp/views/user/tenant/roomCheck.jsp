@@ -32,7 +32,7 @@
 					<li><a href="roomGuest.jsp?rid=<%=rid%>&rNum=<%=rNum%>">房间信息</a></li>
 					<li class="liactive"><a href="javascript:void(0);">查房状态</a></li>
 					<li><a href="javascript:void(0);">维修状态</a></li>
-					<li class="linormal"><a href="javascript:void(0);">其他</a></li>
+					<!-- <li class="linormal"><a href="javascript:void(0);">其他</a></li> -->
 				</ul>
 			</div>
 		</div>

@@ -23,9 +23,8 @@
 			<div class="nav-secondul">
 				<ul>
 					<li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
-					<li class="linormal"><a href="javascript:void(0);">租客一览表</a></li>
-					<li class="linormal"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
+					<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
+					<li class="linormal"><a href="newGuest.jsp">新增租客</a></li>
 					<li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li>
 				</ul>
 			</div>

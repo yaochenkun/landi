@@ -70,7 +70,8 @@ var requestRoomPic = function(room_id){
             //console.log(data);
         	if(!data.length){
         		console.log("data.length = " + data.length);
-        		$(".roomPic").html("不存在查房状态！")
+        		$(".roomPic").html("不存在查房状态！");
+                $(".roomPic").css("display","block");
         		return;
         	}
             for(var i=0; i<data.length; i++){
@@ -83,9 +84,10 @@ var requestRoomPic = function(room_id){
             // 初始化显示第一张图
             $(".num ul li:first-child").toggleClass("liactive").toggleClass("linormal");
             $("#bigimg").html("").append($(".num li").eq(0).html());
+            $(".roomPic").css("display","block");
         }
     })
-}
+};
 
 // 根据 roomNumber查询 roomID
 var getRoomIDByNumber = function(roomNumber){

@@ -19,7 +19,7 @@
 	font-size: 18px;
 	width: 32px;
 	border-radius: 50%;
-	background: #ff4d4d;
+	background: #2277da;
 	text-align: center;
 	margin-right: 15px;
 	color: #fff;
@@ -68,9 +68,8 @@
 }
 
 .item .text {
-	height: 22px;
-	line-height: 22px;
-	padding: 6px;
+	line-height: 20px;
+	padding: 0 6px;
 	width: 100%;
 }
 
@@ -94,7 +93,7 @@
 	font-size: 18px;
 	line-height: 32px;
 	color: #fff;
-	background: #ff4d4d;
+	background: #2277da;
 	border-radius: 50%;
 	text-align: center;
 }
@@ -256,11 +255,11 @@ tbody .col-LE, tbody .col-wash, tbody .col-consume, tbody .col-car,
 
 tbody .col-lunch-choose td:nth-child(2) {
 	cursor: pointer;
-	color: #ff4d4d;
+	color: #2277da;
 }
 
 tbody .col-lunch-choose td:nth-child(2):hover {
-	color: #ec0000;
+	color: #0262b5;
 }
 
 tbody .col-lunch td:nth-child(1) {
@@ -310,13 +309,13 @@ tbody .operation:hover {
 .btnnew {
 	display: inline-block;
 	width: 20em;
-	border: 1px solid #ff4d4d;
+	border: 1px solid #2277da;
 	border-radius: 5px;
 	text-align: center;
 	height: 4em;
 	line-height: 4em;
 	font-size: 15px;
-	background: #ff4d4d;
+	background: #2277da;
 	color: #fff;
 }
 
@@ -406,8 +405,8 @@ tbody .operation:hover {
 }
 
 .restaurant .a-active {
-	color: #ff4d4d;
-	border-color: #ff4d4d;
+	color: #2277da;
+	border-color: #2277da;
 }
 
 .restaurant .btnedit {
@@ -447,7 +446,7 @@ tbody .operation:hover {
 /* 增加项目 */
 .addService {
 	cursor: pointer;
-	color: #ff4d4d;
+	color: #2277da;
 }
 
 /* 右侧回到顶部底部 */
@@ -461,7 +460,7 @@ tbody .operation:hover {
 	display: block;
 	width: 45px;
 	height: 45px;
-	background-color: #ff4d4d;
+	background-color: #2277da;
 	color: #fff;
 	text-align: center;
 	margin-bottom: 5px;
@@ -480,5 +479,5 @@ tbody .operation:hover {
 }
 
 .bar .bar-top:hover, .bar .bar-bottom:hover {
-	background-color: #fb6a6a;
+	background-color: #6aaefb;
 }

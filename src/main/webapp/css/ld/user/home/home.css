@@ -64,20 +64,21 @@ header .homeMenu .span {
 	margin: 0 30px;
 }
 
-.content {
-	margin: 50px 10px 20px 170px;
-}
-
 /* ******* 管理员界面样式  *******  */
 .content {
 	width: 1100px;
-	margin: 60px auto;
+	margin: 0 auto;
 }
 
-.content .title {
+.title {
 	border-bottom: 1px solid #ccc;
-	margin-bottom: 20px;
-	padding: 20px 35px;
+	padding: 20px;
+	margin-top: 50px;
+}
+
+.title-content{
+	width: 1100px; 
+	margin: 0 auto;
 }
 
 /********* 首页  标题样式*******/
@@ -85,7 +86,7 @@ header .homeMenu .span {
 	width: 60px;
 	display: inline-block;
 	float: left;
-	margin-top: -15px;
+	margin-top: -20px;
 	border-radius: 50%;
 	border: 1px #888 dashed;
 	padding: 9px;
@@ -109,7 +110,7 @@ header .homeMenu .span {
 
 /********** 首页 个人信息样式 *****************/
 .detail {
-	padding: 20px 70px;
+	padding: 30px 0;
 	position: relative;
 }
 
@@ -125,13 +126,16 @@ header .homeMenu .span {
 	padding: 5px 20px;
 }
 
-.detail-body {
-	position: absolute;
-	left: 50%;
-	top: 90%;
-	margin-left: -160px;
+.detail-body:after{
+	content: "";
+	display: block;
+	clear: both;
 }
-/* .detail-body li{display: inline; margin-right: 50px; font-size: 14px;} */
+.detail-body {
+	zoom: 1;
+	margin-left: 37%;
+}
+
 .detail-body dl dt {
 	float: left;
 	clear: left;
@@ -145,7 +149,7 @@ header .homeMenu .span {
 .detail-body dl dd {
 	float: left;
 	font-size: 17px;
-	color: #4a8bee;
+	color: #2277da;
 }
 
 /* 修改密码模态框样式 */

@@ -1,13 +1,16 @@
+.body-content{
+	width: 1100px;
+	margin: 0 auto;
+}
 .content {
-	width: 1050px;
-	margin: 40px auto;
+	margin: 50px 0;
 	position: relative;
 }
 
 /* 图片整体样式 */
 .roomPic {
 	position: relative;
-	display: inline-block;
+	display: none;
 }
 
 .ban {

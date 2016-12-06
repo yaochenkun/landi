@@ -18,6 +18,8 @@
 
 	<% String rid = request.getParameter("rid"); %>
 	<% String rNum = request.getParameter("rNum"); %>
+	<div style="display:none;" id="rid"><%=rid%></div>
+	<div style="display:none;" id="rNum"><%=rNum%></div>
 	
 	<!-- 三级导航栏 start -->
 	<div class="nav-second">
@@ -27,7 +29,7 @@
 					<li class="liactive"><a href="javascript:void(0);">房间信息</a></li>
 					<li><a href="roomCheck.jsp?rid=<%=rid%>&rNum=<%=rNum%>">查房状态</a></li>
 					<li><a href="javascript:void(0);">维修状态</a></li>
-					<li class="linormal"><a href="javascript:void(0);">其他</a></li>
+					<!-- <li class="linormal"><a href="javascript:void(0);">其他</a></li> -->
 				</ul>
 			</div>
 		</div>
@@ -35,6 +37,11 @@
 	<!-- 三级导航栏 end-->
 
 	<div class="body-content">
+		<div class="tenant-title">
+			<span><span class="roomNumber"><%=rNum%></span>&nbsp;&nbsp;房间</span>
+		</div>
+		<a class="btn btngoback" href="generalMap.jsp">返回租客一览图</a>
+
 		<!-- 房间信息 start -->
 		<div class="tab-content">
 			<div class="tab-header">
@@ -43,23 +50,26 @@
 					<h3>房间信息</h3>
 				</div>
 			</div>
-			<div id="room-guest" class="roomInfo">
-				<div class="ul">
-					<ul>
-						<li><span class="span">房间号：</span><span class="roomNo"></span></li>
-						<li><span class="span">面积：</span><span class="area"></span></li>
-					</ul>
-				</div>
-				<div class="ul">
-					<ul>
-						<li><span class="span">房间状态：</span><span class="state"></span></li>
-						<li><span class="span">备注：</span><span class="comm"></span></li>
-					</ul>
-				</div>
-				<div class="ul">
-					<ul>
-						<li><span class="span">租金：</span><span class="rent"></span></li>
-					</ul>
+			<div class="room-guest room">
+				<div class="noData">没有房间信息！</div>
+				<div class="roomInfo">
+					<div class="ul">
+						<ul>
+							<li><span class="span">房间号：</span><span class="roomNo"></span></li>
+							<li><span class="span">面积：</span><span class="area"></span></li>
+						</ul>
+					</div>
+					<div class="ul">
+						<ul>
+							<li><span class="span">房间状态：</span><span class="state"></span></li>
+							<li><span class="span">备注：</span><span class="comm"></span></li>
+						</ul>
+					</div>
+					<div class="ul">
+						<ul>
+							<li><span class="span">租金：</span><span class="rent"></span></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -73,28 +83,31 @@
 					<h3>租客信息</h3>
 				</div>
 			</div>
-			<div id="room-guest">
-				<div class="ul">
-					<ul>
-						<li><span class="span">租客姓名：</span><span id="guestName"></span></li>
-						<li><span class="span">职务：</span><span id="position"></span></li>
-						<li><span class="span">租金：</span><span id="charge"></span></li>
-					</ul>
-				</div>
-				<div class="ul">
-					<ul>
-						<li><span class="span">联系电话：</span><span id="telNum"></span></li>
-						<li><span class="span">入住日期：</span><span id="inDate"></span></li>
-						<li><span class="span">车位：</span><span id="park"></span></li>
-					</ul>
-				</div>
-				<div class="ul">
-					<ul>
-						<li><span class="span">所在公司：</span><span id="company"></span></li>
-						<li><span class="span">入住人数：</span><span id="totalNum"></span></li>
-						<li><span class="span">备注：</span><span id="comment"></span></li>
-					</ul>
-				</div>
+			<div class="room-guest user">
+				<div class="noData">没有租客信息！</div>
+				<div class="userInfo">
+					<div class="ul">
+						<ul>
+							<li><span class="span">租客姓名：</span><span id="guestName"></span></li>
+							<li><span class="span">职务：</span><span id="position"></span></li>
+							<li><span class="span">租金：</span><span id="charge"></span></li>
+						</ul>
+					</div>
+					<div class="ul">
+						<ul>
+							<li><span class="span">联系电话：</span><span id="telNum"></span></li>
+							<li><span class="span">入住日期：</span><span id="inDate"></span></li>
+							<li><span class="span">车位：</span><span id="park"></span></li>
+						</ul>
+					</div>
+					<div class="ul">
+						<ul>
+							<li><span class="span">所在公司：</span><span id="company"></span></li>
+							<li><span class="span">入住人数：</span><span id="totalNum"></span></li>
+							<li><span class="span">备注：</span><span id="comment"></span></li>
+						</ul>
+					</div>
+				</div>	
 			</div>
 		</div>
 		<!-- 租客信息 start -->
@@ -107,10 +120,12 @@
 					<h3>物品信息</h3>
 				</div>
 			</div>
-			<div id="room-item">
+
+			<!-- 家具信息 start -->
+			<div class="room-item">
 				<div class="inner-table">
-					<h3>家具信息</h3>
-					<table id="item_furniture" class="table table-striped">
+					<h4>家具</h4>
+					<table>
 						<thead>
 							<tr>
 								<th>编号</th>
@@ -121,13 +136,16 @@
 								<th>备注</th>
 							<tr>
 						</thead>
-						<tbody>
-						</tbody>
+						<tbody id="item_furniture"></tbody>
 					</table>
+					<div id="furnitureBottom" class="bottom"></div>
 				</div>
+				<!-- 家具信息 end -->
+
+				<!-- 家电信息 start -->
 				<div class="inner-table">
-					<h3>家电信息</h3>
-					<table id="item_electric" class="table table-striped">
+					<h4>家电</h4>
+					<table>
 						<thead>
 							<tr>
 								<th>编号</th>
@@ -138,13 +156,16 @@
 								<th>备注</th>
 							<tr>
 						</thead>
-						<tbody>
-						</tbody>
+						<tbody id="item_electric"></tbody>
 					</table>
+					<div id="electricBottom" class="bottom"></div>
 				</div>
+				<!-- 家电信息 start -->
+
+				<!-- 灯具信息 start -->
 				<div class="inner-table">
-					<h3>灯具信息</h3>
-					<table id="item_light" class="table table-striped">
+					<h4>灯具</h4>
+					<table>
 						<thead>
 							<tr>
 								<th>编号</th>
@@ -155,13 +176,16 @@
 								<th>备注</th>
 							<tr>
 						</thead>
-						<tbody>
-						</tbody>
+						<tbody id="item_light"></tbody>
 					</table>
+					<div id="lightBottom" class="bottom"></div>
 				</div>
+				<!-- 灯具信息 start -->
+
+				<!-- 窗帘及浴屏 start -->
 				<div class="inner-table">
-					<h3>窗帘及浴屏</h3>
-					<table id="item_curtain" class="table table-striped">
+					<h4>窗帘及浴屏</h4>
+					<table>
 						<thead>
 							<tr>
 								<th>编号</th>
@@ -172,13 +196,16 @@
 								<th>备注</th>
 							<tr>
 						</thead>
-						<tbody>
-						</tbody>
+						<tbody id="item_curtain"></tbody>
 					</table>
+					<div id="curtainBottom" class="bottom"></div>
 				</div>
+				<!-- 窗帘及浴屏 end -->
+				
+				<!-- 备品信息 start -->
 				<div class="inner-table">
-					<h3>备品信息</h3>
-					<table id="item_little" class="table table-striped">
+					<h4>备品</h4>
+					<table>
 						<thead>
 							<tr>
 								<th>编号</th>
@@ -189,10 +216,11 @@
 								<th>备注</th>
 							<tr>
 						</thead>
-						<tbody>
-						</tbody>
+						<tbody id="item_little"></tbody>
 					</table>
+					<div id="littleBottom" class="bottom"></div>
 				</div>
+				<!-- 备品信息 start -->
 			</div>
 		</div>
 		<!-- 物品信息 start -->
@@ -209,16 +237,27 @@
 				getRoomInfo(parseInt(<%=rid%>), "<%=rNum%>");
 				// 获取租客信息
 				getGuestInfo(parseInt(<%=rid%>), "<%=rNum%>");
-				// $("#asset-link").attr("href", "./roomAsset.jsp?rid="+roomId + "rNum=" + roomNum);
-
-				getFurniture(parseInt(<%=rid%>), "<%=rNum%>");
-				getElectric(parseInt(<%=rid%>), "<%=rNum%>");
-				getLight(parseInt(<%=rid%>), "<%=rNum%>");
-				getCurtain(parseInt(<%=rid%>), "<%=rNum%>");
-				getLittle(parseInt(<%=rid%>), "<%=rNum%>");
+				// 获取物品信息
+				getFurniture(1);
+				getElectric(1);
+				getLight(1);
+				getCurtain(1);
+				getLittle(1);
+			}else{  // 数据库中没有录入该房间信息
+				$(".room .noData").css("display","block");
+				$(".user .noData").css("display","block");
+				$("#item_furniture").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
+					"没有相关数据！</td></tr>");
+				$("#item_electric").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
+					"没有相关数据！</td></tr>");
+				$("#item_light").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
+					"没有相关数据！</td></tr>");
+				$("#item_curtain").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
+					"没有相关数据！</td></tr>");
+				$("#item_little").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
+					"没有相关数据！</td></tr>");
 			}
 		});
-		//getMeters();
 	</script>
 </body>
 </html>

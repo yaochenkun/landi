@@ -96,7 +96,10 @@ var requestPlanProgress = function(pageNum){
 // 显示隐藏采购计划执行情况
 var showCaigouFac = function(element){
 	$(".shadow").css("display","block");
-	$(".addItemDiv").css("display","block");
+	$('.addItemDiv').css("display","block");
+
+ 	setTimeout(function(){$('.addItemDiv').addClass('showMenu');},50);
+	$(".addItemDiv").addClass("effect-fade");
 
 	// 弹出框显示物品名称
 	var facName = $(element).parent().parent().children("td").eq(4).text();
@@ -109,9 +112,8 @@ var showCaigouFac = function(element){
 	$("#pd-id").html(pdID);
 }
 var closeCaigouDiv = function(){
-	// console.log("hehe");
 	$(".shadow").css("display","none");
-	$(".addItemDiv").css("display","none");
+	$(".addItemDiv").removeClass('showMenu');
 }
 
 // 添加一条采购计划执行记录
@@ -140,11 +142,20 @@ var addPlanProgress = function(){
 		success:function(data){
 			console.log(data);
 			if (data == 1) {
-				alert("采购成功！");
-				window.location.reload();
+				closeCaigouDiv();
+				$(".shadow").css("display","block");
+				$('.caigouSuccess').css("display","block");
+ 				setTimeout(function(){$('.caigouSuccess').addClass('showMenu');},50);
+				$(".caigouSuccess").addClass("effect-fade");
+				setTimeout(closeCaigouSuccessDiv,2000);
 			} else if (data == 0){
 				alert("采购失败！请重试或联系管理员。");
 			}
 		}
 	});
+}
+
+var closeCaigouSuccessDiv = function(){
+	$(".shadow").css("display","none");
+	$(".caigouSuccess").removeClass('showMenu');
 }

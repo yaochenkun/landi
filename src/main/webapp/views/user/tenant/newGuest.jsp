@@ -21,11 +21,9 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="linormal"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">租客一览图</a></li>
-					<li class="linormal"><a href="javascript:void(0);">租客一览表</a></li>
-					<li class="liactive"><a
-						href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
+					<li class="linormal"><a	href="generalMap.jsp">租客一览图</a></li>
+					<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
+					<li class="liactive"><a	href="newGuest.jsp">新增租客</a></li>
 					<li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li>
 				</ul>
 			</div>
@@ -594,14 +592,10 @@
 	</div>
 	<!-- 回到顶部底部 end-->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/tenant/newGuest.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/newGuest.js"></script>
 	<script>(function(){changeLeftMenu(1);})(); </script>
 </body>
 </html>

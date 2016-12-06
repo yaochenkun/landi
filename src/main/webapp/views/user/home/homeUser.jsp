@@ -9,15 +9,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/home.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/home.css" rel="stylesheet" type="text/css" />
 <title>用户首页</title>
 </head>
 <body>
@@ -26,17 +20,19 @@
 	<jsp:include page="../_leftMenu.jsp" />
 
 	<!-- 页面内容 start-->
-	<div class="content">
-		<div class="title">
-			<img src="${pageContext.request.contextPath}/img/user.svg" alt="">
+	<div class="title">
+		<div class="title-content">
+			<img src="${pageContext.request.contextPath}/img/user.svg" alt="用户头像">
 			<h5>
-				当前用户角色：<span id="roleTypeContent"></span><span id="roleTypeNum"
-					style="display: none;">${CUR_ENV.cur_user.ROLE}</span>
+				当前用户角色：<span id="roleTypeContent"></span>
+				<span id="roleTypeNum" style="display: none;">${CUR_ENV.cur_user.ROLE}</span>
 			</h5>
 			<div class="btn btn-change btnchange">
 				<a onclick="showEditPasswordModal();">修改密码</a>
 			</div>
 		</div>
+	</div>
+	<div class="content">
 		<div class="detail">
 			<div class="detail-head">
 				<span>个人信息</span>
@@ -75,6 +71,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- 页面内容 end-->
 
 	<!-- 修改密码模态框  start -->
 	<div id="editPassword" class="modal fade" tabindex="-1">
@@ -99,8 +96,7 @@
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="submit" class="btn btn-primary"
-						onclick="changePassword();">确认修改</button>
+					<button type="submit" class="btn btn-primary" onclick="changePassword();">确认修改</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -110,14 +106,10 @@
 	<!-- /.modal -->
 	<!-- 修改密码模态框 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
 	<script type="text/javascript">
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
