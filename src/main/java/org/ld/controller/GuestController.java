@@ -167,7 +167,7 @@ public class GuestController {
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
 			newBalance.setCHARGE_DAY(obj.getInteger("STR_RentNumber"));
 			newBalance.setCHARGE_TURN(obj.getInteger("STR_RentCycle"));
-			newBalance.setCHARGE_WAY(obj.getInteger("STR_RentWay"));
+			newBalance.setCHARGE_WAY(obj.getString("STR_RentWay"));
 			newBalance.setRETURN_DAY(obj.getInteger("STR_ReturnNumber"));
 			newBalance.setRETURN_TURN(obj.getInteger("STR_ReturnCycle"));
 			newBalance.setINVOICE_DAY(obj.getInteger("STR_BillNumber"));
