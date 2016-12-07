@@ -139,7 +139,6 @@ public class GuestController {
 		obj = objs.getJSONObject("intern");
 		try {
 			newIntern.setGUEST_ID(newGuest.getID());
-			newIntern.se
 			newIntern.setLE_1(obj.getDouble("DOU_LEFirst"));
 			newIntern.setLE_2(obj.getDouble("DOU_LESecond"));
 			newIntern.setLE_3(obj.getDouble("DOU_LEThird"));
