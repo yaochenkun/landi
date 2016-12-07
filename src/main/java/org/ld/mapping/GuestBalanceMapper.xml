@@ -7,7 +7,7 @@
 		<result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
 		<result column="CHARGE_DAY" property="CHARGE_DAY" jdbcType="INTEGER" />
 		<result column="CHARGE_TURN" property="CHARGE_TURN" jdbcType="INTEGER" />
-		<result column="CHARGE_WAY" property="CHARGE_WAY" jdbcType="INTEGER" />
+		<result column="CHARGE_WAY" property="CHARGE_WAY" jdbcType="VARCHAR" />
 		<result column="RETURN_DAY" property="RETURN_DAY" jdbcType="INTEGER" />
 		<result column="RETURN_TURN" property="RETURN_TURN" jdbcType="INTEGER" />
 		<result column="INVOICE_DAY" property="INVOICE_DAY" jdbcType="INTEGER" />
@@ -40,7 +40,7 @@
 		)
 		values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER},
 		#{ROOM_NUMBER,jdbcType=VARCHAR},
-		#{CHARGE_DAY,jdbcType=INTEGER}, #{CHARGE_TURN,jdbcType=INTEGER}, #{CHARGE_WAY,jdbcType=INTEGER},
+		#{CHARGE_DAY,jdbcType=INTEGER}, #{CHARGE_TURN,jdbcType=INTEGER}, #{CHARGE_WAY,jdbcType=VARCHAR},
 		#{RETURN_DAY,jdbcType=INTEGER}, #{RETURN_TURN,jdbcType=INTEGER},
 		#{INVOICE_DAY,jdbcType=INTEGER},
 		#{INVOICE_TURN,jdbcType=INTEGER}, #{INVOICE_AHEAD,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER}
@@ -103,7 +103,7 @@
 				#{CHARGE_TURN,jdbcType=INTEGER},
 			</if>
 			<if test="CHARGE_WAY != null">
-				#{CHARGE_WAY,jdbcType=INTEGER},
+				#{CHARGE_WAY,jdbcType=VARCHAR},
 			</if>
 			<if test="RETURN_DAY != null">
 				#{RETURN_DAY,jdbcType=INTEGER},
@@ -141,7 +141,7 @@
 				CHARGE_TURN = #{CHARGE_TURN,jdbcType=INTEGER},
 			</if>
 			<if test="CHARGE_WAY != null">
-				CHARGE_WAY = #{CHARGE_WAY,jdbcType=INTEGER},
+				CHARGE_WAY = #{CHARGE_WAY,jdbcType=VARCHAR},
 			</if>
 			<if test="RETURN_DAY != null">
 				RETURN_DAY = #{RETURN_DAY,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
 		ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
 		CHARGE_DAY = #{CHARGE_DAY,jdbcType=INTEGER},
 		CHARGE_TURN = #{CHARGE_TURN,jdbcType=INTEGER},
-		CHARGE_WAY = #{CHARGE_WAY,jdbcType=INTEGER},
+		CHARGE_WAY = #{CHARGE_WAY,jdbcType=VARCHAR},
 		RETURN_DAY = #{RETURN_DAY,jdbcType=INTEGER},
 		RETURN_TURN = #{RETURN_TURN,jdbcType=INTEGER},
 		INVOICE_DAY = #{INVOICE_DAY,jdbcType=INTEGER},

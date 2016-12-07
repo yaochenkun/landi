@@ -96,6 +96,7 @@ public class GuestController {
 
 			if (guestMissionService.addGuest(newGuest) == 1) {
 				newGuest = guestMissionService.getGuestByContract(obj.getString("STR_ContractID"));
+				System.out.println("Finish Guest");
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
@@ -108,7 +109,7 @@ public class GuestController {
 			return ans;
 		}
 
-		obj = objs.getJSONObject("guest");
+		obj = objs.getJSONObject("host");
 		try {
 			newHost.setGUEST_ID(newGuest.getID());
 			newHost.setHOST_NAME(obj.getString("STR_Name"));
@@ -120,22 +121,25 @@ public class GuestController {
 			newHost.setSYS_STATE(0);
 
 			if (guestMissionService.addHost(newHost) == 1) {
-
+				System.out.println("Finish Host");
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
+				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
 			ans.put("State", "Invalid");
+			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
 
 		obj = objs.getJSONObject("intern");
 		try {
 			newIntern.setGUEST_ID(newGuest.getID());
+			newIntern.se
 			newIntern.setLE_1(obj.getDouble("DOU_LEFirst"));
 			newIntern.setLE_2(obj.getDouble("DOU_LESecond"));
 			newIntern.setLE_3(obj.getDouble("DOU_LEThird"));
@@ -148,16 +152,18 @@ public class GuestController {
 			newIntern.setSYS_STATE(0);
 
 			if (guestMissionService.addIntern(newIntern) == 1) {
-
+				System.out.println("Finish Intern");
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
+				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
 			ans.put("State", "Invalid");
+			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
 
@@ -167,7 +173,7 @@ public class GuestController {
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
 			newBalance.setCHARGE_DAY(obj.getInteger("STR_RentNumber"));
 			newBalance.setCHARGE_TURN(obj.getInteger("STR_RentCycle"));
-			newBalance.setCHARGE_WAY(obj.getInteger("STR_RentWay"));
+			newBalance.setCHARGE_WAY(obj.getString("STR_RentWay"));
 			newBalance.setRETURN_DAY(obj.getInteger("STR_ReturnNumber"));
 			newBalance.setRETURN_TURN(obj.getInteger("STR_ReturnCycle"));
 			newBalance.setINVOICE_DAY(obj.getInteger("STR_BillNumber"));
@@ -176,16 +182,18 @@ public class GuestController {
 			newBalance.setSYS_STATE(0);
 
 			if (guestMissionService.addGuestBalance(newBalance) == 1) {
-
+				System.out.println("Finish Balance");
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid");
+				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
 			ans.put("State", "Invalid");
+			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
 
@@ -209,10 +217,11 @@ public class GuestController {
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
 
 						if (guestMissionService.addGuestService(newService) == 1) {
-
+							System.out.println("Finish launch");
 						} else {
 							ans.remove("State");
 							ans.put("State", "Invalid");
+							guestMissionService.delGuest(newGuest.getID());
 							return ans;
 						}
 					}
@@ -230,10 +239,11 @@ public class GuestController {
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
 
 						if (guestMissionService.addGuestService(newService) == 1) {
-
+							System.out.println("Finish service_add");
 						} else {
 							ans.remove("State");
 							ans.put("State", "Invalid");
+							guestMissionService.delGuest(newGuest.getID());
 							return ans;
 						}
 					}
@@ -249,10 +259,11 @@ public class GuestController {
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
 
 					if (guestMissionService.addGuestService(newService) == 1) {
-
+						System.out.println("Finish service_source");
 					} else {
 						ans.remove("State");
 						ans.put("State", "Invalid");
+						guestMissionService.delGuest(newGuest.getID());
 						return ans;
 					}
 				} else {
@@ -267,10 +278,11 @@ public class GuestController {
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
 
 					if (guestMissionService.addGuestService(newService) == 1) {
-
+						System.out.println("Finish service");
 					} else {
 						ans.remove("State");
 						ans.put("State", "Invalid");
+						guestMissionService.delGuest(newGuest.getID());
 						return ans;
 					}
 				}
@@ -278,6 +290,7 @@ public class GuestController {
 				e.printStackTrace();
 				ans.remove("State");
 				ans.put("State", "Invalid");
+				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		}

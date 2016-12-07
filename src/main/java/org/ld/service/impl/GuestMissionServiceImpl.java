@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.ld.dao.GuestBalanceMapper;
 import org.ld.dao.GuestMapper;
+import org.ld.dao.GuestServiceMapper;
 import org.ld.dao.HostMapper;
+import org.ld.dao.InternMapper;
 import org.ld.dao.RoomMapper;
 import org.ld.model.Guest;
 import org.ld.model.GuestBalance;
@@ -28,6 +31,15 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 
 	@Autowired
 	private HostMapper hostMapper;
+	
+	@Autowired
+	private InternMapper internMapper;
+	
+	@Autowired
+	private GuestBalanceMapper guestBalanceMapper;
+	
+	@Autowired
+	private GuestServiceMapper guestServiceMapper;
 
 	@Override
 	public Guest getGuestById(int id) {
@@ -80,18 +92,49 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 	@Override
 	public int addIntern(Intern t) {
 		// TODO Auto-generated method stub
-		return 0;
+		try {
+			internMapper.insert(t);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 
 	@Override
 	public int addGuestBalance(GuestBalance t) {
 		// TODO Auto-generated method stub
-		return 0;
+		try {
+			guestBalanceMapper.insert(t);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 
 	@Override
 	public int addGuestService(GuestService t) {
 		// TODO Auto-generated method stub
-		return 0;
+		try {
+			guestServiceMapper.insert(t);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+	
+	@Override
+	public int delGuest(int id) {
+		// TODO Auto-generated method stub
+		System.out.println("delete " + id);
+		try {
+			guestMapper.deleteByPrimaryKey(id);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 }

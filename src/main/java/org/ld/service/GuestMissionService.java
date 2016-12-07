@@ -27,4 +27,6 @@ public interface GuestMissionService {
 	int addGuestBalance(GuestBalance t);
 
 	int addGuestService(GuestService t);
+	
+	int delGuest(int id);
 }

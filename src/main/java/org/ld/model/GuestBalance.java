@@ -11,7 +11,7 @@ public class GuestBalance {
 
 	private Integer CHARGE_TURN;
 
-	private Integer CHARGE_WAY;
+	private String CHARGE_WAY;
 
 	private Integer RETURN_DAY;
 
@@ -65,11 +65,11 @@ public class GuestBalance {
 		this.CHARGE_TURN = CHARGE_TURN;
 	}
 
-	public Integer getCHARGE_WAY() {
+	public String getCHARGE_WAY() {
 		return CHARGE_WAY;
 	}
 
-	public void setCHARGE_WAY(Integer CHARGE_WAY) {
+	public void setCHARGE_WAY(String CHARGE_WAY) {
 		this.CHARGE_WAY = CHARGE_WAY;
 	}
 
