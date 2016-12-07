@@ -50,6 +50,11 @@ var requestItemOverview = function(pageNum){
 		contentType:'application/json',
 		dataType:'json',
 		data:'{"pageNum":'+ pageNum +'}',
+		beforeSend:function(){
+			// $("#itemOverviewTbody").append("<div class='loader'><div class='loader-inner line-scale'>"+
+   //        		"<div></div><div></div><div></div><div></div><div></div></div></div>");
+   			console.log("正在加载物品统计信息...");
+		},
 		success:function(data){
 			console.log(data);
 

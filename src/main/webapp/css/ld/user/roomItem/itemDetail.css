@@ -19,6 +19,10 @@
 .bill-table tbody tr{line-height: 45px;}
 
 /* 弹出框 样式 */
+.showMenu{display: block;}
+.effect-fade{-webkit-transform: scale(0.6); -ms-transform: scale(0.6); transform: scale(0.6); opacity: 0; transition: all .4s;}
+.showMenu.effect-fade{-webkit-transform: scale(1); -ms-transform: scale(1);	transform: scale(1); opacity: 1;}
+
 .shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
 .menuDiv{display: none; position: fixed; width: 60%; height: 160px; top: 20%; left: 20%; z-index: 400; background: #fff; 
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
@@ -31,4 +35,7 @@
 .menuContent input{padding: 0 10px;}
 
 .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
-.btn-submit:hover{background: #ccc;}
+.btn-submit:hover{background: #fafafa;}
+
+.btn-new, .btn-bad{width: 100px; height: 30px; line-height: 16px; margin-left: 20px;}
+.btn-new{}

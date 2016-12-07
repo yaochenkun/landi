@@ -54,8 +54,8 @@ var requestRoomItem = function (pageNum) {
 					$("#facDetailTbody").append("<tr><td>"+ perFac.room_ID +"</td>"+
 						"<td>"+ perFac.tag +"</td><td>"+ perFac.comm +"</td>"+
 						"<td><span class='blue' onclick='transferFac(this);''>转移</span>"+
-						"<span class='blue' onclick='gobackToWarehouse(this);'>回仓库</span>"+
-						"<span class='gray' onclick='facBad();'>报废</span>"+
+						"<span class='blue' onclick='requestToWarehouse(this);'>回仓库</span>"+
+						"<span class='gray' onclick='requestFacBad(this);'>报废</span>"+
 						"<span class='recID' style='display:none;'>"+ perFac.id +"</span></td></tr>");
 				}
 				// 添加物品总览 底部页码
@@ -88,27 +88,13 @@ var requestNextRoomItem = function(){
 	requestRoomItem(nowpage+1);
 };
 
-// 将物品回仓库
-// var gobackToWarehouse = function(element){
-// 	var facID = Number($(element).parent().parent().children("td").eq(1).text());
-// 	if(confirm("确定将"+ facID +"回仓库吗？")){
-// 		// 将物品回仓库
-// 		$.ajax({
-// 			url:'/LD/userItem/toWarehouse.action',
-// 			dataType:'json',
-// 			contentType:'application/json',
-// 			data:'"facID":12',
-// 			success:function(data){
-// 				console.log(data);
-// 			}
-// 		});
-// 	}
-// };
-
 // 转移物品到其他房间
 var transferFac = function(element){
 	$(".shadow").css("display","block");
-	$("#transferMenu").css("display","block");
+	$('#transferMenu').css("display","block");
+
+ 	setTimeout(function(){$('#transferMenu').addClass('showMenu');},50);
+	$("#transferMenu").addClass("effect-fade");
 
 	// 即将转移物品在数据库表中的id
 	var recID = $(element).parent().children(".recID").text();
@@ -120,8 +106,10 @@ var transferFac = function(element){
 };
 var closeTransferDiv = function(){
 	$(".shadow").css("display","none");
-	$("#transferMenu").css("display","none");
+	$("#transferMenu").removeClass('showMenu');
 };
+
+// 转移物品
 var requestTransferFac = function(){
 	var recID = Number($("#transferMenu .rec-id").text());
 	var rNum = $("#transferMenu input").val();
@@ -143,20 +131,69 @@ var requestTransferFac = function(){
 	});
 }
 
-// 物品报废
-var facBad = function(element){
+// 物品回仓库
+var requestToWarehouse = function(element){
+	var recID = Number($(element).parent().children(".recID").text());
+	// 将物品回仓库
 	$.ajax({
-		url:'/LD/userItem/facBad.action',
+		url:'/LD/userItem/toWarehouse.action',
+		type:'post',
 		dataType:'json',
 		contentType:'application/json',
-		data:'{"facID":'+ facID +'}',
+		data:'{"recID":'+ recID +'}',
 		success:function(data){
 			console.log(data);
 			if(data == 1){
-				alert("移动成功！")
+				alert("回仓库成功！")
 			} else {
-				alert("移动失败！");
+				alert("回仓库失败！");
 			}
 		}
 	});
 };
+
+// 物品报废
+var requestFacBad = function(element){
+	var recID = Number($(element).parent().children(".recID").text());
+	$.ajax({
+		url:'/LD/userItem/facBad.action',
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		data:'{"recID":'+ recID +'}',
+		success:function(data){
+			console.log(data);
+			if(data == 1){
+				alert("报废成功！")
+			} else {
+				alert("报废失败！");
+			}
+		}
+	});
+};
+
+// 新分配物品
+var newDistribute = function(){
+	$.ajax({
+		url:'/LD/newDistribute.action',
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+		}
+	});
+};
+
+// 新报废
+var newfacBad = function(){
+	$.ajax({
+		url:'/LD/newFacBad.action',
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+		}
+	});
+}

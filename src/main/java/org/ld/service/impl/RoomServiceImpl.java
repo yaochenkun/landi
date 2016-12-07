@@ -189,7 +189,7 @@ public class RoomServiceImpl implements RoomService {
 	public int deleteRI(Integer id) {
 		// TODO Auto-generated method stub
 		try {
-			roomMeterMapper.deleteByPrimaryKey(id);
+			roomItemMapper.deleteByPrimaryKey(id);
 			return 1;
 		} catch (Exception e) {
 			logger.error(e.getCause());

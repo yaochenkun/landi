@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -52,6 +53,7 @@ public class GuestController {
 	 */
 
 	@RequestMapping("/addGuest")
+	@ResponseBody
 	public Map<String, Object> Model(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();

@@ -454,10 +454,10 @@ var addGuest = function(){
     if(addData.length!=0) addData = addData.substring(0,addData.length-1);
 
 	$.ajax({
-		url:"/",
+		url:"/LD/guest/addGuest.action",
 		type:"post",
-		//dataType:'json',
-		//contentType:'application/json',
+		dataType:'json',
+		contentType:'application/json',
 		data:'{' + guestData + hostData + internData + rentData
 
 		    +'"service":{' 

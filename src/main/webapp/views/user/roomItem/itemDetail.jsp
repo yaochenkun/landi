@@ -41,6 +41,8 @@
 			<span class="text">可用：<span class="count"></span></span>
 			<span class="text">已分配：<span class="count"></span></span>
 			<span class="text">报废：<span class="count"></span></span>
+			<a href="javascript:void(0);" onclick="newDistribute();" class="btn btn-new">新分配</a>
+			<a href="javascript:void(0);" onclick="newfacBad();" class="btn btn-bad">新报废</a>
 		</div>
 		<div class="main-page">
 			<div class="bill-area">
@@ -66,7 +68,8 @@
 	</div>
 	<!-- 页面内容 end -->
 	<div class="shadow"></div>
-	<!-- 移动物品弹出框 start -->
+
+	<!-- 转移物品弹出框 start -->
 	<div id="transferMenu" class="menuDiv">
 		<div class="menuContent">
 			<div class="menuTitle">
@@ -83,7 +86,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 移动物品弹出框 end -->
+	<!-- 转移物品弹出框 end -->
 
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
