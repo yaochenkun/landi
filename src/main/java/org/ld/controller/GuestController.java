@@ -139,6 +139,7 @@ public class GuestController {
 		obj = objs.getJSONObject("intern");
 		try {
 			newIntern.setGUEST_ID(newGuest.getID());
+			newIntern.setIN_NAME(obj.getString("STR_Company"));
 			newIntern.setLE_1(obj.getDouble("DOU_LEFirst"));
 			newIntern.setLE_2(obj.getDouble("DOU_LESecond"));
 			newIntern.setLE_3(obj.getDouble("DOU_LEThird"));
@@ -170,14 +171,14 @@ public class GuestController {
 		try {
 			newBalance.setGUEST_ID(newGuest.getID());
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
-			newBalance.setCHARGE_DAY(obj.getInteger("STR_RentNumber"));
-			newBalance.setCHARGE_TURN(obj.getInteger("STR_RentCycle"));
+			newBalance.setCHARGE_DAY(obj.getInteger("INT_RentNumber"));
+			newBalance.setCHARGE_TURN(obj.getInteger("INT_RentCycle"));
 			newBalance.setCHARGE_WAY(obj.getString("STR_RentWay"));
-			newBalance.setRETURN_DAY(obj.getInteger("STR_ReturnNumber"));
-			newBalance.setRETURN_TURN(obj.getInteger("STR_ReturnCycle"));
-			newBalance.setINVOICE_DAY(obj.getInteger("STR_BillNumber"));
-			newBalance.setINVOICE_TURN(obj.getInteger("STR_BillCycle"));
-			newBalance.setINVOICE_AHEAD(obj.getInteger("STR_BillTime"));
+			newBalance.setRETURN_DAY(obj.getInteger("INT_ReturnNumber"));
+			newBalance.setRETURN_TURN(obj.getInteger("INT_ReturnCycle"));
+			newBalance.setINVOICE_DAY(obj.getInteger("INT_BillNumber"));
+			newBalance.setINVOICE_TURN(obj.getInteger("INT_BillCycle"));
+			newBalance.setINVOICE_AHEAD(obj.getInteger("INT_BillTime"));
 			newBalance.setSYS_STATE(0);
 
 			if (guestMissionService.addGuestBalance(newBalance) == 1) {
@@ -248,7 +249,7 @@ public class GuestController {
 					}
 				} else if (key.equals("resource")) {
 					newService.setSYS_STATE(obj2.getBooleanValue("BOOL_Selfpay") ? 5 : 7);
-					newService.setNAME(obj2.getString("resource"));
+					newService.setNAME(key);
 					newService.setLECHARGE(obj2.getDouble("DOU_LECharge"));
 					newService.setLECOUNT(obj2.getInteger("INT_LECount"));
 					newService.setSPCHARGE(obj2.getDouble("DOU_SPCCharge"));
@@ -267,7 +268,7 @@ public class GuestController {
 					}
 				} else {
 					newService.setSYS_STATE(9);
-					newService.setNAME(obj2.getString(key));
+					newService.setNAME(key);
 					newService.setLECHARGE(obj2.getDouble("DOU_LECharge"));
 					newService.setLECOUNT(obj2.getInteger("INT_LECount"));
 					newService.setSPCHARGE(obj2.getDouble("DOU_SPCCharge"));
