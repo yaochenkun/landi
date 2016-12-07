@@ -9,6 +9,7 @@
     <result column="TAG" property="TAG" jdbcType="VARCHAR" />
     <result column="COMM" property="COMM" jdbcType="VARCHAR" />
     <result column="STATE" property="STATE" jdbcType="INTEGER" />
+    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, ROOM_ID, ITEM_ID, TYPE, TAG, COMM, STATE
@@ -131,7 +132,9 @@
 	</select>
 	<select id="getItemsByItemID" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where ITEM_ID = #{ITEM_ID} limit #{ST}, #{EACH}
+  	select room_item.ROOM_ID, room_item.ITEM_ID, room_item.TYPE, room_item.TAG, room_item.COMM, room_item.STATE,
+  	 room.ROOM_NUMBER from room_item left join room on room_item.ROOM_ID = room.ID
+  	  where ITEM_ID = #{ITEM_ID} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getAllItems" resultMap="BaseResultMap" parameterType="map">

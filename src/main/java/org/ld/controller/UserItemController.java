@@ -493,4 +493,91 @@ public class UserItemController {
 		
 		return 1;
 	}
+	
+	@RequestMapping("/toWarehouse") // 物品回仓库
+	@ResponseBody
+	public Integer toWarehouse(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Integer recID = dataJson.getInteger("recID");
+		RoomItem ri = roomService.getCertainRIRec(recID);
+		if(roomService.deleteRI(recID) == 1)
+		{
+			FacSta fs = itemService.getFac(ri.getITEM_ID());
+			fs.setWORKING(fs.getWORKING() - 1);
+			fs.setFREE(fs.getFREE() + 1);
+			itemService.updateFac(fs);
+		} else {
+			return 0;
+		}
+		
+		return 1;
+	}
+	
+	@RequestMapping("/newDistribute") // 新分配物品
+	@ResponseBody
+	public Integer newDistribute(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		int facId = dataJson.getIntValue("facID");
+		String rn = dataJson.getString("rNum");
+		
+		FacSta fs = itemService.getFac(facId);
+		if(fs.getFREE() <= 0)
+		{
+			return 0;
+		}
+		else {
+			fs.setWORKING(fs.getWORKING() + 1);
+			fs.setFREE(fs.getFREE() - 1);
+			itemService.updateFac(fs);
+			RoomItem newRi = new RoomItem();
+			newRi.setCOMM(dataJson.getString("comment"));
+			newRi.setTAG(dataJson.getString("tag"));
+			newRi.setITEM_ID(facId);
+			newRi.setROOM_NUMBER(rn);
+			newRi.setROOM_ID(roomService.getRoomByNumber(rn).getID());
+			newRi.setSTATE(0);
+		}
+		
+		return 1;
+	}
+	
+	@RequestMapping("/newFacBad") // 新报废物品
+	@ResponseBody
+	public Integer newFacBad(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		int facId = dataJson.getIntValue("facID");
+		int count = dataJson.getIntValue("count");
+		
+		FacSta fs = itemService.getFac(facId);
+		if(fs.getFREE() <= count)
+		{
+			return 0;
+		}
+		else {
+			fs.setFREE(fs.getFREE() - count);
+			fs.setTOTAL(fs.getTOTAL() - count);
+			fs.setBAD(fs.getBAD() + count);
+			itemService.updateFac(fs);
+		}
+		
+		return 1;
+	}
 }

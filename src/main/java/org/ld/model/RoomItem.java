@@ -14,6 +14,8 @@ public class RoomItem {
     private String COMM;
 
     private Integer STATE;
+    
+    private String ROOM_NUMBER;
 
     public Integer getID() {
         return ID;
@@ -70,4 +72,12 @@ public class RoomItem {
     public void setSTATE(Integer STATE) {
         this.STATE = STATE;
     }
+
+	public String getROOM_NUMBER() {
+		return ROOM_NUMBER;
+	}
+
+	public void setROOM_NUMBER(String rOOM_NUMBER) {
+		ROOM_NUMBER = rOOM_NUMBER;
+	}
 }

@@ -48,9 +48,13 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 	}
 
 	@Override
-	public List<Guest> getGuestByName(String name) {
+	public List<Guest> getGuestByName(String name, int st, int eachPage) {
 		// TODO Auto-generated method stub
-		return guestMapper.selectByName("%" + name + "%");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		map.put("NAME", "%" + name + "%");
+		return guestMapper.selectByName(map);
 	}
 
 	@Override
@@ -136,5 +140,20 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		return guestMapper.getTotal();
+	}
+	
+	@Override
+	public List<Guest> getGuestList(int st, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return guestMapper.getGuestRange(map);
 	}
 }

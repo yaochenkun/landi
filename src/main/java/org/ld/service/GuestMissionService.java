@@ -12,7 +12,7 @@ public interface GuestMissionService {
 
 	Guest getGuestById(int id);
 
-	List<Guest> getGuestByName(String name);
+	List<Guest> getGuestByName(String name, int st, int eachPage);
 
 	Guest getGuestByRoomNumber(String s);
 
@@ -29,4 +29,8 @@ public interface GuestMissionService {
 	int addGuestService(GuestService t);
 	
 	int delGuest(int id);
+	
+	int getTotal();
+	
+	List<Guest> getGuestList(int st, int eachPage);
 }

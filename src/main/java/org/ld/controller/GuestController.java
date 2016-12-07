@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
+import org.ld.model.DailyService;
 import org.ld.model.Guest;
 import org.ld.model.GuestBalance;
 import org.ld.model.GuestService;
@@ -99,13 +100,13 @@ public class GuestController {
 				System.out.println("Finish Guest");
 			} else {
 				ans.remove("State");
-				ans.put("State", "Invalid");
+				ans.put("State", "Invalid: Guest info error");
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
-			ans.put("State", "Invalid");
+			ans.put("State", "Invalid: Guest info error");
 			return ans;
 		}
 
@@ -124,14 +125,14 @@ public class GuestController {
 				System.out.println("Finish Host");
 			} else {
 				ans.remove("State");
-				ans.put("State", "Invalid");
+				ans.put("State", "Invalid: Host info error");
 				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
-			ans.put("State", "Invalid");
+			ans.put("State", "Invalid: Host info error");
 			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
@@ -155,14 +156,14 @@ public class GuestController {
 				System.out.println("Finish Intern");
 			} else {
 				ans.remove("State");
-				ans.put("State", "Invalid");
+				ans.put("State", "Invalid: Intern info error");
 				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
-			ans.put("State", "Invalid");
+			ans.put("State", "Invalid: Intern info error");
 			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
@@ -185,14 +186,14 @@ public class GuestController {
 				System.out.println("Finish Balance");
 			} else {
 				ans.remove("State");
-				ans.put("State", "Invalid");
+				ans.put("State", "Invalid: Balance info error");
 				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			ans.remove("State");
-			ans.put("State", "Invalid");
+			ans.put("State", "Invalid: Balance info error");
 			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
@@ -220,7 +221,7 @@ public class GuestController {
 							System.out.println("Finish launch");
 						} else {
 							ans.remove("State");
-							ans.put("State", "Invalid");
+							ans.put("State", "Invalid: Launch info error");
 							guestMissionService.delGuest(newGuest.getID());
 							return ans;
 						}
@@ -242,7 +243,7 @@ public class GuestController {
 							System.out.println("Finish service_add");
 						} else {
 							ans.remove("State");
-							ans.put("State", "Invalid");
+							ans.put("State", "Invalid: AddService info error");
 							guestMissionService.delGuest(newGuest.getID());
 							return ans;
 						}
@@ -262,7 +263,7 @@ public class GuestController {
 						System.out.println("Finish service_source");
 					} else {
 						ans.remove("State");
-						ans.put("State", "Invalid");
+						ans.put("State", "Invalid: Resource info error");
 						guestMissionService.delGuest(newGuest.getID());
 						return ans;
 					}
@@ -281,7 +282,7 @@ public class GuestController {
 						System.out.println("Finish service");
 					} else {
 						ans.remove("State");
-						ans.put("State", "Invalid");
+						ans.put("State", "Invalid: Service info error");
 						guestMissionService.delGuest(newGuest.getID());
 						return ans;
 					}
@@ -289,7 +290,7 @@ public class GuestController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				ans.remove("State");
-				ans.put("State", "Invalid");
+				ans.put("State", "Invalid: Data Error");
 				guestMissionService.delGuest(newGuest.getID());
 				return ans;
 			}
@@ -298,8 +299,8 @@ public class GuestController {
 		return ans;
 	}
 
-	@RequestMapping("/Model/")
-	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
+	@RequestMapping("/searchGuestList")
+	public Map<String, Object> searchGuestList(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();
 		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
@@ -308,6 +309,28 @@ public class GuestController {
 		} else {
 			ans.put("State", "Valid");
 		}
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = guestMissionService.getTotal();
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<Guest> record = guestMissionService.getGuestList(st, eachPage);
+
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
 
 		return ans;
 	}

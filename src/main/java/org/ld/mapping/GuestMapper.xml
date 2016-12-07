@@ -237,9 +237,9 @@
     from guest
     where ROOM_NUMBER = #{RN,jdbcType=VARCHAR}
   </select>
-  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="map" >
     <![CDATA[
-  	select * from guest where GUEST_NAME like #{NAME}
+  	select * from guest where GUEST_NAME like #{NAME} limit #{ST}, #{EACH}
     ]]>
   </select>
   <select id="selectByContract" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -248,4 +248,14 @@
     from guest
     where CONTRACT_NUMBER = #{CT,jdbcType=VARCHAR}
   </select>
+  <select id="getTotal" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from guest
+  	]]>
+  </select>
+  <select id="getGuestRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from guest limit #{ST}, #{EACH}
+    ]]>
+	</select>
 </mapper>

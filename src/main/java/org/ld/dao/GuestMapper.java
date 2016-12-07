@@ -1,5 +1,6 @@
 package org.ld.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.ld.model.Guest;
@@ -18,9 +19,13 @@ public interface GuestMapper {
 	int updateByPrimaryKey(Guest record);
 
 	// add
-	List<Guest> selectByName(String NAME);
+	List<Guest> selectByName(HashMap<String, Object> map);
 
 	Guest selectByRoomNumber(String RN);
 
 	Guest selectByContract(String CT);
+	
+	int getTotal();
+	
+	List<Guest> getGuestRange(HashMap<String, Object> map);
 }
