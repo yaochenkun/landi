@@ -41,16 +41,16 @@ var requestPlanDetail = function () {
 						"<td>"+ perFac.type +"</td><td>" + perFac.cat +"</td>"+
 						"<td>"+ perFac.band +"</td><td>"+ perFac.name +"</td>"+
 						"<td>"+ perFac.total +"</td><td><span class='money'>"+ perFac.all_MONEY +"</span>&nbsp;元</td>"+
-						"<td>"+ perFac.all_MONEY +"</td><td>" + perFac.comment +"</td>"+
+						"<td>"+ perFac.already +"</td><td>" + perFac.comment +"</td>"+
 						"<td><span class='caigou' onclick='showCaigouFac(this);'>采购</span>"+
 						"<span style='display:none' class='pdID'>"+ perFac.id +"</span></td></tr>");
 				}
 			}
 		}
 	});
-}
+};
 
-var requestPlanProgress = function(pageNum){
+var requestPlanProgress = function(pageNum,clear){
 	var planID = Number($("#planID").text());
 	console.log("请求计划"+ planID +"第"+ pageNum +"页执行情况");
 	// 请求计划执行情况
@@ -64,10 +64,13 @@ var requestPlanProgress = function(pageNum){
 			console.log(data);
 
 			// 清空采购计划执行情况
-			// $("#planProgressBody").html("");
-
-			if(data.pageList.length == 0){
-				$("#planProgressBody").html("没有计划执行记录");
+			if(clear == 1){
+				$("#planProgressBody").html("");
+				progressPage = 2;
+			}
+			if(!data.pageList){
+				$("#planProgressBody").html("<div style='text-align:center; color: #ff4d4d;'>没有计划执行记录！</div>");
+				return;
 			}
 			pageTotal = data.pageTotal;
 			for(var i=0; i<data.pageList.length; i++){
@@ -91,14 +94,14 @@ var requestPlanProgress = function(pageNum){
 			}
 		}
 	});
-}
+};
 
 // 显示隐藏采购计划执行情况
 var showCaigouFac = function(element){
 	$(".shadow").css("display","block");
 	$('.addItemDiv').css("display","block");
 
- 	setTimeout(function(){$('.addItemDiv').addClass('showMenu');},50);
+ 	setTimeout(function(){$('.addItemDiv').addClass('showMenuModal');},50);
 	$(".addItemDiv").addClass("effect-fade");
 
 	// 弹出框显示物品名称
@@ -110,11 +113,12 @@ var showCaigouFac = function(element){
 	// 弹出框隐藏显示每条采购明细ID
 	var pdID = $(element).parent().children(".pdID").text();
 	$("#pd-id").html(pdID);
-}
+};
 var closeCaigouDiv = function(){
 	$(".shadow").css("display","none");
-	$(".addItemDiv").removeClass('showMenu');
-}
+	$(".addItemDiv").removeClass('showMenuModal');
+	setTimeout(function(){$(".addItemDiv").css("display","none");},200);
+};
 
 // 添加一条采购计划执行记录
 var addPlanProgress = function(){
@@ -143,19 +147,13 @@ var addPlanProgress = function(){
 			console.log(data);
 			if (data == 1) {
 				closeCaigouDiv();
-				$(".shadow").css("display","block");
-				$('.caigouSuccess').css("display","block");
- 				setTimeout(function(){$('.caigouSuccess').addClass('showMenu');},50);
-				$(".caigouSuccess").addClass("effect-fade");
-				setTimeout(closeCaigouSuccessDiv,2000);
+				showModalBox("success","采购成功！");
+				requestPlanDetail();
+				requestPlanProgress(1,1);
 			} else if (data == 0){
-				alert("采购失败！请重试或联系管理员。");
+				closeCaigouDiv();
+				showModalBox("error","采购失败！");
 			}
 		}
 	});
-}
-
-var closeCaigouSuccessDiv = function(){
-	$(".shadow").css("display","none");
-	$(".caigouSuccess").removeClass('showMenu');
-}
+};

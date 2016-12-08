@@ -486,3 +486,15 @@ header .header-content .dropdown-menu li {
 .red {
 	color: red;
 }
+
+/* 弹出页面样式 */
+.shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
+.showMenuModal{display: block;}
+.effect-fade{-webkit-transform: scale(0.6); -ms-transform: scale(0.6); transform: scale(0.6); opacity: 0; transition: all .4s;}
+.showMenuModal.effect-fade{-webkit-transform: scale(1); -ms-transform: scale(1);	transform: scale(1); opacity: 1;}
+
+/* 采购成功弹出框*/
+.successModal, .errorModal{display: none; position: fixed; width: 30%; height: 80px; top: 150px; left: 35%; background-color: #fff; z-index: 500; border-radius: 10px; box-shadow: 0 0 16px rgba(0,0,0,.3);}
+.successModal .text, .errorModal .text{text-align: center; margin: 25px; font-size: 20px;}
+.successModal .text{color: #009805;}
+.errorModal .text{color: #ff4d4d;}

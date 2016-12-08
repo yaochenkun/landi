@@ -15,6 +15,7 @@
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
 	<jsp:include page="../_leftMenu.jsp"></jsp:include>
+	<jsp:include page="../_modal.jsp"></jsp:include>
 
 	<!-- 三级菜单 begin -->
 	<div class="nav-second">
@@ -24,7 +25,6 @@
 					<li class="linormal"><a	href="generalMap.jsp">租客一览图</a></li>
 					<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
 					<li class="liactive"><a	href="newGuest.jsp">新增租客</a></li>
-					<li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li>
 				</ul>
 			</div>
 		</div>
@@ -55,8 +55,7 @@
 						<div class="item item-room">
 							<span class="spanLabel"><span class="red">*&nbsp;</span>房间号：</span>
 							<div class="fl">
-								<input id="guest_roomNumber" type="text" class="text"
-									value="W12" />
+								<input id="guest_roomNumber" type="text" class="text" value="W33-3" />
 							</div>
 							<span class="spanLabel"><span class="red">*&nbsp;</span>户型：</span>
 							<div class="fl"></div>
@@ -64,13 +63,11 @@
 						<div class="item item-tel">
 							<span class="spanLabel"><span class="red">*&nbsp;</span>合同编号：</span>
 							<div class="fl">
-								<input id="guest_contractID" type="text" class="text"
-									value="S131" />
+								<input id="guest_contractID" type="text" class="text" value="S131" />
 							</div>
 							<span class="spanLabel"><span class="red">*&nbsp;</span>联系电话：</span>
 							<div class="fl">
-								<input id="guest_tel" type="text" class="text"
-									value="13581818113" />
+								<input id="guest_tel" type="text" class="text" value="13581818113" />
 							</div>
 						</div>
 						<div class="item item-company">
@@ -92,11 +89,11 @@
 						<div class="item item-time">
 							<span class="spanLabel">入住日期：</span>
 							<div class="fl">
-								<input type="text" class="text" value="2016-11-11" />
+								<input type="text" class="text" value="2016-11-11 11:11:12" />
 							</div>
 							<span class="spanLabel">到期时间：</span>
 							<div class="fl">
-								<input type="text" class="text" value="2017-11-11" />
+								<input type="text" class="text" value="2017-11-11 11:12:12" />
 							</div>
 						</div>
 						<div class="item item-car">
@@ -152,9 +149,9 @@
 							<div class="fl">
 								<input type="text" class="text" value="5000.5" />
 							</div>
-							<span class="spanLabel">其他：</span>
+							<span class="spanLabel">其他费用：</span>
 							<div class="fl">
-								<input type="text" class="text" value="无" />
+								<input type="text" class="text" value="5000.5" />
 							</div>
 						</div>
 					</div>
@@ -591,6 +588,8 @@
 		<a class="bar-top">顶部</a> <a class="bar-bottom">底部</a>
 	</div>
 	<!-- 回到顶部底部 end-->
+
+	<div class="shadow"></div>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

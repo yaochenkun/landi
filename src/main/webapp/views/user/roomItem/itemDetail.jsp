@@ -19,6 +19,7 @@
 
 	<jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
+	<jsp:include page="../_modal.jsp" />
 	
 	<% String itemID = request.getParameter("itemID"); %>
 
@@ -41,8 +42,8 @@
 			<span class="text">可用：<span class="count"></span></span>
 			<span class="text">已分配：<span class="count"></span></span>
 			<span class="text">报废：<span class="count"></span></span>
-			<a href="javascript:void(0);" onclick="newDistribute();" class="btn btn-new">新分配</a>
-			<a href="javascript:void(0);" onclick="newfacBad();" class="btn btn-bad">新报废</a>
+			<a href="javascript:void(0);" onclick="showDistributeModal();" class="btn btn-new">新分配</a>
+			<a href="javascript:void(0);" onclick="showNewfacBadModal();" class="btn btn-bad">新报废</a>
 		</div>
 		<div class="main-page">
 			<div class="bill-area">
@@ -87,6 +88,52 @@
 		</div>
 	</div>
 	<!-- 转移物品弹出框 end -->
+
+	<!-- 新分配物品弹出框 start -->
+	<div id="newDistributeMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				新分配物品
+				<span onclick="closeDistributeDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="room-number" class="item">
+					<span class="span">分配至房间：</span>
+					<div class="item-content"><input type="text" value="W34-1" /></div>
+				</div>
+				<div id="tag-name" class="item">
+					<span class="span">标签：</span>
+					<div class="item-content"><input type="text" value="123" /></div>
+				</div>
+				<div id="fac-comment" class="item">
+						<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="无" /></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewDistribute();">确认分配</a>
+			</div>
+		</div>
+	</div>
+	<!-- 新分配物品弹出框 end -->
+
+	<!-- 新报废弹出框 start -->
+	<div id="facBadMenu" class="menuDiv">
+		<div class="menuContent">
+			<div class="menuTitle">
+				报废物品
+				<span onclick="closeFacBadDiv();">×</span>
+			</div>
+			<div class="menuBody">
+				<span class="rec-id" style="display:none;"></span>
+				<div class="menuContent">请输入报废物品数量：&nbsp;
+					<input type="text" value="2"/>
+				</div>
+				<a class="btn btn-submit" onclick="requestNewFacBad();">确认报废</a>
+			</div>
+		</div>
+	</div>
+	<!-- 新报废弹出框 end -->
 
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

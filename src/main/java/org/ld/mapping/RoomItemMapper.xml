@@ -132,7 +132,7 @@
 	</select>
 	<select id="getItemsByItemID" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select room_item.ROOM_ID, room_item.ITEM_ID, room_item.TYPE, room_item.TAG, room_item.COMM, room_item.STATE,
+  	select room_item.ID, room_item.ROOM_ID, room_item.ITEM_ID, room_item.TYPE, room_item.TAG, room_item.COMM, room_item.STATE,
   	 room.ROOM_NUMBER from room_item left join room on room_item.ROOM_ID = room.ID
   	  where ITEM_ID = #{ITEM_ID} limit #{ST}, #{EACH}
     ]]>

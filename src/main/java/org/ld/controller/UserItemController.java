@@ -233,6 +233,7 @@ public class UserItemController {
 					pd.setALL_MONEY(obj2.getDouble("totalPrice"));
 					pd.setCOMMENT(obj2.getString("comment"));
 					pd.setTOTAL(obj2.getInteger("count"));
+					pd.setALREADY(0);
 					sum += obj2.getDouble("totalPrice");
 
 					Integer ID = obj2.getIntValue("FAC_ID");
@@ -548,8 +549,8 @@ public class UserItemController {
 			newRi.setROOM_NUMBER(rn);
 			newRi.setROOM_ID(roomService.getRoomByNumber(rn).getID());
 			newRi.setSTATE(0);
+			roomService.insertRI(newRi);
 		}
-		
 		return 1;
 	}
 	
@@ -573,7 +574,6 @@ public class UserItemController {
 		}
 		else {
 			fs.setFREE(fs.getFREE() - count);
-			fs.setTOTAL(fs.getTOTAL() - count);
 			fs.setBAD(fs.getBAD() + count);
 			itemService.updateFac(fs);
 		}

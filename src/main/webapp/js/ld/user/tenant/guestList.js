@@ -26,15 +26,19 @@ var requestGuestList = function (pageNum) {
 			for(var i=0; i<data.pageList.length; i++){
 				var perRecord = data.pageList[i];
 
+				var checkIn = formatDate(new Date(perRecord.timein));
+				var checkOut = formatDate(new Date(perRecord.timeout));
+
 				$("#guestListTbody").append("<tr><td>"+ perRecord.guest_NAME +"</td>"+
-					"<td>"+ perRecord.room_NUMBER +"</td><td>"+ perRecord.room_TYPE +"</td>"+
-					"<td>"+ perRecord.tel + "</td><td>"+ perRecord.company +"</td>"+
-					"<td>"+ perRecord.timein + "</td><td>"+ perRecord.persons +"</td>"+
-					"<td>"+ perRecord.car + "</td><td>"+ perRecord.rent +"</td>"+
-					"<td>"+ perRecord.comment +"</td></tr>");
+					"<td>"+ perRecord.room_NUMBER +"</td><td>"+ perRecord.company +"</td>"+
+					"<td>"+ perRecord.title + "</td><td>"+ perRecord.tel +"</td>"+
+					"<td>"+ perRecord.persons + "</td><td>"+ perRecord.parking +"</td>"+
+					"<td>"+ perRecord.charge + "&nbsp;元</td><td>"+ checkIn +"</td>"+  
+					"<td>"+ checkOut + "</td><td>"+ perRecord.comment +"</td>"+
+					"<td><span class='detail'>详情</span></td></tr>");
 			}	
 
-			// 添加电费 底部页码
+			// 添加租客列表 底部页码
 			$("#guestListBottom").append("<div class='bottom-page'>"+
 		        	"<span class='page-before' onclick='requestBeforeGuestList();'>上一页&nbsp;&nbsp;</span>"+
 		        	"<span><input id='guestList_nowpage' value='"+ pageNow +"' type='text' class='input_num'></span>"+

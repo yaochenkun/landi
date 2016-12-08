@@ -19,6 +19,9 @@
 		});
 		$(".shadow").css("display","block");
 		$(".addItemDiv").css("display","block");
+
+		setTimeout(function(){$('.addItemDiv').addClass('showMenuModal');},50);
+		$(".addItemDiv").addClass("effect-fade");
 	});
 
 	// 改变必填项选中
@@ -30,7 +33,8 @@
 	// 1. 关闭弹出框
 	$(".addItemDiv .fac-title span").click(function(){
 		$(".shadow").css("display","none");
-		$(".addItemDiv").css("display","none");
+		$(".addItemDiv").removeClass('showMenuModal'); 
+		setTimeout(function(){$(".addItemDiv").css("display","none");},200);
 	});
 })();
 
@@ -165,8 +169,9 @@ var addOneItem = function(){
 	});
 	$("#item-name .btn-item").each(function(){
 		if($(this).hasClass("item-active")){
-			FACID = $(this).parent().children(".facID").text();
+			FACID = $(this).next(".facID").text();
 			FAC_NAME = $(this).text();
+			console.log("向计划中添加物品ID："+ FACID + "，名字："+FAC_NAME);
 		}
 	});
     // 新增序号
@@ -184,7 +189,8 @@ var addOneItem = function(){
 			"<td class='operation' onclick='deleteOneItem(this)'>删除</td>"+
 			"<td class='facid' style='display:none'>"+ FACID +"</td></tr>");
 	$(".shadow").css("display","none");
-	$(".addItemDiv").css("display","none");
+	$(".addItemDiv").removeClass('showMenuModal');
+	setTimeout(function(){$(".addItemDiv").css("display","none");},200);
 };
 
 // 5. 根据种类、子类和品牌获取物品名称
@@ -251,10 +257,10 @@ var addPlan = function(){
 		success:function(data){
 			console.log(data);
 			if(data == 1){
-				alert("添加成功！");
+				showModalBox("success","添加成功！");
 			}
 			else if(data == 0){
-				alert("添加失败！");
+				showModalBox("error","添加失败！");
 			}
 		}
 	});

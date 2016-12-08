@@ -300,6 +300,7 @@ public class GuestController {
 	}
 
 	@RequestMapping("/searchGuestList")
+	@ResponseBody
 	public Map<String, Object> searchGuestList(HttpSession session, @RequestBody String data) {
 		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> ans = new HashMap<String, Object>();

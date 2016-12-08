@@ -1,3 +1,13 @@
 .bill-table{
 	margin: 50px 0;
 }
+.bill-table thead tr th{width: 7%;}
+.bill-table thead tr th:nth-child(5){width: 9%;}
+.bill-table thead tr th:nth-child(9), .bill-table thead tr th:nth-child(10){width: 12%;}
+
+#guestListTbody .detail{color: #2277da; cursor: pointer;}
+#guestListTbody .detail:hover{border-bottom: 1px solid #2277da;}
+
+.bill-table tbody tr td:nth-child(9), .bill-table tbody tr td:nth-child(10){color: #01069e;}
+
+.bill-table tbody tr td:nth-child(8){color: #ff5722;}

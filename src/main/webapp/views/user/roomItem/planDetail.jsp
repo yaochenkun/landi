@@ -19,6 +19,7 @@
 
 	<jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
+	<jsp:include page="../_modal.jsp" />
 
 	<% String planID = request.getParameter("planID"); %>
 	<% String planName = request.getParameter("planName"); %>
@@ -109,12 +110,6 @@
 		</div>
 	</div>
 	<!-- 执行采购计划 弹出框 start-->
-
-	<!-- 采购物品成功弹出框 start -->
-	<div class="caigouSuccess">
-		<div class="text">采购成功！</div>
-	</div>
-	<!-- 采购物品成功弹出框 start -->
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

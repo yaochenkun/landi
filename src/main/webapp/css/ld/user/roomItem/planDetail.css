@@ -34,10 +34,6 @@ table .money{font-weight: bold;}
 #facTbody .caigou:hover{border-bottom: 1px solid #2277da;}
 
 /************  添加物品弹框 **************/
-.showMenu{display: block;}
-.effect-fade{-webkit-transform: scale(0.6); -ms-transform: scale(0.6); transform: scale(0.6); opacity: 0; transition: all .4s;}
-.showMenu.effect-fade{-webkit-transform: scale(1); -ms-transform: scale(1);	transform: scale(1); opacity: 1;}
-
 .shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
 .addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff; 
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
@@ -58,7 +54,3 @@ table .money{font-weight: bold;}
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .fac-foot .btn-submit:hover{background: #fafafa;}
-
-/* 采购成功弹出框*/
-.caigouSuccess{display: none; position: fixed; width: 30%; height: 80px; top: 150px; left: 35%; background-color: #fff; z-index: 500; border-radius: 10px; box-shadow: 0 0 16px rgba(0,0,0,.3);}
-.caigouSuccess .text{text-align: center; margin: 25px; color: #009805; font-size: 20px;}

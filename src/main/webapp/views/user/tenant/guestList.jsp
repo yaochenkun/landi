@@ -14,7 +14,7 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/tenant/guestList.css" rel="stylesheet" type="text/css" />
-<title>客房物品总览</title>
+<title>租客列表</title>
 </head>
 <body>
 
@@ -29,7 +29,6 @@
 					<li class="linormal"><a	href="generalMap.jsp">租客一览图</a></li>
 					<li class="liactive"><a href="javascript:void(0);">租客一览表</a></li>
 					<li class="linormal"><a	href="newGuest.jsp">新增租客</a></li>
-					<li class="linormal"><a href="javascript:void(0);">服务变更及结算</a></li>
 				</ul>
 			</div>
 		</div>
@@ -47,14 +46,16 @@
 							<tr>
 								<th><span>姓名</span></th>
 								<th><span>房间号</span></th>
-								<th><span>户型</span></th>
-								<th><span>电话</span></th>
 								<th><span>公司</span></th>
-								<th><span>入住时间</span></th>
+								<th><span>职务</span></th>
+								<th><span>电话</span></th>
 								<th><span>入住人数</span></th>
 								<th><span>车位</span></th>
 								<th><span>租金</span></th>
+								<th><span>入住时间</span></th>
+								<th><span>到期时间</span></th>
 								<th><span>备注</span></th>
+								<th><span>操作</span></th>
 							</tr>
 						</thead>
 						<tbody id="guestListTbody"></tbody>

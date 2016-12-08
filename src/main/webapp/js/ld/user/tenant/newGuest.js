@@ -64,10 +64,11 @@ $(function(){
 		$(this).children(".rowOne").toggleClass("td-hover");
 	});
 
-	// 选择饭店按钮
+	// 关闭选择饭店弹出框
 	$(".thick-title span").click(function(){
 		$(".thick-div").css("display","none");
-		$(".thick-box").css("display","none");
+		$(".thick-box").removeClass('showMenuModal');
+		setTimeout(function(){$(".thick-box").css("display","none");},200);
 	});
 
 	// 点击具体饭店
@@ -126,13 +127,19 @@ $(function(){
 var showChooseRestaurant = function(){
 	$(".thick-div").css("display","block");
 	$(".thick-box").css("display","block");
-}
 
-//选择饭店
+ 	setTimeout(function(){$('.thick-box').addClass('showMenuModal');},50);
+	$(".thick-box").addClass("effect-fade");
+
+};
+
+// 确定选择饭店
 var chooseRestaurant = function(){
 	var restaurantCount = Number($(".restaurant .a-active").length);
 	$(".thick-div").css("display","none");
-	$(".thick-box").css("display","none");
+	$(".thick-box").removeClass('showMenuModal');
+	setTimeout(function(){$(".thick-box").css("display","none");},200);
+
 	if(restaurantCount == 0) return;
 
 	// 清空餐券
@@ -247,10 +254,10 @@ var addGuest = function(){
 		Rent = Number($(".tab-content-owner .item-rent input").eq(0).val()),
 		Service = Number($(".tab-content-owner .item-rent input").eq(1).val()),
 		Return = Number($(".tab-content-owner .item-other input").eq(0).val()),
-		Other = $(".tab-content-owner .item-other input").eq(1).val();
+		Other = Number($(".tab-content-owner .item-other input").eq(1).val());
 
 	let hostData = '"host":{"STR_Name":"'+ Name +'","DOU_Rent":'+ Rent +',"DOU_Service":'+ Service +','
-		    +'"DOU_Return":'+ Return +',"STR_Other":"'+ Other +'"},';
+		    +'"DOU_Return":'+ Return +',"STR_Other":'+ Other +'},';
 
 
 	// 获取中介信息
@@ -488,6 +495,11 @@ var addGuest = function(){
 		    +'}',
         success:function(data){
         	console.log(data);
+        	if(data.State == "Valid"){
+        		showModalBox("success","添加成功！");
+        	} else{
+        		showModalBox("error","添加失败！");
+        	}
         }
 	});
 }

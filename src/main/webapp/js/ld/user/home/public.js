@@ -53,4 +53,31 @@ function formatDate(date) {
             + " " + date.getHours() + seperator2 + date.getMinutes()
             + seperator2 + date.getSeconds();
     return currentdate;
+};
+
+// 显示弹出框
+var showModalBox = function(type,content){
+    $(".shadow").css("display","block");
+    if ( type == "success"){
+        $successModal = $('.successModal');
+        $successModal.css("display","block");
+        $successModal.children(".text").text(content);
+        setTimeout(function(){$successModal.addClass('showMenuModal');},50);
+        $successModal.addClass("effect-fade");
+        setTimeout(function(){ 
+            $(".shadow").css("display","none");
+            $successModal.removeClass('showMenuModal');
+            setTimeout(function(){$successModal.css("display","none");},200);},2000);
+    } else if ( type == "error"){
+        $errorModal = $('.errorModal');
+        $errorModal.css("display","block");
+        $errorModal.children(".text").text(content);
+        setTimeout(function(){$errorModal.addClass('showMenuModal');},50);
+        $errorModal.addClass("effect-fade");
+        setTimeout(function(){ 
+            $(".shadow").css("display","none");
+            $errorModal.removeClass('showMenuModal');
+            setTimeout(function(){$errorModal.css("display","none");},200);},2000);
+    }
 }
+
