@@ -6,15 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 <title>擦鞋费</title>
 </head>
 <body>
@@ -25,10 +19,11 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i
-					class="icon-home"></i></a> <i class="icon-path"></i> <a
-					href="serviceIndex.jsp">客房服务</a> <i class="icon-path"></i> <a
-					href="">擦鞋费</a>
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<i class="icon-path"></i> 
+				<a href="serviceIndex.jsp">客房服务</a>
+				<i class="icon-path"></i> 
+				<a href="">擦鞋费</a>
 			</div>
 			<a class="btn btn-new btnnew" href="serviceNew.jsp?type=3">新增擦鞋费记录</a>
 			<div class="bill-area">

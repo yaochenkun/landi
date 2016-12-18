@@ -16,13 +16,13 @@
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
 	
-	<!-- 页面内容 strat -->
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i
-					class="icon-home"></i></a> <i class="icon-path"></i> <a
-					href="serviceIndex.jsp">客房服务</a>
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<i class="icon-path"></i>
+				<a href="serviceIndex.jsp">客房服务</a>
 				<% String type = request.getParameter("type"); 
 				   String contentOne = "", contentTwo = "", contentThree = "";
 				   if(type.matches("1")){
@@ -38,8 +38,9 @@
 				   		contentOne = "代购费"; contentTwo = "新增代购费记录"; 
 				   		contentThree = "serviceShopping.jsp";}
 				%>
-				<i class="icon-path"></i> <a id="serviceType"
-					href="<%=contentThree %>"><%=contentOne %></a> <i class="icon-path"></i>
+				<i class="icon-path"></i>
+				<a id="serviceType" href="<%=contentThree %>"><%=contentOne %></a>
+				<i class="icon-path"></i>
 				<a href="javascript:void(0);"><%=contentTwo %></a>
 			</div>
 			<div class="body">
@@ -60,15 +61,12 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceNew.js"></script>
+	<!-- 页面内容 end -->
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceNew.js"></script>
 </body>
 </html>

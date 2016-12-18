@@ -8,40 +8,48 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceIndex.css" rel="stylesheet" type="text/css" />
-<title>客房服务</title>
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
+<title>添加洗衣单收费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
-
-	<!-- 页面内容 strat -->
+	
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
 				<a href="serviceIndex.jsp">客房服务</a>
+				<i class="icon-path"></i>
+				<a id="serviceType" href="serviceWash.jsp">洗衣单收费</a>
+				<i class="icon-path"></i>
+				<a href="javascript:void(0);">新增洗衣单收费记录</a>
 			</div>
 			<div class="body">
-				<div class="content-title content-title-index">
+				<div class="body-content">
 					<ul>
-						<li><div class="icon"></div><a href="serviceWash.jsp">洗衣单收费</a></li>
-						<li><div class="icon"></div><a href="serviceTakeaway.jsp">餐费</a></li>
-						<li><div class="icon"></div><a href="serviceWaterBill.jsp">桶装水费</a></li>
-						<li><div class="icon"></div><a href="serviceShoeCleaning.jsp">擦鞋费</a></li>
-						<li><div class="icon"></div><a href="serviceShopping.jsp">代购费</a></li>
-						<li><div class="icon"></div><a href="serviceBus.jsp">车费</a></li>
+						<li><span class="span">房间号：</span>
+							<input id="serviceRoomNumber" type="text" value="W35-1" />
+							<span class="red red-right">*&nbsp;必填</span></li>
+						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
+						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">总件数：</span><input type="text" value="1" /></li>
+						<li><span class="span">价格：</span><input type="text" value="120" /></li>
+						<li><span class="span"></span><a onclick="addserviceWash();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- 页面内容 end -->
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWash.js"></script>
 </body>
 </html>

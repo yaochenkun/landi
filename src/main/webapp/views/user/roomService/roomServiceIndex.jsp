@@ -22,8 +22,8 @@
 			<div class="title">
 				<div class="right">
 					<a class="span" href="service/serviceIndex.jsp">客房服务</a>&nbsp;|&nbsp;
-					<a class="span" href="javascript:void(0);">客房维修</a>&nbsp;|&nbsp; <a
-						class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;
+					<a class="span" href="javascript:void(0);">客房维修</a>&nbsp;|&nbsp; 
+					<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;
 					<a class="span" href="javascript:void(0);">客房费用结算</a>
 				</div>
 			</div>
@@ -32,20 +32,20 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><img
-								src="${pageContext.request.contextPath}/img/roomService/shirt.svg">
-								<span>客房服务</span></li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/shirt.svg">
+								<span>客房服务</span>
+							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="content-title content-title-index active content-wash">
 					<ul>
-						<li><a href="">洗衣单收费</a></li>
+						<li><a href="service/serviceWash.jsp">洗衣单收费</a></li>
 						<li><a href="service/serviceTakeaway.jsp">餐费</a></li>
 						<li><a href="service/serviceWaterBill.jsp">桶装水费</a></li>
 						<li><a href="service/serviceShoeCleaning.jsp">擦鞋费</a></li>
 						<li><a href="service/serviceShopping.jsp">代购费</a></li>
-						<li><a href="">车费</a></li>
+						<li><a href="service/serviceBus.jsp">车费</a></li>
 					</ul>
 				</div>
 				<!-- 客房服务 end -->
@@ -54,9 +54,9 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><img
-								src="${pageContext.request.contextPath}/img/roomService/tools.svg">
-								<span>客房维修</span></li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/tools.svg">
+								<span>客房维修</span>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -73,9 +73,9 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><img
-								src="${pageContext.request.contextPath}/img/roomService/drops.svg">
-								<span>能源费结算</span></li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/drops.svg">
+								<span>能源费结算</span>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -92,9 +92,9 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><img
-								src="${pageContext.request.contextPath}/img/roomService/calculate.svg">
-								<span>客房费用结算</span></li>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/calculate.svg">
+								<span>客房费用结算</span>
+							</li>
 						</ul>
 					</div>
 				</div>
