@@ -3,6 +3,16 @@
 		$(this).removeClass("border-red");
 		$("#roomIdWarning").css("display","none");
 	});
+
+	// 洗衣单弹出框选择衣服种类
+	$(".item-content a").click(function(){
+		$(".item-content a").each(function(){
+			if($(this).hasClass("active")){
+				$(this).removeClass("active");
+			}
+		});
+		$(this).addClass("active");
+	});
 })();
 
 
@@ -66,7 +76,6 @@ var addserviceWash = function(){
 	}
 	requestAddServiceWash();
 }; 
-
 var requestAddServiceWash = function(){
 	console.log("添加房间洗衣单收费！");
 	$.ajax({
@@ -78,4 +87,42 @@ var requestAddServiceWash = function(){
 			console.log(data);
 		}
 	});
+};
+
+
+/////////////////////////////////////////////////////选择衣服种类弹出框
+// 选择衣服种类
+var chooseClothes = function(){
+	$(".shadow").css("display","block");
+	$(".addItemDiv").css("display","block");
+
+	setTimeout(function(){$('.addItemDiv').addClass('showMenuModal');},50);
+	$(".addItemDiv").addClass("effect-fade");
+};
+// 关闭选择衣服种类弹出框
+var closeClothesDiv = function(){
+	$(".shadow").css("display","none");
+	$(".addItemDiv").removeClass('showMenuModal'); 
+	setTimeout(function(){$(".addItemDiv").css("display","none");},200);
+};
+// 选择一件衣服
+var addOneWashCloth = function(){
+	var text = "";
+	$(".item-content a").each(function(){
+		if($(this).hasClass("active")){
+			text = $(this).text();
+		}
+	});
+	var count = Number($("#item-count input").val());
+	$("#clothList").append("<div class='perCloth'><span class='clothType'>"+ text +"</span>"
+		+"<span class='count'>"+ count +"</span>&nbsp;件"
+		+"<a class='delete' onclick='deleteCloth(this);' href='javascript:void(0);'>删除</a></div>");
+
+	$("#clothTotal").text(Number($("#clothTotal").text()) + count);
+	closeClothesDiv();
+}; 
+// 删除选择的衣服
+var deleteCloth = function(element){
+	$("#clothTotal").text(Number($("#clothTotal").text()) - Number($(element).parent().children(".count").text()));
+	$(element).parent().remove();
 };

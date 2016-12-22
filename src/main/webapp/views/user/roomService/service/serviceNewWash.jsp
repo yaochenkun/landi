@@ -36,8 +36,10 @@
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
-						<li><span class="span">总件数：</span><input type="text" value="1" /></li>
-						<li><span class="span">价格：</span><input type="text" value="120" /></li>
+						<li><span class="span">衣服种类：</span><div class="btn btn-choose" onclick="chooseClothes();">选择</div>
+						<li id="clothList"></li>
+						<li><span class="span">总件数：</span><span class='clothText' id="clothTotal">0</span>&nbsp;件</li>
+						<li><span class="span">总价：</span><input type="text" value="120" /></li>
 						<li><span class="span"></span><a onclick="addserviceWash();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
@@ -45,6 +47,52 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
+	
+	<!-- 选择衣服种类 弹出框 start -->
+	<div class="shadow"></div>
+	<div class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				选择衣服种类
+				<span onclick="closeClothesDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-type" class="item">
+					<span class="span">衣服种类：</span>
+					<div class="item-content">
+						<a href="javascript:void(0);">衬衫</a>
+						<a href="javascript:void(0);">西装上衣</a>
+						<a href="javascript:void(0);">裤子</a>
+						<a href="javascript:void(0);">夹克</a>
+						<a href="javascript:void(0);">外套（中）</a>
+						<a href="javascript:void(0);">外套（长）</a>
+						<a href="javascript:void(0);">棉质外套（短）</a>
+						<a href="javascript:void(0);">棉质外套（中）</a>
+						<a href="javascript:void(0);">棉质外套（长）</a>
+						<a href="javascript:void(0);">羊绒外套</a>
+						<a href="javascript:void(0);">短裤</a>
+						<a href="javascript:void(0);">马甲</a>
+						<a href="javascript:void(0);">T恤</a>
+						<a href="javascript:void(0);">羊毛衫</a>
+						<a href="javascript:void(0);">领带</a>
+						<a href="javascript:void(0);">长裙</a>
+						<a href="javascript:void(0);">短裙</a>
+						<a href="javascript:void(0);">其他</a>
+					</div>
+				</div>
+
+				<div id="item-count" class="item">
+					<span class="span">数量：</span>
+					<div class="item-content"><input type="text" value="1" /></div>
+				</div>
+
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="addOneWashCloth();">确定</a>
+			</div>
+		</div>
+	</div>
+	<!-- 选择衣服种类 弹出框 start -->
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

@@ -43,3 +43,16 @@
 .goback {
 	margin-top: 1.5em;
 }
+
+/* ******* 新增洗衣单收费样式 ***** */
+.btn-choose{width: 100px; height: 28px; line-height: 14px; border-color: #999;}
+.addItemDiv{height: 420px;}
+.fac-body{max-height: 324px;}
+
+#clothList{margin-left: 120px; margin-bottom: 2em; height: initial; margin-right: 200px;}
+.perCloth{margin-bottom: 1em; border-bottom: 1px dashed #aaa; padding: 3px 10px;}
+.perCloth .clothType{width: 160px; display: inline-block;}
+.perCloth .count{color: #2277da; font-weight: bold; font-size: 16px;}
+.perCloth .delete{float: right; color: red;}
+
+.clothText{font-weight: bold; color: #2277da; font-size: 16px;}

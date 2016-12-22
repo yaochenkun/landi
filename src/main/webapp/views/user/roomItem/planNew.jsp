@@ -76,7 +76,7 @@
 		</div>
 	</div>
 
-
+	<!-- 添加采购计划物品弹出框 start -->
 	<div class="shadow"></div>
 	<div class="addItemDiv">
 		<div class="facContent">
@@ -123,6 +123,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- 添加采购计划物品弹出框 end -->
 
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

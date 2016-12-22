@@ -1,7 +1,5 @@
-table{border: 1px solid #999;}
-
 td{border: 1px solid #aaa; line-height: 26px; padding: 8px 0;}
-tbody td:nth-child(1){font-weight: bold; width: 30%; font-size: 16px; background-color: #f5f5f5; border-right: 2px solid #333; color: #555;}
+tbody td:nth-child(1){font-weight: bold; width: 30%; font-size: 16px; background-color: #f5f5f5; color: #555;}
 tbody td:nth-child(1) span{font-weight: normal; font-size: 10px; display: block; color: #888;}
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px;}
@@ -9,3 +7,4 @@ tbody td:nth-child(1) span{font-weight: normal; font-size: 10px; display: block;
 
 .bottom-page{margin: 0; margin-top: 3em;}
 .bottom-page .recorTotal{color: #2277da;}
+
