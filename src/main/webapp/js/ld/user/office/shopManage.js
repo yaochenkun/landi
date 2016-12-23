@@ -1,23 +1,24 @@
-// 请求本月所有商品信息
-var requestshopList = function(){
+// 根据日期查询商品信息
+var requestShopListByDate = function(date){
+	console.log("查询商品日期："+date);
 	// $.ajax({
-	// 	url:'/LD/',
+	// 	url:'/LD/searchShopListByDate',
 	// 	type:'post',
-	// 	contentTypr:'application/json',
 	// 	dataType:'json',
+	// 	contentType:'application/json',
 	// 	data:'{}',
-		// success:function(data){
-			// console.log(data);
+	// 	success:function(data){
+	// 		console.log(data);
+			// 清空列表
+			$("#shopListTbody").html("");
 			for(var i=0; i<2; i++){
 				$("#shopListTbody").append("<tr><td>虾条</td><td>1&nbsp;元</td><td>1&nbsp;元</td>"+
 					"<td>1</td><td>1</td><td>1</td><td>1</td><td>"+
 					"<span class='buy' onclick='showBuyGoodsDiv(this);'>买</span>"+
 					"<span class='sale' onclick='showSaleGoodsDiv(this);'>卖</span>"+
 					"<span class='use' onclick='showUseGoodsDiv(this);'>自用</span></td>"+
-					"<td><span class='annualSale'>查看年销售量</span></td></tr>");
-
-			}
-	// 	}
+					"<td><a href='shopAnnualSale.jsp?goodId="+ 1 +"' class='annualSale' >查看年销售量</a></td></tr>");
+		}
 	// });
 };
 
@@ -71,7 +72,7 @@ var requestSaleGoods = function(){
 	// 		console.log(data);
 	// 	}
 	// });
-}
+};
 
 // 显示自用商品弹出框
 var showUseGoodsDiv = function(element){
@@ -81,7 +82,7 @@ var showUseGoodsDiv = function(element){
 // 关闭自用商品弹出框
 var closeUseGoodsDiv = function(){
 	closePopMenu("useGoodsMenu");
-}
+};
 // 请求自用商品
 var requestUseGoods = function(){
 	var count = Number($("#useGoodsMenu input").val());
@@ -97,7 +98,7 @@ var requestUseGoods = function(){
 	// 		console.log(data);
 	// 	}
 	// });
-}
+};
 
 var showPopMenu = function(DivId){
 	var $popDiv = $("#" + DivId);

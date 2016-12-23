@@ -1,15 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
-<%@ page import="java.util.Date, java.text.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateCustom.css"/>
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/office/shopManage.css" rel="stylesheet" type="text/css" />
@@ -17,7 +16,7 @@
 </head>
 <body>
 
-	<jsp:include page="../_header.jsp" />
+    <jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
 
 	<div class="nav-second">
@@ -35,10 +34,20 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<span class="span">商品名：</span>
-				<input type="text" value="" id="plan_id" />
+				<div class="chooseGoodsName">
+					<span class="span">商品名：</span>
+					<input type="text" value="" id="plan_id" />
+				</div>
+				<div class="calendarPart">
+					<span class="span">日期：</span>
+					<div class="tool_date cf">
+						<div class="ta_date" id="div_month_picker">
+							<span class="date_title" id="month_picker"></span>
+						</div>
+					</div>
+				</div>
 			</div>
-			<a class="btn btn-new btnnew" href="planNew.jsp">新增商品</a>
+			<a class="btn btn-new btnnew" href="shopNew.jsp">新增商品</a>
 			<div class="bill-area">
 				<div class="bill-table">
 					<!-- 费用 table start -->
@@ -122,13 +131,22 @@
 	</div>
 	<!-- 自用商品弹出框 end -->
 
+
+
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/calendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/dateRange.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/monthPicker.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/office/shopManage.js"></script>
 	<script>
-	    // 请求本月第一页小卖部商品信息
-		requestshopList(1);
+		// 创建时间插件 并 请求本月所有商品信息
+		monthPicker.create('month_picker', {
+			autoCommit : true,
+			callback : function(obj){
+				requestShopListByDate(obj);
+			}
+	  	});
 	</script>
 </body>
-</html>

@@ -44,12 +44,6 @@
 
 		<!-- 房间信息 start -->
 		<div class="tab-content">
-			<div class="tab-header">
-				<div>
-					<span class="flag">1</span>
-					<h3>房间信息</h3>
-				</div>
-			</div>
 			<div class="room-guest room">
 				<div class="noData">没有房间信息！</div>
 				<div class="roomInfo">
@@ -77,12 +71,6 @@
 
 		<!-- 租客信息 start -->
 		<div class="tab-content">
-			<div class="tab-header">
-				<div>
-					<span class="flag">2</span>
-					<h3>租客信息</h3>
-				</div>
-			</div>
 			<div class="room-guest user">
 				<div class="noData">没有租客信息！</div>
 				<div class="userInfo">
@@ -114,13 +102,6 @@
 
 		<!-- 物品信息 start -->
 		<div class="tab-content">
-			<div class="tab-header">
-				<div>
-					<span class="flag">3</span>
-					<h3>物品信息</h3>
-				</div>
-			</div>
-
 			<!-- 家具信息 start -->
 			<div class="room-item">
 				<div class="inner-table">

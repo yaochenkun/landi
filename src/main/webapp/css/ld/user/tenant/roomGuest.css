@@ -13,9 +13,6 @@
 .body-content .tab-content {
   margin-bottom: 60px;
 }
-.body-content .tab-content .tab-header {
-  margin-bottom: 10px;
-}
 .body-content .tenant-title {
   text-align: center;
   padding-top: 20px;
@@ -24,17 +21,6 @@
 .body-content .tenant-title .roomNumber {
   font-size: 22px;
   font-weight: bold;
-}
-.body-content .flag {
-  height: 25px;
-  width: 25px;
-  display: inline-block;
-  background-color: #444;
-  color: #fff;
-  border-radius: 50%;
-  font-size: 15px;
-  margin-right: 10px;
-  padding: 2px 8px;
 }
 .body-content .btngoback {
   width: 120px;
@@ -55,6 +41,9 @@ h3 {
 }
 .room-guest {
   background: #fafafa;
+  margin-top: 2em;
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
 }
 .room-guest .ul {
   float: left;

@@ -1,3 +1,44 @@
+/* 日历样式 */
+.calendarPart{
+	margin-top: 4em;
+	font-size: 14px;
+}
+
+.calendarPart .date{
+	margin-right: 1em;
+}
+
+.ta_date{
+	float: none;
+	display: inline-block;
+	width: 200px;
+	border-radius: 0px;
+	webkit-border-radius: 0px;
+	border-color: #aaa;
+	background: #fff;
+    box-shadow: none;
+}
+.ta_calendar table caption{
+	line-height: 20px;
+}
+.i_pre{
+	background-position: 1px 0;
+}
+.i_pre:hover{
+	background-position: -45.5px 0;
+}
+.ta_date .date_title{
+	border-right: none;
+}
+.ta_ipt_text, .ta_ipt_textarea, .ta_ipt_text_s{
+	padding: 10px 4px;
+}
+
+.ta_calendar_footer{
+	height: 46px;
+}
+
+/* 查房图片样式*/
 .body-content{
 	width: 1100px;
 	margin: 0 auto;
@@ -147,7 +188,7 @@
 /** 上传图片样式 **/
 .uploadPic {
 	position: absolute;
-	top: 0;
+	top: -84px;
 	left: 550px;
 	width: 480px;
 }

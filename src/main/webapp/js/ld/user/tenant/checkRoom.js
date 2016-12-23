@@ -89,6 +89,11 @@ var requestRoomPic = function(room_id){
     })
 };
 
+// 根据日期查询查房状态
+var requestRoomPicByDate = function(startDate, endDate){
+    console.log("查询查房状态，开始时间" + startDate + "，结束时间：" + endDate);
+};
+
 // 根据 roomNumber查询 roomID
 var getRoomIDByNumber = function(roomNumber){
 	console.log(roomNumber);

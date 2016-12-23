@@ -1,11 +1,21 @@
+.nav-path:before,.nav-path:after { content:""; display:table;}
+.nav-path:after{clear:both;}
+.nav-path{*zoom:1;}
 .nav-path input{height: 24px; padding: 0 10px;}
+.chooseGoodsName{float: left;}
 
+/* 选择日期样式 */
+.calendarPart{font-size: 14px;}
+.calendarPart .span{float: left; margin-left: 2em;}
+
+
+/*  商品表格样式 */
 #shopListTbody .buy{color: #2277da;}
 #shopListTbody .sale{color: green;}
 #shopListTbody .use{color: #004ca5;}
 #shopListTbody .annualSale{color: #999;}
 #shopListTbody span{margin-left: 1em; cursor: pointer;}
-#shopListTbody span:hover{border-bottom-width: 1px; border-bottom-style: solid;}
+#shopListTbody span:hover, #shopListTbody a:hover{border-bottom-width: 1px; border-bottom-style: solid;}
 
 #shopListTbody td:nth-child(2), #shopListTbody td:nth-child(3){color: #ff5722;}
 #shopListTbody td:nth-child(6){color: #999;}
@@ -25,3 +35,17 @@
 .btn-submit:hover{background: #fafafa;}
 
 .goodsName{color: #2277da;}
+
+/* 新增商品 样式 */
+.body{margin-top: 7em;}
+.body-content li:first-child{margin-bottom: 1em;}
+.body-content li:nth-child(2) .span{width: 116px;}
+.firstGoback{float: right; margin-right: 14em; width: 120px;}
+
+#goodsNameWarning {
+	display: none;
+	position: absolute;
+	margin-top: -25px;
+	margin-left: 25px;
+	font-size: 12px;
+}

@@ -1,0 +1,50 @@
+.ta_date{
+	border: 1px solid #aaa;
+	-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	background: #fff;
+	box-shadow: none;
+	-webkit-box-shadow:none;
+	height: 24px;
+}
+
+.tool_date.cf{
+	float: left;
+	height: 28px;
+}
+
+.ta_date .date_title{
+	border-right: none; 
+	display: inline-block; 
+	width: 150px;
+	padding: 0 10px;
+}
+
+::selection {
+	background-color: #E13300;
+	color: white;
+}
+::moz-selection {
+	background-color: #E13300;
+	color: white;
+}
+::webkit-selection {
+	background-color: #E13300;
+	color: white;
+}
+
+.calendar-month caption span:hover{
+	color: #444;
+	border :none;
+}
+
+.calendar caption{
+	line-height: 26px;
+}
+.i_pre{
+	background-position: 0.5px 0;
+}
+.i_pre:hover{
+	background-position: -45.5px 0;
+}
