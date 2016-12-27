@@ -99,18 +99,3 @@ var requestUseGoods = function(){
 	// 	}
 	// });
 };
-
-var showPopMenu = function(DivId){
-	var $popDiv = $("#" + DivId);
-	$(".shadow").css("display","block");
-	$popDiv.css("display","block");
-
-	setTimeout(function(){$popDiv.addClass('showMenuModal');},50);
-	$popDiv.addClass("effect-fade");
-};
-var closePopMenu = function(DivId){
-	var $popDiv = $("#" + DivId); 
-	$(".shadow").css("display","none");
-	$popDiv.removeClass('showMenuModal'); 
-	setTimeout(function(){$popDiv.css("display","none");},200);
-};

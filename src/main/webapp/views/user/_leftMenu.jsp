@@ -32,9 +32,9 @@
 				<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;办公室管理</a>
 			</li>
 
-			<li><a class="linormal" href="javascript:void(0);">
+<!-- 			<li><a class="linormal" href="javascript:void(0);">
 				<span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;其他</a>
-			</li>
+			</li> -->
 		</ul>
 	</div>
 </div>

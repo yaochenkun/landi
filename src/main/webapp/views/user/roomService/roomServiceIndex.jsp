@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,7 +21,7 @@
 			<div class="title">
 				<div class="right">
 					<a class="span" href="service/serviceIndex.jsp">客房服务</a>&nbsp;|&nbsp;
-					<a class="span" href="javascript:void(0);">客房维修</a>&nbsp;|&nbsp; 
+					<a class="span" href="maintain/maintainIndex.jsp">客房维修</a>&nbsp;|&nbsp; 
 					<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;
 					<a class="span" href="javascript:void(0);">客房费用结算</a>
 				</div>
@@ -62,9 +61,9 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<li><a href="">维修报修</a></li>
-						<li><a href="">维修管理</a></li>
-						<li><a href="">维修统计</a></li>
+						<li><a href="maintain/maintainNew.jsp">维修报修</a></li>
+						<li><a href="maintain/maintainManage.jsp">维修管理</a></li>
+						<li><a href="maintain/maintainStat.jsp">维修统计</a></li>
 					</ul>
 				</div>
 				<!-- 客房维修 end -->

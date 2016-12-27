@@ -1,0 +1,11 @@
+.main{margin-top: 80px;}
+
+.roomInfo{display: inline-block; margin-bottom: 1em;}
+.goback{width: 120px; float: right;}
+
+
+table{width: 100%; margin: 2em 0; border: }
+table td{height: 40px; text-align: center; border: 1px solid #aaa; width: 8%; padding: 5px 2px;}
+
+table .itemName{background: #eee; color: #222;}
+#detailThree td:nth-child(10){background: #cde2ff;}

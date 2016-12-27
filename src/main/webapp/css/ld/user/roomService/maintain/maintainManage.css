@@ -1,0 +1,60 @@
+.main{margin-top: 70px;}
+
+.main-page .nav-path {
+	padding: 20px 0;
+	line-height: 22px;
+}
+
+.nav-path a {
+	color: #2277da;
+}
+
+.nav-path a:hover {
+	border-bottom: 1px solid #2277da;
+}
+
+.icon-home {
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 14px;
+	height: 13px;
+	background-position: -68px -59px;
+}
+
+.icon-path {
+	margin: 0 5px;
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 8px;
+	height: 11px;
+	background-position: -84px -59px;
+}
+
+.table-title:before,.table-title:after { content:""; display:table;}
+.table-title:after{clear:both;}
+.table-title{*zoom:1; margin-top: 1em;}
+.table-title .btnExcel{float: right;}
+
+#maintainManageTbody .trace{color: #2277da; cursor: pointer;}
+#maintainManageTbody .confirm{color: green; margin-left: 10px; cursor: pointer;}
+#maintainManageTbody .trace:hover, #maintainManageTbody .confirm:hover{border-bottom-width: 1px; border-bottom-style: solid;}
+
+.maintainItemType{float: left;}
+.maintainItemType .span{float: left; margin-right: 1em;}
+.maintainItemType .itemType{position: relative; display: inline-block; width: 140px; height: 20px; cursor: pointer; border: 1px solid #ccc;}
+
+/* 弹出框样式 */
+.menuDiv{display: none; position: fixed; width: 60%; height: 160px; top: 20%; left: 20%; z-index: 400; background: #fff; 
+	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
+.menuDiv .menuTitle{height: 35px; line-height: 35px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
+.menuDiv .menuTitle span{float: right; font-size: 24px; cursor: pointer;}
+.menuDiv .menuTitle span:hover{color: #666;}
+
+.menuBody{overflow-y: auto; padding: 40px; padding-bottom: 0;}
+.menuBody .roomNumber{color: #2277da;}
+.menuContent input{padding: 0 10px;}
+
+.btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
+.btn-submit:hover{background: #fafafa;}
+
+.goodsName{color: #2277da;}

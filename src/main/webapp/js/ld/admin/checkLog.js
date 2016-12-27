@@ -30,15 +30,23 @@ var getLogs = function() {
             lastPageLog = arrayKey.length - logPerPage*(totalLogPage-1);
 
             $(".log-detail").html("");
-        	// 第一页日志
-            for(var i=0; i<logPerPage; i++){
+
+        	// 显示第一页日志
+            if(totalLogPage == 1){
+                var logPage = arrayKey.length;
+            }
+            else{
+                var logPage = logPerPage;
+            }
+            for(var i=0; i<logPage; i++){
+                // console.log(logMap[arrayKey[i]]);
                 var filePath = logMap[arrayKey[i]].replace(/\\/g,"/");
                 var perlog = $("<div class='perlog'><div class='log-title'><span class='normal-log'>普通日志</span>"+
                    arrayKey[i] +"</div><div class='btn btn-edit btndownload' onclick=\"downloadLog('"+ filePath +"')\">下载</div></div>");
                 $(".log-detail").append(perlog);
 
             }
-            // 底部页码
+            // 显示底部页码
             var bottomPage = $("<div class='bottom-page'>"+
                 "<span class='page-before' onclick='requestBeforeLog();'>上一页&nbsp;&nbsp;</span>"+
                 "<span><input id='log_nowpage' value='"+ 1 +"' type='text' class='input_num'></span>"+
@@ -48,15 +56,15 @@ var getLogs = function() {
             $("#log-bottom").append(bottomPage);
         }
 	});
-}
+};
 
 // 下载指定的文件
 var downloadLog = function(filePath){
     console.log("filePath:"+filePath);
 	window.location.href = "http://" + window.location.host + "/LD/download.action?fp=" + filePath;
-}
+};
 
-// 获取上一页数据
+// 获取上一页日志
 var requestBeforeLog = function() {
     if($("#log_nowpage").val()==1) return;
     else{
@@ -71,9 +79,9 @@ var requestBeforeLog = function() {
         }
         $("#log_nowpage").val(Number($("#log_nowpage").val())-1);
     }
-}
+};
 
-// 获取下一页数据
+// 获取下一页日志
 var requestNextLog = function() {
     if(Number($("#log_nowpage").val()) == Number($("#log_totalpage").text())) return;
     else{
@@ -94,4 +102,4 @@ var requestNextLog = function() {
         }
         $("#log_nowpage").val(Number($("#log_nowpage").val())+1);
     }
-}
+};

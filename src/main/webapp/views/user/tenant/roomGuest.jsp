@@ -28,7 +28,7 @@
 				<ul>
 					<li class="liactive"><a href="javascript:void(0);">房间信息</a></li>
 					<li><a href="roomCheck.jsp?rid=<%=rid%>&rNum=<%=rNum%>">查房状态</a></li>
-					<li><a href="javascript:void(0);">维修状态</a></li>
+					<li><a href="roomMaintain.jsp?rid=<%=rid%>&rNum=<%=rNum%>">维修状态</a></li>
 					<!-- <li class="linormal"><a href="javascript:void(0);">其他</a></li> -->
 				</ul>
 			</div>

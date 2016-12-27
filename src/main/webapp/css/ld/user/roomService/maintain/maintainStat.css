@@ -1,0 +1,44 @@
+.main{margin-top: 70px;}
+
+.main-page .nav-path {
+	padding: 20px 0;
+	line-height: 22px;
+}
+
+.nav-path a {
+	color: #2277da;
+}
+
+.nav-path a:hover {
+	border-bottom: 1px solid #2277da;
+}
+
+.icon-home {
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 14px;
+	height: 13px;
+	background-position: -68px -59px;
+}
+
+.icon-path {
+	margin: 0 5px;
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 8px;
+	height: 11px;
+	background-position: -84px -59px;
+}
+
+/* ****** 维修统计表格样式 ******  */
+.bill-table thead tr{background: #eee;}
+.bill-table thead tr th span{color: #222;}
+.bill-table tbody tr:hover{background: #fbfbfb;}
+#theadFirst th:nth-child(2){width: 12%;}
+
+#theadSecond th{width: 6%;}
+#theadSecond th:nth-child(5){width: 12%;}
+#theadSecond th:nth-child(6){width: 10%;}
+
+#maintainStatTbody .detail{color: #2277da;}
+#maintainStatTbody .detail:hover{border-bottom-width: 1px; border-bottom-style: solid;}

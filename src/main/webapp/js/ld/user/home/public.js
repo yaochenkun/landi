@@ -16,11 +16,11 @@ $(function(){
     $(".homeMenu").click(function(){
         $(".main-nav").animate({width:"160px"}, 100);
         // 菜单箭头样式
-        setInterval(function(){$("i:nth-child(3)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500);
+        setInterval(function(){$(".i3").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500);
           setTimeout(function(){
-              setInterval(function(){$("i:nth-child(2)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500); 
+              setInterval(function(){$(".i2").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);},2500); 
               setTimeout(function(){
-                 setInterval(function(){$("i:nth-child(1)").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);
+                 setInterval(function(){$(".i1").animate({"opacity":"0.1"},500).animate({"opacity":"1"},1000);
             },2500);},400);},200
         );
     });
@@ -55,7 +55,39 @@ function formatDate(date) {
     return currentdate;
 };
 
-// 显示弹出框
+// 将时间转换为 YYYY-mm-dd形式
+function formatDateForm(date) {
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate;
+    return currentdate;
+};
+
+// 显示关闭弹出框
+var showPopMenu = function(DivId){
+    var $popDiv = $("#" + DivId);
+    $(".shadow").css("display","block");
+    $popDiv.css("display","block");
+
+    setTimeout(function(){$popDiv.addClass('showMenuModal');},50);
+    $popDiv.addClass("effect-fade");
+};
+var closePopMenu = function(DivId){
+    var $popDiv = $("#" + DivId); 
+    $(".shadow").css("display","none");
+    $popDiv.removeClass('showMenuModal'); 
+    setTimeout(function(){$popDiv.css("display","none");},200);
+};
+
+// 显示操作成功或失败弹出框
 var showModalBox = function(type,content){
     $(".shadow").css("display","block");
     if ( type == "success"){
@@ -79,5 +111,4 @@ var showModalBox = function(type,content){
             $errorModal.removeClass('showMenuModal');
             setTimeout(function(){$errorModal.css("display","none");},200);},2000);
     }
-}
-
+};
