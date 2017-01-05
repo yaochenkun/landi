@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.IncomeMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Income" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
+    <result column="CONTRACT_RECEIVE" property="CONTRACT_RECEIVE" jdbcType="DOUBLE" />
+    <result column="CONTAACT_PAY" property="CONTAACT_PAY" jdbcType="DOUBLE" />
+    <result column="BENIFIT" property="BENIFIT" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUMBER, GUEST_NAME, TIME, CONTRACT_RECEIVE, CONTAACT_PAY, BENIFIT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from income
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from income
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Income" >
+    insert into income (ID, ROOM_NUMBER, GUEST_NAME, 
+      TIME, CONTRACT_RECEIVE, CONTAACT_PAY, 
+      BENIFIT)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_NAME,jdbcType=VARCHAR}, 
+      #{TIME,jdbcType=TIMESTAMP}, #{CONTRACT_RECEIVE,jdbcType=DOUBLE}, #{CONTAACT_PAY,jdbcType=DOUBLE}, 
+      #{BENIFIT,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Income" >
+    insert into income
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="CONTRACT_RECEIVE != null" >
+        CONTRACT_RECEIVE,
+      </if>
+      <if test="CONTAACT_PAY != null" >
+        CONTAACT_PAY,
+      </if>
+      <if test="BENIFIT != null" >
+        BENIFIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CONTRACT_RECEIVE != null" >
+        #{CONTRACT_RECEIVE,jdbcType=DOUBLE},
+      </if>
+      <if test="CONTAACT_PAY != null" >
+        #{CONTAACT_PAY,jdbcType=DOUBLE},
+      </if>
+      <if test="BENIFIT != null" >
+        #{BENIFIT,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Income" >
+    update income
+    <set >
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CONTRACT_RECEIVE != null" >
+        CONTRACT_RECEIVE = #{CONTRACT_RECEIVE,jdbcType=DOUBLE},
+      </if>
+      <if test="CONTAACT_PAY != null" >
+        CONTAACT_PAY = #{CONTAACT_PAY,jdbcType=DOUBLE},
+      </if>
+      <if test="BENIFIT != null" >
+        BENIFIT = #{BENIFIT,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Income" >
+    update income
+    set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=TIMESTAMP},
+      CONTRACT_RECEIVE = #{CONTRACT_RECEIVE,jdbcType=DOUBLE},
+      CONTAACT_PAY = #{CONTAACT_PAY,jdbcType=DOUBLE},
+      BENIFIT = #{BENIFIT,jdbcType=DOUBLE}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

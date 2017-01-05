@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.LaundryMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Laundry" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="DATE" property="DATE" jdbcType="DATE" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="SHIRT" property="SHIRT" jdbcType="INTEGER" />
+    <result column="TOP_OF_SUIT" property="TOP_OF_SUIT" jdbcType="INTEGER" />
+    <result column="TROUSERS" property="TROUSERS" jdbcType="INTEGER" />
+    <result column="JACKET" property="JACKET" jdbcType="INTEGER" />
+    <result column="COAT_M" property="COAT_M" jdbcType="INTEGER" />
+    <result column="COAT_L" property="COAT_L" jdbcType="INTEGER" />
+    <result column="COAT_MS" property="COAT_MS" jdbcType="INTEGER" />
+    <result column="COAT_MM" property="COAT_MM" jdbcType="INTEGER" />
+    <result column="COAT_ML" property="COAT_ML" jdbcType="INTEGER" />
+    <result column="CASHMERE" property="CASHMERE" jdbcType="INTEGER" />
+    <result column="SHORT_PANTS" property="SHORT_PANTS" jdbcType="INTEGER" />
+    <result column="WAISTCOAT" property="WAISTCOAT" jdbcType="INTEGER" />
+    <result column="T_SHRIT" property="t_SHRIT" jdbcType="INTEGER" />
+    <result column="KNITTED" property="KNITTED" jdbcType="INTEGER" />
+    <result column="TIE" property="TIE" jdbcType="INTEGER" />
+    <result column="LONG_SKIRT" property="LONG_SKIRT" jdbcType="INTEGER" />
+    <result column="SHORT_SKIRT" property="SHORT_SKIRT" jdbcType="INTEGER" />
+    <result column="OTHER" property="OTHER" jdbcType="INTEGER" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+    <result column="PROCE" property="PROCE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DATE, ROOM_NUM, NAME, SHIRT, TOP_OF_SUIT, TROUSERS, JACKET, COAT_M, COAT_L, COAT_MS, 
+    COAT_MM, COAT_ML, CASHMERE, SHORT_PANTS, WAISTCOAT, T_SHRIT, KNITTED, TIE, LONG_SKIRT, 
+    SHORT_SKIRT, OTHER, TOTAL, PROCE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from laundry
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from laundry
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Laundry" >
+    insert into laundry (ID, DATE, ROOM_NUM, 
+      NAME, SHIRT, TOP_OF_SUIT, 
+      TROUSERS, JACKET, COAT_M, 
+      COAT_L, COAT_MS, COAT_MM, 
+      COAT_ML, CASHMERE, SHORT_PANTS, 
+      WAISTCOAT, T_SHRIT, KNITTED, 
+      TIE, LONG_SKIRT, SHORT_SKIRT, 
+      OTHER, TOTAL, PROCE
+      )
+    values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
+      #{NAME,jdbcType=VARCHAR}, #{SHIRT,jdbcType=INTEGER}, #{TOP_OF_SUIT,jdbcType=INTEGER}, 
+      #{TROUSERS,jdbcType=INTEGER}, #{JACKET,jdbcType=INTEGER}, #{COAT_M,jdbcType=INTEGER}, 
+      #{COAT_L,jdbcType=INTEGER}, #{COAT_MS,jdbcType=INTEGER}, #{COAT_MM,jdbcType=INTEGER}, 
+      #{COAT_ML,jdbcType=INTEGER}, #{CASHMERE,jdbcType=INTEGER}, #{SHORT_PANTS,jdbcType=INTEGER}, 
+      #{WAISTCOAT,jdbcType=INTEGER}, #{t_SHRIT,jdbcType=INTEGER}, #{KNITTED,jdbcType=INTEGER}, 
+      #{TIE,jdbcType=INTEGER}, #{LONG_SKIRT,jdbcType=INTEGER}, #{SHORT_SKIRT,jdbcType=INTEGER}, 
+      #{OTHER,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, #{PROCE,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
+    insert into laundry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="DATE != null" >
+        DATE,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="SHIRT != null" >
+        SHIRT,
+      </if>
+      <if test="TOP_OF_SUIT != null" >
+        TOP_OF_SUIT,
+      </if>
+      <if test="TROUSERS != null" >
+        TROUSERS,
+      </if>
+      <if test="JACKET != null" >
+        JACKET,
+      </if>
+      <if test="COAT_M != null" >
+        COAT_M,
+      </if>
+      <if test="COAT_L != null" >
+        COAT_L,
+      </if>
+      <if test="COAT_MS != null" >
+        COAT_MS,
+      </if>
+      <if test="COAT_MM != null" >
+        COAT_MM,
+      </if>
+      <if test="COAT_ML != null" >
+        COAT_ML,
+      </if>
+      <if test="CASHMERE != null" >
+        CASHMERE,
+      </if>
+      <if test="SHORT_PANTS != null" >
+        SHORT_PANTS,
+      </if>
+      <if test="WAISTCOAT != null" >
+        WAISTCOAT,
+      </if>
+      <if test="t_SHRIT != null" >
+        T_SHRIT,
+      </if>
+      <if test="KNITTED != null" >
+        KNITTED,
+      </if>
+      <if test="TIE != null" >
+        TIE,
+      </if>
+      <if test="LONG_SKIRT != null" >
+        LONG_SKIRT,
+      </if>
+      <if test="SHORT_SKIRT != null" >
+        SHORT_SKIRT,
+      </if>
+      <if test="OTHER != null" >
+        OTHER,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+      <if test="PROCE != null" >
+        PROCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="DATE != null" >
+        #{DATE,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIRT != null" >
+        #{SHIRT,jdbcType=INTEGER},
+      </if>
+      <if test="TOP_OF_SUIT != null" >
+        #{TOP_OF_SUIT,jdbcType=INTEGER},
+      </if>
+      <if test="TROUSERS != null" >
+        #{TROUSERS,jdbcType=INTEGER},
+      </if>
+      <if test="JACKET != null" >
+        #{JACKET,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_M != null" >
+        #{COAT_M,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_L != null" >
+        #{COAT_L,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_MS != null" >
+        #{COAT_MS,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_MM != null" >
+        #{COAT_MM,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_ML != null" >
+        #{COAT_ML,jdbcType=INTEGER},
+      </if>
+      <if test="CASHMERE != null" >
+        #{CASHMERE,jdbcType=INTEGER},
+      </if>
+      <if test="SHORT_PANTS != null" >
+        #{SHORT_PANTS,jdbcType=INTEGER},
+      </if>
+      <if test="WAISTCOAT != null" >
+        #{WAISTCOAT,jdbcType=INTEGER},
+      </if>
+      <if test="t_SHRIT != null" >
+        #{t_SHRIT,jdbcType=INTEGER},
+      </if>
+      <if test="KNITTED != null" >
+        #{KNITTED,jdbcType=INTEGER},
+      </if>
+      <if test="TIE != null" >
+        #{TIE,jdbcType=INTEGER},
+      </if>
+      <if test="LONG_SKIRT != null" >
+        #{LONG_SKIRT,jdbcType=INTEGER},
+      </if>
+      <if test="SHORT_SKIRT != null" >
+        #{SHORT_SKIRT,jdbcType=INTEGER},
+      </if>
+      <if test="OTHER != null" >
+        #{OTHER,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="PROCE != null" >
+        #{PROCE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Laundry" >
+    update laundry
+    <set >
+      <if test="DATE != null" >
+        DATE = #{DATE,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="SHIRT != null" >
+        SHIRT = #{SHIRT,jdbcType=INTEGER},
+      </if>
+      <if test="TOP_OF_SUIT != null" >
+        TOP_OF_SUIT = #{TOP_OF_SUIT,jdbcType=INTEGER},
+      </if>
+      <if test="TROUSERS != null" >
+        TROUSERS = #{TROUSERS,jdbcType=INTEGER},
+      </if>
+      <if test="JACKET != null" >
+        JACKET = #{JACKET,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_M != null" >
+        COAT_M = #{COAT_M,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_L != null" >
+        COAT_L = #{COAT_L,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_MS != null" >
+        COAT_MS = #{COAT_MS,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_MM != null" >
+        COAT_MM = #{COAT_MM,jdbcType=INTEGER},
+      </if>
+      <if test="COAT_ML != null" >
+        COAT_ML = #{COAT_ML,jdbcType=INTEGER},
+      </if>
+      <if test="CASHMERE != null" >
+        CASHMERE = #{CASHMERE,jdbcType=INTEGER},
+      </if>
+      <if test="SHORT_PANTS != null" >
+        SHORT_PANTS = #{SHORT_PANTS,jdbcType=INTEGER},
+      </if>
+      <if test="WAISTCOAT != null" >
+        WAISTCOAT = #{WAISTCOAT,jdbcType=INTEGER},
+      </if>
+      <if test="t_SHRIT != null" >
+        T_SHRIT = #{t_SHRIT,jdbcType=INTEGER},
+      </if>
+      <if test="KNITTED != null" >
+        KNITTED = #{KNITTED,jdbcType=INTEGER},
+      </if>
+      <if test="TIE != null" >
+        TIE = #{TIE,jdbcType=INTEGER},
+      </if>
+      <if test="LONG_SKIRT != null" >
+        LONG_SKIRT = #{LONG_SKIRT,jdbcType=INTEGER},
+      </if>
+      <if test="SHORT_SKIRT != null" >
+        SHORT_SKIRT = #{SHORT_SKIRT,jdbcType=INTEGER},
+      </if>
+      <if test="OTHER != null" >
+        OTHER = #{OTHER,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="PROCE != null" >
+        PROCE = #{PROCE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Laundry" >
+    update laundry
+    set DATE = #{DATE,jdbcType=DATE},
+      ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      SHIRT = #{SHIRT,jdbcType=INTEGER},
+      TOP_OF_SUIT = #{TOP_OF_SUIT,jdbcType=INTEGER},
+      TROUSERS = #{TROUSERS,jdbcType=INTEGER},
+      JACKET = #{JACKET,jdbcType=INTEGER},
+      COAT_M = #{COAT_M,jdbcType=INTEGER},
+      COAT_L = #{COAT_L,jdbcType=INTEGER},
+      COAT_MS = #{COAT_MS,jdbcType=INTEGER},
+      COAT_MM = #{COAT_MM,jdbcType=INTEGER},
+      COAT_ML = #{COAT_ML,jdbcType=INTEGER},
+      CASHMERE = #{CASHMERE,jdbcType=INTEGER},
+      SHORT_PANTS = #{SHORT_PANTS,jdbcType=INTEGER},
+      WAISTCOAT = #{WAISTCOAT,jdbcType=INTEGER},
+      T_SHRIT = #{t_SHRIT,jdbcType=INTEGER},
+      KNITTED = #{KNITTED,jdbcType=INTEGER},
+      TIE = #{TIE,jdbcType=INTEGER},
+      LONG_SKIRT = #{LONG_SKIRT,jdbcType=INTEGER},
+      SHORT_SKIRT = #{SHORT_SKIRT,jdbcType=INTEGER},
+      OTHER = #{OTHER,jdbcType=INTEGER},
+      TOTAL = #{TOTAL,jdbcType=INTEGER},
+      PROCE = #{PROCE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

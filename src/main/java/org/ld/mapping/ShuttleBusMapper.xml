@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.ShuttleBusMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.ShuttleBus" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="YEAR" property="YEAR" jdbcType="INTEGER" />
+    <result column="MONTH" property="MONTH" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="FIRST" property="FIRST" jdbcType="INTEGER" />
+    <result column="SECOND" property="SECOND" jdbcType="INTEGER" />
+    <result column="THIRD" property="THIRD" jdbcType="INTEGER" />
+    <result column="FOURTH" property="FOURTH" jdbcType="INTEGER" />
+    <result column="FIFTH" property="FIFTH" jdbcType="INTEGER" />
+    <result column="SIXTH" property="SIXTH" jdbcType="INTEGER" />
+    <result column="SEVENTH" property="SEVENTH" jdbcType="INTEGER" />
+    <result column="EIGHTH" property="EIGHTH" jdbcType="INTEGER" />
+    <result column="NINTH" property="NINTH" jdbcType="INTEGER" />
+    <result column="TENTH" property="TENTH" jdbcType="INTEGER" />
+    <result column="ELEVENTH" property="ELEVENTH" jdbcType="INTEGER" />
+    <result column="TWELFTH" property="TWELFTH" jdbcType="INTEGER" />
+    <result column="THIRTEENTH" property="THIRTEENTH" jdbcType="INTEGER" />
+    <result column="FOURTEENTH" property="FOURTEENTH" jdbcType="INTEGER" />
+    <result column="FIFTEENTH" property="FIFTEENTH" jdbcType="INTEGER" />
+    <result column="SIXTEENTH" property="SIXTEENTH" jdbcType="INTEGER" />
+    <result column="SEVENTEENTH" property="SEVENTEENTH" jdbcType="INTEGER" />
+    <result column="EIGHTEENTH" property="EIGHTEENTH" jdbcType="INTEGER" />
+    <result column="NINETEENTH" property="NINETEENTH" jdbcType="INTEGER" />
+    <result column="TWENTIETH" property="TWENTIETH" jdbcType="INTEGER" />
+    <result column="TWENTY_FIRST" property="TWENTY_FIRST" jdbcType="INTEGER" />
+    <result column="TWENTY_SECOND" property="TWENTY_SECOND" jdbcType="INTEGER" />
+    <result column="TWENTY_THIRD" property="TWENTY_THIRD" jdbcType="INTEGER" />
+    <result column="TWENTY_FOURTH" property="TWENTY_FOURTH" jdbcType="INTEGER" />
+    <result column="TWENTY_FIFTH" property="TWENTY_FIFTH" jdbcType="INTEGER" />
+    <result column="TWENTY_SIXTH" property="TWENTY_SIXTH" jdbcType="INTEGER" />
+    <result column="TWENTY_SEVENTH" property="TWENTY_SEVENTH" jdbcType="INTEGER" />
+    <result column="TWENTY_EIGHTH" property="TWENTY_EIGHTH" jdbcType="INTEGER" />
+    <result column="TWENTY_NINTH" property="TWENTY_NINTH" jdbcType="INTEGER" />
+    <result column="THIRTIETH" property="THIRTIETH" jdbcType="INTEGER" />
+    <result column="THIRTY_FIRST" property="THIRTY_FIRST" jdbcType="INTEGER" />
+    <result column="DAYS" property="DAYS" jdbcType="INTEGER" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, YEAR, MONTH, ROOM_NUM, NAME, FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH, 
+    EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH, THIRTEENTH, FOURTEENTH, FIFTEENTH, SIXTEENTH, 
+    SEVENTEENTH, EIGHTEENTH, NINETEENTH, TWENTIETH, TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD, 
+    TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, TWENTY_EIGHTH, TWENTY_NINTH, 
+    THIRTIETH, THIRTY_FIRST, DAYS, TOTAL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shuttle_bus
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shuttle_bus
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.ShuttleBus" >
+    insert into shuttle_bus (ID, YEAR, MONTH, 
+      ROOM_NUM, NAME, FIRST, 
+      SECOND, THIRD, FOURTH, 
+      FIFTH, SIXTH, SEVENTH, 
+      EIGHTH, NINTH, TENTH, 
+      ELEVENTH, TWELFTH, THIRTEENTH, 
+      FOURTEENTH, FIFTEENTH, SIXTEENTH, 
+      SEVENTEENTH, EIGHTEENTH, NINETEENTH, 
+      TWENTIETH, TWENTY_FIRST, TWENTY_SECOND, 
+      TWENTY_THIRD, TWENTY_FOURTH, TWENTY_FIFTH, 
+      TWENTY_SIXTH, TWENTY_SEVENTH, TWENTY_EIGHTH, 
+      TWENTY_NINTH, THIRTIETH, THIRTY_FIRST, 
+      DAYS, TOTAL)
+    values (#{ID,jdbcType=INTEGER}, #{YEAR,jdbcType=INTEGER}, #{MONTH,jdbcType=INTEGER}, 
+      #{ROOM_NUM,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{FIRST,jdbcType=INTEGER}, 
+      #{SECOND,jdbcType=INTEGER}, #{THIRD,jdbcType=INTEGER}, #{FOURTH,jdbcType=INTEGER}, 
+      #{FIFTH,jdbcType=INTEGER}, #{SIXTH,jdbcType=INTEGER}, #{SEVENTH,jdbcType=INTEGER}, 
+      #{EIGHTH,jdbcType=INTEGER}, #{NINTH,jdbcType=INTEGER}, #{TENTH,jdbcType=INTEGER}, 
+      #{ELEVENTH,jdbcType=INTEGER}, #{TWELFTH,jdbcType=INTEGER}, #{THIRTEENTH,jdbcType=INTEGER}, 
+      #{FOURTEENTH,jdbcType=INTEGER}, #{FIFTEENTH,jdbcType=INTEGER}, #{SIXTEENTH,jdbcType=INTEGER}, 
+      #{SEVENTEENTH,jdbcType=INTEGER}, #{EIGHTEENTH,jdbcType=INTEGER}, #{NINETEENTH,jdbcType=INTEGER}, 
+      #{TWENTIETH,jdbcType=INTEGER}, #{TWENTY_FIRST,jdbcType=INTEGER}, #{TWENTY_SECOND,jdbcType=INTEGER}, 
+      #{TWENTY_THIRD,jdbcType=INTEGER}, #{TWENTY_FOURTH,jdbcType=INTEGER}, #{TWENTY_FIFTH,jdbcType=INTEGER}, 
+      #{TWENTY_SIXTH,jdbcType=INTEGER}, #{TWENTY_SEVENTH,jdbcType=INTEGER}, #{TWENTY_EIGHTH,jdbcType=INTEGER}, 
+      #{TWENTY_NINTH,jdbcType=INTEGER}, #{THIRTIETH,jdbcType=INTEGER}, #{THIRTY_FIRST,jdbcType=INTEGER}, 
+      #{DAYS,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.ShuttleBus" >
+    insert into shuttle_bus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="YEAR != null" >
+        YEAR,
+      </if>
+      <if test="MONTH != null" >
+        MONTH,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="FIRST != null" >
+        FIRST,
+      </if>
+      <if test="SECOND != null" >
+        SECOND,
+      </if>
+      <if test="THIRD != null" >
+        THIRD,
+      </if>
+      <if test="FOURTH != null" >
+        FOURTH,
+      </if>
+      <if test="FIFTH != null" >
+        FIFTH,
+      </if>
+      <if test="SIXTH != null" >
+        SIXTH,
+      </if>
+      <if test="SEVENTH != null" >
+        SEVENTH,
+      </if>
+      <if test="EIGHTH != null" >
+        EIGHTH,
+      </if>
+      <if test="NINTH != null" >
+        NINTH,
+      </if>
+      <if test="TENTH != null" >
+        TENTH,
+      </if>
+      <if test="ELEVENTH != null" >
+        ELEVENTH,
+      </if>
+      <if test="TWELFTH != null" >
+        TWELFTH,
+      </if>
+      <if test="THIRTEENTH != null" >
+        THIRTEENTH,
+      </if>
+      <if test="FOURTEENTH != null" >
+        FOURTEENTH,
+      </if>
+      <if test="FIFTEENTH != null" >
+        FIFTEENTH,
+      </if>
+      <if test="SIXTEENTH != null" >
+        SIXTEENTH,
+      </if>
+      <if test="SEVENTEENTH != null" >
+        SEVENTEENTH,
+      </if>
+      <if test="EIGHTEENTH != null" >
+        EIGHTEENTH,
+      </if>
+      <if test="NINETEENTH != null" >
+        NINETEENTH,
+      </if>
+      <if test="TWENTIETH != null" >
+        TWENTIETH,
+      </if>
+      <if test="TWENTY_FIRST != null" >
+        TWENTY_FIRST,
+      </if>
+      <if test="TWENTY_SECOND != null" >
+        TWENTY_SECOND,
+      </if>
+      <if test="TWENTY_THIRD != null" >
+        TWENTY_THIRD,
+      </if>
+      <if test="TWENTY_FOURTH != null" >
+        TWENTY_FOURTH,
+      </if>
+      <if test="TWENTY_FIFTH != null" >
+        TWENTY_FIFTH,
+      </if>
+      <if test="TWENTY_SIXTH != null" >
+        TWENTY_SIXTH,
+      </if>
+      <if test="TWENTY_SEVENTH != null" >
+        TWENTY_SEVENTH,
+      </if>
+      <if test="TWENTY_EIGHTH != null" >
+        TWENTY_EIGHTH,
+      </if>
+      <if test="TWENTY_NINTH != null" >
+        TWENTY_NINTH,
+      </if>
+      <if test="THIRTIETH != null" >
+        THIRTIETH,
+      </if>
+      <if test="THIRTY_FIRST != null" >
+        THIRTY_FIRST,
+      </if>
+      <if test="DAYS != null" >
+        DAYS,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="YEAR != null" >
+        #{YEAR,jdbcType=INTEGER},
+      </if>
+      <if test="MONTH != null" >
+        #{MONTH,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="FIRST != null" >
+        #{FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="SECOND != null" >
+        #{SECOND,jdbcType=INTEGER},
+      </if>
+      <if test="THIRD != null" >
+        #{THIRD,jdbcType=INTEGER},
+      </if>
+      <if test="FOURTH != null" >
+        #{FOURTH,jdbcType=INTEGER},
+      </if>
+      <if test="FIFTH != null" >
+        #{FIFTH,jdbcType=INTEGER},
+      </if>
+      <if test="SIXTH != null" >
+        #{SIXTH,jdbcType=INTEGER},
+      </if>
+      <if test="SEVENTH != null" >
+        #{SEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="EIGHTH != null" >
+        #{EIGHTH,jdbcType=INTEGER},
+      </if>
+      <if test="NINTH != null" >
+        #{NINTH,jdbcType=INTEGER},
+      </if>
+      <if test="TENTH != null" >
+        #{TENTH,jdbcType=INTEGER},
+      </if>
+      <if test="ELEVENTH != null" >
+        #{ELEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWELFTH != null" >
+        #{TWELFTH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTEENTH != null" >
+        #{THIRTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="FOURTEENTH != null" >
+        #{FOURTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="FIFTEENTH != null" >
+        #{FIFTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="SIXTEENTH != null" >
+        #{SIXTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="SEVENTEENTH != null" >
+        #{SEVENTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="EIGHTEENTH != null" >
+        #{EIGHTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="NINETEENTH != null" >
+        #{NINETEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTIETH != null" >
+        #{TWENTIETH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FIRST != null" >
+        #{TWENTY_FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SECOND != null" >
+        #{TWENTY_SECOND,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_THIRD != null" >
+        #{TWENTY_THIRD,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FOURTH != null" >
+        #{TWENTY_FOURTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FIFTH != null" >
+        #{TWENTY_FIFTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SIXTH != null" >
+        #{TWENTY_SIXTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SEVENTH != null" >
+        #{TWENTY_SEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_EIGHTH != null" >
+        #{TWENTY_EIGHTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_NINTH != null" >
+        #{TWENTY_NINTH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTIETH != null" >
+        #{THIRTIETH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTY_FIRST != null" >
+        #{THIRTY_FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="DAYS != null" >
+        #{DAYS,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.ShuttleBus" >
+    update shuttle_bus
+    <set >
+      <if test="YEAR != null" >
+        YEAR = #{YEAR,jdbcType=INTEGER},
+      </if>
+      <if test="MONTH != null" >
+        MONTH = #{MONTH,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="FIRST != null" >
+        FIRST = #{FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="SECOND != null" >
+        SECOND = #{SECOND,jdbcType=INTEGER},
+      </if>
+      <if test="THIRD != null" >
+        THIRD = #{THIRD,jdbcType=INTEGER},
+      </if>
+      <if test="FOURTH != null" >
+        FOURTH = #{FOURTH,jdbcType=INTEGER},
+      </if>
+      <if test="FIFTH != null" >
+        FIFTH = #{FIFTH,jdbcType=INTEGER},
+      </if>
+      <if test="SIXTH != null" >
+        SIXTH = #{SIXTH,jdbcType=INTEGER},
+      </if>
+      <if test="SEVENTH != null" >
+        SEVENTH = #{SEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="EIGHTH != null" >
+        EIGHTH = #{EIGHTH,jdbcType=INTEGER},
+      </if>
+      <if test="NINTH != null" >
+        NINTH = #{NINTH,jdbcType=INTEGER},
+      </if>
+      <if test="TENTH != null" >
+        TENTH = #{TENTH,jdbcType=INTEGER},
+      </if>
+      <if test="ELEVENTH != null" >
+        ELEVENTH = #{ELEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWELFTH != null" >
+        TWELFTH = #{TWELFTH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTEENTH != null" >
+        THIRTEENTH = #{THIRTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="FOURTEENTH != null" >
+        FOURTEENTH = #{FOURTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="FIFTEENTH != null" >
+        FIFTEENTH = #{FIFTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="SIXTEENTH != null" >
+        SIXTEENTH = #{SIXTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="SEVENTEENTH != null" >
+        SEVENTEENTH = #{SEVENTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="EIGHTEENTH != null" >
+        EIGHTEENTH = #{EIGHTEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="NINETEENTH != null" >
+        NINETEENTH = #{NINETEENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTIETH != null" >
+        TWENTIETH = #{TWENTIETH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FIRST != null" >
+        TWENTY_FIRST = #{TWENTY_FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SECOND != null" >
+        TWENTY_SECOND = #{TWENTY_SECOND,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_THIRD != null" >
+        TWENTY_THIRD = #{TWENTY_THIRD,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FOURTH != null" >
+        TWENTY_FOURTH = #{TWENTY_FOURTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_FIFTH != null" >
+        TWENTY_FIFTH = #{TWENTY_FIFTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SIXTH != null" >
+        TWENTY_SIXTH = #{TWENTY_SIXTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_SEVENTH != null" >
+        TWENTY_SEVENTH = #{TWENTY_SEVENTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_EIGHTH != null" >
+        TWENTY_EIGHTH = #{TWENTY_EIGHTH,jdbcType=INTEGER},
+      </if>
+      <if test="TWENTY_NINTH != null" >
+        TWENTY_NINTH = #{TWENTY_NINTH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTIETH != null" >
+        THIRTIETH = #{THIRTIETH,jdbcType=INTEGER},
+      </if>
+      <if test="THIRTY_FIRST != null" >
+        THIRTY_FIRST = #{THIRTY_FIRST,jdbcType=INTEGER},
+      </if>
+      <if test="DAYS != null" >
+        DAYS = #{DAYS,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.ShuttleBus" >
+    update shuttle_bus
+    set YEAR = #{YEAR,jdbcType=INTEGER},
+      MONTH = #{MONTH,jdbcType=INTEGER},
+      ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      NAME = #{NAME,jdbcType=VARCHAR},
+      FIRST = #{FIRST,jdbcType=INTEGER},
+      SECOND = #{SECOND,jdbcType=INTEGER},
+      THIRD = #{THIRD,jdbcType=INTEGER},
+      FOURTH = #{FOURTH,jdbcType=INTEGER},
+      FIFTH = #{FIFTH,jdbcType=INTEGER},
+      SIXTH = #{SIXTH,jdbcType=INTEGER},
+      SEVENTH = #{SEVENTH,jdbcType=INTEGER},
+      EIGHTH = #{EIGHTH,jdbcType=INTEGER},
+      NINTH = #{NINTH,jdbcType=INTEGER},
+      TENTH = #{TENTH,jdbcType=INTEGER},
+      ELEVENTH = #{ELEVENTH,jdbcType=INTEGER},
+      TWELFTH = #{TWELFTH,jdbcType=INTEGER},
+      THIRTEENTH = #{THIRTEENTH,jdbcType=INTEGER},
+      FOURTEENTH = #{FOURTEENTH,jdbcType=INTEGER},
+      FIFTEENTH = #{FIFTEENTH,jdbcType=INTEGER},
+      SIXTEENTH = #{SIXTEENTH,jdbcType=INTEGER},
+      SEVENTEENTH = #{SEVENTEENTH,jdbcType=INTEGER},
+      EIGHTEENTH = #{EIGHTEENTH,jdbcType=INTEGER},
+      NINETEENTH = #{NINETEENTH,jdbcType=INTEGER},
+      TWENTIETH = #{TWENTIETH,jdbcType=INTEGER},
+      TWENTY_FIRST = #{TWENTY_FIRST,jdbcType=INTEGER},
+      TWENTY_SECOND = #{TWENTY_SECOND,jdbcType=INTEGER},
+      TWENTY_THIRD = #{TWENTY_THIRD,jdbcType=INTEGER},
+      TWENTY_FOURTH = #{TWENTY_FOURTH,jdbcType=INTEGER},
+      TWENTY_FIFTH = #{TWENTY_FIFTH,jdbcType=INTEGER},
+      TWENTY_SIXTH = #{TWENTY_SIXTH,jdbcType=INTEGER},
+      TWENTY_SEVENTH = #{TWENTY_SEVENTH,jdbcType=INTEGER},
+      TWENTY_EIGHTH = #{TWENTY_EIGHTH,jdbcType=INTEGER},
+      TWENTY_NINTH = #{TWENTY_NINTH,jdbcType=INTEGER},
+      THIRTIETH = #{THIRTIETH,jdbcType=INTEGER},
+      THIRTY_FIRST = #{THIRTY_FIRST,jdbcType=INTEGER},
+      DAYS = #{DAYS,jdbcType=INTEGER},
+      TOTAL = #{TOTAL,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>
