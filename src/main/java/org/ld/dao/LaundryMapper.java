@@ -1,5 +1,8 @@
 package org.ld.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.ld.model.Laundry;
 
 public interface LaundryMapper {
@@ -14,4 +17,11 @@ public interface LaundryMapper {
     int updateByPrimaryKeySelective(Laundry record);
 
     int updateByPrimaryKey(Laundry record);
+    
+    //add
+    Integer totalRec(String RN);
+    
+    List<Laundry> getRec(HashMap<String, Object> map);
+    
+    Laundry getCertainRec(HashMap<String, Object> map);
 }

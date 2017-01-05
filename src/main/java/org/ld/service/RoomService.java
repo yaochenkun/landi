@@ -1,7 +1,9 @@
 package org.ld.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.ld.model.Laundry;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -52,4 +54,14 @@ public interface RoomService {
 	int insertRI(RoomItem ri);
 	
 	int deleteRI(Integer id);
+	
+	int totalLaundry(String rn);
+	
+	List<Laundry> getLaundry(String rn, Integer st, Integer eachPage);
+	
+	Laundry getCertainLaundry(String rn, String name, Date date);
+	
+	int addWash(Laundry l);
+	
+	int updateWash(Laundry l);
 }

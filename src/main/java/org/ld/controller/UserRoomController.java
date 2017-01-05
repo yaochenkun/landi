@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.DailyService;
 import org.ld.model.Guest;
+import org.ld.model.Laundry;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -437,6 +438,125 @@ public class UserRoomController {
 				return 0;
 			}
 		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchWash") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Map<String, Object> searchWash(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String roomNum = dataJson.getString("roomNum");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = roomService.totalLaundry(roomNum);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<Laundry> record = roomService.getLaundry(roomNum, st, eachPage);
+
+			ans.put("dataList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+
+	@RequestMapping("/addWash") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Integer addWash(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+			Date date;
+			date = ft.parse(dataJson.getString("date"));
+		
+			Laundry nL = roomService.getCertainLaundry(dataJson.getString("roomNum"), dataJson.getString("guestName"), date);
+			if(nL == null) {
+				nL = new Laundry();
+				nL.setROOM_NUM(dataJson.getString("roomNum"));
+				nL.setNAME(dataJson.getString("guestName"));
+				nL.setDATE(date);
+				nL.setPRICE(dataJson.getDoubleValue("totalPrice"));
+				nL.setTOTAL(dataJson.getInteger("total"));
+				
+				nL.setCASHMERE(dataJson.getInteger("cashmere"));
+				nL.setCOAT_L(dataJson.getInteger("longCoat"));
+				nL.setCOAT_M(dataJson.getInteger("middleCoat"));
+				nL.setCOAT_ML(dataJson.getInteger("longCotton"));
+				nL.setCOAT_MM(dataJson.getInteger("middleCotton"));
+				nL.setCOAT_MS(dataJson.getInteger("shortCotton"));
+				nL.setJACKET(dataJson.getInteger("jacket"));
+				nL.setKNITTED(dataJson.getInteger("knitted"));
+				nL.setLONG_SKIRT(dataJson.getInteger("longSkirt"));
+				nL.setOTHER(dataJson.getInteger("other"));
+				nL.setSHIRT(dataJson.getInteger("shirt"));
+				nL.setSHORT_PANTS(dataJson.getInteger("shortPants"));
+				nL.setSHORT_SKIRT(dataJson.getInteger("shortSkirt"));
+				nL.setT_SHRIT(dataJson.getInteger("tshirt"));
+				nL.setTIE(dataJson.getInteger("tie"));
+				nL.setTOP_OF_SUIT(dataJson.getInteger("topSuit"));
+				nL.setTROUSERS(dataJson.getInteger("trousers"));
+				nL.setWAISTCOAT(dataJson.getInteger("waistcoat"));
+				
+				roomService.addWash(nL);
+			}
+			else
+			{
+				nL.setPRICE(nL.getPRICE() + dataJson.getDoubleValue("totalPrice"));
+				nL.setTOTAL(nL.getTOTAL() + dataJson.getInteger("total"));
+				
+				nL.setCASHMERE(nL.getCASHMERE() + dataJson.getInteger("cashmere"));
+				nL.setCOAT_L(nL.getCOAT_L() + dataJson.getInteger("longCoat"));
+				nL.setCOAT_M(nL.getCOAT_M() + dataJson.getInteger("middleCoat"));
+				nL.setCOAT_ML(nL.getCOAT_ML() + dataJson.getInteger("longCotton"));
+				nL.setCOAT_MM(nL.getCOAT_MM() + dataJson.getInteger("middleCotton"));
+				nL.setCOAT_MS(nL.getCOAT_MS() + dataJson.getInteger("shortCotton"));
+				nL.setJACKET(nL.getJACKET() + dataJson.getInteger("jacket"));
+				nL.setKNITTED(nL.getKNITTED() + dataJson.getInteger("knitted"));
+				nL.setLONG_SKIRT(nL.getLONG_SKIRT() + dataJson.getInteger("longSkirt"));
+				nL.setOTHER(nL.getOTHER() + dataJson.getInteger("other"));
+				nL.setSHIRT(nL.getSHIRT() + dataJson.getInteger("shirt"));
+				nL.setSHORT_PANTS(nL.getSHORT_PANTS() + dataJson.getInteger("shortPants"));
+				nL.setSHORT_SKIRT(nL.getSHORT_SKIRT() + dataJson.getInteger("shortSkirt"));
+				nL.setT_SHRIT(nL.getT_SHRIT() + dataJson.getInteger("tshirt"));
+				nL.setTIE(nL.getTIE() + dataJson.getInteger("tie"));
+				nL.setTOP_OF_SUIT(nL.getTOP_OF_SUIT() + dataJson.getInteger("topSuit"));
+				nL.setTROUSERS(nL.getTROUSERS() + dataJson.getInteger("trousers"));
+				nL.setWAISTCOAT(nL.getWAISTCOAT() + dataJson.getInteger("waistcoat"));
+				
+				roomService.updateWash(nL);
+			}
+	
+			return 1;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
 		}

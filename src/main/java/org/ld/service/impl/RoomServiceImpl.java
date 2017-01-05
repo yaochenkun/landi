@@ -1,14 +1,17 @@
 package org.ld.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.ld.dao.LaundryMapper;
 import org.ld.dao.RoomItemMapper;
 import org.ld.dao.RoomMapper;
 import org.ld.dao.RoomMeterMapper;
 import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
+import org.ld.model.Laundry;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -34,6 +37,8 @@ public class RoomServiceImpl implements RoomService {
 	private RoomPicMapper roomPicMapper;
 	@Autowired
 	private RoomStateMapper roomStateMapper;
+	@Autowired
+	private LaundryMapper laundryMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -195,5 +200,59 @@ public class RoomServiceImpl implements RoomService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+	
+	@Override
+	public int totalLaundry(String rn) {
+		// TODO Auto-generated method stub
+		
+		return laundryMapper.totalRec(rn);
+	}
+
+	@Override
+	public List<Laundry> getLaundry(String rn, Integer st, Integer eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		
+		return laundryMapper.getRec(map);
+	}
+
+	@Override
+	public int addWash(Laundry l) {
+		// TODO Auto-generated method stub
+		
+		try{
+			laundryMapper.insertSelective(l);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateWash(Laundry l) {
+		// TODO Auto-generated method stub
+		try{
+			laundryMapper.updateByPrimaryKeySelective(l);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public Laundry getCertainLaundry(String rn, String name, Date date) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("NAME", name);
+		map.put("DATE", date);
+		
+		return laundryMapper.getCertainRec(map);
 	}
 }

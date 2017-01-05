@@ -49,7 +49,7 @@ public class Laundry {
 
     private Integer TOTAL;
 
-    private Integer PROCE;
+    private Double PRICE;
 
     public Integer getID() {
         return ID;
@@ -235,11 +235,11 @@ public class Laundry {
         this.TOTAL = TOTAL;
     }
 
-    public Integer getPROCE() {
-        return PROCE;
+    public Double getPRICE() {
+        return PRICE;
     }
 
-    public void setPROCE(Integer PROCE) {
-        this.PROCE = PROCE;
+    public void setPRICE(Double PRICE) {
+        this.PRICE = PRICE;
     }
 }
