@@ -1,6 +1,7 @@
 package org.ld.app;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,10 +29,12 @@ import com.alibaba.fastjson.parser.*;
 public class MyTest {
 	private static Logger logger = Logger.getLogger(MyTest.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 //		Para tp = new Para();
-		String root = "env/";
+		String date = "2016-01";
+		int year = Integer.parseInt(date.substring(0,4));
+		int mon = Integer.parseInt(date.substring(5));
 		
-		System.out.println(root);
+		System.out.println(year + " " + mon);
 	}
 }

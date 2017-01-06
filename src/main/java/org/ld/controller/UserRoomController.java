@@ -22,6 +22,7 @@ import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
+import org.ld.model.ShuttleBus;
 import org.ld.model.Sources;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
@@ -561,6 +562,195 @@ public class UserRoomController {
 			return 0;
 		}
 	}
+	
+	@RequestMapping("/searchFare") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Map<String, Object> searchFare(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String roomNum = dataJson.getString("roomNum");
+		String date = dataJson.getString("date");
+		int year = Integer.parseInt(date.substring(0,4));
+		int mon = Integer.parseInt(date.substring(5));
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = roomService.totalShuttleBus(roomNum, year, mon);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<ShuttleBus> record = roomService.getShuttleBus(roomNum, year, mon, st, eachPage);
+
+			ans.put("dataList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/addFare") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Integer addFare(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			int pageNumber = dataJson.getIntValue("pageNum");
+			String roomNum = dataJson.getString("roomNum");
+			String date = dataJson.getString("date");
+			int year = Integer.parseInt(date.substring(0,4));
+			int mon = Integer.parseInt(date.substring(5));
+			String name = dataJson.getString("name");
+			
+			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
+			if(sb == null)
+			{
+				sb = new ShuttleBus();
+				sb.setYEAR(year);
+				sb.setMONTH(mon);
+				sb.setROOM_NUM(roomNum);
+				sb.setNAME(name);
+				roomService.addShuttleBus(sb);
+				sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
+			}
+				
+			JSONObject obj = dataJson.getJSONObject("perRecord");
+			sb.setDAYS(obj.size());
+			int total = 0;
+			for (String key : obj.keySet()) {
+				JSONObject obj2 = obj.getJSONObject(key);
+				int price = obj2.getInteger("price");
+				total += price;
+				switch(obj2.getInteger("day"))
+				{
+				case 1:
+					sb.setFIRST(price);
+					break;
+				case 2:
+					sb.setSECOND(price);
+					break;
+				case 3:
+					sb.setTHIRD(price);
+					break;
+				case 4:
+					sb.setFOURTH(price);
+					break;
+				case 5:
+					sb.setFIFTH(price);
+					break;
+				case 6:
+					sb.setSIXTH(price);
+					break;
+				case 7:
+					sb.setSEVENTH(price);;
+					break;
+				case 8:
+					sb.setEIGHTH(price);
+					break;
+				case 9:
+					sb.setNINTH(price);
+					break;
+				case 10:
+					sb.setTENTH(price);
+					break;
+				case 11:
+					sb.setELEVENTH(price);
+					break;
+				case 12:
+					sb.setTWELFTH(price);
+					break;
+				case 13:
+					sb.setTHIRTEENTH(price);
+					break;
+				case 14:
+					sb.setFOURTEENTH(price);
+					break;
+				case 15:
+					sb.setFIFTEENTH(price);
+					break;
+				case 16:
+					sb.setSIXTEENTH(price);
+					break;
+				case 17:
+					sb.setSEVENTEENTH(price);
+					break;
+				case 18:
+					sb.setEIGHTEENTH(price);
+					break;
+				case 19:
+					sb.setNINETEENTH(price);
+					break;
+				case 20:
+					sb.setTWENTIETH(price);
+					break;
+				case 21:
+					sb.setTWENTY_FIRST(price);
+					break;
+				case 22:
+					sb.setTWENTY_SECOND(price);
+					break;
+				case 23:
+					sb.setTWENTY_THIRD(price);
+					break;
+				case 24:
+					sb.setTWENTY_FOURTH(price);
+					break;
+				case 25:
+					sb.setTWENTY_FIFTH(price);
+					break;
+				case 26:
+					sb.setTWENTY_SIXTH(price);
+					break;
+				case 27:
+					sb.setTWENTY_SEVENTH(price);
+					break;
+				case 28:
+					sb.setTWENTY_EIGHTH(price);
+					break;
+				case 29:
+					sb.setTWENTY_NINTH(price);
+					break;
+				case 30:
+					sb.setTHIRTIETH(price);
+					break;
+				case 31:
+					sb.setTHIRTY_FIRST(price);
+					break;
+				}
+			}
+			sb.setTOTAL(total);
+			roomService.updateShuttleBus(sb);
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+	}
+	
+	
 
 	@RequestMapping("/Model/")
 	@ResponseBody

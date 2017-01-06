@@ -479,4 +479,22 @@
       TOTAL = #{TOTAL,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from shuttle_bus where 
+     <if test="RN != null" >
+     ROOM_NUM = #{RN} and 
+     </if>
+     YEAR = #{YEAR} and MON = #{MON}
+  </select>
+  <select id="getRec" resultMap="BaseResultMap" parameterType="map">
+    select * from shuttle_bus where 
+     <if test="RN != null" >
+      ROOM_NUM = #{RN} and 
+     </if>
+     YEAR = #{YEAR} and MON = #{MON}
+     limit #{ST}, #{EACH}
+  </select>
+  <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
+    select * from shuttle_bus where ROOM_NUM = #{RN} and NAME = #{NAME} and YEAR = #{YEAR} and MON = #{MON}
+  </select>
 </mapper>

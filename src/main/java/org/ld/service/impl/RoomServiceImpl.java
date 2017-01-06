@@ -11,12 +11,14 @@ import org.ld.dao.RoomMapper;
 import org.ld.dao.RoomMeterMapper;
 import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
+import org.ld.dao.ShuttleBusMapper;
 import org.ld.model.Laundry;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
+import org.ld.model.ShuttleBus;
 import org.ld.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +41,8 @@ public class RoomServiceImpl implements RoomService {
 	private RoomStateMapper roomStateMapper;
 	@Autowired
 	private LaundryMapper laundryMapper;
+	@Autowired
+	private ShuttleBusMapper shuttleBusMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -254,5 +258,65 @@ public class RoomServiceImpl implements RoomService {
 		map.put("DATE", date);
 		
 		return laundryMapper.getCertainRec(map);
+	}
+
+	@Override
+	public int totalShuttleBus(String rn, int year, int mon) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("YEAR", year);
+		map.put("MON", mon);
+		
+		return shuttleBusMapper.totalRec(map);
+	}
+
+	@Override
+	public List<ShuttleBus> getShuttleBus(String rn, int year, int mon, Integer st, Integer eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("YEAR", year);
+		map.put("MON", mon);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		
+		return shuttleBusMapper.getRec(map);
+	}
+
+	@Override
+	public ShuttleBus getCertainShuttleBus(String rn, String name, int year, int mon) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("YEAR", year);
+		map.put("MON", mon);
+		map.put("NAME", name);
+		
+		return shuttleBusMapper.getCertainRec(map);
+	}
+
+	@Override
+	public int addShuttleBus(ShuttleBus sb) {
+		// TODO Auto-generated method stub
+		try{
+			shuttleBusMapper.insertSelective(sb);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateShuttleBus(ShuttleBus sb) {
+		// TODO Auto-generated method stub
+		try{
+			shuttleBusMapper.updateByPrimaryKeySelective(sb);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
 	}
 }

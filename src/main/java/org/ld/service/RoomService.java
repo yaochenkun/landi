@@ -9,6 +9,7 @@ import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
+import org.ld.model.ShuttleBus;
 
 public interface RoomService {
 
@@ -64,4 +65,14 @@ public interface RoomService {
 	int addWash(Laundry l);
 	
 	int updateWash(Laundry l);
+	
+	int totalShuttleBus(String rn, int year, int mon);
+	
+	List<ShuttleBus> getShuttleBus(String rn, int year, int mon, Integer st, Integer eachPage);
+	
+	ShuttleBus getCertainShuttleBus(String rn, String name, int year, int mon);
+	
+	int addShuttleBus(ShuttleBus sb);
+	
+	int updateShuttleBus(ShuttleBus sb);
 }
