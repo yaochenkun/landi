@@ -161,4 +161,17 @@
       SELL_MONEY = #{SELL_MONEY,jdbcType=DOUBLE}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*) from grocery_item 
+     <if test="NAME != null" >
+      where NAME like #{NAME,jdbcType=VARCHAR}
+     </if>
+  </select>
+  <select id="getRec" resultMap="BaseResultMap" parameterType="map">
+    select * from grocery_item  
+     <if test="NAME != null" >
+      where NAME like #{NAME,jdbcType=VARCHAR} 
+     </if>
+     limit #{ST}, #{EACH}
+  </select>
 </mapper>

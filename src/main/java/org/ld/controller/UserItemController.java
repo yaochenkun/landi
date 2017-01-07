@@ -18,7 +18,10 @@ import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.DailyService;
 import org.ld.model.FacSta;
+import org.ld.model.GroceryItem;
+import org.ld.model.GroceryRunning;
 import org.ld.model.Guest;
+import org.ld.model.Laundry;
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
 import org.ld.model.PlanProgress;
@@ -27,6 +30,7 @@ import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
+import org.ld.model.ShuttleBus;
 import org.ld.model.Sources;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
@@ -579,5 +583,247 @@ public class UserItemController {
 		}
 		
 		return 1;
+	}
+	
+	//小卖部
+	
+	@RequestMapping("/searchGoodsList") // GoodsName为null时，查询所有记录(只有当前的统计，没有历史统计记录)
+	@ResponseBody
+	public Map<String, Object> searchGoodsList(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rGrocery"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String goods = dataJson.getString("GoodsName");
+		
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = itemService.totalGrocery(goods);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<GroceryItem> record = itemService.getGrocery(goods, st, eachPage);
+
+			ans.put("dataList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/buyGoods")
+	@ResponseBody
+	public Integer buyGoods(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			int ID = dataJson.getIntValue("ID");
+			int count = dataJson.getIntValue("count");
+			double per = dataJson.getDoubleValue("per");
+			double total = dataJson.getDoubleValue("total"); // money
+			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
+			
+			GroceryItem gi = itemService.getCertainGrocery(ID);
+			GroceryRunning gr = new GroceryRunning();
+			gr.setALL_MONEY(total);
+			gr.setCTIME(date);
+			gr.setITEM_ID(ID);
+			gr.setPER_MONEY(per);
+			gr.setTOTAL(count);
+			gr.setTYPE(1); // 1 buy, 2 sell, 3 use
+			
+			itemService.addGroceryRec(gr);
+			gi.setTOTAL(gi.getTOTAL() + count);
+			gi.setAVALIABLE(gi.getAVALIABLE() + count);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+
+		return 1;
+	}
+	
+	@RequestMapping("/sellGoods")
+	@ResponseBody
+	public Integer sellGoods(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			int ID = dataJson.getIntValue("ID");
+			int count = dataJson.getIntValue("count");
+			double per = dataJson.getDoubleValue("per");
+			double total = dataJson.getDoubleValue("total"); // money
+			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
+			
+			GroceryItem gi = itemService.getCertainGrocery(ID);
+			GroceryRunning gr = new GroceryRunning();
+			gr.setALL_MONEY(total);
+			gr.setCTIME(date);
+			gr.setITEM_ID(ID);
+			gr.setPER_MONEY(per);
+			gr.setTOTAL(count);
+			gr.setTYPE(2); // 1 buy, 2 sell, 3 waste
+			
+			itemService.addGroceryRec(gr);
+			gi.setAVALIABLE(gi.getAVALIABLE() - count);
+			gi.setTOTAL_SOLD(gi.getTOTAL_SOLD() + count);
+			gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() + total - count * gi.getBUY_MONEY());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+
+		return 1;
+	}
+	
+	@RequestMapping("/wasteGoods")
+	@ResponseBody
+	public Integer wasteGoods(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			int ID = dataJson.getIntValue("ID");
+			int count = dataJson.getIntValue("count");
+			double per = dataJson.getDoubleValue("per");
+			double total = dataJson.getDoubleValue("total"); // money
+			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
+			
+			GroceryItem gi = itemService.getCertainGrocery(ID);
+			GroceryRunning gr = new GroceryRunning();
+			gr.setALL_MONEY(total);
+			gr.setCTIME(date);
+			gr.setITEM_ID(ID);
+			gr.setPER_MONEY(per);
+			gr.setTOTAL(count);
+			gr.setTYPE(3); // 1 buy, 2 sell, 3 waste
+			
+			itemService.addGroceryRec(gr);
+			gi.setAVALIABLE(gi.getAVALIABLE() - count);
+			gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() - count * gi.getBUY_MONEY());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+
+		return 1;
+	}
+	
+	@RequestMapping("/searchAnnualSale") // id为null时，查询所有记录(只有当前的统计，没有历史统计记录)
+	@ResponseBody
+	public Map<String, Object> searchAnnualSale(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rGrocery"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		int id = dataJson.getIntValue("id");
+		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
+		Date to = dataJson.getDate("to");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = itemService.totalGroceryRunning(id, from, to);
+		
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<GroceryRunning> record = itemService.getGroceryRunning(id, st, eachPage, from, to);
+
+			ans.put("dataList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/addGoods") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Integer addGoods(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			String name = dataJson.getString("name");
+			String type = dataJson.getString("type");
+			String cat = dataJson.getString("cat");
+			double buyMoney = dataJson.getDoubleValue("buyPrice");
+			double sellMoney = dataJson.getDoubleValue("sellPrice");
+			int total = dataJson.getIntValue("total");
+			GroceryItem gi = new GroceryItem();
+			
+			gi.setAVALIABLE(total);
+			gi.setBUY_MONEY(buyMoney);
+			gi.setCAT(cat);
+			gi.setNAME(name);
+			gi.setSELL_MONEY(sellMoney);
+			gi.setTOTAL(total);
+			gi.setTYPE(type);
+			
+			itemService.addGrocery(gi);
+			
+			return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
 	}
 }

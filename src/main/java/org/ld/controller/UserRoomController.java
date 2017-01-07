@@ -616,7 +616,6 @@ public class UserRoomController {
 		}
 		
 		try{
-			int pageNumber = dataJson.getIntValue("pageNum");
 			String roomNum = dataJson.getString("roomNum");
 			String date = dataJson.getString("date");
 			int year = Integer.parseInt(date.substring(0,4));

@@ -114,4 +114,17 @@
       TYPE = #{TYPE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from grocery_running 
+     <if test="ID != null" >
+      where ITEM_ID = #{ID} and CTIME &lt;= #{TTIME} and CTIME &gt;= #{STIME}
+     </if>
+  </select>
+  <select id="getRec" resultMap="BaseResultMap" parameterType="map">
+    select * from grocery_running  
+     <if test="ID != null" >
+      where ITEM_ID = #{ID} and CTIME &lt;= #{TTIME} and CTIME &gt;= #{STIME}
+     </if>
+     limit #{ST}, #{EACH}
+  </select>
 </mapper>

@@ -1,11 +1,14 @@
 package org.ld.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.ld.dao.DailyServiceMapper;
 import org.ld.dao.FacStaMapper;
+import org.ld.dao.GroceryItemMapper;
+import org.ld.dao.GroceryRunningMapper;
 import org.ld.dao.PlanDetailMapper;
 import org.ld.dao.PlanMapper;
 import org.ld.dao.PlanProgressMapper;
@@ -13,6 +16,8 @@ import org.ld.dao.RoomItemMapper;
 import org.ld.dao.SourcesMapper;
 import org.ld.model.DailyService;
 import org.ld.model.FacSta;
+import org.ld.model.GroceryItem;
+import org.ld.model.GroceryRunning;
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
 import org.ld.model.PlanProgress;
@@ -47,6 +52,12 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	private PlanProgressMapper planProgressMapper;
+	
+	@Autowired
+	private GroceryItemMapper groceryItemMapper;
+	
+	@Autowired
+	private GroceryRunningMapper groceryRunningMapper;
 
 	@Override
 	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
@@ -294,5 +305,87 @@ public class ItemServiceImpl implements ItemService {
 		map.put("ROOM_ID", rid);
 		map.put("TYPE", type);
 		return roomItemMapper.getTotal(map);
+	}
+
+	@Override
+	public int totalGrocery(String goods) {
+		// TODO Auto-generated method stub
+		return groceryItemMapper.totalRec("%" + goods + "%");
+	}
+
+	@Override
+	public List<GroceryItem> getGrocery(String goods, int st, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("NAME", "%" + goods + "%");
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return groceryItemMapper.getRec(map);
+	}
+
+	@Override
+	public int addGrocery(GroceryItem goods) {
+		// TODO Auto-generated method stub
+		try {
+			groceryItemMapper.insert(goods);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int addGroceryRec(GroceryRunning gr) {
+		// TODO Auto-generated method stub
+		try {
+			groceryRunningMapper.insert(gr);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateGrocery(GroceryItem goods) {
+		// TODO Auto-generated method stub
+		try {
+			groceryItemMapper.updateByPrimaryKeySelective(goods);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public GroceryItem getCertainGrocery(int ID) {
+		// TODO Auto-generated method stub
+		return groceryItemMapper.selectByPrimaryKey(ID);
+	}
+	
+	@Override
+	public List<GroceryRunning> getGroceryRunning(int id, int st, int eachPage, Date from, Date to) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ID", id);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		map.put("FTIME", from);
+		map.put("TTIME", to);
+		
+		return groceryRunningMapper.getRec(map);
+	}
+	
+	@Override
+	public int totalGroceryRunning(int id, Date from, Date to) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ID", id);
+		map.put("FTIME", from);
+		map.put("TTIME", to);
+		
+		return groceryRunningMapper.totalRec(map);
 	}
 }
