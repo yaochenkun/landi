@@ -9,7 +9,9 @@ public class ShuttleBus {
 
     private String ROOM_NUM;
 
-    private String NAME;
+    private Integer GUEST_ID;
+
+    private String GUEST_NAME;
 
     private Integer FIRST;
 
@@ -109,12 +111,20 @@ public class ShuttleBus {
         this.ROOM_NUM = ROOM_NUM == null ? null : ROOM_NUM.trim();
     }
 
-    public String getNAME() {
-        return NAME;
+    public Integer getGUEST_ID() {
+        return GUEST_ID;
     }
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME == null ? null : NAME.trim();
+    public void setGUEST_ID(Integer GUEST_ID) {
+        this.GUEST_ID = GUEST_ID;
+    }
+
+    public String getGUEST_NAME() {
+        return GUEST_NAME;
+    }
+
+    public void setGUEST_NAME(String GUEST_NAME) {
+        this.GUEST_NAME = GUEST_NAME == null ? null : GUEST_NAME.trim();
     }
 
     public Integer getFIRST() {

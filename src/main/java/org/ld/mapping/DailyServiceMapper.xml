@@ -5,6 +5,7 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
     <result column="ITEM" property="ITEM" jdbcType="VARCHAR" />
     <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
@@ -13,7 +14,7 @@
     <result column="RTIME" property="RTIME" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TYPE, ROOM_NUMBER, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME
+    ID, TYPE, ROOM_NUMBER, GUEST_ID, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,13 +28,13 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.DailyService" >
     insert into daily_service (ID, TYPE, ROOM_NUMBER, 
-      GUEST_NAME, ITEM, COUNT, 
-      MONEY, COMMENT, RTIME
-      )
+      GUEST_ID, GUEST_NAME, ITEM, 
+      COUNT, MONEY, COMMENT, 
+      RTIME)
     values (#{ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
-      #{GUEST_NAME,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, 
-      #{MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, #{RTIME,jdbcType=TIMESTAMP}
-      )
+      #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, 
+      #{COUNT,jdbcType=INTEGER}, #{MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, 
+      #{RTIME,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.DailyService" >
     insert into daily_service
@@ -46,6 +47,9 @@
       </if>
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
       </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME,
@@ -76,6 +80,9 @@
       <if test="ROOM_NUMBER != null" >
         #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="GUEST_NAME != null" >
         #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
@@ -105,6 +112,9 @@
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
@@ -130,6 +140,7 @@
     update daily_service
     set TYPE = #{TYPE,jdbcType=INTEGER},
       ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       ITEM = #{ITEM,jdbcType=VARCHAR},
       COUNT = #{COUNT,jdbcType=INTEGER},

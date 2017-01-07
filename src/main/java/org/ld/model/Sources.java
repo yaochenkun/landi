@@ -7,7 +7,9 @@ public class Sources {
 
 	private String ROOM_NUMBER;
 
-	private String GUEST_NAME;
+    private Integer GUEST_ID;
+
+    private String GUEST_NAME;
 
 	private Date TIME;
 
@@ -35,9 +37,17 @@ public class Sources {
 		return ROOM_NUMBER;
 	}
 
-	public void setROOM_NUMBER(String ROOM_NUMBER) {
-		this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
-	}
+    public void setROOM_NUMBER(String ROOM_NUMBER) {
+        this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
+    }
+
+    public Integer getGUEST_ID() {
+        return GUEST_ID;
+    }
+
+    public void setGUEST_ID(Integer GUEST_ID) {
+        this.GUEST_ID = GUEST_ID;
+    }
 
 	public String getGUEST_NAME() {
 		return GUEST_NAME;

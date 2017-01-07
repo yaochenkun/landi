@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="org.ld.model.Maintain" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="STIME" property="STIME" jdbcType="TIMESTAMP" />
     <result column="FTIME" property="FTIME" jdbcType="TIMESTAMP" />
     <result column="ETIME" property="ETIME" jdbcType="TIMESTAMP" />
@@ -21,8 +22,8 @@
     <result column="PAY" property="PAY" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, STIME, FTIME, ETIME, LEVEL, PROBLEM, PRO_TYPE, PRO_CAUSE, COMMENT, 
-    PIC, CHARGE, TIMES, DEPART, FOLLOW, STATE, PAY
+    ID, ROOM_NUMBER, GUEST_ID, STIME, FTIME, ETIME, LEVEL, PROBLEM, PRO_TYPE, PRO_CAUSE, 
+    COMMENT, PIC, CHARGE, TIMES, DEPART, FOLLOW, STATE, PAY
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,18 +36,18 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Maintain" >
-    insert into maintain (ID, ROOM_NUMBER, STIME, 
-      FTIME, ETIME, LEVEL, 
-      PROBLEM, PRO_TYPE, PRO_CAUSE, 
-      COMMENT, PIC, CHARGE, 
-      TIMES, DEPART, FOLLOW, 
-      STATE, PAY)
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{STIME,jdbcType=TIMESTAMP}, 
-      #{FTIME,jdbcType=TIMESTAMP}, #{ETIME,jdbcType=TIMESTAMP}, #{LEVEL,jdbcType=INTEGER}, 
-      #{PROBLEM,jdbcType=VARCHAR}, #{PRO_TYPE,jdbcType=INTEGER}, #{PRO_CAUSE,jdbcType=INTEGER}, 
-      #{COMMENT,jdbcType=VARCHAR}, #{PIC,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, 
-      #{TIMES,jdbcType=INTEGER}, #{DEPART,jdbcType=VARCHAR}, #{FOLLOW,jdbcType=VARCHAR}, 
-      #{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT})
+    insert into maintain (ID, ROOM_NUMBER, GUEST_ID, 
+      STIME, FTIME, ETIME, 
+      LEVEL, PROBLEM, PRO_TYPE, 
+      PRO_CAUSE, COMMENT, PIC, 
+      CHARGE, TIMES, DEPART, 
+      FOLLOW, STATE, PAY)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{STIME,jdbcType=TIMESTAMP}, #{FTIME,jdbcType=TIMESTAMP}, #{ETIME,jdbcType=TIMESTAMP}, 
+      #{LEVEL,jdbcType=INTEGER}, #{PROBLEM,jdbcType=VARCHAR}, #{PRO_TYPE,jdbcType=INTEGER}, 
+      #{PRO_CAUSE,jdbcType=INTEGER}, #{COMMENT,jdbcType=VARCHAR}, #{PIC,jdbcType=VARCHAR}, 
+      #{CHARGE,jdbcType=DOUBLE}, #{TIMES,jdbcType=INTEGER}, #{DEPART,jdbcType=VARCHAR}, 
+      #{FOLLOW,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Maintain" >
     insert into maintain
@@ -56,6 +57,9 @@
       </if>
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
       </if>
       <if test="STIME != null" >
         STIME,
@@ -110,6 +114,9 @@
       <if test="ROOM_NUMBER != null" >
         #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="STIME != null" >
         #{STIME,jdbcType=TIMESTAMP},
       </if>
@@ -163,6 +170,9 @@
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="STIME != null" >
         STIME = #{STIME,jdbcType=TIMESTAMP},
       </if>
@@ -214,6 +224,7 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.Maintain" >
     update maintain
     set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       STIME = #{STIME,jdbcType=TIMESTAMP},
       FTIME = #{FTIME,jdbcType=TIMESTAMP},
       ETIME = #{ETIME,jdbcType=TIMESTAMP},

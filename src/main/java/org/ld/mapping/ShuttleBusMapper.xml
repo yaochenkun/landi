@@ -6,7 +6,8 @@
     <result column="YEAR" property="YEAR" jdbcType="INTEGER" />
     <result column="MONTH" property="MONTH" jdbcType="INTEGER" />
     <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
     <result column="FIRST" property="FIRST" jdbcType="INTEGER" />
     <result column="SECOND" property="SECOND" jdbcType="INTEGER" />
     <result column="THIRD" property="THIRD" jdbcType="INTEGER" />
@@ -42,11 +43,11 @@
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, YEAR, MONTH, ROOM_NUM, NAME, FIRST, SECOND, THIRD, FOURTH, FIFTH, SIXTH, SEVENTH, 
-    EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH, THIRTEENTH, FOURTEENTH, FIFTEENTH, SIXTEENTH, 
-    SEVENTEENTH, EIGHTEENTH, NINETEENTH, TWENTIETH, TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD, 
-    TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, TWENTY_EIGHTH, TWENTY_NINTH, 
-    THIRTIETH, THIRTY_FIRST, DAYS, TOTAL
+    ID, YEAR, MONTH, ROOM_NUM, GUEST_ID, GUEST_NAME, FIRST, SECOND, THIRD, FOURTH, FIFTH, 
+    SIXTH, SEVENTH, EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH, THIRTEENTH, FOURTEENTH, 
+    FIFTEENTH, SIXTEENTH, SEVENTEENTH, EIGHTEENTH, NINETEENTH, TWENTIETH, TWENTY_FIRST, 
+    TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, 
+    TWENTY_EIGHTH, TWENTY_NINTH, THIRTIETH, THIRTY_FIRST, DAYS, TOTAL
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -60,31 +61,33 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.ShuttleBus" >
     insert into shuttle_bus (ID, YEAR, MONTH, 
-      ROOM_NUM, NAME, FIRST, 
-      SECOND, THIRD, FOURTH, 
-      FIFTH, SIXTH, SEVENTH, 
-      EIGHTH, NINTH, TENTH, 
-      ELEVENTH, TWELFTH, THIRTEENTH, 
-      FOURTEENTH, FIFTEENTH, SIXTEENTH, 
-      SEVENTEENTH, EIGHTEENTH, NINETEENTH, 
-      TWENTIETH, TWENTY_FIRST, TWENTY_SECOND, 
-      TWENTY_THIRD, TWENTY_FOURTH, TWENTY_FIFTH, 
-      TWENTY_SIXTH, TWENTY_SEVENTH, TWENTY_EIGHTH, 
-      TWENTY_NINTH, THIRTIETH, THIRTY_FIRST, 
-      DAYS, TOTAL)
+      ROOM_NUM, GUEST_ID, GUEST_NAME, 
+      FIRST, SECOND, THIRD, 
+      FOURTH, FIFTH, SIXTH, 
+      SEVENTH, EIGHTH, NINTH, 
+      TENTH, ELEVENTH, TWELFTH, 
+      THIRTEENTH, FOURTEENTH, FIFTEENTH, 
+      SIXTEENTH, SEVENTEENTH, EIGHTEENTH, 
+      NINETEENTH, TWENTIETH, TWENTY_FIRST, 
+      TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH, 
+      TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, 
+      TWENTY_EIGHTH, TWENTY_NINTH, THIRTIETH, 
+      THIRTY_FIRST, DAYS, TOTAL
+      )
     values (#{ID,jdbcType=INTEGER}, #{YEAR,jdbcType=INTEGER}, #{MONTH,jdbcType=INTEGER}, 
-      #{ROOM_NUM,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{FIRST,jdbcType=INTEGER}, 
-      #{SECOND,jdbcType=INTEGER}, #{THIRD,jdbcType=INTEGER}, #{FOURTH,jdbcType=INTEGER}, 
-      #{FIFTH,jdbcType=INTEGER}, #{SIXTH,jdbcType=INTEGER}, #{SEVENTH,jdbcType=INTEGER}, 
-      #{EIGHTH,jdbcType=INTEGER}, #{NINTH,jdbcType=INTEGER}, #{TENTH,jdbcType=INTEGER}, 
-      #{ELEVENTH,jdbcType=INTEGER}, #{TWELFTH,jdbcType=INTEGER}, #{THIRTEENTH,jdbcType=INTEGER}, 
-      #{FOURTEENTH,jdbcType=INTEGER}, #{FIFTEENTH,jdbcType=INTEGER}, #{SIXTEENTH,jdbcType=INTEGER}, 
-      #{SEVENTEENTH,jdbcType=INTEGER}, #{EIGHTEENTH,jdbcType=INTEGER}, #{NINETEENTH,jdbcType=INTEGER}, 
-      #{TWENTIETH,jdbcType=INTEGER}, #{TWENTY_FIRST,jdbcType=INTEGER}, #{TWENTY_SECOND,jdbcType=INTEGER}, 
-      #{TWENTY_THIRD,jdbcType=INTEGER}, #{TWENTY_FOURTH,jdbcType=INTEGER}, #{TWENTY_FIFTH,jdbcType=INTEGER}, 
-      #{TWENTY_SIXTH,jdbcType=INTEGER}, #{TWENTY_SEVENTH,jdbcType=INTEGER}, #{TWENTY_EIGHTH,jdbcType=INTEGER}, 
-      #{TWENTY_NINTH,jdbcType=INTEGER}, #{THIRTIETH,jdbcType=INTEGER}, #{THIRTY_FIRST,jdbcType=INTEGER}, 
-      #{DAYS,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER})
+      #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, 
+      #{FIRST,jdbcType=INTEGER}, #{SECOND,jdbcType=INTEGER}, #{THIRD,jdbcType=INTEGER}, 
+      #{FOURTH,jdbcType=INTEGER}, #{FIFTH,jdbcType=INTEGER}, #{SIXTH,jdbcType=INTEGER}, 
+      #{SEVENTH,jdbcType=INTEGER}, #{EIGHTH,jdbcType=INTEGER}, #{NINTH,jdbcType=INTEGER}, 
+      #{TENTH,jdbcType=INTEGER}, #{ELEVENTH,jdbcType=INTEGER}, #{TWELFTH,jdbcType=INTEGER}, 
+      #{THIRTEENTH,jdbcType=INTEGER}, #{FOURTEENTH,jdbcType=INTEGER}, #{FIFTEENTH,jdbcType=INTEGER}, 
+      #{SIXTEENTH,jdbcType=INTEGER}, #{SEVENTEENTH,jdbcType=INTEGER}, #{EIGHTEENTH,jdbcType=INTEGER}, 
+      #{NINETEENTH,jdbcType=INTEGER}, #{TWENTIETH,jdbcType=INTEGER}, #{TWENTY_FIRST,jdbcType=INTEGER}, 
+      #{TWENTY_SECOND,jdbcType=INTEGER}, #{TWENTY_THIRD,jdbcType=INTEGER}, #{TWENTY_FOURTH,jdbcType=INTEGER}, 
+      #{TWENTY_FIFTH,jdbcType=INTEGER}, #{TWENTY_SIXTH,jdbcType=INTEGER}, #{TWENTY_SEVENTH,jdbcType=INTEGER}, 
+      #{TWENTY_EIGHTH,jdbcType=INTEGER}, #{TWENTY_NINTH,jdbcType=INTEGER}, #{THIRTIETH,jdbcType=INTEGER}, 
+      #{THIRTY_FIRST,jdbcType=INTEGER}, #{DAYS,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.ShuttleBus" >
     insert into shuttle_bus
@@ -101,8 +104,11 @@
       <if test="ROOM_NUM != null" >
         ROOM_NUM,
       </if>
-      <if test="NAME != null" >
-        NAME,
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
       </if>
       <if test="FIRST != null" >
         FIRST,
@@ -217,8 +223,11 @@
       <if test="ROOM_NUM != null" >
         #{ROOM_NUM,jdbcType=VARCHAR},
       </if>
-      <if test="NAME != null" >
-        #{NAME,jdbcType=VARCHAR},
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
       <if test="FIRST != null" >
         #{FIRST,jdbcType=INTEGER},
@@ -333,8 +342,11 @@
       <if test="ROOM_NUM != null" >
         ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
       </if>
-      <if test="NAME != null" >
-        NAME = #{NAME,jdbcType=VARCHAR},
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
       <if test="FIRST != null" >
         FIRST = #{FIRST,jdbcType=INTEGER},
@@ -443,7 +455,8 @@
     set YEAR = #{YEAR,jdbcType=INTEGER},
       MONTH = #{MONTH,jdbcType=INTEGER},
       ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
-      NAME = #{NAME,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       FIRST = #{FIRST,jdbcType=INTEGER},
       SECOND = #{SECOND,jdbcType=INTEGER},
       THIRD = #{THIRD,jdbcType=INTEGER},
@@ -495,6 +508,6 @@
      limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
-    select * from shuttle_bus where ROOM_NUM = #{RN} and NAME = #{NAME} and YEAR = #{YEAR} and MON = #{MON}
+    select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_NAME = #{NAME} and YEAR = #{YEAR} and MON = #{MON}
   </select>
 </mapper>

@@ -5,6 +5,7 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="DATE" property="DATE" jdbcType="DATE" />
     <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="NAME" property="NAME" jdbcType="VARCHAR" />
     <result column="SHIRT" property="SHIRT" jdbcType="INTEGER" />
     <result column="TOP_OF_SUIT" property="TOP_OF_SUIT" jdbcType="INTEGER" />
@@ -28,9 +29,9 @@
     <result column="PRICE" property="PRICE" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, DATE, ROOM_NUM, NAME, SHIRT, TOP_OF_SUIT, TROUSERS, JACKET, COAT_M, COAT_L, COAT_MS, 
-    COAT_MM, COAT_ML, CASHMERE, SHORT_PANTS, WAISTCOAT, T_SHRIT, KNITTED, TIE, LONG_SKIRT, 
-    SHORT_SKIRT, OTHER, TOTAL, PRICE
+    ID, DATE, ROOM_NUM, GUEST_ID, NAME, SHIRT, TOP_OF_SUIT, TROUSERS, JACKET, COAT_M, 
+    COAT_L, COAT_MS, COAT_MM, COAT_ML, CASHMERE, SHORT_PANTS, WAISTCOAT, T_SHRIT, KNITTED, 
+    TIE, LONG_SKIRT, SHORT_SKIRT, OTHER, TOTAL, PRICE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -44,21 +45,23 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.Laundry" >
     insert into laundry (ID, DATE, ROOM_NUM, 
-      NAME, SHIRT, TOP_OF_SUIT, 
-      TROUSERS, JACKET, COAT_M, 
-      COAT_L, COAT_MS, COAT_MM, 
-      COAT_ML, CASHMERE, SHORT_PANTS, 
-      WAISTCOAT, T_SHRIT, KNITTED, 
-      TIE, LONG_SKIRT, SHORT_SKIRT, 
-      OTHER, TOTAL, PRICE)
+      GUEST_ID, NAME, SHIRT, 
+      TOP_OF_SUIT, TROUSERS, JACKET, 
+      COAT_M, COAT_L, COAT_MS, 
+      COAT_MM, COAT_ML, CASHMERE, 
+      SHORT_PANTS, WAISTCOAT, T_SHRIT, 
+      KNITTED, TIE, LONG_SKIRT, 
+      SHORT_SKIRT, OTHER, TOTAL, 
+      PRICE)
     values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{SHIRT,jdbcType=INTEGER}, #{TOP_OF_SUIT,jdbcType=INTEGER}, 
-      #{TROUSERS,jdbcType=INTEGER}, #{JACKET,jdbcType=INTEGER}, #{COAT_M,jdbcType=INTEGER}, 
-      #{COAT_L,jdbcType=INTEGER}, #{COAT_MS,jdbcType=INTEGER}, #{COAT_MM,jdbcType=INTEGER}, 
-      #{COAT_ML,jdbcType=INTEGER}, #{CASHMERE,jdbcType=INTEGER}, #{SHORT_PANTS,jdbcType=INTEGER}, 
-      #{WAISTCOAT,jdbcType=INTEGER}, #{t_SHRIT,jdbcType=INTEGER}, #{KNITTED,jdbcType=INTEGER}, 
-      #{TIE,jdbcType=INTEGER}, #{LONG_SKIRT,jdbcType=INTEGER}, #{SHORT_SKIRT,jdbcType=INTEGER}, 
-      #{OTHER,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, #{PRICE,jdbcType=DOUBLE})
+      #{GUEST_ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{SHIRT,jdbcType=INTEGER}, 
+      #{TOP_OF_SUIT,jdbcType=INTEGER}, #{TROUSERS,jdbcType=INTEGER}, #{JACKET,jdbcType=INTEGER}, 
+      #{COAT_M,jdbcType=INTEGER}, #{COAT_L,jdbcType=INTEGER}, #{COAT_MS,jdbcType=INTEGER}, 
+      #{COAT_MM,jdbcType=INTEGER}, #{COAT_ML,jdbcType=INTEGER}, #{CASHMERE,jdbcType=INTEGER}, 
+      #{SHORT_PANTS,jdbcType=INTEGER}, #{WAISTCOAT,jdbcType=INTEGER}, #{t_SHRIT,jdbcType=INTEGER}, 
+      #{KNITTED,jdbcType=INTEGER}, #{TIE,jdbcType=INTEGER}, #{LONG_SKIRT,jdbcType=INTEGER}, 
+      #{SHORT_SKIRT,jdbcType=INTEGER}, #{OTHER,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
+      #{PRICE,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
     insert into laundry
@@ -71,6 +74,9 @@
       </if>
       <if test="ROOM_NUM != null" >
         ROOM_NUM,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
       </if>
       <if test="NAME != null" >
         NAME,
@@ -146,6 +152,9 @@
       <if test="ROOM_NUM != null" >
         #{ROOM_NUM,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="NAME != null" >
         #{NAME,jdbcType=VARCHAR},
       </if>
@@ -220,6 +229,9 @@
       <if test="ROOM_NUM != null" >
         ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="NAME != null" >
         NAME = #{NAME,jdbcType=VARCHAR},
       </if>
@@ -290,6 +302,7 @@
     update laundry
     set DATE = #{DATE,jdbcType=DATE},
       ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       NAME = #{NAME,jdbcType=VARCHAR},
       SHIRT = #{SHIRT,jdbcType=INTEGER},
       TOP_OF_SUIT = #{TOP_OF_SUIT,jdbcType=INTEGER},

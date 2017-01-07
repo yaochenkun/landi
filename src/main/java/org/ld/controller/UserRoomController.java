@@ -630,7 +630,7 @@ public class UserRoomController {
 				sb.setYEAR(year);
 				sb.setMONTH(mon);
 				sb.setROOM_NUM(roomNum);
-				sb.setNAME(name);
+				sb.setGUEST_NAME(name);
 				roomService.addShuttleBus(sb);
 				sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
 			}
@@ -750,8 +750,6 @@ public class UserRoomController {
 		}
 	}
 	
-	
-
 	@RequestMapping("/Model/")
 	@ResponseBody
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {

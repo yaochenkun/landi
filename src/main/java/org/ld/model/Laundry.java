@@ -9,6 +9,8 @@ public class Laundry {
 
     private String ROOM_NUM;
 
+    private Integer GUEST_ID;
+
     private String NAME;
 
     private Integer SHIRT;
@@ -73,6 +75,14 @@ public class Laundry {
 
     public void setROOM_NUM(String ROOM_NUM) {
         this.ROOM_NUM = ROOM_NUM == null ? null : ROOM_NUM.trim();
+    }
+
+    public Integer getGUEST_ID() {
+        return GUEST_ID;
+    }
+
+    public void setGUEST_ID(Integer GUEST_ID) {
+        this.GUEST_ID = GUEST_ID;
     }
 
     public String getNAME() {

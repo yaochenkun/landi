@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="org.ld.model.Income" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
     <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
     <result column="CONTRACT_RECEIVE" property="CONTRACT_RECEIVE" jdbcType="DOUBLE" />
@@ -11,7 +12,7 @@
     <result column="BENIFIT" property="BENIFIT" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, GUEST_NAME, TIME, CONTRACT_RECEIVE, CONTAACT_PAY, BENIFIT
+    ID, ROOM_NUMBER, GUEST_ID, GUEST_NAME, TIME, CONTRACT_RECEIVE, CONTAACT_PAY, BENIFIT
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,12 +25,12 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Income" >
-    insert into income (ID, ROOM_NUMBER, GUEST_NAME, 
-      TIME, CONTRACT_RECEIVE, CONTAACT_PAY, 
-      BENIFIT)
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_NAME,jdbcType=VARCHAR}, 
-      #{TIME,jdbcType=TIMESTAMP}, #{CONTRACT_RECEIVE,jdbcType=DOUBLE}, #{CONTAACT_PAY,jdbcType=DOUBLE}, 
-      #{BENIFIT,jdbcType=DOUBLE})
+    insert into income (ID, ROOM_NUMBER, GUEST_ID, 
+      GUEST_NAME, TIME, CONTRACT_RECEIVE, 
+      CONTAACT_PAY, BENIFIT)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{TIME,jdbcType=TIMESTAMP}, #{CONTRACT_RECEIVE,jdbcType=DOUBLE}, 
+      #{CONTAACT_PAY,jdbcType=DOUBLE}, #{BENIFIT,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Income" >
     insert into income
@@ -39,6 +40,9 @@
       </if>
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
       </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME,
@@ -63,6 +67,9 @@
       <if test="ROOM_NUMBER != null" >
         #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="GUEST_NAME != null" >
         #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
@@ -86,6 +93,9 @@
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
@@ -107,6 +117,7 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.Income" >
     update income
     set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       TIME = #{TIME,jdbcType=TIMESTAMP},
       CONTRACT_RECEIVE = #{CONTRACT_RECEIVE,jdbcType=DOUBLE},
