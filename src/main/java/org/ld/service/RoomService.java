@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ld.model.Laundry;
+import org.ld.model.Maintain;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -75,4 +76,15 @@ public interface RoomService {
 	int addShuttleBus(ShuttleBus sb);
 	
 	int updateShuttleBus(ShuttleBus sb);
+	
+	int addMaintain(Maintain m);
+	
+	int updateMaintain(Maintain m);
+	
+	int totalMaintain(Integer type, Integer cat, Integer state, String rn, Date from, Date to);
+	
+	Maintain getCertainMaintain(int ID);
+	
+	List<Maintain> getMaintain(Integer type, Integer cat, Integer state, String rn, Integer st, Integer eachPage, Date from, Date to, Integer order);
+	
 }

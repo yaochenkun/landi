@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.ld.dao.LaundryMapper;
+import org.ld.dao.MaintainMapper;
 import org.ld.dao.RoomItemMapper;
 import org.ld.dao.RoomMapper;
 import org.ld.dao.RoomMeterMapper;
@@ -13,6 +14,7 @@ import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
 import org.ld.dao.ShuttleBusMapper;
 import org.ld.model.Laundry;
+import org.ld.model.Maintain;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -43,6 +45,8 @@ public class RoomServiceImpl implements RoomService {
 	private LaundryMapper laundryMapper;
 	@Autowired
 	private ShuttleBusMapper shuttleBusMapper;
+	@Autowired
+	private MaintainMapper maintainMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -318,5 +322,67 @@ public class RoomServiceImpl implements RoomService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+
+	@Override
+	public int addMaintain(Maintain m) {
+		// TODO Auto-generated method stub
+		try{
+			maintainMapper.insertSelective(m);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateMaintain(Maintain m) {
+		// TODO Auto-generated method stub
+		try{
+			maintainMapper.updateByPrimaryKeySelective(m);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int totalMaintain(Integer type, Integer cat, Integer state, String rn, Date from, Date to) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("STIME", from);
+		map.put("TTIME", to);
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("STATE", state);
+		
+		return maintainMapper.totalRec(map);
+	}
+
+	@Override
+	public List<Maintain> getMaintain(Integer type, Integer cat, Integer state, String rn, Integer st, Integer eachPage, Date from,
+			Date to, Integer order) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("STIME", from);
+		map.put("TTIME", to);
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("STATE", state);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		map.put("ORDER", order);
+		
+		return maintainMapper.getRec(map);
+	}
+
+	@Override
+	public Maintain getCertainMaintain(int ID) {
+		// TODO Auto-generated method stub
+		return maintainMapper.selectByPrimaryKey(ID);
 	}
 }

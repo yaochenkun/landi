@@ -653,17 +653,19 @@ public class UserItemController {
 			gr.setTOTAL(count);
 			gr.setTYPE(1); // 1 buy, 2 sell, 3 use
 			
-			itemService.addGroceryRec(gr);
-			gi.setTOTAL(gi.getTOTAL() + count);
-			gi.setAVALIABLE(gi.getAVALIABLE() + count);
+			if(itemService.addGroceryRec(gr) == 1)
+			{
+				gi.setTOTAL(gi.getTOTAL() + count);
+				gi.setAVALIABLE(gi.getAVALIABLE() + count);
+				return itemService.updateGrocery(gi);
+			}
+			else return 0;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 			return 0;
 		}
-
-		return 1;
 	}
 	
 	@RequestMapping("/sellGoods")
@@ -693,18 +695,20 @@ public class UserItemController {
 			gr.setTOTAL(count);
 			gr.setTYPE(2); // 1 buy, 2 sell, 3 waste
 			
-			itemService.addGroceryRec(gr);
-			gi.setAVALIABLE(gi.getAVALIABLE() - count);
-			gi.setTOTAL_SOLD(gi.getTOTAL_SOLD() + count);
-			gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() + total - count * gi.getBUY_MONEY());
+			if(itemService.addGroceryRec(gr) == 1)
+			{
+				gi.setAVALIABLE(gi.getAVALIABLE() - count);
+				gi.setTOTAL_SOLD(gi.getTOTAL_SOLD() + count);
+				gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() + total - count * gi.getBUY_MONEY());
+				return itemService.updateGrocery(gi);
+			}
+			else return 0;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 			return 0;
 		}
-
-		return 1;
 	}
 	
 	@RequestMapping("/wasteGoods")
@@ -734,17 +738,20 @@ public class UserItemController {
 			gr.setTOTAL(count);
 			gr.setTYPE(3); // 1 buy, 2 sell, 3 waste
 			
-			itemService.addGroceryRec(gr);
-			gi.setAVALIABLE(gi.getAVALIABLE() - count);
-			gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() - count * gi.getBUY_MONEY());
+			if(itemService.addGroceryRec(gr) == 1)
+			{
+				gi.setAVALIABLE(gi.getAVALIABLE() - count);
+				gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() - count * gi.getBUY_MONEY());
+				
+				return itemService.updateGrocery(gi);
+			}
+			else return 0;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 			return 0;
 		}
-
-		return 1;
 	}
 	
 	@RequestMapping("/searchAnnualSale") // id为null时，查询所有记录(只有当前的统计，没有历史统计记录)
@@ -816,9 +823,7 @@ public class UserItemController {
 			gi.setTOTAL(total);
 			gi.setTYPE(type);
 			
-			itemService.addGrocery(gi);
-			
-			return 1;
+			return itemService.addGrocery(gi);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.ld.app.CurEnv;
 import org.ld.model.DailyService;
 import org.ld.model.Guest;
 import org.ld.model.Laundry;
+import org.ld.model.Maintain;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -526,7 +528,7 @@ public class UserRoomController {
 				nL.setTROUSERS(dataJson.getInteger("trousers"));
 				nL.setWAISTCOAT(dataJson.getInteger("waistcoat"));
 				
-				roomService.addWash(nL);
+				return roomService.addWash(nL);
 			}
 			else
 			{
@@ -552,10 +554,8 @@ public class UserRoomController {
 				nL.setTROUSERS(nL.getTROUSERS() + dataJson.getInteger("trousers"));
 				nL.setWAISTCOAT(nL.getWAISTCOAT() + dataJson.getInteger("waistcoat"));
 				
-				roomService.updateWash(nL);
+				return roomService.updateWash(nL);
 			}
-	
-			return 1;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -739,14 +739,246 @@ public class UserRoomController {
 				}
 			}
 			sb.setTOTAL(total);
-			roomService.updateShuttleBus(sb);
-			return 1;
+			
+			return roomService.updateShuttleBus(sb);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/addMaintain") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Integer addMaintain(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Maintain m = new Maintain();
+			Guest g = guestService.getGuestByRoomNumber(dataJson.getString("roomNum"));
+			m.setGUEST_ID(g.getID());
+			m.setCHARGE(dataJson.getDouble("price"));
+			m.setCOMMENT(dataJson.getString("comment"));
+			m.setETIME(dataJson.getDate("expTime")); // YY-MM-DD HH-MM-SS
+			m.setFOLLOW(dataJson.getString("follow"));
+			m.setGUEST_ID(dataJson.getInteger("guestID"));
+			m.setLEVEL(dataJson.getInteger("problemLevel"));
+			m.setPROBLEM(dataJson.getString("problemExist"));
+			m.setPRO_TYPE(dataJson.getString("problemType"));
+			m.setPRO_CAUSE(dataJson.getString("problemReason"));
+			m.setPRO_DETAIL(dataJson.getString("problemDetail"));
+			m.setROOM_NUMBER(dataJson.getString("roomNum"));
+			m.setSTATE(1); //1 unfinish, 0 finish
+			m.setSTIME(dataJson.getDate("maintainTime")); // YY-MM-DD HH-MM-SS
+			
+			return roomService.addMaintain(m);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchMaintainUnfinished") // state 1 : unfinish , 0 finish, null for all; roomNum为null时查询所有记录
+	@ResponseBody
+	public Map<String, Object> searchMaintainUnfinished(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String roomNum = dataJson.getString("roomNum");
+		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
+		Date to = dataJson.getDate("to");
+		int type = dataJson.getIntValue("type");
+		int cat = dataJson.getIntValue("cat");
+		int state = dataJson.getIntValue("state");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<Maintain> record = roomService.getMaintain(type, cat, state, roomNum, st, eachPage, from, to, 0);
+
+			ans.put("dataList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/updateMaintain") // roomNum为null时，查询所有记录
+	@ResponseBody
+	public Integer updateMaintain(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Maintain m = roomService.getCertainMaintain(dataJson.getIntValue("ID"));
+			m.setCOMMENT(dataJson.getString("comment"));
+			m.setTIMES(dataJson.getInteger("times"));
+			m.setFOLLOW(dataJson.getString("follow"));
+			m.setFTIME(dataJson.getDate("fixTime"));
+			m.setPAY(dataJson.getBoolean("payState")); // PAY OR NOT 
+			m.setLEVEL(dataJson.getInteger("problemLevel"));
+			m.setSTATE(dataJson.getInteger("state")); // 0 unfinish, 1 finish
+			
+			return roomService.updateMaintain(m);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+	}
+	
+	class sta{
+		public Integer total = 0, l1 = 0, l2 = 0, l3 = 0, l4 = 0, uf = 0, uf4 = 0;
+		public Map<String, Integer> count = new HashMap<String, Integer>();
+		public Map<String, Integer> time = new HashMap<String, Integer>();
+	};
+	
+	public int getIntervalDays(Date startday,Date endday){          
+	    if(startday.after(endday)){  
+	        Date cal=startday;  
+	        startday=endday;  
+	        endday=cal;  
+	    }          
+	    long sl=startday.getTime();  
+	    long el=endday.getTime();         
+	    long ei=el-sl;             
+	    return (int)(ei/(1000*60*60*24));  
+	} 
+	
+	@RequestMapping("/searchMaintainStatic") // state 1 : unfinish , 0 finish, null for all; roomNum为null时查询所有记录
+	@ResponseBody
+	public Map<String, Object> searchMaintainStatic(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String roomNum = dataJson.getString("roomNum");
+		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
+		Date to = dataJson.getDate("to");
+		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int recordTotal = roomService.totalRow();
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			List<Maintain> record = roomService.getMaintain(null, null, null, roomNum, null, null, from, to, 1);
+			
+			Integer l1 = 0, l2 = 0, l3 = 0, l4 = 0;
+			Integer uf = 0, uf4 = 0, total = 0;
+			
+			Map<String, sta> cal = new HashMap<String, sta>();
+
+			for(Maintain m : record)
+			{
+				sta m2 = cal.get(m.getROOM_NUMBER());
+				if(m2 == null)
+				{
+					m2 = new sta();
+					cal.put(m.getROOM_NUMBER(), m2);
+				}
+				m2.total ++;
+				total ++;
+				String key = m.getPRO_TYPE();
+				Integer val = m2.count.get(key);
+				if(val != null)
+					m2.count.put(key,  val + 1);
+				else
+					m2.count.put(key, 1);
+				
+				val = m2.time.get(key);
+				if(val != null)
+					m2.time.put(key, val + getIntervalDays(m.getSTIME(), m.getFTIME()));
+				else
+					m2.time.put(key, getIntervalDays(m.getSTIME(), m.getFTIME()));
+				
+				switch(m.getLEVEL())
+				{
+				case 1:
+					m2.l1 ++;
+					m2.uf += m.getSTATE();
+					l1 ++;
+					uf ++;
+					break;
+				case 2:
+					m2.l2 ++;
+					m2.uf += m.getSTATE();
+					l2 ++;
+					uf ++;
+					break;
+				case 3:
+					m2.l3 ++;
+					m2.uf += m.getSTATE();
+					l3 ++;
+					uf ++;
+					break;
+				case 4:
+					m2.l4 ++;
+					m2.uf4 += m.getSTATE();
+					l4 ++;
+					uf4 ++;
+					break;
+				}
+			}
+			
+			ans.put("l1", l1);
+			ans.put("l2", l1);
+			ans.put("l3", l1);
+			ans.put("l4", l1);
+			ans.put("uf", l1);
+			ans.put("uf4", l1);
+			ans.put("total", l1);
+			ans.put("dataList", cal);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
 	}
 	
 	@RequestMapping("/Model/")
