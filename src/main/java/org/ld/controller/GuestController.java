@@ -296,13 +296,22 @@ public class GuestController {
 			}
 		}
 		
-		Integer rid = roomService.getRoomByNumber(obj.getString("STR_RommID")).getID();
-		RoomState rs = new RoomState();
-		rs.setID(rid);
-		rs.setCUS_ID(newGuest.getID());
-		rs.setCUS_NAME(newGuest.getGUEST_NAME());
-		rs.setSTATE(1); // 0 free, 1 rent
-		roomService.updateRoomState(rs);
+		try{
+			Integer rid = roomService.getRoomByNumber(newGuest.getROOM_NUMBER()).getID();
+			RoomState rs = new RoomState();
+			rs.setID(rid);
+			rs.setCUS_ID(newGuest.getID());
+			rs.setCUS_NAME(newGuest.getGUEST_NAME());
+			rs.setSTATE(1); // 0 free, 1 rent
+			roomService.updateRoomState(rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ans.remove("State");
+			ans.put("State", "Invalid: Data Error");
+			guestMissionService.delGuest(newGuest.getID());
+			return ans;
+		}
+		
 		return ans;
 	}
 
