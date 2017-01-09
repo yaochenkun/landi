@@ -105,7 +105,7 @@
   </update>
   <select id="getAllRoomState" resultMap="BaseResultMap" >
     <![CDATA[
-  	select * from room_state
+  	select * from room_state where STATE != 0
   	]]>
   </select>
 </mapper>
