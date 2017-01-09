@@ -385,4 +385,16 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return maintainMapper.selectByPrimaryKey(ID);
 	}
+
+	@Override
+	public int updateRoomState(RoomState rs) {
+		// TODO Auto-generated method stub
+		try{
+			roomStateMapper.updateByPrimaryKeySelective(rs);
+			return 1;
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
 }

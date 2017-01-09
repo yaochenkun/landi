@@ -87,4 +87,5 @@ public interface RoomService {
 	
 	List<Maintain> getMaintain(Integer type, Integer cat, Integer state, String rn, Integer st, Integer eachPage, Date from, Date to, Integer order);
 	
+	int updateRoomState(RoomState rs);
 }

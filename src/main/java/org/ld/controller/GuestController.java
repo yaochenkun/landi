@@ -295,7 +295,14 @@ public class GuestController {
 				return ans;
 			}
 		}
-
+		
+		Integer rid = roomService.getRoomByNumber(obj.getString("STR_RommID")).getID();
+		RoomState rs = new RoomState();
+		rs.setID(rid);
+		rs.setCUS_ID(newGuest.getID());
+		rs.setCUS_NAME(newGuest.getGUEST_NAME());
+		rs.setSTATE(1); // 0 free, 1 rent
+		roomService.updateRoomState(rs);
 		return ans;
 	}
 
