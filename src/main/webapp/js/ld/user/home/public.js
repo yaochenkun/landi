@@ -35,7 +35,7 @@ $(function(){
 var changeLeftMenu = function(index){
 	$(".main-nav a").removeClass("a-active");
 	$(".main-nav a").eq(index).addClass("a-active")
-}
+};
 
 // 将时间转换为 YYYY-mm-dd hh:mm:ss 形式
 function formatDate(date) {

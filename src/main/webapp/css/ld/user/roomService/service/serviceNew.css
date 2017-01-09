@@ -56,3 +56,5 @@
 .perCloth .delete{float: right; color: red;}
 
 .clothText{font-weight: bold; color: #2277da; font-size: 16px;}
+
+#item-type a + span{display: none;}

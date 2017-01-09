@@ -328,7 +328,7 @@
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
     select count(*) from laundry 
-     <if test="RN != null" >
+     <if test="_parameter != null" >
       where ROOM_NUM = #{RN,jdbcType=VARCHAR}
      </if>
   </select>

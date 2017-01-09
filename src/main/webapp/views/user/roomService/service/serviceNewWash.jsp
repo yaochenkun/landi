@@ -15,6 +15,7 @@
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 	
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -35,11 +36,11 @@
 							<input id="serviceRoomNumber" type="text" value="W35-1" />
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
-						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">客人姓名：</span><input id="guestName" type="text" value="Alice" /></li>
 						<li><span class="span">衣服种类：</span><div class="btn btn-choose" onclick="chooseClothes();">选择</div>
 						<li id="clothList"></li>
 						<li><span class="span">总件数：</span><span class='clothText' id="clothTotal">0</span>&nbsp;件</li>
-						<li><span class="span">总价：</span><input type="text" value="120" /></li>
+						<li><span class="span">总价：</span><input id="totalPrice" type="text" value="120" /></li>
 						<li><span class="span"></span><a onclick="addserviceWash();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
@@ -60,24 +61,24 @@
 				<div id="item-type" class="item">
 					<span class="span">衣服种类：</span>
 					<div class="item-content">
-						<a href="javascript:void(0);">衬衫</a>
-						<a href="javascript:void(0);">西装上衣</a>
-						<a href="javascript:void(0);">裤子</a>
-						<a href="javascript:void(0);">夹克</a>
-						<a href="javascript:void(0);">外套（中）</a>
-						<a href="javascript:void(0);">外套（长）</a>
-						<a href="javascript:void(0);">棉质外套（短）</a>
-						<a href="javascript:void(0);">棉质外套（中）</a>
-						<a href="javascript:void(0);">棉质外套（长）</a>
-						<a href="javascript:void(0);">羊绒外套</a>
-						<a href="javascript:void(0);">短裤</a>
-						<a href="javascript:void(0);">马甲</a>
-						<a href="javascript:void(0);">T恤</a>
-						<a href="javascript:void(0);">羊毛衫</a>
-						<a href="javascript:void(0);">领带</a>
-						<a href="javascript:void(0);">长裙</a>
-						<a href="javascript:void(0);">短裙</a>
-						<a href="javascript:void(0);">其他</a>
+						<a href="javascript:void(0);">衬衫</a><span>shirt</span>
+						<a href="javascript:void(0);">西装上衣</a><span>topSuit</span>
+						<a href="javascript:void(0);">裤子</a><span>trousers</span>
+						<a href="javascript:void(0);">夹克</a><span>jacket</span>
+						<a href="javascript:void(0);">外套（中）</a><span>middleCoat</span>
+						<a href="javascript:void(0);">外套（长）</a><span>longCoat</span>
+						<a href="javascript:void(0);">棉质外套（短）</a><span>shortCotton</span>
+						<a href="javascript:void(0);">棉质外套（中）</a><span>middleCotton</span>
+						<a href="javascript:void(0);">棉质外套（长）</a><span>longCotton</span>
+						<a href="javascript:void(0);">羊绒外套</a><span>cashmere</span>
+						<a href="javascript:void(0);">短裤</a><span>shortPants</span>
+						<a href="javascript:void(0);">马甲</a><span>waistcoat</span>
+						<a href="javascript:void(0);">T恤</a><span>tshirt</span>
+						<a href="javascript:void(0);">羊毛衫</a><span>knitted</span>
+						<a href="javascript:void(0);">领带</a><span>tie</span>
+						<a href="javascript:void(0);">长裙</a><span>longSkirt</span>
+						<a href="javascript:void(0);">短裙</a><span>shortSkirt</span>
+						<a href="javascript:void(0);">其他</a><span>other</span>
 					</div>
 				</div>
 

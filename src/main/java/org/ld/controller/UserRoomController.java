@@ -484,7 +484,7 @@ public class UserRoomController {
 		return ans;
 	}
 
-	@RequestMapping("/addWash") // roomNum为null时，查询所有记录
+	@RequestMapping("/addWash")   // 添加洗衣单收费记录
 	@ResponseBody
 	public Integer addWash(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
@@ -849,7 +849,7 @@ public class UserRoomController {
 			m.setFTIME(dataJson.getDate("fixTime"));
 			m.setPAY(dataJson.getBoolean("payState")); // PAY OR NOT 
 			m.setLEVEL(dataJson.getInteger("problemLevel"));
-			m.setSTATE(dataJson.getInteger("state")); // 0 unfinish, 1 finish
+			m.setSTATE(dataJson.getInteger("state")); // 1 unfinish, 0 finish
 			
 			return roomService.updateMaintain(m);
 		} catch (Exception e) {

@@ -29,35 +29,35 @@
 			<a class="btn btn-new btnnew" href="serviceNewWash.jsp">新增洗衣单收费记录</a>
 			<div class="bill-area">
 				<div class="search">
-					<span>房间号：</span><input type="text" value="W34-1">
+					<span>房间号：</span><input id="searchWashButton" type="text" value="">
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<tbody>
-							<tr class="date"><td>日期<span>Date.</span></td></tr>
-							<tr class="roomNo"><td>房间号<span>Room No.</span></td></tr>
-							<tr class="name"><td>姓名<span>Name.</span></td></tr>
-							<tr class="shirt"><td>衬衫<span>Shirt.</span></td></tr>
-							<tr class="topSuit"><td>西装上衣<span>Top of suit.</span></td></tr>
-							<tr class="trousers"><td>裤子<span>Trousers.</span></td></tr>
-							<tr class="jacket"><td>夹克<span>Jacket.</span></td></tr>
-							<tr class="middleCoat"><td>外套（中）<span>Coat（middle）.</span></td></tr>
-							<tr class="longCoat"><td>外套（长）<span>Coat(long).</span></td></tr>
-							<tr class="shortCotton"><td>棉质外套（短）<span>Cotton coat(short).</span></td></tr>
-							<tr class="middleCotton"><td>棉质外套（中）<span>Cotton coat(middle).</span></td></tr>
-							<tr class="longCotton"><td>棉质外套（长）<span>Cotton coat(long).</span></td></tr>
-							<tr class="cashmere"><td>羊绒外套<span>Cashmere Coat.</span></td></tr>
-							<tr class="shortPants"><td>短裤<span>Short Pants.</span></td></tr>
-							<tr class="waistcoat"><td>马甲<span>Waistcoat.</span></td></tr>
-							<tr class="tshirt"><td>T恤<span>T-shirt.</span></td></tr>
-							<tr class="knitted"><td>羊毛衫<span>Knitted sweater.</span></td></tr>
-							<tr class="tie"><td>领带<span>Tie.</span></td></tr>
-							<tr class="longSkirt"><td>长裙<span>Long Skirt.</span></td></tr>
-							<tr class="shortSkirt"><td>短裙<span>Short Skirt.</span></td></tr>
-							<tr class="other"><td>其他<span>Other.</span></td></tr>
-							<tr class="total"><td>总件数<span>Total Items.</span></td></tr>
-							<tr class="price"><td>价格<span>Price.</span></td></tr>
+							<tr class="date"></tr>
+							<tr class="roomNo"></tr>
+							<tr class="name"></tr>
+							<tr class="shirt"></tr>
+							<tr class="topSuit"></tr>
+							<tr class="trousers"></tr>
+							<tr class="jacket"></tr>
+							<tr class="middleCoat"></tr>
+							<tr class="longCoat"></tr>
+							<tr class="shortCotton"></tr>
+							<tr class="middleCotton"></tr>
+							<tr class="longCotton"></tr>
+							<tr class="cashmere"></tr>
+							<tr class="shortPants"></tr>
+							<tr class="waistcoat"></tr>
+							<tr class="tshirt"></tr>
+							<tr class="knitted"></tr>
+							<tr class="tie"></tr>
+							<tr class="longSkirt"></tr>
+							<tr class="shortSkirt"></tr>
+							<tr class="other"></tr>
+							<tr class="total"></tr>
+							<tr class="price"></tr>
 						</tbody>
 					</table>
 					<!-- 费用 table end -->
@@ -78,7 +78,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWash.js"></script>
 	<script type="text/javascript">
 	    // 拉取第一页 洗衣单收费信息
-		requestWash();
+		requestWash(1);
 	</script>
 </body>
 </html>
