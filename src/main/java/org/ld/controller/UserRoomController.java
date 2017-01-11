@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
@@ -60,7 +61,7 @@ public class UserRoomController {
 
 	private static Logger logger = Logger.getLogger("logRec");
 
-	// 多文件上传(add by pq)
+	// 多文件上传
 	@RequestMapping(value = "/uploadFiles", method = RequestMethod.POST)
 	public String uploadFiles(@RequestParam("file") MultipartFile[] file, Integer room_id, HttpServletRequest request) {
 		// System.out.println(request.getSession().getServletContext().getRealPath(""));
@@ -96,7 +97,7 @@ public class UserRoomController {
 		return "forward:/views/user/tenant/roomCheck.jsp?rid=" + room_id + "&rNum=" + roomNumber;
 	}
 
-	// 获取房间图片路径(add by pq)
+	// 获取房间图片路径
 	@RequestMapping(value = "/getRoomPic", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody
 	public List<RoomPic> getRoomPic(@RequestParam(value = "id", required = true) Integer room_id) throws Exception {
@@ -107,7 +108,7 @@ public class UserRoomController {
 		return roomPic;
 	}
 
-	// 根据roomNumber 查询 roomID(add by pq)
+	// 根据roomNumber 查询 roomID
 	@RequestMapping(value = "/getRoomIDByNumber")
 	@ResponseBody
 	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
@@ -563,7 +564,7 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/searchFare") // roomNum为null时，查询所有记录
+	@RequestMapping("/searchFare") // 查询车费信息
 	@ResponseBody
 	public Map<String, Object> searchFare(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
@@ -604,7 +605,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/addFare") // roomNum为null时，查询所有记录
+	@RequestMapping("/addFare") // 添加车费记录
 	@ResponseBody
 	public Integer addFare(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
@@ -633,12 +634,16 @@ public class UserRoomController {
 				roomService.addShuttleBus(sb);
 				sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
 			}
-				
-			JSONObject obj = dataJson.getJSONObject("perRecord");
+
+//			JSONObject obj = dataJson.getJSONObject("perRecord");
+			JSONArray obj = dataJson.getJSONArray("perRecord");
 			sb.setDAYS(obj.size());
 			int total = 0;
-			for (String key : obj.keySet()) {
-				JSONObject obj2 = obj.getJSONObject(key);
+//			for (String key : obj.keySet()) {
+			for(int i = 0; i < obj.size(); i++){
+//				JSONObject obj2 = obj.getJSONObject(key);
+				
+				JSONObject obj2 = obj.getJSONObject(i);	
 				int price = obj2.getInteger("price");
 				total += price;
 				switch(obj2.getInteger("day"))

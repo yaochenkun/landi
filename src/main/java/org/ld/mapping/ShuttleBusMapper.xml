@@ -497,17 +497,17 @@
      <if test="RN != null" >
      ROOM_NUM = #{RN} and 
      </if>
-     YEAR = #{YEAR} and MON = #{MON}
+     YEAR = #{YEAR} and MONTH = #{MON}
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from shuttle_bus where 
      <if test="RN != null" >
       ROOM_NUM = #{RN} and 
      </if>
-     YEAR = #{YEAR} and MON = #{MON}
+     YEAR = #{YEAR} and MONTH = #{MON}
      limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
-    select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_NAME = #{NAME} and YEAR = #{YEAR} and MON = #{MON}
+    select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_NAME = #{NAME} and YEAR = #{YEAR} and MONTH = #{MON}
   </select>
 </mapper>
