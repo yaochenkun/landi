@@ -273,6 +273,12 @@
       STATE = #{STATE} and 
      </if>
      STIME &gt;= #{STIME} and ETIME &lt;= #{TTIME} 
+      <if test="ORDER == 1" >
+       ORDER BY ROOM_NUMBER ASC
+      </if>
+      <if test="ORDER == 2" >
+       ORDER BY TYPE ASC
+      </if>
       limit #{ST}, #{EACH}
   </select>
 </mapper>
