@@ -754,7 +754,7 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/addMaintain") // roomNum为null时，查询所有记录
+	@RequestMapping("/addMaintain") // 添加维修记录
 	@ResponseBody
 	public Integer addMaintain(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
@@ -816,6 +816,7 @@ public class UserRoomController {
 		int state = dataJson.getIntValue("state");
 		int eachPage = cur_env.getSettingsInt().get("list_size");
 		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
+		System.out.println(recordTotal);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
 		if (recordTotal != 0) {
@@ -835,7 +836,7 @@ public class UserRoomController {
 		return ans;
 	}
 	
-	@RequestMapping("/updateMaintain") // roomNum为null时，查询所有记录
+	@RequestMapping("/updateMaintain") 
 	@ResponseBody
 	public Integer updateMaintain(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);

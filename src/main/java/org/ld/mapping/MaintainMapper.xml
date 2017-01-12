@@ -247,13 +247,13 @@
      <if test="RN != null" >
       ROOM_NUMBER = #{RN} and 
      </if>
-     <if test="TYPE != null" >
+     <if test="TYPE" >
       PRO_TYPE = #{TYPE} and 
      </if>
-     <if test="CAT != null" >
+     <if test="CAT" >
       PRO_CAUSE = #{CAT} and 
      </if>
-     <if test="STATE != null" >
+     <if test="STATE" >
       STATE = #{STATE} and 
      </if>
      STIME &gt;= #{STIME} and ETIME &lt;= #{TTIME}
@@ -263,24 +263,16 @@
      <if test="RN != null" >
       ROOM_NUMBER = #{RN} and 
      </if>
-     <if test="TYPE != null" >
+     <if test="TYPE" >
       PRO_TYPE = #{TYPE} and 
      </if>
-     <if test="CAT != null" >
+     <if test="CAT" >
       PRO_CAUSE = #{CAT} and 
      </if>
-     <if test="STATE != null" >
+     <if test="STATE" >
       STATE = #{STATE} and 
      </if>
      STIME &gt;= #{STIME} and ETIME &lt;= #{TTIME} 
-     <if test="ORDER = 1" >
-      ORDER BY ROOM_NUMBER ASC
-     </if>
-     <if test="ORDER = 2" >
-      ORDER BY TYPE ASC
-     </if>
-     <if test="ST != null" >
       limit #{ST}, #{EACH}
-     </if>
   </select>
 </mapper>

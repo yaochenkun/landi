@@ -13,6 +13,7 @@
 #date_demo3{border-right: none;}
 .ta_calendar_footer {height: 46px;}
 .ta_calendar table caption{line-height: 20px;}
+.ta_date{box-shadow: none; background: #fff; border-radius: 0; border-color: #aaa;}
 
 .emptyText{text-align: center; line-height: 60px; border-bottom: 1px solid #aaa; color: #ff4d4d; font-size: 14px;}
 

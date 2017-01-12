@@ -17,6 +17,7 @@
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 	
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -32,7 +33,7 @@
 				<div class="body-content">
 					<ul>
 						<li><span class="span">房间号：</span>
-							<input id="roomNumber" type="text" value="W35-1" />
+							<input id="roomNumber" type="text" value="W33-3" />
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 
@@ -48,8 +49,8 @@
 							<span class="problemLevel levelFour">四级</span>
 						</li>
 
-						<li><span class="span">存在问题：</span>
-							<input id='problemExist' type="text" value="" />
+						<li><span class="span" id='spanExist'>存在问题：</span>
+							<input id='problemExist' type="text" value="空调故障" />
 						</li>
 						<li id="problemSort"><span class="span">问题分类：</span>
 							<input type="text" id="problemSortInput" value="" />
@@ -82,10 +83,15 @@
 							</div>
 						</li>
 
-						<li><span class="span">问题明细：</span><input type="text" value="" /></li>
-						<li><span class="span">房间位置：</span><input type="text" value="" /></li>
-						<li><span class="span">图片：</span><input type="text" value="" /></li>
-						<li><span class="span">费用：</span><input type="text" value="" /></li>
+						<li><span class="span">问题明细：</span>
+							<input type="text" value="1" id='problemDetail'/>
+						</li>
+						<li><span class="span">费用：</span>
+							<input type="text" value="12" id="problemPrice" />
+						</li>
+						<li><span class="span">备注：</span>
+							<input type="text" value="12" id="problemComment" />
+						</li>
 						<li><span class="span"></span><a onclick="addMaintain();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
@@ -93,6 +99,7 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
+	<div class="shadow"></div>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>

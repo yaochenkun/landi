@@ -73,7 +73,7 @@ var requestItemOverview = function(pageNum){
 				var recordTotal = data.recordTotal;
 
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
@@ -164,7 +164,7 @@ var requestItemByItemType = function(pageNum){
 				var pageTotal = data.pageTotal;
 				var recordTotal = data.recordTotal;
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='7' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}

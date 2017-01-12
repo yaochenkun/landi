@@ -3,7 +3,7 @@
 .bill-table td:nth-child(1) span{font-weight: normal; font-size: 10px; display: block; color: #888;}
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px; float: left;}
-.search input{padding: 0 5px; margin-left: 10px;}
+.search input{padding: 0 5px; margin-left: 10px; height: 26px;}
 .bill-area .emptyText{text-align: center; color: #ff4d4d; border-top: 1px solid #aaa; border-bottom: 1px solid #aaa; height: 60px; margin-top: 3em; font-size: 14px; line-height: 55px;}
 
 .bottom-page{margin: 0; margin-top: 3em;}

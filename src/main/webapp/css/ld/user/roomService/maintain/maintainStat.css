@@ -42,3 +42,29 @@
 
 #maintainStatTbody .detail{color: #2277da;}
 #maintainStatTbody .detail:hover{border-bottom-width: 1px; border-bottom-style: solid;}
+
+.table-title:before,.table-title:after { content:""; display:table;}
+.table-title:after{clear:both;}
+.table-title{*zoom:1; margin-top: 1em; margin-bottom: 2em;}
+.table-title .btnExcel{float: right; height: 30px; line-height: 16px; border-color: #aaa; margin-top: -6px;}
+
+/* 搜索日历样式 */
+.calendarPart{float: left; font-size: 14px; margin-left: 3em;}
+.calendarPart .span{float: left;}
+.ta_date{height: 26px; box-shadow: none; background: #fff; border-radius: 0; border-color: #aaa; margin-top: -2px;}
+.ta_date .date_title{font-size: 15px;}
+
+.search{float: left; font-size: 14px;}
+#searchRoomNum{margin-left: 1em; height: 24px; padding: 0 6px; width: 140px;}
+.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-left: 4em; float: left; margin-top: -2px;}
+
+/* 双日历样式 */
+.calendarPart:before,.calendarPart:after {content:""; display:table;}
+.calendarPart:after{clear:both;}
+.calendarPart{zoom: 1;}
+.calendarPart .date{font-size: 14px; float: left; margin-right: 1em;}
+#date_demo3{border-right: none;}
+.ta_calendar_footer {height: 46px;}
+.ta_calendar table caption{line-height: 20px;}
+
+.emptyText{text-align: center; line-height: 60px; border-bottom: 1px solid #aaa; color: #ff4d4d; font-size: 14px;}

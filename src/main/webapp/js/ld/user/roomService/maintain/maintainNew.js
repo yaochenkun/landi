@@ -35,6 +35,9 @@
 	});
 })();
 
+// 保存问题等级文字与整型数字对应关系
+var map = {"一级":1,"二级":2,"三级":3,"四级":4}
+
 // 添加一条维修报修记录
 var addMaintain = function(){
 
@@ -49,23 +52,34 @@ var addMaintain = function(){
 	var problemLevel = "";
 	$(".problemLevel").each(function(){
 		if($(this).hasClass("levelActive")){
-			problemLevel = $(this).text();
+			problemLevel = map[$(this).text()];
 		}
 	});
 	// console.log(problemLevel);
 
-	var problemExist = $("#problemExist").val();
-	var problemSort = $("#problemSortInput").val();
-	var problemReason = $("#problemReasonInput").val();
-
+	var problemExist = $("#problemExist").val();         // 存在问题
+	var problemSort = $("#problemSortInput").val();      // 问题分类
+	var problemReason = $("#problemReasonInput").val();  // 问题原因
+	var problemDetail = $("#problemDetail").val();       // 问题明细
+	var price = $("#problemPrice").val();                 // 费用
+	var comment = $("#problemComment").val();            // 备注
+ 
 	$.ajax({
-		url:'/LD/',
+		url:'/LD/userRoom/addMaintain.action',
 		type:'post',
 		dataType:'json',
 		contentType:'application/json',
-		data:'{}',
+		data:'{"roomNum":"'+ roomNo +'","maintainTime":"'+ maintainTime +'","expTime":"'+ maintainTimeSolve+'",'
+			+'"problemLevel":"'+ problemLevel +'","problemExist":"'+ problemExist +'",'
+			+'"problemType":"'+ problemSort +'","problemReason":"'+ problemReason +'",'
+			+'"problemDetail":"'+ problemDetail +'","price":'+ price +',"comment":"'+ comment +'"}',
 		success:function(data){
 			console.log(data);
+			if(data == 1){
+				showModalBox("success","添加成功！");
+			}else if(data == 0){
+				showModalBox("error","添加失败！");
+			}
 		}
 	});
 };

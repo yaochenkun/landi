@@ -11,6 +11,8 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css"/>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css"/>
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/maintain/maintainManage.css" rel="stylesheet" type="text/css" />
 <title>维修管理</title>
 </head>
@@ -32,18 +34,19 @@
 			<div class="bill-area">
 				<div class="table-title">
 					<div class="maintainItemType">
-						<span class="span">物品种类：</span>
-						<div class="itemType">
-							<span class="span"></span>
-							<div class="itemTypeMenu">
-								<ul>
-									<li>全&nbsp;&nbsp;部</li>								
-									<li>家&nbsp;&nbsp;具</li>
-									<li>家&nbsp;&nbsp;电</li>
-									<li>灯&nbsp;&nbsp;具</li>
-								</ul>
-							</div>
+						<div class="search">
+							<span>房间号：</span><input id="searchRoomNum" type="text" value="">
 						</div>
+						<!-- 双日历 start -->
+						<div class="calendarPart">
+							<span class="date">日期：</span>
+							<div class="ta_date" id="div_date_demo3">
+					            <span class="date_title" id="date_demo3"></span>
+					        </div>
+					        <div id="datePicker"></div>
+						</div>
+						<!-- 双日历 end -->
+						<a class="btn btn-edit btnEdit" onclick="requestMaintainByDate(1);">搜索</a>
 					</div>
 					<a href="" class="btn btn-edit btnExcel">导出列表</a>
 				</div>
@@ -54,14 +57,15 @@
 						<thead>
 							<tr>
 								<th><span>房间号</span></th>
-								<th><span>入住状态</span></th>
-								<th><span>报修次数</span></th>
 								<th><span>报修时间</span></th>
+								<th><span>要求解决时间</span></th>
 								<th><span>问题等级</span></th>
-								<th><span>问题分类</span></th>
 								<th><span>存在问题</span></th>
-								<th><span>需解决时间</span></th>
-								<th><span>剩余天数</span></th>
+								<th><span>问题分类</span></th>
+								<th><span>问题原因</span></th>
+								<th><span>问题明细</span></th>
+								<th><span>费用</span></th>
+								<th><span>备注</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
@@ -98,9 +102,21 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/dateRange.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/monthPicker.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/maintain/maintainManage.js"></script>
 	<script>
+	var dateRange = new pickerDateRange('date_demo3', {
+			isTodayValid : true,
+			startDate : '2017-01-01',
+			endDate : '2017-01-31',
+			defaultText : ' 至 ',
+			theme : 'ta',
+			success : function(obj) {
+				// console.log(obj);
+			}
+		});
 	    // 请求第一页房间报修记录
 	    requestMaintainList(1);
 	</script>
