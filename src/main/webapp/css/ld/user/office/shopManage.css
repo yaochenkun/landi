@@ -18,7 +18,8 @@
 #shopListTbody span:hover, #shopListTbody a:hover{border-bottom-width: 1px; border-bottom-style: solid;}
 
 #shopListTbody td:nth-child(2), #shopListTbody td:nth-child(3){color: #ff5722;}
-#shopListTbody td:nth-child(6){color: #999;}
+#shopListTbody td:nth-child(7){color: #999;}
+.emptyText{text-align: center; line-height: 60px; border-bottom: 1px solid #aaa; color: #ff4d4d; font-size: 14px;}
 
 /* 弹出框样式 */
 .menuDiv{display: none; position: fixed; width: 60%; height: 160px; top: 20%; left: 20%; z-index: 400; background: #fff; 

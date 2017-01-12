@@ -15,19 +15,27 @@ var addGood = function(){
 		return;
 	}
 
-	var goodsName = $(".body-content input").eq(0).val();
-	var purchasePrice = Number($(".body-content input").eq(1).val());
-	var sellingPrice = Number($(".body-content input").eq(2).val());
-	var total = Number($(".body-content input").eq(3).val());
+	var name = $("#addGoodUL input").eq(0).val();
+	var type = $("#addGoodUL input").eq(1).val();
+	var cat = $("#addGoodUL input").eq(2).val();
+	var buyPrice = Number($("#addGoodUL input").eq(3).val());
+	var sellPrice = Number($("#addGoodUL input").eq(4).val());
+	var total = Number($("#addGoodUL input").eq(5).val());
 
-	// $.ajax({
-	// 	url:'',
-	// 	type:'post',
-	// 	contentType:'application/json',
-	// 	dataType:'json',
-	// 	data:'{}',
-	// 	success:function(data){
-	// 		console.log(data);
-	// 	}
-	// });
+	$.ajax({
+		url:'/LD/userItem/addGoods.action',
+		type:'post',
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"name":"'+ name +'","type":"'+ type +'","cat":"'+ cat +'","buyPrice":'+ buyPrice +','
+			+'"sellPrice":'+ sellPrice +',"total":'+ total +'}',
+		success:function(data){
+			console.log(data);
+			if(data == 1){
+				showModalBox("success","添加成功！");
+			}else if(data == 0){
+				showModalBox("error","添加失败！");
+			}
+		}
+	});
 };

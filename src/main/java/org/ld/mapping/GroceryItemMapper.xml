@@ -163,14 +163,14 @@
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
     select count(*) from grocery_item 
-     <if test="NAME != null" >
-      where NAME like #{NAME,jdbcType=VARCHAR}
+     <if test="_parameter != null" >
+      where NAME like CONCAT('%',#{NAME,jdbcType=VARCHAR},'%')
      </if>
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from grocery_item  
      <if test="NAME != null" >
-      where NAME like #{NAME,jdbcType=VARCHAR} 
+      where NAME like CONCAT('%',#{NAME,jdbcType=VARCHAR},'%')
      </if>
      limit #{ST}, #{EACH}
   </select>

@@ -1,0 +1,103 @@
+.main{width: 1100px; margin: 0 auto;}
+
+.main-page{margin-top: 8em;}
+.search input{padding: 0 10px; margin-left: 1em;}
+.btn-goback{float: right; width: 120px; margin-top: -2em;}
+.bill-table{margin-top: 3em;}
+
+/* 双日历样式 */
+.calendarPart:before,.calendarPart:after { content:""; display:table;}
+.calendarPart:after{clear:both;}
+.calendarPart{zoom: 1;}
+.calendarPart .date{font-size: 14px; float: left; margin-right: 1em;}
+#date_demo3{border-right: none;}
+.ta_calendar_footer {height: 46px;}
+.ta_calendar table caption{line-height: 20px;}
+
+.emptyText{text-align: center; line-height: 60px; border-bottom: 1px solid #aaa; color: #ff4d4d; font-size: 14px;}
+
+.bottom-page {
+	margin-top: 2em;
+	margin-right: 0;
+}
+
+
+#shopDetailTable{width: 100%;}
+#shopDetailTable thead tr {
+	line-height: 50px;
+	border-top: 1px solid #00324e;
+	border-bottom: 1px solid #00324e;
+	font-size: 15px;
+	background-color: #2277da;
+}
+
+#shopDetailTable thead th {
+	text-align: center;
+	color: #fff;
+	position: relative;
+}
+#shopDetailTable thead th:nth-child(1){width: 25%;}
+#shopDetailTable tbody tr {
+	text-align: center;
+	line-height: 4em;
+	border-bottom: 1px solid #d6d6d6;
+	font-size: 14px;
+}
+
+#shopDetailTable tbody tr:hover {
+	background: #f7faff;
+	border-top: 1px #b2d7ff solid;
+}
+
+#shopDetailTable tbody tr td:nth-child(5) {
+	color: #ff5722;
+}
+/* 导航栏样式 */
+header .header-logo {
+	left: 45%;
+}
+
+header .homeMenu {
+	margin-top: 15px;
+	margin-left: -20px;
+	display: inline-block;
+	cursor: pointer;
+	width: 160px;
+	height: 30px;
+}
+
+header .homeMenu .span {
+	margin-left: .5em;
+}
+
+/* 一级菜单样式 */
+.main-nav {
+	position: fixed;
+	z-index: 200;
+	box-shadow: 2px 0 16px rgba(0, 0, 0, .2);
+	top: 0;
+	width: 0;
+}
+
+.main-nav .menuOne {
+	display: block;
+	height: 49px;
+	line-height: 50px;
+	background: #fafafa;
+	cursor: pointer;
+	font-size: 13px;
+	color: #0057bd;
+}
+
+.main-nav .menuOne i {
+	font-size: 15px;
+	font-style: normal;
+}
+
+.main-nav .menuOne i:nth-child(1) {
+	margin-left: 80px;
+}
+
+.main-nav .menuOne i:nth-child(2), .main-nav .menuOne i:nth-child(3) {
+	margin-left: -5px;
+}

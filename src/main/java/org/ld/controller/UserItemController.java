@@ -795,7 +795,7 @@ public class UserItemController {
 		return ans;
 	}
 	
-	@RequestMapping("/addGoods") // roomNum为null时，查询所有记录
+	@RequestMapping("/addGoods") // 新增小卖部物品
 	@ResponseBody
 	public Integer addGoods(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);

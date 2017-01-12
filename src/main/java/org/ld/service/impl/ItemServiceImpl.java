@@ -310,14 +310,14 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int totalGrocery(String goods) {
 		// TODO Auto-generated method stub
-		return groceryItemMapper.totalRec("%" + goods + "%");
+		return groceryItemMapper.totalRec(goods);
 	}
 
 	@Override
 	public List<GroceryItem> getGrocery(String goods, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("NAME", "%" + goods + "%");
+		map.put("NAME", goods);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 		return groceryItemMapper.getRec(map);

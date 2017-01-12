@@ -22,6 +22,7 @@ var requestFare = function(pageNum,date){
 				for(var i = 0; i < data.dataList.length; i++){
 					addPerFare(data.dataList[i]);
 				}
+				
 				// 添加洗衣单收费 底部页码
 				$("#serviceBusBottom").append("<div class='bottom-page'>"+
 		        	"<span class='page-before' onclick='requestBeforeFare();'>上一页&nbsp;&nbsp;</span>"+

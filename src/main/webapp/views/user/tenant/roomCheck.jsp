@@ -104,16 +104,16 @@
 			getRoomIDByNumber("<%=request.getParameter("rNum") %>");
     	})
     	var dateRange = new pickerDateRange('date_demo3', {
-					isTodayValid : true,
-					startDate : '2016-11-01',
-					endDate : '2016-11-30',
-					defaultText : ' 至 ',
-					theme : 'ta',
-					success : function(obj) {
-						// console.log(obj);
-						requestRoomPicByDate(obj.startDate, obj.endDate);
-					}
-				});
+				isTodayValid : true,
+				startDate : '2016-11-01',
+				endDate : '2016-11-30',
+				defaultText : ' 至 ',
+				theme : 'ta',
+				success : function(obj) {
+					// console.log(obj);
+					requestRoomPicByDate(obj.startDate, obj.endDate);
+				}
+		});
     </script>
 </body>
 </html>
