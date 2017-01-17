@@ -11,13 +11,10 @@
     <result column="STAFF" property="STAFF" jdbcType="VARCHAR" />
     <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
-    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
-    <result column="BAND" property="BAND" jdbcType="VARCHAR" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TIME, PLAN_ID, FAC_ID, TERM, TOTAL, STAFF, ALL_MONEY, COMMENT
+    ID, TIME, PLAN_ID, FAC_ID, TERM, TOTAL, STAFF, ALL_MONEY, COMMENT, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,12 +29,12 @@
   <insert id="insert" parameterType="org.ld.model.PlanProgress" >
     insert into plan_progress (ID, TIME, PLAN_ID, 
       FAC_ID, TERM, TOTAL, 
-      STAFF, ALL_MONEY, COMMENT
-      )
+      STAFF, ALL_MONEY, COMMENT, 
+      SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=TIMESTAMP}, #{PLAN_ID,jdbcType=INTEGER}, 
       #{FAC_ID,jdbcType=INTEGER}, #{TERM,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
-      #{STAFF,jdbcType=VARCHAR}, #{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}
-      )
+      #{STAFF,jdbcType=VARCHAR}, #{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, 
+      #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.PlanProgress" >
     insert into plan_progress
@@ -69,6 +66,9 @@
       <if test="COMMENT != null" >
         COMMENT,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -97,6 +97,9 @@
       </if>
       <if test="COMMENT != null" >
         #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -127,6 +130,9 @@
       <if test="COMMENT != null" >
         COMMENT = #{COMMENT,jdbcType=VARCHAR},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -139,7 +145,8 @@
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       STAFF = #{STAFF,jdbcType=VARCHAR},
       ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR}
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">

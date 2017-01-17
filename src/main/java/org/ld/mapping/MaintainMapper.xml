@@ -20,10 +20,11 @@
     <result column="FOLLOW" property="FOLLOW" jdbcType="VARCHAR" />
     <result column="STATE" property="STATE" jdbcType="INTEGER" />
     <result column="PAY" property="PAY" jdbcType="BIT" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, ROOM_NUMBER, GUEST_ID, STIME, FTIME, ETIME, LEVEL, PROBLEM, PRO_TYPE, PRO_CAUSE, 
-    PRO_DETAIL, PIC, CHARGE, TIMES, COMMENT, FOLLOW, STATE, PAY
+    PRO_DETAIL, PIC, CHARGE, TIMES, COMMENT, FOLLOW, STATE, PAY, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -41,13 +42,15 @@
       LEVEL, PROBLEM, PRO_TYPE, 
       PRO_CAUSE, PRO_DETAIL, PIC, 
       CHARGE, TIMES, COMMENT, 
-      FOLLOW, STATE, PAY)
+      FOLLOW, STATE, PAY, SYS_STATE
+      )
     values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
       #{STIME,jdbcType=TIMESTAMP}, #{FTIME,jdbcType=TIMESTAMP}, #{ETIME,jdbcType=TIMESTAMP}, 
       #{LEVEL,jdbcType=INTEGER}, #{PROBLEM,jdbcType=VARCHAR}, #{PRO_TYPE,jdbcType=VARCHAR}, 
       #{PRO_CAUSE,jdbcType=VARCHAR}, #{PRO_DETAIL,jdbcType=VARCHAR}, #{PIC,jdbcType=VARCHAR}, 
       #{CHARGE,jdbcType=DOUBLE}, #{TIMES,jdbcType=INTEGER}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{FOLLOW,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT})
+      #{FOLLOW,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER}, #{PAY,jdbcType=BIT}, #{SYS_STATE,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Maintain" >
     insert into maintain
@@ -106,6 +109,9 @@
       <if test="PAY != null" >
         PAY,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -161,6 +167,9 @@
       </if>
       <if test="PAY != null" >
         #{PAY,jdbcType=BIT},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -218,6 +227,9 @@
       <if test="PAY != null" >
         PAY = #{PAY,jdbcType=BIT},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -239,7 +251,8 @@
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
       FOLLOW = #{FOLLOW,jdbcType=VARCHAR},
       STATE = #{STATE,jdbcType=INTEGER},
-      PAY = #{PAY,jdbcType=BIT}
+      PAY = #{PAY,jdbcType=BIT},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
@@ -247,13 +260,13 @@
      <if test="RN != null" >
       ROOM_NUMBER = #{RN} and 
      </if>
-     <if test="TYPE" >
+     <if test="TYPE != null" >
       PRO_TYPE = #{TYPE} and 
      </if>
-     <if test="CAT" >
+     <if test="CAT != null" >
       PRO_CAUSE = #{CAT} and 
      </if>
-     <if test="STATE" >
+     <if test="STATE != null" >
       STATE = #{STATE} and 
      </if>
      STIME &gt;= #{STIME} and ETIME &lt;= #{TTIME}
@@ -263,13 +276,13 @@
      <if test="RN != null" >
       ROOM_NUMBER = #{RN} and 
      </if>
-     <if test="TYPE" >
+     <if test="TYPE != null" >
       PRO_TYPE = #{TYPE} and 
      </if>
-     <if test="CAT" >
+     <if test="CAT != null" >
       PRO_CAUSE = #{CAT} and 
      </if>
-     <if test="STATE" >
+     <if test="STATE != null" >
       STATE = #{STATE} and 
      </if>
      STIME &gt;= #{STIME} and ETIME &lt;= #{TTIME} 
@@ -279,6 +292,8 @@
       <if test="ORDER == 2" >
        ORDER BY TYPE ASC
       </if>
+      <if test="ST != null" >
       limit #{ST}, #{EACH}
+      </if>
   </select>
 </mapper>

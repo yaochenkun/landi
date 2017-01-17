@@ -235,7 +235,7 @@
     select 
     <include refid="Base_Column_List" />
     from guest
-    where ROOM_NUMBER = #{RN,jdbcType=VARCHAR}
+    where ROOM_NUMBER = #{RN,jdbcType=VARCHAR} and SYS_STATE = 0;
   </select>
   <select id="selectByName" resultMap="BaseResultMap" parameterType="map" >
     <![CDATA[

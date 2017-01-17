@@ -21,6 +21,8 @@ public class PlanProgress {
 
 	private String COMMENT;
 	
+	private Integer SYS_STATE;
+	
 	private String TYPE;
     
     private String CAT;
@@ -100,6 +102,14 @@ public class PlanProgress {
 	public void setCOMMENT(String COMMENT) {
 		this.COMMENT = COMMENT == null ? null : COMMENT.trim();
 	}
+	
+	public Integer getSYS_STATE() {
+        return SYS_STATE;
+    }
+
+    public void setSYS_STATE(Integer SYS_STATE) {
+        this.SYS_STATE = SYS_STATE;
+    }
 
 	public String getTYPE() {
 		return TYPE;

@@ -79,6 +79,8 @@ public class ShuttleBus {
 
     private Integer TOTAL;
 
+    private Integer SYS_STATE;
+
     public Integer getID() {
         return ID;
     }
@@ -389,5 +391,13 @@ public class ShuttleBus {
 
     public void setTOTAL(Integer TOTAL) {
         this.TOTAL = TOTAL;
+    }
+
+    public Integer getSYS_STATE() {
+        return SYS_STATE;
+    }
+
+    public void setSYS_STATE(Integer SYS_STATE) {
+        this.SYS_STATE = SYS_STATE;
     }
 }

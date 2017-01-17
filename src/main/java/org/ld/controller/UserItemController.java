@@ -385,6 +385,7 @@ public class UserItemController {
 		} else {
 			return 0;
 		}
+		logger.info(cur_env.getCur_user().getNAME() + " add plan progress for " + dataJson.getInteger("planID"));
 		return 1;
 	}
 	
@@ -468,7 +469,7 @@ public class UserItemController {
 		} else {
 			return 0;
 		}
-
+		logger.info(cur_env.getCur_user().getNAME() + " move item " + recID + " to " + dataJson.getString("rNum"));
 		return 1;
 	}
 	
@@ -496,6 +497,7 @@ public class UserItemController {
 			return 0;
 		}
 		
+		logger.info(cur_env.getCur_user().getNAME() + " let " + recID + " bad ");
 		return 1;
 	}
 	
@@ -521,6 +523,7 @@ public class UserItemController {
 			return 0;
 		}
 		
+		logger.info(cur_env.getCur_user().getNAME() + " move " + recID + " to warehouse" ); 
 		return 1;
 	}
 	
@@ -550,11 +553,12 @@ public class UserItemController {
 			newRi.setCOMM(dataJson.getString("comment"));
 			newRi.setTAG(dataJson.getString("tag"));
 			newRi.setITEM_ID(facId);
-			newRi.setROOM_NUMBER(rn);
 			newRi.setROOM_ID(roomService.getRoomByNumber(rn).getID());
 			newRi.setSTATE(0);
 			roomService.insertRI(newRi);
 		}
+		
+		logger.info(cur_env.getCur_user().getNAME() + " assign " + facId + " to " + rn );
 		return 1;
 	}
 	
@@ -582,6 +586,7 @@ public class UserItemController {
 			itemService.updateFac(fs);
 		}
 		
+		logger.info(cur_env.getCur_user().getNAME() + " let " + count + " " + facId + " bad ");
 		return 1;
 	}
 	

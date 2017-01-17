@@ -14,6 +14,8 @@ public class PlanDetail {
     private Double ALL_MONEY;
 
     private String COMMENT;
+	
+	private Integer SYS_STATE;
     
     private String TYPE;
     
@@ -77,6 +79,14 @@ public class PlanDetail {
 
     public void setCOMMENT(String COMMENT) {
         this.COMMENT = COMMENT == null ? null : COMMENT.trim();
+    }
+	
+	public Integer getSYS_STATE() {
+        return SYS_STATE;
+    }
+
+    public void setSYS_STATE(Integer SYS_STATE) {
+        this.SYS_STATE = SYS_STATE;
     }
 
 	public String getTYPE() {

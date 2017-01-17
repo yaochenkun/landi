@@ -341,7 +341,7 @@ public class UserRoomController {
 			Date date;
 			date = ft.parse(dataJson.getString("delivery"));
 			newDS.setRTIME(date);
-
+			
 			return serverService.addDailyService(newDS);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -500,12 +500,13 @@ public class UserRoomController {
 			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("date"));
-		
-			Laundry nL = roomService.getCertainLaundry(dataJson.getString("roomNum"), dataJson.getString("guestName"), date);
+			int id = guestService.getGuestByRoomNumber(dataJson.getString("roomNum")).getID();
+			Laundry nL = roomService.getCertainLaundry(dataJson.getString("roomNum"), id, date);
 			if(nL == null) {
 				nL = new Laundry();
 				nL.setROOM_NUM(dataJson.getString("roomNum"));
 				nL.setNAME(dataJson.getString("guestName"));
+				nL.setGUEST_ID(dataJson.getInteger("guestID"));
 				nL.setDATE(date);
 				nL.setPRICE(dataJson.getDoubleValue("totalPrice"));
 				nL.setTOTAL(dataJson.getInteger("total"));
@@ -622,8 +623,9 @@ public class UserRoomController {
 			int year = Integer.parseInt(date.substring(0,4));
 			int mon = Integer.parseInt(date.substring(5));
 			String name = dataJson.getString("name");
+			int id = guestService.getGuestByRoomNumber(roomNum).getID();
 			
-			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
+			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
 			if(sb == null)
 			{
 				sb = new ShuttleBus();
@@ -631,8 +633,9 @@ public class UserRoomController {
 				sb.setMONTH(mon);
 				sb.setROOM_NUM(roomNum);
 				sb.setGUEST_NAME(name);
+				sb.setGUEST_ID(id);
 				roomService.addShuttleBus(sb);
-				sb = roomService.getCertainShuttleBus(roomNum, name, year, mon);
+				sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
 			}
 
 //			JSONObject obj = dataJson.getJSONObject("perRecord");
@@ -936,10 +939,10 @@ public class UserRoomController {
 					m2.count.put(key, 1);
 				
 				val = m2.time.get(key);
-				if(val != null)
-					m2.time.put(key, val + getIntervalDays(m.getSTIME(), m.getFTIME()));
-				else
-					m2.time.put(key, getIntervalDays(m.getSTIME(), m.getFTIME()));
+//				if(val != null)
+//					m2.time.put(key, val + getIntervalDays(m.getSTIME(), m.getFTIME()));
+//				else
+//					m2.time.put(key, getIntervalDays(m.getSTIME(), m.getFTIME()));
 				
 				switch(m.getLEVEL())
 				{
@@ -983,6 +986,38 @@ public class UserRoomController {
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/getCurentGuest")
+	@ResponseBody
+	public Map<String, Object> getCurentGuest(HttpSession session, @RequestBody String data) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		Integer rid = dataJson.getIntValue("rid");
+		if(rid != null)
+		{
+			RoomState rs = roomService.getCertainRSbyID(rid);
+			ans.put("Gname", rs.getCUS_NAME());
+			ans.put("GID", rs.getCUS_ID());
+		}
+		else
+		{
+			String rn = dataJson.getString("rNum");
+			RoomState rs = roomService.getCertainRSbyNumber(rn);
+			ans.put("Gname", rs.getCUS_NAME());
+			ans.put("GID", rs.getCUS_ID());
+		}
 
 		return ans;
 	}

@@ -61,17 +61,17 @@ public interface RoomService {
 	
 	List<Laundry> getLaundry(String rn, Integer st, Integer eachPage);
 	
-	Laundry getCertainLaundry(String rn, String name, Date date);
+	Laundry getCertainLaundry(String rn, Integer gid, Date date);
 	
 	int addWash(Laundry l);
 	
 	int updateWash(Laundry l);
 	
-	int totalShuttleBus(String rn, int year, int mon);
+	int totalShuttleBus(String rn, Integer year, Integer mon);
 	
-	List<ShuttleBus> getShuttleBus(String rn, int year, int mon, Integer st, Integer eachPage);
+	List<ShuttleBus> getShuttleBus(String rn, Integer year, Integer mon, Integer st, Integer eachPage);
 	
-	ShuttleBus getCertainShuttleBus(String rn, String name, int year, int mon);
+	ShuttleBus getCertainShuttleBus(String rn, Integer gid, Integer year, Integer mon);
 	
 	int addShuttleBus(ShuttleBus sb);
 	
@@ -88,4 +88,8 @@ public interface RoomService {
 	List<Maintain> getMaintain(Integer type, Integer cat, Integer state, String rn, Integer st, Integer eachPage, Date from, Date to, Integer order);
 	
 	int updateRoomState(RoomState rs);
+	
+	RoomState getCertainRSbyID(Integer id);
+	
+	RoomState getCertainRSbyNumber(String number);
 }
