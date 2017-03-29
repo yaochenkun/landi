@@ -6,14 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/admin/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/admin/rateOther.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/admin/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/admin/rateOther.css" rel="stylesheet" type="text/css" />
 <title>其他费用管理</title>
 </head>
 <body>
@@ -321,14 +316,10 @@
 	</div>
 	<!-- 页面内容 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/admin/rate.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/admin/rate.js"></script>
 
 	<!-- jsp页面初始化操作 -->
 	<script type="text/javascript">
