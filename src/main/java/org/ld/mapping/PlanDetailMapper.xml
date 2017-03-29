@@ -9,13 +9,10 @@
     <result column="ALREADY" property="ALREADY" jdbcType="INTEGER" />
     <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
-    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
-    <result column="BAND" property="BAND" jdbcType="VARCHAR" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, PLAN_ID, FAC_ID, TOTAL, ALREADY, ALL_MONEY, COMMENT
+    ID, PLAN_ID, FAC_ID, TOTAL, ALREADY, ALL_MONEY, COMMENT, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,10 +27,10 @@
   <insert id="insert" parameterType="org.ld.model.PlanDetail" >
     insert into plan_detail (ID, PLAN_ID, FAC_ID, 
       TOTAL, ALREADY, ALL_MONEY, 
-      COMMENT)
+      COMMENT, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER}, #{FAC_ID,jdbcType=INTEGER}, 
       #{TOTAL,jdbcType=INTEGER}, #{ALREADY,jdbcType=INTEGER}, #{ALL_MONEY,jdbcType=DOUBLE}, 
-      #{COMMENT,jdbcType=VARCHAR})
+      #{COMMENT,jdbcType=VARCHAR}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.PlanDetail" >
     insert into plan_detail
@@ -59,6 +56,9 @@
       <if test="COMMENT != null" >
         COMMENT,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -81,6 +81,9 @@
       </if>
       <if test="COMMENT != null" >
         #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -105,6 +108,9 @@
       <if test="COMMENT != null" >
         COMMENT = #{COMMENT,jdbcType=VARCHAR},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -115,7 +121,8 @@
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       ALREADY = #{ALREADY,jdbcType=INTEGER},
       ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR}
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">

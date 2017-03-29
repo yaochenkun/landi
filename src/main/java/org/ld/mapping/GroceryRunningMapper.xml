@@ -9,9 +9,10 @@
     <result column="PER_MONEY" property="PER_MONEY" jdbcType="DOUBLE" />
     <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
     <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, CTIME, ITEM_ID, TOTAL, PER_MONEY, ALL_MONEY, TYPE
+    ID, CTIME, ITEM_ID, TOTAL, PER_MONEY, ALL_MONEY, TYPE, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,10 +27,10 @@
   <insert id="insert" parameterType="org.ld.model.GroceryRunning" >
     insert into grocery_running (ID, CTIME, ITEM_ID, 
       TOTAL, PER_MONEY, ALL_MONEY, 
-      TYPE)
+      TYPE, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{CTIME,jdbcType=TIMESTAMP}, #{ITEM_ID,jdbcType=INTEGER}, 
       #{TOTAL,jdbcType=INTEGER}, #{PER_MONEY,jdbcType=DOUBLE}, #{ALL_MONEY,jdbcType=DOUBLE}, 
-      #{TYPE,jdbcType=INTEGER})
+      #{TYPE,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.GroceryRunning" >
     insert into grocery_running
@@ -55,6 +56,9 @@
       <if test="TYPE != null" >
         TYPE,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -77,6 +81,9 @@
       </if>
       <if test="TYPE != null" >
         #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -101,6 +108,9 @@
       <if test="TYPE != null" >
         TYPE = #{TYPE,jdbcType=INTEGER},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -111,7 +121,8 @@
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       PER_MONEY = #{PER_MONEY,jdbcType=DOUBLE},
       ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      TYPE = #{TYPE,jdbcType=INTEGER}
+      TYPE = #{TYPE,jdbcType=INTEGER},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="map">

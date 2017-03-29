@@ -9,7 +9,6 @@
     <result column="TAG" property="TAG" jdbcType="VARCHAR" />
     <result column="COMM" property="COMM" jdbcType="VARCHAR" />
     <result column="STATE" property="STATE" jdbcType="INTEGER" />
-    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, ROOM_ID, ITEM_ID, TYPE, TAG, COMM, STATE

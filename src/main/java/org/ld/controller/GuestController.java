@@ -312,6 +312,7 @@ public class GuestController {
 			return ans;
 		}
 		
+		logger.info(cur_env.getCur_user().getNAME() + " add new guest " + newGuest.getGUEST_NAME() + " in " + newGuest.getROOM_NUMBER());
 		return ans;
 	}
 

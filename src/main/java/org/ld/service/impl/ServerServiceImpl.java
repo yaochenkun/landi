@@ -28,7 +28,7 @@ public class ServerServiceImpl implements ServerService {
 	public int getTotalDailyServiceRow(String rn, int type) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
+		if(rn != null) map.put("RN", rn);
 		map.put("TYPE", type);
 		return dailyServiceMapper.getTotalRow(map);
 	}

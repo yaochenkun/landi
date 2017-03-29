@@ -19,6 +19,18 @@ public class Income {
 
     private Double BENIFIT;
 
+    private Double SOURCE;
+
+    private Double DAILY_SERVICE;
+
+    private Double MAINTAIN;
+
+    private Double SHUTTLE_BUS;
+
+    private Double LAUNDRY;
+
+    private Integer SYS_STATE;
+
     public Integer getID() {
         return ID;
     }
@@ -81,5 +93,53 @@ public class Income {
 
     public void setBENIFIT(Double BENIFIT) {
         this.BENIFIT = BENIFIT;
+    }
+
+    public Double getSOURCE() {
+        return SOURCE;
+    }
+
+    public void setSOURCE(Double SOURCE) {
+        this.SOURCE = SOURCE;
+    }
+
+    public Double getDAILY_SERVICE() {
+        return DAILY_SERVICE;
+    }
+
+    public void setDAILY_SERVICE(Double DAILY_SERVICE) {
+        this.DAILY_SERVICE = DAILY_SERVICE;
+    }
+
+    public Double getMAINTAIN() {
+        return MAINTAIN;
+    }
+
+    public void setMAINTAIN(Double MAINTAIN) {
+        this.MAINTAIN = MAINTAIN;
+    }
+
+    public Double getSHUTTLE_BUS() {
+        return SHUTTLE_BUS;
+    }
+
+    public void setSHUTTLE_BUS(Double SHUTTLE_BUS) {
+        this.SHUTTLE_BUS = SHUTTLE_BUS;
+    }
+
+    public Double getLAUNDRY() {
+        return LAUNDRY;
+    }
+
+    public void setLAUNDRY(Double LAUNDRY) {
+        this.LAUNDRY = LAUNDRY;
+    }
+
+    public Integer getSYS_STATE() {
+        return SYS_STATE;
+    }
+
+    public void setSYS_STATE(Integer SYS_STATE) {
+        this.SYS_STATE = SYS_STATE;
     }
 }

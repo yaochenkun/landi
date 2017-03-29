@@ -12,9 +12,11 @@
     <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="RTIME" property="RTIME" jdbcType="TIMESTAMP" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TYPE, ROOM_NUMBER, GUEST_ID, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME
+    ID, TYPE, ROOM_NUMBER, GUEST_ID, GUEST_NAME, ITEM, COUNT, MONEY, COMMENT, RTIME, 
+    SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,11 +32,11 @@
     insert into daily_service (ID, TYPE, ROOM_NUMBER, 
       GUEST_ID, GUEST_NAME, ITEM, 
       COUNT, MONEY, COMMENT, 
-      RTIME)
+      RTIME, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
       #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ITEM,jdbcType=VARCHAR}, 
       #{COUNT,jdbcType=INTEGER}, #{MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{RTIME,jdbcType=TIMESTAMP})
+      #{RTIME,jdbcType=TIMESTAMP}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.DailyService" >
     insert into daily_service
@@ -69,6 +71,9 @@
       <if test="RTIME != null" >
         RTIME,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -100,6 +105,9 @@
       </if>
       <if test="RTIME != null" >
         #{RTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -133,6 +141,9 @@
       <if test="RTIME != null" >
         RTIME = #{RTIME,jdbcType=TIMESTAMP},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -146,7 +157,8 @@
       COUNT = #{COUNT,jdbcType=INTEGER},
       MONEY = #{MONEY,jdbcType=DOUBLE},
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      RTIME = #{RTIME,jdbcType=TIMESTAMP}
+      RTIME = #{RTIME,jdbcType=TIMESTAMP},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">

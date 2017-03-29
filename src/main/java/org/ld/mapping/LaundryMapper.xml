@@ -27,11 +27,12 @@
     <result column="OTHER" property="OTHER" jdbcType="INTEGER" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
     <result column="PRICE" property="PRICE" jdbcType="DOUBLE" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, DATE, ROOM_NUM, GUEST_ID, NAME, SHIRT, TOP_OF_SUIT, TROUSERS, JACKET, COAT_M, 
     COAT_L, COAT_MS, COAT_MM, COAT_ML, CASHMERE, SHORT_PANTS, WAISTCOAT, T_SHRIT, KNITTED, 
-    TIE, LONG_SKIRT, SHORT_SKIRT, OTHER, TOTAL, PRICE
+    TIE, LONG_SKIRT, SHORT_SKIRT, OTHER, TOTAL, PRICE, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -52,7 +53,7 @@
       SHORT_PANTS, WAISTCOAT, T_SHRIT, 
       KNITTED, TIE, LONG_SKIRT, 
       SHORT_SKIRT, OTHER, TOTAL, 
-      PRICE)
+      PRICE, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
       #{GUEST_ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{SHIRT,jdbcType=INTEGER}, 
       #{TOP_OF_SUIT,jdbcType=INTEGER}, #{TROUSERS,jdbcType=INTEGER}, #{JACKET,jdbcType=INTEGER}, 
@@ -61,7 +62,7 @@
       #{SHORT_PANTS,jdbcType=INTEGER}, #{WAISTCOAT,jdbcType=INTEGER}, #{t_SHRIT,jdbcType=INTEGER}, 
       #{KNITTED,jdbcType=INTEGER}, #{TIE,jdbcType=INTEGER}, #{LONG_SKIRT,jdbcType=INTEGER}, 
       #{SHORT_SKIRT,jdbcType=INTEGER}, #{OTHER,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
-      #{PRICE,jdbcType=DOUBLE})
+      #{PRICE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
     insert into laundry
@@ -141,6 +142,9 @@
       <if test="PRICE != null" >
         PRICE,
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -217,6 +221,9 @@
       </if>
       <if test="PRICE != null" >
         #{PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -295,6 +302,9 @@
       <if test="PRICE != null" >
         PRICE = #{PRICE,jdbcType=DOUBLE},
       </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -323,7 +333,8 @@
       SHORT_SKIRT = #{SHORT_SKIRT,jdbcType=INTEGER},
       OTHER = #{OTHER,jdbcType=INTEGER},
       TOTAL = #{TOTAL,jdbcType=INTEGER},
-      PRICE = #{PRICE,jdbcType=DOUBLE}
+      PRICE = #{PRICE,jdbcType=DOUBLE},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
@@ -340,7 +351,7 @@
      limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
-    select * from laundry where ROOM_NUM = #{RN} and NAME = #{NAME} and DATE = #{DATE}
+    select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and DATE = #{DATE}
   </select>
 
 </mapper>

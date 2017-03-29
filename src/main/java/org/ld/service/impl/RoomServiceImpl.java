@@ -221,7 +221,7 @@ public class RoomServiceImpl implements RoomService {
 	public List<Laundry> getLaundry(String rn, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
+		if(rn != null) map.put("RN", rn);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 		
@@ -254,21 +254,21 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public Laundry getCertainLaundry(String rn, String name, Date date) {
+	public Laundry getCertainLaundry(String rn, Integer gid, Date date) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("RN", rn);
-		map.put("NAME", name);
+		map.put("GID", gid);
 		map.put("DATE", date);
 		
 		return laundryMapper.getCertainRec(map);
 	}
 
 	@Override
-	public int totalShuttleBus(String rn, int year, int mon) {
+	public int totalShuttleBus(String rn, Integer year, Integer mon) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
+		if(rn != null) map.put("RN", rn);
 		map.put("YEAR", year);
 		map.put("MON", mon);
 		
@@ -276,10 +276,10 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<ShuttleBus> getShuttleBus(String rn, int year, int mon, Integer st, Integer eachPage) {
+	public List<ShuttleBus> getShuttleBus(String rn, Integer year, Integer mon, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
+		if(rn != null) map.put("RN", rn);
 		map.put("YEAR", year);
 		map.put("MON", mon);
 		map.put("ST", st);
@@ -289,13 +289,13 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public ShuttleBus getCertainShuttleBus(String rn, String name, int year, int mon) {
+	public ShuttleBus getCertainShuttleBus(String rn, Integer gid, Integer year, Integer mon) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("RN", rn);
 		map.put("YEAR", year);
 		map.put("MON", mon);
-		map.put("NAME", name);
+		map.put("GID", gid);
 		
 		return shuttleBusMapper.getCertainRec(map);
 	}
@@ -352,12 +352,12 @@ public class RoomServiceImpl implements RoomService {
 	public int totalMaintain(Integer type, Integer cat, Integer state, String rn, Date from, Date to) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("STIME", from);
-		map.put("TTIME", to);
-		map.put("TYPE", type);
-		map.put("CAT", cat);
-		map.put("STATE", state);
+		if(rn != null) map.put("RN", rn);
+		if(from != null) map.put("STIME", from);
+		if(to != null) map.put("TTIME", to);
+		if(type != null) map.put("TYPE", type);
+		if(cat != null) map.put("CAT", cat);
+		if(state != null) map.put("STATE", state);
 		
 		return maintainMapper.totalRec(map);
 	}
@@ -367,15 +367,13 @@ public class RoomServiceImpl implements RoomService {
 			Date to, Integer order) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("STIME", from);
-		map.put("TTIME", to);
-		map.put("TYPE", type);
-		map.put("CAT", cat);
-		map.put("STATE", state);
-		map.put("ST", st);
-		map.put("EACH", eachPage);
-		map.put("ORDER", order);
+		if(rn != null) map.put("RN", rn);
+		if(from != null) map.put("STIME", from);
+		if(to != null) map.put("TTIME", to);
+		if(type != null) map.put("TYPE", type);
+		if(cat != null) map.put("CAT", cat);
+		if(state != null) map.put("STATE", state);
+		if(order != null)map.put("ORDER", order);
 		
 		return maintainMapper.getRec(map);
 	}
@@ -396,5 +394,17 @@ public class RoomServiceImpl implements RoomService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+
+	@Override
+	public RoomState getCertainRSbyID(Integer id) {
+		// TODO Auto-generated method stub
+		return roomStateMapper.getCertainRoomStateByID(id);
+	}
+
+	@Override
+	public RoomState getCertainRSbyNumber(String number) {
+		// TODO Auto-generated method stub
+		return roomStateMapper.getCertainRoomStateByNumber(number);
 	}
 }
