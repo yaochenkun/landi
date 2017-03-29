@@ -33,14 +33,19 @@ public class LoginController {
 		ModelAndView modelAndView =  new ModelAndView();
 		 
 		//指定视图
+		modelAndView.addObject("error", "");
 		modelAndView.setViewName("/login");
-	      
-		if(user == null)
-			modelAndView.addObject("error", "用户名不存在!");
+	    
+		if (name == null)
+			modelAndView.addObject("error", "");
+		else if (user == null)
+			modelAndView.addObject("error", "用户名不存在！");
 		else if (!(user.getUSERNAME().equals(name)))
-			modelAndView.addObject("error", "用户名不存在!");
+			modelAndView.addObject("error", "用户名不存在！");
 		else if(!(user.getPASSWD().equals(cur_env.myMD5(passwd))))
-			modelAndView.addObject("error", "密码错误!");
+			modelAndView.addObject("error", "密码错误！");
+		else if(user.getSTATE().equals(cur_env.getSettingsInt().get("forbid_state")))
+			modelAndView.addObject("error", "用户  " + name + " 被禁用！");
 		else // 身份验证成功
 		{
 			System.out.println("login controller");

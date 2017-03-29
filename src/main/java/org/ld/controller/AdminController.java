@@ -48,8 +48,8 @@ public class AdminController {
 		if (pageNumber > pageTotal)
 			pageNumber = pageTotal;
 
-		int st = (pageNumber - 1) * eachPage + 1;
-		List<User> user_list = userService.selectUserRange(st, st + eachPage - 1);
+		int st = (pageNumber - 1) * eachPage;
+		List<User> user_list = userService.selectUserRange(st, eachPage);
 
 		res_map.put("pageList", user_list);
 		res_map.put("pageNow", pageNumber);

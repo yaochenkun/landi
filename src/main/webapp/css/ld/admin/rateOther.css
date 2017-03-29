@@ -19,7 +19,7 @@ table thead tr th {
 table thead tr th {
 	width: 7%;
 	height: 40px;
-	background: #ff9393;
+	background: #2277da;
 	font-weight: normal;
 	white-space: nowrap;
 	overflow: hidden;
@@ -36,7 +36,7 @@ table tbody tr {
 }
 
 table tbody tr:hover {
-	background: #fff5f5;
+	background: #D6F6FF;
 }
 
 table tbody tr td {
@@ -54,7 +54,7 @@ table tbody tr td input {
 /******* 提交修改 样式 ********/
 .btn-submit {
 	float: right;
-	background: #ff6565;
+	background:#0C89FD;
 	color: #fff;
 	border-color: #fffafa;
 	margin-bottom: 7em;
@@ -65,6 +65,6 @@ table tbody tr td input {
 }
 
 .btn-submit:hover {
-	background: #ff4c4c;
+	background: #2277da;
 	color: #fff;
 }

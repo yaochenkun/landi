@@ -38,10 +38,11 @@
 
 .body dl {
 	clear: both;
-	left: 50%;
-	position: relative;
+	left: 40%;
+	position:relative;
 	margin-left: -88px;
 	font-size: 15px;
+	color: #333;
 }
 
 .body dl dt {
@@ -49,18 +50,23 @@
 	margin-right: 10px;
 	margin-bottom: 20px;
 	color: #73777b;
+	font-weight: 700;
 }
 
 .body dl dd {
 	float: left;
-	margin-right: 30px;
+	margin-right: 10px;
 	color: #ff824d;
 }
 
 .body dl dd input {
-	width: 40px;
+	text-align: center;
+	width: 75px;
 	border: 1px #bad1de solid;
-	padding: 0 4px;
+	padding: 0 3px;
+	border: inherit;
+	background-color: inherit;
+	color: blue;
 }
 
 .btnchange {

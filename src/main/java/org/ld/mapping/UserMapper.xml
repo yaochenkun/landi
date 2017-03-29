@@ -168,7 +168,7 @@
   </select>
   <select id="selectIdRange" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from user where ID >= #{ST} and ID <= #{ED}
+  	select * from user limit #{ST}, #{EACH}
     ]]>
   </select>
   <select id="totalRow" resultType="java.lang.Integer">

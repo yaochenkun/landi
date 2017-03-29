@@ -20,10 +20,12 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="liactive"><a
-						href="${pageContext.request.contextPath }/views/admin/rateList.jsp">能源费管理</a></li>
-					<li class="linormal"><a
-						href="${pageContext.request.contextPath }/views/admin/rateOther.jsp">其他费用管理</a></li>
+					<li class="liactive">
+						<a href="${pageContext.request.contextPath }/views/admin/rateList.jsp">能源费管理</a>
+					</li>
+					<li class="linormal">
+						<a href="${pageContext.request.contextPath }/views/admin/rateOther.jsp">其他费用管理</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -140,7 +142,7 @@
 		</div>
 	</div>
 	<div id='editButton'>
-		<a class="btn btn-change btnchange" onclick="EditRatePage();">编&nbsp;&nbsp;辑</a>
+		<a class="btn btn-change btnchange" onclick="EditRatePage()">编&nbsp;&nbsp;辑</a>
 	</div>
 	<!-- 页面内容 end-->
 	

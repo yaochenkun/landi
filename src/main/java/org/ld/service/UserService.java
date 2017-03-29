@@ -17,7 +17,7 @@ public interface UserService {
 
 	int updateUserInfo(User userInfo);
 
-	List<User> selectUserRange(int st, int ed);
+	List<User> selectUserRange(int st, int each);
 
 	int totalRow();
 }

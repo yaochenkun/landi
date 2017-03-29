@@ -57,10 +57,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectUserRange(int st, int ed) {
+	public List<User> selectUserRange(int st, int each) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ST", st);
-		map.put("ED", ed);
+		map.put("EACH", each);
 		List<User> user_list = new ArrayList<User>();
 		user_list = userInfoMapper.selectIdRange(map);
 
