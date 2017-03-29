@@ -9,6 +9,7 @@ import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.app.MyTest;
@@ -22,13 +23,26 @@ public class LoginController {
 
 	// 登录
 	@RequestMapping("/login")
-	public String login(HttpSession session, String name, String passwd) throws Exception {
+	public ModelAndView login(HttpSession session, String name, String passwd) throws Exception {
 		// 调用service进行用户身份验证
 		CurEnv cur_env = new CurEnv();
 		User user = userService.getUserByUserName(name);
 		System.out.println(user);
-		// 身份验证成功
-		if (user != null && user.getPASSWD().equals(cur_env.myMD5(passwd))) {
+		
+		//返回ModelAndView
+		ModelAndView modelAndView =  new ModelAndView();
+		 
+		//指定视图
+		modelAndView.setViewName("/login");
+	      
+		if(user == null)
+			modelAndView.addObject("error", "用户名不存在!");
+		else if (!(user.getUSERNAME().equals(name)))
+			modelAndView.addObject("error", "用户名不存在!");
+		else if(!(user.getPASSWD().equals(cur_env.myMD5(passwd))))
+			modelAndView.addObject("error", "密码错误!");
+		else // 身份验证成功
+		{
 			System.out.println("login controller");
 			// 在session中保存用户身份信息
 			cur_env.setCur_user(user);
@@ -40,13 +54,13 @@ public class LoginController {
 			logger.info("User Login: " + name);
 
 			if (user.getROLE() == 0)
-				return "redirect:/homeAdmin.action";
+				modelAndView.setViewName("redirect:/homeAdmin.action");
 			else
-				return "redirect:/homeUser.action";
+				modelAndView.setViewName("redirect:/homeUser.action");
 		}
 		// 返回登录 页面(.jsp)
-		else
-			return "/login";
+		
+		return modelAndView;
 	}
 
 	// 用户首页

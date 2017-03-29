@@ -75,7 +75,7 @@ public class AdminController {
 				Integer.parseInt(tp.ReadParaPair("role", ((Integer) userJson.get("ROLE")).toString(), 0, 2)[1]));
 		newUser.setCTIME(new Date());
 		newUser.setLTIME(new Date());
-		newUser.setSTATE(2);
+		newUser.setSTATE(1);
 
 		if (userService.insert(newUser) == 1) {
 			logger.info(cur_env.getCur_user().getNAME() + " create a new user " + newUser.getNAME());
