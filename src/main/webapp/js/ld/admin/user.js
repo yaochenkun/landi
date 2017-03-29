@@ -63,7 +63,7 @@ var requestAjaxUserList = function(pageNum){
 			$("#users_table").append(tabletitle);
 			
 			//添加每一行用户信息
-            for(var i=0; i<JsonData.pageList.length; i++){
+            for(var i = 0; i < JsonData.pageList.length; i++){
             	var peruser = JsonData.pageList[i];
             	
                 // 将时间戳变为2016-12-12显示          	
@@ -75,7 +75,7 @@ var requestAjaxUserList = function(pageNum){
             	//console.log(showDate);
             	
             	// 正常状态
-            	if(peruser.state==1){
+            	if(peruser.state == 1){
             		var tr = $("<tr><td>"+ peruser.id +"</td>"+
                    		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
                    	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
@@ -84,7 +84,7 @@ var requestAjaxUserList = function(pageNum){
                    	     "<span onclick=\"sureForbidUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
             	}
             	// 禁用状态
-            	else if(peruser.state==10){
+            	else if(peruser.state == 10){
             		var tr = $("<tr><td>"+ peruser.id +"</td>"+
                    		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
                    	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
