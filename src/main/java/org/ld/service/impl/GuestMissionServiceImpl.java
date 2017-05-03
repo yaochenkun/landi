@@ -156,4 +156,24 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 		map.put("EACH", eachPage);
 		return guestMapper.getGuestRange(map);
 	}
+
+	@Override
+	public int getTotalByName_RoomNumber(String name, String roomNumber) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("NAME", name);
+		map.put("ROOM_NUMBER", roomNumber);
+		return guestMapper.getTotalByName_RoomNumber(map);
+	}
+
+	@Override
+	public List<Guest> getGuestByName_RoomNumber(String name, String roomNumber, int st, int eachPage) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("NAME", name);
+		map.put("ROOM_NUMBER", roomNumber);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+		return guestMapper.selectByName_RoomNumber(map);
+	}
 }

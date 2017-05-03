@@ -257,5 +257,20 @@
   	<![CDATA[
   	select * from guest limit #{ST}, #{EACH}
     ]]>
-	</select>
+  </select>
+  
+  <!-- add by yck -->
+  
+  <select id="getTotalByName_RoomNumber" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from guest where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and GUEST_NAME like CONCAT('%', #{NAME}, '%')
+  	]]>
+  </select>
+  
+    <select id="selectByName_RoomNumber" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from guest where ROOM_NUMBER like CONCAT('%',#{ROOM_NUMBER},'%') and GUEST_NAME like CONCAT('%', #{NAME}, '%') limit #{ST}, #{EACH}
+  	]]>
+  </select>
+  
 </mapper>

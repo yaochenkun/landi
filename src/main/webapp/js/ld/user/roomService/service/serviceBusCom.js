@@ -240,6 +240,25 @@ var addserviceBus = function(){
 	}
 	requestAddServiceBus();
 };
+
+// 查询本月某个房间的通勤车合计
+var searchBusCom = function(){
+	var roomNum = $("#serviceRoomNumber").val();
+	for(let k=1; k<=18; k++){
+		$("#checkbox_role" + k).removeAttr("checked");
+	}			
+	
+	// 更新复选框选中状态
+	for(let i=1; i<=18; i++){
+		let curCheck = data % 2;
+		data = parseInt(data/2);
+		//console.log(curCheck);
+		if(curCheck==1){
+			// 添加选中状态
+			$("#checkbox_role" + i).prop("checked",true);
+		}
+	}
+}
 // 请求添加车费记录
 var requestAddServiceBus = function(){
 	console.log("添加车费记录");
@@ -250,9 +269,10 @@ var requestAddServiceBus = function(){
 	// 遍历日期
 	var perRecord = "";
 	for(var i = 0; i < 31; i++){
-		var price = $("table input").eq(i).val();
-		if(price != ""){
-			perRecord += '{"day":'+ (i + 1) +',"price":'+ price +'},';
+		// var price = $("table input").eq(i).val();
+		var isRecord = $("table input").eq(i).is(":checked") == true ? 1 : 0;
+		if(isRecord != 0){
+			perRecord += '{"day":'+ (i + 1) +',"price":'+ isRecord +'},';
 		}
 	}
 	if(perRecord != ""){

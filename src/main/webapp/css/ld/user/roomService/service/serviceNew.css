@@ -4,8 +4,12 @@
 	margin-bottom: 9em;
 }
 
+.main-page{
+	position: static;
+}
 .body-content {
 	margin-left: 180px;
+	position: static;
 }
 
 .body-content li {
@@ -13,7 +17,7 @@
 	font-size: 15px;
 }
 
-.body-content li:first-child .span{width: 116px;}
+.body-content li:nth-child(2) .span{width: 116px;}
 .body-content li .span {
 	width: 8em;
 	display: inline-block;
@@ -22,6 +26,22 @@
 .body-content li input {
 	width: 20em;
 	padding: .1em .8em;
+}
+
+.eventType {
+	margin-left: 8em;
+}
+
+.eventType input[type = "radio"] {
+	width: 20px;
+	height: 20px;
+	float: left;
+}
+
+.eventType .span{
+	margin-left: 10px;
+	float: left;
+	margin-top: 4px;
 }
 
 .red-right {

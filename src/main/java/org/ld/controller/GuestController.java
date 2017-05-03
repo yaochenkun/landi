@@ -352,4 +352,45 @@ public class GuestController {
 
 		return ans;
 	}
+	
+	//add by yck
+	@RequestMapping("/searchGuestByName")
+	@ResponseBody
+	public Map<String, Object> searchGuestByName_RoomNumber(HttpSession session, @RequestBody String data) {
+		
+		//验证权限
+		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String name = dataJson.getString("name");
+		String roomNumber = dataJson.getString("roomId");
+
+		//分页
+		int eachPage = curEnv.getSettingsInt().get("list_size");
+		int recordTotal = guestMissionService.getTotalByName_RoomNumber(name, roomNumber);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		if(recordTotal != 0) {
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int st = (pageNumber - 1) * eachPage;
+			List<Guest> record = guestMissionService.getGuestByName_RoomNumber(name, roomNumber, st, eachPage);
+			ans.put("pageList", record);
+		}
+		
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
+		return ans;
+	}
 }

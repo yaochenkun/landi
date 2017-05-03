@@ -1,6 +1,8 @@
-.bill-table{
-	margin: 50px 0;
-}
+.main-title{margin: 30px 0;}
+.main-title input{padding: 0 5px; margin-right: 20px;}
+.btnSearch{border: 1px solid #aaa; padding: 2px 12px; cursor: pointer;}
+.btn-edit{float: right;}
+
 .bill-table thead tr th{width: 7%;}
 .bill-table thead tr th:nth-child(5){width: 9%;}
 .bill-table thead tr th:nth-child(9), .bill-table thead tr th:nth-child(10){width: 12%;}

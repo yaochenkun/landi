@@ -276,7 +276,7 @@ var requestAjaxAddUser = function(){
 		}
 		return;
 	}	
-
+	
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/addUser.action',
@@ -395,7 +395,7 @@ var exportUserList = function(){
     var fileName = "userList.csv";
     var content = ",,,用户信息表\n编号,用户名,姓名,工号,部门,职务,创建用户时间,最近登录时间,状态\n";
     $("#users_table tr").each(function(i){
-    	   if(i!=0){
+    	   if (i != 0) {
     		   content += $(this).children("td").eq(0).text() + "," + $(this).children("td").eq(1).text() + "," +
     		              $(this).children("td").eq(2).text() + "," + $(this).children("td").eq(3).text() + "," +
     		              $(this).children("td").eq(4).text() + "," + $(this).children("td").eq(5).text() + "," +

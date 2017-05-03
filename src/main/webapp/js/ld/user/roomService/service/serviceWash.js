@@ -50,7 +50,7 @@ var requestWash = function(pageNum){
 		        	"<span id='wash_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextWash();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recorTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
-	}
+		}
 	});
 };
 //拉取上一页 洗衣单收费信息
@@ -86,6 +86,12 @@ var requestWashByRoomNum = function(pageNum,roomNum){
 			// 清空
 			clearWashDiv();
 
+			if (data.recordTotal == 0) {
+				$(".bill-table table").css("display", "none");
+				$(".emptyData").css("display", "block");
+				return;
+			}
+
 			for(var i = 0; i < data.dataList.length; i++){
 				addPerWash(data.dataList[i]);
 			}
@@ -98,21 +104,21 @@ var requestWashByRoomNum = function(pageNum,roomNum){
 		        	"<span id='wash_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextWashByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recorTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
-	}
+		}
 	});
 };
 //拉取上一页 洗衣单收费信息（按房间号查询）
 var requestBeforeWashByRoomNum = function(){
 	var nowpage = parseInt($("#wash_nowpage").val());
 	if(nowpage == 1) return;
-	requestWash(nowpage - 1);
+	requestWashByRoomNum(nowpage - 1);
 };
 // 拉取下一页 洗衣单收费信息（按房间号查询）
 var requestNextWashByRoomNum = function(){
 	var nowpage = parseInt($("#wash_nowpage").val());
 	var totalpage = parseInt($("#wash_totalpage").text());
 	if(nowpage == totalpage) return;
-	requestWash(nowpage + 1);
+	requestWashByRoomNum(nowpage + 1);
 };
 
 //////////////////////////////////////////////////////// 洗衣单收费列表项
@@ -148,6 +154,9 @@ var clearWashDiv = function(){
 
 // 项洗衣单收费列表添加每列洗衣单收费项
 var addPerWash = function(perRecord){
+	$(".emptyData").css("display", "none");
+	$(".bill-table table").css("display", "table");
+
 	$(".date").append("<td>"+ formatDateForm(new Date(perRecord.date)) +"</td>");
 	$(".roomNo").append("<td>"+ perRecord.room_NUM +"</td>");
 	$(".name").append("<td>"+ perRecord.name +"</td>");
@@ -192,7 +201,7 @@ var addPerWash = function(perRecord){
 	$(".shortSkirt").append("<td>"+ short_SKIRT +"</td>");
 	$(".other").append("<td>"+ other +"</td>");
 	$(".total").append("<td>"+ total +"</td>");
-	$(".price").append("<td>"+ price +"</td>");
+	$(".price").append("<td>"+ price +"&nbsp;元</td>");
 };
 
 /////////////////////////////////////////// 添加洗衣单收费

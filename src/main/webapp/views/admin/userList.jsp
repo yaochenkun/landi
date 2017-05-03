@@ -30,19 +30,25 @@
 	<!-- 页面内容 start-->
 	<div class="body-content">
 		<div class="content">
-			<section class="activities"> <!-- 新建用户 start-->
+			<section class="activities"> 
+			<!-- 新建用户 start-->
 			<div class="new">
-				<a class="btn btn-edit" onclick="exportUserList();">导出列表</a> <a
-					href="${pageContext.request.contextPath}/views/admin/newUser.jsp"
-					class="btn btn-new">新建用户</a>
+				<a class="btn btn-edit" onclick="exportUserList();">导出列表</a>
+				<a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
 			</div>
-			<!-- 新建用户  end--> <!-- 用户table start-->
+			<!-- 新建用户  end-->
+			
+			<!-- 用户table start-->
 			<div class="nav-block">
 				<table id="users_table" class="table"></table>
 			</div>
-			<!-- 用户table end--> <!-- 用户页码 start-->
+			<!-- 用户table end--> 
+			
+			<!-- 用户页码 start-->
 			<div id="userBottom" class="bottom"></div>
-			<!-- 用户页码 end --> </section>
+			<!-- 用户页码 end --> 
+			
+			</section>
 		</div>
 	</div>
 	<!-- 页面内容 end-->

@@ -33,4 +33,8 @@ public interface GuestMissionService {
 	int getTotal();
 	
 	List<Guest> getGuestList(int st, int eachPage);
+	
+	//add by yck
+	int getTotalByName_RoomNumber(String name, String roomNumber);
+	List<Guest> getGuestByName_RoomNumber(String name, String roomNumber, int st, int eachPage);
 }

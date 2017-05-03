@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
 <%@ page import="java.util.Date, java.text.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -37,6 +36,12 @@
 
 	<!-- 页面内容 strat -->
 	<div class="main">
+		<div class="main-title">
+			<input type="text" placeholder="房间号..." />
+			<input type="text" placeholder="姓名..." />
+			<a class="btnSearch">搜索</a>
+			<a class="btn btn-edit" onclick="exportGuestList();">导出列表</a>
+		</div>
 		<div class="main-page">
 			<div class="bill-area">
 				<div class="bill-table">
@@ -71,6 +76,10 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/guestList.js"></script>
 	<script>requestGuestList(1);</script>

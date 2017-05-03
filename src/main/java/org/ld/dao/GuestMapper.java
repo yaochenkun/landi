@@ -28,4 +28,9 @@ public interface GuestMapper {
 	int getTotal();
 	
 	List<Guest> getGuestRange(HashMap<String, Object> map);
+	
+	//add by yck
+	int getTotalByName_RoomNumber(HashMap<String, Object> map);
+	
+	List<Guest> selectByName_RoomNumber(HashMap<String, Object> map);
 }
