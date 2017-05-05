@@ -505,18 +505,15 @@
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
     select count(*) from shuttle_bus where 
-     <if test="RN != null" >
-     ROOM_NUM = #{RN} and 
-     </if>
-     YEAR = #{YEAR} and MONTH = #{MON}
+    ROOM_NUM like CONCAT('%', #{RN}, '%') and
+   	YEAR = #{YEAR} and MONTH = #{MON}
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from shuttle_bus where 
-     <if test="RN != null" >
-      ROOM_NUM = #{RN} and 
-     </if>
-     YEAR = #{YEAR} and MONTH = #{MON}
-     limit #{ST}, #{EACH}
+    ROOM_NUM like CONCAT('%', #{RN}, '%') and
+    YEAR = #{YEAR} and MONTH = #{MON}
+    order by ID
+    limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
     select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and YEAR = #{YEAR} and MONTH = #{MON}

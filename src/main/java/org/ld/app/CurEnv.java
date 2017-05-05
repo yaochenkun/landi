@@ -17,6 +17,10 @@ public class CurEnv {
 	private Set<String> item_type;
 	private Map<String, Set<String>> item_cat;
 	private Map<String, Set<String>> item_com;
+	
+	//add by yck
+	private Map<String, Integer> charge;
+	private Map<String, Map<String, Integer>> laundry_price;
 
 	public CurEnv() {
 		Para tp = new Para();
@@ -26,6 +30,8 @@ public class CurEnv {
 		item_type = tp.getPara("item_type");
 		item_cat = new HashMap<String, Set<String>>();
 		item_com = new HashMap<String, Set<String>>();
+		charge = tp.getParaPairInt("charge", 0, 1);
+		laundry_price = new HashMap<String, Map<String, Integer>>();
 
 		Map<String, String> temp = tp.getParaPair("item_cat", 0, 1);
 
@@ -56,6 +62,30 @@ public class CurEnv {
 
 			item_com.put(key, news);
 		}
+		
+		temp = tp.getParaPair("laundry_price", 0, 1);
+		for (String key : temp.keySet()) {
+			String list = temp.get(key);
+
+			String[] modes = {"水洗", "干洗", "单熨"};
+			String[] ans = list.split("[,]");
+			Map<String, Integer> news = new HashMap<String, Integer>();
+			for (int i = 0; i < ans.length; i++) {
+				news.put(modes[i], Integer.parseInt(ans[i]));
+			}
+
+			laundry_price.put(key, news);
+		}
+		
+		
+		//测试
+//		for(Map.Entry<String, Map<String, Integer>> entry : laundry_price.entrySet()){
+//			System.out.print(entry.getKey() + ": ");
+//			Map<String, Integer> map = entry.getValue();
+//			System.out.print(map.get("水洗") + "," + map.get("干洗") + "," + map.get("单熨"));
+//			System.out.println();
+//		}
+		
 	}
 
 	public String myMD5(String md5) {
@@ -131,4 +161,22 @@ public class CurEnv {
 	public void setItem_com(Map<String, Set<String>> item_com) {
 		this.item_com = item_com;
 	}
+
+	public Map<String, Integer> getCharge() {
+		return charge;
+	}
+
+	public void setCharge(Map<String, Integer> charge) {
+		this.charge = charge;
+	}
+
+	public Map<String, Map<String, Integer>> getLaundry_price() {
+		return laundry_price;
+	}
+
+	public void setLaundry_price(Map<String, Map<String, Integer>> laundry_price) {
+		this.laundry_price = laundry_price;
+	}
+	
+	
 }

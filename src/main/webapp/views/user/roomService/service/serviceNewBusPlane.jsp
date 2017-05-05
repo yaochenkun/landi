@@ -10,11 +10,13 @@
 <link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNewBusPlane.css" rel="stylesheet" type="text/css" />
 <title>新增接送机记录</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -58,7 +60,8 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
-
+	
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
@@ -67,6 +70,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusPlane.js"></script>
 	<script type="text/javascript">
+		// 设置为当前时间
+		var nowDate = new Date();
+		$(".pack_maintain").val(formatDateForm(nowDate));
 		$('.pack_maintain').date_input();
 	</script>
 </body>

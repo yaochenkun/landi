@@ -223,6 +223,25 @@ public class AdminController {
 			return 0;
 		}
 	}
+	
+	@RequestMapping("/getLaundryPrice")
+	public @ResponseBody Map<String, String> getLaundryPrice(HttpSession session) {
+		Para p = new Para();
+		return p.getParaPair("laundry_price", 0, 1);
+	}
+
+	@RequestMapping("/setLaundryPrice")
+	public @ResponseBody Integer setLaundryPrice(HttpSession session, @RequestBody Map<String, String> laundry_price) {
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Para p = new Para();
+		if (p.setPair("laundry_price", laundry_price) == 1) {
+			logger.info(cur_env.getCur_user().getNAME() + " set laundry_price " + laundry_price.toString());
+			return 1;
+		} else {
+			logger.info(cur_env.getCur_user().getNAME() + " failed to set laundry_price " + laundry_price.toString());
+			return 0;
+		}
+	}
 
 	@RequestMapping("/getLogs")
 	public @ResponseBody Map<String, String> getLogs() {

@@ -17,7 +17,7 @@
 	font-size: 15px;
 }
 
-.body-content li:nth-child(2) .span{width: 116px;}
+.body-content li:nth-child(1) .span{width: 116px;}
 .body-content li .span {
 	width: 8em;
 	display: inline-block;

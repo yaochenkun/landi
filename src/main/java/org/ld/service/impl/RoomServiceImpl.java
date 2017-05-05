@@ -221,7 +221,7 @@ public class RoomServiceImpl implements RoomService {
 	public List<Laundry> getLaundry(String rn, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(rn != null) map.put("RN", rn);
+		map.put("RN", rn);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 		
@@ -268,7 +268,7 @@ public class RoomServiceImpl implements RoomService {
 	public int totalShuttleBus(String rn, Integer year, Integer mon) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(rn != null) map.put("RN", rn);
+		map.put("RN", rn);
 		map.put("YEAR", year);
 		map.put("MON", mon);
 		
@@ -279,7 +279,7 @@ public class RoomServiceImpl implements RoomService {
 	public List<ShuttleBus> getShuttleBus(String rn, Integer year, Integer mon, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(rn != null) map.put("RN", rn);
+		map.put("RN", rn);
 		map.put("YEAR", year);
 		map.put("MON", mon);
 		map.put("ST", st);

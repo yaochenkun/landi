@@ -45,48 +45,12 @@
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
-					<table id="busTable">
-						<tbody>
-						    <tr class="date"></tr>
-							<tr class="roomNo"></tr>
-							<tr class="name"></tr>						
-							<tr class="price"></tr>
-
-							<tr class="one"></tr>
-							<tr class="two"></tr>
-							<tr class="three"></tr>
-							<tr class="four"></tr>
-							<tr class="five"></tr>
-							<tr class="six"></tr>
-							<tr class="seven"></tr>
-							<tr class="eight"></tr>
-							<tr class="nine"></tr>
-							<tr class="ten"></tr>
-							<tr class="eleven"></tr>
-							<tr class="twelve"></tr>
-							<tr class="thirteen"></tr>
-							<tr class="fourteen"></tr>
-							<tr class="fifteen"></tr>
-							<tr class="sixteen"></tr>
-							<tr class="seventeen"></tr>
-							<tr class="eighteen"></tr>
-							<tr class="nineteen"></tr>
-							<tr class="twenty"></tr>
-							<tr class="twentyOne"></tr>
-							<tr class="twentyTwo"></tr>
-							<tr class="twentyThree"></tr>
-							<tr class="twentyFour"></tr>
-							<tr class="twentyFive"></tr>
-							<tr class="twentySix"></tr>
-							<tr class="twentySeven"></tr>
-							<tr class="twentyEight"></tr>
-							<tr class="twentyNine"></tr>
-							<tr class="thirty"></tr>
-							<tr class="thirtyOne"></tr>
-
-							<tr class="days"></tr>
-							<tr class="total"></tr>
-						</tbody>
+					<table>
+						<thead>
+							<tr><th>时间</th><th>房间号</th><th>客人姓名</th>
+							<th>通勤天数</th><th>合计费用</th><th>操作</th></tr>
+						</thead>
+						<tbody id="busTable"></tbody>
 					</table>
 					<!-- 费用 table end -->
 
@@ -118,7 +82,7 @@
 	  	var nowDate = new Date();
 	  	var date = nowDate.getFullYear() + "-" + Number(nowDate.getMonth() + 1);
 	  	console.log(date);
-	  	requestFare(1,date);
+	  	serachFareByDate(1, date);
 	</script>
 </body>
 </html>

@@ -10,12 +10,15 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusNew.css" rel="stylesheet" type="text/css" />
-<title>添加通勤车车费记录</title>
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusExit.css" rel="stylesheet" type="text/css" /
+<title>编辑通勤车车费记录</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
+
+	<% String id = request.getParameter("id"); %>
 	
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -29,19 +32,15 @@
 				<i class="icon-path"></i>
 				<a href="serviceBusCom.jsp">通勤车</a>
 				<i class="icon-path"></i>
-				<a href="javascript:void(0);">新增通勤车车费记录</a>
+				<a href="javascript:void(0);">编辑通勤车车费记录</a>
 			</div>
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li id="dateLi"><span class="span">本月：</span><span id="newBusDate"></span></li>
-						<li id="roomNumLi"><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="W35-1" />
-							<span class="red red-right">*&nbsp;必填</span></li>
-						<li id="roomIdWarning"><span class="red">不能为空！</span></li>
-						<li id="nameLi"><span class="span">客人姓名：</span><input id="guestName" type="text" value="Alice" /></li>
-						<a href="javascript:void(0);" class="btn btn-goback" id="btn-search" onclick="searchBusCom();">搜索本月通勤车记录</a>
-						<table id="newBusComTable">
+						<li id="dateLi"><span class="span">时间：</span>2017-04</li>
+						<li id="roomNumLi"><span class="span">房间号：</span>W34-1</li>
+						<li id="nameLi"><span class="span">客人姓名：</span>1234</li>
+						<table id="exitBusComTable">
 							<tbody>
 								<tr><td>日期</td><td>1日</td><td>2日</td><td>3日</td><td>4日</td>
 									<td>5日</td><td>6日</td><td>7日</td><td>8日</td><td>9日</td>
@@ -74,7 +73,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<a onclick="addserviceBus();" class="btn btn-goback goback">确认添加</a>
+						<a onclick="addserviceBus();" class="btn btn-goback goback">确认修改</a>
 					</ul>
 				</div>
 			</div>
@@ -87,6 +86,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script>
+		searchBusComExit();
 		// 设置为当前日期
 		var date = new Date();
 		$("#newBusDate").text(date.getFullYear() + "-" + (date.getMonth() + 1));

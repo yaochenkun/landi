@@ -29,37 +29,14 @@
 			<div class="bill-area">
 				<div class="search">
 					<span>房间号：</span><input id="searchWashButton" type="text" value="">
-					<span class="totalPrice">合计：&nbsp;<span>1</span>&nbsp;元</span>
 				</div>
 				<div class="bill-table">
-					<div class="emptyData">没有相关数据！</div>
 					<!-- 费用 table start -->
 					<table>
-						<tbody>
-							<tr class="date"></tr>
-							<tr class="roomNo"></tr>
-							<tr class="name"></tr>
-							<tr class="shirt"></tr>
-							<tr class="topSuit"></tr>
-							<tr class="trousers"></tr>
-							<tr class="jacket"></tr>
-							<tr class="middleCoat"></tr>
-							<tr class="longCoat"></tr>
-							<tr class="shortCotton"></tr>
-							<tr class="middleCotton"></tr>
-							<tr class="longCotton"></tr>
-							<tr class="cashmere"></tr>
-							<tr class="shortPants"></tr>
-							<tr class="waistcoat"></tr>
-							<tr class="tshirt"></tr>
-							<tr class="knitted"></tr>
-							<tr class="tie"></tr>
-							<tr class="longSkirt"></tr>
-							<tr class="shortSkirt"></tr>
-							<tr class="other"></tr>
-							<tr class="total"></tr>
-							<tr class="price"></tr>
-						</tbody>
+						<thead>
+							<tr><th>日期</th><th>房间号</th><th>客户姓名</th><th>洗衣详情</th><th>价格</th></tr>
+						</thead>
+						<tbody id="washTable"></tbody>
 					</table>
 					<!-- 费用 table end -->
 

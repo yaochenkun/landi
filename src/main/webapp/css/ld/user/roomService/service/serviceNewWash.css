@@ -1,28 +1,35 @@
-.bill-table thead tr{height: 4em; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
-.bill-table th{background-color: #2277da; color: #fff; text-align: center;}
-.bill-table td{line-height: 26px; padding: 8px 0; text-align: center; font-size: 14px; border-bottom: 1px solid #ccc;}
-.bill-table td:nth-child(5){color: #ff5722;}
+.body-content{margin-left: 0; margin-top: 1em; font-size: 14px;}
+.body-content li{display: inline-block; margin-right: 90px;}
+.body-content li input{padding: 0 10px; width: 110px;}
+.body-content li .span{margin-right: 5px;}
+.red-right{margin-left: 10px;}
+.border-red{border: 1px solid red;}
+#roomIdWarning{display: none; position: absolute; left: 60px;}
 
-.bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px; float: left;}
-.search input{padding: 0 5px; margin-left: 10px; height: 26px;}
-.bill-area .emptyText{text-align: center; color: #ff4d4d;}
+#totalCount, #totalPrice{font-weight: bold; font-size: 18px;}
+#count{color: #2277da;}
+#totalPrice{color: #ff5722;}
 
-.bottom-page{margin: 0; margin-top: 3em;}
-.bottom-page .recorTotal{color: #2277da;}
+.goback{height: 26px; line-height: 12px; width: 100px; float: right;}
 
-#exitCom{color: #2277da;}
-#exitCom:hover{color: #2277da; border-bottom: 1px solid #2277da;}
 
-/* 车费日期样式 */
-.calendarPart{display: inline-block; font-size: 16px; margin-top: 30px; margin-left: 2em;}
-.calendarPart .span{float: left;}
-.ta_date{height: 26px;}
-.ta_date .date_title{font-size: 15px;}
+.body table{width: 100%; margin: 30px 0;}
+table thead tr{height: 50px; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
+table th{background-color: #2277da; color: #fff; text-align: center;}
+table td{position: relative; line-height: 30px; padding: 0; text-align: center; font-size: 14px; border: 1px solid #ccc;}
+table th:nth-child(1){width: 40%;}
+table th:nth-child(2),table th:nth-child(3),table th:nth-child(4) {width: 12%;}
+table th:nth-child(5),table th:nth-child(6){width: 8%;}
+table th:nth-child(7){width: 5%;}
 
-.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-left: 3em;}
+table td input[type="radio"]{width: 16px; height: 16px; position: absolute; top: 4px; left: 10px;}
+table td input[type="text"]{width: 100%; border: none; padding: 0 5px; text-align: center;}
+table .td-hover{background-color: #f9f9f9;}
+table td .span{position: absolute; top: 2px; right: 10px;}
+table .price{color: #ff5722;}
+table .delete{color: #ff4d4d; cursor: pointer; display: none;}
 
 /* 导航栏样式 */
-header {font-size: 14px;}
 header .header-logo {
 	left: 45%;
 }
@@ -105,7 +112,6 @@ header .homeMenu .span {
 
 /**** 表格上方样式  ****/
 .main-page .nav-path {
-	font-size: 14px;
 	padding: 20px 0;
 	line-height: 22px;
 }
@@ -149,28 +155,3 @@ header .homeMenu .span {
 .bill-table table {
 	width: 100%;
 }
-
-.bill-table tr {
-	font-size: 14px;
-	text-align: center;
-	line-height: 4em;
-	border-bottom: 1px solid #eee;
-}
-
-.bill-table tr:hover {
-	background: #f7f7f7;
-}
-
-/**** 页码 样式 ****/
-.bottom-page {
-	margin: 3em 2em 5em;
-}
-
-.page-bottom {
-	font-size: 14px;
-	color: #a5a5a5;
-	height: 40px;
-	margin: 20px 0;
-}
-/****************** 页面内容 start *****************************/
-

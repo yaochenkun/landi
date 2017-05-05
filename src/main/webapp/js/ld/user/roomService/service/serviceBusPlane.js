@@ -13,7 +13,7 @@ var searchBusPlane = function(pageNum){
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的车费信息");
 
 	$.ajax({
-		url:'/LD/flightPicking/searchFlightPickingByRoomNumber_Time.action',
+		url:'/LD/userRoom/searchFlightPickingByRoomNumber_Time.action',
 		type:'post',
 		dataType:'json',
 		contentType:'application/json',
@@ -99,7 +99,7 @@ var requestAddBusPlane = function(){
 	console.log(roomNum);
 
 	$.ajax({
-		url:'/LD/flightPicking/addFlightPicking.action',
+		url:'/LD/userRoom/addFlightPicking.action',
 		type:'post',
 		contentType:'application/json',
 		dataType:'json',

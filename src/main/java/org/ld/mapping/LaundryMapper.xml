@@ -6,33 +6,15 @@
     <result column="DATE" property="DATE" jdbcType="DATE" />
     <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
     <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
-    <result column="SHIRT" property="SHIRT" jdbcType="INTEGER" />
-    <result column="TOP_OF_SUIT" property="TOP_OF_SUIT" jdbcType="INTEGER" />
-    <result column="TROUSERS" property="TROUSERS" jdbcType="INTEGER" />
-    <result column="JACKET" property="JACKET" jdbcType="INTEGER" />
-    <result column="COAT_M" property="COAT_M" jdbcType="INTEGER" />
-    <result column="COAT_L" property="COAT_L" jdbcType="INTEGER" />
-    <result column="COAT_MS" property="COAT_MS" jdbcType="INTEGER" />
-    <result column="COAT_MM" property="COAT_MM" jdbcType="INTEGER" />
-    <result column="COAT_ML" property="COAT_ML" jdbcType="INTEGER" />
-    <result column="CASHMERE" property="CASHMERE" jdbcType="INTEGER" />
-    <result column="SHORT_PANTS" property="SHORT_PANTS" jdbcType="INTEGER" />
-    <result column="WAISTCOAT" property="WAISTCOAT" jdbcType="INTEGER" />
-    <result column="T_SHRIT" property="t_SHRIT" jdbcType="INTEGER" />
-    <result column="KNITTED" property="KNITTED" jdbcType="INTEGER" />
-    <result column="TIE" property="TIE" jdbcType="INTEGER" />
-    <result column="LONG_SKIRT" property="LONG_SKIRT" jdbcType="INTEGER" />
-    <result column="SHORT_SKIRT" property="SHORT_SKIRT" jdbcType="INTEGER" />
-    <result column="OTHER" property="OTHER" jdbcType="INTEGER" />
-    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
-    <result column="PRICE" property="PRICE" jdbcType="DOUBLE" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="CLOTHES" property="CLOTHES" jdbcType="VARCHAR" />
+    <result column="OTHER" property="OTHER" jdbcType="VARCHAR" />
+    <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
+    <result column="TOTAL_PRICE" property="TOTAL_PRICE" jdbcType="INTEGER" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, DATE, ROOM_NUM, GUEST_ID, NAME, SHIRT, TOP_OF_SUIT, TROUSERS, JACKET, COAT_M, 
-    COAT_L, COAT_MS, COAT_MM, COAT_ML, CASHMERE, SHORT_PANTS, WAISTCOAT, T_SHRIT, KNITTED, 
-    TIE, LONG_SKIRT, SHORT_SKIRT, OTHER, TOTAL, PRICE, SYS_STATE
+    ID, DATE, ROOM_NUM, GUEST_ID, GUEST_NAME, CLOTHES, OTHER, COUNT, TOTAL_PRICE, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -46,23 +28,13 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.Laundry" >
     insert into laundry (ID, DATE, ROOM_NUM, 
-      GUEST_ID, NAME, SHIRT, 
-      TOP_OF_SUIT, TROUSERS, JACKET, 
-      COAT_M, COAT_L, COAT_MS, 
-      COAT_MM, COAT_ML, CASHMERE, 
-      SHORT_PANTS, WAISTCOAT, T_SHRIT, 
-      KNITTED, TIE, LONG_SKIRT, 
-      SHORT_SKIRT, OTHER, TOTAL, 
-      PRICE, SYS_STATE)
+      GUEST_ID, GUEST_NAME, CLOTHES, 
+      OTHER, COUNT, TOTAL_PRICE, 
+      SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
-      #{GUEST_ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{SHIRT,jdbcType=INTEGER}, 
-      #{TOP_OF_SUIT,jdbcType=INTEGER}, #{TROUSERS,jdbcType=INTEGER}, #{JACKET,jdbcType=INTEGER}, 
-      #{COAT_M,jdbcType=INTEGER}, #{COAT_L,jdbcType=INTEGER}, #{COAT_MS,jdbcType=INTEGER}, 
-      #{COAT_MM,jdbcType=INTEGER}, #{COAT_ML,jdbcType=INTEGER}, #{CASHMERE,jdbcType=INTEGER}, 
-      #{SHORT_PANTS,jdbcType=INTEGER}, #{WAISTCOAT,jdbcType=INTEGER}, #{t_SHRIT,jdbcType=INTEGER}, 
-      #{KNITTED,jdbcType=INTEGER}, #{TIE,jdbcType=INTEGER}, #{LONG_SKIRT,jdbcType=INTEGER}, 
-      #{SHORT_SKIRT,jdbcType=INTEGER}, #{OTHER,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
-      #{PRICE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
+      #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{CLOTHES,jdbcType=VARCHAR}, 
+      #{OTHER,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, #{TOTAL_PRICE,jdbcType=INTEGER}, 
+      #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
     insert into laundry
@@ -79,68 +51,20 @@
       <if test="GUEST_ID != null" >
         GUEST_ID,
       </if>
-      <if test="NAME != null" >
-        NAME,
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
       </if>
-      <if test="SHIRT != null" >
-        SHIRT,
-      </if>
-      <if test="TOP_OF_SUIT != null" >
-        TOP_OF_SUIT,
-      </if>
-      <if test="TROUSERS != null" >
-        TROUSERS,
-      </if>
-      <if test="JACKET != null" >
-        JACKET,
-      </if>
-      <if test="COAT_M != null" >
-        COAT_M,
-      </if>
-      <if test="COAT_L != null" >
-        COAT_L,
-      </if>
-      <if test="COAT_MS != null" >
-        COAT_MS,
-      </if>
-      <if test="COAT_MM != null" >
-        COAT_MM,
-      </if>
-      <if test="COAT_ML != null" >
-        COAT_ML,
-      </if>
-      <if test="CASHMERE != null" >
-        CASHMERE,
-      </if>
-      <if test="SHORT_PANTS != null" >
-        SHORT_PANTS,
-      </if>
-      <if test="WAISTCOAT != null" >
-        WAISTCOAT,
-      </if>
-      <if test="t_SHRIT != null" >
-        T_SHRIT,
-      </if>
-      <if test="KNITTED != null" >
-        KNITTED,
-      </if>
-      <if test="TIE != null" >
-        TIE,
-      </if>
-      <if test="LONG_SKIRT != null" >
-        LONG_SKIRT,
-      </if>
-      <if test="SHORT_SKIRT != null" >
-        SHORT_SKIRT,
+      <if test="CLOTHES != null" >
+        CLOTHES,
       </if>
       <if test="OTHER != null" >
         OTHER,
       </if>
-      <if test="TOTAL != null" >
-        TOTAL,
+      <if test="COUNT != null" >
+        COUNT,
       </if>
-      <if test="PRICE != null" >
-        PRICE,
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE,
       </if>
       <if test="SYS_STATE != null" >
         SYS_STATE,
@@ -159,68 +83,20 @@
       <if test="GUEST_ID != null" >
         #{GUEST_ID,jdbcType=INTEGER},
       </if>
-      <if test="NAME != null" >
-        #{NAME,jdbcType=VARCHAR},
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="SHIRT != null" >
-        #{SHIRT,jdbcType=INTEGER},
-      </if>
-      <if test="TOP_OF_SUIT != null" >
-        #{TOP_OF_SUIT,jdbcType=INTEGER},
-      </if>
-      <if test="TROUSERS != null" >
-        #{TROUSERS,jdbcType=INTEGER},
-      </if>
-      <if test="JACKET != null" >
-        #{JACKET,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_M != null" >
-        #{COAT_M,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_L != null" >
-        #{COAT_L,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_MS != null" >
-        #{COAT_MS,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_MM != null" >
-        #{COAT_MM,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_ML != null" >
-        #{COAT_ML,jdbcType=INTEGER},
-      </if>
-      <if test="CASHMERE != null" >
-        #{CASHMERE,jdbcType=INTEGER},
-      </if>
-      <if test="SHORT_PANTS != null" >
-        #{SHORT_PANTS,jdbcType=INTEGER},
-      </if>
-      <if test="WAISTCOAT != null" >
-        #{WAISTCOAT,jdbcType=INTEGER},
-      </if>
-      <if test="t_SHRIT != null" >
-        #{t_SHRIT,jdbcType=INTEGER},
-      </if>
-      <if test="KNITTED != null" >
-        #{KNITTED,jdbcType=INTEGER},
-      </if>
-      <if test="TIE != null" >
-        #{TIE,jdbcType=INTEGER},
-      </if>
-      <if test="LONG_SKIRT != null" >
-        #{LONG_SKIRT,jdbcType=INTEGER},
-      </if>
-      <if test="SHORT_SKIRT != null" >
-        #{SHORT_SKIRT,jdbcType=INTEGER},
+      <if test="CLOTHES != null" >
+        #{CLOTHES,jdbcType=VARCHAR},
       </if>
       <if test="OTHER != null" >
-        #{OTHER,jdbcType=INTEGER},
+        #{OTHER,jdbcType=VARCHAR},
       </if>
-      <if test="TOTAL != null" >
-        #{TOTAL,jdbcType=INTEGER},
+      <if test="COUNT != null" >
+        #{COUNT,jdbcType=INTEGER},
       </if>
-      <if test="PRICE != null" >
-        #{PRICE,jdbcType=DOUBLE},
+      <if test="TOTAL_PRICE != null" >
+        #{TOTAL_PRICE,jdbcType=INTEGER},
       </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
@@ -239,68 +115,20 @@
       <if test="GUEST_ID != null" >
         GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       </if>
-      <if test="NAME != null" >
-        NAME = #{NAME,jdbcType=VARCHAR},
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="SHIRT != null" >
-        SHIRT = #{SHIRT,jdbcType=INTEGER},
-      </if>
-      <if test="TOP_OF_SUIT != null" >
-        TOP_OF_SUIT = #{TOP_OF_SUIT,jdbcType=INTEGER},
-      </if>
-      <if test="TROUSERS != null" >
-        TROUSERS = #{TROUSERS,jdbcType=INTEGER},
-      </if>
-      <if test="JACKET != null" >
-        JACKET = #{JACKET,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_M != null" >
-        COAT_M = #{COAT_M,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_L != null" >
-        COAT_L = #{COAT_L,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_MS != null" >
-        COAT_MS = #{COAT_MS,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_MM != null" >
-        COAT_MM = #{COAT_MM,jdbcType=INTEGER},
-      </if>
-      <if test="COAT_ML != null" >
-        COAT_ML = #{COAT_ML,jdbcType=INTEGER},
-      </if>
-      <if test="CASHMERE != null" >
-        CASHMERE = #{CASHMERE,jdbcType=INTEGER},
-      </if>
-      <if test="SHORT_PANTS != null" >
-        SHORT_PANTS = #{SHORT_PANTS,jdbcType=INTEGER},
-      </if>
-      <if test="WAISTCOAT != null" >
-        WAISTCOAT = #{WAISTCOAT,jdbcType=INTEGER},
-      </if>
-      <if test="t_SHRIT != null" >
-        T_SHRIT = #{t_SHRIT,jdbcType=INTEGER},
-      </if>
-      <if test="KNITTED != null" >
-        KNITTED = #{KNITTED,jdbcType=INTEGER},
-      </if>
-      <if test="TIE != null" >
-        TIE = #{TIE,jdbcType=INTEGER},
-      </if>
-      <if test="LONG_SKIRT != null" >
-        LONG_SKIRT = #{LONG_SKIRT,jdbcType=INTEGER},
-      </if>
-      <if test="SHORT_SKIRT != null" >
-        SHORT_SKIRT = #{SHORT_SKIRT,jdbcType=INTEGER},
+      <if test="CLOTHES != null" >
+        CLOTHES = #{CLOTHES,jdbcType=VARCHAR},
       </if>
       <if test="OTHER != null" >
-        OTHER = #{OTHER,jdbcType=INTEGER},
+        OTHER = #{OTHER,jdbcType=VARCHAR},
       </if>
-      <if test="TOTAL != null" >
-        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      <if test="COUNT != null" >
+        COUNT = #{COUNT,jdbcType=INTEGER},
       </if>
-      <if test="PRICE != null" >
-        PRICE = #{PRICE,jdbcType=DOUBLE},
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
       </if>
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
@@ -313,45 +141,26 @@
     set DATE = #{DATE,jdbcType=DATE},
       ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
       GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
-      NAME = #{NAME,jdbcType=VARCHAR},
-      SHIRT = #{SHIRT,jdbcType=INTEGER},
-      TOP_OF_SUIT = #{TOP_OF_SUIT,jdbcType=INTEGER},
-      TROUSERS = #{TROUSERS,jdbcType=INTEGER},
-      JACKET = #{JACKET,jdbcType=INTEGER},
-      COAT_M = #{COAT_M,jdbcType=INTEGER},
-      COAT_L = #{COAT_L,jdbcType=INTEGER},
-      COAT_MS = #{COAT_MS,jdbcType=INTEGER},
-      COAT_MM = #{COAT_MM,jdbcType=INTEGER},
-      COAT_ML = #{COAT_ML,jdbcType=INTEGER},
-      CASHMERE = #{CASHMERE,jdbcType=INTEGER},
-      SHORT_PANTS = #{SHORT_PANTS,jdbcType=INTEGER},
-      WAISTCOAT = #{WAISTCOAT,jdbcType=INTEGER},
-      T_SHRIT = #{t_SHRIT,jdbcType=INTEGER},
-      KNITTED = #{KNITTED,jdbcType=INTEGER},
-      TIE = #{TIE,jdbcType=INTEGER},
-      LONG_SKIRT = #{LONG_SKIRT,jdbcType=INTEGER},
-      SHORT_SKIRT = #{SHORT_SKIRT,jdbcType=INTEGER},
-      OTHER = #{OTHER,jdbcType=INTEGER},
-      TOTAL = #{TOTAL,jdbcType=INTEGER},
-      PRICE = #{PRICE,jdbcType=DOUBLE},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      CLOTHES = #{CLOTHES,jdbcType=VARCHAR},
+      OTHER = #{OTHER,jdbcType=VARCHAR},
+      COUNT = #{COUNT,jdbcType=INTEGER},
+      TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  
   <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
     select count(*) from laundry 
-     <if test="_parameter != null" >
-      where ROOM_NUM = #{RN,jdbcType=VARCHAR}
-     </if>
+	where ROOM_NUM like CONCAT('%', #{RN}, '%')
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry  
-     <if test="RN != null" >
-      where ROOM_NUM = #{RN} 
-     </if>
-     limit #{ST}, #{EACH}
+    where ROOM_NUM like CONCAT('%', #{RN}, '%')
+    order by DATE desc
+    limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and DATE = #{DATE}
   </select>
-
 </mapper>

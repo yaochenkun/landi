@@ -163,14 +163,18 @@
   </update>
 
   <select id="getTotalByRoomNumber_Time" parameterType="map" resultType="java.lang.Integer">
-  	<![CDATA[
-  	select count(*) from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and TIME = #{TIME}
-  	]]>
+  	select count(*) from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%')
+  	<if test = "TIME != null">
+  	and TIME = #{TIME} 
+  	</if>
   </select>
   
   <select id="selectByRoomNumber_Time" parameterType="map" resultMap="BaseResultMap">
-  	<![CDATA[
-  	select * from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and TIME = #{TIME} limit #{START_PAGE}, #{EACH_PAGE}
-  	]]>
+  	select * from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') 
+  	<if test = "TIME != null">
+  	and TIME = #{TIME} 
+  	</if>
+  	order by ID
+  	limit #{START_PAGE}, #{EACH_PAGE}
   </select>
 </mapper>

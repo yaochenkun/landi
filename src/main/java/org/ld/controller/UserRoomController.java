@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.ld.app.CurEnv;
 import org.ld.model.DailyService;
+import org.ld.model.FlightPicking;
 import org.ld.model.Guest;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
@@ -26,11 +27,13 @@ import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.ShuttleBus;
 import org.ld.model.Sources;
+import org.ld.service.FlightPickingService;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
 import org.ld.service.ServerService;
 import org.ld.service.UserService;
+import org.ld.utils.BeanPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,6 +61,8 @@ public class UserRoomController {
 	private ServerService serverService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private FlightPickingService flightPickingService;
 
 	private static Logger logger = Logger.getLogger("logRec");
 
@@ -475,7 +480,7 @@ public class UserRoomController {
 			int st = (pageNumber - 1) * eachPage;
 			List<Laundry> record = roomService.getLaundry(roomNum, st, eachPage);
 
-			ans.put("dataList", record);
+			ans.put("pageList", record);
 		}
 
 		ans.put("pageNow", pageNumber);
@@ -484,7 +489,7 @@ public class UserRoomController {
 
 		return ans;
 	}
-
+	
 	@RequestMapping("/addWash")   // 添加洗衣单收费记录
 	@ResponseBody
 	public Integer addWash(HttpSession session,  @RequestBody String data) {
@@ -500,61 +505,82 @@ public class UserRoomController {
 			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 			Date date;
 			date = ft.parse(dataJson.getString("date"));
-			int id = guestService.getGuestByRoomNumber(dataJson.getString("roomNum")).getID();
+			Guest guest = guestService.getGuestByRoomNumber(dataJson.getString("roomNum"));
+			int id = guest.getID();
+			String guestName = guest.getGUEST_NAME();
 			Laundry nL = roomService.getCertainLaundry(dataJson.getString("roomNum"), id, date);
 			if(nL == null) {
 				nL = new Laundry();
-				nL.setROOM_NUM(dataJson.getString("roomNum"));
-				nL.setNAME(dataJson.getString("guestName"));
-				nL.setGUEST_ID(dataJson.getInteger("guestID"));
 				nL.setDATE(date);
-				nL.setPRICE(dataJson.getDoubleValue("totalPrice"));
-				nL.setTOTAL(dataJson.getInteger("total"));
-				
-				nL.setCASHMERE(dataJson.getInteger("cashmere"));
-				nL.setCOAT_L(dataJson.getInteger("longCoat"));
-				nL.setCOAT_M(dataJson.getInteger("middleCoat"));
-				nL.setCOAT_ML(dataJson.getInteger("longCotton"));
-				nL.setCOAT_MM(dataJson.getInteger("middleCotton"));
-				nL.setCOAT_MS(dataJson.getInteger("shortCotton"));
-				nL.setJACKET(dataJson.getInteger("jacket"));
-				nL.setKNITTED(dataJson.getInteger("knitted"));
-				nL.setLONG_SKIRT(dataJson.getInteger("longSkirt"));
-				nL.setOTHER(dataJson.getInteger("other"));
-				nL.setSHIRT(dataJson.getInteger("shirt"));
-				nL.setSHORT_PANTS(dataJson.getInteger("shortPants"));
-				nL.setSHORT_SKIRT(dataJson.getInteger("shortSkirt"));
-				nL.setT_SHRIT(dataJson.getInteger("tshirt"));
-				nL.setTIE(dataJson.getInteger("tie"));
-				nL.setTOP_OF_SUIT(dataJson.getInteger("topSuit"));
-				nL.setTROUSERS(dataJson.getInteger("trousers"));
-				nL.setWAISTCOAT(dataJson.getInteger("waistcoat"));
+				nL.setROOM_NUM(dataJson.getString("roomNum"));
+				nL.setGUEST_ID(id);
+				nL.setGUEST_NAME(guestName);
+				nL.setCLOTHES(dataJson.getString("clothes"));
+				nL.setOTHER(dataJson.getString("other"));
+				nL.setTOTAL_PRICE(dataJson.getInteger("totalPrice"));
+				nL.setCOUNT(dataJson.getInteger("count"));
 				
 				return roomService.addWash(nL);
 			}
 			else
 			{
-				nL.setPRICE(nL.getPRICE() + dataJson.getDoubleValue("totalPrice"));
-				nL.setTOTAL(nL.getTOTAL() + dataJson.getInteger("total"));
-				
-				nL.setCASHMERE(nL.getCASHMERE() + dataJson.getInteger("cashmere"));
-				nL.setCOAT_L(nL.getCOAT_L() + dataJson.getInteger("longCoat"));
-				nL.setCOAT_M(nL.getCOAT_M() + dataJson.getInteger("middleCoat"));
-				nL.setCOAT_ML(nL.getCOAT_ML() + dataJson.getInteger("longCotton"));
-				nL.setCOAT_MM(nL.getCOAT_MM() + dataJson.getInteger("middleCotton"));
-				nL.setCOAT_MS(nL.getCOAT_MS() + dataJson.getInteger("shortCotton"));
-				nL.setJACKET(nL.getJACKET() + dataJson.getInteger("jacket"));
-				nL.setKNITTED(nL.getKNITTED() + dataJson.getInteger("knitted"));
-				nL.setLONG_SKIRT(nL.getLONG_SKIRT() + dataJson.getInteger("longSkirt"));
-				nL.setOTHER(nL.getOTHER() + dataJson.getInteger("other"));
-				nL.setSHIRT(nL.getSHIRT() + dataJson.getInteger("shirt"));
-				nL.setSHORT_PANTS(nL.getSHORT_PANTS() + dataJson.getInteger("shortPants"));
-				nL.setSHORT_SKIRT(nL.getSHORT_SKIRT() + dataJson.getInteger("shortSkirt"));
-				nL.setT_SHRIT(nL.getT_SHRIT() + dataJson.getInteger("tshirt"));
-				nL.setTIE(nL.getTIE() + dataJson.getInteger("tie"));
-				nL.setTOP_OF_SUIT(nL.getTOP_OF_SUIT() + dataJson.getInteger("topSuit"));
-				nL.setTROUSERS(nL.getTROUSERS() + dataJson.getInteger("trousers"));
-				nL.setWAISTCOAT(nL.getWAISTCOAT() + dataJson.getInteger("waistcoat"));
+				//把新旧的洗衣种类与对应数量合并，得到新clothes json串
+				JSONArray oldClothes = JSONArray.parseArray(nL.getCLOTHES());
+				JSONArray newClothes = JSONArray.parseArray(dataJson.getString("clothes"));
+				for(int i = 0; i < newClothes.size(); i++){
+					JSONObject newCloth = newClothes.getJSONObject(i);
+					String newClothName = newCloth.getString("name");
+					String newClothMode = newCloth.getString("mode");
+					Integer newClothCount = newCloth.getInteger("count");
+					int j = 0;
+					for(; j < oldClothes.size(); j++){
+						JSONObject oldCloth = oldClothes.getJSONObject(j);
+						String oldClothName = oldCloth.getString("name");
+						String oldClothMode = oldCloth.getString("mode");
+						if(newClothName.equals(oldClothName) 
+						&& newClothMode.equals(oldClothMode)) { //种类与洗衣方式均相同，算到一起
+							oldCloth.put("count", oldCloth.getInteger("count") + newClothCount);
+							break;
+						}
+					}
+					
+					//若没找到相同的，追加
+					if(j >= oldClothes.size()) 
+						oldClothes.add(newCloth);
+				}
+
+				//把新旧的其他种类与对应数量合并，得到新other json串
+				JSONArray oldOthers = JSONArray.parseArray(nL.getOTHER());
+				JSONArray newOthers = JSONArray.parseArray(dataJson.getString("other"));
+				for(int i = 0; i < newOthers.size(); i++){
+					JSONObject newOther = newOthers.getJSONObject(i);
+					String newOtherName = newOther.getString("name");
+					String newOtherMode = newOther.getString("mode");
+					Integer newOtherPrice = newOther.getInteger("price");
+					Integer newOtherCount = newOther.getInteger("count");
+					int j = 0;
+					for(; j < oldOthers.size(); j++){
+						JSONObject oldOther = oldOthers.getJSONObject(j);
+						String oldOtherName = oldOther.getString("name");
+						String oldOtherMode = oldOther.getString("mode");
+						Integer oldOtherPrice = oldOther.getInteger("price");
+						if(newOtherName.equals(oldOtherName) 
+						&& newOtherMode.equals(oldOtherMode)
+						&& newOtherPrice.equals(oldOtherPrice)) { //种类与洗衣方式均相同，算到一起
+							oldOther.put("count", oldOther.getInteger("count") + newOtherCount);
+							break;
+						}
+					}
+					
+					//若没找到相同的，追加
+					if(j >= oldOthers.size()) 
+						oldOthers.add(newOther);
+				}
+
+				nL.setCLOTHES(oldClothes.toJSONString());
+				nL.setOTHER(oldOthers.toJSONString());
+				nL.setTOTAL_PRICE(nL.getTOTAL_PRICE() + dataJson.getInteger("totalPrice"));
+				nL.setCOUNT(nL.getCOUNT() + dataJson.getInteger("count"));
 				
 				return roomService.updateWash(nL);
 			}
@@ -564,6 +590,28 @@ public class UserRoomController {
 			return 0;
 		}
 	}
+	
+	@RequestMapping("/searchWashModeUnitPrice") //查询洗衣单价（种类+方式）
+	@ResponseBody
+	public Map<String, Object> searchWashModeUnitPrice(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		String clothesName = dataJson.getString("clothesName");
+		String mode = dataJson.getString("mode");
+		Integer unitPrice = cur_env.getLaundry_price().get(clothesName).get(mode);
+		ans.put("unitPrice", unitPrice);
+		
+		return ans;
+	}
+	
 	
 	@RequestMapping("/searchFare") // 查询车费信息
 	@ResponseBody
@@ -626,7 +674,7 @@ public class UserRoomController {
 			int id = guestService.getGuestByRoomNumber(roomNum).getID();
 			
 			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
-			if(sb == null)
+			if(sb == null) //先试探查询，若以前没有则为第一次新来的，先增加到数据库
 			{
 				sb = new ShuttleBus();
 				sb.setYEAR(year);
@@ -638,116 +686,117 @@ public class UserRoomController {
 				sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
 			}
 
-//			JSONObject obj = dataJson.getJSONObject("perRecord");
 			JSONArray obj = dataJson.getJSONArray("perRecord");
-			sb.setDAYS(obj.size());
-			int total = 0;
-//			for (String key : obj.keySet()) {
+			int totalDay = 0;
 			for(int i = 0; i < obj.size(); i++){
-//				JSONObject obj2 = obj.getJSONObject(key);
-				
-				JSONObject obj2 = obj.getJSONObject(i);	
-				int price = obj2.getInteger("price");
-				total += price;
+
+				JSONObject obj2 = obj.getJSONObject(i);
+				Integer selection = obj2.getInteger("selection");
+				if(selection == 1) totalDay++;
+
 				switch(obj2.getInteger("day"))
 				{
-				case 1:
-					sb.setFIRST(price);
-					break;
-				case 2:
-					sb.setSECOND(price);
-					break;
-				case 3:
-					sb.setTHIRD(price);
-					break;
-				case 4:
-					sb.setFOURTH(price);
-					break;
-				case 5:
-					sb.setFIFTH(price);
-					break;
-				case 6:
-					sb.setSIXTH(price);
-					break;
-				case 7:
-					sb.setSEVENTH(price);;
-					break;
-				case 8:
-					sb.setEIGHTH(price);
-					break;
-				case 9:
-					sb.setNINTH(price);
-					break;
-				case 10:
-					sb.setTENTH(price);
-					break;
-				case 11:
-					sb.setELEVENTH(price);
-					break;
-				case 12:
-					sb.setTWELFTH(price);
-					break;
-				case 13:
-					sb.setTHIRTEENTH(price);
-					break;
-				case 14:
-					sb.setFOURTEENTH(price);
-					break;
-				case 15:
-					sb.setFIFTEENTH(price);
-					break;
-				case 16:
-					sb.setSIXTEENTH(price);
-					break;
-				case 17:
-					sb.setSEVENTEENTH(price);
-					break;
-				case 18:
-					sb.setEIGHTEENTH(price);
-					break;
-				case 19:
-					sb.setNINETEENTH(price);
-					break;
-				case 20:
-					sb.setTWENTIETH(price);
-					break;
-				case 21:
-					sb.setTWENTY_FIRST(price);
-					break;
-				case 22:
-					sb.setTWENTY_SECOND(price);
-					break;
-				case 23:
-					sb.setTWENTY_THIRD(price);
-					break;
-				case 24:
-					sb.setTWENTY_FOURTH(price);
-					break;
-				case 25:
-					sb.setTWENTY_FIFTH(price);
-					break;
-				case 26:
-					sb.setTWENTY_SIXTH(price);
-					break;
-				case 27:
-					sb.setTWENTY_SEVENTH(price);
-					break;
-				case 28:
-					sb.setTWENTY_EIGHTH(price);
-					break;
-				case 29:
-					sb.setTWENTY_NINTH(price);
-					break;
-				case 30:
-					sb.setTHIRTIETH(price);
-					break;
-				case 31:
-					sb.setTHIRTY_FIRST(price);
-					break;
+					case 1:
+						sb.setFIRST(selection);
+						break;
+					case 2:
+						sb.setSECOND(selection);
+						break;
+					case 3:
+						sb.setTHIRD(selection);
+						break;
+					case 4:
+						sb.setFOURTH(selection);
+						break;
+					case 5:
+						sb.setFIFTH(selection);
+						break;
+					case 6:
+						sb.setSIXTH(selection);
+						break;
+					case 7:
+						sb.setSEVENTH(selection);;
+						break;
+					case 8:
+						sb.setEIGHTH(selection);
+						break;
+					case 9:
+						sb.setNINTH(selection);
+						break;
+					case 10:
+						sb.setTENTH(selection);
+						break;
+					case 11:
+						sb.setELEVENTH(selection);
+						break;
+					case 12:
+						sb.setTWELFTH(selection);
+						break;
+					case 13:
+						sb.setTHIRTEENTH(selection);
+						break;
+					case 14:
+						sb.setFOURTEENTH(selection);
+						break;
+					case 15:
+						sb.setFIFTEENTH(selection);
+						break;
+					case 16:
+						sb.setSIXTEENTH(selection);
+						break;
+					case 17:
+						sb.setSEVENTEENTH(selection);
+						break;
+					case 18:
+						sb.setEIGHTEENTH(selection);
+						break;
+					case 19:
+						sb.setNINETEENTH(selection);
+						break;
+					case 20:
+						sb.setTWENTIETH(selection);
+						break;
+					case 21:
+						sb.setTWENTY_FIRST(selection);
+						break;
+					case 22:
+						sb.setTWENTY_SECOND(selection);
+						break;
+					case 23:
+						sb.setTWENTY_THIRD(selection);
+						break;
+					case 24:
+						sb.setTWENTY_FOURTH(selection);
+						break;
+					case 25:
+						sb.setTWENTY_FIFTH(selection);
+						break;
+					case 26:
+						sb.setTWENTY_SIXTH(selection);
+						break;
+					case 27:
+						sb.setTWENTY_SEVENTH(selection);
+						break;
+					case 28:
+						sb.setTWENTY_EIGHTH(selection);
+						break;
+					case 29:
+						sb.setTWENTY_NINTH(selection);
+						break;
+					case 30:
+						sb.setTHIRTIETH(selection);
+						break;
+					case 31:
+						sb.setTHIRTY_FIRST(selection);
+						break;
 				}
 			}
-			sb.setTOTAL(total);
+			sb.setDAYS(totalDay);
 			
+			//设置总价
+			int unitPrice = this.getUnitPrice(sb.getROOM_NUM(), cur_env); //读取单价
+			sb.setTOTAL(totalDay * unitPrice);
+
 			return roomService.updateShuttleBus(sb);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -755,6 +804,32 @@ public class UserRoomController {
 			
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/searchFareUnitPrice")
+	@ResponseBody
+	public Map<String, Object> searchUnitPrice(HttpSession session, @RequestBody String data){
+		
+		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String roomNum = dataJson.getString("roomNum");
+		ans.put("unitPrice", getUnitPrice(roomNum, cur_env));
+		
+		return ans;
+	}
+
+	//到时候把全局配置文件从cur_env中抽离写成单例，把该函数转入RoomService中
+	private int getUnitPrice(String roomNum, CurEnv cur_env) {
+		String floor = "车费_" + roomNum.substring(0, 1) + "-" + roomNum.substring(1, roomNum.indexOf('-'));
+		return cur_env.getCharge().get(floor);
 	}
 	
 	@RequestMapping("/addMaintain") // 添加维修记录
@@ -1034,6 +1109,77 @@ public class UserRoomController {
 			ans.put("State", "Valid");
 		}
 
+		return ans;
+	}
+	
+	@RequestMapping("/addFlightPicking")
+	@ResponseBody
+	public Integer addFlightPicking(HttpSession session, @RequestBody String data) {
+		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		//权限
+//		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("wBuy"))) == 0) {
+//			return 0;
+//		};
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		FlightPicking bean = new FlightPicking();
+		bean.setTIME(dataJson.getDate("time"));
+		bean.setROOM_NUMBER(dataJson.getString("roomNum"));
+		bean.setGUEST_NAME(dataJson.getString("guestName"));
+		bean.setTYPE(dataJson.getString("type"));
+		bean.setFLIGHT_NUMBER(dataJson.getString("flight"));
+		bean.setPLATE_NUMBER(dataJson.getString("platNum"));
+		bean.setPICKER_NAME(dataJson.getString("pick"));
+		bean.setPICKER_TELE(dataJson.getString("pickTele"));
+		bean.setCONTACT_NAME(dataJson.getString("contact"));
+		bean.setCONTACT_TELE(dataJson.getString("contactNum"));
+
+		if(flightPickingService.addFlightPicking(bean) == 1) {
+			logger.info(curEnv.getCur_user().getNAME() + " successfully add a flight picking record " + BeanPrinter.toString(bean));
+			return 1;
+		} else {
+			logger.error(curEnv.getCur_user().getNAME() + "failed to add a flight picking record" + BeanPrinter.toString(bean));
+			return 0;
+		}
+	}
+	
+	
+	@RequestMapping("/searchFlightPickingByRoomNumber_Time")
+	@ResponseBody
+	public Map<String, Object> searchFlightPickingByRoomNumber_Time(HttpSession session, @RequestBody String data) {
+		//验证权限
+		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		Map<String, Object> ans = new HashMap<>();
+//		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		Date time = dataJson.getDate("time");
+		String roomNumber = dataJson.getString("roomNum");
+
+		//分页
+		int eachPage = curEnv.getSettingsInt().get("list_size");
+		int recordTotal = flightPickingService.getTotalFlightPickingByRoomNumber_Time(roomNumber, time);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		if(recordTotal != 0) {
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int startPage = (pageNumber - 1) * eachPage;
+			List<FlightPicking> record = flightPickingService.getFlightPickingByRoomNumber_Time(roomNumber, time, startPage, eachPage);
+			ans.put("pageList", record);
+		}
+		
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
 		return ans;
 	}
 }
