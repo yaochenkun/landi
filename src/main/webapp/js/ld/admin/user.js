@@ -7,14 +7,14 @@ var requestFirstUser = function(){
 }
 
 //获取角色信息保存至全局变量中
-let requestAjaxRoleArraySave = function(){
+requestAjaxRoleArraySave = function(){
 	console.log("request Ajax role");
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/requestRole.action',
 		success:function(data){			
 			//逐条保存角色 数值-名称对应关系
-			for(let item in data){
+			for(item in data){
 				//console.log(item);   //key
 				//console.log(data[item]);  //value
 				roleMap[item] = data[item];
@@ -345,7 +345,7 @@ var requestAjaxRole = function(){
 			$("#AdminRoleMenu").append("<ul id='AdminRoleUL'></ul>");
 			
 			//逐条添加角色下拉菜单
-			for(let item in data){
+			for(item in data){
 				//console.log(item);   //key
 				//console.log(data[item]);  //value
 				$("#AdminRoleUL").append("<li id='AdminRole"+ item +"' "+

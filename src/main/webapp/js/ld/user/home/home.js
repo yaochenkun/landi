@@ -8,7 +8,7 @@ let requestAjaxRoleArraySave = function(){
 		success:function(data){			
 			console.log(data);
 			//逐条保存角色 数值-名称对应关系
-			for(let item in data){
+			for(item in data){
 				// console.log(item);   //key
 				// console.log(data[item]);  //value
 				if($("#roleTypeNum").text()==item){

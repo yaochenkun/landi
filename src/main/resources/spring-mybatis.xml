@@ -62,19 +62,24 @@
 	</bean>
 
 	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 注解方式配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<!-- 注解方式配置事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<!-- 拦截器方式配置事物 -->
+	<!-- 拦截器方式配置事务 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			
 			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="modify*" propagation="REQUIRED" />
+			
 			<tx:method name="delete*" propagation="REQUIRED" />
 
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
@@ -85,10 +90,8 @@
 	</tx:advice>
 	<!-- Spring aop事务管理 -->
 	<aop:config>
-		<aop:pointcut id="transactionPointcut"
-			expression="execution(* org.ld.service..*Impl.*(..))" />
-		<aop:advisor pointcut-ref="transactionPointcut"
-			advice-ref="transactionAdvice" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* org.ld.service..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 
 </beans>

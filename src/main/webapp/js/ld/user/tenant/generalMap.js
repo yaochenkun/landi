@@ -84,7 +84,7 @@ var getRoomState = function () {
 	    success: function(data) {
 	    	console.log(data);
 	      	let roomList = data.roomStateList;
-	     	for (let item in roomList) {
+	     	for (item in roomList) {
 		        let roomNum = roomList[item].room_NUMBER;
 		        let userName = roomList[item].cus_NAME;
 		        let roomID = roomList[item].room_ID;

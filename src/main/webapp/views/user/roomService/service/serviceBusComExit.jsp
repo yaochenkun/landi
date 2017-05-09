@@ -10,7 +10,7 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusNew.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusExit.css" rel="stylesheet" type="text/css" /
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusExit.css" rel="stylesheet" type="text/css" />
 <title>编辑通勤车车费记录</title>
 </head>
 <body>

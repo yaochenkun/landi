@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.StaffMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Staff" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="DUTY" property="DUTY" jdbcType="VARCHAR" />
+    <result column="DEPART" property="DEPART" jdbcType="VARCHAR" />
+    <result column="JOIN_DATE" property="JOIN_DATE" jdbcType="DATE" />
+    <result column="STATE" property="STATE" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, DUTY, DEPART, JOIN_DATE, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from staff
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Staff" >
+    insert into staff (ID, NAME, DUTY, 
+      DEPART, JOIN_DATE, STATE
+      )
+    values (#{ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{DUTY,jdbcType=VARCHAR}, 
+      #{DEPART,jdbcType=VARCHAR}, #{JOIN_DATE,jdbcType=DATE}, #{STATE,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="DUTY != null" >
+        DUTY,
+      </if>
+      <if test="DEPART != null" >
+        DEPART,
+      </if>
+      <if test="JOIN_DATE != null" >
+        JOIN_DATE,
+      </if>
+      <if test="STATE != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DUTY != null" >
+        #{DUTY,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPART != null" >
+        #{DEPART,jdbcType=VARCHAR},
+      </if>
+      <if test="JOIN_DATE != null" >
+        #{JOIN_DATE,jdbcType=DATE},
+      </if>
+      <if test="STATE != null" >
+        #{STATE,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Staff" >
+    update staff
+    <set >
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DUTY != null" >
+        DUTY = #{DUTY,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPART != null" >
+        DEPART = #{DEPART,jdbcType=VARCHAR},
+      </if>
+      <if test="JOIN_DATE != null" >
+        JOIN_DATE = #{JOIN_DATE,jdbcType=DATE},
+      </if>
+      <if test="STATE != null" >
+        STATE = #{STATE,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Staff" >
+    update staff
+    set NAME = #{NAME,jdbcType=VARCHAR},
+      DUTY = #{DUTY,jdbcType=VARCHAR},
+      DEPART = #{DEPART,jdbcType=VARCHAR},
+      JOIN_DATE = #{JOIN_DATE,jdbcType=DATE},
+      STATE = #{STATE,jdbcType=TINYINT}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

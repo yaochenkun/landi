@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.DrinkingWaterMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.DrinkingWater" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="BARREL_COUNT" property="BARREL_COUNT" jdbcType="INTEGER" />
+    <result column="BARREL_LIMITCOUNT" property="BARREL_LIMITCOUNT" jdbcType="INTEGER" />
+    <result column="BOTTLE_COUNT" property="BOTTLE_COUNT" jdbcType="INTEGER" />
+    <result column="BOTTLE_LIMITCOUNT" property="BOTTLE_LIMITCOUNT" jdbcType="INTEGER" />
+    <result column="BOTTLE_UNITPRICE" property="BOTTLE_UNITPRICE" jdbcType="DOUBLE" />
+    <result column="EXCESS_PRICE" property="EXCESS_PRICE" jdbcType="DOUBLE" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="PAY_MODE" property="PAY_MODE" jdbcType="TINYINT" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="STAFF_ID" property="STAFF_ID" jdbcType="INTEGER" />
+    <result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, GUEST_ID, GUEST_NAME, BARREL_COUNT, BARREL_LIMITCOUNT, BOTTLE_COUNT, 
+    BOTTLE_LIMITCOUNT, BOTTLE_UNITPRICE, EXCESS_PRICE, OCCUR_TIME, PAY_MODE, COMMENT, 
+    STAFF_ID, STAFF_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from drinking_water
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from drinking_water
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.DrinkingWater" >
+    insert into drinking_water (ID, ROOM_NUM, GUEST_ID, 
+      GUEST_NAME, BARREL_COUNT, BARREL_LIMITCOUNT, 
+      BOTTLE_COUNT, BOTTLE_LIMITCOUNT, BOTTLE_UNITPRICE, 
+      EXCESS_PRICE, OCCUR_TIME, PAY_MODE, 
+      COMMENT, STAFF_ID, STAFF_NAME
+      )
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{BARREL_COUNT,jdbcType=INTEGER}, #{BARREL_LIMITCOUNT,jdbcType=INTEGER}, 
+      #{BOTTLE_COUNT,jdbcType=INTEGER}, #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER}, #{BOTTLE_UNITPRICE,jdbcType=DOUBLE}, 
+      #{EXCESS_PRICE,jdbcType=DOUBLE}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{PAY_MODE,jdbcType=TINYINT}, 
+      #{COMMENT,jdbcType=VARCHAR}, #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.DrinkingWater" >
+    insert into drinking_water
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="BARREL_COUNT != null" >
+        BARREL_COUNT,
+      </if>
+      <if test="BARREL_LIMITCOUNT != null" >
+        BARREL_LIMITCOUNT,
+      </if>
+      <if test="BOTTLE_COUNT != null" >
+        BOTTLE_COUNT,
+      </if>
+      <if test="BOTTLE_LIMITCOUNT != null" >
+        BOTTLE_LIMITCOUNT,
+      </if>
+      <if test="BOTTLE_UNITPRICE != null" >
+        BOTTLE_UNITPRICE,
+      </if>
+      <if test="EXCESS_PRICE != null" >
+        EXCESS_PRICE,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID,
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="BARREL_COUNT != null" >
+        #{BARREL_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BARREL_LIMITCOUNT != null" >
+        #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_COUNT != null" >
+        #{BOTTLE_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_LIMITCOUNT != null" >
+        #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_UNITPRICE != null" >
+        #{BOTTLE_UNITPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="EXCESS_PRICE != null" >
+        #{EXCESS_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="PAY_MODE != null" >
+        #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="STAFF_ID != null" >
+        #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.DrinkingWater" >
+    update drinking_water
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="BARREL_COUNT != null" >
+        BARREL_COUNT = #{BARREL_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BARREL_LIMITCOUNT != null" >
+        BARREL_LIMITCOUNT = #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_COUNT != null" >
+        BOTTLE_COUNT = #{BOTTLE_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_LIMITCOUNT != null" >
+        BOTTLE_LIMITCOUNT = #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_UNITPRICE != null" >
+        BOTTLE_UNITPRICE = #{BOTTLE_UNITPRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="EXCESS_PRICE != null" >
+        EXCESS_PRICE = #{EXCESS_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.DrinkingWater" >
+    update drinking_water
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      BARREL_COUNT = #{BARREL_COUNT,jdbcType=INTEGER},
+      BARREL_LIMITCOUNT = #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
+      BOTTLE_COUNT = #{BOTTLE_COUNT,jdbcType=INTEGER},
+      BOTTLE_LIMITCOUNT = #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
+      BOTTLE_UNITPRICE = #{BOTTLE_UNITPRICE,jdbcType=DOUBLE},
+      EXCESS_PRICE = #{EXCESS_PRICE,jdbcType=DOUBLE},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

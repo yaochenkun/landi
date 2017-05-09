@@ -12,7 +12,7 @@ var requestAjaxRoleChange = function(){
 			$("#RoleEditMenu").append("<ul id='RoleEditUL'></ul>");
 			
 			//逐条添加角色下拉菜单
-			for(let item in data){
+			for(item in data){
 				//console.log(item);   //key
 				//console.log(data[item]);  //value
 				$("#RoleEditUL").append("<li id='RoleEdit"+ item +"' "+
@@ -49,12 +49,12 @@ var requestAjaxRoleAuth = function(role){
 //				$(this).attr("checked");
 //			});
 			// 取消选中
-			for(let k=1; k<=18; k++){
+			for(k=1; k<=18; k++){
 				$("#checkbox_role" + k).removeAttr("checked");
 			}			
 			
 			// 更新复选框选中状态
-			for(let i=1; i<=18; i++){
+			for(i=1; i<=18; i++){
 				let curCheck = data % 2;
 				data = parseInt(data/2);
 				//console.log(curCheck);
