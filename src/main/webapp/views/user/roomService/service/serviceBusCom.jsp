@@ -47,8 +47,16 @@
 					<!-- 费用 table start -->
 					<table>
 						<thead>
-							<tr><th>时间</th><th>房间号</th><th>客人姓名</th>
-							<th>通勤天数</th><th>合计费用</th><th>操作</th></tr>
+							<tr>
+								<th>房间号</th>
+								<th>客人姓名</th>
+								<th>通勤天数</th>
+								<th>合计费用</th>
+								<th>通勤年月</th>
+								<th>上传时间</th>
+								<th>最后编辑时间</th>
+								<th>操作</th>
+							</tr>
 						</thead>
 						<tbody id="busTable"></tbody>
 					</table>

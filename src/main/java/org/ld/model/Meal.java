@@ -25,6 +25,8 @@ public class Meal {
 
     private String STAFF_NAME;
 
+    private Integer EVENT_ID;
+
     public Integer getID() {
         return ID;
     }
@@ -111,5 +113,13 @@ public class Meal {
 
     public void setSTAFF_NAME(String STAFF_NAME) {
         this.STAFF_NAME = STAFF_NAME == null ? null : STAFF_NAME.trim();
+    }
+
+    public Integer getEVENT_ID() {
+        return EVENT_ID;
+    }
+
+    public void setEVENT_ID(Integer EVENT_ID) {
+        this.EVENT_ID = EVENT_ID;
     }
 }

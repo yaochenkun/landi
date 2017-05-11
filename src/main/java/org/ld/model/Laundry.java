@@ -21,7 +21,7 @@ public class Laundry {
 
     private Integer TOTAL_PRICE;
 
-    private Integer SYS_STATE;
+    private Integer EVENT_ID;
 
     public Integer getID() {
         return ID;
@@ -95,11 +95,11 @@ public class Laundry {
         this.TOTAL_PRICE = TOTAL_PRICE;
     }
 
-    public Integer getSYS_STATE() {
-        return SYS_STATE;
+    public Integer getEVENT_ID() {
+        return EVENT_ID;
     }
 
-    public void setSYS_STATE(Integer SYS_STATE) {
-        this.SYS_STATE = SYS_STATE;
+    public void setEVENT_ID(Integer EVENT_ID) {
+        this.EVENT_ID = EVENT_ID;
     }
 }

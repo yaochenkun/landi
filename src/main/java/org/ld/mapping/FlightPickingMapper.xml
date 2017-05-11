@@ -3,7 +3,7 @@
 <mapper namespace="org.ld.dao.FlightPickingMapper" >
   <resultMap id="BaseResultMap" type="org.ld.model.FlightPicking" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
+    <result column="TIME" property="TIME" jdbcType="DATE" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
     <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
@@ -13,10 +13,11 @@
     <result column="PICKER_TELE" property="PICKER_TELE" jdbcType="VARCHAR" />
     <result column="CONTACT_NAME" property="CONTACT_NAME" jdbcType="VARCHAR" />
     <result column="CONTACT_TELE" property="CONTACT_TELE" jdbcType="VARCHAR" />
+    <result column="EVENT_ID" property="EVENT_ID" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, TIME, ROOM_NUMBER, GUEST_NAME, TYPE, FLIGHT_NUMBER, PLATE_NUMBER, PICKER_NAME, 
-    PICKER_TELE, CONTACT_NAME, CONTACT_TELE
+    PICKER_TELE, CONTACT_NAME, CONTACT_TELE, EVENT_ID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,11 +33,13 @@
     insert into flight_picking (ID, TIME, ROOM_NUMBER, 
       GUEST_NAME, TYPE, FLIGHT_NUMBER, 
       PLATE_NUMBER, PICKER_NAME, PICKER_TELE, 
-      CONTACT_NAME, CONTACT_TELE)
-    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=TIMESTAMP}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
+      CONTACT_NAME, CONTACT_TELE, EVENT_ID
+      )
+    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=DATE}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
       #{GUEST_NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, #{FLIGHT_NUMBER,jdbcType=VARCHAR}, 
       #{PLATE_NUMBER,jdbcType=VARCHAR}, #{PICKER_NAME,jdbcType=VARCHAR}, #{PICKER_TELE,jdbcType=VARCHAR}, 
-      #{CONTACT_NAME,jdbcType=VARCHAR}, #{CONTACT_TELE,jdbcType=VARCHAR})
+      #{CONTACT_NAME,jdbcType=VARCHAR}, #{CONTACT_TELE,jdbcType=VARCHAR}, #{EVENT_ID,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.FlightPicking" >
     insert into flight_picking
@@ -74,6 +77,9 @@
       <if test="CONTACT_TELE != null" >
         CONTACT_TELE,
       </if>
+      <if test="EVENT_ID != null" >
+        EVENT_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -109,13 +115,16 @@
       <if test="CONTACT_TELE != null" >
         #{CONTACT_TELE,jdbcType=VARCHAR},
       </if>
+      <if test="EVENT_ID != null" >
+        #{EVENT_ID,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.FlightPicking" >
     update flight_picking
     <set >
       <if test="TIME != null" >
-        TIME = #{TIME,jdbcType=TIMESTAMP},
+        TIME = #{TIME,jdbcType=DATE},
       </if>
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
@@ -144,12 +153,15 @@
       <if test="CONTACT_TELE != null" >
         CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
       </if>
+      <if test="EVENT_ID != null" >
+        EVENT_ID = #{EVENT_ID,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.FlightPicking" >
     update flight_picking
-    set TIME = #{TIME,jdbcType=TIMESTAMP},
+    set TIME = #{TIME,jdbcType=DATE},
       ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       TYPE = #{TYPE,jdbcType=VARCHAR},
@@ -158,7 +170,8 @@
       PICKER_NAME = #{PICKER_NAME,jdbcType=VARCHAR},
       PICKER_TELE = #{PICKER_TELE,jdbcType=VARCHAR},
       CONTACT_NAME = #{CONTACT_NAME,jdbcType=VARCHAR},
-      CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR}
+      CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
+      EVENT_ID = #{EVENT_ID,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 

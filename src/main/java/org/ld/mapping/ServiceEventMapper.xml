@@ -3,14 +3,12 @@
 <mapper namespace="org.ld.dao.ServiceEventMapper" >
   <resultMap id="BaseResultMap" type="org.ld.model.ServiceEvent" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="SERVICE_TYPE" property="SERVICE_TYPE" jdbcType="TINYINT" />
-    <result column="SERVICE_ID" property="SERVICE_ID" jdbcType="INTEGER" />
     <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
     <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
     <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, SERVICE_TYPE, SERVICE_ID, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+    ID, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,24 +21,16 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.ServiceEvent" >
-    insert into service_event (ID, SERVICE_TYPE, SERVICE_ID, 
-      OCCUR_TIME, IMPORT_TIME, EDIT_TIME
-      )
-    values (#{ID,jdbcType=INTEGER}, #{SERVICE_TYPE,jdbcType=TINYINT}, #{SERVICE_ID,jdbcType=INTEGER}, 
-      #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP}
-      )
+    insert into service_event (ID, OCCUR_TIME, IMPORT_TIME, 
+      EDIT_TIME)
+    values (#{ID,jdbcType=INTEGER}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, 
+      #{EDIT_TIME,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.ServiceEvent" >
     insert into service_event
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
         ID,
-      </if>
-      <if test="SERVICE_TYPE != null" >
-        SERVICE_TYPE,
-      </if>
-      <if test="SERVICE_ID != null" >
-        SERVICE_ID,
       </if>
       <if test="OCCUR_TIME != null" >
         OCCUR_TIME,
@@ -56,12 +46,6 @@
       <if test="ID != null" >
         #{ID,jdbcType=INTEGER},
       </if>
-      <if test="SERVICE_TYPE != null" >
-        #{SERVICE_TYPE,jdbcType=TINYINT},
-      </if>
-      <if test="SERVICE_ID != null" >
-        #{SERVICE_ID,jdbcType=INTEGER},
-      </if>
       <if test="OCCUR_TIME != null" >
         #{OCCUR_TIME,jdbcType=TIMESTAMP},
       </if>
@@ -76,12 +60,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.ServiceEvent" >
     update service_event
     <set >
-      <if test="SERVICE_TYPE != null" >
-        SERVICE_TYPE = #{SERVICE_TYPE,jdbcType=TINYINT},
-      </if>
-      <if test="SERVICE_ID != null" >
-        SERVICE_ID = #{SERVICE_ID,jdbcType=INTEGER},
-      </if>
       <if test="OCCUR_TIME != null" >
         OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
       </if>
@@ -96,9 +74,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.ServiceEvent" >
     update service_event
-    set SERVICE_TYPE = #{SERVICE_TYPE,jdbcType=TINYINT},
-      SERVICE_ID = #{SERVICE_ID,jdbcType=INTEGER},
-      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+    set OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
       IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
       EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}

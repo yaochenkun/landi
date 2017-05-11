@@ -25,6 +25,8 @@ public class FlightPicking {
 
     private String CONTACT_TELE;
 
+    private Integer EVENT_ID;
+
     public Integer getID() {
         return ID;
     }
@@ -111,5 +113,13 @@ public class FlightPicking {
 
     public void setCONTACT_TELE(String CONTACT_TELE) {
         this.CONTACT_TELE = CONTACT_TELE == null ? null : CONTACT_TELE.trim();
+    }
+
+    public Integer getEVENT_ID() {
+        return EVENT_ID;
+    }
+
+    public void setEVENT_ID(Integer EVENT_ID) {
+        this.EVENT_ID = EVENT_ID;
     }
 }

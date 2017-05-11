@@ -10,8 +10,11 @@
 .bottom-page{margin: 0; margin-top: 3em;}
 .bottom-page .recorTotal{color: #2277da;}
 
-#exitCom{color: #2277da;}
-#exitCom:hover{color: #2277da; border-bottom: 1px solid #2277da;}
+#editCom{color: #2277da;margin-right:10px;}
+#editCom:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
+
+#deleteCom{color: #e45e00;}
+#deleteCom:hover{color: #e45e00; border-bottom: 1px solid #e45e00;cursor: pointer;}
 
 /* 车费日期样式 */
 .calendarPart{display: inline-block; font-size: 16px; margin-top: 30px; margin-left: 2em;}
@@ -159,6 +162,7 @@ header .homeMenu .span {
 
 .bill-table tr:hover {
 	background: #f7f7f7;
+	
 }
 
 /**** 页码 样式 ****/

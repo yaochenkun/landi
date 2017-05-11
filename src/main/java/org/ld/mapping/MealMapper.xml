@@ -13,10 +13,11 @@
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="STAFF_ID" property="STAFF_ID" jdbcType="INTEGER" />
     <result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+    <result column="EVENT_ID" property="EVENT_ID" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, ROOM_NUM, GUEST_ID, GUEST_NAME, RESTAURANT_NAME, TOTAL_PRICE, OCCUR_TIME, PAY_MODE, 
-    COMMENT, STAFF_ID, STAFF_NAME
+    COMMENT, STAFF_ID, STAFF_NAME, EVENT_ID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,11 +33,13 @@
     insert into meal (ID, ROOM_NUM, GUEST_ID, 
       GUEST_NAME, RESTAURANT_NAME, TOTAL_PRICE, 
       OCCUR_TIME, PAY_MODE, COMMENT, 
-      STAFF_ID, STAFF_NAME)
+      STAFF_ID, STAFF_NAME, EVENT_ID
+      )
     values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
       #{GUEST_NAME,jdbcType=VARCHAR}, #{RESTAURANT_NAME,jdbcType=VARCHAR}, #{TOTAL_PRICE,jdbcType=DOUBLE}, 
       #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{PAY_MODE,jdbcType=TINYINT}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR})
+      #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR}, #{EVENT_ID,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Meal" >
     insert into meal
@@ -74,6 +77,9 @@
       <if test="STAFF_NAME != null" >
         STAFF_NAME,
       </if>
+      <if test="EVENT_ID != null" >
+        EVENT_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -108,6 +114,9 @@
       </if>
       <if test="STAFF_NAME != null" >
         #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="EVENT_ID != null" >
+        #{EVENT_ID,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -144,6 +153,9 @@
       <if test="STAFF_NAME != null" >
         STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
       </if>
+      <if test="EVENT_ID != null" >
+        EVENT_ID = #{EVENT_ID,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -158,7 +170,8 @@
       PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
       STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
-      STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR}
+      STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      EVENT_ID = #{EVENT_ID,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -79,7 +79,7 @@ public class ShuttleBus {
 
     private Integer TOTAL;
 
-    private Integer SYS_STATE;
+    private Integer EVENT_ID;
 
     public Integer getID() {
         return ID;
@@ -393,11 +393,11 @@ public class ShuttleBus {
         this.TOTAL = TOTAL;
     }
 
-    public Integer getSYS_STATE() {
-        return SYS_STATE;
+    public Integer getEVENT_ID() {
+        return EVENT_ID;
     }
 
-    public void setSYS_STATE(Integer SYS_STATE) {
-        this.SYS_STATE = SYS_STATE;
+    public void setEVENT_ID(Integer EVENT_ID) {
+        this.EVENT_ID = EVENT_ID;
     }
 }

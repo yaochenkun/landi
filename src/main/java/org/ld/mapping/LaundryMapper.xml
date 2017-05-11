@@ -11,10 +11,10 @@
     <result column="OTHER" property="OTHER" jdbcType="VARCHAR" />
     <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
     <result column="TOTAL_PRICE" property="TOTAL_PRICE" jdbcType="INTEGER" />
-    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="EVENT_ID" property="EVENT_ID" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, DATE, ROOM_NUM, GUEST_ID, GUEST_NAME, CLOTHES, OTHER, COUNT, TOTAL_PRICE, SYS_STATE
+    ID, DATE, ROOM_NUM, GUEST_ID, GUEST_NAME, CLOTHES, OTHER, COUNT, TOTAL_PRICE, EVENT_ID
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,11 +30,11 @@
     insert into laundry (ID, DATE, ROOM_NUM, 
       GUEST_ID, GUEST_NAME, CLOTHES, 
       OTHER, COUNT, TOTAL_PRICE, 
-      SYS_STATE)
+      EVENT_ID)
     values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
       #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{CLOTHES,jdbcType=VARCHAR}, 
       #{OTHER,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, #{TOTAL_PRICE,jdbcType=INTEGER}, 
-      #{SYS_STATE,jdbcType=INTEGER})
+      #{EVENT_ID,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
     insert into laundry
@@ -66,8 +66,8 @@
       <if test="TOTAL_PRICE != null" >
         TOTAL_PRICE,
       </if>
-      <if test="SYS_STATE != null" >
-        SYS_STATE,
+      <if test="EVENT_ID != null" >
+        EVENT_ID,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -98,8 +98,8 @@
       <if test="TOTAL_PRICE != null" >
         #{TOTAL_PRICE,jdbcType=INTEGER},
       </if>
-      <if test="SYS_STATE != null" >
-        #{SYS_STATE,jdbcType=INTEGER},
+      <if test="EVENT_ID != null" >
+        #{EVENT_ID,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -130,8 +130,8 @@
       <if test="TOTAL_PRICE != null" >
         TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
       </if>
-      <if test="SYS_STATE != null" >
-        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      <if test="EVENT_ID != null" >
+        EVENT_ID = #{EVENT_ID,jdbcType=INTEGER},
       </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
@@ -146,10 +146,9 @@
       OTHER = #{OTHER,jdbcType=VARCHAR},
       COUNT = #{COUNT,jdbcType=INTEGER},
       TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+      EVENT_ID = #{EVENT_ID,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  
+  </update> 
   <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
     select count(*) from laundry 
 	where ROOM_NUM like CONCAT('%', #{RN}, '%')

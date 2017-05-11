@@ -670,8 +670,9 @@ public class UserRoomController {
 			String date = dataJson.getString("date");
 			int year = Integer.parseInt(date.substring(0,4));
 			int mon = Integer.parseInt(date.substring(5));
-			String name = dataJson.getString("name");
-			int id = guestService.getGuestByRoomNumber(roomNum).getID();
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+			int id = guest.getID();
 			
 			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
 			if(sb == null) //先试探查询，若以前没有则为第一次新来的，先增加到数据库
@@ -680,7 +681,7 @@ public class UserRoomController {
 				sb.setYEAR(year);
 				sb.setMONTH(mon);
 				sb.setROOM_NUM(roomNum);
-				sb.setGUEST_NAME(name);
+				sb.setGUEST_NAME(guest.getGUEST_NAME());
 				sb.setGUEST_ID(id);
 				roomService.addShuttleBus(sb);
 				sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);

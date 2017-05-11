@@ -25,14 +25,18 @@ var serachFareByDate = function(pageNum, date){
 			$("#serviceBusBottom").html("");
 
 			if (data.recordTotal == 0) {
-				$("#busTable").append("<tr><td colspan='6' class='emptyText'>没有相关信息！</td></tr>");
+				$("#busTable").append("<tr><td colspan='8' class='emptyText'>没有相关信息！</td></tr>");
 			} else {
+
 				for(var i = 0; i < data.dataList.length; i++){
 					var perRecord = data.dataList[i];
-					$("#busTable").append("<tr><td>"+ perRecord.year + "-" + perRecord.month +"</td>"+
-						"<td>"+ perRecord.room_NUM +"</td><td>"+ perRecord.guest_NAME +"</td>"+
+					$("#busTable").append(
+						"<tr><td>"+ perRecord.room_NUM +"</td><td>"+ perRecord.guest_NAME +"</td>"+
 						"<td>"+ perRecord.days +"</td><td>"+ perRecord.total +"&nbsp;元</td>"+
-						"<td><a id='exitCom' href='serviceBusComExit.jsp?id="+ perRecord.id +"'>编辑</a></td></tr>");
+						"<td>"+ perRecord.year + "-" + perRecord.month +"</td>"+
+						"<td>"+ "1993-11-08" +"</td>"+
+						"<td>"+ "1993-11-08" +"</td>"+
+						"<td><a id='editCom' href='serviceBusComEdit.jsp?id="+ perRecord.id +"'>编辑</a><a id='deleteCom' onclick='serviceBusComDelete("+ perRecord.id +")'>删除</a></td></tr>");
 				}
 				
 				// 添加洗衣单收费 底部页码

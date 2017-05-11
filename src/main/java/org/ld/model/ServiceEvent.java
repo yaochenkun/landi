@@ -5,10 +5,6 @@ import java.util.Date;
 public class ServiceEvent {
     private Integer ID;
 
-    private Byte SERVICE_TYPE;
-
-    private Integer SERVICE_ID;
-
     private Date OCCUR_TIME;
 
     private Date IMPORT_TIME;
@@ -21,22 +17,6 @@ public class ServiceEvent {
 
     public void setID(Integer ID) {
         this.ID = ID;
-    }
-
-    public Byte getSERVICE_TYPE() {
-        return SERVICE_TYPE;
-    }
-
-    public void setSERVICE_TYPE(Byte SERVICE_TYPE) {
-        this.SERVICE_TYPE = SERVICE_TYPE;
-    }
-
-    public Integer getSERVICE_ID() {
-        return SERVICE_ID;
-    }
-
-    public void setSERVICE_ID(Integer SERVICE_ID) {
-        this.SERVICE_ID = SERVICE_ID;
     }
 
     public Date getOCCUR_TIME() {
