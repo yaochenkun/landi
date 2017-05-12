@@ -13,11 +13,13 @@
     <result column="PICKER_TELE" property="PICKER_TELE" jdbcType="VARCHAR" />
     <result column="CONTACT_NAME" property="CONTACT_NAME" jdbcType="VARCHAR" />
     <result column="CONTACT_TELE" property="CONTACT_TELE" jdbcType="VARCHAR" />
-    <result column="EVENT_ID" property="EVENT_ID" jdbcType="INTEGER" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, TIME, ROOM_NUMBER, GUEST_NAME, TYPE, FLIGHT_NUMBER, PLATE_NUMBER, PICKER_NAME, 
-    PICKER_TELE, CONTACT_NAME, CONTACT_TELE, EVENT_ID
+    PICKER_TELE, CONTACT_NAME, CONTACT_TELE, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -33,13 +35,13 @@
     insert into flight_picking (ID, TIME, ROOM_NUMBER, 
       GUEST_NAME, TYPE, FLIGHT_NUMBER, 
       PLATE_NUMBER, PICKER_NAME, PICKER_TELE, 
-      CONTACT_NAME, CONTACT_TELE, EVENT_ID
-      )
+      CONTACT_NAME, CONTACT_TELE, OCCUR_TIME, 
+      IMPORT_TIME, EDIT_TIME)
     values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=DATE}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
       #{GUEST_NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, #{FLIGHT_NUMBER,jdbcType=VARCHAR}, 
       #{PLATE_NUMBER,jdbcType=VARCHAR}, #{PICKER_NAME,jdbcType=VARCHAR}, #{PICKER_TELE,jdbcType=VARCHAR}, 
-      #{CONTACT_NAME,jdbcType=VARCHAR}, #{CONTACT_TELE,jdbcType=VARCHAR}, #{EVENT_ID,jdbcType=INTEGER}
-      )
+      #{CONTACT_NAME,jdbcType=VARCHAR}, #{CONTACT_TELE,jdbcType=VARCHAR}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, 
+      #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.FlightPicking" >
     insert into flight_picking
@@ -77,8 +79,14 @@
       <if test="CONTACT_TELE != null" >
         CONTACT_TELE,
       </if>
-      <if test="EVENT_ID != null" >
-        EVENT_ID,
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -115,8 +123,14 @@
       <if test="CONTACT_TELE != null" >
         #{CONTACT_TELE,jdbcType=VARCHAR},
       </if>
-      <if test="EVENT_ID != null" >
-        #{EVENT_ID,jdbcType=INTEGER},
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -153,8 +167,14 @@
       <if test="CONTACT_TELE != null" >
         CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
       </if>
-      <if test="EVENT_ID != null" >
-        EVENT_ID = #{EVENT_ID,jdbcType=INTEGER},
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
@@ -171,7 +191,9 @@
       PICKER_TELE = #{PICKER_TELE,jdbcType=VARCHAR},
       CONTACT_NAME = #{CONTACT_NAME,jdbcType=VARCHAR},
       CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
-      EVENT_ID = #{EVENT_ID,jdbcType=INTEGER}
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 

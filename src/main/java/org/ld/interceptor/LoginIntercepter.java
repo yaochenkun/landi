@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.ld.app.CurEnv;
+import org.ld.model.User;
 
 /* 用户登录拦截器  */
 public class LoginIntercepter implements HandlerInterceptor {
@@ -24,14 +24,14 @@ public class LoginIntercepter implements HandlerInterceptor {
 
 		// 判断session，用户是否登录
 		HttpSession session = request.getSession();
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if (cur_env == null) {
+		User curUser = (User) session.getAttribute("curUser");
+		if (curUser == null) {
 			// 没有登录
 			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 			return false;
 		} else {
 			// 用户不是管理员且要访问管理员页面
-			if (url.toLowerCase().indexOf("admin") >= 0 && cur_env.getCur_user().getROLE() > 0) {
+			if (url.toLowerCase().indexOf("admin") >= 0 && curUser.getROLE() > 0) {
 				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 				return false;
 			} else {

@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
+import org.ld.app.Config;
 import org.ld.app.Para;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
@@ -19,6 +19,7 @@ import org.ld.model.RoomState;
 import org.ld.model.User;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
+import org.ld.utils.MD5Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,23 +56,23 @@ public class UserController {
 	public @ResponseBody Integer changePassword(HttpSession session, @RequestBody String stringPassword) {
 		JSONObject passwordJson = (JSONObject) JSONObject.parse(stringPassword);
 		String password = passwordJson.getString("password");
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		cur_env.getCur_user().setPASSWD(cur_env.myMD5(password));
+		User curUser = (User) session.getAttribute("curUser");
+		curUser.setPASSWD(MD5Builder.create(password));
 
-		if (userService.updateUserInfo(cur_env.getCur_user()) == 1) {
-			logger.info("Change password of " + cur_env.getCur_user().getNAME());
+		if (userService.updateUserInfo(curUser) == 1) {
+			logger.info("Change password of " + curUser.getNAME());
 			return 1;
 		} else {
-			logger.error("Failed to change password of " + cur_env.getCur_user().getNAME());
+			logger.error("Failed to change password of " + curUser.getNAME());
 			return 0;
 		}
 	}
 
 	@RequestMapping("/Model/")
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {

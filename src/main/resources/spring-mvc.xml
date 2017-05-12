@@ -12,7 +12,8 @@
         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<!-- 自动扫描controller包下的所有类，如果@Controller注入为bean -->
-	<context:component-scan base-package="org.ld.controller"></context:component-scan>
+	<context:component-scan base-package="org.ld.controller">   
+	</context:component-scan>  
 	<mvc:annotation-driven />
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->

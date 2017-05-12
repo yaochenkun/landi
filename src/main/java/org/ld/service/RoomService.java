@@ -67,6 +67,8 @@ public interface RoomService {
 	
 	int updateWash(Laundry l);
 	
+	ShuttleBus getShuttleBusById(Integer id);
+	
 	int totalShuttleBus(String rn, Integer year, Integer mon);
 	
 	List<ShuttleBus> getShuttleBus(String rn, Integer year, Integer mon, Integer st, Integer eachPage);
@@ -76,6 +78,8 @@ public interface RoomService {
 	int addShuttleBus(ShuttleBus sb);
 	
 	int updateShuttleBus(ShuttleBus sb);
+	
+	int deleteShuttleBus(Integer id);
 	
 	int addMaintain(Maintain m);
 	

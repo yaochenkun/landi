@@ -12,8 +12,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 import java.util.Set;
+
+/**
+ * 按“对”读取配置文件的帮助类
+ *
+ */
 
 public class Para {
 	private String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";

@@ -6,16 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css"/>
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css"/>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateCustom.css"/>
+<link href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/calendar/dateCustom.css" rel="stylesheet" type="text/css"/>
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusCom.css" rel="stylesheet" type="text/css" />
 <title>通勤车</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -41,7 +42,7 @@
 							<span class="date_title" id="month_picker"></span>
 						</div>
 					</div>
-					<a class="btn btn-edit btnEdit" onclick="serachFareByDate(1);">搜索</a>
+					<a class="btn btn-edit btnEdit" onclick="searchFareByDate(1);">搜索</a>
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
@@ -53,6 +54,7 @@
 								<th>通勤天数</th>
 								<th>合计费用</th>
 								<th>通勤年月</th>
+								<th>其他人员</th>
 								<th>上传时间</th>
 								<th>最后编辑时间</th>
 								<th>操作</th>
@@ -70,16 +72,17 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
-
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/calendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/dateRange.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/monthPicker.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script type="text/javascript">
+
 	    // 拉取第一页 本月车费信息
 	    monthPicker.create('month_picker', {
 			autoCommit : true,
@@ -88,9 +91,9 @@
 			}
 	  	});
 	  	var nowDate = new Date();
-	  	var date = nowDate.getFullYear() + "-" + Number(nowDate.getMonth() + 1);
+	  	var date = formatYearMonth(nowDate);
 	  	console.log(date);
-	  	serachFareByDate(1, date);
+	  	searchFareByDate(1, date);
 	</script>
 </body>
 </html>

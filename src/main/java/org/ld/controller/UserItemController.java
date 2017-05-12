@@ -1,7 +1,5 @@
 package org.ld.controller;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,44 +8,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
-import org.ld.model.DailyService;
+import org.ld.app.Config;
+
 import org.ld.model.FacSta;
 import org.ld.model.GroceryItem;
 import org.ld.model.GroceryRunning;
-import org.ld.model.Guest;
-import org.ld.model.Laundry;
+
 import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
 import org.ld.model.PlanProgress;
-import org.ld.model.Room;
 import org.ld.model.RoomItem;
-import org.ld.model.RoomMeter;
-import org.ld.model.RoomPic;
-import org.ld.model.RoomState;
-import org.ld.model.ShuttleBus;
-import org.ld.model.Sources;
+import org.ld.model.User;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
-import org.ld.service.ServerService;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 @Controller
 @RequestMapping("/userItem")
@@ -67,9 +52,9 @@ public class UserItemController {
 	@RequestMapping("/searchItemOverview") // 物品统计
 	@ResponseBody
 	public Map<String, Object> searchItemOverview(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -83,7 +68,7 @@ public class UserItemController {
 		String cat = dataJson.getString("cat");
 		String band = dataJson.getString("band");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.getTotal(type, cat, band);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -107,9 +92,9 @@ public class UserItemController {
 	@RequestMapping("/searchItemList") // 根据物品种类、子类、品牌获取物品名称
 	@ResponseBody
 	public Map<String, Object> searchItemList(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -132,9 +117,9 @@ public class UserItemController {
 	@RequestMapping("/searchPlanList") // 查询所有采购计划
 	@ResponseBody
 	public Map<String, Object> searchPlanList(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -145,7 +130,7 @@ public class UserItemController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.getTotalPlan();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -181,8 +166,7 @@ public class UserItemController {
 	@RequestMapping("/getItemType") // 查询系统物品种类（家电、家具）
 	@ResponseBody
 	public Set<String> getItemType(HttpSession session) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		return cur_env.getItem_type();
+		return Config.item_type;
 	}
 
 	@RequestMapping("/getItemCat") // 根据物品种类type查询物品类别Cat
@@ -191,8 +175,7 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		String type = dataJson.getString("type");
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		return cur_env.getItem_cat().get(type);
+		return Config.item_cat.get(type);
 	}
 
 	@RequestMapping("/getItemCom") // 根据物品种类type查询物品品牌Com
@@ -201,15 +184,14 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		String type = dataJson.getString("type");
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		return cur_env.getItem_com().get(type);
+		return Config.item_com.get(type);
 	}
 
 	@RequestMapping("/newPlan") // 新增采购计划
 	@ResponseBody
 	public Integer newPlan(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wBuy"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wBuy"))) == 0) {
 			return 0;
 		}
 
@@ -280,9 +262,9 @@ public class UserItemController {
 	@RequestMapping("/searchPlanDetail") // 查询计划采购物品（plan_detail表）
 	@ResponseBody
 	public Map<String, Object> searchPlanDetail(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -292,15 +274,13 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		int pageNumber = dataJson.getIntValue("pageNum");
 		int pid = dataJson.getIntValue("planID");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.getTotalPlanDetail(pid);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
 		if (recordTotal != 0) {
 			if (pageNumber > pageTotal)
 				pageNumber = pageTotal;
-			
-			int st = (pageNumber - 1) * eachPage;
 			
 			List<PlanDetail> record = itemService.getPlanDetails(pid, 0, eachPage);
 			
@@ -316,9 +296,9 @@ public class UserItemController {
 	@RequestMapping("/searchPlanProgress") // 查询计划执行情况（plan_progress表）
 	@ResponseBody
 	public Map<String, Object> searchPlanProgress(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -328,7 +308,7 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		int pageNumber = dataJson.getIntValue("pageNum");
 		int pid = dataJson.getIntValue("planID");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.getTotalPlanProgress(pid);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -352,8 +332,8 @@ public class UserItemController {
 	@RequestMapping("/addPlanProgress") // 添加计划执行情况
 	@ResponseBody
 	public Integer addPlanProgress(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wBuy"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wBuy"))) == 0) {
 			return 0;
 		};
 		
@@ -385,16 +365,16 @@ public class UserItemController {
 		} else {
 			return 0;
 		}
-		logger.info(cur_env.getCur_user().getNAME() + " add plan progress for " + dataJson.getInteger("planID"));
+		logger.info(curUser.getNAME() + " add plan progress for " + dataJson.getInteger("planID"));
 		return 1;
 	}
 	
 	@RequestMapping("/searchFacDetail") // 根据物品ID查询物品分配到房间的情况
 	@ResponseBody
 	public Map<String, Object> searchFacDetail(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -406,7 +386,7 @@ public class UserItemController {
 		Integer facID = dataJson.getInteger("facID");
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = roomService.totalRowByItem(facID);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -430,9 +410,9 @@ public class UserItemController {
 	@RequestMapping("/searchFacSta") // 获取指定FacSta
 	@ResponseBody
 	public Map<String, Object> searchFacSta(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -450,8 +430,8 @@ public class UserItemController {
 	@RequestMapping("/transferFac") // 移动物品到其他房间
 	@ResponseBody
 	public Integer transferFac(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -469,15 +449,15 @@ public class UserItemController {
 		} else {
 			return 0;
 		}
-		logger.info(cur_env.getCur_user().getNAME() + " move item " + recID + " to " + dataJson.getString("rNum"));
+		logger.info(curUser.getNAME() + " move item " + recID + " to " + dataJson.getString("rNum"));
 		return 1;
 	}
 	
 	@RequestMapping("/facBad") // 物品点击报废
 	@ResponseBody
 	public Integer facBad(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -497,15 +477,15 @@ public class UserItemController {
 			return 0;
 		}
 		
-		logger.info(cur_env.getCur_user().getNAME() + " let " + recID + " bad ");
+		logger.info(curUser.getNAME() + " let " + recID + " bad ");
 		return 1;
 	}
 	
 	@RequestMapping("/toWarehouse") // 物品回仓库
 	@ResponseBody
 	public Integer toWarehouse(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -523,15 +503,15 @@ public class UserItemController {
 			return 0;
 		}
 		
-		logger.info(cur_env.getCur_user().getNAME() + " move " + recID + " to warehouse" ); 
+		logger.info(curUser.getNAME() + " move " + recID + " to warehouse" ); 
 		return 1;
 	}
 	
 	@RequestMapping("/newDistribute") // 新分配物品
 	@ResponseBody
 	public Integer newDistribute(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -558,15 +538,15 @@ public class UserItemController {
 			roomService.insertRI(newRi);
 		}
 		
-		logger.info(cur_env.getCur_user().getNAME() + " assign " + facId + " to " + rn );
+		logger.info(curUser.getNAME() + " assign " + facId + " to " + rn );
 		return 1;
 	}
 	
 	@RequestMapping("/newFacBad") // 新报废物品
 	@ResponseBody
 	public Integer newFacBad(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wFac"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -586,7 +566,7 @@ public class UserItemController {
 			itemService.updateFac(fs);
 		}
 		
-		logger.info(cur_env.getCur_user().getNAME() + " let " + count + " " + facId + " bad ");
+		logger.info(curUser.getNAME() + " let " + count + " " + facId + " bad ");
 		return 1;
 	}
 	
@@ -597,10 +577,10 @@ public class UserItemController {
 	public Map<String, Object> searchGoodsList(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rGrocery"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -610,7 +590,7 @@ public class UserItemController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String goods = dataJson.getString("GoodsName");
 		
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.totalGrocery(goods);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -636,9 +616,9 @@ public class UserItemController {
 	public Integer buyGoods(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -678,9 +658,9 @@ public class UserItemController {
 	public Integer sellGoods(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -721,9 +701,9 @@ public class UserItemController {
 	public Integer wasteGoods(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -764,10 +744,10 @@ public class UserItemController {
 	public Map<String, Object> searchAnnualSale(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rGrocery"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -778,7 +758,7 @@ public class UserItemController {
 		int id = dataJson.getIntValue("id");
 		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
 		Date to = dataJson.getDate("to");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = itemService.totalGroceryRunning(id, from, to);
 		
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
@@ -805,9 +785,9 @@ public class UserItemController {
 	public Integer addGoods(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
 			return 0;
 		}
 		

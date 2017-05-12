@@ -234,24 +234,20 @@
 				</configuration>
 			</plugin>
 
-			<!-- 部署至本机 -->
-			<!-- <plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>1.0</version>
-				<configuration>
-					<container>
-						<containerId>tomcat6x</containerId>
-						<home>D:\WebServer\apache-tomcat-6.0.39</home>
-					</container>
-					<configuration>
-						<type>existing</type>
-						<home>D:\WebServer\apache-tomcat-6.0.39</home>
-					</configuration>
-				</configuration>
-			</plugin>-->
-
+   			<plugin>  
+		    	<groupId>org.mortbay.jetty</groupId>  
+				<artifactId>jetty-maven-plugin</artifactId>  
+			    <version>7.1.6.v20100715</version>  
+			    
+			    <!-- 扫描项目变更的时间间隔，默认为0不扫描 -->  
+				<configuration>  
+					<scanIntervalSeconds>10</scanIntervalSeconds>   
+					<webAppConfig>  
+						<!-- 项目访问路径 -->  
+				    	<contextPath>/cmdb</contextPath>  
+					</webAppConfig>  
+				</configuration>  
+			</plugin>
 		</plugins>
-
 	</build>
 </project>

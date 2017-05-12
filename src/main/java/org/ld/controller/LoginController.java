@@ -6,13 +6,14 @@ import javax.servlet.http.HttpSession;
 
 import org.ld.model.User;
 import org.ld.service.UserService;
+import org.ld.utils.MD5Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
-import org.ld.app.MyTest;
+import org.ld.app.Config;
 
 @Controller
 public class LoginController {
@@ -25,7 +26,6 @@ public class LoginController {
 	@RequestMapping("/login")
 	public ModelAndView login(HttpSession session, String name, String passwd) throws Exception {
 		// 调用service进行用户身份验证
-		CurEnv cur_env = new CurEnv();
 		User user = userService.getUserByUserName(name);
 		System.out.println(user);
 		
@@ -42,18 +42,17 @@ public class LoginController {
 			modelAndView.addObject("error", "用户名不存在！");
 		else if (!(user.getUSERNAME().equals(name)))
 			modelAndView.addObject("error", "用户名不存在！");
-		else if(!(user.getPASSWD().equals(cur_env.myMD5(passwd))))
+		else if(!(user.getPASSWD().equals(MD5Builder.create(passwd))))
 			modelAndView.addObject("error", "密码错误！");
-		else if(user.getSTATE().equals(cur_env.getSettingsInt().get("forbid_state")))
+		else if(user.getSTATE().equals(Config.settingsInt.get("forbid_state")))
 			modelAndView.addObject("error", "用户  " + name + " 被禁用！");
 		else // 身份验证成功
 		{
 			System.out.println("login controller");
 			// 在session中保存用户身份信息
-			cur_env.setCur_user(user);
 			user.setLTIME(new Date());
 			userService.updateUserInfo(user);
-			session.setAttribute("CUR_ENV", cur_env);
+			session.setAttribute("curUser", user);
 			// 重定向到首页(.action)
 
 			logger.info("User Login: " + name);

@@ -34,12 +34,13 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li id="dateLi"><span class="span">本月：</span><span id="newBusDate"></span></li>
-						<li id="roomNumLi"><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="W35-1" />
+						<li id="dateLi"><span>通勤年月：</span><span id="newBusDate"></span></li>
+						<li id="roomNumLi"><span>房间号：</span>
+							<input id="serviceRoomNumber" type="text" value="W33-3" />
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="red">不能为空！</span></li>
-						<li id="nameLi"><span class="span">客人姓名：</span><input id="guestName" type="text" value="Alice" /></li>
+						<li id="nameLi"><span>客人姓名：</span><input id="guestName" type="text" value="Alice" /></li>
+						<li id="othersLi"><span>其他人员：</span><input id="othersName" type="text" value="" /></li>
 						<a href="javascript:void(0);" class="btn btn-goback" id="btn-search" onclick="searchBusCom();">搜索本月通勤车记录</a>
 						<table id="newBusComTable">
 							<tbody>
@@ -73,8 +74,8 @@
 									<td><input type="checkbox" value=""/></td><td><input type="checkbox" value=""/></td>
 								</tr>
 							</tbody>
-						</table>
-						<a onclick="addserviceBus();" class="btn btn-goback goback">确认添加</a>
+						</table></br>
+						<li class="monthTotalLi"><span>本月合计：</span><input id="monthTotal" type="text" value="0" disabled="disabled"/> <a onclick="addserviceBus();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>
 			</div>
@@ -89,7 +90,7 @@
 	<script>
 		// 设置为当前日期
 		var date = new Date();
-		$("#newBusDate").text(date.getFullYear() + "-" + (date.getMonth() + 1));
+		$("#newBusDate").text(formatYearMonth(date));
 	</script>
 </body>
 </html>

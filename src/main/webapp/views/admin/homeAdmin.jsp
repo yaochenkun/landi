@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
+<%@ page import="org.ld.model.User"%>
 <%@ page import="java.util.Date, java.text.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -37,7 +37,7 @@
 			<img src="${pageContext.request.contextPath}/img/admin.svg" alt="">
 			<h5>
 				当前用户角色：<span id="roleTypeContent"></span><span id="roleTypeNum"
-					style="display: none;">${CUR_ENV.cur_user.ROLE}</span>
+					style="display: none;">${curUser.ROLE}</span>
 			</h5>
 			<div class="btn btn-change btnchange">
 				<a onclick="showEditPasswordModal();">修改密码</a>
@@ -50,24 +50,24 @@
 			<div class="detail-body">
 				<dl>
 					<dt>用户名</dt>
-					<dd>${CUR_ENV.cur_user.USERNAME}</dd>
+					<dd>${curUser.USERNAME}</dd>
 					<dt>姓名</dt>
-					<dd>${CUR_ENV.cur_user.NAME}</dd>
+					<dd>${curUser.NAME}</dd>
 					<dt>工号</dt>
-					<dd>${CUR_ENV.cur_user.NUM}</dd>
+					<dd>${curUser.NUM}</dd>
 					<dt>部门</dt>
-					<dd>${CUR_ENV.cur_user.DEPART}</dd>
+					<dd>${curUser.DEPART}</dd>
 					<% 
-                       CurEnv curenv = (CurEnv)session.getAttribute("CUR_ENV");
-                       Date ctime = curenv.getCur_user().getCTIME();
-                       Date ltime = curenv.getCur_user().getLTIME();
+                       User curUser = (User)session.getAttribute("curUser");
+                       Date ctime = curUser.getCTIME();
+                       Date ltime = curUser.getLTIME();
                        
                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                        String createLocalDate = sdf.format(ctime);
                        String loginLocalDate = sdf.format(ltime);
                        
                        String stateString = "";
-                       int state = curenv.getCur_user().getSTATE();
+                       int state = curUser.getSTATE();
                        if(state==1)  stateString = "正常";
                        else if(state == 10) stateString = "禁用";
                        %>

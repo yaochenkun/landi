@@ -3,6 +3,7 @@ package org.ld.service.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.ld.dao.LaundryMapper;
@@ -324,6 +325,23 @@ public class RoomServiceImpl implements RoomService {
 		}
 	}
 
+
+	@Override
+	public ShuttleBus getShuttleBusById(Integer id) {
+
+		return shuttleBusMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int deleteShuttleBus(Integer id) {
+		try{
+			return shuttleBusMapper.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+	
 	@Override
 	public int addMaintain(Maintain m) {
 		// TODO Auto-generated method stub
@@ -407,4 +425,5 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return roomStateMapper.getCertainRoomStateByNumber(number);
 	}
+	
 }

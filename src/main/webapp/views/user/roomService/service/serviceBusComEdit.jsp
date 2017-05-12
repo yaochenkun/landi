@@ -10,15 +10,13 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusNew.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusExit.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusEdit.css" rel="stylesheet" type="text/css" />
 <title>编辑通勤车车费记录</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
-
-	<% String id = request.getParameter("id"); %>
 	
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -37,10 +35,11 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li id="dateLi"><span class="span">时间：</span>2017-04</li>
-						<li id="roomNumLi"><span class="span">房间号：</span>W34-1</li>
-						<li id="nameLi"><span class="span">客人姓名：</span>1234</li>
-						<table id="exitBusComTable">
+						<li id="dateLi"><span>时间：</span><span id="editServiceBusDate"></span></li>
+						<li id="roomNumLi"><span>房间号：</span><span id="editServiceBusRoomNum"></span></li>
+						<li id="nameLi"><span>客人姓名：</span><span id="editGuestName"></span></li>
+						<li id="othersLi"><span>其他人员：</span><span id="editOthersName"></span></li>
+						<table id="newBusComTable" style="display: table;">
 							<tbody>
 								<tr><td>日期</td><td>1日</td><td>2日</td><td>3日</td><td>4日</td>
 									<td>5日</td><td>6日</td><td>7日</td><td>8日</td><td>9日</td>
@@ -72,8 +71,8 @@
 									<td><input type="checkbox" value=""/></td><td><input type="checkbox" value=""/></td>
 								</tr>
 							</tbody>
-						</table>
-						<a onclick="addserviceBus();" class="btn btn-goback goback">确认修改</a>
+						</table></br>
+						<li><span>本月合计：</span><input id="monthTotal" type="text" value="0" disabled="disabled"/> <a onclick="requestUpdateServiceBus(${param.id});" class="btn btn-goback goback">确认更新</a></li>
 					</ul>
 				</div>
 			</div>
@@ -86,10 +85,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script>
-		searchBusComExit();
+		searchBusComEdit('${param.id}');
 		// 设置为当前日期
 		var date = new Date();
-		$("#newBusDate").text(date.getFullYear() + "-" + (date.getMonth() + 1));
+		$("#newBusDate").text(formatYearMonth(date));
 	</script>
 </body>
 </html>

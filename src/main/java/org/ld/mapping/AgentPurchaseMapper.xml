@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.AgentPurchaseMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.AgentPurchase" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="GOOD_NAME" property="GOOD_NAME" jdbcType="VARCHAR" />
+    <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
+    <result column="COVER_PRICE" property="COVER_PRICE" jdbcType="DOUBLE" />
+    <result column="SERVICE_PRICE" property="SERVICE_PRICE" jdbcType="DOUBLE" />
+    <result column="PAY_MODE" property="PAY_MODE" jdbcType="TINYINT" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="STAFF_ID" property="STAFF_ID" jdbcType="INTEGER" />
+    <result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, GUEST_ID, GUEST_NAME, GOOD_NAME, COUNT, COVER_PRICE, SERVICE_PRICE, 
+    PAY_MODE, COMMENT, STAFF_ID, STAFF_NAME, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from agent_purchase
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from agent_purchase
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.AgentPurchase" >
+    insert into agent_purchase (ID, ROOM_NUM, GUEST_ID, 
+      GUEST_NAME, GOOD_NAME, COUNT, 
+      COVER_PRICE, SERVICE_PRICE, PAY_MODE, 
+      COMMENT, STAFF_ID, STAFF_NAME, 
+      OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+      )
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{GOOD_NAME,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, 
+      #{COVER_PRICE,jdbcType=DOUBLE}, #{SERVICE_PRICE,jdbcType=DOUBLE}, #{PAY_MODE,jdbcType=TINYINT}, 
+      #{COMMENT,jdbcType=VARCHAR}, #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR}, 
+      #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.AgentPurchase" >
+    insert into agent_purchase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="GOOD_NAME != null" >
+        GOOD_NAME,
+      </if>
+      <if test="COUNT != null" >
+        COUNT,
+      </if>
+      <if test="COVER_PRICE != null" >
+        COVER_PRICE,
+      </if>
+      <if test="SERVICE_PRICE != null" >
+        SERVICE_PRICE,
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID,
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="GOOD_NAME != null" >
+        #{GOOD_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNT != null" >
+        #{COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="COVER_PRICE != null" >
+        #{COVER_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="SERVICE_PRICE != null" >
+        #{SERVICE_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="PAY_MODE != null" >
+        #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="STAFF_ID != null" >
+        #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.AgentPurchase" >
+    update agent_purchase
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="GOOD_NAME != null" >
+        GOOD_NAME = #{GOOD_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNT != null" >
+        COUNT = #{COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="COVER_PRICE != null" >
+        COVER_PRICE = #{COVER_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="SERVICE_PRICE != null" >
+        SERVICE_PRICE = #{SERVICE_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.AgentPurchase" >
+    update agent_purchase
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      GOOD_NAME = #{GOOD_NAME,jdbcType=VARCHAR},
+      COUNT = #{COUNT,jdbcType=INTEGER},
+      COVER_PRICE = #{COVER_PRICE,jdbcType=DOUBLE},
+      SERVICE_PRICE = #{SERVICE_PRICE,jdbcType=DOUBLE},
+      PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

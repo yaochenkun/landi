@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
+import org.ld.app.Config;
 import org.ld.model.DailyService;
 import org.ld.model.FlightPicking;
 import org.ld.model.Guest;
@@ -27,6 +28,7 @@ import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.ShuttleBus;
 import org.ld.model.Sources;
+import org.ld.model.User;
 import org.ld.service.FlightPickingService;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
@@ -36,6 +38,8 @@ import org.ld.service.UserService;
 import org.ld.utils.BeanPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -128,9 +132,9 @@ public class UserRoomController {
 	@RequestMapping("/getAllRoom") // 所有房间
 	@ResponseBody
 	public Map<String, Object> getAllRoom(HttpSession session) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -146,9 +150,9 @@ public class UserRoomController {
 	@RequestMapping("/getAllRoomState") // 获取所有房间状态信息（租客一览表）
 	@ResponseBody
 	public Map<String, Object> getAllRoomState(HttpSession session) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -170,10 +174,10 @@ public class UserRoomController {
 		int rid = dataJson.getIntValue("rid");
 		String rn = dataJson.getString("rNum");
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -190,7 +194,7 @@ public class UserRoomController {
 			String type = dataJson.getString("type");
 			int pageNumber = dataJson.getIntValue("pageNum");
 
-			int eachPage = cur_env.getSettingsInt().get("list_size");
+			int eachPage = Config.settingsInt.get("list_size");
 			int recordTotal = itemService.totalItemByRoomType(rid, type);
 			int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -215,9 +219,9 @@ public class UserRoomController {
 	@RequestMapping("/getPics")
 	@ResponseBody
 	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -232,9 +236,9 @@ public class UserRoomController {
 	@RequestMapping("/getMeters") // 查meter（一行）
 	@ResponseBody
 	public Map<String, Object> getMeters(HttpSession session, Integer rid, Integer type) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -249,9 +253,9 @@ public class UserRoomController {
 	@RequestMapping("/roomSearchBill") // 明细流水（客房服务）
 	@ResponseBody
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -264,7 +268,7 @@ public class UserRoomController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = serverService.getTotalDailyServiceRow(rn, type);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -288,9 +292,9 @@ public class UserRoomController {
 	@RequestMapping("/roomSearchSource") // 查 sources
 	@ResponseBody
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -304,7 +308,7 @@ public class UserRoomController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = serverService.getTotalSourcesRow(rn, type);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -328,8 +332,8 @@ public class UserRoomController {
 	@RequestMapping("/addService") // 添加客房服务
 	@ResponseBody
 	public Integer addService(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -357,8 +361,8 @@ public class UserRoomController {
 	@RequestMapping("/addSource") // 添加水费电费
 	@ResponseBody
 	public Integer addSource(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -397,8 +401,8 @@ public class UserRoomController {
 	@RequestMapping("/addSourceGas") // 添加燃气费
 	@ResponseBody
 	public Integer addSourceGas(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wDaily"))) == 0) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -409,7 +413,7 @@ public class UserRoomController {
 			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("firstthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("firstCharge"));
-			newSrc.setTYPE((Integer) cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setTYPE((Integer) Config.settingsInt.get("source_gas"));
 			newSrc.setMETER(dataJson.getString("firstMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
@@ -432,7 +436,7 @@ public class UserRoomController {
 			meter = roomService.getMeter(dataJson.getString("secondMeterNo"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("secondthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("secondCharge"));
-			newSrc.setTYPE((Integer) cur_env.getSettingsInt().get("source_gas"));
+			newSrc.setTYPE((Integer) Config.settingsInt.get("source_gas"));
 			newSrc.setMETER(dataJson.getString("secondMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
@@ -457,10 +461,10 @@ public class UserRoomController {
 	public Map<String, Object> searchWash(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -469,7 +473,7 @@ public class UserRoomController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String roomNum = dataJson.getString("roomNum");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = roomService.totalLaundry(roomNum);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -495,9 +499,9 @@ public class UserRoomController {
 	public Integer addWash(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -595,9 +599,9 @@ public class UserRoomController {
 	@ResponseBody
 	public Map<String, Object> searchWashModeUnitPrice(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -606,22 +610,22 @@ public class UserRoomController {
 		
 		String clothesName = dataJson.getString("clothesName");
 		String mode = dataJson.getString("mode");
-		Integer unitPrice = cur_env.getLaundry_price().get(clothesName).get(mode);
+		Integer unitPrice = Config.laundry_price.get(clothesName).get(mode);
 		ans.put("unitPrice", unitPrice);
 		
 		return ans;
 	}
 	
 	
-	@RequestMapping("/searchFare") // 查询车费信息
+	@RequestMapping("/searchFares") // 按房间号+时间查询车费信息(一组)
 	@ResponseBody
-	public Map<String, Object> searchFare(HttpSession session, @RequestBody String data) {
+	public Map<String, Object> searchFares(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -633,7 +637,7 @@ public class UserRoomController {
 		String date = dataJson.getString("date");
 		int year = Integer.parseInt(date.substring(0,4));
 		int mon = Integer.parseInt(date.substring(5));
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = roomService.totalShuttleBus(roomNum, year, mon);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -646,7 +650,7 @@ public class UserRoomController {
 
 			ans.put("dataList", record);
 		}
-
+		
 		ans.put("pageNow", pageNumber);
 		ans.put("pageTotal", pageTotal);
 		ans.put("recordTotal", recordTotal);
@@ -654,14 +658,69 @@ public class UserRoomController {
 		return ans;
 	}
 	
+	@RequestMapping("/searchFare") // 按房间号+时间查询车费信息(单个)
+	@ResponseBody
+	public Map<String, Object> searchFare(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		String roomNum = dataJson.getString("roomNum");
+		String date = dataJson.getString("date");
+		int year = Integer.parseInt(date.substring(0,4));
+		int mon = Integer.parseInt(date.substring(5));
+		Guest guest = guestService.getGuestByRoomNumber(roomNum);
+		if(guest == null) {
+			ans.put("record", null);
+			ans.put("unitPrice", getUnitPrice(roomNum));
+			return ans;
+		}
+		
+		ShuttleBus record = roomService.getCertainShuttleBus(roomNum, guest.getID(), year, mon);
+		ans.put("record", record);
+		ans.put("unitPrice", getUnitPrice(roomNum));
+		
+		return ans;
+	}
+	
+	@RequestMapping("/searchFareById") // 按房间号+时间查询车费信息(单个)
+	@ResponseBody
+	public Map<String, Object> searchFareById(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		Integer id= dataJson.getInteger("id");
+		ShuttleBus record = roomService.getShuttleBusById(id);
+		ans.put("record", record);
+		ans.put("unitPrice", getUnitPrice(record.getROOM_NUM()));
+		
+		return ans;
+	}
+	
 	@RequestMapping("/addFare") // 添加车费记录
 	@ResponseBody
 	public Integer addFare(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
-		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -670,23 +729,41 @@ public class UserRoomController {
 			String date = dataJson.getString("date");
 			int year = Integer.parseInt(date.substring(0,4));
 			int mon = Integer.parseInt(date.substring(5));
+			String othersName = dataJson.getString("othersName");
+			
+			if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
 			Guest guest = guestService.getGuestByRoomNumber(roomNum);
 			if(guest == null) return 0;
 			int id = guest.getID();
-			
 			ShuttleBus sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
+			
 			if(sb == null) //先试探查询，若以前没有则为第一次新来的，先增加到数据库
-			{
+			{	
+				//初次生成通勤车记录
 				sb = new ShuttleBus();
 				sb.setYEAR(year);
 				sb.setMONTH(mon);
 				sb.setROOM_NUM(roomNum);
 				sb.setGUEST_NAME(guest.getGUEST_NAME());
 				sb.setGUEST_ID(id);
+				sb.setOTHER_PEOPLE(othersName);
+
+				Calendar calendar = Calendar.getInstance(); //构建发生时间
+				calendar.set(Calendar.YEAR, year);
+				calendar.set(Calendar.MONTH, mon - 1);
+				calendar.set(Calendar.DATE, 1);
+				calendar.set(Calendar.HOUR, 0);
+				calendar.set(Calendar.MINUTE, 0);
+				calendar.set(Calendar.SECOND, 0);
+				Date occurTime = calendar.getTime();
+				sb.setOCCUR_TIME(occurTime);
+				Date importTime = new Date();
+				sb.setIMPORT_TIME(importTime);
+				sb.setEDIT_TIME(importTime);
 				roomService.addShuttleBus(sb);
 				sb = roomService.getCertainShuttleBus(roomNum, id, year, mon);
 			}
-
+			
 			JSONArray obj = dataJson.getJSONArray("perRecord");
 			int totalDay = 0;
 			for(int i = 0; i < obj.size(); i++){
@@ -793,11 +870,14 @@ public class UserRoomController {
 				}
 			}
 			sb.setDAYS(totalDay);
-			
-			//设置总价
-			int unitPrice = this.getUnitPrice(sb.getROOM_NUM(), cur_env); //读取单价
-			sb.setTOTAL(totalDay * unitPrice);
+			if(!"".equals(othersName)) 
+				sb.setOTHER_PEOPLE(sb.getOTHER_PEOPLE() + "，" + othersName);
 
+			//设置总价
+			int unitPrice = this.getUnitPrice(sb.getROOM_NUM()); //读取单价
+			sb.setTOTAL(totalDay * unitPrice);
+			sb.setEDIT_TIME(new Date()); //更新编辑时间
+			
 			return roomService.updateShuttleBus(sb);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -807,30 +887,162 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/searchFareUnitPrice")
+	@RequestMapping("/updateFare") // 添加车费记录
 	@ResponseBody
-	public Map<String, Object> searchUnitPrice(HttpSession session, @RequestBody String data){
-		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
-			ans.put("State", "Invalid");
-			return ans;
-		} else {
-			ans.put("State", "Valid");
-		}
-
+	public Integer updateFare(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
-		String roomNum = dataJson.getString("roomNum");
-		ans.put("unitPrice", getUnitPrice(roomNum, cur_env));
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+			return 0;
+		}
 		
-		return ans;
+		try{
+			Integer id = dataJson.getInteger("id");
+			ShuttleBus sb = roomService.getShuttleBusById(id);
+			JSONArray obj = dataJson.getJSONArray("perRecord");
+			int totalDay = 0;
+			for(int i = 0; i < obj.size(); i++){
+
+				JSONObject obj2 = obj.getJSONObject(i);
+				Integer selection = obj2.getInteger("selection");
+				if(selection == 1) totalDay++;
+
+				switch(obj2.getInteger("day"))
+				{
+					case 1:
+						sb.setFIRST(selection);
+						break;
+					case 2:
+						sb.setSECOND(selection);
+						break;
+					case 3:
+						sb.setTHIRD(selection);
+						break;
+					case 4:
+						sb.setFOURTH(selection);
+						break;
+					case 5:
+						sb.setFIFTH(selection);
+						break;
+					case 6:
+						sb.setSIXTH(selection);
+						break;
+					case 7:
+						sb.setSEVENTH(selection);;
+						break;
+					case 8:
+						sb.setEIGHTH(selection);
+						break;
+					case 9:
+						sb.setNINTH(selection);
+						break;
+					case 10:
+						sb.setTENTH(selection);
+						break;
+					case 11:
+						sb.setELEVENTH(selection);
+						break;
+					case 12:
+						sb.setTWELFTH(selection);
+						break;
+					case 13:
+						sb.setTHIRTEENTH(selection);
+						break;
+					case 14:
+						sb.setFOURTEENTH(selection);
+						break;
+					case 15:
+						sb.setFIFTEENTH(selection);
+						break;
+					case 16:
+						sb.setSIXTEENTH(selection);
+						break;
+					case 17:
+						sb.setSEVENTEENTH(selection);
+						break;
+					case 18:
+						sb.setEIGHTEENTH(selection);
+						break;
+					case 19:
+						sb.setNINETEENTH(selection);
+						break;
+					case 20:
+						sb.setTWENTIETH(selection);
+						break;
+					case 21:
+						sb.setTWENTY_FIRST(selection);
+						break;
+					case 22:
+						sb.setTWENTY_SECOND(selection);
+						break;
+					case 23:
+						sb.setTWENTY_THIRD(selection);
+						break;
+					case 24:
+						sb.setTWENTY_FOURTH(selection);
+						break;
+					case 25:
+						sb.setTWENTY_FIFTH(selection);
+						break;
+					case 26:
+						sb.setTWENTY_SIXTH(selection);
+						break;
+					case 27:
+						sb.setTWENTY_SEVENTH(selection);
+						break;
+					case 28:
+						sb.setTWENTY_EIGHTH(selection);
+						break;
+					case 29:
+						sb.setTWENTY_NINTH(selection);
+						break;
+					case 30:
+						sb.setTHIRTIETH(selection);
+						break;
+					case 31:
+						sb.setTHIRTY_FIRST(selection);
+						break;
+				}
+			}
+			sb.setDAYS(totalDay);
+
+			//设置总价
+			int unitPrice = this.getUnitPrice(sb.getROOM_NUM()); //读取单价
+			sb.setTOTAL(totalDay * unitPrice);
+			sb.setEDIT_TIME(new Date()); //更新编辑时间
+			
+			return roomService.updateShuttleBus(sb);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/deleteFare") // 添加车费记录
+	@ResponseBody
+	public Integer deleteFare(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return roomService.deleteShuttleBus(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	//到时候把全局配置文件从cur_env中抽离写成单例，把该函数转入RoomService中
-	private int getUnitPrice(String roomNum, CurEnv cur_env) {
+	private Integer getUnitPrice(String roomNum) {
 		String floor = "车费_" + roomNum.substring(0, 1) + "-" + roomNum.substring(1, roomNum.indexOf('-'));
-		return cur_env.getCharge().get(floor);
+		return Config.charge.get(floor);
 	}
 	
 	@RequestMapping("/addMaintain") // 添加维修记录
@@ -838,9 +1050,9 @@ public class UserRoomController {
 	public Integer addMaintain(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -876,10 +1088,10 @@ public class UserRoomController {
 	public Map<String, Object> searchMaintainUnfinished(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -893,7 +1105,7 @@ public class UserRoomController {
 		int type = dataJson.getIntValue("type");
 		int cat = dataJson.getIntValue("cat");
 		int state = dataJson.getIntValue("state");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
 		System.out.println(recordTotal);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
@@ -920,9 +1132,9 @@ public class UserRoomController {
 	public Integer updateMaintain(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -968,10 +1180,10 @@ public class UserRoomController {
 	public Map<String, Object> searchMaintainStatic(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -982,7 +1194,7 @@ public class UserRoomController {
 		String roomNum = dataJson.getString("roomNum");
 		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
 		Date to = dataJson.getDate("to");
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = roomService.totalRow();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -1069,11 +1281,11 @@ public class UserRoomController {
 	@RequestMapping("/getCurentGuest")
 	@ResponseBody
 	public Map<String, Object> getCurentGuest(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1101,9 +1313,9 @@ public class UserRoomController {
 	@RequestMapping("/Model/")
 	@ResponseBody
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1116,7 +1328,7 @@ public class UserRoomController {
 	@RequestMapping("/addFlightPicking")
 	@ResponseBody
 	public Integer addFlightPicking(HttpSession session, @RequestBody String data) {
-		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		//权限
 //		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("wBuy"))) == 0) {
 //			return 0;
@@ -1136,10 +1348,10 @@ public class UserRoomController {
 		bean.setCONTACT_TELE(dataJson.getString("contactNum"));
 
 		if(flightPickingService.addFlightPicking(bean) == 1) {
-			logger.info(curEnv.getCur_user().getNAME() + " successfully add a flight picking record " + BeanPrinter.toString(bean));
+			logger.info(curUser.getNAME() + " successfully add a flight picking record " + BeanPrinter.toString(bean));
 			return 1;
 		} else {
-			logger.error(curEnv.getCur_user().getNAME() + "failed to add a flight picking record" + BeanPrinter.toString(bean));
+			logger.error(curUser.getNAME() + "failed to add a flight picking record" + BeanPrinter.toString(bean));
 			return 0;
 		}
 	}
@@ -1149,7 +1361,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Map<String, Object> searchFlightPickingByRoomNumber_Time(HttpSession session, @RequestBody String data) {
 		//验证权限
-		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
 //		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("rRoom"))) == 0) {
 //			ans.put("State", "Invalid");
@@ -1165,7 +1377,7 @@ public class UserRoomController {
 		String roomNumber = dataJson.getString("roomNum");
 
 		//分页
-		int eachPage = curEnv.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = flightPickingService.getTotalFlightPickingByRoomNumber_Time(roomNumber, time);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 		if(recordTotal != 0) {

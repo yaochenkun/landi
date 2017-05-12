@@ -8,6 +8,7 @@
     <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
     <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="OTHER_PEOPLE" property="OTHER_PEOPLE" jdbcType="VARCHAR" />
     <result column="FIRST" property="FIRST" jdbcType="INTEGER" />
     <result column="SECOND" property="SECOND" jdbcType="INTEGER" />
     <result column="THIRD" property="THIRD" jdbcType="INTEGER" />
@@ -41,14 +42,17 @@
     <result column="THIRTY_FIRST" property="THIRTY_FIRST" jdbcType="INTEGER" />
     <result column="DAYS" property="DAYS" jdbcType="INTEGER" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
-    <result column="EVENT_ID" property="EVENT_ID" jdbcType="INTEGER" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, YEAR, MONTH, ROOM_NUM, GUEST_ID, GUEST_NAME, FIRST, SECOND, THIRD, FOURTH, FIFTH, 
-    SIXTH, SEVENTH, EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH, THIRTEENTH, FOURTEENTH, 
-    FIFTEENTH, SIXTEENTH, SEVENTEENTH, EIGHTEENTH, NINETEENTH, TWENTIETH, TWENTY_FIRST, 
-    TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, 
-    TWENTY_EIGHTH, TWENTY_NINTH, THIRTIETH, THIRTY_FIRST, DAYS, TOTAL, EVENT_ID
+    ID, YEAR, MONTH, ROOM_NUM, GUEST_ID, GUEST_NAME, OTHER_PEOPLE, FIRST, SECOND, THIRD, 
+    FOURTH, FIFTH, SIXTH, SEVENTH, EIGHTH, NINTH, TENTH, ELEVENTH, TWELFTH, THIRTEENTH, 
+    FOURTEENTH, FIFTEENTH, SIXTEENTH, SEVENTEENTH, EIGHTEENTH, NINETEENTH, TWENTIETH, 
+    TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, 
+    TWENTY_SEVENTH, TWENTY_EIGHTH, TWENTY_NINTH, THIRTIETH, THIRTY_FIRST, DAYS, TOTAL, 
+    OCCUR_TIME, IMPORT_TIME, EDIT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -63,32 +67,34 @@
   <insert id="insert" parameterType="org.ld.model.ShuttleBus" >
     insert into shuttle_bus (ID, YEAR, MONTH, 
       ROOM_NUM, GUEST_ID, GUEST_NAME, 
-      FIRST, SECOND, THIRD, 
-      FOURTH, FIFTH, SIXTH, 
-      SEVENTH, EIGHTH, NINTH, 
-      TENTH, ELEVENTH, TWELFTH, 
-      THIRTEENTH, FOURTEENTH, FIFTEENTH, 
-      SIXTEENTH, SEVENTEENTH, EIGHTEENTH, 
-      NINETEENTH, TWENTIETH, TWENTY_FIRST, 
-      TWENTY_SECOND, TWENTY_THIRD, TWENTY_FOURTH, 
-      TWENTY_FIFTH, TWENTY_SIXTH, TWENTY_SEVENTH, 
-      TWENTY_EIGHTH, TWENTY_NINTH, THIRTIETH, 
-      THIRTY_FIRST, DAYS, TOTAL, 
-      EVENT_ID)
+      OTHER_PEOPLE, FIRST, SECOND, 
+      THIRD, FOURTH, FIFTH, 
+      SIXTH, SEVENTH, EIGHTH, 
+      NINTH, TENTH, ELEVENTH, 
+      TWELFTH, THIRTEENTH, FOURTEENTH, 
+      FIFTEENTH, SIXTEENTH, SEVENTEENTH, 
+      EIGHTEENTH, NINETEENTH, TWENTIETH, 
+      TWENTY_FIRST, TWENTY_SECOND, TWENTY_THIRD, 
+      TWENTY_FOURTH, TWENTY_FIFTH, TWENTY_SIXTH, 
+      TWENTY_SEVENTH, TWENTY_EIGHTH, TWENTY_NINTH, 
+      THIRTIETH, THIRTY_FIRST, DAYS, 
+      TOTAL, OCCUR_TIME, IMPORT_TIME, 
+      EDIT_TIME)
     values (#{ID,jdbcType=INTEGER}, #{YEAR,jdbcType=INTEGER}, #{MONTH,jdbcType=INTEGER}, 
       #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, 
-      #{FIRST,jdbcType=INTEGER}, #{SECOND,jdbcType=INTEGER}, #{THIRD,jdbcType=INTEGER}, 
-      #{FOURTH,jdbcType=INTEGER}, #{FIFTH,jdbcType=INTEGER}, #{SIXTH,jdbcType=INTEGER}, 
-      #{SEVENTH,jdbcType=INTEGER}, #{EIGHTH,jdbcType=INTEGER}, #{NINTH,jdbcType=INTEGER}, 
-      #{TENTH,jdbcType=INTEGER}, #{ELEVENTH,jdbcType=INTEGER}, #{TWELFTH,jdbcType=INTEGER}, 
-      #{THIRTEENTH,jdbcType=INTEGER}, #{FOURTEENTH,jdbcType=INTEGER}, #{FIFTEENTH,jdbcType=INTEGER}, 
-      #{SIXTEENTH,jdbcType=INTEGER}, #{SEVENTEENTH,jdbcType=INTEGER}, #{EIGHTEENTH,jdbcType=INTEGER}, 
-      #{NINETEENTH,jdbcType=INTEGER}, #{TWENTIETH,jdbcType=INTEGER}, #{TWENTY_FIRST,jdbcType=INTEGER}, 
-      #{TWENTY_SECOND,jdbcType=INTEGER}, #{TWENTY_THIRD,jdbcType=INTEGER}, #{TWENTY_FOURTH,jdbcType=INTEGER}, 
-      #{TWENTY_FIFTH,jdbcType=INTEGER}, #{TWENTY_SIXTH,jdbcType=INTEGER}, #{TWENTY_SEVENTH,jdbcType=INTEGER}, 
-      #{TWENTY_EIGHTH,jdbcType=INTEGER}, #{TWENTY_NINTH,jdbcType=INTEGER}, #{THIRTIETH,jdbcType=INTEGER}, 
-      #{THIRTY_FIRST,jdbcType=INTEGER}, #{DAYS,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
-      #{EVENT_ID,jdbcType=INTEGER})
+      #{OTHER_PEOPLE,jdbcType=VARCHAR}, #{FIRST,jdbcType=INTEGER}, #{SECOND,jdbcType=INTEGER}, 
+      #{THIRD,jdbcType=INTEGER}, #{FOURTH,jdbcType=INTEGER}, #{FIFTH,jdbcType=INTEGER}, 
+      #{SIXTH,jdbcType=INTEGER}, #{SEVENTH,jdbcType=INTEGER}, #{EIGHTH,jdbcType=INTEGER}, 
+      #{NINTH,jdbcType=INTEGER}, #{TENTH,jdbcType=INTEGER}, #{ELEVENTH,jdbcType=INTEGER}, 
+      #{TWELFTH,jdbcType=INTEGER}, #{THIRTEENTH,jdbcType=INTEGER}, #{FOURTEENTH,jdbcType=INTEGER}, 
+      #{FIFTEENTH,jdbcType=INTEGER}, #{SIXTEENTH,jdbcType=INTEGER}, #{SEVENTEENTH,jdbcType=INTEGER}, 
+      #{EIGHTEENTH,jdbcType=INTEGER}, #{NINETEENTH,jdbcType=INTEGER}, #{TWENTIETH,jdbcType=INTEGER}, 
+      #{TWENTY_FIRST,jdbcType=INTEGER}, #{TWENTY_SECOND,jdbcType=INTEGER}, #{TWENTY_THIRD,jdbcType=INTEGER}, 
+      #{TWENTY_FOURTH,jdbcType=INTEGER}, #{TWENTY_FIFTH,jdbcType=INTEGER}, #{TWENTY_SIXTH,jdbcType=INTEGER}, 
+      #{TWENTY_SEVENTH,jdbcType=INTEGER}, #{TWENTY_EIGHTH,jdbcType=INTEGER}, #{TWENTY_NINTH,jdbcType=INTEGER}, 
+      #{THIRTIETH,jdbcType=INTEGER}, #{THIRTY_FIRST,jdbcType=INTEGER}, #{DAYS,jdbcType=INTEGER}, 
+      #{TOTAL,jdbcType=INTEGER}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, 
+      #{EDIT_TIME,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.ShuttleBus" >
     insert into shuttle_bus
@@ -110,6 +116,9 @@
       </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME,
+      </if>
+      <if test="OTHER_PEOPLE != null" >
+        OTHER_PEOPLE,
       </if>
       <if test="FIRST != null" >
         FIRST,
@@ -210,8 +219,14 @@
       <if test="TOTAL != null" >
         TOTAL,
       </if>
-      <if test="EVENT_ID != null" >
-        EVENT_ID,
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -232,6 +247,9 @@
       </if>
       <if test="GUEST_NAME != null" >
         #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OTHER_PEOPLE != null" >
+        #{OTHER_PEOPLE,jdbcType=VARCHAR},
       </if>
       <if test="FIRST != null" >
         #{FIRST,jdbcType=INTEGER},
@@ -332,8 +350,14 @@
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
       </if>
-      <if test="EVENT_ID != null" >
-        #{EVENT_ID,jdbcType=INTEGER},
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -354,6 +378,9 @@
       </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OTHER_PEOPLE != null" >
+        OTHER_PEOPLE = #{OTHER_PEOPLE,jdbcType=VARCHAR},
       </if>
       <if test="FIRST != null" >
         FIRST = #{FIRST,jdbcType=INTEGER},
@@ -454,8 +481,14 @@
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
       </if>
-      <if test="EVENT_ID != null" >
-        EVENT_ID = #{EVENT_ID,jdbcType=INTEGER},
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
@@ -467,6 +500,7 @@
       ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
       GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      OTHER_PEOPLE = #{OTHER_PEOPLE,jdbcType=VARCHAR},
       FIRST = #{FIRST,jdbcType=INTEGER},
       SECOND = #{SECOND,jdbcType=INTEGER},
       THIRD = #{THIRD,jdbcType=INTEGER},
@@ -500,7 +534,9 @@
       THIRTY_FIRST = #{THIRTY_FIRST,jdbcType=INTEGER},
       DAYS = #{DAYS,jdbcType=INTEGER},
       TOTAL = #{TOTAL,jdbcType=INTEGER},
-      EVENT_ID = #{EVENT_ID,jdbcType=INTEGER}
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="map">

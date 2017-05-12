@@ -5,12 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.ld.app.MyTest;
 import org.ld.dao.UserMapper;
 import org.ld.model.User;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 /* 用户service实现类  */

@@ -18,7 +18,7 @@
 					<li class="dropdown">
 						<div class="dropdown-toggle" data-toggle="dropdown"
 							id="user_dropdown">
-							欢迎您，${CUR_ENV.cur_user.USERNAME} <span class="caret"></span>
+							欢迎您，${curUser.USERNAME} <span class="caret"></span>
 						</div>
 						<ul class="dropdown-menu" aria-labelledby="user_dropdown"
 							aria-expanded="false">

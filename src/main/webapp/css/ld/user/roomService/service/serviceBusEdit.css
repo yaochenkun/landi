@@ -1,8 +1,10 @@
 #dateLi .span{width: 5em;}
 #roomNumLi .span{width: 6em;}
 #nameLi .span{width: 7em;}
+#othersLi .span{width: 7em;}
 #roomNumLi{margin-left: 10em;}
 #nameLi{margin-left: 10em;}
+#othersLi{margin-left: 10em;}
 
 table{margin-top: 1em;}
-.goback{display: block;}
+.goback{display: block;float:true;}

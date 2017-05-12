@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.ld.model.User;
 
 import org.ld.service.UserService;
+import org.ld.utils.MD5Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
+import org.ld.app.Config;
 import org.ld.app.MyFile;
 import org.ld.app.Para;
 
@@ -39,10 +40,9 @@ public class AdminController {
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, @PathVariable int pageNumber) {
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
 		Map<String, Object> res_map = new HashMap<String, Object>();
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int pageTotal = (int) Math.ceil((float) userService.totalRow() / eachPage);
 
 		if (pageNumber > pageTotal)
@@ -61,7 +61,7 @@ public class AdminController {
 	public @ResponseBody Integer addUser(@RequestBody String userString, HttpSession session) {
 		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Para tp = new Para();
 		User newUser = new User();
 
@@ -70,7 +70,7 @@ public class AdminController {
 		newUser.setNAME((String) userJson.get("NAME"));
 		newUser.setDEPART((String) userJson.get("DEPART"));
 		newUser.setROLE((Integer) userJson.get("ROLE"));
-		newUser.setPASSWD(cur_env.getSettings().get("default_passwd"));
+		newUser.setPASSWD(Config.settings.get("default_passwd"));
 		newUser.setAUTH(
 				Integer.parseInt(tp.ReadParaPair("role", ((Integer) userJson.get("ROLE")).toString(), 0, 2)[1]));
 		newUser.setCTIME(new Date());
@@ -78,10 +78,10 @@ public class AdminController {
 		newUser.setSTATE(1);
 
 		if (userService.insert(newUser) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " create a new user " + newUser.getNAME());
+			logger.info(curUser.getNAME() + " create a new user " + newUser.getNAME());
 			return 1;
 		} else {
-			logger.error(cur_env.getCur_user().getNAME() + " failed to create the new user " + newUser.getNAME());
+			logger.error(curUser.getNAME() + " failed to create the new user " + newUser.getNAME());
 			return 0;
 		}
 	}
@@ -126,62 +126,62 @@ public class AdminController {
 	public @ResponseBody Integer changePassword(HttpSession session, @RequestBody String stringPassword) {
 		JSONObject passwordJson = (JSONObject) JSONObject.parse(stringPassword);
 		String password = passwordJson.getString("password");
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
-		cur_env.getCur_user().setPASSWD(cur_env.myMD5(password));
+		User curUser = (User) session.getAttribute("curUser");
+		curUser.setPASSWD(MD5Builder.create((password)));
 
-		if (userService.updateUserInfo(cur_env.getCur_user()) == 1) {
-			logger.info("Change password of " + cur_env.getCur_user().getNAME());
+		if (userService.updateUserInfo(curUser) == 1) {
+			logger.info("Change password of " + curUser.getNAME());
 			return 1;
 		} else {
-			logger.error("Failed to change password of " + cur_env.getCur_user().getNAME());
+			logger.error("Failed to change password of " + curUser.getNAME());
 			return 0;
 		}
 	}
 
 	@RequestMapping("/resetPasswd/{user_id}")
 	public @ResponseBody Integer resetPasswd(HttpSession session, @PathVariable Integer user_id) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setPASSWD(cur_env.getSettings().get("default_passwd"));
+		temp.setPASSWD(Config.settings.get("default_passwd"));
 
 		if (userService.updateUserInfo(temp) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " reset password of " + user_id);
+			logger.info(curUser.getNAME() + " reset password of " + user_id);
 			return 1;
 		} else {
-			logger.error(cur_env.getCur_user().getNAME() + " failed to reset password of " + user_id);
+			logger.error(curUser.getNAME() + " failed to reset password of " + user_id);
 			return 0;
 		}
 	}
 
 	@RequestMapping("/forbidUser/{user_id}")
 	public @ResponseBody Integer forbidUser(HttpSession session, @PathVariable int user_id) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(cur_env.getSettingsInt().get("forbid_state"));
+		temp.setSTATE(Config.settingsInt.get("forbid_state"));
 
 		if (userService.updateUserInfo(temp) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " disable user " + user_id);
+			logger.info(curUser.getNAME() + " disable user " + user_id);
 			return 1;
 		} else {
-			logger.error(cur_env.getCur_user().getNAME() + " failed to disable user " + user_id);
+			logger.error(curUser.getNAME() + " failed to disable user " + user_id);
 			return 0;
 		}
 	}
 
 	@RequestMapping("/enableUser/{user_id}")
 	public @ResponseBody Integer enableUser(HttpSession session, @PathVariable int user_id) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(cur_env.getSettingsInt().get("normal_state"));
+		temp.setSTATE(Config.settingsInt.get("normal_state"));
 
 		if (userService.updateUserInfo(temp) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " enable user " + user_id);
+			logger.info(curUser.getNAME() + " enable user " + user_id);
 			return 1;
 		} else {
-			logger.error(cur_env.getCur_user().getNAME() + " failed to enable user " + user_id);
+			logger.error(curUser.getNAME() + " failed to enable user " + user_id);
 			return 0;
 		}
 	}
@@ -194,13 +194,13 @@ public class AdminController {
 
 	@RequestMapping("/setRate")
 	public @ResponseBody Integer setRate(HttpSession session, @RequestBody Map<String, String> rate) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Para p = new Para();
 		if (p.setPair("rate", rate) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " set rate " + rate.toString());
+			logger.info(curUser.getNAME() + " set rate " + rate.toString());
 			return 1;
 		} else {
-			logger.info(cur_env.getCur_user().getNAME() + " failed to set rate " + rate.toString());
+			logger.info(curUser.getNAME() + " failed to set rate " + rate.toString());
 			return 0;
 		}
 	}
@@ -213,13 +213,13 @@ public class AdminController {
 
 	@RequestMapping("/setCharge")
 	public @ResponseBody Integer setCharge(HttpSession session, @RequestBody Map<String, String> charge) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Para p = new Para();
 		if (p.setPair("charge", charge) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " set charge " + charge.toString());
+			logger.info(curUser.getNAME() + " set charge " + charge.toString());
 			return 1;
 		} else {
-			logger.info(cur_env.getCur_user().getNAME() + " failed to set charge " + charge.toString());
+			logger.info(curUser.getNAME() + " failed to set charge " + charge.toString());
 			return 0;
 		}
 	}
@@ -232,13 +232,13 @@ public class AdminController {
 
 	@RequestMapping("/setLaundryPrice")
 	public @ResponseBody Integer setLaundryPrice(HttpSession session, @RequestBody Map<String, String> laundry_price) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Para p = new Para();
 		if (p.setPair("laundry_price", laundry_price) == 1) {
-			logger.info(cur_env.getCur_user().getNAME() + " set laundry_price " + laundry_price.toString());
+			logger.info(curUser.getNAME() + " set laundry_price " + laundry_price.toString());
 			return 1;
 		} else {
-			logger.info(cur_env.getCur_user().getNAME() + " failed to set laundry_price " + laundry_price.toString());
+			logger.info(curUser.getNAME() + " failed to set laundry_price " + laundry_price.toString());
 			return 0;
 		}
 	}

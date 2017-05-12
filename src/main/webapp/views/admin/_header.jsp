@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="org.ld.app.CurEnv, org.ld.model.User"%>
+<%@ page import="org.ld.model.User"%>
 <%@ page import="java.util.Date, java.text.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -28,7 +28,7 @@
                </ul>
             </div>-->
 			<div class="navbar-collapse">
-				欢迎您，${CUR_ENV.cur_user.USERNAME}
+				欢迎您，${curUser.USERNAME}
 				<div class="logoutDiv">
 					<a title="退出" class="logoutImg"
 						href="${pageContext.request.contextPath}/logout.action"></a>

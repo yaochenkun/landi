@@ -1,17 +1,18 @@
 .body{width: 1100px; margin: 2em auto;}
 .body-content{margin-left: 0;}
 
-#nameLi, #roomNumLi, #dateLi{display: inline-block;}
-#roomNumLi{margin-left: 10em;}
+#othersLi,#nameLi, #roomNumLi, #dateLi{display: inline-block;}
+#roomNumLi,#othersLi{margin-left: 10em;}
 #dateLi .span{width: 8em;}
 #newBusDate{border: 1px solid #aaa; padding: 2px 10px; width: 300px; display: inline-block; cursor: no-drop;}
 #roomIdWarning{margin-left: 700px;}
-#btn-search{margin-left: 150px; width: 150px; height: 30px; line-height: 16px; }
+#btn-search{margin-left: 20px; width: 150px; height: 30px; line-height: 16px; }
 
 table{width: 100%; margin: 2em auto;}
 td{border: 1px solid #ccc; line-height: 30px; width: 5%;}
 tbody tr:hover{background: #fff;}
 td input{margin: 0; width: 20px; min-height: 2em;}
 
-.goback{float: right; display: none;}
+.monthTotalLi{display: none;}
+.goback{float: right;}
 #newBusComTable{display: none;}

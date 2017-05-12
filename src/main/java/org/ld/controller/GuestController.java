@@ -1,6 +1,5 @@
 package org.ld.controller;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,17 +9,12 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.ld.app.CurEnv;
-import org.ld.model.DailyService;
+import org.ld.app.Config;
 import org.ld.model.Guest;
 import org.ld.model.GuestBalance;
 import org.ld.model.GuestService;
 import org.ld.model.Host;
 import org.ld.model.Intern;
-import org.ld.model.Room;
-import org.ld.model.RoomItem;
-import org.ld.model.RoomMeter;
-import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.User;
 import org.ld.service.GuestMissionService;
@@ -56,9 +50,9 @@ public class GuestController {
 	@RequestMapping("/addGuest")
 	@ResponseBody
 	public Map<String, Object> Model(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("wCustom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wCustom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -312,16 +306,16 @@ public class GuestController {
 			return ans;
 		}
 		
-		logger.info(cur_env.getCur_user().getNAME() + " add new guest " + newGuest.getGUEST_NAME() + " in " + newGuest.getROOM_NUMBER());
+		logger.info(curUser.getNAME() + " add new guest " + newGuest.getGUEST_NAME() + " in " + newGuest.getROOM_NUMBER());
 		return ans;
 	}
 
 	@RequestMapping("/searchGuestList")
 	@ResponseBody
 	public Map<String, Object> searchGuestList(HttpSession session, @RequestBody String data) {
-		CurEnv cur_env = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((cur_env.getCur_user().getAUTH() & (0x01 << cur_env.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -332,7 +326,7 @@ public class GuestController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = cur_env.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = guestMissionService.getTotal();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -359,9 +353,9 @@ public class GuestController {
 	public Map<String, Object> searchGuestByName_RoomNumber(HttpSession session, @RequestBody String data) {
 		
 		//验证权限
-		CurEnv curEnv = (CurEnv) session.getAttribute("CUR_ENV");
+		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
-		if ((curEnv.getCur_user().getAUTH() & (0x01 << curEnv.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -375,7 +369,7 @@ public class GuestController {
 		String roomNumber = dataJson.getString("roomId");
 
 		//分页
-		int eachPage = curEnv.getSettingsInt().get("list_size");
+		int eachPage = Config.settingsInt.get("list_size");
 		int recordTotal = guestMissionService.getTotalByName_RoomNumber(name, roomNumber);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 		if(recordTotal != 0) {

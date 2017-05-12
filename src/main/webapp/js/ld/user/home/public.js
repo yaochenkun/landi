@@ -71,6 +71,14 @@ function formatDateForm(date) {
     return currentdate;
 };
 
+//将时间转换为 YYYY-mm-dd形式
+function formatYearMonth(date) {
+	var dd = formatDateForm(date);
+    return dd.substring(0, 7);
+};
+
+
+
 // 显示关闭弹出框
 var showPopMenu = function(DivId){
     var $popDiv = $("#" + DivId);
@@ -96,6 +104,7 @@ var showModalBox = function(type,content){
         $successModal.children(".text").text(content);
         setTimeout(function(){$successModal.addClass('showMenuModal');},50);
         $successModal.addClass("effect-fade");
+        
         setTimeout(function(){ 
             $(".shadow").css("display","none");
             $successModal.removeClass('showMenuModal');
