@@ -3,9 +3,10 @@ package org.ld.service.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.ld.app.Config;
+import org.ld.dao.FlightPickingMapper;
 import org.ld.dao.LaundryMapper;
 import org.ld.dao.MaintainMapper;
 import org.ld.dao.RoomItemMapper;
@@ -14,6 +15,7 @@ import org.ld.dao.RoomMeterMapper;
 import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
 import org.ld.dao.ShuttleBusMapper;
+import org.ld.model.FlightPicking;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
 import org.ld.model.Room;
@@ -48,6 +50,8 @@ public class RoomServiceImpl implements RoomService {
 	private ShuttleBusMapper shuttleBusMapper;
 	@Autowired
 	private MaintainMapper maintainMapper;
+	@Autowired
+	private FlightPickingMapper flightPickingMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -212,17 +216,20 @@ public class RoomServiceImpl implements RoomService {
 	}
 	
 	@Override
-	public int totalLaundry(String rn) {
-		// TODO Auto-generated method stub
-		
-		return laundryMapper.totalRec(rn);
-	}
-
-	@Override
-	public List<Laundry> getLaundry(String rn, Integer st, Integer eachPage) {
+	public int totalLaundry(String rn, Date date) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("RN", rn);
+		map.put("DATE", date);
+		return laundryMapper.totalRec(map);
+	}
+
+	@Override
+	public List<Laundry> getLaundry(String rn, Date date, Integer st, Integer eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("DATE", date);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 		
@@ -265,6 +272,24 @@ public class RoomServiceImpl implements RoomService {
 		return laundryMapper.getCertainRec(map);
 	}
 
+	@Override
+	public int deleteWash(Integer id) {
+	
+		try {
+			return laundryMapper.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+	
+	@Override
+	public Laundry getWashById(Integer id) {
+		// TODO Auto-generated method stub
+		return laundryMapper.selectByPrimaryKey(id);
+	}
+	
 	@Override
 	public int totalShuttleBus(String rn, Integer year, Integer mon) {
 		// TODO Auto-generated method stub
@@ -340,6 +365,13 @@ public class RoomServiceImpl implements RoomService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+	
+	@Override
+	public int getFareUnitPrice(String roomNum) {
+		// TODO Auto-generated method stub
+		String floor = "车费_" + roomNum.substring(0, 1) + "-" + roomNum.substring(1, roomNum.indexOf('-'));
+		return Config.charge.get(floor);
 	}
 	
 	@Override
@@ -425,5 +457,67 @@ public class RoomServiceImpl implements RoomService {
 		// TODO Auto-generated method stub
 		return roomStateMapper.getCertainRoomStateByNumber(number);
 	}
+
+	/**
+	 * 接送机
+	 */
 	
+	@Override
+	public int addFlightPicking(FlightPicking bean) {
+		// TODO Auto-generated method stub
+		try {
+			flightPickingMapper.insert(bean);
+			return 1;
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int getTotalFlightPickingByRoomNumber_Time(String roomNumber, Date time) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUMBER", roomNumber);
+		map.put("TIME", time);
+		return flightPickingMapper.getTotalByRoomNumber_Time(map);
+	}
+
+	@Override
+	public List<FlightPicking> getFlightPickingByRoomNumber_Time(String roomNumber, Date time, int startPage, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUMBER", roomNumber);
+		map.put("TIME", time);
+		map.put("START_PAGE", startPage);
+		map.put("EACH_PAGE", eachPage);
+		return flightPickingMapper.selectByRoomNumber_Time(map);
+	}
+
+	@Override
+	public FlightPicking getFlightPickingById(Integer id) {
+		
+		return flightPickingMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int deleteFlightPickingById(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			return flightPickingMapper.deleteByPrimaryKey(id);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateFlightPicking(FlightPicking fp) {
+		try{
+			return flightPickingMapper.updateByPrimaryKeySelective(fp);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
 }

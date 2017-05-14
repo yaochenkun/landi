@@ -43,7 +43,7 @@ var searchFareByDate = function(pageNum, date){
 			$("#serviceBusBottom").html("");
 
 			if (data.recordTotal == 0) {
-				$("#busTable").append("<tr><td colspan='8' class='emptyText'>没有相关信息！</td></tr>");
+				$("#busTable").append("<tr><td colspan='9' class='emptyText'>没有相关信息！</td></tr>");
 			} else {
 
 				for(var i = 0; i < data.dataList.length; i++){
@@ -107,7 +107,8 @@ var searchBusCom = function(){
 		return;
 	}
 	var roomNum = $("#serviceRoomNumber").val();
-	var date = $("#newBusDate").text();
+	var datearr = $("#newBusDate").val().split("-");
+	var date = datearr[0] + "-" + datearr[1];
 
 	$.ajax({
 		url:'/LD/userRoom/searchFare.action',
@@ -181,7 +182,8 @@ var searchBusCom = function(){
 var requestAddServiceBus = function(){
 	console.log("添加车费记录");
 	var roomNum = $("#serviceRoomNumber").val();
-	var date = $("#newBusDate").text();
+	var datearr = $("#newBusDate").val().split("-");
+	var date = datearr[0] + "-" + datearr[1];
 	var name = $("#guestName").val();
 	var othersName = $("#othersName").val();
 
@@ -234,10 +236,10 @@ var searchBusComEdit = function(id){
 			} 
 			
 			//表上的房间号、时间、客人姓名
-			$("#editServiceBusDate").text(data.record.year + "-" + data.record.month);
-			$("#editServiceBusRoomNum").text(data.record.room_NUM);
-			$("#editGuestName").text(data.record.guest_NAME);
-			$("#editOthersName").text(data.record.other_PEOPLE);
+			$("#editServiceBusDate").val(data.record.year + "-" + data.record.month);
+			$("#editServiceBusRoomNum").val(data.record.room_NUM);
+			$("#editGuestName").val(data.record.guest_NAME);
+			$("#editOthersName").val(data.record.other_PEOPLE);
 			
 			// 清空表格
 			for (var i = 0; i < 31; i++) {
@@ -293,6 +295,13 @@ var requestUpdateServiceBus = function(id){
 
 	console.log("更新车费记录");
 
+	//获取基本信息
+	var roomNum = $("#editServiceBusRoomNum").val();
+	var datearr = $("#editServiceBusDate").val().split("-");
+	var date = datearr[0] + "-" + datearr[1];
+	var name = $("#editGuestName").val();
+	var othersName = $("#editOthersName").val();
+
 	// 遍历日期
 	var perRecord = "";
 	for(var i = 0; i < 31; i++){
@@ -310,8 +319,8 @@ var requestUpdateServiceBus = function(id){
 		type:'post',
 		contentType:'application/json',
 		dataType:'json',
-		data:
-			'{"id":'+ id +',"perRecord":['+ perRecord +']}',
+		data:'{"id":'+ id +', "date":"'+ date +'","roomNum":"'+ roomNum +'","name":"'+ name +'",'
+			+'"perRecord":['+ perRecord +']' + ',"othersName":"'+ othersName +'"}',
 		success:function(data){
 			console.log(data);
 			if(data == 1){
@@ -342,5 +351,5 @@ var serviceBusComDelete = function(id){
 			}
 		}
 	});
-	
 }
+

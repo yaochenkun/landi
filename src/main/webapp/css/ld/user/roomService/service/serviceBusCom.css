@@ -1,7 +1,7 @@
 .bill-table thead tr{height: 4em; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
 .bill-table th{background-color: #2277da; color: #fff; text-align: center;}
 .bill-table td{line-height: 26px; padding: 8px 0; text-align: center; font-size: 14px; border-bottom: 1px solid #ccc;}
-.bill-table td:nth-child(5){color: #ff5722;}
+.bill-table td:nth-child(4){color: #ff5722;font-weight: bold;}
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px; float: left;}
 .search input{padding: 0 5px; margin-left: 10px; height: 26px;}

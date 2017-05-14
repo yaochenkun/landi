@@ -37,7 +37,7 @@
 					<ul>
 						<li>
 							<div class="eventType">
-								<input type="radio" name="eventType" id="eventType"><span class="span">接机</span>
+								<input type="radio" name="eventType" id="eventType" checked="checked"><span class="span">接机</span>
 								<input type="radio" name="eventType"><span class="span">送机</span>
 							</div>					
 						</li>
@@ -46,7 +46,7 @@
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
-						<li><span class="span">时间：</span><input type="text" class="pack_maintain"></li>
+						<li><span class="span">发生时间：</span><input type="text" class="pack_maintain"></li>
 						<li><span class="span">航班：</span><input type="text" value="CA1344" /></li>
 						<li><span class="span">车牌：</span><input type="text" value="S12345" /></li>
 						<li><span class="span">接送人：</span><input type="text" value="Tom" /></li>

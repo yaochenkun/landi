@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusNew.css" rel="stylesheet" type="text/css" />
@@ -35,10 +36,10 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li id="dateLi"><span>时间：</span><span id="editServiceBusDate"></span></li>
-						<li id="roomNumLi"><span>房间号：</span><span id="editServiceBusRoomNum"></span></li>
-						<li id="nameLi"><span>客人姓名：</span><span id="editGuestName"></span></li>
-						<li id="othersLi"><span>其他人员：</span><span id="editOthersName"></span></li>
+						<li id="dateLi"><span>通勤日期：</span><input id="editServiceBusDate" type="text" class="pack_maintain"/></li>
+						<li id="roomNumLi"><span>房间号：</span><input id="editServiceBusRoomNum" type="text" /></li>
+						<li id="nameLi"><span>客人姓名：</span><input id="editGuestName" type="text" /></li>
+						<li id="othersLi"><span>其他人员：</span><input id="editOthersName" type="text" /></li>
 						<table id="newBusComTable" style="display: table;">
 							<tbody>
 								<tr><td>日期</td><td>1日</td><td>2日</td><td>3日</td><td>4日</td>
@@ -83,12 +84,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script>
 		searchBusComEdit('${param.id}');
 		// 设置为当前日期
-		var date = new Date();
-		$("#newBusDate").text(formatYearMonth(date));
+		var nowDate = new Date();
+		$('.pack_maintain').date_input();
 	</script>
 </body>
 </html>

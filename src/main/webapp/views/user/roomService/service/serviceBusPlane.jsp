@@ -14,7 +14,8 @@
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
-
+	<jsp:include page="../../_modal.jsp" />
+	
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
@@ -41,9 +42,10 @@
 					<table>
 						<thead>
 					    	<tr>
-					    		<th>时间</th><th>房间号</th><th>客人姓名</th><th>接送机</th>
-					    		<th>航班</th><th>车牌</th><th>接送人</th>
-					    		<th>接送人电话</th><th>联络人</th><th>联络人电话</th>
+					    		<th>房间号</th><th>客人姓名</th><th>接送机</th>
+					    		<th>航班</th><th>车牌</th><th>接送人（电话）</th>
+					    		<th>联络人（电话）</th>
+					    		<th>发生时间</th><th>上传时间</th><th>最后编辑时间</th><th>操作</th>
 					    	</tr>
 						</thead>
 						<tbody id="busPlaneTbody"></tbody>
@@ -58,10 +60,10 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
-
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>

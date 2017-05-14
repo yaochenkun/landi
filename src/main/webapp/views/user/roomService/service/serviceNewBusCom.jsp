@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusNew.css" rel="stylesheet" type="text/css" />
@@ -34,7 +35,7 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li id="dateLi"><span>通勤年月：</span><span id="newBusDate"></span></li>
+						<li id="dateLi"><span>通勤日期：</span><input id="newBusDate" type="text" class="pack_maintain"/></li>
 						<li id="roomNumLi"><span>房间号：</span>
 							<input id="serviceRoomNumber" type="text" value="W33-3" />
 							<span class="red red-right">*&nbsp;必填</span></li>
@@ -85,12 +86,15 @@
 	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script>
 		// 设置为当前日期
 		var date = new Date();
-		$("#newBusDate").text(formatYearMonth(date));
+		$("#newBusDate").val(formatDateForm(date));
+		$('#newBusDate').date_input();
 	</script>
 </body>
 </html>

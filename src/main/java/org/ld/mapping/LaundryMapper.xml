@@ -174,14 +174,14 @@
       EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
-  <select id="totalRec" resultType="java.lang.Integer" parameterType="java.lang.String">
+  <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
     select count(*) from laundry 
-	where ROOM_NUM like CONCAT('%', #{RN}, '%')
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry  
-    where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    order by DATE desc
+    where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+    order by DATE DESC
     limit #{ST}, #{EACH}
   </select>
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">

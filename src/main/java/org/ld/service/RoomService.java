@@ -3,6 +3,7 @@ package org.ld.service;
 import java.util.Date;
 import java.util.List;
 
+import org.ld.model.FlightPicking;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
 import org.ld.model.Room;
@@ -30,22 +31,26 @@ public interface RoomService {
 
 	int update(Room roomInfo);
 
-	int updateMeter(RoomMeter MeterInfo);
 
 	int totalRow();
 
-	List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage);
 
 	List<RoomPic> getPic(Integer rid);
 
-	// add by pq
+	/**
+	 * 能源
+	 */
 	int insertRoomPic(RoomPic roomPic);
 
 	List<RoomMeter> getMeters(Integer rid, Integer type);
 
 	RoomMeter getMeter(String mn);
 	
-	// add
+	int updateMeter(RoomMeter MeterInfo);
+	
+	/**
+	 * 房间物品
+	 */
 	
 	int totalRowByItem(Integer item_id);
 	
@@ -57,9 +62,14 @@ public interface RoomService {
 	
 	int deleteRI(Integer id);
 	
-	int totalLaundry(String rn);
+	List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage);
 	
-	List<Laundry> getLaundry(String rn, Integer st, Integer eachPage);
+	/**
+	 * 洗衣
+	 */
+	int totalLaundry(String rn,Date date);
+	
+	List<Laundry> getLaundry(String rn, Date date, Integer st, Integer eachPage);
 	
 	Laundry getCertainLaundry(String rn, Integer gid, Date date);
 	
@@ -67,6 +77,13 @@ public interface RoomService {
 	
 	int updateWash(Laundry l);
 	
+	int deleteWash(Integer id);
+	
+	Laundry getWashById(Integer id);
+	
+	/**
+	 * 通勤车
+	 */
 	ShuttleBus getShuttleBusById(Integer id);
 	
 	int totalShuttleBus(String rn, Integer year, Integer mon);
@@ -81,6 +98,11 @@ public interface RoomService {
 	
 	int deleteShuttleBus(Integer id);
 	
+	int getFareUnitPrice(String roomNum);
+	
+	/**
+	 * 维修报修
+	 */
 	int addMaintain(Maintain m);
 	
 	int updateMaintain(Maintain m);
@@ -96,4 +118,14 @@ public interface RoomService {
 	RoomState getCertainRSbyID(Integer id);
 	
 	RoomState getCertainRSbyNumber(String number);
+	
+	/**
+	 * 接送机
+	 */
+	int addFlightPicking(FlightPicking bean);
+	int getTotalFlightPickingByRoomNumber_Time(String roomNumber, Date time);
+	List<FlightPicking> getFlightPickingByRoomNumber_Time(String roomNumber, Date time, int startPage, int eachPage);
+	FlightPicking getFlightPickingById(Integer id);
+	int deleteFlightPickingById(Integer id);
+	int updateFlightPicking(FlightPicking fp);
 }

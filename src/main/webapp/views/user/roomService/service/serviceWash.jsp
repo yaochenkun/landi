@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceWash.css" rel="stylesheet" type="text/css" />
 <title>洗衣单收费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -29,14 +30,27 @@
 			<div class="bill-area">
 				<div class="search">
 					<span>房间号：</span><input id="searchWashButton" type="text" value="">
+					<span>日期：</span><input type="text" class="pack_maintain">
+					<a class="btn btn-edit btnEdit" onclick="requestWash(1);">搜索</a>	
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
-							<tr><th>日期</th><th>房间号</th><th>客户姓名</th><th>洗衣详情</th><th>价格</th></tr>
+							<tr>
+								<th>房间号</th>
+								<th>客户姓名</th>
+								<th>洗衣详情</th>
+								<th>件数</th>
+								<th>价格</th>
+								<th>发生时间</th>
+								<th>上传时间</th>
+								<th>最后编辑时间</th>
+								<th>操作</th>
+							</tr>
 						</thead>
-						<tbody id="washTable"></tbody>
+						<tbody id="washTable">
+						</tbody>
 					</table>
 					<!-- 费用 table end -->
 
@@ -48,13 +62,20 @@
 		</div>
 	</div>
 	<!-- 页面内容 end -->
-
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWash.js"></script>
 	<script type="text/javascript">
+		// 按时间查询接送机记录
+		var nowDate = new Date();
+		$(".pack_maintain").val(formatDateForm(nowDate));
+		$('.pack_maintain').date_input();
+
 	    // 拉取第一页 洗衣单收费信息
 		requestWash(1);
 	</script>

@@ -71,7 +71,7 @@ function formatDateForm(date) {
     return currentdate;
 };
 
-//将时间转换为 YYYY-mm-dd形式
+//将时间转换为 YYYY-mm形式
 function formatYearMonth(date) {
 	var dd = formatDateForm(date);
     return dd.substring(0, 7);

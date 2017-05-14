@@ -2,11 +2,10 @@
 .body-content{margin-left: 0;}
 
 #othersLi,#nameLi, #roomNumLi, #dateLi{display: inline-block;}
-#roomNumLi,#othersLi{margin-left: 10em;}
+#roomNumLi,#othersLi{margin-left: 5em;}
 #dateLi .span{width: 8em;}
-#newBusDate{border: 1px solid #aaa; padding: 2px 10px; width: 300px; display: inline-block; cursor: no-drop;}
 #roomIdWarning{margin-left: 700px;}
-#btn-search{margin-left: 20px; width: 150px; height: 30px; line-height: 16px; }
+#btn-search{margin-left: 40px; width: 150px; height: 30px; line-height: 16px; }
 
 table{width: 100%; margin: 2em auto;}
 td{border: 1px solid #ccc; line-height: 30px; width: 5%;}

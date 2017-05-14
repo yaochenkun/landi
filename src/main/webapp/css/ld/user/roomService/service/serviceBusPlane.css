@@ -12,6 +12,12 @@
 
 .btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px; border-radius: 0;}
 
+#editLink{color: #2277da;margin-right:10px;}
+#editLink:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
+
+#deleteLink{color: #e45e00;}
+#deleteLink:hover{color: #e45e00; border-bottom: 1px solid #e45e00;cursor: pointer;}
+
 /* 导航栏样式 */
 header .header-logo {
 	left: 45%;

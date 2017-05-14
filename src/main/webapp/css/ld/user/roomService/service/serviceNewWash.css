@@ -1,5 +1,5 @@
 .body-content{margin-left: 0; margin-top: 1em; font-size: 14px;}
-.body-content li{display: inline-block; margin-right: 90px;}
+.body-content li{display: inline-block; margin-right: 20px;}
 .body-content li input{padding: 0 10px; width: 110px;}
 .body-content li .span{margin-right: 5px;}
 .red-right{margin-left: 10px;}
@@ -12,23 +12,11 @@
 
 .goback{height: 26px; line-height: 12px; width: 100px; float: right;}
 
-
-.body table{width: 100%; margin: 30px 0;}
-table thead tr{height: 50px; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
-table th{background-color: #2277da; color: #fff; text-align: center;}
-table td{position: relative; line-height: 30px; padding: 0; text-align: center; font-size: 14px; border: 1px solid #ccc;}
-table th:nth-child(1){width: 40%;}
-table th:nth-child(2),table th:nth-child(3),table th:nth-child(4) {width: 12%;}
-table th:nth-child(5),table th:nth-child(6){width: 8%;}
-table th:nth-child(7){width: 5%;}
-
-table td input[type="radio"]{width: 16px; height: 16px; position: absolute; top: 4px; left: 10px;}
-table td input[type="text"]{width: 100%; border: none; padding: 0 5px; text-align: center;}
-table .td-hover{background-color: #f9f9f9;}
-table td .span{position: absolute; top: 2px; right: 10px;}
-table .price{color: #ff5722;}
-table .delete{color: #ff4d4d; cursor: pointer; display: none;}
-
+/* 增加项目 */
+.addOther {
+	cursor: pointer;
+	color: #2277da;
+}
 /* 导航栏样式 */
 header .header-logo {
 	left: 45%;
@@ -155,3 +143,19 @@ header .homeMenu .span {
 .bill-table table {
 	width: 100%;
 }
+
+.body table{width: 100%; margin: 30px 0;}
+.bill-table thead tr{height: 50px; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
+.bill-table th{background-color: #2277da; color: #fff; text-align: center;}
+.bill-table td{position: relative; line-height: 30px; padding: 0; text-align: center; font-size: 14px; border-bottom: 1px solid #ccc;border-right: 1px solid #ccc;border-left: 1px solid #ccc;}
+.bill-table th:nth-child(1){width: 40%;}
+.bill-table th:nth-child(2),table th:nth-child(3),table th:nth-child(4) {width: 12%;}
+.bill-table th:nth-child(5),table th:nth-child(6){width: 8%;}
+.bill-table th:nth-child(7){width: 5%;}
+
+.bill-table td input[type="radio"]{width: 16px; height: 16px; position: absolute; top: 4px; left: 10px;}
+.bill-table td input[type="text"]{width: 100%; border: none; padding: 0 5px; text-align: center;}
+.bill-table .td-hover{background-color: #f9f9f9;}
+.bill-table td .span{position: absolute; top: 2px; right: 10px;}
+.bill-table .price{color: #ff5722;}
+.bill-table .delete{color: #ff4d4d; cursor: pointer; display: none;}

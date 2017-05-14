@@ -19,7 +19,7 @@ public interface LaundryMapper {
     int updateByPrimaryKey(Laundry record);
     
     //add
-    Integer totalRec(String RN);
+    Integer totalRec(HashMap<String, Object> map);
     
     List<Laundry> getRec(HashMap<String, Object> map);
     
