@@ -49,100 +49,100 @@
 					<tbody>
 						<tr><td class="trTitle" rowspan="4">西装</td><td class="name">西服上衣</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="suitJacket"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="suitJacket"><span >10</span></td>
+							<td class="dry"><input type="radio" name="suitJacket"><span ></span></td>
+							<td class="pressing"><input type="radio" name="suitJacket"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">西服裤子</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="suitTrousers"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="suitTrousers"><span >8</span></td>
+							<td class="dry"><input type="radio" name="suitTrousers"><span ></span></td>
+							<td class="pressing"><input type="radio" name="suitTrousers"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">西服马甲</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="suitWaistcoat"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="suitWaistcoat"><span >8</span></td>
+							<td class="dry"><input type="radio" name="suitWaistcoat"><span ></span></td>
+							<td class="pressing"><input type="radio" name="suitWaistcoat"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">领带</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="tie"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="tie"><span >8</span></td>
+							<td class="dry"><input type="radio" name="tie"><span ></span></td>
+							<td class="pressing"><input type="radio" name="tie"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 
 
 						<tr><td class="trTitle" rowspan="10">上衣</td><td class="name">休闲上衣</td>
-							<td class="laundry"><input type="radio" name="casualCoat"><span >20</span></td>
-							<td class="dry"><input type="radio" name="casualCoat"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="casualCoat"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="casualCoat"><span ></span></td>
+							<td class="dry"><input type="radio" name="casualCoat"><span ></span></td>
+							<td class="pressing"><input type="radio" name="casualCoat"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
-						<tr><td class="name">毛衣</td>
+						<tr><td class="name">毛衣/毛衣外套</td>
 							<td class="laundry"></td>
-							<td  class="dry"><input type="radio" name="sweater"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="sweater"><span >10</span></td>
+							<td  class="dry"><input type="radio" name="sweater"><span ></span></td>
+							<td class="pressing"><input type="radio" name="sweater"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">风衣</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="windCoat"><span >65</span></td>
-							<td class="pressing"><input type="radio" name="windCoat"><span >22</span></td>
+							<td class="dry"><input type="radio" name="windCoat"><span ></span></td>
+							<td class="pressing"><input type="radio" name="windCoat"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羊绒外套（短）</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="shortCashmere"><span >65</span></td>
-							<td class="pressing"><input type="radio" name="shortCashmere"><span >22</span></td>
+							<td class="dry"><input type="radio" name="shortCashmere"><span ></span></td>
+							<td class="pressing"><input type="radio" name="shortCashmere"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羊绒外套（中）</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="mediumCashmere"><span >75</span></td>
-							<td class="pressing"><input type="radio" name="mediumCashmere"><span >25</span></td>
+							<td class="dry"><input type="radio" name="mediumCashmere"><span ></span></td>
+							<td class="pressing"><input type="radio" name="mediumCashmere"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羊绒外套（长）</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="longCashmere"><span >88</span></td>
-							<td class="pressing"><input type="radio" name="longCashmere"><span >30</span></td>
+							<td class="dry"><input type="radio" name="longCashmere"><span ></span></td>
+							<td class="pressing"><input type="radio" name="longCashmere"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羽绒外套（短）</td>
-							<td class="laundry"><input type="radio" name="shortCotton"><span >42</span></td>
-							<td class="dry"><input type="radio" name="shortCotton"><span >65</span></td>
+							<td class="laundry"><input type="radio" name="shortCotton"><span ></span></td>
+							<td class="dry"><input type="radio" name="shortCotton"><span ></span></td>
 							<td></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羽绒外套（中）</td>
-							<td class="laundry"><input type="radio" name="mediumCotton"><span >50</span></td>
-							<td><input type="radio" name="mediumCotton"><span >75</span></td>
+							<td class="laundry"><input type="radio" name="mediumCotton"><span ></span></td>
+							<td class="dry"><input type="radio" name="mediumCotton"><span ></span></td>
 							<td></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羽绒外套（长）</td>
-							<td class="laundry"><input type="radio" name="longCotton"><span >58</span></td>
-							<td class="dry"><input type="radio" name="longCotton"><span >88</span></td>
+							<td class="laundry"><input type="radio" name="longCotton"><span ></span></td>
+							<td class="dry"><input type="radio" name="longCotton"><span ></span></td>
 							<td></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">棉马甲</td>
-							<td class="laundry"><input type="radio" name="cottonWaistcoat"><span >42</span></td>
-							<td class="pressing"><input type="radio" name=cottonWaistcoat""><span >65</span></td>
+							<td class="laundry"><input type="radio" name="cottonWaistcoat"><span ></span></td>
+							<td class="dry"><input type="radio" name=cottonWaistcoat""><span ></span></td>
 							<td></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
@@ -150,138 +150,138 @@
 
 
 						<tr><td class="trTitle" rowspan="3">裤子</td><td class="name">休闲裤</td>
-							<td class="laundry"><input type="radio" name="jeans"><span >15</span></td>
-							<td class="dry"><input type="radio" name="jeans"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="jeans"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="jeans"><span ></span></td>
+							<td class="dry"><input type="radio" name="jeans"><span ></span></td>
+							<td class="pressing"><input type="radio" name="jeans"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">羊绒裤</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="woollen"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="woollen"><span >10</span></td>
+							<td class="dry"><input type="radio" name="woollen"><span ></span></td>
+							<td class="pressing"><input type="radio" name="woollen"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">短裤</td>
-							<td class="laundry"><input type="radio" name="shorts"><span >15</span></td>
-							<td class="dry"><input type="radio" name="shorts"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="shorts"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="shorts"><span ></span></td>
+							<td class="dry"><input type="radio" name="shorts"><span ></span></td>
+							<td class="pressing"><input type="radio" name="shorts"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 
 
 						<tr><td class="trTitle" rowspan="5">裙子</td><td class="name">裙子</td>
-							<td class="laundry"><input type="radio" name="dress"><span >15</span></td>
-							<td class="dry"><input type="radio" name="dress"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="dress"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="dress"><span ></span></td>
+							<td class="dry"><input type="radio" name="dress"><span ></span></td>
+							<td class="pressing"><input type="radio" name="dress"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">长裙</td>
-							<td class="laundry"><input type="radio" name="longDress"><span >20</span></td>
-							<td class="dry"><input type="radio" name="longDress"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="longDress"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="longDress"><span ></span></td>
+							<td class="dry"><input type="radio" name="longDress"><span ></span></td>
+							<td class="pressing"><input type="radio" name="longDress"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">真丝裙</td>
-							<td class="laundry"><input type="radio" name="silkDress"><span >25</span></td>
-							<td class="dry"><input type="radio" name="silkDress"><span >38</span></td>
-							<td class="pressing"><input type="radio" name="silkDress"><span >12</span></td>
+							<td class="laundry"><input type="radio" name="silkDress"><span ></span></td>
+							<td class="dry"><input type="radio" name="silkDress"><span ></span></td>
+							<td class="pressing"><input type="radio" name="silkDress"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">短裙</td>
-							<td class="laundry"><input type="radio" name="skirt"><span >15</span></td>
-							<td class="dry"><input type="radio" name="skirt"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="skirt"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="skirt"><span ></span></td>
+							<td class="dry"><input type="radio" name="skirt"><span ></span></td>
+							<td class="pressing"><input type="radio" name="skirt"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">百褶裙</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="pleated"><span >38</span></td>
-							<td class="pressing"><input type="radio" name="pleated"><span >12</span></td>
+							<td class="dry"><input type="radio" name="pleated"><span ></span></td>
+							<td class="pressing"><input type="radio" name="pleated"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 
 						<tr><td class="trTitle" rowspan="4">衬衫</td><td class="name">T恤</td>
-							<td class="laundry"><input type="radio" name="tshirt"><span >15</span></td>
-							<td class="dry"><input type="radio" name="tshirt"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="tshirt"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="tshirt"><span ></span></td>
+							<td class="dry"><input type="radio" name="tshirt"><span ></span></td>
+							<td class="pressing"><input type="radio" name="tshirt"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">衬衫</td>
-							<td class="laundry"><input type="radio" name="shirt"><span >15</span></td>
-							<td class="dry"><input type="radio" name="shirt"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="shirt"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="shirt"><span ></span></td>
+							<td class="dry"><input type="radio" name="shirt"><span ></span></td>
+							<td class="pressing"><input type="radio" name="shirt"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">丝质衬衫</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="silkShirt"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="silkShirt"><span >10</span></td>
+							<td class="dry"><input type="radio" name="silkShirt"><span ></span></td>
+							<td class="pressing"><input type="radio" name="silkShirt"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">女装衬衫</td>
-							<td class="laundry"><input type="radio" name="blouse"><span >15</span></td>
-							<td class="dry"><input type="radio" name="blouse"><span >25</span></td>
-							<td class="pressing"><input type="radio" name="blouse"><span >8</span></td>
+							<td class="laundry"><input type="radio" name="blouse"><span ></span></td>
+							<td class="dry"><input type="radio" name="blouse"><span ></span></td>
+							<td class="pressing"><input type="radio" name="blouse"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 
 
 						<tr><td class="trTitle" rowspan="8">其他</td><td class="name">睡衣</td>
-							<td class="laundry"><input type="radio" name="pyjamas"><span >20</span></td>
-							<td class="dry"><input type="radio" name="pyjamas"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="pyjamas"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="pyjamas"><span ></span></td>
+							<td class="dry"><input type="radio" name="pyjamas"><span ></span></td>
+							<td class="pressing"><input type="radio" name="pyjamas"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">围巾</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="scarf"><span >20</span></td>
-							<td class="pressing"><input type="radio" name="scarf"><span >10</span></td>
+							<td class="dry"><input type="radio" name="scarf"><span ></span></td>
+							<td class="pressing"><input type="radio" name="scarf"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">丝质围巾</td>
 							<td class="laundry"></td>
-							<td class="dry"><input type="radio" name="silkScarf"><span >30</span></td>
-							<td class="pressing"><input type="radio" name="silkScarf"><span >10</span></td>
+							<td class="dry"><input type="radio" name="silkScarf"><span ></span></td>
+							<td class="pressing"><input type="radio" name="silkScarf"><span ></span></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">背心</td>
-							<td class="laundry"><input type="radio" name="vest"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="vest"><span ></span></td>
 							<td class="dry"></td>
 							<td class="pressing"></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">手帕</td>
-							<td class="laundry"><input type="radio" name="hand"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="hand"><span ></span></td>
 							<td class="dry"></td>
 							<td class="pressing"></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
-						<tr><td class="name">手帽</td>
-							<td class="laundry"><input type="radio" name="gloves"><span >10</span></td>
+						<tr><td class="name">手套</td>
+							<td class="laundry"><input type="radio" name="gloves"><span ></span></td>
 							<td class="dry"></td>
 							<td class="pressing"></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
 							<td><span class="delete">清空</span>
 								<span style="display:none" class="unitPrice"></span></td></tr>
 						<tr><td class="name">帽子</td>
-							<td class="laundry"><input type="radio" name="hat"><span >10</span></td>
+							<td class="laundry"><input type="radio" name="hat"><span ></span></td>
 							<td class="dry"></td>
 							<td class="pressing"></td>
 							<td><input type="text" value="0"></td><td class="price"></td>
@@ -308,6 +308,9 @@
 		var nowDate = new Date();
 		$(".pack_maintain").val(formatDateForm(nowDate));
 		$('.pack_maintain').date_input();
+
+		//获取所有衣服的单价
+		requestUnitPrice();
 	</script>
 </body>
 </html>

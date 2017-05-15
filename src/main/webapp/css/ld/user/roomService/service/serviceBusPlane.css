@@ -10,8 +10,8 @@
 .bottom-page .recorTotal{color: #2277da;}
 .date_selector .button{line-height: 14px;}
 
-.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px; border-radius: 0;}
-
+.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px;}
+.btnRight{margin-left: 198px;}
 #editLink{color: #2277da;margin-right:10px;}
 #editLink:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
 

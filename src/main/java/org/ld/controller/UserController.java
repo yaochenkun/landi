@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
-import org.ld.app.Para;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -20,6 +19,7 @@ import org.ld.model.User;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
 import org.ld.utils.MD5Builder;
+import org.ld.utils.Para;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

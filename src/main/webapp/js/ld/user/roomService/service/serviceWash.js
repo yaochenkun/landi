@@ -85,6 +85,35 @@
 	});
 })();
 
+//查询所有衣服的水洗、干洗、单熨的单价
+var requestUnitPrice = function(){
+
+	$.ajax({
+		url:'/LD/userRoom/getLaundryPrice.action',
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		success:function(data){
+			
+			console.log(data);
+
+			//将单价写入表中
+			$(".bill-table tr:not(:first)").each(function(){
+
+				clothName = $(this).find(".name").text();
+				var prices = data[clothName].split(",");
+				var laundryPrice = prices[0];
+				var dryPrice = prices[1];
+				var pressingPrice = prices[2];
+				if(laundryPrice != -1) $(this).find(".laundry span").text(laundryPrice);
+				if(dryPrice != -1) $(this).find(".dry span").text(dryPrice);
+				if(pressingPrice != -1) $(this).find(".pressing span").text(pressingPrice);
+			});
+		}
+	});
+};
+
+
 ///////////////////////////////////////////////////////// 按房间号搜索洗衣单收费记录
 // 按房间号查询洗衣单收费记录
 // 请求洗衣单收费信息

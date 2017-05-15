@@ -1,4 +1,4 @@
-package org.ld.app;
+package org.ld.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

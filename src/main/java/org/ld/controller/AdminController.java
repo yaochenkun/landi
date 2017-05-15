@@ -14,6 +14,8 @@ import org.ld.model.User;
 
 import org.ld.service.UserService;
 import org.ld.utils.MD5Builder;
+import org.ld.utils.MyFile;
+import org.ld.utils.Para;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +27,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
-import org.ld.app.MyFile;
-import org.ld.app.Para;
 
 @Controller
 @RequestMapping("/HomeAdmin")

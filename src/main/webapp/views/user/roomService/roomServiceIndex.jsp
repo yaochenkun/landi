@@ -23,7 +23,8 @@
 					<a class="span" href="service/serviceIndex.jsp">客房服务</a>&nbsp;|&nbsp;
 					<a class="span" href="maintain/maintainIndex.jsp">客房维修</a>&nbsp;|&nbsp; 
 					<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;
-					<a class="span" href="javascript:void(0);">客房费用结算</a>
+					<a class="span" href="javascript:void(0);">客房费用结算</a>&nbsp;|&nbsp;
+					<a class="span" href="javascript:void(0);">事务提醒</a>
 				</div>
 			</div>
 			<div class="body">
@@ -31,7 +32,7 @@
 				<div class="index-list">
 					<div class="left-index">
 						<ul>
-							<li><img src="${pageContext.request.contextPath}/img/roomService/shirt.svg">
+							<li><img src="${pageContext.request.contextPath}/img/roomService/telephone.svg">
 								<span>客房服务</span>
 							</li>
 						</ul>
@@ -101,6 +102,25 @@
 					<ul>
 						<li><a href="">统计费用</a></li>
 						<li><a href="">其他费用</a></li>
+					</ul>
+				</div>
+				<!-- 客房费用结算 end -->
+
+				<!-- 事务提醒 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/calendar.svg">
+								<span>事务提醒</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="">站内信</a></li>
+						<li><a href="">个人日志</a></li>
+						<li><a href="">系统提醒</a></li>
 					</ul>
 				</div>
 				<!-- 客房费用结算 end -->

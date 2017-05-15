@@ -32,6 +32,8 @@
 					<span>房间号：</span><input id="searchWashButton" type="text" value="">
 					<span>日期：</span><input type="text" class="pack_maintain">
 					<a class="btn btn-edit btnEdit" onclick="requestWash(1);">搜索</a>	
+					<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
+					<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->

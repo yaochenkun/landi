@@ -27,9 +27,9 @@
 			<div class="nav-path">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="maintainIndex.jsp">客房维修</a>
+				<a href="maintainIndex.jsp" style="font-size: 14px;">客房维修</a>
 				<i class="icon-path"></i>
-				<a href="javascript:void(0);">维修统计</a>
+				<a href="javascript:void(0);" style="font-size: 14px;">维修统计</a>
 			</div>
 			<div class="bill-area">
 				<div class="table-title">

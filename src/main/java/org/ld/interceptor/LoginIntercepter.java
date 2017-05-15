@@ -27,15 +27,18 @@ public class LoginIntercepter implements HandlerInterceptor {
 		User curUser = (User) session.getAttribute("curUser");
 		if (curUser == null) {
 			// 没有登录
-			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+			System.out.println("没有登录");
+			response.sendRedirect(request.getContextPath() + "/views/login.jsp");
+//			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+
 			return false;
 		} else {
 			// 用户不是管理员且要访问管理员页面
 			if (url.toLowerCase().indexOf("admin") >= 0 && curUser.getROLE() > 0) {
-				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+				System.out.println("用户不是管理员且要访问管理员页面");
+				response.sendRedirect(request.getContextPath() + "/views/login.jsp");
 				return false;
 			} else {
-				
 				//是合法已登录过的用户
 				
 				//从cur_eve.getUser()中获取resetPass字段查看是否重置了密码

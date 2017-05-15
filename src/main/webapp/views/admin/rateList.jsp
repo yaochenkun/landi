@@ -23,6 +23,8 @@
 					<li class="liactive">
 						<a href="${pageContext.request.contextPath }/views/admin/rateList.jsp">能源费管理</a>
 					</li>
+					<li class="linormal"><a
+						href="${pageContext.request.contextPath }/views/admin/rateLaundry.jsp">洗衣费管理</a></li>
 					<li class="linormal">
 						<a href="${pageContext.request.contextPath }/views/admin/rateOther.jsp">其他费用管理</a>
 					</li>

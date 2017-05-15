@@ -139,6 +139,77 @@ var setRate = function(){
 	});
 }
 
+//获取所有衣服的水洗、干洗、单熨的单价
+var requestClothesUnitPrice = function(){
+
+	$.ajax({
+		url:'/LD/HomeAdmin/getLaundryPrice.action',
+		type:'post',
+		dataType:'json',
+		contentType:'application/json',
+		success:function(data){
+			
+			console.log(data);
+
+			//将单价写入表中
+			$(".bill-table tr:not(:first)").each(function(){
+
+				clothName = $(this).find(".name").text();
+				var prices = data[clothName].split(",");
+				var laundryPrice = prices[0];
+				var dryPrice = prices[1];
+				var pressingPrice = prices[2];
+				if(laundryPrice != -1) $(this).find(".laundry input").val(laundryPrice);
+				if(dryPrice != -1) $(this).find(".dry input").val(dryPrice);
+				if(pressingPrice != -1) $(this).find(".pressing input").val(pressingPrice);
+			});
+		}
+	});
+};
+
+//更新洗衣单价
+var setLaundray = function(){
+
+	unitPrices = {};
+
+	//获取每一行整合得到所有衣服的单价map
+	$("table tr:not(:first)").each(function(){
+
+		var clothName = $(this).find(".name").text();
+		var laundryPrice = $(this).find(".laundry input").val();
+		var dryPrice = $(this).find(".dry input").val();
+		var pressingPrice = $(this).find(".pressing input").val();
+
+		var price = "";
+		if(laundryPrice == undefined) laundryPrice = -1;
+		if(dryPrice == undefined) dryPrice = -1;
+		if(pressingPrice == undefined) pressingPrice = -1;
+
+		price = laundryPrice + "," + dryPrice + "," + pressingPrice;
+		unitPrices[clothName] = price;
+	});
+
+	$.ajax({
+		url:'/LD/HomeAdmin/setLaundryPrice.action',
+		type:'post',
+		dataType:'json',
+		data: JSON.stringify(unitPrices),
+		contentType:'application/json',
+		success:function(data){
+			
+			console.log(data);
+
+	    	if (data == 1) {
+	    		alert("洗衣费单价变更成功！");
+	    		window.location.href = "/LD/views/admin/rateLaundry.jsp";
+	    	} else if (data == 0){
+	    		alert("洗衣费单价变更失败！");
+	    	}
+		}
+	});
+
+};
+
 // 获取其他费用管理信息
 var requestAjaxCharge = function(){
 	$.ajax({

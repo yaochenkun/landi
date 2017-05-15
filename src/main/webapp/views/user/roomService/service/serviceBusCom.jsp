@@ -43,7 +43,11 @@
 						</div>
 					</div>
 					<a class="btn btn-edit btnEdit" onclick="searchFareByDate(1);">搜索</a>
+					<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
+					<a class="btn btn-edit btnEdit" style="margin-left: 0em;" onclick="printList();">打印</a>
 				</div>
+				
+
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>

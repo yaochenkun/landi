@@ -34,6 +34,7 @@ import org.ld.service.RoomService;
 import org.ld.service.ServerService;
 import org.ld.service.UserService;
 import org.ld.utils.BeanPrinter;
+import org.ld.utils.Para;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -574,27 +575,11 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/searchWashModeUnitPrice") //查询洗衣单价（种类+方式）
-	@ResponseBody
-	public Map<String, Object> searchWashModeUnitPrice(HttpSession session, @RequestBody String data) {
-		JSONObject dataJson = JSONObject.parseObject(data);
-		User curUser = (User) session.getAttribute("curUser");
-		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
-			ans.put("State", "Invalid");
-			return ans;
-		} else {
-			ans.put("State", "Valid");
-		}
-		
-		String clothesName = dataJson.getString("clothesName");
-		String mode = dataJson.getString("mode");
-		Integer unitPrice = Config.laundry_price.get(clothesName).get(mode);
-		ans.put("unitPrice", unitPrice);
-		
-		return ans;
+	@RequestMapping("/getLaundryPrice")
+	public @ResponseBody Map<String, String> getLaundryPrice(HttpSession session) {
+		Para p = new Para();
+		return p.getParaPair("laundry_price", 0, 1);
 	}
-	
 	
 	@RequestMapping("/searchFares") // 按房间号+时间查询车费信息(一组)
 	@ResponseBody
