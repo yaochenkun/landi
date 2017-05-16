@@ -21,6 +21,8 @@ public interface ShuttleBusMapper {
     //add
     Integer totalRec(HashMap<String, Object> map);
     
+    List<ShuttleBus> getAllRec(HashMap<String, Object> map);
+    
     List<ShuttleBus> getRec(HashMap<String, Object> map);
     
     ShuttleBus getCertainRec(HashMap<String, Object> map);

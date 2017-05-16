@@ -22,5 +22,7 @@ public interface FlightPickingMapper {
     //add
     int getTotalByRoomNumber_Time(HashMap<String, Object> map);
     
+    List<FlightPicking> getAll(HashMap<String, Object> map);
+    
     List<FlightPicking> selectByRoomNumber_Time(HashMap<String, Object> map);
 }

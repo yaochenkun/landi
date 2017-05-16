@@ -49,7 +49,7 @@
 												onclick="requestFirstElecByRoomNum(this)">搜索电费</a>
 										</div>
 									</div></th>
-								<th><span>客人姓名</span></th>
+								<th><span>客户姓名</span></th>
 								<th><span>表号</span></th>
 								<th><span>上月表数</span></th>
 								<th><span>抄表</span></th>

@@ -49,7 +49,7 @@
 							<input id="serviceRoomNumber" type="text" value="W35-1" />
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
-						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">客户姓名：</span><input type="text" value="Alice" /></li>
 						<li><span class="span">物品：</span><input type="text" value="衣服" /></li>
 						<li><span class="span">数量：</span><input type="text" value="1" /></li>
 						<li><span class="span">金额：</span><input type="text" value="12.5" /></li>

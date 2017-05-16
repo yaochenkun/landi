@@ -235,6 +235,15 @@ public class RoomServiceImpl implements RoomService {
 		
 		return laundryMapper.getRec(map);
 	}
+	
+	@Override
+	public List<Laundry> getAllWashes(String rn, Date date) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("DATE", date);
+		return laundryMapper.getAll(map);
+	}
 
 	@Override
 	public int addWash(Laundry l) {
@@ -299,6 +308,16 @@ public class RoomServiceImpl implements RoomService {
 		map.put("MON", mon);
 		
 		return shuttleBusMapper.totalRec(map);
+	}
+	
+	@Override
+	public List<ShuttleBus> getAllShuttleBus(String rn, Integer year, Integer mon) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("YEAR", year);
+		map.put("MON", mon);
+		return shuttleBusMapper.getAllRec(map);
 	}
 
 	@Override
@@ -519,5 +538,13 @@ public class RoomServiceImpl implements RoomService {
 			logger.error(e.getCause());
 			return 0;
 		}
+	}
+
+	@Override
+	public List<FlightPicking> getAllFlightPickings(String roomNumber, Date time) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUMBER", roomNumber);
+		map.put("TIME", time);
+		return flightPickingMapper.getAll(map);
 	}
 }

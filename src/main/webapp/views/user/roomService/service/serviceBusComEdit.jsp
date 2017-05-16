@@ -37,9 +37,9 @@
 				<div class="body-content">
 					<ul>
 						<li id="dateLi"><span>通勤日期：</span><input id="editServiceBusDate" type="text" class="pack_maintain"/></li>
-						<li id="roomNumLi"><span>房间号：</span><input id="editServiceBusRoomNum" type="text" /></li>
-						<li id="nameLi"><span>客人姓名：</span><input id="editGuestName" type="text" /></li>
-						<li id="othersLi"><span>其他人员：</span><input id="editOthersName" type="text" /></li>
+						<li id="roomNumLi"><span>房间号：</span><input id="editServiceBusRoomNum" type="text" disabled="disabled"/></li>
+						<li id="nameLi"><span>客户姓名：</span><input id="guestName" type="text" disabled="disabled" /></li>
+						<li id="othersLi"><span>其他人员：</span><input id="editOthersName" type="text"/></li>
 						<table id="newBusComTable" style="display: table;">
 							<tbody>
 								<tr><td>日期</td><td>1日</td><td>2日</td><td>3日</td><td>4日</td>

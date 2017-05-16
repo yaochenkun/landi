@@ -98,9 +98,10 @@ var requestUnitPrice = function(){
 			console.log(data);
 
 			//将单价写入表中
-			$(".bill-table tr:not(:first)").each(function(){
+			$(".bill-table tr:not(:first:last)").each(function(){
 
 				clothName = $(this).find(".name").text();
+				if(data[clothName] == undefined) return;
 				var prices = data[clothName].split(",");
 				var laundryPrice = prices[0];
 				var dryPrice = prices[1];
@@ -656,6 +657,136 @@ var serviceWashDelete = function(id){
 			}else if(data == 0){
 				showModalBox("error","删除失败");
 			}
+		}
+	});
+};
+
+//导出洗衣单列表至 excel中
+var exportList = function(){
+    var BB = self.Blob;
+    var fileName = "WashList_" + formatDateDot(new Date()) + ".csv";
+    var content = ",,,,洗衣单记录表\n房间号,客户姓名,洗衣详情,合计件数,合计费用,发生时间,上传时间,最后编辑时间\n";
+    
+    //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchWashButton").val();
+	var date = $(".pack_maintain").val();
+	console.log("请求 房间："+ roomNum + " 所有洗衣单收费信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllWashes.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+
+				//拼接洗衣详情字串
+				clothes = JSON.parse(record.clothes);
+				others = JSON.parse(record.other);
+				details = '';
+				clothes.map(function(cloth){
+					details += cloth["mode"] + "：" + cloth["name"] + "x" + cloth["count"] + "\n";
+				});
+				others.map(function(other){
+					details += other["mode"] + "：" + other["name"] + "x" + other["count"] + "\n";
+				});
+				details = '\"'+ details +'\"';
+
+				content += record.room_NUM + "," + 
+						   record.guest_NAME + "," + 
+						   details + "," +
+						   record.count + "," + 
+						   record.total_PRICE + " 元," +
+						   formatDate(new Date(record.occur_TIME)) + "," + 
+						   formatDate(new Date(record.import_TIME)) + "," + 
+						   formatDate(new Date(record.edit_TIME)) + "\n";
+			});
+
+			saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+		}
+	});
+};
+
+
+//客户姓名联动
+var associateGuestName = function(element){
+
+	var roomNum = $(element).val(); //这里是需要根据页面元素变的
+	$.ajax({
+		url:'/LD/userRoom/searchGuestName.action',
+		type:'post',
+		dataType:'json',
+		data:'{"roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			if(data.State == "Valid") {
+				if(data.guest_NAME != null) {
+					$("#guestName").val(data.guest_NAME); //这里是需要根据页面元素变的
+				} else {
+					$("#guestName").val("尚无客户，请重新填写房间号");
+				}
+			} else {
+				showModalBox("error", "无操作权限");
+			}
+		}
+	});
+
+};
+
+//打印洗衣单
+var printList = function()  
+{  
+	printData = [];
+
+	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchWashButton").val();
+	var date = $(".pack_maintain").val();
+	console.log("请求 房间："+ roomNum + " 所有洗衣单收费信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllWashes.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+
+				//拼接洗衣详情字串
+				clothes = JSON.parse(record.clothes);
+				others = JSON.parse(record.other);
+				details = '';
+				clothes.map(function(cloth){
+					details += cloth["mode"] + ":" + cloth["name"] + "x" + cloth["count"] + "</br>";
+				});
+				others.map(function(other){
+					details += other["mode"] + ":" + other["name"] + "x" + other["count"] + "</br>";
+				});
+
+
+				curRow = {};
+				curRow["房间号"] = record.room_NUM;
+				curRow["客户姓名"] = record.guest_NAME;
+				curRow["洗衣详情"] = details;
+				curRow["合计件数"] = record.count;
+				curRow["合计费用"] = record.total_PRICE + " 元";
+				curRow["发生时间"] = formatDate(new Date(record.occur_TIME));
+				curRow["上传时间"] = formatDate(new Date(record.import_TIME));
+				curRow["最后编辑时间"] = formatDate(new Date(record.edit_TIME));
+
+				printData.push(curRow);
+			});
+
+			//打印
+ 			printJS({printable: printData, 
+ 			 		 properties: ['房间号', '客户姓名', '洗衣详情', '合计件数', '合计费用', '发生时间', '上传时间', '最后编辑时间'], 
+ 			 		 type: 'json',
+ 		     	     font_size: '9pt'});
 		}
 	});
 };

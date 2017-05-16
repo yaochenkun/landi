@@ -211,3 +211,116 @@ var updateBusPlane = function(id){
 		}
 	});
 };
+
+//-----------客房服务页面公有的-------------------------------------
+
+//客户姓名联动
+var associateGuestName = function(element){
+
+	var roomNum = $(element).val(); //这里是需要根据页面元素变的
+	$.ajax({
+		url:'/LD/userRoom/searchGuestName.action',
+		type:'post',
+		dataType:'json',
+		data:'{"roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			if(data.State == "Valid") {
+				if(data.guest_NAME != null) {
+					$(".body-content input").eq(3).val(data.guest_NAME); //这里是需要根据页面元素变的
+				} else {
+					$(".body-content input").eq(3).val("尚无客户，请重新填写房间号");
+				}
+			} else {
+				showModalBox("error", "无操作权限");
+			}
+		}
+	});
+
+};
+
+
+//导出接送机列表至 excel中
+var exportList = function(){
+    var BB = self.Blob;
+    var fileName = "BusPlaneList_" + formatDateDot(new Date()) + ".csv";
+    var content = ",,,,,接送机记录表\n房间号,客户姓名,接送/送机,航班,车牌,接送人（电话）,联络人（电话）,发生时间,上传时间,最后编辑时间\n";
+    
+    //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchRoomNum").val();
+	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有接送机信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllFlightPickings.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+	
+				content += record.room_NUMBER + "," + 
+						   record.guest_NAME + "," + 
+						   (record.type == "welcome" ? "接机":"送机") + "," +
+						   record.flight_NUMBER + "," + 
+						   record.plate_NUMBER + "," +
+						   record.picker_NAME + "（" + record.picker_TELE + "）" + "," + 
+						   record.contact_NAME + "（" + record.contact_TELE + "）" + "," + 
+						   formatDate(new Date(record.occur_TIME)) + "," + 
+						   formatDate(new Date(record.import_TIME)) + "," + 
+						   formatDate(new Date(record.edit_TIME)) + "\n";
+			});
+
+			saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+		}
+	});
+};
+
+//打印接送机车费
+var printList = function()  
+{  
+	printData = [];
+
+	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchRoomNum").val();
+	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有接送机信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllFlightPickings.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+			
+
+				curRow = {};
+				curRow["房间号"] = record.room_NUMBER;
+				curRow["客户姓名"] = record.guest_NAME;
+				curRow["接送/送机"] = record.type == "welcome" ? "接机":"送机";
+				curRow["航班"] = record.flight_NUMBER;
+				curRow["车牌"] = record.plate_NUMBER;
+				curRow["接送人（电话）"] = record.picker_NAME + "</br>（" + record.picker_TELE + "）";
+				curRow["联络人（电话）"] = record.contact_NAME + "</br>（" + record.contact_TELE + "）";
+				curRow["发生时间"] = formatDate(new Date(record.occur_TIME));
+				curRow["上传时间"] = formatDate(new Date(record.import_TIME));
+				curRow["最后编辑时间"] = formatDate(new Date(record.edit_TIME));
+
+				printData.push(curRow);
+			});
+
+			//打印
+ 			printJS({printable: printData, 
+ 			 		 properties: ['房间号','客户姓名','接送/送机','航班','车牌','接送人（电话）','联络人（电话）','发生时间','上传时间','最后编辑时间'], 
+ 			 		 type: 'json',
+ 		     	     font_size: '8pt'});
+		}
+	});
+};

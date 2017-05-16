@@ -33,7 +33,7 @@
 					<span>日期：</span><input type="text" class="pack_maintain">
 					<a class="btn btn-edit btnEdit" onclick="requestWash(1);">搜索</a>	
 					<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-					<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
+					<a class="btn btn-edit btnEdit" onclick="printList('hahaha');">打印</a>
 				</div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
@@ -43,8 +43,8 @@
 								<th>房间号</th>
 								<th>客户姓名</th>
 								<th>洗衣详情</th>
-								<th>件数</th>
-								<th>价格</th>
+								<th>合计件数</th>
+								<th>合计费用</th>
 								<th>发生时间</th>
 								<th>上传时间</th>
 								<th>最后编辑时间</th>
@@ -70,6 +70,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
+
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+	
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWash.js"></script>
 	<script type="text/javascript">

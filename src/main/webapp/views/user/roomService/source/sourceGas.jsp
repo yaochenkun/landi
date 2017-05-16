@@ -49,7 +49,7 @@
 												onclick="requestFirstGasByRoomNum(this)">搜索燃气费</a>
 										</div>
 									</div></th>
-								<th rowspan="2"><span>客人姓名</span></th>
+								<th rowspan="2"><span>客户姓名</span></th>
 								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;一</span></th>
 								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;二</span></th>
 								<th rowspan="2">抄表日期</th>

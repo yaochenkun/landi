@@ -42,17 +42,17 @@
 							</div>					
 						</li>
 						<li><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="W35-1" />
+							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this)"/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
-						<li><span class="span">客人姓名：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">客户姓名：</span><input type="text" value="" disabled="disabled" /></li>
 						<li><span class="span">发生时间：</span><input type="text" class="pack_maintain"></li>
-						<li><span class="span">航班：</span><input type="text" value="CA1344" /></li>
-						<li><span class="span">车牌：</span><input type="text" value="S12345" /></li>
-						<li><span class="span">接送人：</span><input type="text" value="Tom" /></li>
-						<li><span class="span">接送人电话：</span><input type="text" value="12345678910" /></li>
-						<li><span class="span">联络人：</span><input type="text" value="Bob" /></li>
-						<li><span class="span">联络人电话：</span><input type="text" value="12345678910" /></li>
+						<li><span class="span">航班：</span><input type="text" value="" /></li>
+						<li><span class="span">车牌：</span><input type="text" value="" /></li>
+						<li><span class="span">接送人：</span><input type="text" value="" /></li>
+						<li><span class="span">接送人电话：</span><input type="text" value="" /></li>
+						<li><span class="span">联络人：</span><input type="text" value="" /></li>
+						<li><span class="span">联络人电话：</span><input type="text" value="" /></li>
 						<li><span class="span"></span><a onclick="addBusPlane();" class="btn btn-goback goback">确认添加</a></li>
 					</ul>
 				</div>

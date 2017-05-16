@@ -493,6 +493,33 @@ public class UserRoomController {
 		return ans;
 	}
 	
+	@RequestMapping("/searchAllWashes") // 按房间号+时间查询所有车费信息(一组)
+	@ResponseBody
+	public Map<String, Object> searchAllWashes(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(dataJson.getString("date"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Laundry> allRecord = roomService.getAllWashes(roomNum, date);
+		ans.put("dataList", allRecord);
+		return ans;
+	}
+	
 	@RequestMapping("/addWash")   // 添加洗衣单收费记录
 	@ResponseBody
 	public Integer addWash(HttpSession session,  @RequestBody String data) {
@@ -622,6 +649,30 @@ public class UserRoomController {
 		return ans;
 	}
 	
+	@RequestMapping("/searchAllFares") // 按房间号+时间查询所有车费信息(一组)
+	@ResponseBody
+	public Map<String, Object> searchAllFares(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");
+		String date = dataJson.getString("date");
+		int year = Integer.parseInt(date.substring(0,4));
+		int mon = Integer.parseInt(date.substring(5));
+		List<ShuttleBus> allRecord = roomService.getAllShuttleBus(roomNum, year, mon);
+		ans.put("dataList", allRecord);
+		return ans;
+	}
+	
 	@RequestMapping("/searchFare") // 按房间号+时间查询车费信息(单个)
 	@ResponseBody
 	public Map<String, Object> searchFare(HttpSession session, @RequestBody String data) {
@@ -710,7 +761,6 @@ public class UserRoomController {
 				sb.setROOM_NUM(roomNum);
 				sb.setGUEST_NAME(guest.getGUEST_NAME());
 				sb.setGUEST_ID(id);
-				sb.setOTHER_PEOPLE(othersName);
 
 				Calendar calendar = Calendar.getInstance(); //构建发生时间
 				calendar.set(Calendar.YEAR, year);
@@ -1369,6 +1419,7 @@ public class UserRoomController {
 		FlightPicking bean = new FlightPicking();
 		String roomNum = dataJson.getString("roomNum");
 		if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
+		if(guestService.getGuestByRoomNumber(roomNum) == null) return 0; //检测房间号是否合法
 		bean.setROOM_NUMBER(roomNum);
 		bean.setGUEST_NAME(dataJson.getString("guestName"));
 		bean.setTYPE(dataJson.getString("type"));
@@ -1434,6 +1485,28 @@ public class UserRoomController {
 		return ans;
 	}
 	
+	@RequestMapping("/searchAllFlightPickings") // 按房间号+时间查询所有车费信息(一组)
+	@ResponseBody
+	public Map<String, Object> searchAllFlightPickings(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");
+		Date date = dataJson.getDate("date");
+		List<FlightPicking> allRecord = roomService.getAllFlightPickings(roomNum, date);
+		ans.put("dataList", allRecord);
+		return ans;
+	}
+	
 	@RequestMapping("/searchFlightPickingById")
 	@ResponseBody
 	public Map<String, Object> searchFlightPickingById(HttpSession session, @RequestBody String data) {
@@ -1487,6 +1560,7 @@ public class UserRoomController {
 		try{
 			String roomNum = dataJson.getString("roomNum");
 			if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
+			if(guestService.getGuestByRoomNumber(roomNum) == null) return 0; //检测该房间目前是否有用户入住
 			
 			Integer id = dataJson.getInteger("id");
 			FlightPicking bean = roomService.getFlightPickingById(id);
@@ -1510,5 +1584,31 @@ public class UserRoomController {
 			System.err.println(e);
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/searchGuestName")
+	@ResponseBody
+	public Map<String, Object> searchGuestName(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String roomNum = dataJson.getString("roomNum");
+			
+		Guest guest = guestService.getGuestByRoomNumber(roomNum);
+		if(guest == null) 
+			ans.put("guest_NAME", null);
+		else
+			ans.put("guest_NAME", guest.getGUEST_NAME());
+		
+		return ans;
 	}
 }

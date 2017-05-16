@@ -81,6 +81,8 @@ public interface RoomService {
 	
 	Laundry getWashById(Integer id);
 	
+	List<Laundry> getAllWashes(String rn, Date date);
+	
 	/**
 	 * 通勤车
 	 */
@@ -100,6 +102,7 @@ public interface RoomService {
 	
 	int getFareUnitPrice(String roomNum);
 	
+	List<ShuttleBus> getAllShuttleBus(String rn, Integer year, Integer mon);
 	/**
 	 * 维修报修
 	 */
@@ -124,6 +127,7 @@ public interface RoomService {
 	 */
 	int addFlightPicking(FlightPicking bean);
 	int getTotalFlightPickingByRoomNumber_Time(String roomNumber, Date time);
+	List<FlightPicking> getAllFlightPickings(String roomNumber, Date time);
 	List<FlightPicking> getFlightPickingByRoomNumber_Time(String roomNumber, Date time, int startPage, int eachPage);
 	FlightPicking getFlightPickingById(Integer id);
 	int deleteFlightPickingById(Integer id);

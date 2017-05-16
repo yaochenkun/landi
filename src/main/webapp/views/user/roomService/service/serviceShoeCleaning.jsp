@@ -41,7 +41,7 @@
 												onclick="requestFirstShoeCleaningByRoomNum(this)">搜索擦鞋费</a>
 										</div>
 									</div></th>
-								<th><span>客人姓名</span>
+								<th><span>客户姓名</span>
 								<p>Customer Name</p> <!--<div class="search-customerName">
 									<div class="search-wrap">
 										<input type="text" class="search-input" placeholder="请输入客户姓名..." />

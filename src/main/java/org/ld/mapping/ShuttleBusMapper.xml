@@ -544,6 +544,11 @@
     ROOM_NUM like CONCAT('%', #{RN}, '%') and
    	YEAR = #{YEAR} and MONTH = #{MON}
   </select>
+  <select id="getAllRec" resultMap="BaseResultMap" parameterType="map">
+    select * from shuttle_bus where 
+    ROOM_NUM like CONCAT('%', #{RN}, '%') and
+   	YEAR = #{YEAR} and MONTH = #{MON}
+  </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from shuttle_bus where 
     ROOM_NUM like CONCAT('%', #{RN}, '%') and

@@ -178,6 +178,10 @@
     select count(*) from laundry 
 	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
   </select>
+  <select id="getAll" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry 
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+  </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry  
     where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}

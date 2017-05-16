@@ -33,7 +33,8 @@
 			<section class="activities"> 
 			<!-- 新建用户 start-->
 			<div class="new">
-				<a class="btn btn-edit" onclick="exportUserList();">导出列表</a>
+				<a class="btn btn-edit" onclick="exportUserList();">导出</a>
+				<a class="btn btn-edit" onclick="printUserList();">打印</a>
 				<a href="${pageContext.request.contextPath}/views/admin/newUser.jsp" class="btn btn-new">新建用户</a>
 			</div>
 			<!-- 新建用户  end-->

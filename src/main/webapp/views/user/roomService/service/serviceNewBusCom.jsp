@@ -37,10 +37,10 @@
 					<ul>
 						<li id="dateLi"><span>通勤日期：</span><input id="newBusDate" type="text" class="pack_maintain"/></li>
 						<li id="roomNumLi"><span>房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="W33-3" />
+							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this)"/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="red">不能为空！</span></li>
-						<li id="nameLi"><span>客人姓名：</span><input id="guestName" type="text" value="Alice" /></li>
+						<li id="nameLi"><span>客户姓名：</span><input id="guestName" type="text" value="" disabled="disabled" /></li>
 						<li id="othersLi"><span>其他人员：</span><input id="othersName" type="text" value="" /></li>
 						<a href="javascript:void(0);" class="btn btn-goback" id="btn-search" onclick="searchBusCom();">搜索本月通勤车记录</a>
 						<table id="newBusComTable">

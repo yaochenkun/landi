@@ -40,7 +40,8 @@
 			<input type="text" placeholder="房间号..." />
 			<input type="text" placeholder="姓名..." />
 			<a class="btnSearch">搜索</a>
-			<a class="btn btn-edit" onclick="exportGuestList();">导出列表</a>
+			<a class="btn btn-edit" style="margin-left:10px;" onclick="printGuestList();">打印</a>
+			<a class="btn btn-edit" onclick="exportGuestList();">导出</a>
 		</div>
 		<div class="main-page">
 			<div class="bill-area">

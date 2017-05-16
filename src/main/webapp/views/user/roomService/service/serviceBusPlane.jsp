@@ -45,10 +45,17 @@
 					<table>
 						<thead>
 					    	<tr>
-					    		<th>房间号</th><th>客人姓名</th><th>接送机</th>
-					    		<th>航班</th><th>车牌</th><th>接送人（电话）</th>
+					    		<th>房间号</th>
+					    		<th>客户姓名</th>
+					    		<th>接机/送机</th>
+					    		<th>航班</th>
+					    		<th>车牌</th>
+					    		<th>接送人（电话）</th>
 					    		<th>联络人（电话）</th>
-					    		<th>发生时间</th><th>上传时间</th><th>最后编辑时间</th><th>操作</th>
+					    		<th>发生时间</th>
+					    		<th>上传时间</th>
+					    		<th>最后编辑时间</th>
+					    		<th>操作</th>
 					    	</tr>
 						</thead>
 						<tbody id="busPlaneTbody"></tbody>
@@ -69,6 +76,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusPlane.js"></script>
 	<script type="text/javascript">

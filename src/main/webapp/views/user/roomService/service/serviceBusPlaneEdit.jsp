@@ -42,10 +42,10 @@
 							</div>					
 						</li>
 						<li><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="" />
+							<input id="serviceRoomNumber" type="text" value="" disabled="disabled"/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
-						<li><span class="span">客人姓名：</span><input type="text" value="" /></li>
+						<li><span class="span">客户姓名：</span><input type="text" value="" disabled="disabled"/></li>
 						<li><span class="span">发生时间：</span><input type="text" class="pack_maintain"></li>
 						<li><span class="span">航班：</span><input type="text" value="" /></li>
 						<li><span class="span">车牌：</span><input type="text" value="" /></li>

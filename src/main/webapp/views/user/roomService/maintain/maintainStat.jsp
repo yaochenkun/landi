@@ -48,7 +48,8 @@
 						<!-- 双日历 end -->
 						<a class="btn btn-edit btnEdit" onclick="requestMaintainByDate(1);">搜索</a>
 					</div>
-					<a href="" class="btn btn-edit btnExcel">导出列表</a>
+					<a href ="" class="btn btn-edit btnExcel" style="margin-left:10px;" onclick="printList();">打印</a>
+					<a href="" class="btn btn-edit btnExcel" onclick="exportList();">导出</a>
 				</div>
 
 				<div class="bill-table">

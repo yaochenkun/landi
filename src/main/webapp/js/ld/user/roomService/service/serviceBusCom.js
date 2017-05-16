@@ -235,10 +235,10 @@ var searchBusComEdit = function(id){
 				return;
 			} 
 			
-			//表上的房间号、时间、客人姓名
+			//表上的房间号、时间、客户姓名
 			$("#editServiceBusDate").val(data.record.year + "-" + data.record.month);
 			$("#editServiceBusRoomNum").val(data.record.room_NUM);
-			$("#editGuestName").val(data.record.guest_NAME);
+			$("#guestName").val(data.record.guest_NAME);
 			$("#editOthersName").val(data.record.other_PEOPLE);
 			
 			// 清空表格
@@ -299,7 +299,7 @@ var requestUpdateServiceBus = function(id){
 	var roomNum = $("#editServiceBusRoomNum").val();
 	var datearr = $("#editServiceBusDate").val().split("-");
 	var date = datearr[0] + "-" + datearr[1];
-	var name = $("#editGuestName").val();
+	var name = $("#guestName").val();
 	var othersName = $("#editOthersName").val();
 
 	// 遍历日期
@@ -352,4 +352,110 @@ var serviceBusComDelete = function(id){
 		}
 	});
 }
+
+//客户姓名联动
+var associateGuestName = function(element){
+
+	var roomNum = $(element).val(); //这里是需要根据页面元素变的
+	$.ajax({
+		url:'/LD/userRoom/searchGuestName.action',
+		type:'post',
+		dataType:'json',
+		data:'{"roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			if(data.State == "Valid") {
+				if(data.guest_NAME != null) {
+					$("#guestName").val(data.guest_NAME); //这里是需要根据页面元素变的
+				} else {
+					$("#guestName").val("尚无客户，请重新填写房间号");
+				}
+			} else {
+				showModalBox("error", "无操作权限");
+			}
+		}
+	});
+
+};
+
+//导出通勤车列表至 excel中
+var exportList = function(){
+    var BB = self.Blob;
+    var fileName = "BusComList_" + formatDateDot(new Date()) + ".csv";
+    var content = ",,,,通勤车记录表\n房间号,客户姓名,通勤天数,合计费用,通勤年月,其他人员,上传时间,最后编辑时间\n";
+    
+    //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchRoomNum").val();
+	var date = date || $("#month_picker").text();
+	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有车费信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllFares.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+			
+				content += record.room_NUM + "," + 
+						   record.guest_NAME + "," + 
+						   record.days + "," +
+						   record.total + " 元," + 
+						   record.year + "." + record.month + "," +
+						   record.other_PEOPLE + "," + 
+						   formatDate(new Date(record.import_TIME)) + "," + 
+						   formatDate(new Date(record.edit_TIME)) + "\n";
+			});
+
+			saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+		}
+	});
+};
+
+//打印通勤车费
+var printList = function()  
+{  
+	printData = [];
+
+	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
+	var roomNum = $("#searchRoomNum").val();
+	var date = date || $("#month_picker").text();
+	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有车费信息");
+	$.ajax({
+		url:'/LD/userRoom/searchAllFares.action',
+		type:'post',
+		dataType:'json',
+		data:'{"date":"'+ date +'","roomNum":"'+ roomNum +'"}',
+		contentType:'application/json',
+		success:function(data){
+			console.log(data);
+
+			(data.dataList).map(function(record){
+			
+
+				curRow = {};
+				curRow["房间号"] = record.room_NUM;
+				curRow["客户姓名"] = record.guest_NAME;
+				curRow["通勤天数"] = record.days;
+				curRow["合计费用"] = record.total + " 元";
+				curRow["通勤年月"] = record.year + "." + record.month;
+				curRow["其他人员"] = record.other_PEOPLE;
+				curRow["上传时间"] = formatDate(new Date(record.import_TIME));
+				curRow["最后编辑时间"] = formatDate(new Date(record.edit_TIME));
+
+				printData.push(curRow);
+			});
+
+			//打印
+ 			printJS({printable: printData, 
+ 			 		 properties: ['房间号', '客户姓名', '通勤天数', '合计费用', '通勤年月', '其他人员', '上传时间', '最后编辑时间'], 
+ 			 		 type: 'json',
+ 		     	     font_size: '9pt'});
+		}
+	});
+};
 

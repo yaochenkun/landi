@@ -21,7 +21,11 @@ public interface LaundryMapper {
     //add
     Integer totalRec(HashMap<String, Object> map);
     
+    List<Laundry> getAll(HashMap<String, Object> map);
+    
     List<Laundry> getRec(HashMap<String, Object> map);
     
     Laundry getCertainRec(HashMap<String, Object> map);
+    
+    
 }

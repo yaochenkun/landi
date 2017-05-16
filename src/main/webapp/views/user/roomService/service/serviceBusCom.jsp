@@ -53,15 +53,15 @@
 					<table>
 						<thead>
 							<tr>
-								<th>房间号</th>
-								<th>客人姓名</th>
-								<th>通勤天数</th>
-								<th>合计费用</th>
-								<th>通勤年月</th>
-								<th>其他人员</th>
-								<th>上传时间</th>
-								<th>最后编辑时间</th>
-								<th>操作</th>
+								<th style="font-weight: bold;">房间号</th>
+								<th style="font-weight: bold;">客户姓名</th>
+								<th style="font-weight: bold;">通勤天数</th>
+								<th style="font-weight: bold;">合计费用</th>
+								<th style="font-weight: bold;">通勤年月</th>
+								<th style="font-weight: bold;">其他人员</th>
+								<th style="font-weight: bold;">上传时间</th>
+								<th style="font-weight: bold;">最后编辑时间</th>
+								<th style="font-weight: bold;">操作</th>
 							</tr>
 						</thead>
 						<tbody id="busTable"></tbody>
@@ -83,6 +83,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/calendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/dateRange.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/calendar/monthPicker.js"></script>
+	
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusCom.js"></script>
 	<script type="text/javascript">
