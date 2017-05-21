@@ -140,6 +140,14 @@
 	cursor: pointer;
 }
 
+#item-ifReceived{
+	display: none;
+}
+
+#item-ownermanage{
+	display: none;
+}
+
 .planContent .submit {
 	margin-left: 41%;
 	height: 40px;
@@ -159,7 +167,7 @@
 
 /************  添加物品弹框 **************/
 .shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
-.addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff; 
+.addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff;
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
 .addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
 .addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}

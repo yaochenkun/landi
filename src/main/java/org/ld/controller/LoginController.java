@@ -44,7 +44,7 @@ public class LoginController {
 			modelAndView.addObject("error", "用户名不存在！");
 		else if(!(user.getPASSWD().equals(MD5Builder.create(passwd))))
 			modelAndView.addObject("error", "密码错误！");
-		else if(user.getSTATE().equals(Config.settingsInt.get("forbid_state")))
+		else if(user.getSTATE().equals(Config.getSettingsInt().get("forbid_state")))
 			modelAndView.addObject("error", "用户  " + name + " 被禁用！");
 		else // 身份验证成功
 		{

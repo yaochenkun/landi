@@ -30,6 +30,7 @@
 					<ul>
 						<li><div class="icon"></div><a href="serviceBusCom.jsp">通勤车</a></li>
 						<li><div class="icon"></div><a href="serviceBusPlane.jsp">接送机</a></li>
+						<li><div class="icon"></div><a href="serviceBusOther.jsp">其它</a></li>
 					</ul>
 				</div>
 			</div>

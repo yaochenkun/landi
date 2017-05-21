@@ -41,8 +41,8 @@ public class UserController {
 
 	@RequestMapping("/requestRole")
 	public @ResponseBody Map<Integer, String> departRole() {
-		Para tp = new Para();
-		Map<String, List<String>> temp = tp.getParaList("role");
+
+		Map<String, List<String>> temp = Para.getParaList("role");
 		Map<Integer, String> ans = new HashMap<Integer, String>();
 		Iterator<Entry<String, List<String>>> it = temp.entrySet().iterator();
 		while (it.hasNext()) {
@@ -72,7 +72,7 @@ public class UserController {
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {

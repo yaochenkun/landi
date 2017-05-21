@@ -28,7 +28,7 @@
 				   		contentOne = "餐费"; contentTwo = "新增餐费记录"; 
 				   		contentThree = "serviceTakeaway.jsp";}
 				   else if(type.matches("2")){
-				   		contentOne = "桶装水费"; contentTwo = "新增桶装水费记录"; 
+				   		contentOne = "饮用水费"; contentTwo = "新增饮用水费记录"; 
 				   		contentThree = "serviceWaterBill.jsp";} 
 				   else if(type.matches("3")){
 				   		contentOne = "擦鞋费"; contentTwo = "新增擦鞋费记录"; 

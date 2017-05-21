@@ -7,8 +7,11 @@
     <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
     <result column="BARREL_COUNT" property="BARREL_COUNT" jdbcType="INTEGER" />
+    <result column="BARREL_REMAINCOUNT" property="BARREL_REMAINCOUNT" jdbcType="INTEGER" />
     <result column="BARREL_LIMITCOUNT" property="BARREL_LIMITCOUNT" jdbcType="INTEGER" />
+    <result column="BARREL_UNITPRICE" property="BARREL_UNITPRICE" jdbcType="DOUBLE" />
     <result column="BOTTLE_COUNT" property="BOTTLE_COUNT" jdbcType="INTEGER" />
+    <result column="BOTTLE_REMAINCOUNT" property="BOTTLE_REMAINCOUNT" jdbcType="INTEGER" />
     <result column="BOTTLE_LIMITCOUNT" property="BOTTLE_LIMITCOUNT" jdbcType="INTEGER" />
     <result column="BOTTLE_UNITPRICE" property="BOTTLE_UNITPRICE" jdbcType="DOUBLE" />
     <result column="EXCESS_PRICE" property="EXCESS_PRICE" jdbcType="DOUBLE" />
@@ -21,9 +24,9 @@
     <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUM, GUEST_ID, GUEST_NAME, BARREL_COUNT, BARREL_LIMITCOUNT, BOTTLE_COUNT, 
-    BOTTLE_LIMITCOUNT, BOTTLE_UNITPRICE, EXCESS_PRICE, PAY_MODE, COMMENT, STAFF_ID, STAFF_NAME, 
-    OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+    ID, ROOM_NUM, GUEST_ID, GUEST_NAME, BARREL_COUNT, BARREL_REMAINCOUNT, BARREL_LIMITCOUNT, 
+    BARREL_UNITPRICE, BOTTLE_COUNT, BOTTLE_REMAINCOUNT, BOTTLE_LIMITCOUNT, BOTTLE_UNITPRICE, 
+    EXCESS_PRICE, PAY_MODE, COMMENT, STAFF_ID, STAFF_NAME, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -37,17 +40,21 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.DrinkingWater" >
     insert into drinking_water (ID, ROOM_NUM, GUEST_ID, 
-      GUEST_NAME, BARREL_COUNT, BARREL_LIMITCOUNT, 
-      BOTTLE_COUNT, BOTTLE_LIMITCOUNT, BOTTLE_UNITPRICE, 
-      EXCESS_PRICE, PAY_MODE, COMMENT, 
-      STAFF_ID, STAFF_NAME, OCCUR_TIME, 
-      IMPORT_TIME, EDIT_TIME)
+      GUEST_NAME, BARREL_COUNT, BARREL_REMAINCOUNT, 
+      BARREL_LIMITCOUNT, BARREL_UNITPRICE, BOTTLE_COUNT, 
+      BOTTLE_REMAINCOUNT, BOTTLE_LIMITCOUNT, 
+      BOTTLE_UNITPRICE, EXCESS_PRICE, PAY_MODE, 
+      COMMENT, STAFF_ID, STAFF_NAME, 
+      OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+      )
     values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
-      #{GUEST_NAME,jdbcType=VARCHAR}, #{BARREL_COUNT,jdbcType=INTEGER}, #{BARREL_LIMITCOUNT,jdbcType=INTEGER}, 
-      #{BOTTLE_COUNT,jdbcType=INTEGER}, #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER}, #{BOTTLE_UNITPRICE,jdbcType=DOUBLE}, 
-      #{EXCESS_PRICE,jdbcType=DOUBLE}, #{PAY_MODE,jdbcType=TINYINT}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, 
-      #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP})
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{BARREL_COUNT,jdbcType=INTEGER}, #{BARREL_REMAINCOUNT,jdbcType=INTEGER}, 
+      #{BARREL_LIMITCOUNT,jdbcType=INTEGER}, #{BARREL_UNITPRICE,jdbcType=DOUBLE}, #{BOTTLE_COUNT,jdbcType=INTEGER}, 
+      #{BOTTLE_REMAINCOUNT,jdbcType=INTEGER}, #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER}, 
+      #{BOTTLE_UNITPRICE,jdbcType=DOUBLE}, #{EXCESS_PRICE,jdbcType=DOUBLE}, #{PAY_MODE,jdbcType=TINYINT}, 
+      #{COMMENT,jdbcType=VARCHAR}, #{STAFF_ID,jdbcType=INTEGER}, #{STAFF_NAME,jdbcType=VARCHAR}, 
+      #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.DrinkingWater" >
     insert into drinking_water
@@ -67,11 +74,20 @@
       <if test="BARREL_COUNT != null" >
         BARREL_COUNT,
       </if>
+      <if test="BARREL_REMAINCOUNT != null" >
+        BARREL_REMAINCOUNT,
+      </if>
       <if test="BARREL_LIMITCOUNT != null" >
         BARREL_LIMITCOUNT,
       </if>
+      <if test="BARREL_UNITPRICE != null" >
+        BARREL_UNITPRICE,
+      </if>
       <if test="BOTTLE_COUNT != null" >
         BOTTLE_COUNT,
+      </if>
+      <if test="BOTTLE_REMAINCOUNT != null" >
+        BOTTLE_REMAINCOUNT,
       </if>
       <if test="BOTTLE_LIMITCOUNT != null" >
         BOTTLE_LIMITCOUNT,
@@ -120,11 +136,20 @@
       <if test="BARREL_COUNT != null" >
         #{BARREL_COUNT,jdbcType=INTEGER},
       </if>
+      <if test="BARREL_REMAINCOUNT != null" >
+        #{BARREL_REMAINCOUNT,jdbcType=INTEGER},
+      </if>
       <if test="BARREL_LIMITCOUNT != null" >
         #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
       </if>
+      <if test="BARREL_UNITPRICE != null" >
+        #{BARREL_UNITPRICE,jdbcType=DOUBLE},
+      </if>
       <if test="BOTTLE_COUNT != null" >
         #{BOTTLE_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_REMAINCOUNT != null" >
+        #{BOTTLE_REMAINCOUNT,jdbcType=INTEGER},
       </if>
       <if test="BOTTLE_LIMITCOUNT != null" >
         #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
@@ -173,11 +198,20 @@
       <if test="BARREL_COUNT != null" >
         BARREL_COUNT = #{BARREL_COUNT,jdbcType=INTEGER},
       </if>
+      <if test="BARREL_REMAINCOUNT != null" >
+        BARREL_REMAINCOUNT = #{BARREL_REMAINCOUNT,jdbcType=INTEGER},
+      </if>
       <if test="BARREL_LIMITCOUNT != null" >
         BARREL_LIMITCOUNT = #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
       </if>
+      <if test="BARREL_UNITPRICE != null" >
+        BARREL_UNITPRICE = #{BARREL_UNITPRICE,jdbcType=DOUBLE},
+      </if>
       <if test="BOTTLE_COUNT != null" >
         BOTTLE_COUNT = #{BOTTLE_COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="BOTTLE_REMAINCOUNT != null" >
+        BOTTLE_REMAINCOUNT = #{BOTTLE_REMAINCOUNT,jdbcType=INTEGER},
       </if>
       <if test="BOTTLE_LIMITCOUNT != null" >
         BOTTLE_LIMITCOUNT = #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
@@ -218,8 +252,11 @@
       GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       BARREL_COUNT = #{BARREL_COUNT,jdbcType=INTEGER},
+      BARREL_REMAINCOUNT = #{BARREL_REMAINCOUNT,jdbcType=INTEGER},
       BARREL_LIMITCOUNT = #{BARREL_LIMITCOUNT,jdbcType=INTEGER},
+      BARREL_UNITPRICE = #{BARREL_UNITPRICE,jdbcType=DOUBLE},
       BOTTLE_COUNT = #{BOTTLE_COUNT,jdbcType=INTEGER},
+      BOTTLE_REMAINCOUNT = #{BOTTLE_REMAINCOUNT,jdbcType=INTEGER},
       BOTTLE_LIMITCOUNT = #{BOTTLE_LIMITCOUNT,jdbcType=INTEGER},
       BOTTLE_UNITPRICE = #{BOTTLE_UNITPRICE,jdbcType=DOUBLE},
       EXCESS_PRICE = #{EXCESS_PRICE,jdbcType=DOUBLE},
@@ -231,5 +268,53 @@
       IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
       EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectLastByGid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * from drinking_water
+  	where GUEST_ID = #{GUEST_ID}
+  	order by IMPORT_TIME DESC
+  	limit 1
+  </select>
+  
+  <select id="selectLastBeforeByGidAndTime" resultMap="BaseResultMap" parameterType="map">
+  	select * from drinking_water
+  	where GUEST_ID = #{GUEST_ID}
+  	and IMPORT_TIME &lt; #{IMPORT_TIME}
+  	order by IMPORT_TIME DESC
+  	limit 1
+  </select>
+
+  <select id="selectTotal" parameterType="map" resultType="java.lang.Integer">
+  	select count(*) from drinking_water where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') 
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  </select>
+  
+  <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
+  	select * from drinking_water where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') 
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  	order by IMPORT_TIME
+  	limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+  
+  <select id="selectAll" parameterType="map" resultMap="BaseResultMap">
+  	select * from drinking_water where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%')
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  </select>
+  
+  <update id="updateAfterTime" parameterType="map">
+    update drinking_water
+    set BARREL_REMAINCOUNT = BARREL_REMAINCOUNT - #{BARREL_COUNT_DIFF,jdbcType=INTEGER},
+        BOTTLE_REMAINCOUNT = BOTTLE_REMAINCOUNT - #{BOTTLE_COUNT_DIFF,jdbcType=INTEGER},
+		EXCESS_PRICE = EXCESS_PRICE + #{EXCESS_PRICE_DIFF,jdbcType=DOUBLE},
+		EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
+    where GUEST_ID = #{GUEST_ID,jdbcType=INTEGER}
+    and   IMPORT_TIME &gt; #{IMPORT_TIME}
   </update>
 </mapper>

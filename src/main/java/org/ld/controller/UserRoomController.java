@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.print.attribute.standard.MediaSize.Other;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,10 +18,13 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
 import org.ld.model.DailyService;
+import org.ld.model.DrinkingWater;
 import org.ld.model.FlightPicking;
 import org.ld.model.Guest;
+import org.ld.model.GuestService;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
+import org.ld.model.OtherFare;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -128,7 +133,7 @@ public class UserRoomController {
 	public Map<String, Object> getAllRoom(HttpSession session) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -146,7 +151,7 @@ public class UserRoomController {
 	public Map<String, Object> getAllRoomState(HttpSession session) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -171,7 +176,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -188,7 +193,7 @@ public class UserRoomController {
 			String type = dataJson.getString("type");
 			int pageNumber = dataJson.getIntValue("pageNum");
 
-			int eachPage = Config.settingsInt.get("list_size");
+			int eachPage = Config.getSettingsInt().get("list_size");
 			int recordTotal = itemService.totalItemByRoomType(rid, type);
 			int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -215,7 +220,7 @@ public class UserRoomController {
 	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -232,7 +237,7 @@ public class UserRoomController {
 	public Map<String, Object> getMeters(HttpSession session, Integer rid, Integer type) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -249,7 +254,7 @@ public class UserRoomController {
 	public Map<String, Object> searchBill(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -262,7 +267,7 @@ public class UserRoomController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalDailyServiceRow(rn, type);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -288,7 +293,7 @@ public class UserRoomController {
 	public Map<String, Object> searchSourch(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -302,7 +307,7 @@ public class UserRoomController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = serverService.getTotalSourcesRow(rn, type);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -327,7 +332,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addService(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -356,7 +361,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addSource(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -396,7 +401,7 @@ public class UserRoomController {
 	@ResponseBody
 	public Integer addSourceGas(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wDaily"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
 		try {
@@ -407,7 +412,7 @@ public class UserRoomController {
 			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("firstthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("firstCharge"));
-			newSrc.setTYPE((Integer) Config.settingsInt.get("source_gas"));
+			newSrc.setTYPE((Integer) Config.getSettingsInt().get("source_gas"));
 			newSrc.setMETER(dataJson.getString("firstMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
@@ -430,7 +435,7 @@ public class UserRoomController {
 			meter = roomService.getMeter(dataJson.getString("secondMeterNo"));
 			newSrc.setCURRENT_DATA(dataJson.getDouble("secondthisMonthNum"));
 			newSrc.setMONEY(dataJson.getDouble("secondCharge"));
-			newSrc.setTYPE((Integer) Config.settingsInt.get("source_gas"));
+			newSrc.setTYPE((Integer) Config.getSettingsInt().get("source_gas"));
 			newSrc.setMETER(dataJson.getString("secondMeterNo"));
 			newSrc.setLAST_DATA(meter.getCUR_VAL());
 			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
@@ -458,7 +463,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -469,7 +474,7 @@ public class UserRoomController {
 			int pageNumber = dataJson.getIntValue("pageNum");
 			String roomNum = dataJson.getString("roomNum");
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dataJson.getString("date"));
-			int eachPage = Config.settingsInt.get("list_size");
+			int eachPage = Config.getSettingsInt().get("list_size");
 			int recordTotal = roomService.totalLaundry(roomNum, date);
 			int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 	
@@ -501,7 +506,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -527,7 +532,7 @@ public class UserRoomController {
 		
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -569,7 +574,7 @@ public class UserRoomController {
 		
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -604,8 +609,8 @@ public class UserRoomController {
 	
 	@RequestMapping("/getLaundryPrice")
 	public @ResponseBody Map<String, String> getLaundryPrice(HttpSession session) {
-		Para p = new Para();
-		return p.getParaPair("laundry_price", 0, 1);
+
+		return Para.getParaPair("laundry_price", 0, 1);
 	}
 	
 	@RequestMapping("/searchFares") // 按房间号+时间查询车费信息(一组)
@@ -616,7 +621,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -628,7 +633,7 @@ public class UserRoomController {
 		String date = dataJson.getString("date");
 		int year = Integer.parseInt(date.substring(0,4));
 		int mon = Integer.parseInt(date.substring(5));
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = roomService.totalShuttleBus(roomNum, year, mon);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -657,7 +662,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -681,7 +686,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -714,7 +719,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -735,7 +740,7 @@ public class UserRoomController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -910,7 +915,7 @@ public class UserRoomController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1071,7 +1076,7 @@ public class UserRoomController {
 		
 		Map<String, Object> ans = new HashMap<String, Object>();
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1094,7 +1099,7 @@ public class UserRoomController {
 	public Integer deleteWash(HttpSession session,  @RequestBody String data){
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1113,7 +1118,7 @@ public class UserRoomController {
 	public Integer deleteFare(HttpSession session,  @RequestBody String data){
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1133,7 +1138,7 @@ public class UserRoomController {
 		
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1172,7 +1177,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1186,7 +1191,7 @@ public class UserRoomController {
 		int type = dataJson.getIntValue("type");
 		int cat = dataJson.getIntValue("cat");
 		int state = dataJson.getIntValue("state");
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
 		System.out.println(recordTotal);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
@@ -1215,7 +1220,7 @@ public class UserRoomController {
 		
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1264,7 +1269,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1275,7 +1280,7 @@ public class UserRoomController {
 		String roomNum = dataJson.getString("roomNum");
 		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
 		Date to = dataJson.getDate("to");
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = roomService.totalRow();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -1366,7 +1371,7 @@ public class UserRoomController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1396,7 +1401,7 @@ public class UserRoomController {
 	public Map<String, Object> Model(HttpSession session, @RequestBody Integer rid) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1411,7 +1416,7 @@ public class UserRoomController {
 	public Integer addFlightPicking(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		//权限
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		};
 
@@ -1419,7 +1424,8 @@ public class UserRoomController {
 		FlightPicking bean = new FlightPicking();
 		String roomNum = dataJson.getString("roomNum");
 		if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
-		if(guestService.getGuestByRoomNumber(roomNum) == null) return 0; //检测房间号是否合法
+		Guest guest = guestService.getGuestByRoomNumber(roomNum);
+		if(guest == null) return 0; //检测房间号是否合法
 		bean.setROOM_NUMBER(roomNum);
 		bean.setGUEST_NAME(dataJson.getString("guestName"));
 		bean.setTYPE(dataJson.getString("type"));
@@ -1452,7 +1458,7 @@ public class UserRoomController {
 		//验证权限
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1466,7 +1472,7 @@ public class UserRoomController {
 		String roomNumber = dataJson.getString("roomNum");
 
 		//分页
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = roomService.getTotalFlightPickingByRoomNumber_Time(roomNumber, time);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 		if(recordTotal != 0) {
@@ -1493,7 +1499,7 @@ public class UserRoomController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1513,7 +1519,7 @@ public class UserRoomController {
 		//验证权限
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1535,7 +1541,7 @@ public class UserRoomController {
 	public Integer deleteFlightPickingById(HttpSession session,  @RequestBody String data){
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1548,12 +1554,12 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/updateFlightPickingById") // 添加车费记录
+	@RequestMapping("/updateFlightPickingById") // 更新接送机记录
 	@ResponseBody
 	public Integer updateFlightPickingById(HttpSession session,  @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
 			return 0;
 		}
 		
@@ -1592,7 +1598,7 @@ public class UserRoomController {
 		//验证权限
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -1608,6 +1614,504 @@ public class UserRoomController {
 			ans.put("guest_NAME", null);
 		else
 			ans.put("guest_NAME", guest.getGUEST_NAME());
+		
+		return ans;
+	}
+	
+	/**
+	 * 其它车费
+	 */
+	@RequestMapping("/addOtherFare")
+	@ResponseBody
+	public Integer addOtherFare(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		//权限
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		};
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		OtherFare bean = new OtherFare();
+		String roomNum = dataJson.getString("roomNum");
+		if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
+		Guest guest = guestService.getGuestByRoomNumber(roomNum);
+		if(guest == null) return 0; //检测该房间内是否有客户
+		bean.setROOM_NUM(roomNum);
+		bean.setGUEST_ID(guest.getID());
+		bean.setGUEST_NAME(dataJson.getString("guestName"));
+		bean.setUSAGE_TYPE(dataJson.getString("usageType"));
+		bean.setPAY_MODE(dataJson.getByte("payMode"));
+		bean.setTOTAL_PRICE(dataJson.getDouble("totalPrice"));
+		bean.setSTAFF_NAME(dataJson.getString("staffName")); //注意之后要加入员工的id号
+		bean.setCOMMENT(dataJson.getString("comment"));
+		bean.setOCCUR_TIME(dataJson.getDate("occurTime"));
+		
+		Date importTime = new Date();
+		bean.setIMPORT_TIME(importTime);
+		bean.setEDIT_TIME(importTime);
+
+		if(roomService.addOtherFare(bean) == 1) {
+			logger.info(curUser.getNAME() + " successfully add a other fare record " + BeanPrinter.toString(bean));
+			return 1;
+		} else {
+			logger.error(curUser.getNAME() + "failed to add a other fare record" + BeanPrinter.toString(bean));
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchOtherFaresByPage")
+	@ResponseBody
+	public Map<String, Object> searchOtherFaresByPage(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		Date occurTime = dataJson.getDate("occurTime");
+		String roomNum = dataJson.getString("roomNum");
+
+		//分页
+		int eachPage = Config.getSettingsInt().get("list_size");
+		int recordTotal = roomService.getTotalOtherFares(roomNum, occurTime);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		if(recordTotal != 0) {
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int startPage = (pageNumber - 1) * eachPage;
+			List<OtherFare> record = roomService.getOtherFaresByPage(roomNum, occurTime, startPage, eachPage);
+			ans.put("pageList", record);
+		}
+		
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
+		return ans;
+	}
+	
+	@RequestMapping("/searchAllOtherFares")
+	@ResponseBody
+	public Map<String, Object> searchAllOtherFares(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");
+		Date date = dataJson.getDate("date");
+		List<OtherFare> allRecord = roomService.getAllOtherFares(roomNum, date);
+		ans.put("dataList", allRecord);
+		return ans;
+	}
+	
+	@RequestMapping("/deleteOtherFareById") // 添加车费记录
+	@ResponseBody
+	public Integer deleteOtherFareById(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return roomService.deleteOtherFareById(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/updateOtherFareById") // 更新其它车费记录
+	@ResponseBody
+	public Integer updateOtherFareById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			String roomNum = dataJson.getString("roomNum");
+			if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
+			if(guestService.getGuestByRoomNumber(roomNum) == null) return 0; //检测该房间目前是否有用户入住
+			
+			Integer id = dataJson.getInteger("id");
+			OtherFare bean = roomService.getOtherFareById(id);
+			
+			bean.setUSAGE_TYPE(dataJson.getString("usageType"));
+			bean.setPAY_MODE(dataJson.getByte("payMode"));
+			bean.setTOTAL_PRICE(dataJson.getDouble("totalPrice"));
+			bean.setSTAFF_NAME(dataJson.getString("staffName")); //注意之后要加入员工的id号
+			bean.setCOMMENT(dataJson.getString("comment"));
+			bean.setOCCUR_TIME(dataJson.getDate("occurTime"));
+			bean.setEDIT_TIME(new Date());
+
+			return roomService.updateOtherFare(bean);
+			
+		}catch(Exception e){
+			System.err.println(e);
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchOtherFareById")
+	@ResponseBody
+	public Map<String, Object> searchOtherFareById(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Integer id = dataJson.getInteger("id");
+			
+		OtherFare record = roomService.getOtherFareById(id);
+		ans.put("record", record);
+		
+		return ans;
+	}
+	
+	/**
+	 * 桶装水费
+	 */
+	@RequestMapping("/addWaterBill")
+	@ResponseBody
+	public Integer addWaterBill(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		//权限
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		};
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		DrinkingWater bean = new DrinkingWater();
+		String roomNum = dataJson.getString("roomNum");
+		if(roomService.getRoomByNumber(roomNum) == null) return 0; //检测房间号是否合法
+		Guest guest = guestService.getGuestByRoomNumber(roomNum);
+		if(guest == null) return 0; //检测该房间内是否有客户
+		bean.setROOM_NUM(roomNum);
+		bean.setGUEST_ID(guest.getID());
+		bean.setGUEST_NAME(guest.getGUEST_NAME());
+		bean.setPAY_MODE(dataJson.getByte("payMode"));	
+		bean.setCOMMENT(dataJson.getString("comment"));
+		//后期看加不加staff信息
+		bean.setOCCUR_TIME(dataJson.getDate("occurTime"));
+		Date importTime = new Date();
+		bean.setIMPORT_TIME(importTime);
+		bean.setEDIT_TIME(importTime);
+		
+		//读取桶装水限额量
+		GuestService gs = guestService.getCertainGuestService(guest.getID(), "barrelwater");
+		Integer barrrelLimitCount = gs == null ? 0 : gs.getLECOUNT();
+		bean.setBARREL_LIMITCOUNT(barrrelLimitCount);
+		
+		//读取矿泉水限额量
+		gs = guestService.getCertainGuestService(guest.getID(), "bottlewater");
+		int bottleLimitCount = gs == null ? 0 : gs.getLECOUNT();
+		bean.setBOTTLE_LIMITCOUNT(bottleLimitCount);
+		
+		//读取上一次gid租客的饮用水记录（为获取剩余桶装水/矿泉水限额量）
+		DrinkingWater lastRecord = roomService.getLastDrinkingWater(guest.getID());
+		int barrelRemainCount = lastRecord == null ? barrrelLimitCount : lastRecord.getBARREL_REMAINCOUNT(); 
+		int bottleRemainCount  = lastRecord == null ? bottleLimitCount : lastRecord.getBOTTLE_REMAINCOUNT();
+		bean.setBARREL_REMAINCOUNT(barrelRemainCount);
+		bean.setBOTTLE_REMAINCOUNT(bottleRemainCount);
+		
+		double barrelUnitPrice =  roomService.getDrinkingWaterUnitPrice(roomNum); //从配置文件读取桶装水费单价
+		bean.setBARREL_UNITPRICE(barrelUnitPrice);
+		
+		String waterType = dataJson.getString("waterType"); //桶装水 or 矿泉水
+		int count = dataJson.getInteger("count");
+		double excessPrice = lastRecord == null ? 0 : lastRecord.getEXCESS_PRICE(); //超出金额
+		double unitPrice = 0;
+		if("桶装水".equals(waterType)){
+			
+			bean.setBARREL_COUNT(count);
+			unitPrice = barrelUnitPrice;
+			
+			//计算这次以后剩多少
+			if(barrelRemainCount <= 0) {
+				excessPrice += count * unitPrice;
+				barrelRemainCount -= count;
+			}else {
+				barrelRemainCount -= count;
+				if(barrelRemainCount < 0) 
+					excessPrice += Math.abs(barrelRemainCount) * unitPrice;
+			}
+			bean.setBOTTLE_UNITPRICE(new Double(0));
+			bean.setBARREL_REMAINCOUNT(barrelRemainCount);
+			bean.setEXCESS_PRICE(excessPrice);
+			
+		} else{
+			
+			bean.setBOTTLE_COUNT(count);
+			unitPrice = dataJson.getDouble("unitPrice"); //读取用户输入的单价
+			
+			//计算这次以后剩多少
+			if(bottleRemainCount <= 0) {
+				excessPrice += count * unitPrice;
+				bottleRemainCount -= count;
+			}else {
+				bottleRemainCount -= count;
+				if(bottleRemainCount < 0) 
+					excessPrice += Math.abs(bottleRemainCount) * unitPrice;
+			}
+			bean.setBOTTLE_UNITPRICE(unitPrice);
+			bean.setBOTTLE_REMAINCOUNT(bottleRemainCount);
+			bean.setEXCESS_PRICE(excessPrice);
+		}
+		
+		if(roomService.addDrinkingWater(bean) == 1) {
+			logger.info(curUser.getNAME() + " successfully add a water bill record " + BeanPrinter.toString(bean));
+			return 1;
+		} else {
+			logger.error(curUser.getNAME() + "failed to add a water bill record" + BeanPrinter.toString(bean));
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchWaterBillsByPage")
+	@ResponseBody
+	public Map<String, Object> searchWaterBillsByPage(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		int pageNumber = dataJson.getIntValue("pageNum");
+		Date occurTime = dataJson.getDate("occurTime");
+		String roomNum = dataJson.getString("roomNum");
+
+		//分页
+		int eachPage = Config.getSettingsInt().get("list_size");
+		int recordTotal = roomService.getTotalDrinkingWaters(roomNum, occurTime);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		if(recordTotal != 0) {
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+			
+			int startPage = (pageNumber - 1) * eachPage;
+			List<DrinkingWater> record = roomService.getDrinkingWatersByPage(roomNum, occurTime, startPage, eachPage);
+			ans.put("pageList", record);
+		}
+		
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+		
+		return ans;
+	}
+	
+	@RequestMapping("/searchAllWaterBills")
+	@ResponseBody
+	public Map<String, Object> searchAllWaterBills(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");
+		Date date = dataJson.getDate("date");
+		List<DrinkingWater> allRecord = roomService.getAllDrinkingWaters(roomNum, date);
+		ans.put("dataList", allRecord);
+		return ans;
+	}
+	
+	@RequestMapping("/deleteWaterBillById") // 添加车费记录
+	@ResponseBody
+	public Integer deleteWaterFillById(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return roomService.deleteWaterBillById(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/updateWaterBillById") // 更新饮用水费记录
+	@ResponseBody
+	public Integer updateWaterBillById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			
+			//获取本记录
+			Integer id = dataJson.getInteger("id");
+			DrinkingWater bean = roomService.getDrinkingWater(id);
+
+			//更新与本记录相关联的，晚于其IMPORT_TIME之后的所有guest_ID记录的：桶装水量&&限额剩余量、矿泉水量&&限额剩余量&&单价、超出金额
+			//暂存该记录的原始数据
+			int oriBarrelCount = bean.getBARREL_COUNT();
+			int oriBottleCount = bean.getBOTTLE_COUNT();
+			double oriExcessPrice = bean.getEXCESS_PRICE();
+			
+			//更新bean开始  
+			//1.获取上一次饮用水费的状态，方便本次记录在它的基础上累加
+			DrinkingWater lastRecord = roomService.getLastBeforeDrinkingWater(bean.getGUEST_ID(), bean.getIMPORT_TIME());
+			int lastBarrelRemainCount = lastRecord == null ? bean.getBARREL_LIMITCOUNT() : lastRecord.getBARREL_REMAINCOUNT(); 
+			int lastBottleRemainCount  = lastRecord == null ? bean.getBOTTLE_LIMITCOUNT() : lastRecord.getBOTTLE_REMAINCOUNT();
+			bean.setBARREL_REMAINCOUNT(lastBarrelRemainCount);
+			bean.setBOTTLE_REMAINCOUNT(lastBottleRemainCount);
+			
+			String waterType = dataJson.getString("waterType"); //桶装水 or 矿泉水
+			int count = dataJson.getInteger("count");
+			double excessPrice = lastRecord == null ? 0 : lastRecord.getEXCESS_PRICE(); //超出金额
+			double curUnitPrice = 0;
+
+			//count与总金额的差值
+			int barrelCountDiff = 0;
+			int bottleCountDiff = 0;
+			double excessPriceDiff = 0;
+			double excessExtraPriceDiff = 0; //若记录的remain从负到正 需要修正其后第一个
+			if("桶装水".equals(waterType)){
+				
+				bean.setBARREL_COUNT(count);
+				bean.setBOTTLE_COUNT(0);
+				curUnitPrice =  bean.getBARREL_UNITPRICE(); //从配置文件读取桶装水费单价
+				barrelCountDiff = count - oriBarrelCount;
+
+				//计算这次以后剩多少
+				if(lastBarrelRemainCount <= 0) {
+					excessPrice += count * curUnitPrice;
+					lastBarrelRemainCount -= count;
+				}else {
+					lastBarrelRemainCount -= count;
+					if(lastBarrelRemainCount < 0) {
+						double price = Math.abs(lastBarrelRemainCount) * curUnitPrice;
+						excessPrice += price;
+					}
+				}
+				bean.setBARREL_REMAINCOUNT(lastBarrelRemainCount);
+				bean.setEXCESS_PRICE(excessPrice);
+				
+			} else{
+				
+				bean.setBOTTLE_COUNT(count);
+				bean.setBARREL_COUNT(0);
+				curUnitPrice = dataJson.getDouble("unitPrice"); //读取用户输入的单价
+				bottleCountDiff = count - oriBottleCount;
+				
+				//计算这次以后剩多少
+				if(lastBottleRemainCount <= 0) {
+					excessPrice += count * curUnitPrice;
+					lastBottleRemainCount -= count;
+				}else {
+					lastBottleRemainCount -= count;
+					if(lastBottleRemainCount < 0) {
+						double price = Math.abs(lastBottleRemainCount) * curUnitPrice;
+						excessPrice += price;
+					}
+				}
+				bean.setBOTTLE_UNITPRICE(curUnitPrice);
+				bean.setBOTTLE_REMAINCOUNT(lastBottleRemainCount);
+				bean.setEXCESS_PRICE(excessPrice);
+			}
+			bean.setPAY_MODE(dataJson.getByte("payMode"));
+			bean.setCOMMENT(dataJson.getString("comment"));
+			bean.setEDIT_TIME(new Date());
+			
+			//计算总金额差异
+			excessPriceDiff = excessPrice - oriExcessPrice;
+			
+			
+			//更新bean
+			try{
+				roomService.updateDrinkingWater(bean);
+			}catch(Exception e){
+				return 0;
+			}
+
+			//更新其它晚于bean的所有记录
+			//用barrelCountDiff、bottleCountDiff和excessPriceDiff去更新晚于该记录之后的所有记录对应项信息
+			try{
+				roomService.updateAfterDrinkingWaters(bean.getGUEST_ID(),
+													  bean.getIMPORT_TIME(), 
+													  barrelCountDiff, 
+													  bottleCountDiff, 
+													  excessPriceDiff,
+													  new Date());
+				
+				//若记录的remain从负到正 修正...不想写了
+				
+			}catch(Exception e){
+				return 0;
+			}
+
+			return 1;
+			
+		}catch(Exception e){
+			System.err.println(e);
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchWaterBillById")
+	@ResponseBody
+	public Map<String, Object> searchWaterBillById(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Integer id = dataJson.getInteger("id");
+			
+		DrinkingWater record = roomService.getDrinkingWater(id);
+		ans.put("record", record);
 		
 		return ans;
 	}

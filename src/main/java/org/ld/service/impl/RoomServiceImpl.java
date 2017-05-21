@@ -3,21 +3,26 @@ package org.ld.service.impl;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
+import org.ld.dao.DrinkingWaterMapper;
 import org.ld.dao.FlightPickingMapper;
 import org.ld.dao.LaundryMapper;
 import org.ld.dao.MaintainMapper;
+import org.ld.dao.OtherFareMapper;
 import org.ld.dao.RoomItemMapper;
 import org.ld.dao.RoomMapper;
 import org.ld.dao.RoomMeterMapper;
 import org.ld.dao.RoomPicMapper;
 import org.ld.dao.RoomStateMapper;
 import org.ld.dao.ShuttleBusMapper;
+import org.ld.model.DrinkingWater;
 import org.ld.model.FlightPicking;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
+import org.ld.model.OtherFare;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -52,6 +57,10 @@ public class RoomServiceImpl implements RoomService {
 	private MaintainMapper maintainMapper;
 	@Autowired
 	private FlightPickingMapper flightPickingMapper;
+	@Autowired
+	private OtherFareMapper otherFareMapper;
+	@Autowired
+	private DrinkingWaterMapper drinkingWaterMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -390,7 +399,7 @@ public class RoomServiceImpl implements RoomService {
 	public int getFareUnitPrice(String roomNum) {
 		// TODO Auto-generated method stub
 		String floor = "车费_" + roomNum.substring(0, 1) + "-" + roomNum.substring(1, roomNum.indexOf('-'));
-		return Config.charge.get(floor);
+		return Config.getCharge().get(floor);
 	}
 	
 	@Override
@@ -547,4 +556,196 @@ public class RoomServiceImpl implements RoomService {
 		map.put("TIME", time);
 		return flightPickingMapper.getAll(map);
 	}
+
+	
+	/**
+	 * 其它车费
+	 */
+	@Override
+	public int addOtherFare(OtherFare bean) {
+		
+		try{
+			return otherFareMapper.insertSelective(bean);
+		}catch(Exception e){
+			System.out.println("===========" + e.getCause());
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int getTotalOtherFares(String roomNum, Date occurTime) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+		return otherFareMapper.getTotal(map);
+	}
+
+	@Override
+	public List<OtherFare> getOtherFaresByPage(String roomNum, Date occurTime, int startPage, int eachPage) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+		map.put("START_PAGE", startPage);
+		map.put("EACH_PAGE", eachPage);
+		return otherFareMapper.getByPage(map);
+	}
+	
+	@Override
+	public List<OtherFare> getAllOtherFares(String roomNum, Date occurTime) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+
+		return otherFareMapper.getAll(map);
+	}
+
+	@Override
+	public int deleteOtherFareById(Integer id) {
+		try {
+			return otherFareMapper.deleteByPrimaryKey(id);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public OtherFare getOtherFareById(Integer id) {
+		
+		return otherFareMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateOtherFare(OtherFare bean) {
+		try {
+			return otherFareMapper.updateByPrimaryKey(bean);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+	
+	/**
+	 * 饮用水费
+	 */
+	
+	@Override
+	public double getDrinkingWaterUnitPrice(String roomNum) {
+		// TODO Auto-generated method stub
+		String floor = "桶装水费_" + roomNum.substring(0, 1) + "-" + roomNum.substring(1, roomNum.indexOf('-'));
+		return Config.getCharge().get(floor);
+	}
+
+	@Override
+	public DrinkingWater getLastDrinkingWater(Integer gid) {
+		// TODO Auto-generated method stub
+		
+		return drinkingWaterMapper.selectLastByGid(gid);
+	}
+
+	@Override
+	public int addDrinkingWater(DrinkingWater bean) {
+		try {
+			return drinkingWaterMapper.insertSelective(bean);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public List<DrinkingWater> getDrinkingWatersByPage(String roomNum, Date occurTime, int startPage, int eachPage) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+		map.put("START_PAGE", startPage);
+		map.put("EACH_PAGE", eachPage);
+		
+		return drinkingWaterMapper.selectByPage(map);
+	}
+
+	@Override
+	public int getTotalDrinkingWaters(String roomNum, Date occurTime) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+		
+		return drinkingWaterMapper.selectTotal(map);
+	}
+
+	@Override
+	public List<DrinkingWater> getAllDrinkingWaters(String roomNum, Date occurTime) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("OCCUR_TIME", occurTime);
+		
+		return drinkingWaterMapper.selectAll(map);
+	}
+
+	@Override
+	public int deleteWaterBillById(Integer id) {
+		try {
+			return drinkingWaterMapper.deleteByPrimaryKey(id);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public DrinkingWater getDrinkingWater(Integer id) {
+		// TODO Auto-generated method stub
+		return drinkingWaterMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateDrinkingWater(DrinkingWater bean) {
+		try {
+			return drinkingWaterMapper.updateByPrimaryKey(bean);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public DrinkingWater getLastBeforeDrinkingWater(Integer gid, Date time) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("GUEST_ID", gid);
+		map.put("IMPORT_TIME", time);
+		
+		return drinkingWaterMapper.selectLastBeforeByGidAndTime(map);
+	}
+
+	@Override
+	public int updateAfterDrinkingWaters(Integer guestId, Date importTime, int barrelCountDiff, int bottleCountDiff,
+			double excessPriceDiff, Date editTime) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("GUEST_ID", guestId);
+		map.put("IMPORT_TIME", importTime);
+		map.put("BARREL_COUNT_DIFF", barrelCountDiff);
+		map.put("BOTTLE_COUNT_DIFF", bottleCountDiff);
+		map.put("EXCESS_PRICE_DIFF", excessPriceDiff);
+		map.put("EDIT_TIME", editTime);
+		
+		try{
+			drinkingWaterMapper.updateAfterTime(map);
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return 1;
+	}
+	
+	
+	
 }

@@ -33,7 +33,7 @@
 										href="${pageContext.request.contextPath}/views/user/roomService/service/serviceTakeaway.jsp">餐费</a></li>
 									<li><div class="icon"></div>
 										<a
-										href="${pageContext.request.contextPath}/views/user/roomService/service/serviceWaterBill.jsp">桶装水费</a></li>
+										href="${pageContext.request.contextPath}/views/user/roomService/service/serviceWaterBill.jsp">饮用水费</a></li>
 									<li><div class="icon"></div>
 										<a
 										href="${pageContext.request.contextPath}/views/user/roomService/service/serviceShoeCleaning.jsp">擦鞋费</a></li>

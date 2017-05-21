@@ -52,7 +52,7 @@ public class GuestController {
 	public Map<String, Object> Model(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wCustom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wCustom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -315,7 +315,7 @@ public class GuestController {
 	public Map<String, Object> searchGuestList(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -326,7 +326,7 @@ public class GuestController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = guestMissionService.getTotal();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -355,7 +355,7 @@ public class GuestController {
 		//验证权限
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -369,7 +369,7 @@ public class GuestController {
 		String roomNumber = dataJson.getString("roomId");
 
 		//分页
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = guestMissionService.getTotalByName_RoomNumber(name, roomNumber);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 		if(recordTotal != 0) {

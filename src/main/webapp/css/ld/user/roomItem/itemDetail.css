@@ -7,12 +7,12 @@
 
 .main{margin: 60px auto;}
 .main .fac-sta{margin-bottom: 20px; text-align: center;}
-.fac-sta .text{margin-right: 40px; font-size: 14px;}
+.fac-sta .text{margin-right: 20px; font-size: 14px;}
 .fac-sta .count{color: #ff5200; font-weight: bold; font-size: 16px;}
 
 /* 表格 样式 */
 #facDetailTbody .blue{color: #004596; margin-right: 10px; cursor: pointer;}
-#facDetailTbody .gray{color: #666; cursor: pointer;}
+#facDetailTbody .gray{color: #666; cursor: pointer;margin-right: 10px;}
 #facDetailTbody .blue:hover, #facDetailTbody .gray:hover{border-bottom-style: solid; border-bottom-width: 1px;}
 
 .bill-table thead tr th span{line-height: 45px;}
@@ -20,7 +20,7 @@
 
 /* 弹出框 样式 */
 .shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
-.menuDiv{display: none; position: fixed; width: 60%; height: 160px; top: 20%; left: 20%; z-index: 400; background: #fff; 
+.menuDiv{display: none; position: fixed; width: 60%; height: 160px; top: 20%; left: 20%; z-index: 400; background: #fff;
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
 .menuDiv .menuTitle{height: 35px; line-height: 35px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
 .menuDiv .menuTitle span{float: right; font-size: 24px; cursor: pointer;}
@@ -33,12 +33,12 @@
 .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .btn-submit:hover{background: #fafafa;}
 
-.btn-new, .btn-bad{width: 100px; height: 30px; line-height: 16px; margin-left: 20px;}
+.btn-new, .btn-bad, .btn-borrow, .btn-repair{width: 100px; height: 30px; line-height: 16px; margin-left: 10px;float:right;}
 .btn-new{}
 
 /* 新分配、新报废物品 */
 .shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
-.addItemDiv{display: none; position: fixed; width: 60%; height: 300px; top: 50px; left: 20%; z-index: 400; background: #fff; 
+.addItemDiv{display: none; position: fixed; width: 60%; height: 300px; top: 50px; left: 20%; z-index: 400; background: #fff;
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
 .addItemDiv .title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
 .addItemDiv .title span{float: right; font-size: 24px; cursor: pointer;}
@@ -57,4 +57,3 @@
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .fac-foot .btn-submit:hover{background: #fafafa;}
-

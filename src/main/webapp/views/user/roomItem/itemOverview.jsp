@@ -34,23 +34,36 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<span class="span">物品种类：</span>
-				<div class="itemType">
+				<span>物品种类：</span>
+				<div class="itemType" style="display:inline-block;">
+
 					<span class="span"></span>
 					<div id="itemTypeName" style="display:none;"></div>
 					<div class="itemTypeMenu">
 						<ul>
-							<li>全&nbsp;&nbsp;部</li>
 							<li>家&nbsp;&nbsp;电</li>
 							<li>家&nbsp;&nbsp;具</li>
-							<li>灯&nbsp;&nbsp;具</li>
-							<li>窗&nbsp;&nbsp;帘</li>
-							<li>浴&nbsp;&nbsp;屏</li>
+							<li>软&nbsp;&nbsp;装</li>
 							<li>备&nbsp;&nbsp;品</li>
+							<li>其&nbsp;&nbsp;它</li>
 						</ul>
 					</div>
 				</div>
+
+				<span style="margin-left:10px;">房间号：</span><input id="searchRoomNum" type="text" value="">
+				<span style="margin-left:10px;">库房号：</span><input id="searchRoomNum" type="text" value="">
+				<a class="btn btn-edit btnEdit" onclick="searchBusOther(1);">搜索</a>
+				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
+				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
+
+			<%-- <div style="display:inline-block">
+				<span>房间号：</span><input id="searchRoomNum" type="text" value="">
+				<a class="btn btn-edit btnEdit" onclick="searchBusOther(1);">搜索</a>
+				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
+				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
+			</div> --%>
+
 			<!-- <a class="btn btn-new btnnew" href="sourceNew.jsp?type=2">新增电费记录</a> -->
 			<div class="bill-area">
 				<div class="bill-table">
@@ -63,6 +76,7 @@
 								<th><span>物品子类</span></th>
 								<th><span>品牌</span></th>
 								<th><span>名称</span></th>
+								<th><span>归属权</span></th>
 								<th><span>总量</span></th>
 								<th><span>可用</span></th>
 								<th><span>已分配</span></th>

@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemDetail.css" rel="stylesheet" type="text/css" />
 <title>物品分配页</title>
@@ -20,7 +21,7 @@
 	<jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
 	<jsp:include page="../_modal.jsp" />
-	
+
 	<% String itemID = request.getParameter("itemID"); %>
 
 	<!-- 页面内容 strat -->
@@ -41,9 +42,13 @@
 			<span class="text">总量：<span class="count"></span></span>
 			<span class="text">可用：<span class="count"></span></span>
 			<span class="text">已分配：<span class="count"></span></span>
-			<span class="text">报废：<span class="count"></span></span>
-			<a href="javascript:void(0);" onclick="showDistributeModal();" class="btn btn-new">新分配</a>
+			<span class="text">借用中：<span class="count"></span></span>
+			<span class="text">维修中：<span class="count"></span></span>
+			<span class="text">已报废：<span class="count"></span></span>
 			<a href="javascript:void(0);" onclick="showNewfacBadModal();" class="btn btn-bad">新报废</a>
+			<a href="javascript:void(0);" onclick="showNewfacRepairModal();" class="btn btn-repair">新维修</a>
+			<a href="javascript:void(0);" onclick="showNewfacBorrowModal();" class="btn btn-borrow">新借用</a>
+			<a href="javascript:void(0);" onclick="showDistributeModal();" class="btn btn-new">新分配</a>
 		</div>
 		<div class="main-page">
 			<div class="bill-area">
@@ -117,18 +122,83 @@
 	</div>
 	<!-- 新分配物品弹出框 end -->
 
+	<!-- 新借用物品弹出框 start -->
+	<div id="newBorrowMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				新借用物品
+				<span onclick="closeBorrowDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="room-number" class="item">
+					<span class="span">分配至房间：</span>
+					<div class="item-content"><input type="text" value="W34-1" /></div>
+				</div>
+				<div id="tag-name" class="item">
+					<span class="span">标签：</span>
+					<div class="item-content"><input type="text" value="123" /></div>
+				</div>
+
+				<div id="borrow-date" class="item">
+					<span class="span">借用时间：</span>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
+				</div>
+
+				<div id="return-date" class="item">
+					<span class="span">归还时间：</span>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
+				</div>
+
+				<div id="fac-comment" class="item">
+						<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="无" /></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewBorrow();">确认借用</a>
+			</div>
+		</div>
+	</div>
+	<!-- 新借用物品弹出框 end -->
+
+	<!-- 新维修弹出框 start -->
+	<div id="newRepairMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				新维修物品
+				<span onclick="closeRepairDiv();">×</span>
+			</div>
+
+			<div class="fac-body">
+				<div id="bad-count" class="item">
+					<span class="span">维修时长：</span>
+					<div class="item-content"><input type="text" value="3" />&nbsp;&nbsp;天</div>
+				</div>
+			</div>
+
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewFacRepair();">确认维修</a>
+			</div>
+		</div>
+	</div>
+	<!-- 新维修弹出框 end -->
+
 	<!-- 新报废弹出框 start -->
-	<div id="facBadMenu" class="menuDiv">
-		<div class="menuContent">
-			<div class="menuTitle">
-				报废物品
+	<div id="facBadMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				新报废物品
 				<span onclick="closeFacBadDiv();">×</span>
 			</div>
-			<div class="menuBody">
-				<span class="rec-id" style="display:none;"></span>
-				<div class="menuContent">请输入报废物品数量：&nbsp;
-					<input type="text" value="2"/>
+
+			<div class="fac-body">
+				<div id="bad-count" class="item">
+					<span class="span">报废数量：</span>
+					<div class="item-content"><input type="text" value="3" /></div>
 				</div>
+			</div>
+
+			<div class="fac-foot">
 				<a class="btn btn-submit" onclick="requestNewFacBad();">确认报废</a>
 			</div>
 		</div>
@@ -139,9 +209,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemDetail.js"></script>
 	<script>(function(){
+		// 初始化时间
+		var nowDate = new Date();
+		$(".pack_maintain").val(formatDateForm(nowDate));
+		$('.pack_maintain').date_input();
+
 		    requestFacSta();  // 请求物品库存信息
 			requestRoomItem(1);  // 请求物品在客房的分配信息
 		})();

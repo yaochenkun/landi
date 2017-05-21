@@ -5,9 +5,6 @@
     	$(".itemTypeMenu").fadeOut(300);
     	var type = "";
     	switch($(this).index()){
-    		case 0:
-    			typeName = "全部"
-    			break;
     		case 1:
     			typeName = "家电";
     		 	break;
@@ -15,16 +12,13 @@
     			typeName = "家具";
     		 	break;
     		case 3:
-    			typeName = "灯具";
+    			typeName = "软装";
     		 	break;
     		case 4:
-    			typeName = "窗帘";
+    			typeName = "备品";
     		 	break;
     		case 5:
-    			typeName = "浴屏";
-    		 	break; 
-    		case 6:
-    			typeName = "备品";
+    			typeName = "其它";
     		 	break;
     		default:
     		 	break;
@@ -73,7 +67,7 @@ var requestItemOverview = function(pageNum){
 				var recordTotal = data.recordTotal;
 
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='12' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
@@ -84,6 +78,7 @@ var requestItemOverview = function(pageNum){
 					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
 						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
+            "<td>"+ "LE固定资产" +"</td>"+
 						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
 						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
 						"<td>"+ perRecord.comment +"</td>"+
@@ -115,7 +110,7 @@ var showItemDetail = function(element){
 var requestBeforeItemOverview = function(){
 	var nowpage = parseInt($("#itemOverview_nowpage").val());
 	if(nowpage == 1) return;
-	
+
 	requestItemOverview(nowpage-1);
 };
 
@@ -124,7 +119,7 @@ var requestNextitemOverview = function(){
 	var nowpage = parseInt($("#itemOverview_nowpage").val());
 	var totalpage = parseInt($("#itemOverview_totalpage").text());
 	if(nowpage == totalpage) return;
-	
+
 	requestItemOverview(nowpage+1);
 };
 
@@ -164,16 +159,17 @@ var requestItemByItemType = function(pageNum){
 				var pageTotal = data.pageTotal;
 				var recordTotal = data.recordTotal;
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='11' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='12' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
 						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
+            "<td>"+ "LE固定资产" +"</td>"+
 						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
 						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
 						"<td>"+ perRecord.comment +"</td>"+
@@ -197,7 +193,7 @@ var requestItemByItemType = function(pageNum){
 var requestBeforeItemByType = function(){
 	var nowpage = parseInt($("#itemOverview_nowpage").val());
 	if(nowpage == 1) return;
-	
+
 	requestItemByItemType(nowpage-1);
 };
 
@@ -206,6 +202,6 @@ var requestNextItemByType = function(){
 	var nowpage = parseInt($("#itemOverview_nowpage").val());
 	var totalpage = parseInt($("#itemOverview_totalpage").text());
 	if(nowpage == totalpage) return;
-	
+
 	requestItemByItemType(nowpage+1);
 };

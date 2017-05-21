@@ -173,7 +173,8 @@ DateInput = (function($) {
 			return date.getFullYear()+"-"+this.short_month_names[date.getMonth()]+"-" +date.getDate()
 		},
 		setPosition: function() {
-			var offset = this.input.offset();
+			var offset = this.input.position();
+
 			this.rootLayers.css({
 				top: offset.top + this.input.outerHeight() + 5,
 				left: offset.left

@@ -491,8 +491,19 @@
 									<td><input type="checkbox" /></td>
 									<td></td>
 								</tr>
-								<tr class="col-water">
-									<td colspan="2" class="title">饮用水</td>
+								<tr class="col-barrelwater">
+									<td colspan="2" class="title">桶装水</td>
+									<td><input type="text" value="1000" /></td>
+									<td><input type="text" value="1" /></td>
+									<td><input type="text" value="1000" /></td>
+									<td><input type="text" value="1" /></td>
+									<td><input type="text" value="1" /></td>
+									<td><input type="text" value="无" /></td>
+									<td><input type="checkbox" /></td>
+									<td></td>
+								</tr>
+								<tr class="col-bottlewater">
+									<td colspan="2" class="title">矿泉水</td>
 									<td><input type="text" value="1000" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1000" /></td>

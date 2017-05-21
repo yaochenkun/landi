@@ -176,4 +176,18 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 		map.put("EACH", eachPage);
 		return guestMapper.selectByName_RoomNumber(map);
 	}
+
+	/**
+	 * 饮用水费
+	 */
+	
+	@Override
+	public GuestService getCertainGuestService(Integer gid, String item) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("GUEST_ID", gid);
+		map.put("NAME", item);
+		
+		return guestServiceMapper.selectCertainByGid_Item(map);
+	}
 }

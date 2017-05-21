@@ -28,7 +28,7 @@
 					<ul>
 						<li><div class="icon"></div><a href="serviceWash.jsp">洗衣单收费</a></li>
 						<li><div class="icon"></div><a href="serviceTakeaway.jsp">餐费</a></li>
-						<li><div class="icon"></div><a href="serviceWaterBill.jsp">桶装水费</a></li>
+						<li><div class="icon"></div><a href="serviceWaterBill.jsp">饮用水费</a></li>
 						<li><div class="icon"></div><a href="serviceShoeCleaning.jsp">擦鞋费</a></li>
 						<li><div class="icon"></div><a href="serviceShopping.jsp">代购费</a></li>
 						<li><div class="icon"></div><a href="serviceBus.jsp">车费</a></li>

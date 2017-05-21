@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.OtherFareMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.OtherFare" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="USAGE_TYPE" property="USAGE_TYPE" jdbcType="VARCHAR" />
+    <result column="PAY_MODE" property="PAY_MODE" jdbcType="TINYINT" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="DATE" />
+    <result column="TOTAL_PRICE" property="TOTAL_PRICE" jdbcType="DOUBLE" />
+    <result column="STAFF_ID" property="STAFF_ID" jdbcType="INTEGER" />
+    <result column="STAFF_NAME" property="STAFF_NAME" jdbcType="VARCHAR" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, GUEST_ID, GUEST_NAME, USAGE_TYPE, PAY_MODE, OCCUR_TIME, TOTAL_PRICE, 
+    STAFF_ID, STAFF_NAME, IMPORT_TIME, EDIT_TIME, COMMENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from other_fare
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from other_fare
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.OtherFare" >
+    insert into other_fare (ID, ROOM_NUM, GUEST_ID, 
+      GUEST_NAME, USAGE_TYPE, PAY_MODE, 
+      OCCUR_TIME, TOTAL_PRICE, STAFF_ID, 
+      STAFF_NAME, IMPORT_TIME, EDIT_TIME, 
+      COMMENT)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{USAGE_TYPE,jdbcType=VARCHAR}, #{PAY_MODE,jdbcType=TINYINT}, 
+      #{OCCUR_TIME,jdbcType=DATE}, #{TOTAL_PRICE,jdbcType=DOUBLE}, #{STAFF_ID,jdbcType=INTEGER}, 
+      #{STAFF_NAME,jdbcType=VARCHAR}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP}, 
+      #{COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.OtherFare" >
+    insert into other_fare
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="USAGE_TYPE != null" >
+        USAGE_TYPE,
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE,
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID,
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USAGE_TYPE != null" >
+        #{USAGE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="PAY_MODE != null" >
+        #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=DATE},
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        #{TOTAL_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="STAFF_ID != null" >
+        #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.OtherFare" >
+    update other_fare
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USAGE_TYPE != null" >
+        USAGE_TYPE = #{USAGE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="PAY_MODE != null" >
+        PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=DATE},
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=DOUBLE},
+      </if>
+      <if test="STAFF_ID != null" >
+        STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF_NAME != null" >
+        STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.OtherFare" >
+    update other_fare
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      USAGE_TYPE = #{USAGE_TYPE,jdbcType=VARCHAR},
+      PAY_MODE = #{PAY_MODE,jdbcType=TINYINT},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=DATE},
+      TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=DOUBLE},
+      STAFF_ID = #{STAFF_ID,jdbcType=INTEGER},
+      STAFF_NAME = #{STAFF_NAME,jdbcType=VARCHAR},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getTotal" parameterType="map" resultType="java.lang.Integer">
+  	select count(*) from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%')
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  </select>
+  
+  <select id="getByPage" parameterType="map" resultMap="BaseResultMap">
+  	select * from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') 
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  	order by ID
+  	limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+  
+  <select id="getAll" parameterType="map" resultMap="BaseResultMap">
+  	select * from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%')
+  	<if test = "OCCUR_TIME != null">
+  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	</if>
+  </select>
+  
+  
+  
+</mapper>

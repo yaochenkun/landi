@@ -49,7 +49,7 @@ var addServiceType = function(type){
 					        window.location.host + "/LD/views/user/roomService/service/serviceTakeaway.jsp";
 						break;
 
-					case "桶装水费":
+					case "饮用水费":
 						window.location.href = "http://" +
 					        window.location.host + "/LD/views/user/roomService/service/serviceWaterBill.jsp";
 						break;
@@ -82,7 +82,7 @@ var ServiceType = function(){
 		    type = 1;
 			break;
 
-		case "桶装水费":
+		case "饮用水费":
 			type = 2;
 			break;
 

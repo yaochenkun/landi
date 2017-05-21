@@ -22,7 +22,9 @@ var requestFacSta = function(){
 			$(".fac-sta .count").eq(0).text(data.fac.total);
 			$(".fac-sta .count").eq(1).text(data.fac.free);
 			$(".fac-sta .count").eq(2).text(data.fac.working);
-			$(".fac-sta .count").eq(3).text(data.fac.bad);
+			$(".fac-sta .count").eq(3).text("XX");
+			$(".fac-sta .count").eq(4).text("XX");
+			$(".fac-sta .count").eq(5).text(data.fac.bad);
 		}
 	});
 };
@@ -42,7 +44,7 @@ var requestRoomItem = function (pageNum) {
 			// // 清空物品详细信息
 			$("#facDetailTbody").html("");
 			$("#roomItemBottom").html("");
-			
+
 			var pageNow = data.pageNow;
 			var pageTotal = data.pageTotal;
 			var recordTotal = data.recordTotal;
@@ -56,6 +58,7 @@ var requestRoomItem = function (pageNum) {
 						"<td>"+ perFac.tag +"</td><td>"+ perFac.comm +"</td>"+
 						"<td><span class='blue' onclick='transferFac(this);''>转移</span>"+
 						"<span class='blue' onclick='requestToWarehouse(this);'>回仓库</span>"+
+						"<span class='gray' onclick='requestFacRepair(this);'>维修</span>"+
 						"<span class='gray' onclick='requestFacBad(this);'>报废</span>"+
 						"<span class='recID' style='display:none;'>"+ perFac.id +"</span></td></tr>");
 				}
@@ -75,7 +78,7 @@ var requestRoomItem = function (pageNum) {
 var requestBeforeRoomItem = function(){
 	var nowpage = parseInt($("#roomItem_nowpage").val());
 	if(nowpage == 1) return;
-	
+
 	requestRoomItem(nowpage-1);
 };
 // 请求下一页房间物品分配信息
@@ -83,7 +86,7 @@ var requestNextRoomItem = function(){
 	var nowpage = parseInt($("#roomItem_nowpage").val());
 	var totalpage = parseInt($("#roomItem_totalpage").text());
 	if(nowpage == totalpage) return;
-	
+
 	requestRoomItem(nowpage+1);
 };
 
@@ -221,6 +224,55 @@ var requestNewDistribute = function(){
 		}
 	});
 };
+
+// 显示新借用物品弹出框
+var showNewfacBorrowModal = function(){
+	$(".shadow").css("display","block");
+	$('#newBorrowMenu').css("display","block");
+
+ 	setTimeout(function(){$('#newBorrowMenu').addClass('showMenuModal');},50);
+	$("#newBorrowMenu").addClass("effect-fade");
+};
+// 关闭新借用物品弹出框
+var closeBorrowDiv = function(){
+	$(".shadow").css("display","none");
+	$("#newBorrowMenu").removeClass('showMenuModal');
+	setTimeout(function(){$("#newBorrowMenu").css("display","none");},200);
+};
+
+//request请求数据
+
+
+// 显示新维修物品弹出框
+var showNewfacRepairModal = function(){
+	$(".shadow").css("display","block");
+	$('#newRepairMenu').css("display","block");
+
+ 	setTimeout(function(){$('#newRepairMenu').addClass('showMenuModal');},50);
+	$("#newRepairMenu").addClass("effect-fade");
+};
+// 关闭新维修物品弹出框
+var closeRepairDiv = function(){
+	$(".shadow").css("display","none");
+	$("#newRepairMenu").removeClass('showMenuModal');
+	setTimeout(function(){$("#newRepairMenu").css("display","none");},200);
+};
+
+//request请求
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 显示新报废弹出框
 var showNewfacBadModal = function(){

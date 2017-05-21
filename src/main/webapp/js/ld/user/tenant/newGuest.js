@@ -425,13 +425,22 @@ var addGuest = function(){
 		shoppingGive = Number($(".tab-content-service .col-shopping input[type='checkbox']").is(":checked"));
 
 	// 饮用水
-	var waterLECharge = $(".tab-content-service .col-water input").eq(0).val(),
-		waterLECount = $(".tab-content-service .col-water input").eq(1).val(),
-		waterSPCCharge = $(".tab-content-service .col-water input").eq(2).val(),
-		waterSPCCount = $(".tab-content-service .col-water input").eq(3).val(),
-		waterCycle = $(".tab-content-service .col-water input").eq(4).val(),
-		waterNote = $(".tab-content-service .col-water input").eq(5).val(),
-		waterGive = Number($(".tab-content-service .col-water input[type='checkbox']").is(":checked"));
+	var barrelwaterLECharge = $(".tab-content-service .col-barrelwater input").eq(0).val(),
+		barrelwaterLECount = $(".tab-content-service .col-barrelwater input").eq(1).val(),
+		barrelwaterSPCCharge = $(".tab-content-service .col-barrelwater input").eq(2).val(),
+		barrelwaterSPCCount = $(".tab-content-service .col-barrelwater input").eq(3).val(),
+		barrelwaterCycle = $(".tab-content-service .col-barrelwater input").eq(4).val(),
+		barrelwaterNote = $(".tab-content-service .col-barrelwater input").eq(5).val(),
+		barrelwaterGive = Number($(".tab-content-service .col-barrelwater input[type='checkbox']").is(":checked"));
+
+	// 饮用水
+	var bottlewaterLECharge = $(".tab-content-service .col-bottlewater input").eq(0).val(),
+		bottlewaterLECount = $(".tab-content-service .col-bottlewater input").eq(1).val(),
+		bottlewaterSPCCharge = $(".tab-content-service .col-bottlewater input").eq(2).val(),
+		bottlewaterSPCCount = $(".tab-content-service .col-bottlewater input").eq(3).val(),
+		bottlewaterCycle = $(".tab-content-service .col-bottlewater input").eq(4).val(),
+		bottlewaterNote = $(".tab-content-service .col-bottlewater input").eq(5).val(),
+		bottlewaterGive = Number($(".tab-content-service .col-bottlewater input[type='checkbox']").is(":checked"));
 
 	// 日用品
 	var dailyLECharge = $(".tab-content-service .col-daily input").eq(0).val(),
@@ -481,10 +490,14 @@ var addGuest = function(){
 		    +'"shopping":{"DOU_LECharge":'+ shoppingLECharge +',"INT_LECount":'+ shoppingLECount +','
 		    +'"DOU_SPCCharge":'+ shoppingSPCCharge +',"INT_SPCCount":'+ shoppingSPCCount+','
 		    +'"INT_Cycle":'+ shoppingCycle +',"STR_Note":"'+ shoppingNote +'","BOOL_Give":'+ shoppingGive +'},'
-		    // 饮用水
-		    +'"water":{"DOU_LECharge":'+ waterLECharge +',"INT_LECount":'+ waterLECount +','
-		    +'"DOU_SPCCharge":'+ waterSPCCharge +',"INT_rSPCCount":'+ waterSPCCount+','
-		    +'"INT_Cycle":'+ waterCycle +',"STR_Note":"'+ waterNote +'","BOOL_Give":'+ waterGive +'},'
+		    // 桶装水
+		    +'"barrelwater":{"DOU_LECharge":'+ barrelwaterLECharge +',"INT_LECount":'+ barrelwaterLECount +','
+		    +'"DOU_SPCCharge":'+ barrelwaterSPCCharge +',"INT_rSPCCount":'+ barrelwaterSPCCount+','
+		    +'"INT_Cycle":'+ barrelwaterCycle +',"STR_Note":"'+ barrelwaterNote +'","BOOL_Give":'+ barrelwaterGive +'},'
+		    // 矿泉水
+		    +'"bottlewater":{"DOU_LECharge":'+ bottlewaterLECharge +',"INT_LECount":'+ bottlewaterLECount +','
+		    +'"DOU_SPCCharge":'+ bottlewaterSPCCharge +',"INT_rSPCCount":'+ bottlewaterSPCCount+','
+		    +'"INT_Cycle":'+ bottlewaterCycle +',"STR_Note":"'+ bottlewaterNote +'","BOOL_Give":'+ bottlewaterGive +'},'
 		    //日用品
 			+'"daily":{"DOU_LECharge":'+ dailyLECharge +',"INT_LECount":'+ dailyLECount +','
 		    +'"DOU_SPCCharge":'+ dailySPCCharge +',"INT_SPCCount":'+ dailySPCCount+','

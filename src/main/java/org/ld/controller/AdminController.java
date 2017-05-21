@@ -42,7 +42,7 @@ public class AdminController {
 
 		Map<String, Object> res_map = new HashMap<String, Object>();
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int pageTotal = (int) Math.ceil((float) userService.totalRow() / eachPage);
 
 		if (pageNumber > pageTotal)
@@ -62,7 +62,7 @@ public class AdminController {
 		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 
 		User curUser = (User) session.getAttribute("curUser");
-		Para tp = new Para();
+
 		User newUser = new User();
 
 		newUser.setNUM((String) userJson.get("NUM"));
@@ -70,9 +70,9 @@ public class AdminController {
 		newUser.setNAME((String) userJson.get("NAME"));
 		newUser.setDEPART((String) userJson.get("DEPART"));
 		newUser.setROLE((Integer) userJson.get("ROLE"));
-		newUser.setPASSWD(Config.settings.get("default_passwd"));
+		newUser.setPASSWD(Config.getSettings().get("default_passwd"));
 		newUser.setAUTH(
-				Integer.parseInt(tp.ReadParaPair("role", ((Integer) userJson.get("ROLE")).toString(), 0, 2)[1]));
+				Integer.parseInt(Para.ReadParaPair("role", ((Integer) userJson.get("ROLE")).toString(), 0, 2)[1]));
 		newUser.setCTIME(new Date());
 		newUser.setLTIME(new Date());
 		newUser.setSTATE(1);
@@ -88,8 +88,8 @@ public class AdminController {
 
 	@RequestMapping("/requestDepart")
 	public @ResponseBody Map<String, List<String>> departMenu() {
-		Para tp = new Para();
-		Map<String, List<String>> temp = tp.getParaList("depart");
+
+		Map<String, List<String>> temp = Para.getParaList("depart");
 		List<String> ans = new ArrayList<String>();
 		for (String x : temp.keySet()) {
 			ans.add(x);
@@ -103,8 +103,8 @@ public class AdminController {
 
 	@RequestMapping("/requestRole")
 	public @ResponseBody Map<Integer, String> departRole() {
-		Para tp = new Para();
-		Map<String, List<String>> temp = tp.getParaList("role");
+
+		Map<String, List<String>> temp = Para.getParaList("role");
 		Map<Integer, String> ans = new HashMap<Integer, String>();
 		Iterator<Entry<String, List<String>>> it = temp.entrySet().iterator();
 		while (it.hasNext()) {
@@ -116,9 +116,8 @@ public class AdminController {
 
 	@RequestMapping("/requestCap/{role}")
 	public @ResponseBody Integer Cap(@PathVariable Integer role) {
-		Para tp = new Para();
-		String[] ps = tp.ReadParas("role", role.toString());
 
+		String[] ps = Para.ReadParas("role", role.toString());
 		return Integer.parseInt(ps[2]);
 	}
 
@@ -143,7 +142,7 @@ public class AdminController {
 		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setPASSWD(Config.settings.get("default_passwd"));
+		temp.setPASSWD(Config.getSettings().get("default_passwd"));
 
 		if (userService.updateUserInfo(temp) == 1) {
 			logger.info(curUser.getNAME() + " reset password of " + user_id);
@@ -159,7 +158,7 @@ public class AdminController {
 		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(Config.settingsInt.get("forbid_state"));
+		temp.setSTATE(Config.getSettingsInt().get("forbid_state"));
 
 		if (userService.updateUserInfo(temp) == 1) {
 			logger.info(curUser.getNAME() + " disable user " + user_id);
@@ -175,7 +174,7 @@ public class AdminController {
 		User curUser = (User) session.getAttribute("curUser");
 		User temp = new User();
 		temp.setID(user_id);
-		temp.setSTATE(Config.settingsInt.get("normal_state"));
+		temp.setSTATE(Config.getSettingsInt().get("normal_state"));
 
 		if (userService.updateUserInfo(temp) == 1) {
 			logger.info(curUser.getNAME() + " enable user " + user_id);
@@ -188,15 +187,15 @@ public class AdminController {
 
 	@RequestMapping("/getRate")
 	public @ResponseBody Map<String, String> getRate(HttpSession session) {
-		Para p = new Para();
-		return p.getParaPair("rate", 0, 1);
+
+		return Para.getParaPair("rate", 0, 1);
 	}
 
 	@RequestMapping("/setRate")
 	public @ResponseBody Integer setRate(HttpSession session, @RequestBody Map<String, String> rate) {
 		User curUser = (User) session.getAttribute("curUser");
-		Para p = new Para();
-		if (p.setPair("rate", rate) == 1) {
+
+		if (Para.setPair("rate", rate) == 1) {
 			logger.info(curUser.getNAME() + " set rate " + rate.toString());
 			return 1;
 		} else {
@@ -207,15 +206,14 @@ public class AdminController {
 
 	@RequestMapping("/getCharge")
 	public @ResponseBody Map<String, String> getCharge(HttpSession session) {
-		Para p = new Para();
-		return p.getParaPair("charge", 0, 1);
+
+		return Para.getParaPair("charge", 0, 1);
 	}
 
 	@RequestMapping("/setCharge")
 	public @ResponseBody Integer setCharge(HttpSession session, @RequestBody Map<String, String> charge) {
 		User curUser = (User) session.getAttribute("curUser");
-		Para p = new Para();
-		if (p.setPair("charge", charge) == 1) {
+		if (Para.setPair("charge", charge) == 1) {
 			logger.info(curUser.getNAME() + " set charge " + charge.toString());
 			return 1;
 		} else {
@@ -226,15 +224,14 @@ public class AdminController {
 	
 	@RequestMapping("/getLaundryPrice")
 	public @ResponseBody Map<String, String> getLaundryPrice(HttpSession session) {
-		Para p = new Para();
-		return p.getParaPair("laundry_price", 0, 1);
+
+		return Para.getParaPair("laundry_price", 0, 1);
 	}
 
 	@RequestMapping("/setLaundryPrice")
 	public @ResponseBody Integer setLaundryPrice(HttpSession session, @RequestBody Map<String, String> laundry_price) {
 		User curUser = (User) session.getAttribute("curUser");
-		Para p = new Para();
-		if (p.setPair("laundry_price", laundry_price) == 1) {
+		if (Para.setPair("laundry_price", laundry_price) == 1) {
 			logger.info(curUser.getNAME() + " set laundry_price " + laundry_price.toString());
 			return 1;
 		} else {

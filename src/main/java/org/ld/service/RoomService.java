@@ -3,9 +3,13 @@ package org.ld.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.print.attribute.standard.MediaSize.Other;
+
+import org.ld.model.DrinkingWater;
 import org.ld.model.FlightPicking;
 import org.ld.model.Laundry;
 import org.ld.model.Maintain;
+import org.ld.model.OtherFare;
 import org.ld.model.Room;
 import org.ld.model.RoomItem;
 import org.ld.model.RoomMeter;
@@ -132,4 +136,30 @@ public interface RoomService {
 	FlightPicking getFlightPickingById(Integer id);
 	int deleteFlightPickingById(Integer id);
 	int updateFlightPicking(FlightPicking fp);
+	
+	/**
+	 * 其它车费
+	 */
+	int addOtherFare(OtherFare bean);
+	int getTotalOtherFares(String roomNum, Date occurTime);
+    List<OtherFare> getOtherFaresByPage(String roomNum, Date occurTime, int startPage, int eachPage);
+    List<OtherFare> getAllOtherFares(String roomNum, Date occurTime);
+    int deleteOtherFareById(Integer id);
+    OtherFare getOtherFareById(Integer id);
+    int updateOtherFare(OtherFare bean);
+    
+    /**
+     * 饮用水费
+     */
+    double getDrinkingWaterUnitPrice(String roomNum);
+    DrinkingWater getLastDrinkingWater(Integer gid);
+    DrinkingWater getLastBeforeDrinkingWater(Integer gid, Date time);
+    int addDrinkingWater(DrinkingWater dw);
+    int getTotalDrinkingWaters(String roomNum, Date occurTime);
+    List<DrinkingWater> getDrinkingWatersByPage(String roomNum, Date occurTime, int startPage, int eachPage);
+    List<DrinkingWater> getAllDrinkingWaters(String roomNum, Date occurTime);
+    int deleteWaterBillById(Integer id);
+    DrinkingWater getDrinkingWater(Integer id);
+    int updateDrinkingWater(DrinkingWater bean);
+    int updateAfterDrinkingWaters(Integer guestId, Date importTime, int barrelCountDiff, int bottleCountDiff, double excessPriceDiff, Date editTime);
 }

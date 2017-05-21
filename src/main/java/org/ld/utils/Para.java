@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.ld.app.Config;
+
 import java.util.Set;
 
 /**
@@ -20,10 +23,10 @@ import java.util.Set;
  */
 
 public class Para {
-	private String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
+	private final static String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
 	
 	@SuppressWarnings("resource")
-	public String[] ReadParas(String text, String key) {
+	public static String[] ReadParas(String text, String key) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -46,7 +49,7 @@ public class Para {
 	}
 
 	@SuppressWarnings("resource")
-	public String[] ReadParaPair(String text, String key, int first, int second) {
+	public static String[] ReadParaPair(String text, String key, int first, int second) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -74,7 +77,7 @@ public class Para {
 		return null;
 	}
 
-	public Map<String, List<String>> getParaList(String text) {
+	public static Map<String, List<String>> getParaList(String text) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -104,7 +107,7 @@ public class Para {
 		return null;
 	}
 
-	public Set<String> getPara(String text) {
+	public static Set<String> getPara(String text) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -125,7 +128,7 @@ public class Para {
 		return null;
 	}
 
-	public Map<String, String> getParaPair(String text, int first, int second) {
+	public static Map<String, String> getParaPair(String text, int first, int second) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -150,7 +153,7 @@ public class Para {
 		return null;
 	}
 
-	public Map<String, Integer> getParaPairInt(String text, int first, int second) {
+	public static Map<String, Integer> getParaPairInt(String text, int first, int second) {
 		String fname = root + text + ".env";
 
 		BufferedReader reader = null;
@@ -174,8 +177,33 @@ public class Para {
 
 		return null;
 	}
+	
+	public static Map<String, Double> getParaPairDouble(String text, int first, int second) {
+		String fname = root + text + ".env";
 
-	public Integer setPair(String text, Map<String, String> map) {
+		BufferedReader reader = null;
+		try {
+			Map<String, Double> map = new HashMap<String, Double>();
+			reader = new BufferedReader(new FileReader(fname));
+			String temp = null;
+			while ((temp = reader.readLine()) != null) {
+				String[] tparas = temp.split(" ");
+				if (tparas.length == 0 || tparas[0].equals("") || tparas[0].equals("#"))
+					continue;
+
+				map.put(tparas[first], Double.parseDouble(tparas[second]));
+			}
+
+			reader.close();
+			return map;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public static Integer setPair(String text, Map<String, String> map) {
 		String fname = root + text + ".env";
 
 		BufferedWriter writer = null;
@@ -190,6 +218,17 @@ public class Para {
 			}
 
 			writer.close();
+			
+			//更新内存中的配置数据,保持一致性
+			if("laundry_price".equals(text))
+				Config.readLaundry_price();
+			else if("charge".equals(text))
+				Config.readCharge();
+			else if("rate".equals(text))
+				Config.readRates();
+			//else
+			
+			
 			return 1;
 		} catch (IOException e) {
 			e.printStackTrace();

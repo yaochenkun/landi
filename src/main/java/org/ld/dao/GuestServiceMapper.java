@@ -1,5 +1,7 @@
 package org.ld.dao;
 
+import java.util.Map;
+
 import org.ld.model.GuestService;
 
 public interface GuestServiceMapper {
@@ -14,4 +16,6 @@ public interface GuestServiceMapper {
 	int updateByPrimaryKeySelective(GuestService record);
 
 	int updateByPrimaryKey(GuestService record);
+	
+	GuestService selectCertainByGid_Item(Map<String, Object> map);
 }

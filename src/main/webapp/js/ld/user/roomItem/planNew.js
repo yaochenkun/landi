@@ -9,7 +9,6 @@
 				$("#item-type .item-content").html("");
 				$("#item-cat .item-content").html("");
 				$("#item-com .item-content").html("");
-				$("#item-name .item-content").html("");
 				if(data != null){
 					for(var i=0; i<data.length; i++){
 						$("#item-type .item-content").append("<a class='btn btn-item' onclick='chooseItemType(this);'>"+ data[i] +"</a>");
@@ -33,7 +32,7 @@
 	// 1. 关闭弹出框
 	$(".addItemDiv .fac-title span").click(function(){
 		$(".shadow").css("display","none");
-		$(".addItemDiv").removeClass('showMenuModal'); 
+		$(".addItemDiv").removeClass('showMenuModal');
 		setTimeout(function(){$(".addItemDiv").css("display","none");},200);
 	});
 })();
@@ -45,7 +44,6 @@ var chooseItemType = function(element){
 
 	$("#item-cat .item-content").html("");
 	$("#item-com .item-content").html("");
-	$("#item-name .item-content").html("");
 
 	// 获取物品名称
 	$.ajax({
@@ -203,7 +201,6 @@ var requestFacName = function(type,cat,com){
 		contentType:'application/json',
 		success:function(data){
 			console.log(data);
-			$("#item-name .item-content").html("");
 			if(!data){
 				return;
 			}
@@ -232,7 +229,7 @@ var addPlan = function(){
 	    planManager = $(".planTitle input").eq(1).val(),
 	    note = $(".planTitle input").eq(2).val(),
 	    money = 1000,
-	    ctime = "2016-11-29";	    
+	    ctime = "2016-11-29";
 	console.log(planName);
 	// 计划采购物品
 	var itemList = "";
@@ -264,4 +261,33 @@ var addPlan = function(){
 			}
 		}
 	});
+};
+
+var changeSelection = function(element){
+	$(element).siblings().each(function(){
+		$(this).removeClass("item-active");
+	});
+	$(element).addClass("item-active");
+};
+
+var changeOwner = function(element){
+	changeSelection(element)
+
+	index = $(element).index();
+	if(index == 1){
+		$("#item-ownermanage").show();
+	} else {
+		$("#item-ownermanage").hide();
+	}
+};
+
+var changeInvoiceInfo = function(element){
+	changeSelection(element)
+
+	index = $(element).index();
+	if(index == 0 || index == 1){
+		$("#item-ifReceived").show();
+	} else {
+		$("#item-ifReceived").hide();
+	}
 };

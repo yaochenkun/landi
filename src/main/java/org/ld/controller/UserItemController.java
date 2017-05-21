@@ -54,7 +54,7 @@ public class UserItemController {
 	public Map<String, Object> searchItemOverview(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -68,7 +68,7 @@ public class UserItemController {
 		String cat = dataJson.getString("cat");
 		String band = dataJson.getString("band");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotal(type, cat, band);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -94,7 +94,7 @@ public class UserItemController {
 	public Map<String, Object> searchItemList(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -119,7 +119,7 @@ public class UserItemController {
 	public Map<String, Object> searchPlanList(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -130,7 +130,7 @@ public class UserItemController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotalPlan();
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -166,7 +166,7 @@ public class UserItemController {
 	@RequestMapping("/getItemType") // 查询系统物品种类（家电、家具）
 	@ResponseBody
 	public Set<String> getItemType(HttpSession session) {
-		return Config.item_type;
+		return Config.getItem_type();
 	}
 
 	@RequestMapping("/getItemCat") // 根据物品种类type查询物品类别Cat
@@ -175,7 +175,7 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		String type = dataJson.getString("type");
 
-		return Config.item_cat.get(type);
+		return Config.getItem_cat().get(type);
 	}
 
 	@RequestMapping("/getItemCom") // 根据物品种类type查询物品品牌Com
@@ -184,14 +184,14 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		String type = dataJson.getString("type");
 
-		return Config.item_com.get(type);
+		return Config.getItem_com().get(type);
 	}
 
 	@RequestMapping("/newPlan") // 新增采购计划
 	@ResponseBody
 	public Integer newPlan(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wBuy"))) == 0) {
 			return 0;
 		}
 
@@ -208,7 +208,9 @@ public class UserItemController {
 			Date date = new Date();
 			newPlan.setCTIME(date);
 
+			System.out.println("=============1");
 			if (itemService.addNewPlan(newPlan) == 1) {
+				System.out.println("=============2");
 				double sum = 0;
 				newPlan = itemService.getPlanByName(name);
 				JSONObject obj = dataJson.getJSONObject("itemList");
@@ -239,7 +241,7 @@ public class UserItemController {
 						newFs.setTOTAL(0);
 
 						itemService.addNewFac(newFs);
-						newFs = itemService.getFacByNumber(obj2.getString("FAC_NUM"));
+						newFs = itemService.getFacByNumber(obj2.getString("FAC_NUMBER"));
 						ID = newFs.getID();
 					}
 
@@ -264,7 +266,7 @@ public class UserItemController {
 	public Map<String, Object> searchPlanDetail(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -274,7 +276,7 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		int pageNumber = dataJson.getIntValue("pageNum");
 		int pid = dataJson.getIntValue("planID");
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotalPlanDetail(pid);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -298,7 +300,7 @@ public class UserItemController {
 	public Map<String, Object> searchPlanProgress(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rBuy"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -308,7 +310,7 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		int pageNumber = dataJson.getIntValue("pageNum");
 		int pid = dataJson.getIntValue("planID");
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = itemService.getTotalPlanProgress(pid);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -333,7 +335,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer addPlanProgress(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wBuy"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wBuy"))) == 0) {
 			return 0;
 		};
 		
@@ -374,7 +376,7 @@ public class UserItemController {
 	public Map<String, Object> searchFacDetail(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -386,7 +388,7 @@ public class UserItemController {
 		Integer facID = dataJson.getInteger("facID");
 		int pageNumber = dataJson.getIntValue("pageNum");
 
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = roomService.totalRowByItem(facID);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -412,7 +414,7 @@ public class UserItemController {
 	public Map<String, Object> searchFacSta(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -431,7 +433,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer transferFac(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -457,7 +459,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer facBad(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -485,7 +487,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer toWarehouse(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -511,7 +513,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer newDistribute(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -546,7 +548,7 @@ public class UserItemController {
 	@ResponseBody
 	public Integer newFacBad(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wFac"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wFac"))) == 0) {
 			return 0;
 		}
 
@@ -580,7 +582,7 @@ public class UserItemController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rGrocery"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -590,7 +592,7 @@ public class UserItemController {
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String goods = dataJson.getString("GoodsName");
 		
-		int eachPage = Config.settingsInt.get("list_size");
+		int eachPage = Config.getSettingsInt().get("list_size");
 		int recordTotal = itemService.totalGrocery(goods);
 		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
 
@@ -618,7 +620,7 @@ public class UserItemController {
 
 		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -660,7 +662,7 @@ public class UserItemController {
 
 		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -703,7 +705,7 @@ public class UserItemController {
 
 		User curUser = (User) session.getAttribute("curUser");
 		
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wGrocery"))) == 0) {
 			return 0;
 		}
 		
@@ -747,7 +749,7 @@ public class UserItemController {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("rGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rGrocery"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
@@ -787,7 +789,7 @@ public class UserItemController {
 		
 		User curUser = (User) session.getAttribute("curUser");
 
-		if ((curUser.getAUTH() & (0x01 << Config.auths.get("wGrocery"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wGrocery"))) == 0) {
 			return 0;
 		}
 		

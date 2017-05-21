@@ -178,4 +178,11 @@
 		SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
 		where ID = #{ID,jdbcType=INTEGER}
 	</update>
+	
+	<select id="selectCertainByGid_Item" resultMap="BaseResultMap" parameterType="map">
+		select * from guest_service
+		where GUEST_ID = #{GUEST_ID}
+		and NAME = #{NAME}
+	</select>
+	
 </mapper>

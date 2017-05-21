@@ -220,10 +220,30 @@
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 					</tr>
+					<tr class="barrelwater-W">
+						<td>桶装水费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
 				</tbody>
 			</table>
 			<!-- 其他费用 W2-18 end -->
-			
+
 			<!-- 其他费用 W19-35 start -->
 			<table>
 				<thead>
@@ -391,6 +411,26 @@
 					</tr>
 					<tr class="resource-W">
 						<td>能源费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
+					<tr class="barrelwater-W">
+						<td>桶装水费</td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
@@ -598,10 +638,30 @@
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 					</tr>
+					<tr class="barrelwater-E">
+						<td>桶装水费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
 				</tbody>
 			</table>
 			<!-- 其他费用 E2-18 end -->
-			
+
 			<!-- 其他费用 E19-35 start -->
 			<table>
 				<thead>
@@ -769,6 +829,26 @@
 					</tr>
 					<tr class="resource-E">
 						<td>能源费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
+					<tr class="barrelwater-E">
+						<td>桶装水费</td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>

@@ -13,9 +13,15 @@ public class DrinkingWater {
 
     private Integer BARREL_COUNT;
 
+    private Integer BARREL_REMAINCOUNT;
+
     private Integer BARREL_LIMITCOUNT;
 
+    private Double BARREL_UNITPRICE;
+
     private Integer BOTTLE_COUNT;
+
+    private Integer BOTTLE_REMAINCOUNT;
 
     private Integer BOTTLE_LIMITCOUNT;
 
@@ -77,6 +83,14 @@ public class DrinkingWater {
         this.BARREL_COUNT = BARREL_COUNT;
     }
 
+    public Integer getBARREL_REMAINCOUNT() {
+        return BARREL_REMAINCOUNT;
+    }
+
+    public void setBARREL_REMAINCOUNT(Integer BARREL_REMAINCOUNT) {
+        this.BARREL_REMAINCOUNT = BARREL_REMAINCOUNT;
+    }
+
     public Integer getBARREL_LIMITCOUNT() {
         return BARREL_LIMITCOUNT;
     }
@@ -85,12 +99,28 @@ public class DrinkingWater {
         this.BARREL_LIMITCOUNT = BARREL_LIMITCOUNT;
     }
 
+    public Double getBARREL_UNITPRICE() {
+        return BARREL_UNITPRICE;
+    }
+
+    public void setBARREL_UNITPRICE(Double BARREL_UNITPRICE) {
+        this.BARREL_UNITPRICE = BARREL_UNITPRICE;
+    }
+
     public Integer getBOTTLE_COUNT() {
         return BOTTLE_COUNT;
     }
 
     public void setBOTTLE_COUNT(Integer BOTTLE_COUNT) {
         this.BOTTLE_COUNT = BOTTLE_COUNT;
+    }
+
+    public Integer getBOTTLE_REMAINCOUNT() {
+        return BOTTLE_REMAINCOUNT;
+    }
+
+    public void setBOTTLE_REMAINCOUNT(Integer BOTTLE_REMAINCOUNT) {
+        this.BOTTLE_REMAINCOUNT = BOTTLE_REMAINCOUNT;
     }
 
     public Integer getBOTTLE_LIMITCOUNT() {

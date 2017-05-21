@@ -8,34 +8,36 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceWaterBill.css" rel="stylesheet" type="text/css" />
-<title>饮用水费</title>
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusOther.css" rel="stylesheet" type="text/css" />
+<title>其它</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
-	
+
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a> 
-				<i class="icon-path"></i> 
+				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<i class="icon-path"></i>
 				<a href="serviceIndex.jsp">客房服务</a>
-				<i class="icon-path"></i> 
-				<a href="javascript:void(0)">饮用水费</a>
+				<i class="icon-path"></i>
+				<a href="serviceBus.jsp">车费</a>
+				<i class="icon-path"></i>
+				<a href="serviceBusOther.jsp">其它</a>
 			</div>
-			<a class="btn btn-new btnnew" href="serviceNewWaterBill.jsp">新增饮用水费记录</a>
+			<a class="btn btn-new btnnew" href="serviceNewBusOther.jsp">新增其它车费记录</a>
 			<div class="bill-area">
 				<div class="search">
 					<span>房间号：</span><input id="searchRoomNum" type="text" value="">
 					<span class="span">日期：</span>
-					<input type="text" class="pack_maintain">		
-					<a class="btn btn-edit btnEdit" onclick="searchWaterBill(1);">搜索</a>
+					<input type="text" class="pack_maintain">
+					<a class="btn btn-edit btnEdit" onclick="searchBusOther(1);">搜索</a>
 					<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
 					<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
-				
+
 				</div>
 
 				<div class="bill-table">
@@ -43,25 +45,17 @@
 					<table>
 						<thead>
 					    	<tr>
-					    		<th rowspan="2">房间号</th>
-					    		<th rowspan="2">客户姓名</th>
-					    		<th rowspan="1" colspan="3">桶装水(桶)</th>
-					    		<th rowspan="1" colspan="3">矿泉水(提)</th>
-					    		<th rowspan="2">支付方式</th>
-					    		<th rowspan="2">超出金额</th>
-					    		<th rowspan="2">备注</th>
-					    		<th rowspan="2">发生时间</th>
-					    		<th rowspan="2">上传时间</th>
-					    		<th rowspan="2">最后编辑时间</th>
-					    		<th rowspan="2">操作</th>
-					    	</tr>
-					    	<tr>
-								<th>买进</th>
-								<th>剩余</th>
-								<th>限额</th>
-								<th>买进</th>
-								<th>剩余</th>
-								<th>限额</th>
+					    		<th>房间号</th>
+					    		<th>客户姓名</th>
+					    		<th>用车种类</th>
+					    		<th>支付方式</th>
+					    		<th>金额</th>
+					    		<th>备注</th>
+					    		<th>操作人</th>
+					    		<th>发生时间</th>
+					    		<th>上传时间</th>
+					    		<th>最后编辑时间</th>
+					    		<th>操作</th>
 					    	</tr>
 						</thead>
 						<tbody id="busPlaneTbody"></tbody>
@@ -82,7 +76,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	
+
 	<!-- 导出插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
@@ -91,14 +85,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWaterBill.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusOther.js"></script>
 	<script type="text/javascript">
 		// 按时间查询接送机记录
 		var nowDate = new Date();
 		$(".pack_maintain").val(formatDateForm(nowDate));
 		$('.pack_maintain').date_input();
 		// 查询第一页信息
-		searchWaterBill(1);
+		searchBusOther(1);
 	</script>
 </body>
 </html>
