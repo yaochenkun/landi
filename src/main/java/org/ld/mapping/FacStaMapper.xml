@@ -1,165 +1,202 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.ld.dao.FacStaMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.FacSta" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="FAC_NUMBER" property="FAC_NUMBER" jdbcType="VARCHAR" />
-    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
-    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
-    <result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
-    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
-    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
-    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
-    <result column="BAD" property="BAD" jdbcType="INTEGER" />
-    <result column="FREE" property="FREE" jdbcType="INTEGER" />
-    <result column="WORKING" property="WORKING" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, FAC_NUMBER, COMMENT, NAME, COMPANY, TYPE, CAT, TOTAL, BAD, FREE, WORKING
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from fac_sta
-    where ID = #{ID,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from fac_sta
-    where ID = #{ID,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="org.ld.model.FacSta" >
-    insert into fac_sta (ID, FAC_NUMBER, COMMENT, 
-      NAME, COMPANY, TYPE, 
-      CAT, TOTAL, BAD, FREE, 
-      WORKING)
-    values (#{ID,jdbcType=INTEGER}, #{FAC_NUMBER,jdbcType=VARCHAR}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{COMPANY,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, 
-      #{CAT,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER}, #{BAD,jdbcType=INTEGER}, #{FREE,jdbcType=INTEGER}, 
-      #{WORKING,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.FacSta" >
-    insert into fac_sta
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        ID,
-      </if>
-      <if test="FAC_NUMBER != null" >
-        FAC_NUMBER,
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT,
-      </if>
-      <if test="NAME != null" >
-        NAME,
-      </if>
-      <if test="COMPANY != null" >
-        COMPANY,
-      </if>
-      <if test="TYPE != null" >
-        TYPE,
-      </if>
-      <if test="CAT != null" >
-        CAT,
-      </if>
-      <if test="TOTAL != null" >
-        TOTAL,
-      </if>
-      <if test="BAD != null" >
-        BAD,
-      </if>
-      <if test="FREE != null" >
-        FREE,
-      </if>
-      <if test="WORKING != null" >
-        WORKING,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
-        #{ID,jdbcType=INTEGER},
-      </if>
-      <if test="FAC_NUMBER != null" >
-        #{FAC_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="COMMENT != null" >
-        #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="NAME != null" >
-        #{NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="COMPANY != null" >
-        #{COMPANY,jdbcType=VARCHAR},
-      </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="CAT != null" >
-        #{CAT,jdbcType=VARCHAR},
-      </if>
-      <if test="TOTAL != null" >
-        #{TOTAL,jdbcType=INTEGER},
-      </if>
-      <if test="BAD != null" >
-        #{BAD,jdbcType=INTEGER},
-      </if>
-      <if test="FREE != null" >
-        #{FREE,jdbcType=INTEGER},
-      </if>
-      <if test="WORKING != null" >
-        #{WORKING,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.FacSta" >
-    update fac_sta
-    <set >
-      <if test="FAC_NUMBER != null" >
-        FAC_NUMBER = #{FAC_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="COMMENT != null" >
-        COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      </if>
-      <if test="NAME != null" >
-        NAME = #{NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="COMPANY != null" >
-        COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="CAT != null" >
+    <resultMap id="BaseResultMap" type="org.ld.model.FacSta" >
+        <id column="ID" property="ID" jdbcType="INTEGER" />
+        <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+        <result column="CAT" property="CAT" jdbcType="VARCHAR" />
+        <result column="BRAND" property="BRAND" jdbcType="VARCHAR" />
+        <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+        <result column="OWNER" property="OWNER" jdbcType="VARCHAR" />
+        <result column="REPO_ID" property="REPO_ID" jdbcType="INTEGER" />
+        <result column="REPO_NUM" property="REPO_NUM" jdbcType="VARCHAR" />
+        <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+        <result column="FREE" property="FREE" jdbcType="INTEGER" />
+        <result column="WORKING" property="WORKING" jdbcType="INTEGER" />
+        <result column="MAINTAIN" property="MAINTAIN" jdbcType="INTEGER" />
+        <result column="BAD" property="BAD" jdbcType="INTEGER" />
+        <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        ID, TYPE, CAT, BRAND, NAME, OWNER, REPO_ID, REPO_NUM, TOTAL, FREE, WORKING, MAINTAIN,
+        BAD, COMMENT
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from fac_sta
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from fac_sta
+        where ID = #{ID,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="org.ld.model.FacSta" keyProperty="ID" useGeneratedKeys="true">
+        insert into fac_sta (ID, TYPE, CAT,
+        BRAND, NAME, OWNER,
+        REPO_ID, REPO_NUM, TOTAL,
+        FREE, WORKING, MAINTAIN,
+        BAD, COMMENT)
+        values (#{ID,jdbcType=INTEGER}, #{TYPE,jdbcType=VARCHAR}, #{CAT,jdbcType=VARCHAR},
+        #{BRAND,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, #{OWNER,jdbcType=VARCHAR},
+        #{REPO_ID,jdbcType=INTEGER}, #{REPO_NUM,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER},
+        #{FREE,jdbcType=INTEGER}, #{WORKING,jdbcType=INTEGER}, #{MAINTAIN,jdbcType=INTEGER},
+        #{BAD,jdbcType=INTEGER}, #{COMMENT,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="org.ld.model.FacSta" >
+        insert into fac_sta
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="ID != null" >
+                ID,
+            </if>
+            <if test="TYPE != null" >
+                TYPE,
+            </if>
+            <if test="CAT != null" >
+                CAT,
+            </if>
+            <if test="BRAND != null" >
+                BRAND,
+            </if>
+            <if test="NAME != null" >
+                NAME,
+            </if>
+            <if test="OWNER != null" >
+                OWNER,
+            </if>
+            <if test="REPO_ID != null" >
+                REPO_ID,
+            </if>
+            <if test="REPO_NUM != null" >
+                REPO_NUM,
+            </if>
+            <if test="TOTAL != null" >
+                TOTAL,
+            </if>
+            <if test="FREE != null" >
+                FREE,
+            </if>
+            <if test="WORKING != null" >
+                WORKING,
+            </if>
+            <if test="MAINTAIN != null" >
+                MAINTAIN,
+            </if>
+            <if test="BAD != null" >
+                BAD,
+            </if>
+            <if test="COMMENT != null" >
+                COMMENT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="ID != null" >
+                #{ID,jdbcType=INTEGER},
+            </if>
+            <if test="TYPE != null" >
+                #{TYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="CAT != null" >
+                #{CAT,jdbcType=VARCHAR},
+            </if>
+            <if test="BRAND != null" >
+                #{BRAND,jdbcType=VARCHAR},
+            </if>
+            <if test="NAME != null" >
+                #{NAME,jdbcType=VARCHAR},
+            </if>
+            <if test="OWNER != null" >
+                #{OWNER,jdbcType=VARCHAR},
+            </if>
+            <if test="REPO_ID != null" >
+                #{REPO_ID,jdbcType=INTEGER},
+            </if>
+            <if test="REPO_NUM != null" >
+                #{REPO_NUM,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTAL != null" >
+                #{TOTAL,jdbcType=INTEGER},
+            </if>
+            <if test="FREE != null" >
+                #{FREE,jdbcType=INTEGER},
+            </if>
+            <if test="WORKING != null" >
+                #{WORKING,jdbcType=INTEGER},
+            </if>
+            <if test="MAINTAIN != null" >
+                #{MAINTAIN,jdbcType=INTEGER},
+            </if>
+            <if test="BAD != null" >
+                #{BAD,jdbcType=INTEGER},
+            </if>
+            <if test="COMMENT != null" >
+                #{COMMENT,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.FacSta" >
+        update fac_sta
+        <set >
+            <if test="TYPE != null" >
+                TYPE = #{TYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="CAT != null" >
+                CAT = #{CAT,jdbcType=VARCHAR},
+            </if>
+            <if test="BRAND != null" >
+                BRAND = #{BRAND,jdbcType=VARCHAR},
+            </if>
+            <if test="NAME != null" >
+                NAME = #{NAME,jdbcType=VARCHAR},
+            </if>
+            <if test="OWNER != null" >
+                OWNER = #{OWNER,jdbcType=VARCHAR},
+            </if>
+            <if test="REPO_ID != null" >
+                REPO_ID = #{REPO_ID,jdbcType=INTEGER},
+            </if>
+            <if test="REPO_NUM != null" >
+                REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
+            </if>
+            <if test="TOTAL != null" >
+                TOTAL = #{TOTAL,jdbcType=INTEGER},
+            </if>
+            <if test="FREE != null" >
+                FREE = #{FREE,jdbcType=INTEGER},
+            </if>
+            <if test="WORKING != null" >
+                WORKING = #{WORKING,jdbcType=INTEGER},
+            </if>
+            <if test="MAINTAIN != null" >
+                MAINTAIN = #{MAINTAIN,jdbcType=INTEGER},
+            </if>
+            <if test="BAD != null" >
+                BAD = #{BAD,jdbcType=INTEGER},
+            </if>
+            <if test="COMMENT != null" >
+                COMMENT = #{COMMENT,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.ld.model.FacSta" >
+        update fac_sta
+        set TYPE = #{TYPE,jdbcType=VARCHAR},
         CAT = #{CAT,jdbcType=VARCHAR},
-      </if>
-      <if test="TOTAL != null" >
+        BRAND = #{BRAND,jdbcType=VARCHAR},
+        NAME = #{NAME,jdbcType=VARCHAR},
+        OWNER = #{OWNER,jdbcType=VARCHAR},
+        REPO_ID = #{REPO_ID,jdbcType=INTEGER},
+        REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
         TOTAL = #{TOTAL,jdbcType=INTEGER},
-      </if>
-      <if test="BAD != null" >
-        BAD = #{BAD,jdbcType=INTEGER},
-      </if>
-      <if test="FREE != null" >
         FREE = #{FREE,jdbcType=INTEGER},
-      </if>
-      <if test="WORKING != null" >
         WORKING = #{WORKING,jdbcType=INTEGER},
-      </if>
-    </set>
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.FacSta" >
-    update fac_sta
-    set FAC_NUMBER = #{FAC_NUMBER,jdbcType=VARCHAR},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      NAME = #{NAME,jdbcType=VARCHAR},
-      COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      TYPE = #{TYPE,jdbcType=VARCHAR},
-      CAT = #{CAT,jdbcType=VARCHAR},
-      TOTAL = #{TOTAL,jdbcType=INTEGER},
-      BAD = #{BAD,jdbcType=INTEGER},
-      FREE = #{FREE,jdbcType=INTEGER},
-      WORKING = #{WORKING,jdbcType=INTEGER}
-    where ID = #{ID,jdbcType=INTEGER}
-  </update>
+        MAINTAIN = #{MAINTAIN,jdbcType=INTEGER},
+        BAD = #{BAD,jdbcType=INTEGER},
+        COMMENT = #{COMMENT,jdbcType=VARCHAR}
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+
 	<select id="getFacByTypeCatBand" resultMap="BaseResultMap" parameterType="map">
   		<![CDATA[
   		select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND} limit #{ST}, #{EACH}
@@ -170,12 +207,6 @@
   		select * from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND}
    	 ]]>
   	</select>
-	<select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
-	  select 
-	  <include refid="Base_Column_List" />
-	  from fac_sta
-	  where FAC_NUMBER = #{NUMBER,jdbcType=VARCHAR}
-	</select>
 	<select id="getFacByType" resultMap="BaseResultMap" parameterType="map" >
 	  <![CDATA[
 		select * from fac_sta where TYPE = #{TYPE} limit #{ST}, #{EACH}
@@ -211,4 +242,15 @@
 		select count(*) from fac_sta where TYPE = #{TYPE} and CAT = #{CAT} and COMPANY = #{BAND}
 	  ]]>
 	 </select>
+    <select id="selectByItemInfo" resultMap="BaseResultMap" parameterType="map">
+        <![CDATA[
+		select * from fac_sta
+		where TYPE = #{TYPE}
+		and CAT = #{CAT}
+		and BRAND = #{BRAND}
+		and NAME = #{NAME}
+		and OWNER = #{OWNER}
+		and REPO_NUM = #{REPO_NUM}
+	  ]]>
+    </select>
 </mapper>

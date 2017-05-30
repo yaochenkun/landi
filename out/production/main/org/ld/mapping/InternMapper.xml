@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.InternMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Intern" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="LE_1" property="LE_1" jdbcType="DOUBLE" />
+    <result column="LE_2" property="LE_2" jdbcType="DOUBLE" />
+    <result column="LE_3" property="LE_3" jdbcType="DOUBLE" />
+    <result column="LE_SERVICE" property="LE_SERVICE" jdbcType="DOUBLE" />
+    <result column="IN_1" property="IN_1" jdbcType="DOUBLE" />
+    <result column="IN_2" property="IN_2" jdbcType="DOUBLE" />
+    <result column="IN_3" property="IN_3" jdbcType="DOUBLE" />
+    <result column="IN_SERVICE" property="IN_SERVICE" jdbcType="DOUBLE" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="IN_NAME" property="IN_NAME" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUEST_ID, LE_1, LE_2, LE_3, LE_SERVICE, IN_1, IN_2, IN_3, IN_SERVICE, SYS_STATE, 
+    IN_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from intern
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from intern
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Intern" >
+    insert into intern (ID, GUEST_ID, LE_1, 
+      LE_2, LE_3, LE_SERVICE, 
+      IN_1, IN_2, IN_3, IN_SERVICE, 
+      SYS_STATE, IN_NAME)
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{LE_1,jdbcType=DOUBLE}, 
+      #{LE_2,jdbcType=DOUBLE}, #{LE_3,jdbcType=DOUBLE}, #{LE_SERVICE,jdbcType=DOUBLE}, 
+      #{IN_1,jdbcType=DOUBLE}, #{IN_2,jdbcType=DOUBLE}, #{IN_3,jdbcType=DOUBLE}, #{IN_SERVICE,jdbcType=DOUBLE}, 
+      #{SYS_STATE,jdbcType=INTEGER}, #{IN_NAME,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Intern" >
+    insert into intern
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="LE_1 != null" >
+        LE_1,
+      </if>
+      <if test="LE_2 != null" >
+        LE_2,
+      </if>
+      <if test="LE_3 != null" >
+        LE_3,
+      </if>
+      <if test="LE_SERVICE != null" >
+        LE_SERVICE,
+      </if>
+      <if test="IN_1 != null" >
+        IN_1,
+      </if>
+      <if test="IN_2 != null" >
+        IN_2,
+      </if>
+      <if test="IN_3 != null" >
+        IN_3,
+      </if>
+      <if test="IN_SERVICE != null" >
+        IN_SERVICE,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+      <if test="IN_NAME != null" >
+        IN_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="LE_1 != null" >
+        #{LE_1,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_2 != null" >
+        #{LE_2,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_3 != null" >
+        #{LE_3,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_SERVICE != null" >
+        #{LE_SERVICE,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_1 != null" >
+        #{IN_1,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_2 != null" >
+        #{IN_2,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_3 != null" >
+        #{IN_3,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_SERVICE != null" >
+        #{IN_SERVICE,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="IN_NAME != null" >
+        #{IN_NAME,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Intern" >
+    update intern
+    <set >
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="LE_1 != null" >
+        LE_1 = #{LE_1,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_2 != null" >
+        LE_2 = #{LE_2,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_3 != null" >
+        LE_3 = #{LE_3,jdbcType=DOUBLE},
+      </if>
+      <if test="LE_SERVICE != null" >
+        LE_SERVICE = #{LE_SERVICE,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_1 != null" >
+        IN_1 = #{IN_1,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_2 != null" >
+        IN_2 = #{IN_2,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_3 != null" >
+        IN_3 = #{IN_3,jdbcType=DOUBLE},
+      </if>
+      <if test="IN_SERVICE != null" >
+        IN_SERVICE = #{IN_SERVICE,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="IN_NAME != null" >
+        IN_NAME = #{IN_NAME,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Intern" >
+    update intern
+    set GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      LE_1 = #{LE_1,jdbcType=DOUBLE},
+      LE_2 = #{LE_2,jdbcType=DOUBLE},
+      LE_3 = #{LE_3,jdbcType=DOUBLE},
+      LE_SERVICE = #{LE_SERVICE,jdbcType=DOUBLE},
+      IN_1 = #{IN_1,jdbcType=DOUBLE},
+      IN_2 = #{IN_2,jdbcType=DOUBLE},
+      IN_3 = #{IN_3,jdbcType=DOUBLE},
+      IN_SERVICE = #{IN_SERVICE,jdbcType=DOUBLE},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      IN_NAME = #{IN_NAME,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

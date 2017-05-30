@@ -67,7 +67,7 @@ var requestItemOverview = function(pageNum){
 				var recordTotal = data.recordTotal;
 
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='12' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='14' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
@@ -75,14 +75,15 @@ var requestItemOverview = function(pageNum){
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 
-					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
+					$("#itemOverviewTbody").append("<tr><td>"+ "R23-3" +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
 						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
-            "<td>"+ "LE固定资产" +"</td>"+
+            			"<td>"+ "LE固定资产" +"</td>"+
 						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
-						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
-						"<td>"+ perRecord.comment +"</td>"+
-						"<td><span class='item_detail' onclick='showItemDetail(this);'>物品分配信息</span></td>"+
+                        "<td>"+ perRecord.free +"</td>"+
+						"<td>"+ perRecord.working +"</td><td>"+ 9 +"</td>"+
+                        "<td>"+ perRecord.bad +"</td><td>"+ perRecord.comment +"</td>"+
+						"<td><span class='item_detail' onclick='showItemDetail(this, "+ perRecord.id +");'>分配信息</span></td>"+
 						"</tr>");
 				}
 				// 添加物品总览 底部页码
@@ -99,8 +100,8 @@ var requestItemOverview = function(pageNum){
 };
 
 // 显示物品详细信息
-var showItemDetail = function(element){
-	var itemID = $(element).parent().parent().children("td").eq(0).text();
+var showItemDetail = function(element, itemID){
+
 	console.log("请求物品ID" + itemID + "的详细信息");
 	window.location.href = "http://" + window.location.host
 	 	+ "/LD/views/user/roomItem/itemDetail.jsp?itemID=" + itemID;
@@ -159,21 +160,22 @@ var requestItemByItemType = function(pageNum){
 				var pageTotal = data.pageTotal;
 				var recordTotal = data.recordTotal;
 				if (recordTotal == 0) {
-					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='12' style='color: #ff4d4d'>"+
+					$("#itemOverviewTbody").append("<tr><td class='no-data' colspan='14' style='color: #ff4d4d'>"+
 						"没有相关数据！</td></tr>");
 					return;
 				}
 
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
-					$("#itemOverviewTbody").append("<tr><td>"+ perRecord.id +"</td>"+
+					$("#itemOverviewTbody").append("<tr><td>"+ "R23-3" +"</td>"+
 						"<td>"+ perRecord.type +"</td><td>"+ perRecord.cat +"</td>"+
 						"<td>"+ perRecord.company +"</td><td>"+ perRecord.name +"</td>"+
-            "<td>"+ "LE固定资产" +"</td>"+
+            			"<td>"+ "LE固定资产" +"</td>"+
 						"<td>"+ perRecord.total +"</td><td>"+ perRecord.free +"</td>"+
-						"<td>"+ perRecord.working +"</td><td>"+ perRecord.bad +"</td>"+
-						"<td>"+ perRecord.comment +"</td>"+
-						"<td><span class='item_detail' onclick='showItemDetail(this);'>物品分配信息</span></td>"+
+                        "<td>"+ perRecord.free +"</td>"+
+                        "<td>"+ perRecord.working +"</td><td>"+ 99 +"</td>"+
+                        "<td>"+ perRecord.bad +"</td><td>"+ perRecord.comment +"</td>"+
+						"<td><span class='item_detail' onclick='showItemDetail(this, "+ perRecord.id +");'>分配信息</span></td>"+
 						"</tr>");
 				}
 				// 添加物品总览 底部页码
@@ -205,3 +207,4 @@ var requestNextItemByType = function(){
 
 	requestItemByItemType(nowpage+1);
 };
+

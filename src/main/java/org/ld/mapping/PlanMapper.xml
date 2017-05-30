@@ -23,7 +23,7 @@
     delete from plan
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.ld.model.Plan" >
+  <insert id="insert" parameterType="org.ld.model.Plan" useGeneratedKeys="true" keyProperty="ID">
     insert into plan (ID, NAME, CTIME, 
       MONEY, STAFF, COMMENT, 
       SYS_STATE)

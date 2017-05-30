@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.LaundryMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Laundry" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="DATE" property="DATE" jdbcType="DATE" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="CLOTHES" property="CLOTHES" jdbcType="VARCHAR" />
+    <result column="OTHER" property="OTHER" jdbcType="VARCHAR" />
+    <result column="COUNT" property="COUNT" jdbcType="INTEGER" />
+    <result column="TOTAL_PRICE" property="TOTAL_PRICE" jdbcType="INTEGER" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, DATE, ROOM_NUM, GUEST_ID, GUEST_NAME, CLOTHES, OTHER, COUNT, TOTAL_PRICE, OCCUR_TIME, 
+    IMPORT_TIME, EDIT_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from laundry
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from laundry
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Laundry" >
+    insert into laundry (ID, DATE, ROOM_NUM, 
+      GUEST_ID, GUEST_NAME, CLOTHES, 
+      OTHER, COUNT, TOTAL_PRICE, 
+      OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+      )
+    values (#{ID,jdbcType=INTEGER}, #{DATE,jdbcType=DATE}, #{ROOM_NUM,jdbcType=VARCHAR}, 
+      #{GUEST_ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{CLOTHES,jdbcType=VARCHAR}, 
+      #{OTHER,jdbcType=VARCHAR}, #{COUNT,jdbcType=INTEGER}, #{TOTAL_PRICE,jdbcType=INTEGER}, 
+      #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Laundry" >
+    insert into laundry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="DATE != null" >
+        DATE,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="CLOTHES != null" >
+        CLOTHES,
+      </if>
+      <if test="OTHER != null" >
+        OTHER,
+      </if>
+      <if test="COUNT != null" >
+        COUNT,
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="DATE != null" >
+        #{DATE,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CLOTHES != null" >
+        #{CLOTHES,jdbcType=VARCHAR},
+      </if>
+      <if test="OTHER != null" >
+        #{OTHER,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNT != null" >
+        #{COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        #{TOTAL_PRICE,jdbcType=INTEGER},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Laundry" >
+    update laundry
+    <set >
+      <if test="DATE != null" >
+        DATE = #{DATE,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CLOTHES != null" >
+        CLOTHES = #{CLOTHES,jdbcType=VARCHAR},
+      </if>
+      <if test="OTHER != null" >
+        OTHER = #{OTHER,jdbcType=VARCHAR},
+      </if>
+      <if test="COUNT != null" >
+        COUNT = #{COUNT,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL_PRICE != null" >
+        TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Laundry" >
+    update laundry
+    set DATE = #{DATE,jdbcType=DATE},
+      ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      CLOTHES = #{CLOTHES,jdbcType=VARCHAR},
+      OTHER = #{OTHER,jdbcType=VARCHAR},
+      COUNT = #{COUNT,jdbcType=INTEGER},
+      TOTAL_PRICE = #{TOTAL_PRICE,jdbcType=INTEGER},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from laundry 
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry 
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+  </select>
+  <select id="getRec" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry  
+    where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+    order by DATE DESC
+    limit #{ST}, #{EACH}
+  </select>
+  <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and DATE = #{DATE}
+  </select>
+</mapper>

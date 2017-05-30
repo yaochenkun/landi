@@ -36,7 +36,7 @@
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span ></span><span class="red">不能为空！</span></li>
 						<li><span>客户姓名：</span><input id="guestName" type="text" value="" disabled="disabled"/><li>
-						<li><span>发生时间：</span><input type="text" class="pack_maintain" disabled="disabled" /><li>
+						<li><span>发生时间：</span><input type="text" class="pack_maintain"/><li>
 						<li><span>总件数：</span><span id='totalCount'>0</span>&nbsp;件</li>
 						<li><span >总价：</span><span id="totalPrice">0</span>&nbsp;元</li>
 						<a onclick="addserviceWash();" class="btn btn-goback goback">确认添加</a>

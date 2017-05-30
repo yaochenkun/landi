@@ -55,19 +55,27 @@
 						<thead>
 							<tr>
 								<th>序号</th>
-								<th>物品种类</th>
-								<th>物品子类</th>
-								<th>物品品牌</th>
-								<th>物品名称</th>
+								<th>种类</th>
+								<th>子类</th>
+								<th>品牌</th>
+								<th>名称</th>
 								<th>数量</th>
+								<th>单价</th>
 								<th>总价</th>
+								<th>库房号</th>
+								<th>供应商</th>
+								<th>归属权</th>
+								<th>开票信息</th>
+								<th>是否收到</th>
+								<th>下单日期</th>
+								<th>到货日期</th>
 								<th>备注</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="addItem">
-								<td colspan="10">+ 添加物品</td>
+								<td colspan="17">+ 添加物品</td>
 							</tr>
 						</tbody>
 					</table>
@@ -82,8 +90,8 @@
 	<div class="addItemDiv">
 		<div class="facContent">
 			<div class="fac-title">
-				添加采购计划中物品
-				<span>×</span>
+				<span>添加采购计划中物品</span>
+				<span class="cross">×</span>
 			</div>
 			<div class="fac-body">
 				<div id="item-type" class="item">
@@ -91,31 +99,36 @@
 					<div class="item-content"></div>
 				</div>
 				<div id="item-cat" class="item">
-						<span class="span">物品子类：</span>
+					<span class="span">物品子类：</span>
 					<div class="item-content"></div>
 				</div>
-   			<div id="item-com" class="item">
-   				<span class="span">物品品牌：</span>
+   				<div id="item-com" class="item">
+   					<span class="span">物品品牌：</span>
 					<div class="item-content"></div>
-   			</div>
-   			<div id="item-name" class="item">
-   				<span class="span">物品名称：</span>
+   				</div>
+   				<div id="item-name" class="item">
+   					<span class="span">物品名称：</span>
 					<div class="item-content"><input type="text" value="GT双开门冰箱" /></div>
-   			</div>
+   				</div>
 
 				<div id="item-count" class="item">
 					<span class="span">数量：</span>
-					<div class="item-content"><input type="text" value="10" /></div>
+					<div class="item-content"><input type="text" value="10" oninput="calTotalPriceByCount(this.value);"/></div>
 				</div>
 
 				<div id="item-unitPrice" class="item">
 					<span class="span">单价：</span>
-					<div class="item-content"><input type="text" value="2.1" /></div>
+					<div class="item-content"><input type="text" value="10" oninput="calTotalPriceByUnitPrice(this.value);"/></div>
 				</div>
 
 				<div id="item-totalPrice" class="item">
 					<span class="span">总价：</span>
-					<div class="item-content"><input type="text" value="1.52" disabled="disabled"/></div>
+					<div class="item-content"><input type="text" value="100" disabled="disabled"/></div>
+				</div>
+
+				<div id="item-repoNum" class="item">
+					<span class="span">库房号：</span>
+					<div class="item-content"><input type="text" value="R3-2" /></div>
 				</div>
 
 				<div id="item-provider" class="item">
@@ -123,36 +136,36 @@
 					<div class="item-content"><input type="text" value="国美电器" /></div>
 				</div>
 
-				<div id="item-ownertype" class="item">
+				<div id="item-ownerType" class="item">
 					<span class="span">归属权：</span>
 					<div class="item-content">
-							<a class="btn btn-item" onclick="changeOwner(this);">LE固定资产</a>
-							<a class="btn btn-item" onclick="changeOwner(this);">LE管理资产</a>
+						<a class="btn btn-item" onclick="changeOwner(this);">LE固定资产</a>
+						<a class="btn btn-item" onclick="changeOwner(this);">LE管理资产</a>
 					</div>
 				</div>
 
-				<div id="item-ownermanage" class="item">
+				<div id="item-ownerManage" class="item">
 					<span class="span"></span>
 					<div class="item-content">
-							<a class="btn btn-item" onclick="changeSelection(this);">SPC</a>
-							<a class="btn btn-item" onclick="changeSelection(this);">小业主</a>
+						<a class="btn btn-item item-active" onclick="changeSelection(this);">SPC</a>
+						<a class="btn btn-item" onclick="changeSelection(this);">小业主</a>
 					</div>
 				</div>
 
 				<div id="item-invoiceInfo" class="item">
 					<span class="span">开票信息：</span>
 					<div class="item-content">
-							<a class="btn btn-item" onclick="changeInvoiceInfo(this);">含普票</a>
-							<a class="btn btn-item" onclick="changeInvoiceInfo(this);">含增票</a>
-							<a class="btn btn-item" onclick="changeInvoiceInfo(this);">不含票</a>
+						<a class="btn btn-item" onclick="changeInvoiceInfo(this);">含普票</a>
+						<a class="btn btn-item" onclick="changeInvoiceInfo(this);">含增票</a>
+						<a class="btn btn-item" onclick="changeInvoiceInfo(this);">不含票</a>
 					</div>
 				</div>
 
 				<div id="item-ifReceived" class="item">
 					<span class="span">是否收到：</span>
 					<div class="item-content">
-							<a class="btn btn-item" onclick="changeSelection(this);">是</a>
-							<a class="btn btn-item" onclick="changeSelection(this);">否</a>
+						<a class="btn btn-item item-active" onclick="changeSelection(this);">是</a>
+						<a class="btn btn-item" onclick="changeSelection(this);">否</a>
 					</div>
 				</div>
 
@@ -170,7 +183,6 @@
 					<span class="span">备注：</span>
 					<div class="item-content"><input type="text" value="无" /></div>
 				</div>
-
 			</div>
 			<div class="fac-foot">
 				<a class="btn btn-submit" onclick="addOneItem();">确定</a>

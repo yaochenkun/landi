@@ -31,12 +31,12 @@
 		var countInput = $(e.target).parent().parent().children("td").children("input[type='text']").val();
 		if (countInput != "") {
 			$("#totalCount").text(Number($("#totalCount").text()) - countInput);
-			$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1)))); 
+			$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1))));
 		}
 		$("#totalCount").text(Number($("#totalCount").text()) + 1);
 		$("#totalPrice").text(Number($("#totalPrice").text()) + price);
-		
-		
+
+
 		// 设置默认件数
 		node.parent().parent().children("td").children("input[type='text']").val(1);
 
@@ -74,7 +74,7 @@
 		var countInput = $(e.target).parent().parent().children("td").children("input[type='text']");
 		if (isNaN(countInput.val())) return;
 		$("#totalCount").text(Number($("#totalCount").text()) - countInput.val());
-		$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1)))); 
+		$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1))));
 
 		// 删除本行记录
 		$(e.target).parent().parent().children("td").children("input[type='radio']").attr("checked", false);
@@ -94,7 +94,7 @@ var requestUnitPrice = function(){
 		dataType:'json',
 		contentType:'application/json',
 		success:function(data){
-			
+
 			console.log(data);
 
 			//将单价写入表中
@@ -201,11 +201,12 @@ var addserviceWash = function(){
 		return;
 	}
 	requestAddServiceWash();
-}; 
+};
 var requestAddServiceWash = function(){
 	console.log("添加房间洗衣单收费！");
 
-	var date = formatDateForm(new Date());
+	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	alert(date);
 	var roomNum = $("#serviceRoomNumber").val();
 	var guestName = $("#guestName").val();
 	var count = Number($("#totalCount").text());
@@ -286,10 +287,10 @@ var requestAddServiceWash = function(){
 		type:'post',
 		contentType:'application/json',
 		dataType:'json',
-		data:JSON.stringify({'date': date, 
-							 'roomNum': roomNum, 
-							 'guestName': guestName, 
-							 'count': count, 
+		data:JSON.stringify({'date': date,
+							 'roomNum': roomNum,
+							 'guestName': guestName,
+							 'count': count,
 							 'totalPrice': totalPrice,
 							 'clothes' : JSON.stringify(normalClothes),
 							 'other' : JSON.stringify(otherClothes)}),
@@ -342,12 +343,12 @@ var appendOther = function(element){
 		var countInput = priceTr.prev().children("input[type='text']").val();
 		if (countInput != "") {
 			$("#totalCount").text(Number($("#totalCount").text()) - countInput);
-			$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1)))); 
+			$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 1))));
 		}
 		$("#totalCount").text(Number($("#totalCount").text()) + 1);
 		$("#totalPrice").text(Number($("#totalPrice").text()) + price);
-		
-		
+
+
 		// 设置默认件数
 		priceTr.prev().children("input[type='text']").val(1);
 
@@ -422,7 +423,7 @@ var appendOther = function(element){
 		console.log(priceTr.text().length);
 		if (isNaN(countInput.val())) return;
 		$("#totalCount").text(Number($("#totalCount").text()) - countInput.val());
-		$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 2)))); 
+		$("#totalPrice").text(Number($("#totalPrice").text() - Number(priceTr.text().substring(0, priceTr.text().length - 2))));
 
 		// 删除本行记录
 		$(e.target).parent().parent().find("input[type='radio']").attr("checked", false);
@@ -447,7 +448,7 @@ var searchWashById = function(id){
 		success:function(data){
 			console.log(data);
 			if(data.State == "Valid" && data.record != null){
-				
+
 				record = data.record;
 
 				//将获取到的数据显示出来
@@ -495,7 +496,7 @@ var searchWashById = function(id){
 				//3.其他衣服
 				others = JSON.parse(record.other);
 				others.map(function(other){
-					
+
 					//添加一行
 					otherBtn = $("table tr .addOther").parent().get(0);
 					$(otherBtn).trigger("click");
@@ -540,7 +541,7 @@ var searchWashById = function(id){
 var updateServiceWashEdit = function(id){
 	console.log("请求更新"+id+"号洗衣记录");
 
-	var date = $(".pack_maintain").val();
+	var date = formatDateForm(new Date($(".pack_maintain").val()));
 	var roomNum = $("#serviceRoomNumber").val();
 	var guestName = $("#guestName").val();
 	var count = Number($("#totalCount").text());
@@ -622,10 +623,10 @@ var updateServiceWashEdit = function(id){
 		contentType:'application/json',
 		dataType:'json',
 		data:JSON.stringify({'id': id,
-							 'date': date, 
-							 'roomNum': roomNum, 
-							 'guestName': guestName, 
-							 'count': count, 
+							 'date': date,
+							 'roomNum': roomNum,
+							 'guestName': guestName,
+							 'count': count,
 							 'totalPrice': totalPrice,
 							 'clothes' : JSON.stringify(normalClothes),
 							 'other' : JSON.stringify(otherClothes)}),
@@ -666,7 +667,7 @@ var exportList = function(){
     var BB = self.Blob;
     var fileName = "WashList_" + formatDateDot(new Date()) + ".csv";
     var content = ",,,,洗衣单记录表\n房间号,客户姓名,洗衣详情,合计件数,合计费用,发生时间,上传时间,最后编辑时间\n";
-    
+
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchWashButton").val();
 	var date = $(".pack_maintain").val();
@@ -694,13 +695,13 @@ var exportList = function(){
 				});
 				details = '\"'+ details +'\"';
 
-				content += record.room_NUM + "," + 
-						   record.guest_NAME + "," + 
+				content += record.room_NUM + "," +
+						   record.guest_NAME + "," +
 						   details + "," +
-						   record.count + "," + 
+						   record.count + "," +
 						   record.total_PRICE + " 元," +
-						   formatDate(new Date(record.occur_TIME)) + "," + 
-						   formatDate(new Date(record.import_TIME)) + "," + 
+						   formatDate(new Date(record.occur_TIME)) + "," +
+						   formatDate(new Date(record.import_TIME)) + "," +
 						   formatDate(new Date(record.edit_TIME)) + "\n";
 			});
 
@@ -738,8 +739,8 @@ var associateGuestName = function(element){
 };
 
 //打印洗衣单
-var printList = function()  
-{  
+var printList = function()
+{
 	printData = [];
 
 	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
@@ -783,12 +784,10 @@ var printList = function()
 			});
 
 			//打印
- 			printJS({printable: printData, 
- 			 		 properties: ['房间号', '客户姓名', '洗衣详情', '合计件数', '合计费用', '发生时间', '上传时间', '最后编辑时间'], 
+ 			printJS({printable: printData,
+ 			 		 properties: ['房间号', '客户姓名', '洗衣详情', '合计件数', '合计费用', '发生时间', '上传时间', '最后编辑时间'],
  			 		 type: 'json',
  		     	     font_size: '9pt'});
 		}
 	});
 };
-
-

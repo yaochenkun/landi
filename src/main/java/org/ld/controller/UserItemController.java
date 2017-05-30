@@ -77,8 +77,8 @@ public class UserItemController {
 				pageNumber = pageTotal;
 
 			int st = (pageNumber - 1) * eachPage;
-			List<FacSta> record = itemService.getFacByTypeCatBand(type, cat, band, st, eachPage);
-
+//			List<FacSta> record = itemService.getFacByTypeCatBand(type, cat, band, st, eachPage);
+			List<FacSta> record = null;
 			ans.put("pageList", record);
 		}
 
@@ -208,44 +208,60 @@ public class UserItemController {
 			Date date = new Date();
 			newPlan.setCTIME(date);
 
-			System.out.println("=============1");
 			if (itemService.addNewPlan(newPlan) == 1) {
-				System.out.println("=============2");
 				double sum = 0;
-				newPlan = itemService.getPlanByName(name);
 				JSONObject obj = dataJson.getJSONObject("itemList");
 				PlanDetail pd = new PlanDetail();
 				pd.setPLAN_ID(newPlan.getID());
 				for (String key : obj.keySet()) {
 					JSONObject obj2 = obj.getJSONObject(key);
+
 					pd.setALL_MONEY(obj2.getDouble("totalPrice"));
 					pd.setCOMMENT(obj2.getString("comment"));
 					pd.setTOTAL(obj2.getInteger("count"));
+					pd.setARRIVAL_DATE(obj2.getDate("arrivalDate"));
+					pd.setORDER_DATE(obj2.getDate("orderDate"));
+					pd.setINVOICE_TYPE(obj2.getString("invoiceType"));
+					pd.setPROVIDER(obj2.getString("provider"));
+					pd.setRECEIVED(obj2.getString("received"));
+					pd.setUNITPRICE(obj2.getDouble("unitPrice"));
 					pd.setALREADY(0);
 					sum += obj2.getDouble("totalPrice");
 
-					Integer ID = obj2.getIntValue("FAC_ID");
+					//物品基本属性信息
+					String facType = obj2.getString("FAC_TYPE");
+					String facCat = obj2.getString("FAC_CAT");
+					String facBrand = obj2.getString("FAC_BRAND");
+					String facName = obj2.getString("FAC_NAME");
+					String facOwner = obj2.getString("FAC_OWNER");
+					String facRepoNum = obj2.getString("FAC_REPONUM");
 
-					if (ID == 0) {
+					//根据上面信息查询数据库，看是否存在已有的物品，若有则将该plan_detail的facId关联上，否则新建一个facSta
+					FacSta facSta= itemService.getFacByItemInfo(facType, facCat, facName, facBrand, facOwner, facRepoNum);
+
+					if (facSta == null) { //新物品
 						FacSta newFs = new FacSta();
 
-						newFs.setNAME(obj2.getString("FAC_NAME"));
-						newFs.setCAT(obj2.getString("FAC_CAT"));
+						newFs.setTYPE(facType);
+						newFs.setCAT(facCat);
+						newFs.setBRAND(facBrand);
+						newFs.setNAME(facName);
+						newFs.setOWNER(facOwner);
+						newFs.setREPO_NUM(facRepoNum);//以后这里还要setRepoId
 						newFs.setCOMMENT("");
-						newFs.setCOMPANY(obj2.getString("FAC_BRAND"));
-						newFs.setFAC_NUMBER(obj2.getString("FAC_NUMBER"));
-						newFs.setTYPE(obj2.getString("FAC_TYPE"));
 						newFs.setFREE(0);
 						newFs.setBAD(0);
+						newFs.setMAINTAIN(0);
 						newFs.setWORKING(0);
 						newFs.setTOTAL(0);
 
 						itemService.addNewFac(newFs);
-						newFs = itemService.getFacByNumber(obj2.getString("FAC_NUMBER"));
-						ID = newFs.getID();
+						pd.setFAC_ID(newFs.getID());
+						pd.setREPO_NUM(facRepoNum);
+					} else {
+						pd.setFAC_ID(facSta.getID());
+						pd.setREPO_NUM(facRepoNum);
 					}
-
-					pd.setFAC_ID(ID);
 
 					itemService.addNewPlanDetail(pd);
 				}

@@ -40,11 +40,11 @@
 	<div class="main">
 		<div class="fac-sta">
 			<span class="text">总量：<span class="count"></span></span>
-			<span class="text">可用：<span class="count"></span></span>
+			<span class="text">待分配：<span class="count"></span></span>
 			<span class="text">已分配：<span class="count"></span></span>
-			<span class="text">借用中：<span class="count"></span></span>
-			<span class="text">维修中：<span class="count"></span></span>
-			<span class="text">已报废：<span class="count"></span></span>
+			<span class="text">可用：<span class="count"></span></span>
+			<span class="text">维修：<span class="count"></span></span>
+			<span class="text">报废：<span class="count"></span></span>
 			<a href="javascript:void(0);" onclick="showNewfacBadModal();" class="btn btn-bad">新报废</a>
 			<a href="javascript:void(0);" onclick="showNewfacRepairModal();" class="btn btn-repair">新维修</a>
 			<a href="javascript:void(0);" onclick="showNewfacBorrowModal();" class="btn btn-borrow">新借用</a>
@@ -59,7 +59,11 @@
 							<tr>
 								<th><span>所在房间</span></th>
 								<th><span>标签</span></th>
-								<th><span>备注</span></th>
+								<th><span>类型</span></th>
+								<th><span>状态</span></th>
+								<th><span>借用时间</span></th>
+								<th><span>归还时间</span></th>
+								<th><span>维修时长</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
@@ -76,23 +80,67 @@
 	<div class="shadow"></div>
 
 	<!-- 转移物品弹出框 start -->
-	<div id="transferMenu" class="menuDiv">
-		<div class="menuContent">
-			<div class="menuTitle">
+	<div id="transferMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
 				转移物品
 				<span onclick="closeTransferDiv();">×</span>
 			</div>
-			<div class="menuBody">
+			<div class="fac-body">
+
 				<span class="rec-id" style="display:none;"></span>
-				<div class="menuContent">将物品从房间&nbsp;
-					<span class="roomNumber"></span>&nbsp;&nbsp;转移至房间：&nbsp;
-					<input type="text" value="W34-1"/>
+				<div id="transfer-div" class="item">
+					<span class="span">转移至房间：</span>
+					<div class="item-content"><input type="text" value="W34-1"/></div>
 				</div>
-				<a class="btn btn-submit" onclick="requestTransferFac();">确认转移</a>
+
+				<div id="ifborrow-radio" class="item">
+					<span class="span">转移方式：</span>
+					<div class="item-content">
+						<input type="radio" name="ifborrow" checked="checked" onclick="checkAllocateRadio();"/>
+						<span>&nbsp;&nbsp;分配</span>
+						&nbsp;&nbsp;
+						<input type="radio" name="ifborrow" onclick="checkBorrowRadio();"/>
+						<span>&nbsp;&nbsp;借用</span>
+					</div>
+				</div>
+
+				<div id="transfer-borrow-date" class="item" style="display:none;">
+					<span class="span">借用时间：</span>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
+				</div>
+
+				<div id="transfer-return-date" class="item" style="display:none;">
+					<span class="span">归还时间：</span>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestTransferFac(this);">确认转移</a>
 			</div>
 		</div>
 	</div>
 	<!-- 转移物品弹出框 end -->
+
+	<!-- 回仓库弹出框 start -->
+	<div id="backMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				物品放回仓库
+				<span onclick="closeBackDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="repo-number" class="item">
+					<span class="span">放回至仓库：</span>
+					<div class="item-content"><input type="text" value="R22-2" /></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestToWarehouse(this);">确认放回</a>
+			</div>
+		</div>
+	</div>
+	<!-- 回仓库物品弹出框 end -->
 
 	<!-- 新分配物品弹出框 start -->
 	<div id="newDistributeMenu" class="addItemDiv">

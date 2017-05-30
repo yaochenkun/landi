@@ -111,10 +111,7 @@
 	width: 5%;
 }
 
-.itemList table thead th:nth-child(2), .itemList table thead th:nth-child(3),
-.itemList table thead th:nth-child(4), .itemList table thead th:nth-child(5),
-.itemList table thead th:nth-child(6), .itemList table thead th:nth-child(7),
-.itemList table thead th:nth-child(8), .itemList table thead th:nth-child(9){width: 10%;}
+.itemList table thead th:nth-child(5){width: 10%;}
 
 .itemList table tbody tr:hover {
 	background: #f4fbff;
@@ -135,16 +132,22 @@
 	background: transparent;
 }
 
-.itemList table tbody .operation {
+.itemList table tbody .delete-operation {
 	color: #e45e00;
 	cursor: pointer;
 }
 
-#item-ifReceived{
-	display: none;
+.itemList table tbody .edit-operation {
+	color: #2277da;
+	cursor: pointer;
+	margin-right: 10px;
 }
 
-#item-ownermanage{
+#item-ifReceived{
+
+}
+
+#item-ownerManage{
 	display: none;
 }
 
@@ -170,8 +173,8 @@
 .addItemDiv{display: none; position: fixed; width: 60%; height: 520px; top: 50px; left: 20%; z-index: 400; background: #fff;
 	 box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
 .addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
-.addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}
-.addItemDiv .fac-title span:hover{color: #666;}
+.addItemDiv .fac-title .cross{float: right; font-size: 24px; cursor: pointer;}
+.addItemDiv .fac-title .cross:hover{color: #666;}
 
 .fac-body{max-height: 425px; overflow-y: auto; padding: 30px 0;}
 .fac-body .item{padding: 0 40px;}

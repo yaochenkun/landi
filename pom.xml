@@ -176,7 +176,6 @@
 			<version>1.2.2</version>
 		</dependency>
 
-
 	</dependencies>
 
 
@@ -200,6 +199,16 @@
 		</resources>
 
 		<plugins>
+		
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
 			<!-- Run the JUnit unit tests in an isolated classloader -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -234,19 +243,23 @@
 				</configuration>
 			</plugin>
 
-   			<plugin>  
-		    	<groupId>org.mortbay.jetty</groupId>  
-				<artifactId>jetty-maven-plugin</artifactId>  
-			    <version>7.1.6.v20100715</version>  
-			    
-			    <!-- 扫描项目变更的时间间隔，默认为0不扫描 -->  
-				<configuration>  
-					<scanIntervalSeconds>10</scanIntervalSeconds>   
-					<webAppConfig>  
-						<!-- 项目访问路径 -->  
-				    	<contextPath>/cmdb</contextPath>  
-					</webAppConfig>  
-				</configuration>  
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>7.1.6.v20100715</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds><!-- 多少秒进行一次热部署 -->
+					<webAppConfig>
+						<contextPath>/LD</contextPath>
+					</webAppConfig>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>8080</port>
+						</connector>
+					</connectors>
+					<stopKey>foo</stopKey>
+					<stopPort>9999</stopPort>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

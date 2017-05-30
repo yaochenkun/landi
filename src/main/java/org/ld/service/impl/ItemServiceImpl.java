@@ -13,8 +13,6 @@ import org.ld.dao.PlanDetailMapper;
 import org.ld.dao.PlanMapper;
 import org.ld.dao.PlanProgressMapper;
 import org.ld.dao.RoomItemMapper;
-import org.ld.dao.SourcesMapper;
-import org.ld.model.DailyService;
 import org.ld.model.FacSta;
 import org.ld.model.GroceryItem;
 import org.ld.model.GroceryRunning;
@@ -22,10 +20,7 @@ import org.ld.model.Plan;
 import org.ld.model.PlanDetail;
 import org.ld.model.PlanProgress;
 import org.ld.model.RoomItem;
-import org.ld.model.Sources;
-import org.ld.model.User;
 import org.ld.service.ItemService;
-import org.ld.service.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -168,6 +163,19 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	public FacSta getFacByItemInfo(String type, String cat, String name, String brand, String owner, String repoNum) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("TYPE", type);
+		map.put("CAT", cat);
+		map.put("NAME", name);
+		map.put("BRAND", brand);
+		map.put("OWNER", owner);
+		map.put("REPO_NUM", repoNum);
+		return facStaMapper.selectByItemInfo(map);
+	}
+
+	@Override
 	public int addNewFac(FacSta f) {
 		// TODO Auto-generated method stub
 		try {
@@ -180,6 +188,10 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	public List<FacSta> getFacByTypeCatBand(String type, String cat, String brand, String band, int st, int eachPage) {
+		return null;
+	}
+
 	public List<FacSta> getFacByTypeCatBand(String type, String cat, String band, int st, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -205,12 +217,6 @@ public class ItemServiceImpl implements ItemService {
 	public FacSta getFac(Integer id) {
 		// TODO Auto-generated method stub
 		return facStaMapper.selectByPrimaryKey(id);
-	}
-
-	@Override
-	public FacSta getFacByNumber(String no) {
-		// TODO Auto-generated method stub
-		return facStaMapper.selectByNumber(no);
 	}
 
 	@Override

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.PlanMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Plan" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="CTIME" property="CTIME" jdbcType="TIMESTAMP" />
+    <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+    <result column="STAFF" property="STAFF" jdbcType="VARCHAR" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, CTIME, MONEY, STAFF, COMMENT, SYS_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Plan" >
+    insert into plan (ID, NAME, CTIME, 
+      MONEY, STAFF, COMMENT, 
+      SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{NAME,jdbcType=VARCHAR}, #{CTIME,jdbcType=TIMESTAMP}, 
+      #{MONEY,jdbcType=DOUBLE}, #{STAFF,jdbcType=VARCHAR}, #{COMMENT,jdbcType=VARCHAR}, 
+      #{SYS_STATE,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Plan" >
+    insert into plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="NAME != null" >
+        NAME,
+      </if>
+      <if test="CTIME != null" >
+        CTIME,
+      </if>
+      <if test="MONEY != null" >
+        MONEY,
+      </if>
+      <if test="STAFF != null" >
+        STAFF,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="NAME != null" >
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CTIME != null" >
+        #{CTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="MONEY != null" >
+        #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="STAFF != null" >
+        #{STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Plan" >
+    update plan
+    <set >
+      <if test="NAME != null" >
+        NAME = #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CTIME != null" >
+        CTIME = #{CTIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="MONEY != null" >
+        MONEY = #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="STAFF != null" >
+        STAFF = #{STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Plan" >
+    update plan
+    set NAME = #{NAME,jdbcType=VARCHAR},
+      CTIME = #{CTIME,jdbcType=TIMESTAMP},
+      MONEY = #{MONEY,jdbcType=DOUBLE},
+      STAFF = #{STAFF,jdbcType=VARCHAR},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="getPlans" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from plan limit #{ST}, #{EACH};
+    ]]>
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from plan;
+    ]]>
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan
+    where NAME = #{NAME,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,113 +1,143 @@
 package org.ld.model;
 
 public class FacSta {
-	private Integer ID;
+    private Integer ID;
 
-	private String FAC_NUMBER;
+    private String TYPE;
 
-	private String COMMENT;
+    private String CAT;
 
-	private String NAME;
+    private String BRAND;
 
-	private String COMPANY;
+    private String NAME;
 
-	private String TYPE;
+    private String OWNER;
 
-	private String CAT;
+    private Integer REPO_ID;
 
-	private Integer TOTAL;
+    private String REPO_NUM;
 
-	private Integer BAD;
+    private Integer TOTAL;
 
-	private Integer FREE;
+    private Integer FREE;
 
-	private Integer WORKING;
+    private Integer WORKING;
 
-	public Integer getID() {
-		return ID;
-	}
+    private Integer MAINTAIN;
 
-	public void setID(Integer ID) {
-		this.ID = ID;
-	}
+    private Integer BAD;
 
-	public String getFAC_NUMBER() {
-		return FAC_NUMBER;
-	}
+    private String COMMENT;
 
-	public void setFAC_NUMBER(String FAC_NUMBER) {
-		this.FAC_NUMBER = FAC_NUMBER == null ? null : FAC_NUMBER.trim();
-	}
+    public Integer getID() {
+        return ID;
+    }
 
-	public String getCOMMENT() {
-		return COMMENT;
-	}
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
 
-	public void setCOMMENT(String COMMENT) {
-		this.COMMENT = COMMENT == null ? null : COMMENT.trim();
-	}
+    public String getTYPE() {
+        return TYPE;
+    }
 
-	public String getNAME() {
-		return NAME;
-	}
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE == null ? null : TYPE.trim();
+    }
 
-	public void setNAME(String NAME) {
-		this.NAME = NAME == null ? null : NAME.trim();
-	}
+    public String getCAT() {
+        return CAT;
+    }
 
-	public String getCOMPANY() {
-		return COMPANY;
-	}
+    public void setCAT(String CAT) {
+        this.CAT = CAT == null ? null : CAT.trim();
+    }
 
-	public void setCOMPANY(String COMPANY) {
-		this.COMPANY = COMPANY == null ? null : COMPANY.trim();
-	}
+    public String getBRAND() {
+        return BRAND;
+    }
 
-	public String getTYPE() {
-		return TYPE;
-	}
+    public void setBRAND(String BRAND) {
+        this.BRAND = BRAND == null ? null : BRAND.trim();
+    }
 
-	public void setTYPE(String TYPE) {
-		this.TYPE = TYPE == null ? null : TYPE.trim();
-	}
+    public String getNAME() {
+        return NAME;
+    }
 
-	public String getCAT() {
-		return CAT;
-	}
+    public void setNAME(String NAME) {
+        this.NAME = NAME == null ? null : NAME.trim();
+    }
 
-	public void setCAT(String CAT) {
-		this.CAT = CAT == null ? null : CAT.trim();
-	}
+    public String getOWNER() {
+        return OWNER;
+    }
 
-	public Integer getTOTAL() {
-		return TOTAL;
-	}
+    public void setOWNER(String OWNER) {
+        this.OWNER = OWNER == null ? null : OWNER.trim();
+    }
 
-	public void setTOTAL(Integer TOTAL) {
-		this.TOTAL = TOTAL;
-	}
+    public Integer getREPO_ID() {
+        return REPO_ID;
+    }
 
-	public Integer getBAD() {
-		return BAD;
-	}
+    public void setREPO_ID(Integer REPO_ID) {
+        this.REPO_ID = REPO_ID;
+    }
 
-	public void setBAD(Integer BAD) {
-		this.BAD = BAD;
-	}
+    public String getREPO_NUM() {
+        return REPO_NUM;
+    }
 
-	public Integer getFREE() {
-		return FREE;
-	}
+    public void setREPO_NUM(String REPO_NUM) {
+        this.REPO_NUM = REPO_NUM == null ? null : REPO_NUM.trim();
+    }
 
-	public void setFREE(Integer FREE) {
-		this.FREE = FREE;
-	}
+    public Integer getTOTAL() {
+        return TOTAL;
+    }
 
-	public Integer getWORKING() {
-		return WORKING;
-	}
+    public void setTOTAL(Integer TOTAL) {
+        this.TOTAL = TOTAL;
+    }
 
-	public void setWORKING(Integer WORKING) {
-		this.WORKING = WORKING;
-	}
+    public Integer getFREE() {
+        return FREE;
+    }
+
+    public void setFREE(Integer FREE) {
+        this.FREE = FREE;
+    }
+
+    public Integer getWORKING() {
+        return WORKING;
+    }
+
+    public void setWORKING(Integer WORKING) {
+        this.WORKING = WORKING;
+    }
+
+    public Integer getMAINTAIN() {
+        return MAINTAIN;
+    }
+
+    public void setMAINTAIN(Integer MAINTAIN) {
+        this.MAINTAIN = MAINTAIN;
+    }
+
+    public Integer getBAD() {
+        return BAD;
+    }
+
+    public void setBAD(Integer BAD) {
+        this.BAD = BAD;
+    }
+
+    public String getCOMMENT() {
+        return COMMENT;
+    }
+
+    public void setCOMMENT(String COMMENT) {
+        this.COMMENT = COMMENT == null ? null : COMMENT.trim();
+    }
 }

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.GuestMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Guest" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="ROOM_TYPE" property="ROOM_TYPE" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NUMBER" property="CONTRACT_NUMBER" jdbcType="VARCHAR" />
+    <result column="TEL" property="TEL" jdbcType="VARCHAR" />
+    <result column="COMPANY" property="COMPANY" jdbcType="VARCHAR" />
+    <result column="TITLE" property="TITLE" jdbcType="VARCHAR" />
+    <result column="PERSONS" property="PERSONS" jdbcType="INTEGER" />
+    <result column="COMING" property="COMING" jdbcType="INTEGER" />
+    <result column="PARKING" property="PARKING" jdbcType="VARCHAR" />
+    <result column="CAR" property="CAR" jdbcType="VARCHAR" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="CHARGE" property="CHARGE" jdbcType="DOUBLE" />
+    <result column="TIMEIN" property="TIMEIN" jdbcType="TIMESTAMP" />
+    <result column="TIMEOUT" property="TIMEOUT" jdbcType="TIMESTAMP" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, GUEST_NAME, ROOM_NUMBER, ROOM_TYPE, CONTRACT_NUMBER, TEL, COMPANY, TITLE, PERSONS, 
+    COMING, PARKING, CAR, COMMENT, CHARGE, TIMEIN, TIMEOUT, SYS_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from guest
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from guest
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Guest" >
+    insert into guest (ID, GUEST_NAME, ROOM_NUMBER, 
+      ROOM_TYPE, CONTRACT_NUMBER, TEL, 
+      COMPANY, TITLE, PERSONS, 
+      COMING, PARKING, CAR, 
+      COMMENT, CHARGE, TIMEIN, 
+      TIMEOUT, SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
+      #{ROOM_TYPE,jdbcType=VARCHAR}, #{CONTRACT_NUMBER,jdbcType=VARCHAR}, #{TEL,jdbcType=VARCHAR}, 
+      #{COMPANY,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, #{PERSONS,jdbcType=INTEGER}, 
+      #{COMING,jdbcType=INTEGER}, #{PARKING,jdbcType=VARCHAR}, #{CAR,jdbcType=VARCHAR}, 
+      #{COMMENT,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, #{TIMEIN,jdbcType=TIMESTAMP}, 
+      #{TIMEOUT,jdbcType=TIMESTAMP}, #{SYS_STATE,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Guest" >
+    insert into guest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER,
+      </if>
+      <if test="ROOM_TYPE != null" >
+        ROOM_TYPE,
+      </if>
+      <if test="CONTRACT_NUMBER != null" >
+        CONTRACT_NUMBER,
+      </if>
+      <if test="TEL != null" >
+        TEL,
+      </if>
+      <if test="COMPANY != null" >
+        COMPANY,
+      </if>
+      <if test="TITLE != null" >
+        TITLE,
+      </if>
+      <if test="PERSONS != null" >
+        PERSONS,
+      </if>
+      <if test="COMING != null" >
+        COMING,
+      </if>
+      <if test="PARKING != null" >
+        PARKING,
+      </if>
+      <if test="CAR != null" >
+        CAR,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+      <if test="CHARGE != null" >
+        CHARGE,
+      </if>
+      <if test="TIMEIN != null" >
+        TIMEIN,
+      </if>
+      <if test="TIMEOUT != null" >
+        TIMEOUT,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_TYPE != null" >
+        #{ROOM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTRACT_NUMBER != null" >
+        #{CONTRACT_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="TEL != null" >
+        #{TEL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY != null" >
+        #{COMPANY,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null" >
+        #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="PERSONS != null" >
+        #{PERSONS,jdbcType=INTEGER},
+      </if>
+      <if test="COMING != null" >
+        #{COMING,jdbcType=INTEGER},
+      </if>
+      <if test="PARKING != null" >
+        #{PARKING,jdbcType=VARCHAR},
+      </if>
+      <if test="CAR != null" >
+        #{CAR,jdbcType=VARCHAR},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="CHARGE != null" >
+        #{CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="TIMEIN != null" >
+        #{TIMEIN,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TIMEOUT != null" >
+        #{TIMEOUT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Guest" >
+    update guest
+    <set >
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_TYPE != null" >
+        ROOM_TYPE = #{ROOM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTRACT_NUMBER != null" >
+        CONTRACT_NUMBER = #{CONTRACT_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="TEL != null" >
+        TEL = #{TEL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY != null" >
+        COMPANY = #{COMPANY,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null" >
+        TITLE = #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="PERSONS != null" >
+        PERSONS = #{PERSONS,jdbcType=INTEGER},
+      </if>
+      <if test="COMING != null" >
+        COMING = #{COMING,jdbcType=INTEGER},
+      </if>
+      <if test="PARKING != null" >
+        PARKING = #{PARKING,jdbcType=VARCHAR},
+      </if>
+      <if test="CAR != null" >
+        CAR = #{CAR,jdbcType=VARCHAR},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="CHARGE != null" >
+        CHARGE = #{CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="TIMEIN != null" >
+        TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TIMEOUT != null" >
+        TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Guest" >
+    update guest
+    set GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      ROOM_TYPE = #{ROOM_TYPE,jdbcType=VARCHAR},
+      CONTRACT_NUMBER = #{CONTRACT_NUMBER,jdbcType=VARCHAR},
+      TEL = #{TEL,jdbcType=VARCHAR},
+      COMPANY = #{COMPANY,jdbcType=VARCHAR},
+      TITLE = #{TITLE,jdbcType=VARCHAR},
+      PERSONS = #{PERSONS,jdbcType=INTEGER},
+      COMING = #{COMING,jdbcType=INTEGER},
+      PARKING = #{PARKING,jdbcType=VARCHAR},
+      CAR = #{CAR,jdbcType=VARCHAR},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      CHARGE = #{CHARGE,jdbcType=DOUBLE},
+      TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
+      TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="selectByRoomNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from guest
+    where ROOM_NUMBER = #{RN,jdbcType=VARCHAR} and SYS_STATE = 0;
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="map" >
+    <![CDATA[
+  	select * from guest where GUEST_NAME like #{NAME} limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  <select id="selectByContract" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from guest
+    where CONTRACT_NUMBER = #{CT,jdbcType=VARCHAR}
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from guest
+  	]]>
+  </select>
+  <select id="getGuestRange" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from guest limit #{ST}, #{EACH}
+    ]]>
+  </select>
+  
+  <!-- add by yck -->
+  
+  <select id="getTotalByName_RoomNumber" resultType="java.lang.Integer" parameterType="map">
+  	<![CDATA[
+  	select count(*) from guest where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and GUEST_NAME like CONCAT('%', #{NAME}, '%')
+  	]]>
+  </select>
+  
+    <select id="selectByName_RoomNumber" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select * from guest where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and GUEST_NAME like CONCAT('%', #{NAME}, '%') limit #{ST}, #{EACH}
+  	]]>
+  </select>
+  
+</mapper>

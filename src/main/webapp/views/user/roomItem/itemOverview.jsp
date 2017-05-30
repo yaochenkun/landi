@@ -23,7 +23,8 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
+					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRepoOverview.jsp">库房物品统计</a></li>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
 			</div>
@@ -50,9 +51,8 @@
 					</div>
 				</div>
 
-				<span style="margin-left:10px;">房间号：</span><input id="searchRoomNum" type="text" value="">
-				<span style="margin-left:10px;">库房号：</span><input id="searchRoomNum" type="text" value="">
-				<a class="btn btn-edit btnEdit" onclick="searchBusOther(1);">搜索</a>
+				<span style="margin-left:30px;">房间号：</span><input id="searchRoomNum" type="text" value="">
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchBusOther(1);">搜索</a>
 				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
@@ -71,17 +71,18 @@
 					<table>
 						<thead>
 							<tr>
-								<th><span>种类ID</span></th>
-								<th><span>物品种类</span></th>
-								<th><span>物品子类</span></th>
+								<th><span>房间号</span></th>
+								<th><span>种类</span></th>
+								<th><span>子类</span></th>
 								<th><span>品牌</span></th>
 								<th><span>名称</span></th>
 								<th><span>归属权</span></th>
-								<th><span>总量</span></th>
-								<th><span>可用</span></th>
-								<th><span>已分配</span></th>
-								<th><span>报废</span></th>
-								<th><span>备注</span></th>
+								<th><span>标签</span></th>
+								<th><span>类型</span></th>
+								<th><span>状态</span></th>
+								<th><span>借用时间</span></th>
+								<th><span>归还时间</span></th>
+								<th><span>维修时长</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>

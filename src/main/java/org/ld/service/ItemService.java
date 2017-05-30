@@ -47,18 +47,23 @@ public interface ItemService {
 
 	Plan getPlanByName(String s);
 
+
+
+	//add by yck
+	FacSta getFacByItemInfo(String type, String cat, String brand, String name, String owner, String repoNum);
+
 	int addNewFac(FacSta f);
 
-	List<FacSta> getFacByTypeCatBand(String type, String cat, String band, int st, int eachPage);
+	List<FacSta> getFacByTypeCatBand(String type, String cat, String brand, String band, int st, int eachPage);
 
 	List<FacSta> getFacByTypeCatBandAll(String type, String cat, String band);
 
 	FacSta getFac(Integer id);
 	
 	int updateFac(FacSta fs);
+//
+//	FacSta getFacByNumber(String no);
 
-	FacSta getFacByNumber(String no);
-	
 	int totalItemByRoomType(int rid, String type);
 	
 	int totalGrocery(String goods);
@@ -76,4 +81,6 @@ public interface ItemService {
 	int updateGrocery(GroceryItem goods);
 	
 	int totalGroceryRunning(int id, Date from, Date to);
+
+
 }

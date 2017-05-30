@@ -5,17 +5,26 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
     <result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
+    <result column="REPO_ID" property="REPO_ID" jdbcType="INTEGER" />
+    <result column="REPO_NUM" property="REPO_NUM" jdbcType="VARCHAR" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
     <result column="ALREADY" property="ALREADY" jdbcType="INTEGER" />
+    <result column="UNITPRICE" property="UNITPRICE" jdbcType="DOUBLE" />
     <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
+    <result column="PROVIDER" property="PROVIDER" jdbcType="VARCHAR" />
+    <result column="INVOICE_TYPE" property="INVOICE_TYPE" jdbcType="VARCHAR" />
+    <result column="RECEIVED" property="RECEIVED" jdbcType="VARCHAR" />
+    <result column="ORDER_DATE" property="ORDER_DATE" jdbcType="DATE" />
+    <result column="ARRIVAL_DATE" property="ARRIVAL_DATE" jdbcType="DATE" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, PLAN_ID, FAC_ID, TOTAL, ALREADY, ALL_MONEY, COMMENT, SYS_STATE
+    ID, PLAN_ID, FAC_ID, REPO_ID, REPO_NUM, TOTAL, ALREADY, UNITPRICE, ALL_MONEY, PROVIDER,
+    INVOICE_TYPE, RECEIVED, ORDER_DATE, ARRIVAL_DATE, COMMENT, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from plan_detail
     where ID = #{ID,jdbcType=INTEGER}
@@ -25,12 +34,18 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.PlanDetail" >
-    insert into plan_detail (ID, PLAN_ID, FAC_ID, 
-      TOTAL, ALREADY, ALL_MONEY, 
-      COMMENT, SYS_STATE)
-    values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER}, #{FAC_ID,jdbcType=INTEGER}, 
-      #{TOTAL,jdbcType=INTEGER}, #{ALREADY,jdbcType=INTEGER}, #{ALL_MONEY,jdbcType=DOUBLE}, 
-      #{COMMENT,jdbcType=VARCHAR}, #{SYS_STATE,jdbcType=INTEGER})
+    insert into plan_detail (ID, PLAN_ID, FAC_ID,
+    REPO_ID, REPO_NUM, TOTAL,
+    ALREADY, UNITPRICE, ALL_MONEY,
+    PROVIDER, INVOICE_TYPE, RECEIVED,
+    ORDER_DATE, ARRIVAL_DATE, COMMENT,
+    SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER}, #{FAC_ID,jdbcType=INTEGER},
+    #{REPO_ID,jdbcType=INTEGER}, #{REPO_NUM,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER},
+    #{ALREADY,jdbcType=INTEGER}, #{UNITPRICE,jdbcType=DOUBLE}, #{ALL_MONEY,jdbcType=DOUBLE},
+    #{PROVIDER,jdbcType=VARCHAR}, #{INVOICE_TYPE,jdbcType=VARCHAR}, #{RECEIVED,jdbcType=VARCHAR},
+    #{ORDER_DATE,jdbcType=DATE}, #{ARRIVAL_DATE,jdbcType=DATE}, #{COMMENT,jdbcType=VARCHAR},
+    #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.PlanDetail" >
     insert into plan_detail
@@ -44,14 +59,38 @@
       <if test="FAC_ID != null" >
         FAC_ID,
       </if>
+      <if test="REPO_ID != null" >
+        REPO_ID,
+      </if>
+      <if test="REPO_NUM != null" >
+        REPO_NUM,
+      </if>
       <if test="TOTAL != null" >
         TOTAL,
       </if>
       <if test="ALREADY != null" >
         ALREADY,
       </if>
+      <if test="UNITPRICE != null" >
+        UNITPRICE,
+      </if>
       <if test="ALL_MONEY != null" >
         ALL_MONEY,
+      </if>
+      <if test="PROVIDER != null" >
+        PROVIDER,
+      </if>
+      <if test="INVOICE_TYPE != null" >
+        INVOICE_TYPE,
+      </if>
+      <if test="RECEIVED != null" >
+        RECEIVED,
+      </if>
+      <if test="ORDER_DATE != null" >
+        ORDER_DATE,
+      </if>
+      <if test="ARRIVAL_DATE != null" >
+        ARRIVAL_DATE,
       </if>
       <if test="COMMENT != null" >
         COMMENT,
@@ -70,14 +109,38 @@
       <if test="FAC_ID != null" >
         #{FAC_ID,jdbcType=INTEGER},
       </if>
+      <if test="REPO_ID != null" >
+        #{REPO_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REPO_NUM != null" >
+        #{REPO_NUM,jdbcType=VARCHAR},
+      </if>
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
       </if>
       <if test="ALREADY != null" >
         #{ALREADY,jdbcType=INTEGER},
       </if>
+      <if test="UNITPRICE != null" >
+        #{UNITPRICE,jdbcType=DOUBLE},
+      </if>
       <if test="ALL_MONEY != null" >
         #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="PROVIDER != null" >
+        #{PROVIDER,jdbcType=VARCHAR},
+      </if>
+      <if test="INVOICE_TYPE != null" >
+        #{INVOICE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVED != null" >
+        #{RECEIVED,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDER_DATE != null" >
+        #{ORDER_DATE,jdbcType=DATE},
+      </if>
+      <if test="ARRIVAL_DATE != null" >
+        #{ARRIVAL_DATE,jdbcType=DATE},
       </if>
       <if test="COMMENT != null" >
         #{COMMENT,jdbcType=VARCHAR},
@@ -96,14 +159,38 @@
       <if test="FAC_ID != null" >
         FAC_ID = #{FAC_ID,jdbcType=INTEGER},
       </if>
+      <if test="REPO_ID != null" >
+        REPO_ID = #{REPO_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REPO_NUM != null" >
+        REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
+      </if>
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
       </if>
       <if test="ALREADY != null" >
         ALREADY = #{ALREADY,jdbcType=INTEGER},
       </if>
+      <if test="UNITPRICE != null" >
+        UNITPRICE = #{UNITPRICE,jdbcType=DOUBLE},
+      </if>
       <if test="ALL_MONEY != null" >
         ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="PROVIDER != null" >
+        PROVIDER = #{PROVIDER,jdbcType=VARCHAR},
+      </if>
+      <if test="INVOICE_TYPE != null" >
+        INVOICE_TYPE = #{INVOICE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVED != null" >
+        RECEIVED = #{RECEIVED,jdbcType=VARCHAR},
+      </if>
+      <if test="ORDER_DATE != null" >
+        ORDER_DATE = #{ORDER_DATE,jdbcType=DATE},
+      </if>
+      <if test="ARRIVAL_DATE != null" >
+        ARRIVAL_DATE = #{ARRIVAL_DATE,jdbcType=DATE},
       </if>
       <if test="COMMENT != null" >
         COMMENT = #{COMMENT,jdbcType=VARCHAR},
@@ -118,9 +205,17 @@
     update plan_detail
     set PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
       FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+      REPO_ID = #{REPO_ID,jdbcType=INTEGER},
+      REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
       TOTAL = #{TOTAL,jdbcType=INTEGER},
       ALREADY = #{ALREADY,jdbcType=INTEGER},
+      UNITPRICE = #{UNITPRICE,jdbcType=DOUBLE},
       ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      PROVIDER = #{PROVIDER,jdbcType=VARCHAR},
+      INVOICE_TYPE = #{INVOICE_TYPE,jdbcType=VARCHAR},
+      RECEIVED = #{RECEIVED,jdbcType=VARCHAR},
+      ORDER_DATE = #{ORDER_DATE,jdbcType=DATE},
+      ARRIVAL_DATE = #{ARRIVAL_DATE,jdbcType=DATE},
       COMMENT = #{COMMENT,jdbcType=VARCHAR},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}

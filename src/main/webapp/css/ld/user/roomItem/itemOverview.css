@@ -1,5 +1,5 @@
 /************ 物品统计表格样式 start  **********/
-.bill-table thead tr th{width: 8%;}
+.bill-table thead tr th{width: 5%;}
 
 /* 数量及ID  */
 .bill-table thead tr th:nth-child(1), .bill-table thead tr th:nth-child(6),

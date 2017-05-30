@@ -27,8 +27,6 @@ public interface FacStaMapper {
 
 	List<FacSta> getFacByTypeCat(HashMap<String, Object> map);
 
-	FacSta selectByNumber(String NUMBER);
-
 	int getAllTotal();
 
 	int getTotalByType(HashMap<String, Object> map);
@@ -38,4 +36,6 @@ public interface FacStaMapper {
 	int getTotalByTypeCatBand(HashMap<String, Object> map);
 
 	List<FacSta> getFacByTypeCatBandAll(HashMap<String, Object> map);
+
+	FacSta selectByItemInfo(HashMap<String, Object> map);
 }

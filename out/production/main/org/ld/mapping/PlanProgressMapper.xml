@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.PlanProgressMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.PlanProgress" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
+    <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
+    <result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
+    <result column="TERM" property="TERM" jdbcType="INTEGER" />
+    <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
+    <result column="STAFF" property="STAFF" jdbcType="VARCHAR" />
+    <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
+    <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TIME, PLAN_ID, FAC_ID, TERM, TOTAL, STAFF, ALL_MONEY, COMMENT, SYS_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from plan_progress
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from plan_progress
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.PlanProgress" >
+    insert into plan_progress (ID, TIME, PLAN_ID, 
+      FAC_ID, TERM, TOTAL, 
+      STAFF, ALL_MONEY, COMMENT, 
+      SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=TIMESTAMP}, #{PLAN_ID,jdbcType=INTEGER}, 
+      #{FAC_ID,jdbcType=INTEGER}, #{TERM,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
+      #{STAFF,jdbcType=VARCHAR}, #{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, 
+      #{SYS_STATE,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.PlanProgress" >
+    insert into plan_progress
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="PLAN_ID != null" >
+        PLAN_ID,
+      </if>
+      <if test="FAC_ID != null" >
+        FAC_ID,
+      </if>
+      <if test="TERM != null" >
+        TERM,
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL,
+      </if>
+      <if test="STAFF != null" >
+        STAFF,
+      </if>
+      <if test="ALL_MONEY != null" >
+        ALL_MONEY,
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="PLAN_ID != null" >
+        #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="FAC_ID != null" >
+        #{FAC_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TERM != null" >
+        #{TERM,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF != null" >
+        #{STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="ALL_MONEY != null" >
+        #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="COMMENT != null" >
+        #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.PlanProgress" >
+    update plan_progress
+    <set >
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="PLAN_ID != null" >
+        PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      </if>
+      <if test="FAC_ID != null" >
+        FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+      </if>
+      <if test="TERM != null" >
+        TERM = #{TERM,jdbcType=INTEGER},
+      </if>
+      <if test="TOTAL != null" >
+        TOTAL = #{TOTAL,jdbcType=INTEGER},
+      </if>
+      <if test="STAFF != null" >
+        STAFF = #{STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="ALL_MONEY != null" >
+        ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="COMMENT != null" >
+        COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.PlanProgress" >
+    update plan_progress
+    set TIME = #{TIME,jdbcType=TIMESTAMP},
+      PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+      FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+      TERM = #{TERM,jdbcType=INTEGER},
+      TOTAL = #{TOTAL,jdbcType=INTEGER},
+      STAFF = #{STAFF,jdbcType=VARCHAR},
+      ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+      COMMENT = #{COMMENT,jdbcType=VARCHAR},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  	<![CDATA[
+  	select count(*) from plan_progress where PLAN_ID = #{PID,jdbcType=INTEGER}
+    ]]>
+  </select>
+  <select id="getPlanProgresses" resultMap="BaseResultMap" parameterType="map">
+  	<![CDATA[
+  	select plan_progress.TIME as TIME, plan_progress.PLAN_ID as PLAN_ID, plan_progress.FAC_ID as FAC_ID,
+  		plan_progress.TERM as TERM, plan_progress.TOTAL as TOTAL, plan_progress.STAFF as STAFF,
+  		plan_progress.ALL_MONEY as ALL_MONEY, plan_progress.COMMENT as COMMENT, 
+  		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.COMPANY as BAND, fac_sta.NAME as NAME
+  	from plan_progress left join fac_sta on plan_progress.FAC_ID = fac_sta.ID 
+  	where plan_progress.PLAN_ID = #{PID} limit #{ST}, #{EACH};
+    ]]>
+  </select>
+</mapper>

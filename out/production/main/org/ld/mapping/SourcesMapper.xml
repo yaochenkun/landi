@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.SourcesMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Sources" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="METER" property="METER" jdbcType="VARCHAR" />
+    <result column="LAST_DATA" property="LAST_DATA" jdbcType="DOUBLE" />
+    <result column="CURRENT_DATA" property="CURRENT_DATA" jdbcType="DOUBLE" />
+    <result column="COUNT" property="COUNT" jdbcType="DOUBLE" />
+    <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+    <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUMBER, GUEST_ID, GUEST_NAME, TIME, TYPE, METER, LAST_DATA, CURRENT_DATA, 
+    COUNT, MONEY, SYS_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sources
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sources
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Sources" >
+    insert into sources (ID, ROOM_NUMBER, GUEST_ID, 
+      GUEST_NAME, TIME, TYPE, 
+      METER, LAST_DATA, CURRENT_DATA, 
+      COUNT, MONEY, SYS_STATE
+      )
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{TIME,jdbcType=TIMESTAMP}, #{TYPE,jdbcType=INTEGER}, 
+      #{METER,jdbcType=VARCHAR}, #{LAST_DATA,jdbcType=DOUBLE}, #{CURRENT_DATA,jdbcType=DOUBLE}, 
+      #{COUNT,jdbcType=DOUBLE}, #{MONEY,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Sources" >
+    insert into sources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER,
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="METER != null" >
+        METER,
+      </if>
+      <if test="LAST_DATA != null" >
+        LAST_DATA,
+      </if>
+      <if test="CURRENT_DATA != null" >
+        CURRENT_DATA,
+      </if>
+      <if test="COUNT != null" >
+        COUNT,
+      </if>
+      <if test="MONEY != null" >
+        MONEY,
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="METER != null" >
+        #{METER,jdbcType=VARCHAR},
+      </if>
+      <if test="LAST_DATA != null" >
+        #{LAST_DATA,jdbcType=DOUBLE},
+      </if>
+      <if test="CURRENT_DATA != null" >
+        #{CURRENT_DATA,jdbcType=DOUBLE},
+      </if>
+      <if test="COUNT != null" >
+        #{COUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="MONEY != null" >
+        #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Sources" >
+    update sources
+    <set >
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_ID != null" >
+        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="METER != null" >
+        METER = #{METER,jdbcType=VARCHAR},
+      </if>
+      <if test="LAST_DATA != null" >
+        LAST_DATA = #{LAST_DATA,jdbcType=DOUBLE},
+      </if>
+      <if test="CURRENT_DATA != null" >
+        CURRENT_DATA = #{CURRENT_DATA,jdbcType=DOUBLE},
+      </if>
+      <if test="COUNT != null" >
+        COUNT = #{COUNT,jdbcType=DOUBLE},
+      </if>
+      <if test="MONEY != null" >
+        MONEY = #{MONEY,jdbcType=DOUBLE},
+      </if>
+      <if test="SYS_STATE != null" >
+        SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Sources" >
+    update sources
+    set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      TIME = #{TIME,jdbcType=TIMESTAMP},
+      TYPE = #{TYPE,jdbcType=INTEGER},
+      METER = #{METER,jdbcType=VARCHAR},
+      LAST_DATA = #{LAST_DATA,jdbcType=DOUBLE},
+      CURRENT_DATA = #{CURRENT_DATA,jdbcType=DOUBLE},
+      COUNT = #{COUNT,jdbcType=DOUBLE},
+      MONEY = #{MONEY,jdbcType=DOUBLE},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

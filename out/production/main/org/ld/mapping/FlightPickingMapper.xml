@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.FlightPickingMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.FlightPicking" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="TIME" property="TIME" jdbcType="DATE" />
+    <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="FLIGHT_NUMBER" property="FLIGHT_NUMBER" jdbcType="VARCHAR" />
+    <result column="PLATE_NUMBER" property="PLATE_NUMBER" jdbcType="VARCHAR" />
+    <result column="PICKER_NAME" property="PICKER_NAME" jdbcType="VARCHAR" />
+    <result column="PICKER_TELE" property="PICKER_TELE" jdbcType="VARCHAR" />
+    <result column="CONTACT_NAME" property="CONTACT_NAME" jdbcType="VARCHAR" />
+    <result column="CONTACT_TELE" property="CONTACT_TELE" jdbcType="VARCHAR" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="IMPORT_TIME" property="IMPORT_TIME" jdbcType="TIMESTAMP" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TIME, ROOM_NUMBER, GUEST_NAME, TYPE, FLIGHT_NUMBER, PLATE_NUMBER, PICKER_NAME, 
+    PICKER_TELE, CONTACT_NAME, CONTACT_TELE, OCCUR_TIME, IMPORT_TIME, EDIT_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from flight_picking
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flight_picking
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.FlightPicking" >
+    insert into flight_picking (ID, TIME, ROOM_NUMBER, 
+      GUEST_NAME, TYPE, FLIGHT_NUMBER, 
+      PLATE_NUMBER, PICKER_NAME, PICKER_TELE, 
+      CONTACT_NAME, CONTACT_TELE, OCCUR_TIME, 
+      IMPORT_TIME, EDIT_TIME)
+    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=DATE}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, #{FLIGHT_NUMBER,jdbcType=VARCHAR}, 
+      #{PLATE_NUMBER,jdbcType=VARCHAR}, #{PICKER_NAME,jdbcType=VARCHAR}, #{PICKER_TELE,jdbcType=VARCHAR}, 
+      #{CONTACT_NAME,jdbcType=VARCHAR}, #{CONTACT_TELE,jdbcType=VARCHAR}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, 
+      #{IMPORT_TIME,jdbcType=TIMESTAMP}, #{EDIT_TIME,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.FlightPicking" >
+    insert into flight_picking
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="TIME != null" >
+        TIME,
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="FLIGHT_NUMBER != null" >
+        FLIGHT_NUMBER,
+      </if>
+      <if test="PLATE_NUMBER != null" >
+        PLATE_NUMBER,
+      </if>
+      <if test="PICKER_NAME != null" >
+        PICKER_NAME,
+      </if>
+      <if test="PICKER_TELE != null" >
+        PICKER_TELE,
+      </if>
+      <if test="CONTACT_NAME != null" >
+        CONTACT_NAME,
+      </if>
+      <if test="CONTACT_TELE != null" >
+        CONTACT_TELE,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="TIME != null" >
+        #{TIME,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="FLIGHT_NUMBER != null" >
+        #{FLIGHT_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="PLATE_NUMBER != null" >
+        #{PLATE_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="PICKER_NAME != null" >
+        #{PICKER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PICKER_TELE != null" >
+        #{PICKER_TELE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACT_NAME != null" >
+        #{CONTACT_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACT_TELE != null" >
+        #{CONTACT_TELE,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.FlightPicking" >
+    update flight_picking
+    <set >
+      <if test="TIME != null" >
+        TIME = #{TIME,jdbcType=DATE},
+      </if>
+      <if test="ROOM_NUMBER != null" >
+        ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="FLIGHT_NUMBER != null" >
+        FLIGHT_NUMBER = #{FLIGHT_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="PLATE_NUMBER != null" >
+        PLATE_NUMBER = #{PLATE_NUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="PICKER_NAME != null" >
+        PICKER_NAME = #{PICKER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PICKER_TELE != null" >
+        PICKER_TELE = #{PICKER_TELE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACT_NAME != null" >
+        CONTACT_NAME = #{CONTACT_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTACT_TELE != null" >
+        CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="IMPORT_TIME != null" >
+        IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.FlightPicking" >
+    update flight_picking
+    set TIME = #{TIME,jdbcType=DATE},
+      ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      FLIGHT_NUMBER = #{FLIGHT_NUMBER,jdbcType=VARCHAR},
+      PLATE_NUMBER = #{PLATE_NUMBER,jdbcType=VARCHAR},
+      PICKER_NAME = #{PICKER_NAME,jdbcType=VARCHAR},
+      PICKER_TELE = #{PICKER_TELE,jdbcType=VARCHAR},
+      CONTACT_NAME = #{CONTACT_NAME,jdbcType=VARCHAR},
+      CONTACT_TELE = #{CONTACT_TELE,jdbcType=VARCHAR},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      IMPORT_TIME = #{IMPORT_TIME,jdbcType=TIMESTAMP},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+
+  <select id="getTotalByRoomNumber_Time" parameterType="map" resultType="java.lang.Integer">
+  	select count(*) from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%')
+  	<if test = "TIME != null">
+  	and TIME = #{TIME} 
+  	</if>
+  </select>
+  
+  <select id="getAll" parameterType="map" resultMap="BaseResultMap">
+  	select * from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%')
+  	<if test = "TIME != null">
+  	and TIME = #{TIME} 
+  	</if>
+  </select>
+  
+  <select id="selectByRoomNumber_Time" parameterType="map" resultMap="BaseResultMap">
+  	select * from flight_picking where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') 
+  	<if test = "TIME != null">
+  	and TIME = #{TIME} 
+  	</if>
+  	order by ID
+  	limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+</mapper>

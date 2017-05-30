@@ -5,7 +5,7 @@
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px; float: left;}
 .search input{padding: 0 5px; margin-left: 10px; height: 26px;}
-.bill-area .emptyText{text-align: right; color: #ff4d4d;}
+.bill-area .emptyText{text-align: center; color: #ff4d4d;}
 
 .bottom-page{margin: 0; margin-top: 3em;}
 .bottom-page .recorTotal{color: #2277da;}

@@ -57,7 +57,7 @@ var requestRoomItem = function (pageNum) {
 					$("#facDetailTbody").append("<tr><td>"+ perFac.room_NUMBER +"</td>"+
 						"<td>"+ perFac.tag +"</td><td>"+ perFac.comm +"</td>"+
 						"<td><span class='blue' onclick='transferFac(this);''>转移</span>"+
-						"<span class='blue' onclick='requestToWarehouse(this);'>回仓库</span>"+
+						"<span class='blue' onclick='showBackModal("+ perFac.id +");'>回仓库</span>"+
 						"<span class='gray' onclick='requestFacRepair(this);'>维修</span>"+
 						"<span class='gray' onclick='requestFacBad(this);'>报废</span>"+
 						"<span class='recID' style='display:none;'>"+ perFac.id +"</span></td></tr>");
@@ -140,20 +140,23 @@ var requestTransferFac = function(){
 
 // 请求物品回仓库
 var requestToWarehouse = function(element){
-	var recID = Number($(element).parent().children(".recID").text());
+
+	var itemId = $(element).attr("itemId");
+
 	// 将物品回仓库
 	$.ajax({
 		url:'/LD/userItem/toWarehouse.action',
 		type:'post',
 		dataType:'json',
 		contentType:'application/json',
-		data:'{"recID":'+ recID +'}',
+		data:'{"recID":'+ itemId +'}',
 		success:function(data){
 			console.log(data);
 			if(data == 1){
 				showModalBox("success","回仓库成功！");
 				requestFacSta();
 				requestRoomItem(1);
+				closeBackDiv();
 			} else {
 				showModalBox("error","回仓库失败！");
 			}
@@ -258,6 +261,25 @@ var closeRepairDiv = function(){
 	setTimeout(function(){$("#newRepairMenu").css("display","none");},200);
 };
 
+// 显示放回物品弹出框
+var showBackModal = function(itemId){
+
+	$("#backMenu").find(".fac-foot a").attr("itemId", itemId);
+
+    $(".shadow").css("display","block");
+    $('#backMenu').css("display","block");
+
+    setTimeout(function(){$('#backMenu').addClass('showMenuModal');},50);
+    $("#backMenu").addClass("effect-fade");
+};
+// 关闭放回物品弹出框
+var closeBackDiv = function(){
+    $(".shadow").css("display","none");
+    $("#backMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#backMenu").css("display","none");},200);
+};
+
+
 //request请求
 
 
@@ -308,4 +330,19 @@ var requestNewFacBad = function(){
 			}
 		}
 	});
+};
+
+//点击分配单选按钮
+var checkAllocateRadio = function(){
+
+    $("#transfer-borrow-date").hide();
+    $("#transfer-return-date").hide();
+
+};
+
+//点击借用单选按钮
+var checkBorrowRadio = function(){
+
+    $("#transfer-borrow-date").show();
+    $("#transfer-return-date").show();
 };
