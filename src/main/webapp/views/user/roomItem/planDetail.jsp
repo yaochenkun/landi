@@ -40,13 +40,21 @@
 					<thead>
 						<tr>
 							<th>序号</th>
-							<th>物品种类</th>
-							<th>物品子类</th>
-							<th>物品品牌</th>
-							<th>物品名称</th>
-							<th>计划采购数量</th>
-							<th>计划采购总价</th>
-							<th>已采购数量</th>
+							<th>种类</th>
+							<th>子类</th>
+							<th>品牌</th>
+							<th>名称</th>
+							<th>归属权</th>
+							<th>库房号</th>
+							<th>供应商</th>
+							<th>已采购</th>
+							<th>总量</th>
+							<th>单价</th>
+							<th>总价</th>
+							<th>开票信息</th>
+							<th>是否收到</th>
+							<th>下单日期</th>
+							<th>到货日期</th>
 							<th>备注</th>
 							<th>操作</th>
 						</tr>
@@ -79,7 +87,7 @@
 				</div>
 				<div id="fac-term" class="item">
 						<span class="span">阶段名称：</span>
-					<div class="item-content"><input type="text" value="10" /></div>
+					<div class="item-content"><input type="text" value="采购" /></div>
 				</div>
 				<div id="fac-name" class="item">
    					<span class="span">物品名称：</span>
@@ -91,12 +99,15 @@
 				</div>
 				<div id="fac-total" class="item">
 					<span class="span">采购物品数量：</span>
-					<div class="item-content"><input type="text" value="1" /></div>
+					<div class="item-content"><input type="text" value="1" oninput="calCaigouTotalPrice(this.value);"/></div>
 				</div>
-
+				<div id="fac-unitprice" class="item">
+					<span class="span">单价：</span>
+					<div class="item-content"></div>
+				</div>
 				<div id="fac-money" class="item">
 					<span class="span">总价：</span>
-					<div class="item-content"><input type="text" value="1.52" /></div>
+					<div class="item-content"></div>
 				</div>
 				<div id="fac-comment" class="item">
 					<span class="span">备注：</span>

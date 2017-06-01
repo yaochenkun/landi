@@ -11,7 +11,7 @@
  Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 05/30/2017 23:19:03 PM
+ Date: 06/02/2017 00:12:13 AM
 */
 
 SET NAMES utf8;
@@ -129,13 +129,13 @@ CREATE TABLE `fac_sta` (
   `BAD` int(11) DEFAULT NULL COMMENT '报废',
   `COMMENT` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `fac_sta`
 -- ----------------------------
 BEGIN;
-INSERT INTO `fac_sta` VALUES ('26', '备品', '床单', '多喜爱', 'GT双开门冰箱', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('27', '备品', '床单', '多喜爱', 'GT双开门冰箱', 'LE管理资产(SPC)', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('28', '软装', '浴屏', '美乐乐', 'GT双开门冰箱', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('29', '备品', '床单', '多喜爱', 'GT双开门冰箱11', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('30', '备品', '床单', '北极绒', 'GT双开门冰箱', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('31', '备品', '床单', '多喜爱', 'GT双开门冰箱', 'LE固定资产', null, 'R3-3', '0', '0', '0', '0', '0', ''), ('32', '家电', '电视', '格力', 'GT双开门冰箱', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('33', '备品', '床单', '富安娜', 'GT双开门冰箱3', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', ''), ('34', '备品', '枕头', '北极绒', 'GT双开门冰箱3', 'LE固定资产', null, 'R3-2', '0', '0', '0', '0', '0', '');
+INSERT INTO `fac_sta` VALUES ('61', '家电', '空调', '格力', 'GT双开门冰箱', 'LE固定资产', null, 'R3-2', '10', '4', '3', '1', '2', '无');
 COMMIT;
 
 -- ----------------------------
@@ -553,13 +553,13 @@ CREATE TABLE `plan` (
   `COMMENT` varchar(64) DEFAULT NULL,
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `plan`
 -- ----------------------------
 BEGIN;
-INSERT INTO `plan` VALUES ('48', '2017-05-30采购冰箱', '2017-05-30 16:33:03', '100', 'Alice', '无', null), ('49', '2017-05-30采购冰箱', '2017-05-30 16:33:15', '100', 'Alice', '无', null), ('50', '2017-05-30采购冰箱', '2017-05-30 16:33:40', '100', 'Alice', '无', null), ('51', '2017-05-30采购冰箱', '2017-05-30 16:34:01', '200', 'Alice', '无', null), ('52', '2017-05-30采购冰箱', '2017-05-30 16:34:59', '300', 'Alice', '无', null), ('53', '2017-05-30采购冰箱', '2017-05-30 16:35:38', '200', 'Alice', '无', null), ('54', '2017-05-30采购冰箱', '2017-05-30 16:38:39', '100', 'Alice', '无', null), ('55', '2017-05-30采购冰箱', '2017-05-30 16:39:20', '100', 'Alice', '无', null), ('56', '2017-05-30采购冰箱', '2017-05-30 16:40:29', '100', 'Alice', '无', null), ('57', '2017-05-30采购冰箱', '2017-05-30 16:40:46', '200', 'Alice', '无', null), ('58', '2017-05-30采购冰箱', '2017-05-30 16:41:34', '200', 'Alice', '无', null), ('59', '2017-05-30采购冰箱', '2017-05-30 16:43:10', '200', 'Alice', '无', null), ('60', '2017-05-30采购冰箱', '2017-05-30 22:49:45', '200', 'Alice', '无', null);
+INSERT INTO `plan` VALUES ('83', '2017-06-01采购冰箱', '2017-06-01 23:01:34', '100', 'Alice', '无', null);
 COMMIT;
 
 -- ----------------------------
@@ -570,8 +570,6 @@ CREATE TABLE `plan_detail` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `PLAN_ID` int(11) DEFAULT NULL,
   `FAC_ID` int(11) DEFAULT NULL,
-  `REPO_ID` int(11) DEFAULT NULL,
-  `REPO_NUM` varchar(64) DEFAULT NULL,
   `TOTAL` int(11) DEFAULT NULL,
   `ALREADY` int(11) DEFAULT '0',
   `UNITPRICE` double DEFAULT NULL,
@@ -585,13 +583,13 @@ CREATE TABLE `plan_detail` (
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`),
   KEY `PLAN_ID` (`PLAN_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `plan_detail`
 -- ----------------------------
 BEGIN;
-INSERT INTO `plan_detail` VALUES ('26', '48', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('27', '49', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('28', '50', '27', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('29', '51', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('30', '51', '27', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('31', '52', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('32', '52', '28', null, 'R3-2', '10', '0', '10', '100', '国美电器', '不含票', '-', '2017-05-30', '2017-05-30', '无', null), ('33', '52', '27', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('34', '53', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('35', '53', '29', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('36', '54', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('37', '55', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('38', '56', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('39', '57', '30', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('40', '57', '26', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('41', '58', '30', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('42', '58', '30', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('43', '59', '31', null, 'R3-3', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('44', '59', '32', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('45', '60', '33', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null), ('46', '60', '34', null, 'R3-2', '10', '0', '10', '100', '国美电器', '含普票', '是', '2017-05-30', '2017-05-30', '无', null);
+INSERT INTO `plan_detail` VALUES ('77', '83', '61', '10', '10', '10', '100', '国美电器', '含普票', '是', '2017-06-01', '2017-06-01', '无', null);
 COMMIT;
 
 -- ----------------------------
@@ -603,7 +601,7 @@ CREATE TABLE `plan_progress` (
   `TIME` datetime DEFAULT NULL,
   `PLAN_ID` int(11) DEFAULT NULL,
   `FAC_ID` int(11) DEFAULT NULL,
-  `TERM` int(11) DEFAULT NULL,
+  `TERM` varchar(64) DEFAULT NULL,
   `TOTAL` int(11) DEFAULT NULL,
   `STAFF` varchar(64) DEFAULT NULL,
   `ALL_MONEY` double DEFAULT NULL,
@@ -611,7 +609,14 @@ CREATE TABLE `plan_progress` (
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`),
   KEY `PLAN_ID` (`PLAN_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `plan_progress`
+-- ----------------------------
+BEGIN;
+INSERT INTO `plan_progress` VALUES ('45', '2017-06-01 23:32:36', '83', '61', '采购', '10', 'Alice', '100', '无', null);
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `repository`
@@ -665,25 +670,25 @@ COMMIT;
 DROP TABLE IF EXISTS `room_item`;
 CREATE TABLE `room_item` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ROOM_ID` int(11) DEFAULT NULL,
-  `ITEM_ID` int(11) DEFAULT NULL,
-  `TYPE` varchar(64) DEFAULT NULL COMMENT '分配、借用、无（新维修时生成的）',
+  `ROOM_NUM` varchar(64) DEFAULT NULL,
+  `FAC_ID` int(11) DEFAULT NULL,
   `TAG` varchar(64) DEFAULT NULL,
-  `COMM` varchar(64) DEFAULT NULL,
-  `STATE` int(11) DEFAULT NULL COMMENT '维修中0 使用中1',
+  `ALLOCATE_TYPE` varchar(10) DEFAULT NULL COMMENT '分配、借用、-（新维修时生成的）',
+  `STATE` varchar(11) DEFAULT NULL COMMENT '维修中0 使用中1',
   `BORROW_DATE` date DEFAULT NULL,
   `RETURN_DATE` date DEFAULT NULL,
   `MAINTAIN_DURATION` int(11) DEFAULT NULL COMMENT '维修时长（天）',
+  `COMM` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `ROOM_ID` (`ROOM_ID`),
-  KEY `ITEM_ID` (`ITEM_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  KEY `ROOM_ID` (`ROOM_NUM`),
+  KEY `ITEM_ID` (`FAC_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `room_item`
 -- ----------------------------
 BEGIN;
-INSERT INTO `room_item` VALUES ('9', '119', '1', null, '123', '无', '0', null, null, null), ('10', '119', '1', null, '123', '无', '0', null, null, null), ('11', '119', '1', null, '123', '无', '0', null, null, null);
+INSERT INTO `room_item` VALUES ('32', '-', '59', '-', '-', '正常', null, null, null, '无'), ('33', 'W34-1', '59', '123', '分配', '正常', null, null, null, '无'), ('34', '-', '60', '-', '-', '维修中', null, null, '3', '无'), ('35', 'W34-1', '60', '123', '分配', '正常', null, null, null, '无'), ('36', 'W34-1', '61', '123', '分配', '正常', null, null, null, '无'), ('39', 'W3-3', '61', '444', '借用', '维修中', '2017-06-07', '2017-06-24', '3', '借一下！'), ('40', 'W34-1', '61', '123', '借用', '正常', '2017-06-02', '2017-06-02', null, '无'), ('41', 'W34-1', '61', '123', '借用', '正常', '2017-06-02', '2017-06-02', null, '无');
 COMMIT;
 
 -- ----------------------------
@@ -718,13 +723,13 @@ CREATE TABLE `room_pic` (
   `PATH` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `ROOM_ID` (`ROOM_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `room_pic`
 -- ----------------------------
 BEGIN;
-INSERT INTO `room_pic` VALUES ('2', '116', '1', null, '1', '1', '/resources/room_pic/1.jpg'), ('3', '117', '1', null, '1', '1', '/resources/room_pic/DSC_0035.JPG');
+INSERT INTO `room_pic` VALUES ('2', '116', '1', null, '1', '1', '/resources/room_pic/1.jpg'), ('3', '117', '1', null, '1', '1', '/resources/room_pic/DSC_0035.JPG'), ('4', '1', '1', null, '1', '1', '/resources/room_pic/IMG_1080.JPG'), ('5', '1', '1', null, '1', '1', '/resources/room_pic/IMG_1042.JPG');
 COMMIT;
 
 -- ----------------------------
@@ -897,7 +902,7 @@ CREATE TABLE `user` (
 --  Records of `user`
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '262143', '2016-10-08', '2017-05-16', '1'), ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '1', '262143', '2016-10-08', '2017-05-30', '1'), ('10', '王二', 'e10adc3949ba59abbe56e057f20f883e', '王二', '王二', '财务部', '1', '262143', '2017-03-17', '2017-03-17', '1'), ('11', 'test8', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '1', '262143', '2017-03-28', '2017-03-28', '1'), ('12', 'testr345', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '262143', '2017-03-29', '2017-03-29', '1'), ('14', 'test12312', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '262143', '2017-04-24', '2017-04-24', '1');
+INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '262143', '2016-10-08', '2017-05-16', '1'), ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '1', '262143', '2016-10-08', '2017-06-01', '1'), ('10', '王二', 'e10adc3949ba59abbe56e057f20f883e', '王二', '王二', '财务部', '1', '262143', '2017-03-17', '2017-03-17', '1'), ('11', 'test8', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '1', '262143', '2017-03-28', '2017-03-28', '1'), ('12', 'testr345', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '262143', '2017-03-29', '2017-03-29', '1'), ('14', 'test12312', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '262143', '2017-04-24', '2017-04-24', '1');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

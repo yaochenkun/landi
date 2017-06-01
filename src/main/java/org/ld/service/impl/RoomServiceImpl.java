@@ -179,16 +179,16 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int totalRowByItem(Integer item_id) {
+	public int totalRowByItem(Integer fac_id) {
 		// TODO Auto-generated method stub
-		return roomItemMapper.getTotalByItemID(item_id);
+		return roomItemMapper.getTotalByItemID(fac_id);
 	}
 
 	@Override
-	public List<RoomItem> getItemByItemID(Integer item_id, Integer st, Integer eachPage) {
+	public List<RoomItem> getItemByItemID(Integer fac_id, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("ITEM_ID", item_id);
+		map.put("FAC_ID", fac_id);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 		return roomItemMapper.getItemsByItemID(map);

@@ -23,7 +23,7 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRoomOverview.jsp">客房物品统计</a></li>
 					<li class="liactive"><a	href="javascript:void(0);">库房物品统计</a></li>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
@@ -38,8 +38,8 @@
 				<span>物品种类：</span>
 				<div class="itemType" style="display:inline-block;">
 
-					<span class="span"></span>
-					<div id="itemTypeName" style="display:none;"></div>
+					<span class="span">家&nbsp;&nbsp;电</span>
+					<div id="itemTypeName" style="display:none;">家电</div>
 					<div class="itemTypeMenu">
 						<ul>
 							<li>家&nbsp;&nbsp;电</li>
@@ -50,8 +50,8 @@
 						</ul>
 					</div>
 				</div>
-				<span style="margin-left:30px;">库房号：</span><input id="searchRoomNum" type="text" value="">
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchBusOther(1);">搜索</a>
+				<span style="margin-left:30px;">库房号：</span><input id="repoNum" type="text" value="">
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
 				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
@@ -103,7 +103,14 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemRepoOverview.js"></script>
+
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
 	<script>
 	    // 请求第一页客房物品信息
 		requestItemOverview(1);

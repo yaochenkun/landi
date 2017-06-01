@@ -9,6 +9,16 @@ public class PlanDetail {
 
     private Integer FAC_ID;
 
+    private String TYPE;
+
+    private String CAT;
+
+    private String BRAND;
+
+    private String NAME;
+
+    private String OWNER;
+
     private Integer REPO_ID;
 
     private String REPO_NUM;
@@ -57,6 +67,46 @@ public class PlanDetail {
 
     public void setFAC_ID(Integer FAC_ID) {
         this.FAC_ID = FAC_ID;
+    }
+
+    public String getTYPE() {
+        return TYPE;
+    }
+
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE == null ? null : TYPE.trim();
+    }
+
+    public String getCAT() {
+        return CAT;
+    }
+
+    public void setCAT(String CAT) {
+        this.CAT = CAT == null ? null : CAT.trim();
+    }
+
+    public String getBRAND() {
+        return BRAND;
+    }
+
+    public void setBRAND(String BRAND) {
+        this.BRAND = BRAND == null ? null : BRAND.trim();
+    }
+
+    public String getNAME() {
+        return NAME;
+    }
+
+    public void setNAME(String NAME) {
+        this.NAME = NAME == null ? null : NAME.trim();
+    }
+
+    public String getOWNER() {
+        return OWNER;
+    }
+
+    public void setOWNER(String OWNER) {
+        this.OWNER = OWNER == null ? null : OWNER.trim();
     }
 
     public Integer getREPO_ID() {

@@ -33,7 +33,7 @@
 			<span class="span">物品子类：<span class="cat"></span></span>
 			<span class="span">物品品牌：<span class="com"></span></span>
 			<span class="span">物品名称：<span class="name"></span></span>
-			<a href="itemOverview.jsp" class="btn btngoback">返&nbsp;回</a>
+			<a href="itemRoomOverview.jsp" class="btn btngoback">返&nbsp;回</a>
 		</div>
 	</div>
 	<!-- 标题 end -->
@@ -59,11 +59,12 @@
 							<tr>
 								<th><span>所在房间</span></th>
 								<th><span>标签</span></th>
-								<th><span>类型</span></th>
-								<th><span>状态</span></th>
+								<th><span>分配类型</span></th>
 								<th><span>借用时间</span></th>
 								<th><span>归还时间</span></th>
+								<th><span>状态</span></th>
 								<th><span>维修时长</span></th>
+								<th><span>备注</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
@@ -218,7 +219,7 @@
 			</div>
 
 			<div class="fac-body">
-				<div id="bad-count" class="item">
+				<div id="repair-duration" class="item">
 					<span class="span">维修时长：</span>
 					<div class="item-content"><input type="text" value="3" />&nbsp;&nbsp;天</div>
 				</div>
@@ -242,7 +243,7 @@
 			<div class="fac-body">
 				<div id="bad-count" class="item">
 					<span class="span">报废数量：</span>
-					<div class="item-content"><input type="text" value="3" /></div>
+					<div class="item-content"><input type="text" value="1" /></div>
 				</div>
 			</div>
 
@@ -252,6 +253,30 @@
 		</div>
 	</div>
 	<!-- 新报废弹出框 end -->
+
+	<!-- 维修弹出框 start -->
+	<div id="turnRepairMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="title">
+				维修物品
+				<span onclick="closeTurnRepairDiv();">×</span>
+			</div>
+
+			<div class="fac-body">
+
+				<span class="rec-id" style="display:none;"></span>
+				<div id="repair-duration" class="item">
+					<span class="span">维修时长：</span>
+					<div class="item-content"><input type="text" value="3" />&nbsp;&nbsp;天</div>
+				</div>
+			</div>
+
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestFacRepair();">确认维修</a>
+			</div>
+		</div>
+	</div>
+	<!-- 维修弹出框 end -->
 
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

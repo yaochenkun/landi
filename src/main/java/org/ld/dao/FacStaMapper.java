@@ -38,4 +38,9 @@ public interface FacStaMapper {
 	List<FacSta> getFacByTypeCatBandAll(HashMap<String, Object> map);
 
 	FacSta selectByItemInfo(HashMap<String, Object> map);
+
+	//查询库房物品
+	int selectTotalRepoItemByType_RepoNum(HashMap<String, Object> map);
+	List<FacSta> selectRepoItemByType_RepoNum(HashMap<String, Object> map);
+	List<FacSta> selectAllRepoItemByType_RepoNum(HashMap<String, Object> map);
 }

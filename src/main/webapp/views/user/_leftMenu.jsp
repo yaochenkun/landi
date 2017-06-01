@@ -24,7 +24,7 @@
 				<span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;客房服务管理</a>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">
+			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomItem/itemRoomOverview.jsp">
 				<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;客房物品管理</a>
 			</li>
 

@@ -5,7 +5,7 @@
     		if(isNaN($("#plan_id").val())){
     			return false;
     		}
-    		requestItemByItemType($("#plan_id").val());
+    		requestItemByItemType();
     		return false;
     	}
     });
@@ -97,7 +97,13 @@ var requestPlanDetail = function(element){
 
 ////////////////////////////////////////////////////////////////////////////
 // 根据采购计划编号查询采购计划
-var requestItemByItemType = function(plan_id){
+var requestItemByItemType = function(){
+
+    var plan_id = $("#plan_id").val();
+    if(isNaN(plan_id)){
+        return false;
+    }
+
 	$.ajax({
 		url:'/LD/userItem/searchPlanByPlanId.action',
 		type:'post',

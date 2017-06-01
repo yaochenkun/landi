@@ -394,4 +394,49 @@ public class ItemServiceImpl implements ItemService {
 		
 		return groceryRunningMapper.totalRec(map);
 	}
+
+	/*
+	 * 库房物品
+	 */
+
+	@Override
+	public int getTotalRepoItemByType_RepoNum(String type, String repoNum) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("TYPE", type);
+		map.put("REPO_NUM", repoNum);
+
+		return facStaMapper.selectTotalRepoItemByType_RepoNum(map);
+	}
+
+	@Override
+	public List<FacSta> getRepoItemByType_RepoNum(String type, String repoNum, int startPage, int eachPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("TYPE", type);
+		map.put("REPO_NUM", repoNum);
+		map.put("START_PAGE", startPage);
+		map.put("EACH_PAGE", eachPage);
+
+		return facStaMapper.selectRepoItemByType_RepoNum(map);
+	}
+
+	@Override
+	public List<FacSta> getAllRepoItemByType_RepoNum(String type, String repoNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("TYPE", type);
+		map.put("REPO_NUM", repoNum);
+
+		return facStaMapper.selectAllRepoItemByType_RepoNum(map);
+	}
+
+	@Override
+	public int updateRoomItem(RoomItem roomItem) {
+		try{
+			return roomItemMapper.updateByPrimaryKey(roomItem);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+
+	}
 }

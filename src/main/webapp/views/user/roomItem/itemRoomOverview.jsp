@@ -23,7 +23,7 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品统计</a></li>
+					<li class="liactive"><a	href="javascript:void(0);">客房物品统计</a></li>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRepoOverview.jsp">库房物品统计</a></li>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
@@ -103,7 +103,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemOverview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemRoomOverview.js"></script>
 	<script>
 	    // 请求第一页客房物品信息
 		requestItemOverview(1);

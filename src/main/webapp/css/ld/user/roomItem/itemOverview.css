@@ -8,7 +8,7 @@
 
 /* 物品名称 */
 .bill-table thead tr th:nth-child(5){width: 10%;}
-
+.bill-table thead tr th:nth-child(6){width: 9%;}
 /* 操作样式 */
 #itemOverviewTbody .item_detail{color: #2277da; cursor: pointer;}
 #itemOverviewTbody .item_detail:hover{border-bottom: 1px solid #2277da;}

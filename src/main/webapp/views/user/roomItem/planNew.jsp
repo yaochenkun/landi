@@ -26,7 +26,7 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRoomOverview.jsp">物品统计</a></li>
 					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
 			</div>
@@ -59,12 +59,12 @@
 								<th>子类</th>
 								<th>品牌</th>
 								<th>名称</th>
+								<th>归属权</th>
+								<th>供应商</th>
+								<th>所在库房</th>
 								<th>数量</th>
 								<th>单价</th>
 								<th>总价</th>
-								<th>库房号</th>
-								<th>供应商</th>
-								<th>归属权</th>
 								<th>开票信息</th>
 								<th>是否收到</th>
 								<th>下单日期</th>
@@ -171,12 +171,12 @@
 
 				<div id="item-orderDate" class="item">
 					<span class="span">下单日期：</span>
-					<div class="item-content"><input type="text" class="pack_maintain" value="" /></div>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
 				</div>
 
 				<div id="item-arrivalDate" class="item">
 					<span class="span">到货日期：</span>
-					<div class="item-content"><input type="text" class="pack_maintain" value="" /></div>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
 				</div>
 
 				<div id="item-comment" class="item">
@@ -195,10 +195,10 @@
 		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript"

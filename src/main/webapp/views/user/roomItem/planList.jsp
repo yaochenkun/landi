@@ -23,7 +23,7 @@
 		<div class="toolbar">
 			<div class="nav-secondul">
 				<ul>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemOverview.jsp">客房物品统计</a></li>
+					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRoomOverview.jsp">客房物品统计</a></li>
 					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRepoOverview.jsp">库房物品统计</a></li>
 					<li class="liactive"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
 				</ul>
@@ -36,7 +36,8 @@
 		<div class="main-page">
 			<div class="nav-path">
 				<span class="span">采购计划编号：</span>
-				<input type="text" value="1" id="plan_id" />
+				<input type="text" value="" id="plan_id" />
+				<a class="btn btn-edit btnEdit" style="margin-left:10px;" onclick="requestItemByItemType();">搜索</a>
 			</div>
 			<a class="btn btn-new btnnew" href="planNew.jsp">新增采购计划</a>
 			<div class="bill-area">

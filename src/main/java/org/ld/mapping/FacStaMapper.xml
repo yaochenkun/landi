@@ -253,4 +253,30 @@
 		and REPO_NUM = #{REPO_NUM}
 	  ]]>
     </select>
+
+    <select id="selectTotalRepoItemByType_RepoNum" resultType="java.lang.Integer" parameterType="map">
+        <![CDATA[
+  		select count(*) from fac_sta
+  		where TYPE = #{TYPE}
+  		and REPO_NUM like CONCAT('%', #{REPO_NUM}, '%')
+   	 ]]>
+    </select>
+
+    <select id="selectRepoItemByType_RepoNum" resultMap="BaseResultMap" parameterType="map">
+        <![CDATA[
+  		select * from fac_sta
+  		where TYPE = #{TYPE}
+  		and REPO_NUM like CONCAT('%', #{REPO_NUM}, '%')
+  		order by ID
+  		limit #{START_PAGE}, #{EACH_PAGE}
+   	 ]]>
+    </select>
+
+    <select id="selectAllRepoItemByType_RepoNum" resultMap="BaseResultMap" parameterType="map">
+        <![CDATA[
+  		select * from fac_sta
+  		where TYPE = #{TYPE}
+  		and REPO_NUM like CONCAT('%', #{REPO_NUM}, '%')
+   	 ]]>
+    </select>
 </mapper>

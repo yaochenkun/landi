@@ -83,4 +83,12 @@ public interface ItemService {
 	int totalGroceryRunning(int id, Date from, Date to);
 
 
+
+	//库房物品
+	int getTotalRepoItemByType_RepoNum(String type, String repoNum);
+	List<FacSta> getRepoItemByType_RepoNum(String type, String repoNum, int startPage, int eachPage);
+	List<FacSta> getAllRepoItemByType_RepoNum(String type, String repoNum);
+
+	//房间物品
+	int updateRoomItem(RoomItem roomItem);
 }

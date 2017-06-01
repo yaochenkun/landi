@@ -5,6 +5,11 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
     <result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
+    <result column="BRAND" property="BRAND" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="OWNER" property="OWNER" jdbcType="VARCHAR" />
     <result column="REPO_ID" property="REPO_ID" jdbcType="INTEGER" />
     <result column="REPO_NUM" property="REPO_NUM" jdbcType="VARCHAR" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
@@ -20,8 +25,8 @@
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, PLAN_ID, FAC_ID, REPO_ID, REPO_NUM, TOTAL, ALREADY, UNITPRICE, ALL_MONEY, PROVIDER,
-    INVOICE_TYPE, RECEIVED, ORDER_DATE, ARRIVAL_DATE, COMMENT, SYS_STATE
+    ID, PLAN_ID, FAC_ID, TOTAL, ALREADY, UNITPRICE, ALL_MONEY, PROVIDER, INVOICE_TYPE,
+    RECEIVED, ORDER_DATE, ARRIVAL_DATE, COMMENT, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -35,17 +40,15 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.PlanDetail" >
     insert into plan_detail (ID, PLAN_ID, FAC_ID,
-    REPO_ID, REPO_NUM, TOTAL,
-    ALREADY, UNITPRICE, ALL_MONEY,
-    PROVIDER, INVOICE_TYPE, RECEIVED,
-    ORDER_DATE, ARRIVAL_DATE, COMMENT,
-    SYS_STATE)
+    TOTAL, ALREADY, UNITPRICE,
+    ALL_MONEY, PROVIDER, INVOICE_TYPE,
+    RECEIVED, ORDER_DATE, ARRIVAL_DATE,
+    COMMENT, SYS_STATE)
     values (#{ID,jdbcType=INTEGER}, #{PLAN_ID,jdbcType=INTEGER}, #{FAC_ID,jdbcType=INTEGER},
-    #{REPO_ID,jdbcType=INTEGER}, #{REPO_NUM,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER},
-    #{ALREADY,jdbcType=INTEGER}, #{UNITPRICE,jdbcType=DOUBLE}, #{ALL_MONEY,jdbcType=DOUBLE},
-    #{PROVIDER,jdbcType=VARCHAR}, #{INVOICE_TYPE,jdbcType=VARCHAR}, #{RECEIVED,jdbcType=VARCHAR},
-    #{ORDER_DATE,jdbcType=DATE}, #{ARRIVAL_DATE,jdbcType=DATE}, #{COMMENT,jdbcType=VARCHAR},
-    #{SYS_STATE,jdbcType=INTEGER})
+    #{TOTAL,jdbcType=INTEGER}, #{ALREADY,jdbcType=INTEGER}, #{UNITPRICE,jdbcType=DOUBLE},
+    #{ALL_MONEY,jdbcType=DOUBLE}, #{PROVIDER,jdbcType=VARCHAR}, #{INVOICE_TYPE,jdbcType=VARCHAR},
+    #{RECEIVED,jdbcType=VARCHAR}, #{ORDER_DATE,jdbcType=DATE}, #{ARRIVAL_DATE,jdbcType=DATE},
+    #{COMMENT,jdbcType=VARCHAR}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.PlanDetail" >
     insert into plan_detail
@@ -58,12 +61,6 @@
       </if>
       <if test="FAC_ID != null" >
         FAC_ID,
-      </if>
-      <if test="REPO_ID != null" >
-        REPO_ID,
-      </if>
-      <if test="REPO_NUM != null" >
-        REPO_NUM,
       </if>
       <if test="TOTAL != null" >
         TOTAL,
@@ -109,12 +106,6 @@
       <if test="FAC_ID != null" >
         #{FAC_ID,jdbcType=INTEGER},
       </if>
-      <if test="REPO_ID != null" >
-        #{REPO_ID,jdbcType=INTEGER},
-      </if>
-      <if test="REPO_NUM != null" >
-        #{REPO_NUM,jdbcType=VARCHAR},
-      </if>
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
       </if>
@@ -159,12 +150,6 @@
       <if test="FAC_ID != null" >
         FAC_ID = #{FAC_ID,jdbcType=INTEGER},
       </if>
-      <if test="REPO_ID != null" >
-        REPO_ID = #{REPO_ID,jdbcType=INTEGER},
-      </if>
-      <if test="REPO_NUM != null" >
-        REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
-      </if>
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
       </if>
@@ -204,20 +189,18 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.PlanDetail" >
     update plan_detail
     set PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
-      FAC_ID = #{FAC_ID,jdbcType=INTEGER},
-      REPO_ID = #{REPO_ID,jdbcType=INTEGER},
-      REPO_NUM = #{REPO_NUM,jdbcType=VARCHAR},
-      TOTAL = #{TOTAL,jdbcType=INTEGER},
-      ALREADY = #{ALREADY,jdbcType=INTEGER},
-      UNITPRICE = #{UNITPRICE,jdbcType=DOUBLE},
-      ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      PROVIDER = #{PROVIDER,jdbcType=VARCHAR},
-      INVOICE_TYPE = #{INVOICE_TYPE,jdbcType=VARCHAR},
-      RECEIVED = #{RECEIVED,jdbcType=VARCHAR},
-      ORDER_DATE = #{ORDER_DATE,jdbcType=DATE},
-      ARRIVAL_DATE = #{ARRIVAL_DATE,jdbcType=DATE},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+    TOTAL = #{TOTAL,jdbcType=INTEGER},
+    ALREADY = #{ALREADY,jdbcType=INTEGER},
+    UNITPRICE = #{UNITPRICE,jdbcType=DOUBLE},
+    ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+    PROVIDER = #{PROVIDER,jdbcType=VARCHAR},
+    INVOICE_TYPE = #{INVOICE_TYPE,jdbcType=VARCHAR},
+    RECEIVED = #{RECEIVED,jdbcType=VARCHAR},
+    ORDER_DATE = #{ORDER_DATE,jdbcType=DATE},
+    ARRIVAL_DATE = #{ARRIVAL_DATE,jdbcType=DATE},
+    COMMENT = #{COMMENT,jdbcType=VARCHAR},
+    SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
@@ -227,11 +210,31 @@
   </select>
   <select id="getPlanDetails" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select plan_detail.ID as ID, plan_detail.PLAN_ID as PLAN_ID, plan_detail.FAC_ID as FAC_ID, plan_detail.TOTAL as TOTAL, 
-  		plan_detail.ALREADY as ALREADY, plan_detail.ALL_MONEY as ALL_MONEY, plan_detail.COMMENT as COMMENT,
-  		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.COMPANY as BAND, fac_sta.NAME as NAME
-  	from plan_detail left join fac_sta on plan_detail.FAC_ID = fac_sta.ID 
-  	where plan_detail.PLAN_ID = #{PID} limit #{ST}, #{EACH};
+  	select plan_detail.ID as ID,
+  	       plan_detail.PLAN_ID as PLAN_ID,
+  	       plan_detail.FAC_ID as FAC_ID,
+  	       fac_sta.TYPE as TYPE,
+  	       fac_sta.CAT as CAT,
+  	       fac_sta.BRAND as BRAND,
+  	       fac_sta.NAME as NAME,
+  	       fac_sta.OWNER as OWNER,
+  	       fac_sta.REPO_ID as REPO_ID,
+  	       fac_sta.REPO_NUM as REPO_NUM,
+  	       plan_detail.TOTAL as TOTAL,
+  	       plan_detail.ALREADY as ALREADY,
+  	       plan_detail.UNITPRICE as UNITPRICE,
+  	       plan_detail.ALL_MONEY as ALL_MONEY,
+  	       plan_detail.PROVIDER as PROVIDER,
+  	       plan_detail.INVOICE_TYPE as INVOICE_TYPE,
+  	       plan_detail.RECEIVED as RECEIVED,
+  	       plan_detail.ORDER_DATE as ORDER_DATE,
+  	       plan_detail.ARRIVAL_DATE as ARRIVAL_DATE,
+           plan_detail.COMMENT as COMMENT,
+           plan_detail.SYS_STATE as SYS_STATE
+  	from plan_detail left join fac_sta on plan_detail.FAC_ID = fac_sta.ID
+  	where plan_detail.PLAN_ID = #{PID}
+  	order by plan_detail.ID
+  	limit #{ST}, #{EACH};
     ]]>
   </select>
 </mapper>

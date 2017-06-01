@@ -21,9 +21,9 @@ var requestFacSta = function(){
 			// 总量、可用、已分配、报废
 			$(".fac-sta .count").eq(0).text(data.fac.total);
 			$(".fac-sta .count").eq(1).text(data.fac.free);
-			$(".fac-sta .count").eq(2).text(data.fac.working);
-			$(".fac-sta .count").eq(3).text("XX");
-			$(".fac-sta .count").eq(4).text("XX");
+			$(".fac-sta .count").eq(2).text(data.fac.total - data.fac.free);
+			$(".fac-sta .count").eq(3).text(data.fac.working);
+			$(".fac-sta .count").eq(4).text(data.fac.maintain);
 			$(".fac-sta .count").eq(5).text(data.fac.bad);
 		}
 	});
@@ -50,16 +50,25 @@ var requestRoomItem = function (pageNum) {
 			var recordTotal = data.recordTotal;
 
 			if (recordTotal == 0) {
-				$("#facDetailTbody").append("<tr><td colspan='4'>没有相关信息！</td></tr>");
+				$("#facDetailTbody").append("<tr><td colspan='9'>没有相关信息！</td></tr>");
 			} else {
 				for(var i = 0; i < data.pageList.length; i++){
 					var perFac = data.pageList[i];
-					$("#facDetailTbody").append("<tr><td>"+ perFac.room_NUMBER +"</td>"+
-						"<td>"+ perFac.tag +"</td><td>"+ perFac.comm +"</td>"+
-						"<td><span class='blue' onclick='transferFac(this);''>转移</span>"+
-						"<span class='blue' onclick='showBackModal("+ perFac.id +");'>回仓库</span>"+
-						"<span class='gray' onclick='requestFacRepair(this);'>维修</span>"+
-						"<span class='gray' onclick='requestFacBad(this);'>报废</span>"+
+
+					var operateHtml = "<span class='blue' onclick='transferFac(this);''>转移</span>"+
+                        "<span class='blue' onclick='showBackModal("+ perFac.id +");'>回仓库</span>"+
+                        "<span class='gray' onclick='showTurnfacRepairModal(this);'>维修</span>"+
+                        "<span class='gray' onclick='requestFacBad(this);'>报废</span>";
+					if(perFac.state == "维修中")
+						operateHtml = "<span class='blue' onclick='finishRepair(this);''>维修完成</span>" +
+                            "<span class='gray' onclick='requestFacRepairToBad(this);'>报废</span>";
+
+					$("#facDetailTbody").append("<tr><td>"+ perFac.room_NUM +"</td>"+
+						"<td>"+ perFac.tag +"</td><td>"+ perFac.allocate_TYPE +"</td>"+
+                        "<td>"+ (perFac.borrow_DATE == null ? "-" : formatDateForm(new Date(perFac.borrow_DATE))) +"</td><td>"+ (perFac.return_DATE == null ? "-" : formatDateForm(new Date(perFac.return_DATE))) +"</td>"+
+                        "<td>"+ perFac.state +"</td><td>"+ (perFac.maintain_DURATION == null ? "-" : perFac.maintain_DURATION + "&nbsp;天") +"</td>"+
+                        "<td>"+ perFac.comm +"</td>"+
+						"<td>"+ operateHtml +
 						"<span class='recID' style='display:none;'>"+ perFac.id +"</span></td></tr>");
 				}
 				// 添加物品总览 底部页码
@@ -164,11 +173,87 @@ var requestToWarehouse = function(element){
 	});
 };
 
+// 显示新维修物品弹出框
+var showTurnfacRepairModal = function(element){
+    $(".shadow").css("display","block");
+    $('#turnRepairMenu').css("display","block");
+
+    var recID = $(element).parent().children(".recID").text();
+    $("#turnRepairMenu .rec-id").text(recID);
+
+    setTimeout(function(){$('#turnRepairMenu').addClass('showMenuModal');},50);
+    $("#turnRepairMenu").addClass("effect-fade");
+};
+// 关闭新维修物品弹出框
+var closeTurnRepairDiv = function(){
+    $(".shadow").css("display","none");
+    $("#turnRepairMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#turnRepairMenu").css("display","none");},200);
+};
+
+
+// 请求物品维修
+var requestFacRepair = function(){
+    var recID = Number($("#turnRepairMenu .rec-id").text());
+    var maintainDuration = Number($("#turnRepairMenu input").val());
+
+    $.ajax({
+        url:'/LD/userItem/facRepair.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({"recID" : recID, "maintainDuration" : maintainDuration}),
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+            	closeTurnRepairDiv();
+                showModalBox("success","报修成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else {
+                showModalBox("error","报修失败！");
+            }
+        }
+    });
+};
+
+//请求维修完成
+var finishRepair = function(element) {
+
+    var recID = Number($(element).parent().children(".recID").text());
+
+    //考察该物品是否不在任何房间
+	var isIsolated = true;
+	var roomNum = $(element).parent().parent().children("td").eq(0).text();
+
+	if(roomNum != '-')
+        isIsolated = false;
+
+    //请求维修完成
+    $.ajax({
+        url:'/LD/userItem/facFinishRepair.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({"recID" : recID, "isIsolated" : isIsolated}),
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","维修成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else {
+                showModalBox("error","维修失败！");
+            }
+        }
+    });
+};
 
 
 // 请求物品报废
 var requestFacBad = function(element){
 	var recID = Number($(element).parent().children(".recID").text());
+
 	$.ajax({
 		url:'/LD/userItem/facBad.action',
 		type:'post',
@@ -188,6 +273,28 @@ var requestFacBad = function(element){
 	});
 };
 
+// 请求物品报废（从维修中到报废）
+var requestFacRepairToBad = function(element){
+    var recID = Number($(element).parent().children(".recID").text());
+
+    $.ajax({
+        url:'/LD/userItem/facRepairToBad.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:'{"recID":'+ recID +'}',
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","报废成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else {
+                showModalBox("error","报废失败！");
+            }
+        }
+    });
+};
 
 // 显示新分配物品弹出框
 var showDistributeModal = function(){
@@ -222,11 +329,47 @@ var requestNewDistribute = function(){
 				requestFacSta();
 				requestRoomItem(1);
 			} else if(data == 0){
-				showModalBox("error","分配失败！");
+				showModalBox("error","分配失败！请检查闲置数量是否足够");
 			}
 		}
 	});
 };
+
+// 请求新借用物品
+var requestNewBorrow = function(){
+    var rNum = $("#newBorrowMenu #room-number input").val();
+    console.log("新借用物品"+ facID +"至房间："+rNum);
+    var tag = $("#newBorrowMenu #tag-name input").val();
+    var comment = $("#newBorrowMenu #fac-comment input").val();
+    var borrowDate = formatDateForm(new Date($("#newBorrowMenu #borrow-date input").val()));
+    var returnDate = formatDateForm(new Date($("#newBorrowMenu #return-date input").val()));
+
+
+    $.ajax({
+        url:'/LD/userItem/newBorrow.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+		data:JSON.stringify({"facID" : facID,
+							 "rNum" : rNum,
+			                 "tag" : tag,
+							 "comment" : comment,
+							 "borrowDate" : borrowDate,
+							 "returnDate" : returnDate}),
+
+        success:function(data){
+            if(data == 1){
+                closeBorrowDiv();
+                showModalBox("success","借用成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else if(data == 0){
+                showModalBox("error","借用失败！请检查闲置数量是否足够");
+            }
+        }
+    });
+};
+
 
 // 显示新借用物品弹出框
 var showNewfacBorrowModal = function(){
@@ -310,6 +453,55 @@ var closeFacBadDiv = function(){
 	$("#facBadMenu").removeClass('showMenuModal');
 	setTimeout(function(){$("#facBadMenu").css("display","none");},200);
 };
+
+
+// 请求新借用物品
+var requestNewFacBorrow = function(){
+    var count = Number($("#facBadMenu input").val());
+    $.ajax({
+        url:'/LD/userItem/newFacBorrow.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:'{"facID":'+ facID +',"count":'+ count +'}',
+        success:function(data){
+            if(data == 1){
+                closeFacBorrowDiv();
+                showModalBox("success","借用成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else if(data == 0){
+                showModalBox("error","借用失败！请检查是否有可借用物品");
+            }
+        }
+    });
+};
+
+
+
+// 请求新维修物品
+var requestNewFacRepair = function(){
+    var maintainDuration = Number($("#newRepairMenu input").val());
+
+    $.ajax({
+        url:'/LD/userItem/newFacRepair.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({"facID" : facID, "maintainDuration" : maintainDuration}),
+        success:function(data){
+            if(data == 1){
+                closeRepairDiv();
+                showModalBox("success","报修成功！");
+                requestFacSta();
+                requestRoomItem(1);
+            } else if(data == 0){
+                showModalBox("error","报修失败！请检查是否有可报修物品");
+            }
+        }
+    });
+};
+
 // 请求新报废物品
 var requestNewFacBad = function(){
 	var count = Number($("#facBadMenu input").val());
@@ -326,7 +518,7 @@ var requestNewFacBad = function(){
 				requestFacSta();
 				requestRoomItem(1);
 			} else if(data == 0){
-				showModalBox("error","报废失败！");
+				showModalBox("error","报废失败！请检查是否有可报废物品");
 			}
 		}
 	});

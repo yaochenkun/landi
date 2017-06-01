@@ -6,18 +6,26 @@
     <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
     <result column="PLAN_ID" property="PLAN_ID" jdbcType="INTEGER" />
     <result column="FAC_ID" property="FAC_ID" jdbcType="INTEGER" />
-    <result column="TERM" property="TERM" jdbcType="INTEGER" />
+    <result column="TERM" property="TERM" jdbcType="VARCHAR" />
     <result column="TOTAL" property="TOTAL" jdbcType="INTEGER" />
     <result column="STAFF" property="STAFF" jdbcType="VARCHAR" />
     <result column="ALL_MONEY" property="ALL_MONEY" jdbcType="DOUBLE" />
     <result column="COMMENT" property="COMMENT" jdbcType="VARCHAR" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="CAT" property="CAT" jdbcType="VARCHAR" />
+    <result column="BRAND" property="BRAND" jdbcType="VARCHAR" />
+    <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+    <result column="OWNER" property="OWNER" jdbcType="VARCHAR" />
+    <result column="REPO_ID" property="REPO_ID" jdbcType="INTEGER" />
+    <result column="REPO_NUM" property="REPO_NUM" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TIME, PLAN_ID, FAC_ID, TERM, TOTAL, STAFF, ALL_MONEY, COMMENT, SYS_STATE
+    ID, TIME, PLAN_ID, FAC_ID, TERM, TOTAL, STAFF, ALL_MONEY, COMMENT, SYS_STATE, TYPE,
+    CAT, BRAND, NAME, OWNER, REPO_ID, REPO_NUM
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from plan_progress
     where ID = #{ID,jdbcType=INTEGER}
@@ -27,14 +35,14 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.PlanProgress" >
-    insert into plan_progress (ID, TIME, PLAN_ID, 
-      FAC_ID, TERM, TOTAL, 
-      STAFF, ALL_MONEY, COMMENT, 
-      SYS_STATE)
-    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=TIMESTAMP}, #{PLAN_ID,jdbcType=INTEGER}, 
-      #{FAC_ID,jdbcType=INTEGER}, #{TERM,jdbcType=INTEGER}, #{TOTAL,jdbcType=INTEGER}, 
-      #{STAFF,jdbcType=VARCHAR}, #{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR}, 
-      #{SYS_STATE,jdbcType=INTEGER})
+    insert into plan_progress (ID, TIME, PLAN_ID,
+    FAC_ID, TERM, TOTAL,
+    STAFF, ALL_MONEY, COMMENT,
+    SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{TIME,jdbcType=TIMESTAMP}, #{PLAN_ID,jdbcType=INTEGER},
+    #{FAC_ID,jdbcType=INTEGER}, #{TERM,jdbcType=VARCHAR}, #{TOTAL,jdbcType=INTEGER},
+    #{STAFF,jdbcType=VARCHAR}, #{ALL_MONEY,jdbcType=DOUBLE}, #{COMMENT,jdbcType=VARCHAR},
+    #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.PlanProgress" >
     insert into plan_progress
@@ -84,7 +92,7 @@
         #{FAC_ID,jdbcType=INTEGER},
       </if>
       <if test="TERM != null" >
-        #{TERM,jdbcType=INTEGER},
+        #{TERM,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         #{TOTAL,jdbcType=INTEGER},
@@ -116,7 +124,7 @@
         FAC_ID = #{FAC_ID,jdbcType=INTEGER},
       </if>
       <if test="TERM != null" >
-        TERM = #{TERM,jdbcType=INTEGER},
+        TERM = #{TERM,jdbcType=VARCHAR},
       </if>
       <if test="TOTAL != null" >
         TOTAL = #{TOTAL,jdbcType=INTEGER},
@@ -139,14 +147,14 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.PlanProgress" >
     update plan_progress
     set TIME = #{TIME,jdbcType=TIMESTAMP},
-      PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
-      FAC_ID = #{FAC_ID,jdbcType=INTEGER},
-      TERM = #{TERM,jdbcType=INTEGER},
-      TOTAL = #{TOTAL,jdbcType=INTEGER},
-      STAFF = #{STAFF,jdbcType=VARCHAR},
-      ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    PLAN_ID = #{PLAN_ID,jdbcType=INTEGER},
+    FAC_ID = #{FAC_ID,jdbcType=INTEGER},
+    TERM = #{TERM,jdbcType=VARCHAR},
+    TOTAL = #{TOTAL,jdbcType=INTEGER},
+    STAFF = #{STAFF,jdbcType=VARCHAR},
+    ALL_MONEY = #{ALL_MONEY,jdbcType=DOUBLE},
+    COMMENT = #{COMMENT,jdbcType=VARCHAR},
+    SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalByPlanId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
@@ -159,9 +167,12 @@
   	select plan_progress.TIME as TIME, plan_progress.PLAN_ID as PLAN_ID, plan_progress.FAC_ID as FAC_ID,
   		plan_progress.TERM as TERM, plan_progress.TOTAL as TOTAL, plan_progress.STAFF as STAFF,
   		plan_progress.ALL_MONEY as ALL_MONEY, plan_progress.COMMENT as COMMENT, 
-  		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.COMPANY as BAND, fac_sta.NAME as NAME
+  		fac_sta.TYPE as TYPE, fac_sta.CAT as CAT, fac_sta.BRAND as BRAND, fac_sta.NAME as NAME,
+  		fac_sta.OWNER as OWNER, fac_sta.REPO_ID as REPO_ID, fac_sta.REPO_NUM as REPO_NUM
   	from plan_progress left join fac_sta on plan_progress.FAC_ID = fac_sta.ID 
-  	where plan_progress.PLAN_ID = #{PID} limit #{ST}, #{EACH};
+  	where plan_progress.PLAN_ID = #{PID}
+  	order by plan_progress.TIME DESC
+  	limit #{ST}, #{EACH};
     ]]>
   </select>
 </mapper>
