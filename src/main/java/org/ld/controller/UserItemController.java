@@ -1,5 +1,6 @@
 package org.ld.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,17 +12,11 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.ld.app.Config;
 
-import org.ld.model.FacSta;
-import org.ld.model.GroceryItem;
-import org.ld.model.GroceryRunning;
+import org.ld.model.*;
 
-import org.ld.model.Plan;
-import org.ld.model.PlanDetail;
-import org.ld.model.PlanProgress;
-import org.ld.model.RoomItem;
-import org.ld.model.User;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
@@ -52,42 +47,62 @@ public class UserItemController {
 	@RequestMapping("/searchItemRoomOverview") // 房间物品统计
 	@ResponseBody
 	public Map<String, Object> searchItemRoomOverview(HttpSession session, @RequestBody String data) {
-//		User curUser = (User) session.getAttribute("curUser");
-//		Map<String, Object> ans = new HashMap<String, Object>();
-//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
-//			ans.put("State", "Invalid");
-//			return ans;
-//		} else {
-//			ans.put("State", "Valid");
-//		}
-//
-//		JSONObject dataJson = JSONObject.parseObject(data);
-//
-//		String type = dataJson.getString("type");
-//		int pageNumber = dataJson.getIntValue("pageNum");
-//		String cat = dataJson.getString("cat");
-//		String band = dataJson.getString("band");
-//
-//		int eachPage = Config.getSettingsInt().get("list_size");
-//		int recordTotal = itemService.getTotal(type, cat, band);
-//		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
-//
-//		if (recordTotal != 0) {
-//			if (pageNumber > pageTotal)
-//				pageNumber = pageTotal;
-//
-//			int st = (pageNumber - 1) * eachPage;
-////			List<FacSta> record = itemService.getFacByTypeCatBand(type, cat, band, st, eachPage);
-//			List<FacSta> record = null;
-//			ans.put("pageList", record);
-//		}
-//
-//		ans.put("pageNow", pageNumber);
-//		ans.put("pageTotal", pageTotal);
-//		ans.put("recordTotal", recordTotal);
-//
-//		return ans;
-		return null;
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		String type = dataJson.getString("type");
+		String roomNum = dataJson.getString("roomNum");
+		int pageNumber = dataJson.getIntValue("pageNum");
+
+		int eachPage = Config.getSettingsInt().get("list_size");
+		int recordTotal = itemService.getTotalItemsByRoomNum_Type(roomNum, type);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<RoomItem> record = itemService.getItemsByRoomNum_Type(roomNum, type, st, eachPage);
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+
+	@RequestMapping("/searchAllItemRoomOverview") // 所有的库房物品统计
+	@ResponseBody
+	public Map<String, Object> searchAllItemRoomOverview(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		String type = dataJson.getString("type");
+		String roomNum = dataJson.getString("roomNum");
+
+		List<RoomItem> record = itemService.getAllRoomItemByType_RoomNum(roomNum, type);
+		ans.put("dataList", record);
+
+		return ans;
 	}
 
 	@RequestMapping("/searchItemRepoOverview") // 库房物品统计
@@ -534,17 +549,19 @@ public class UserItemController {
 		
 		Integer recID = dataJson.getInteger("recID");
 		RoomItem ri = roomService.getCertainRIRec(recID);
-		
-		ri.setID(null);
+		ri.setALLOCATE_TYPE(dataJson.getString("allocateType"));
+		ri.setBORROW_DATE(dataJson.getDate("borrowDate"));
+		ri.setRETURN_DATE(dataJson.getDate("returnDate"));
 		ri.setROOM_NUM(dataJson.getString("rNum"));
 		
-		if(roomService.insertRI(ri) == 1) {
-			roomService.deleteRI(recID);
+		if(itemService.updateRoomItem(ri) == 1) {
+
+			logger.info(curUser.getNAME() + " move item " + recID + " to " + dataJson.getString("rNum"));
+			return 1;
 		} else {
+
 			return 0;
 		}
-		logger.info(curUser.getNAME() + " move item " + recID + " to " + dataJson.getString("rNum"));
-		return 1;
 	}
 
 
@@ -578,7 +595,7 @@ public class UserItemController {
 		}
 	}
 
-	@RequestMapping("/facFinishRepair") // 物品点击维修
+	@RequestMapping("/facFinishRepair") // 物品点击维修完成
 	@ResponseBody
 	public Integer facFinishRepair(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
@@ -594,25 +611,34 @@ public class UserItemController {
 
 
 		fs.setMAINTAIN(fs.getMAINTAIN() - 1);
-		fs.setWORKING(fs.getWORKING() + 1);
-		ri.setSTATE("正常"); //状态变为正常
-		ri.setMAINTAIN_DURATION(null);
 
 		//检测物品是否需要直接放回库房（若不处于任何房间则放回，若处于则不放回）
 		boolean isIsolated = dataJson.getBoolean("isIsolated");
-		if(isIsolated == true) { //物品现在已被分配到某个房间
+		if(isIsolated == true) { //物品不属于任一房间
 
 			fs.setFREE(fs.getFREE() + 1);
-		}
 
+			if(roomService.deleteRI(recID) == 1 && itemService.updateFac(fs) == 1)
+			{
+				logger.info(curUser.getNAME() + " let " + recID + " be free");
+				return 1;
+			} else {
+				return 0;
+			}
 
+		} else { //物品现在已被分配到某个房间
 
-		if(itemService.updateRoomItem(ri) == 1 && itemService.updateFac(fs) == 1)
-		{
-			logger.info(curUser.getNAME() + " let " + recID + " be working");
-			return 1;
-		} else {
-			return 0;
+			fs.setWORKING(fs.getWORKING() + 1);
+			ri.setSTATE("正常"); //状态变为正常
+			ri.setMAINTAIN_DURATION(null);
+
+			if(itemService.updateRoomItem(ri) == 1 && itemService.updateFac(fs) == 1)
+			{
+				logger.info(curUser.getNAME() + " let " + recID + " be working");
+				return 1;
+			} else {
+				return 0;
+			}
 		}
 	}
 
@@ -671,7 +697,35 @@ public class UserItemController {
 		logger.info(curUser.getNAME() + " let " + recID + " bad ");
 		return 1;
 	}
-	
+
+	@RequestMapping("/getFacRepoNum") // 获得物品所在仓库号
+	@ResponseBody
+	public String getFacRepoNum(HttpSession session, @RequestBody String data) throws IOException {
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rFac"))) == 0) {
+			return mapper.writeValueAsString(null);
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		Integer recID = dataJson.getInteger("recID");
+		RoomItem ri = roomService.getCertainRIRec(recID);
+		Integer facId = ri.getFAC_ID();
+		FacSta fs= itemService.getFac(facId);
+
+		if(fs != null)
+		{
+			return mapper.writeValueAsString(fs.getREPO_NUM());
+		} else {
+			return mapper.writeValueAsString(null);
+		}
+	}
+
+
+
 	@RequestMapping("/toWarehouse") // 物品回仓库
 	@ResponseBody
 	public Integer toWarehouse(HttpSession session, @RequestBody String data) {
@@ -683,18 +737,83 @@ public class UserItemController {
 		JSONObject dataJson = JSONObject.parseObject(data);
 		
 		Integer recID = dataJson.getInteger("recID");
+		String targetRepoNum = dataJson.getString("repoNum"); //当前希望放回的仓库号
+
+		//查看targetRepoNum是否存在
+		Repository repo = itemService.getRepoByRepoNum(targetRepoNum);
+		if(repo == null) return 0;
+
 		RoomItem ri = roomService.getCertainRIRec(recID);
-		if(roomService.deleteRI(recID) == 1)
-		{
-			FacSta fs = itemService.getFac(ri.getFAC_ID());
-			fs.setWORKING(fs.getWORKING() - 1);
-			fs.setFREE(fs.getFREE() + 1);
-			itemService.updateFac(fs);
+		Integer facID = ri.getFAC_ID();
+		if(roomService.deleteRI(recID) == 1) {
+
+			FacSta fs = itemService.getFac(facID);
+			if(fs == null) return 0;
+			String oriRepoNum = fs.getREPO_NUM(); //原来的仓库号
+
+
+			//存在，合法的仓库号
+			//检测是否是该物品原来所在的仓库
+			if(oriRepoNum.equals(targetRepoNum)) {
+
+				//是
+				fs.setWORKING(fs.getWORKING() - 1);
+				fs.setFREE(fs.getFREE() + 1);
+				itemService.updateFac(fs);
+
+				logger.info(curUser.getNAME() + " move " + recID + " to original warehouse " + targetRepoNum);
+
+			} else {
+
+				//转到别的仓库
+				fs.setWORKING(fs.getWORKING() - 1);
+				fs.setTOTAL(fs.getTOTAL() - 1);
+				itemService.updateFac(fs);
+
+				//查看targetRepoNum仓库中是否有fac这个物品（种类、子类、品牌、名称、归属权 5项必须相同）
+				FacSta targetFacSta = itemService.getFacByItemInfo(fs.getTYPE(), fs.getCAT(),fs.getNAME(), fs.getBRAND(),fs.getOWNER(), targetRepoNum);
+
+				if(targetFacSta == null) {
+
+					//目标仓库暂无该物品
+					//向该仓库新增一个该物品
+					FacSta newFs = new FacSta();
+
+					newFs.setTYPE(fs.getTYPE());
+					newFs.setCAT(fs.getCAT());
+					newFs.setBRAND(fs.getBRAND());
+					newFs.setNAME(fs.getNAME());
+					newFs.setOWNER(fs.getOWNER());
+					newFs.setREPO_NUM(targetRepoNum);//以后这里还要setRepoId
+					newFs.setTOTAL(1);
+					newFs.setFREE(1);
+					newFs.setWORKING(0);
+					newFs.setMAINTAIN(0);
+					newFs.setBAD(0);
+					newFs.setCOMMENT("无");
+
+					if(itemService.addNewFac(newFs) == 1){
+						logger.info(curUser.getNAME() + " move " + recID + " to other warehouse " + targetRepoNum);
+						return 1;
+					} else return 0;
+
+				} else {
+
+					//已有
+					targetFacSta.setTOTAL(targetFacSta.getTOTAL() + 1);
+					targetFacSta.setFREE(targetFacSta.getFREE() + 1);
+
+					if(itemService.updateFac(targetFacSta) == 1){
+						logger.info(curUser.getNAME() + " move " + recID + " to other warehouse " + targetRepoNum);
+						return 1;
+					} else return 0;
+				}
+			}
+
 		} else {
 			return 0;
 		}
-		
-		logger.info(curUser.getNAME() + " move " + recID + " to warehouse" ); 
+
 		return 1;
 	}
 	

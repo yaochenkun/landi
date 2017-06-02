@@ -114,4 +114,8 @@
       STATE = #{STATE,jdbcType=TINYINT}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="selectByRepoNum" resultMap="BaseResultMap" parameterType="string">
+    select * from repository
+    where REPO_NUM = #{repoNum}
+  </select>
 </mapper>

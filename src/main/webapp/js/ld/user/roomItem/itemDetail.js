@@ -16,8 +16,9 @@ var requestFacSta = function(){
 			// 物品种类、子类、品牌、名称
 			$(".fac-title .type").text(data.fac.type);
 			$(".fac-title .cat").text(data.fac.cat);
-			$(".fac-title .com").text(data.fac.company);
+			$(".fac-title .com").text(data.fac.brand);
 			$(".fac-title .name").text(data.fac.name);
+            $(".fac-title .owner").text(data.fac.owner);
 			// 总量、可用、已分配、报废
 			$(".fac-sta .count").eq(0).text(data.fac.total);
 			$(".fac-sta .count").eq(1).text(data.fac.free);
@@ -56,7 +57,7 @@ var requestRoomItem = function (pageNum) {
 					var perFac = data.pageList[i];
 
 					var operateHtml = "<span class='blue' onclick='transferFac(this);''>转移</span>"+
-                        "<span class='blue' onclick='showBackModal("+ perFac.id +");'>回仓库</span>"+
+                        "<span class='blue' onclick='showBackModal(this);'>回仓库</span>"+
                         "<span class='gray' onclick='showTurnfacRepairModal(this);'>维修</span>"+
                         "<span class='gray' onclick='requestFacBad(this);'>报废</span>";
 					if(perFac.state == "维修中")
@@ -125,13 +126,21 @@ var closeTransferDiv = function(){
 // 请求转移物品
 var requestTransferFac = function(){
 	var recID = Number($("#transferMenu .rec-id").text());
-	var rNum = $("#transferMenu input").val();
+	var rNum = $("#transferMenu input").eq(0).val();
+	var allocateType = $("#transferMenu input").eq(1).prop("checked") == true ? "分配" : "借用";
+	var borrowDate = allocateType == "分配" ? null : formatDateForm(new Date($("#transferMenu input").eq(3).val()));
+    var returnDate = allocateType == "分配" ? null : formatDateForm(new Date($("#transferMenu input").eq(4).val()));
+
 	$.ajax({
 		url:'/LD/userItem/transferFac.action',
 		type:'post',
 		dataType:'json',
 		contentType:'application/json',
-		data:'{"recID":'+ recID +',"rNum":"'+ rNum +'"}',
+		data:JSON.stringify({"recID" : recID,
+							"rNum" : rNum,
+							"allocateType" : allocateType,
+							"borrowDate" : borrowDate,
+							"returnDate" : returnDate}),
 		success:function(data){
 			console.log(data);
 			if(data == 1){
@@ -148,9 +157,12 @@ var requestTransferFac = function(){
 
 
 // 请求物品回仓库
-var requestToWarehouse = function(element){
+var requestToWarehouse = function(){
 
-	var itemId = $(element).attr("itemId");
+
+    var recID = Number($("#backMenu .rec-id").text());
+	var repoNum = $("#backMenu #repo-number input").val();
+
 
 	// 将物品回仓库
 	$.ajax({
@@ -158,7 +170,8 @@ var requestToWarehouse = function(element){
 		type:'post',
 		dataType:'json',
 		contentType:'application/json',
-		data:'{"recID":'+ itemId +'}',
+		data:JSON.stringify({"recID" : recID,
+            "repoNum" : repoNum}),
 		success:function(data){
 			console.log(data);
 			if(data == 1){
@@ -405,15 +418,35 @@ var closeRepairDiv = function(){
 };
 
 // 显示放回物品弹出框
-var showBackModal = function(itemId){
-
-	$("#backMenu").find(".fac-foot a").attr("itemId", itemId);
+var showBackModal = function(element){
 
     $(".shadow").css("display","block");
     $('#backMenu').css("display","block");
 
     setTimeout(function(){$('#backMenu').addClass('showMenuModal');},50);
     $("#backMenu").addClass("effect-fade");
+
+    // 即将放回的物品在数据库表中的id
+    var recID = $(element).parent().children(".recID").text();
+    $("#backMenu .rec-id").text(recID);
+
+
+    //查询该物品当前所在的仓库号
+    $.ajax({
+        url:'/LD/userItem/getFacRepoNum.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({"recID" : recID}),
+        success:function(data){
+        	console.log(data);
+            if(data != null){
+
+            	//将仓库号输入框默认设置为该值
+				$("#backMenu #repo-number input").val(data);
+            }
+        }
+    });
 };
 // 关闭放回物品弹出框
 var closeBackDiv = function(){

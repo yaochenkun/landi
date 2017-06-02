@@ -243,15 +243,13 @@
 	  ]]>
 	 </select>
     <select id="selectByItemInfo" resultMap="BaseResultMap" parameterType="map">
-        <![CDATA[
 		select * from fac_sta
-		where TYPE = #{TYPE}
+		where REPO_NUM = #{REPO_NUM}
+		and TYPE = #{TYPE}
 		and CAT = #{CAT}
 		and BRAND = #{BRAND}
 		and NAME = #{NAME}
 		and OWNER = #{OWNER}
-		and REPO_NUM = #{REPO_NUM}
-	  ]]>
     </select>
 
     <select id="selectTotalRepoItemByType_RepoNum" resultType="java.lang.Integer" parameterType="map">

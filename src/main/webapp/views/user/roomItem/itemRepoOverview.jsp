@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemRepoOverview.css" rel="stylesheet" type="text/css" />
 <title>库房物品总览</title>
 </head>
 <body>

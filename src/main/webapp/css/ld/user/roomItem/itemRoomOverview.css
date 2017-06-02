@@ -1,0 +1,17 @@
+/************ 物品统计表格样式 start  **********/
+.bill-table thead tr th{width: 5%;}
+
+/* 数量及ID  */
+.bill-table thead tr th:nth-child(1), .bill-table thead tr th:nth-child(6),
+.bill-table thead tr th:nth-child(7), .bill-table thead tr th:nth-child(8),
+.bill-table thead tr th:nth-child(9){width: 5%;}
+
+/* 物品名称 */
+.bill-table thead tr th:nth-child(5){width: 10%;}
+.bill-table thead tr th:nth-child(6){width: 10%;}
+.bill-table thead tr th:nth-child(9){width: 8%;}
+.bill-table thead tr th:nth-child(10){width: 8%;}
+/* 操作样式 */
+#itemOverviewTbody .item_detail{color: #2277da; cursor: pointer;}
+#itemOverviewTbody .item_detail:hover{border-bottom: 1px solid #2277da;}
+/************ 物品统计表格样式 end  **********/

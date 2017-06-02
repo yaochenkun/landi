@@ -14,4 +14,6 @@ public interface RepositoryMapper {
     int updateByPrimaryKeySelective(Repository record);
 
     int updateByPrimaryKey(Repository record);
+
+    Repository selectByRepoNum(String repoNum);
 }

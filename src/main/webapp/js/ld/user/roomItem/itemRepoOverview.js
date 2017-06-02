@@ -131,7 +131,7 @@ var requestItemByItemType = function(pageNum){
 	    var type = $("#itemTypeName").text();
 		var repoNum = $("#repoNum").val();
 
-		console.log("请求第" + pageNum + "页 type:"+ type + "物品总览信息");
+		console.log("请求第" + pageNum + "页 type:"+ type + "库房物品总览信息");
 
 	    $.ajax({
 		url:'/LD/userItem/searchItemRepoOverview.action',

@@ -236,8 +236,8 @@ var addOneItem = function(){
 	$(".addItem").before("<tr class='eachItem'><td><span class='no'>"+ no +"</span></td>"+
 		    "<td>"+ FAC_TYPE +"</td><td>"+ FAC_CAT +"</td>"+
 			"<td>"+ FAC_BRAND +"</td><td>"+ FAC_NAME +"</td>"+
-			"<td>"+ count +"</td><td>"+ unitPrice +"</td><td>"+ totalPrice +"</td><td>"+ repoNum +"</td>"+
-        	"<td>"+ provider +"</td><td>"+ ownerType + ownerManageStr + "</td><td>"+ invoiceType +"</td>"+
+        	"<td>"+ ownerType + ownerManageStr +"</td><td>"+ provider + "</td><td>"+ repoNum +"</td>"+
+			"<td>"+ count +"</td><td>"+ unitPrice +"</td><td>"+ totalPrice +"</td><td>"+ invoiceType +"</td>"+
         	"<td>"+ received +"</td><td>"+ orderDate +"</td><td>"+ arrivalDate +"</td>"+
 			"<td>"+ comment +"</td>"+
 			"<td><a class='edit-operation' onclick='editOneItem(this)'>编辑</a><a class='delete-operation' onclick='deleteOneItem(this)'>删除</a></td></tr>");
@@ -491,8 +491,8 @@ var addPlan = function(){
 	for(var i=1; i<=$(".eachItem").length; i++){
 		var I = $(".eachItem").eq(i-1).children("td");
 		var perItem = '"item'+ i +'":{"FAC_TYPE":"'+ I.eq(1).text() +'","FAC_CAT":"'+ I.eq(2).text()+'","FAC_BRAND":"'+ I.eq(3).text() +'",'
-            +'"FAC_NAME":"'+ I.eq(4).text() +'","count":'+ I.eq(5).text() +',"unitPrice":'+ I.eq(6).text()+',"totalPrice":'+ I.eq(7).text()+','
-            +'"FAC_REPONUM":"'+ I.eq(8).text() +'","provider":"'+ I.eq(9).text() +'","FAC_OWNER":"'+ I.eq(10).text()+'",'
+            +'"FAC_NAME":"'+ I.eq(4).text() +'","FAC_OWNER":"'+ I.eq(5).text() +'","provider":"'+ I.eq(6).text()+'","FAC_REPONUM":"'+ I.eq(7).text()+'",'
+            +'"count":'+ I.eq(8).text() +',"unitPrice":'+ I.eq(9).text() +',"totalPrice":'+ I.eq(10).text()+','
 		    +'"invoiceType":"'+ I.eq(11).text() +'","received":"'+ I.eq(12).text() +'","orderDate":"'+ formatDateForm(new Date(I.eq(13).text()))+'",'
             +'"arrivalDate":"'+ formatDateForm(new Date(I.eq(14).text())) +'","comment":"'+ I.eq(15).text() +'"},';
 		itemList += perItem;

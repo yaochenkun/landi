@@ -3,19 +3,20 @@ package org.ld.service;
 import java.util.Date;
 import java.util.List;
 
-import org.ld.model.DailyService;
-import org.ld.model.FacSta;
-import org.ld.model.GroceryItem;
-import org.ld.model.GroceryRunning;
-import org.ld.model.Plan;
-import org.ld.model.PlanDetail;
-import org.ld.model.PlanProgress;
-import org.ld.model.RoomItem;
-import org.ld.model.Sources;
+import org.ld.model.*;
 
 public interface ItemService {
 
-	List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage);
+	//add by yck
+	int getTotalItemsByRoomNum_Type(String roomNum, String type);
+	List<RoomItem>  getItemsByRoomNum_Type(String roomNum, String type, Integer st, Integer eachPage);
+	List<RoomItem> getAllRoomItemByType_RoomNum(String roomNum, String type);
+
+
+
+
+
+	List<RoomItem> getItems(String roomNum, String type, Integer st, Integer eachPage);
 
 	int getTotal(String type, String cat, String band);
 
@@ -91,4 +92,7 @@ public interface ItemService {
 
 	//房间物品
 	int updateRoomItem(RoomItem roomItem);
+
+	//库房查询
+	Repository getRepoByRepoNum(String repoNum);
 }

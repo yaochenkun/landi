@@ -5,21 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.ld.dao.DailyServiceMapper;
-import org.ld.dao.FacStaMapper;
-import org.ld.dao.GroceryItemMapper;
-import org.ld.dao.GroceryRunningMapper;
-import org.ld.dao.PlanDetailMapper;
-import org.ld.dao.PlanMapper;
-import org.ld.dao.PlanProgressMapper;
-import org.ld.dao.RoomItemMapper;
-import org.ld.model.FacSta;
-import org.ld.model.GroceryItem;
-import org.ld.model.GroceryRunning;
-import org.ld.model.Plan;
-import org.ld.model.PlanDetail;
-import org.ld.model.PlanProgress;
-import org.ld.model.RoomItem;
+import org.ld.dao.*;
+import org.ld.model.*;
 import org.ld.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +34,9 @@ public class ItemServiceImpl implements ItemService {
 	
 	@Autowired
 	private PlanProgressMapper planProgressMapper;
+
+	@Autowired
+	private RepositoryMapper repositoryMapper;
 	
 	@Autowired
 	private GroceryItemMapper groceryItemMapper;
@@ -55,24 +45,57 @@ public class ItemServiceImpl implements ItemService {
 	private GroceryRunningMapper groceryRunningMapper;
 
 	@Override
-	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
+	public int getTotalItemsByRoomNum_Type(String roomNum, String type) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("TYPE", type);
+		return roomItemMapper.selectTotalItemsByRoomNum_Type(map);
+	}
+
+	@Override
+	public List<RoomItem> getItemsByRoomNum_Type(String roomNum, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("TYPE", type);
+		map.put("START_PAGE", st);
+		map.put("EACH_PAGE", eachPage);
+		return roomItemMapper.selectItemsByRoomNum_Type(map);
+	}
+
+	@Override
+	public List<RoomItem> getAllRoomItemByType_RoomNum(String roomNum, String type) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("TYPE", type);
+		return roomItemMapper.selectAllItemsByRoomNum_Type(map);
+	}
+
+	@Override
+	public List<RoomItem> getItems(String roomNum, String type, Integer st, Integer eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ROOM_NUM", roomNum);
+		map.put("TYPE", type);
 		map.put("ST", st);
 		map.put("EACH", eachPage);
-		if (rid == 0 && type == null) {
-			return roomItemMapper.getAllItems(map);
-		} else if (rid != 0 && type != null) {
-			map.put("ROOM_ID", rid);
-			map.put("TYPE", type);
-			return roomItemMapper.getItems(map);
-		} else if (rid != 0) {
-			map.put("ROOM_ID", rid);
-			return roomItemMapper.getItemsByRoom(map);
-		} else {
-			map.put("TYPE", type);
-			return roomItemMapper.getItemsByType(map);
-		}
+		return roomItemMapper.getItems(map);
+
+
+//		if (rid == 0 && type == null) {
+//			return roomItemMapper.getAllItems(map);
+//		} else if (rid != 0 && type != null) {
+//			map.put("ROOM_ID", rid);
+//			map.put("TYPE", type);
+//			return roomItemMapper.getItems(map);
+//		} else if (rid != 0) {
+//			map.put("ROOM_ID", rid);
+//			return roomItemMapper.getItemsByRoom(map);
+//		} else {
+//			map.put("TYPE", type);
+//			return roomItemMapper.getItemsByType(map);
+//		}
 	}
 
 	// 获取房间物品总数
@@ -429,6 +452,7 @@ public class ItemServiceImpl implements ItemService {
 		return facStaMapper.selectAllRepoItemByType_RepoNum(map);
 	}
 
+
 	@Override
 	public int updateRoomItem(RoomItem roomItem) {
 		try{
@@ -438,5 +462,10 @@ public class ItemServiceImpl implements ItemService {
 			return 0;
 		}
 
+	}
+
+	@Override
+	public Repository getRepoByRepoNum(String repoNum) {
+		return repositoryMapper.selectByRepoNum(repoNum);
 	}
 }

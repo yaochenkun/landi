@@ -33,7 +33,8 @@
 			<span class="span">物品子类：<span class="cat"></span></span>
 			<span class="span">物品品牌：<span class="com"></span></span>
 			<span class="span">物品名称：<span class="name"></span></span>
-			<a href="itemRoomOverview.jsp" class="btn btngoback">返&nbsp;回</a>
+			<span class="span">物品归属权：<span class="owner"></span></span>
+			<a href="itemRepoOverview.jsp" class="btn btngoback">返&nbsp;回</a>
 		</div>
 	</div>
 	<!-- 标题 end -->
@@ -131,13 +132,15 @@
 				<span onclick="closeBackDiv();">×</span>
 			</div>
 			<div class="fac-body">
+
+				<span class="rec-id" style="display:none;"></span>
 				<div id="repo-number" class="item">
 					<span class="span">放回至仓库：</span>
-					<div class="item-content"><input type="text" value="R22-2" /></div>
+					<div class="item-content"><input type="text" value="" /></div>
 				</div>
 			</div>
 			<div class="fac-foot">
-				<a class="btn btn-submit" onclick="requestToWarehouse(this);">确认放回</a>
+				<a class="btn btn-submit" onclick="requestToWarehouse();">确认放回</a>
 			</div>
 		</div>
 	</div>

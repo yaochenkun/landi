@@ -38,4 +38,10 @@ public interface RoomItemMapper {
  	int getTotalByRoom(int RID);
  	
  	int getTotalByItemID(int ITEM_ID);
+
+
+ 	//add by yck
+	int selectTotalItemsByRoomNum_Type(HashMap<String, Object> map);
+	List<RoomItem> selectItemsByRoomNum_Type(HashMap<String, Object> map);
+	List<RoomItem> selectAllItemsByRoomNum_Type(HashMap<String, Object> map);
 }

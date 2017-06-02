@@ -12,11 +12,16 @@
         <result column="RETURN_DATE" property="RETURN_DATE" jdbcType="DATE" />
         <result column="MAINTAIN_DURATION" property="MAINTAIN_DURATION" jdbcType="INTEGER" />
         <result column="COMM" property="COMM" jdbcType="VARCHAR" />
+        <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+        <result column="CAT" property="CAT" jdbcType="VARCHAR" />
+        <result column="BRAND" property="BRAND" jdbcType="VARCHAR" />
+        <result column="NAME" property="NAME" jdbcType="VARCHAR" />
+        <result column="OWNER" property="OWNER" jdbcType="VARCHAR" />
     </resultMap>
     <sql id="Base_Column_List" >
-        ID, ROOM_NUM, FAC_ID, TAG, ALLOCATE_TYPE, STATE, BORROW_DATE, RETURN_DATE, MAINTAIN_DURATION,
-        COMM
-    </sql>
+    ID, ROOM_NUM, FAC_ID, TAG, ALLOCATE_TYPE, STATE, BORROW_DATE, RETURN_DATE, MAINTAIN_DURATION,
+    COMM
+  </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
@@ -200,4 +205,58 @@
   	select count(*) from room_item where FAC_ID = #{FAC_ID,jdbcType=INTEGER}
     ]]>
 	</select>
+
+
+    <select id="selectTotalItemsByRoomNum_Type" resultType="java.lang.Integer" parameterType="map">
+      select count(*)
+      from room_item left join fac_sta on room_item.FAC_ID = fac_sta.ID
+      where fac_sta.TYPE = #{TYPE}
+      and room_item.ROOM_NUM like CONCAT('%', #{ROOM_NUM},'%')
+    </select>
+
+    <select id="selectItemsByRoomNum_Type" resultMap="BaseResultMap" parameterType="map" >
+      select room_item.ID as ID,
+             room_item.ROOM_NUM as ROOM_NUM,
+             room_item.FAC_ID as FAC_ID,
+             room_item.TAG as TAG,
+             room_item.ALLOCATE_TYPE as ALLOCATE_TYPE,
+             room_item.STATE as STATE,
+             room_item.BORROW_DATE as BORROW_DATE,
+             room_item.RETURN_DATE as RETURN_DATE,
+             room_item.MAINTAIN_DURATION as MAINTAIN_DURATION,
+             room_item.COMM as COMM,
+             fac_sta.TYPE as TYPE,
+  	         fac_sta.CAT as CAT,
+  	         fac_sta.BRAND as BRAND,
+  	         fac_sta.NAME as NAME,
+  	         fac_sta.OWNER as OWNER
+      from room_item left join fac_sta on room_item.FAC_ID = fac_sta.ID
+      where fac_sta.TYPE = #{TYPE}
+      and room_item.ROOM_NUM like CONCAT('%', #{ROOM_NUM},'%')
+      order by room_item.ID
+      limit #{START_PAGE}, #{EACH_PAGE};
+    </select>
+
+    <select id="selectAllItemsByRoomNum_Type" resultMap="BaseResultMap" parameterType="map" >
+        select  room_item.ID as ID,
+                room_item.ROOM_NUM as ROOM_NUM,
+                room_item.FAC_ID as FAC_ID,
+                room_item.TAG as TAG,
+                room_item.ALLOCATE_TYPE as ALLOCATE_TYPE,
+                room_item.STATE as STATE,
+                room_item.BORROW_DATE as BORROW_DATE,
+                room_item.RETURN_DATE as RETURN_DATE,
+                room_item.MAINTAIN_DURATION as MAINTAIN_DURATION,
+                room_item.COMM as COMM,
+                fac_sta.TYPE as TYPE,
+                fac_sta.CAT as CAT,
+                fac_sta.BRAND as BRAND,
+                fac_sta.NAME as NAME,
+                fac_sta.OWNER as OWNER
+        from room_item left join fac_sta on room_item.FAC_ID = fac_sta.ID
+        where fac_sta.TYPE = #{TYPE}
+        and room_item.ROOM_NUM like CONCAT('%', #{ROOM_NUM},'%')
+        order by room_item.ID
+    </select>
+
 </mapper>

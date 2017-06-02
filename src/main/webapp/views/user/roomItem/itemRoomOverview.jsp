@@ -11,7 +11,7 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemOverview.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemRoomOverview.css" rel="stylesheet" type="text/css" />
 <title>客房物品总览</title>
 </head>
 <body>
@@ -38,8 +38,8 @@
 				<span>物品种类：</span>
 				<div class="itemType" style="display:inline-block;">
 
-					<span class="span"></span>
-					<div id="itemTypeName" style="display:none;"></div>
+					<span class="span">家&nbsp;&nbsp;电</span>
+					<div id="itemTypeName" style="display:none;">家电</div>
 					<div class="itemTypeMenu">
 						<ul>
 							<li>家&nbsp;&nbsp;电</li>
@@ -51,8 +51,8 @@
 					</div>
 				</div>
 
-				<span style="margin-left:30px;">房间号：</span><input id="searchRoomNum" type="text" value="">
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchBusOther(1);">搜索</a>
+				<span style="margin-left:30px;">房间号：</span><input id="roomNum" type="text" value="">
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
 				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
@@ -78,12 +78,12 @@
 								<th><span>名称</span></th>
 								<th><span>归属权</span></th>
 								<th><span>标签</span></th>
-								<th><span>类型</span></th>
-								<th><span>状态</span></th>
+								<th><span>分配类型</span></th>
 								<th><span>借用时间</span></th>
 								<th><span>归还时间</span></th>
+								<th><span>状态</span></th>
 								<th><span>维修时长</span></th>
-								<th><span>操作</span></th>
+								<th><span>备注</span></th>
 							</tr>
 						</thead>
 						<tbody id="itemOverviewTbody"></tbody>
@@ -104,9 +104,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemRoomOverview.js"></script>
+
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
 	<script>
 	    // 请求第一页客房物品信息
-		requestItemOverview(1);
+        requestItemByItemType(1);
 	</script>
 </body>
 </html>
