@@ -1,0 +1,295 @@
+/* 导航栏样式 */
+header .header-logo {
+	left: 45%;
+}
+
+header .homeMenu {
+	margin-top: 15px;
+	margin-left: -20px;
+	display: inline-block;
+	cursor: pointer;
+	width: 160px;
+	height: 30px;
+}
+
+header .homeMenu .span {
+	margin-left: .5em;
+}
+
+/* 一级菜单样式 */
+.main-nav {
+	position: fixed;
+	z-index: 200;
+	box-shadow: 2px 0 16px rgba(0, 0, 0, .2);
+	top: 0;
+	width: 0;
+}
+
+.main-nav .menuOne {
+	display: block;
+	height: 49px;
+	line-height: 50px;
+	background: #fafafa;
+	cursor: pointer;
+	font-size: 13px;
+	color: #0057bd;
+}
+
+.main-nav .menuOne i {
+	font-size: 15px;
+	font-style: normal;
+}
+
+.main-nav .menuOne i:nth-child(1) {
+	margin-left: 80px;
+}
+
+.main-nav .menuOne i:nth-child(2), .main-nav .menuOne i:nth-child(3) {
+	margin-left: -5px;
+}
+/* 二级菜单样式 */
+.nav-second .toolbar {
+	width: 1100px;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.toolbar ul {
+	margin-left: -30px;
+}
+
+.toolbar li {
+	margin: 0 30px;
+}
+
+/****************** 页面内容 start *****************************/
+.main {
+	width: 1100px;
+	margin: 65px auto;
+}
+
+.main-page {
+	margin: 10px 0;
+	position: relative;
+}
+
+/**** 表格上方样式  ****/
+.main-page .nav-path {
+	padding: 20px 0;
+}
+
+.nav-path .span {
+	float: left;
+	font-size: 14px;
+	margin-right: 1em;
+}
+
+.nav-path0 a {
+	color: #2277da;
+}
+
+.nav-path0 a:hover {
+	border-bottom: 1px solid #2277da;
+}
+
+.icon-home {
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 14px;
+	height: 13px;
+	background-position: -68px -59px;
+}
+
+.icon-path {
+	margin: 0 5px;
+	display: inline-block;
+	background-image: url(../../../../../img/roomService/index.png);
+	width: 8px;
+	height: 11px;
+	background-position: -84px -59px;
+}
+
+
+.nav-path .itemType {
+	position: relative;
+	top:8px;
+	width: 140px;
+	height: 26px;
+	cursor: pointer;
+	border: 1px solid #a9a9a9;
+	background: url(../../../../../img/topMenu.png) no-repeat 120px 8px;
+}
+
+.nav-path input{
+	padding-left: 10px;
+}
+
+.itemType .itemTypeMenu {
+	display: none;
+	position: absolute;
+	width: 100%;
+	margin-top: 25px;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+}
+
+.itemType .itemTypeMenu li {
+	background: #fafafa;
+	border-bottom: 1px dashed #777;
+	width: 100%;
+	height: 25px;
+	line-height: 27px;
+	text-align: center;
+	color: #ff5400;
+	cursor: pointer;
+}
+
+.itemType .itemTypeMenu li:hover {
+	background: #eee;
+}
+
+.itemType .itemTypeMenu li:last-child {
+	border: none;
+}
+
+.itemType .span {
+	color: #ff5400;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	position: relative;
+	top:2px;
+}
+
+.btnnew {
+	position: absolute;
+	right: 0;
+	top: 16px;
+}
+
+/**** 表格样式  *****/
+.bill-table {
+	margin: 1em 0;
+}
+
+.bill-table table {
+	width: 100%;
+}
+
+.bill-table thead tr {
+	height: 20px;
+	line-height: 20px;
+	border-top: 1px solid #00324e;
+	border-bottom: 1px solid #00324e;
+	font-size: 15px;
+	background-color: #2277da;
+}
+
+.bill-table thead tr input[type="checkbox"] {
+	width:20px;
+	height:20px;
+}
+
+.bill-table thead th {
+	text-align: center;
+}
+
+.bill-table thead tr th span {
+	display: inline-block;
+	line-height: 50px;
+	color: #fff;
+	font-weight: normal;
+}
+
+.bill-table thead tr th {
+	width: 10%;
+}
+
+.bill-table tbody tr {
+	text-align: center;
+	line-height: 4em;
+	border-bottom: 1px solid #d6d6d6;
+}
+
+.bill-table tbody tr:hover {
+	background: #f7faff;
+	border-top: 1px #b2d7ff solid;
+}
+
+.bill-table tbody tr td:nth-child(7) {
+	color: #ff5722;
+	font-weight: bold;
+}
+
+/**** 页码 样式 ****/
+.bottom-page {
+	margin: 3em 0 5em;
+}
+
+.page-bottom {
+	font-size: 14px;
+	color: #a5a5a5;
+	height: 40px;
+	margin: 20px 0;
+}
+
+.page-bottom .page-wrap {
+	background-color: #fff;
+	float: right;
+	line-height: 40px;
+}
+
+.page-wrap a {
+	float: left;
+	text-align: center;
+	width: 38px;
+	height: 38px;
+	line-height: 38px;
+	border: 1px solid #e6e6e6;
+	color: #5e5e5e;
+}
+
+.page-wrap a:hover {
+	background: #2277da;
+	color: #fff;
+	border-color: #2277da;
+}
+
+.page-wrap .down-page {
+	width: 98px;
+	position: relative;
+	float: left;
+}
+
+.page-wrap .down-page em {
+	font-style: normal;
+}
+
+.page-wrap .down-page .next-i, .page-wrap .down-page .prev-i {
+	font-style: normal;
+	font-size: 16px;
+}
+
+.page-wrap .down-page .next-i {
+	padding: 0 0 0 8px;
+}
+
+.page-wrap span {
+	color: #5e5e5e;
+	float: left;
+	padding: 0 14px;
+}
+
+.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px;}
+.btnRight{margin-left: 270px;}
+/****************** 页面内容 start *****************************/
+
+
+
+/* 下拉列表 */
+#dropDownList{position: relative;}
+#dropDownInput{cursor: pointer;}
+#spanExist, #dropDownList .span{width: 116px;}
+.dropDownMenu{display: none; z-index: 100; position: absolute; top: 30px; left: 65px; background: #fafafa; border: 1px solid #aaa; box-shadow: 2px 2px 2px rgba(0,0,0,.3); margin-bottom: 5em;}
+.dropDownMenu li{height: 30px; line-height: 30px; width: 300px; text-align: center; border-bottom: 1px solid #aaa; color: #2277da; cursor: pointer;}
+.dropDownMenu li:hover{background: #2277da; color: #fff;}

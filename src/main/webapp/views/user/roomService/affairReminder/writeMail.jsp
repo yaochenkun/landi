@@ -8,10 +8,9 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNewWaterBill.css" rel="stylesheet" type="text/css" />
-<title>新增饮用水费记录</title>
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/writeMail.css" rel="stylesheet" type="text/css" />
+<title>写信</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
@@ -21,52 +20,36 @@
 	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
-			<div class="nav-path">
+			<div class="nav-path nav-path0">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="serviceIndex.jsp">客房服务</a>
+				<a href="affairReminderIndex.jsp">事务提醒</a>
 				<i class="icon-path"></i>
-				<a href="serviceWaterBill.jsp">饮用水费</a>
+				<a href="mailboxIndex.jsp;">站内信</a>
 				<i class="icon-path"></i>
-				<a href="javascript:void(0);">新增饮用水费记录</a>
+				<a href="outboxOverview.jsp">发件箱</a>
+				<i class="icon-path"></i>
+				<a href="javascript:void(0);">写信</a>
 			</div>
 			<div class="body">
 				<div class="body-content">
 					<ul>
-
-						<li><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this)"/>
-							<span class="red red-right">*&nbsp;必填</span></li>
-						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
-						<li><span class="span">客户姓名：</span><input type="text" value="" disabled="disabled" /></li>
-
 						<li id="dropDownList">
-							<span class="span">水分类：</span>
+							<span>收件人：</span>
 							<input type="text" id="dropDownInput" value="桶装水" readonly/>
 							<div class="dropDownMenu">
 								<ul>
-									<li>桶装水</li>
-									<li>矿泉水</li>
+									<li style="height:30px;">桶装水</li>
+									<li style="height:30px;">矿泉水</li>
 								</ul>
 							</div>
 						</li>
-
-
-						<li><span class="span">发生时间：</span><input type="text" class="pack_maintain"></li>
-
-						<li><span class="span">数量：</span><input type="text" value=""/></li>
-						<li id="unitPrice"><span class="span">单价：</span><input type="text" value="0" /></li>
-						<li><span class="span">备注：</span><input type="text" value="" /></li>
-						<li>
-							<div class="eventType">
-								<input type="radio" name="eventType" id="eventType" checked="checked"><span class="span">现金</span>
-								<input type="radio" name="eventType"><span class="span">月结</span>
-								
-							</div>					
-						</li>
-
-
-						<li><span class="span"></span><a onclick="addWaterBill();" class="btn btn-goback goback">确认添加</a></li>
+						<%--<li><span class="span">收件人：</span><input type="text" value="" /></li>--%>
+						<li><span>提醒时间：</span><input type="text" class="pack_maintain"></li>
+						<li><span>主题：</span><input type="text" id="mailTitle"></li>
+						<li style="margin-bottom: -15px;"><span>内容：</span></li>
+						<textarea id="mailContent" cols="155" rows="10"></textarea>
+						<li><a onclick="sendMail();" class="btn btn-goback goback">发送</a></li>
 					</ul>
 				</div>
 			</div>
@@ -81,12 +64,34 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceWaterBill.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusPlane.js"></script>
 	<script type="text/javascript">
+
 		// 设置为当前时间
 		var nowDate = new Date();
 		$(".pack_maintain").val(formatDateForm(nowDate));
 		$('.pack_maintain').date_input();
+
+
+        // 事件冒泡（隐藏下拉菜单）
+        $(document).on("click",function(e){
+            $(".dropDownMenu").css("display","none");
+
+        })
+
+        // 显示问题分类下拉菜单
+        $("#dropDownInput").click(function(e){
+            $(".dropDownMenu").css("display","block");
+
+            // 阻止事件冒泡
+            e.stopPropagation();
+        });
+        // 选择问题分类
+        $(".dropDownMenu li").click(function(){
+
+            var waterType = $(this).text();
+            $("#dropDownInput").val(waterType);
+        });
 	</script>
 </body>
 </html>

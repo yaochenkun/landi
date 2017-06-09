@@ -24,7 +24,7 @@
 					<a class="span" href="maintain/maintainIndex.jsp">客房维修</a>&nbsp;|&nbsp; 
 					<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;
 					<a class="span" href="javascript:void(0);">客房费用结算</a>&nbsp;|&nbsp;
-					<a class="span" href="javascript:void(0);">事务提醒</a>
+					<a class="span" href="affairReminder/affairReminderIndex.jsp">事务提醒</a>
 				</div>
 			</div>
 			<div class="body">
@@ -118,9 +118,9 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<li><a href="">站内信</a></li>
-						<li><a href="">个人日志</a></li>
-						<li><a href="">系统提醒</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/inboxOverview.jsp">站内信</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/diaryOverview.jsp">个人日志</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/systemOverview.jsp">系统提醒</a></li>
 					</ul>
 				</div>
 				<!-- 客房费用结算 end -->

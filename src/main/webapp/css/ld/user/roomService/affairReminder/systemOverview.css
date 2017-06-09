@@ -1,0 +1,16 @@
+/************ 物品统计表格样式 start  **********/
+.bill-table thead tr th{width: 5%;}
+
+/* 数量及ID  */
+.bill-table thead tr th:nth-child(2){width: 35%;}
+.bill-table tbody tr td:nth-child(3){color: #ff5200; font-weight: bold;}
+
+.bill-table tbody tr .detail{
+    color:#2277da;
+}
+/* 操作样式 */
+#itemOverviewTbody .item_detail{color: #2277da; cursor: pointer;}
+#itemOverviewTbody .item_detail:hover{border-bottom: 1px solid #2277da;}
+
+
+/************ 物品统计表格样式 end  **********/

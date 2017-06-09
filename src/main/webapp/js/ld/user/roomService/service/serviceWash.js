@@ -206,7 +206,6 @@ var requestAddServiceWash = function(){
 	console.log("添加房间洗衣单收费！");
 
 	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	alert(date);
 	var roomNum = $("#serviceRoomNumber").val();
 	var guestName = $("#guestName").val();
 	var count = Number($("#totalCount").text());
