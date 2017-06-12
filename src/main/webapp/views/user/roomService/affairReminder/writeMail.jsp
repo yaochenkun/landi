@@ -32,24 +32,22 @@
 				<a href="javascript:void(0);">写信</a>
 			</div>
 			<div class="body">
+				<span id="sid" sid="${curUser.ID}" sname="${curUser.USERNAME}"/>
 				<div class="body-content">
 					<ul>
 						<li id="dropDownList">
 							<span>收件人：</span>
-							<input type="text" id="dropDownInput" value="桶装水" readonly/>
+							<input type="text" id="dropDownInput" value="" rid="" readonly/>
 							<div class="dropDownMenu">
 								<ul>
-									<li style="height:30px;">桶装水</li>
-									<li style="height:30px;">矿泉水</li>
 								</ul>
 							</div>
 						</li>
-						<%--<li><span class="span">收件人：</span><input type="text" value="" /></li>--%>
 						<li><span>提醒时间：</span><input type="text" class="pack_maintain"></li>
-						<li><span>主题：</span><input type="text" id="mailTitle"></li>
+						<li><span>主题：</span><input type="text" id="reminderTitle"></li>
 						<li style="margin-bottom: -15px;"><span>内容：</span></li>
-						<textarea id="mailContent" cols="155" rows="10"></textarea>
-						<li><a onclick="sendMail();" class="btn btn-goback goback">发送</a></li>
+						<textarea id="reminderContent" cols="155" rows="10"></textarea>
+						<li><a onclick="requestAddMailReminder();" class="btn btn-goback goback">发送</a></li>
 					</ul>
 				</div>
 			</div>
@@ -65,6 +63,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceBusPlane.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/mailReminder.js"></script>
 	<script type="text/javascript">
 
 		// 设置为当前时间
@@ -86,12 +85,10 @@
             // 阻止事件冒泡
             e.stopPropagation();
         });
-        // 选择问题分类
-        $(".dropDownMenu li").click(function(){
 
-            var waterType = $(this).text();
-            $("#dropDownInput").val(waterType);
-        });
+        //拉取所有用户
+        searchAllUsers();
+
 	</script>
 </body>
 </html>

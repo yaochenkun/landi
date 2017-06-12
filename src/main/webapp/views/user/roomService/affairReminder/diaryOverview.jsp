@@ -19,10 +19,12 @@
 
 	<jsp:include page="../../_header.jsp" />
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
+			<span id="uid" uid="${curUser.ID}"/>
 			<div class="nav-path nav-path0">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
@@ -36,11 +38,7 @@
 			<div class="nav-path">
 				<span>关键字：</span><input id="keyword" type="text" value="">
 				<span style="margin-left:30px;">提醒时间：</span><input type="text" class="pack_maintain">
-
-
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
-				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchDiaryReminderByPage(1);">搜索</a>
 			</div>
 
 			<div class="bill-area">
@@ -57,7 +55,7 @@
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
-						<tbody id="itemOverviewTbody">
+						<tbody id="reminderOverviewTbody">
 							<tr>
 								<td>1</td>
 								<td>W33-6客房的客人周末要预订一桶水W33-6客房的客人周末要预订一桶水</td>
@@ -71,19 +69,20 @@
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="itemOverviewBottom" class="bottom"></div>
+					<div id="reminderOverviewBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 页面内容 end -->
-
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemRoomOverview.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/diaryReminder.js"></script>
 
 	<!--日期筛选器-->
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
@@ -100,6 +99,10 @@
         var nowDate = new Date();
         $(".pack_maintain").val(formatDateForm(nowDate));
         $('.pack_maintain').date_input();
+
+
+        //查询第一页信息
+        searchDiaryReminderByPage(1);
 
 	</script>
 </body>

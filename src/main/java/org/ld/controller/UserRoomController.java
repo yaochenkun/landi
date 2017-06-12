@@ -33,6 +33,10 @@ import org.ld.model.RoomState;
 import org.ld.model.ShuttleBus;
 import org.ld.model.Sources;
 import org.ld.model.User;
+import org.ld.model.Meal;
+import org.ld.model.Staff;
+import org.ld.model.ShoesPolishing;
+import org.ld.model.AgentPurchase;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
@@ -1617,6 +1621,604 @@ public class UserRoomController {
 		
 		return ans;
 	}
+	//by lyd
+	@RequestMapping("/searchStaff")
+	@ResponseBody
+	public Map<String,Object> searchStaff(HttpSession session, @RequestBody String duty){
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(duty);
+		String dt = dataJson.getString("duty");
+				
+		System.out.println(dt);
+		
+		List<Staff> staffs = serverService.searchStaff(dt);
+		if(staffs == null) 
+			ans.put("staffs", null);
+		else
+			ans.put("staffs", staffs);
+				
+		return ans;
+	}
+	
+	@RequestMapping("/addTakeaway")   // 添加餐费记录
+	@ResponseBody
+	public Integer addTakeaway(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			System.out.println("新增餐费");
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法	
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+			int id = guest.getID();
+			String guestName = guest.getGUEST_NAME();
+			Date occurTime = dataJson.getDate("time");
+
+			Meal meal = new Meal();
+			meal.setOCCUR_TIME(occurTime);
+			meal.setROOM_NUM(dataJson.getString("roomNumber"));
+			meal.setGUEST_ID(id);
+			meal.setGUEST_NAME(guestName);
+			meal.setTOTAL_PRICE(dataJson.getDouble("count"));
+			meal.setCOMMENT(dataJson.getString("note"));
+			meal.setRESTAURANT_NAME(dataJson.getString("res"));
+			meal.setPAY_MODE(dataJson.getByte("pay_for"));
+			meal.setSTAFF_ID(dataJson.getInteger("staff_id"));
+			meal.setSTAFF_NAME(dataJson.getString("staff_name"));
+			
+			Date importTime = new Date();
+			meal.setIMPORT_TIME(importTime);
+			meal.setEDIT_TIME(importTime);
+			
+			return serverService.addTakeaway(meal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/roomSearchMeal") // 明细流水（餐费）
+	@ResponseBody 
+	public Map<String, Object> roomSearchMeal(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		JSONObject dataJson = JSONObject.parseObject(data);
+		System.out.println(data);
+		int pageNumber = dataJson.getInteger("pageNum");
+		String rn = dataJson.getString("rNum");
+		if(rn == null) rn = "";
+		System.out.println(rn);
+		Date date = dataJson.getDate("date");
+
+		int eachPage = Config.settingsInt.get("list_size");
+		int recordTotal = serverService.getTotalMealRow(rn , date);
+		System.out.println(recordTotal);
+		
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<Meal> record = serverService.searchMeal(rn,date, st, eachPage);
+
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+    
+		return ans;
+	}
+	
+	@RequestMapping("/deleteMeal") // 删除餐费记录
+	@ResponseBody 
+	public Integer deleteMeal(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return serverService.deleteMeal(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchMealById") // 根据id号查询餐费记录
+	@ResponseBody 
+	public Map<String,Object> searchMealById(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Map<String, Object> ans = new HashMap<String, Object>();
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			Meal meal = serverService.getMealById(id);
+			ans.put("record", meal);
+			return ans;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ans;
+		}
+	}
+	
+	@RequestMapping("/searchAllMeal") // 按房间号查询所有餐费信息(一组)
+	@ResponseBody  
+	public Map<String, Object> searchAllMeal(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");	
+		Date date = null;
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd").parse(dataJson.getString("date"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Meal> allRecord = serverService.getAllMeal(roomNum,date);
+		ans.put("dataList", allRecord);		
+		return ans;
+	}
+	
+	@RequestMapping("/updateMealById")   // 更新餐费记录
+	@ResponseBody 
+	public Integer updateMealById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+
+			Meal meal = serverService.getMealById(dataJson.getInteger("id"));
+        
+			meal.setTOTAL_PRICE(dataJson.getDouble("count"));
+			meal.setCOMMENT(dataJson.getString("note"));
+			meal.setRESTAURANT_NAME(dataJson.getString("res"));
+			meal.setPAY_MODE(dataJson.getByte("pay_for"));
+			meal.setSTAFF_ID(dataJson.getInteger("staff_id"));
+			meal.setSTAFF_NAME(dataJson.getString("staff_name"));
+			Date editTime = new Date();
+			meal.setEDIT_TIME(editTime);
+			meal.setOCCUR_TIME(dataJson.getDate("time"));
+			
+			return serverService.updateMeal(meal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/addShoeCleaning")   // 添加擦鞋费记录
+	@ResponseBody
+	public Integer addShoeCleaning(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			System.out.println("新增擦鞋费");
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法	
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+			int id = guest.getID();
+			String guestName = guest.getGUEST_NAME();
+			Date occurTime = dataJson.getDate("time");
+
+			ShoesPolishing shoe = new ShoesPolishing();
+			shoe.setOCCUR_TIME(occurTime);
+			shoe.setROOM_NUM(dataJson.getString("roomNumber"));
+			shoe.setGUEST_ID(id);
+			shoe.setGUEST_NAME(guestName);
+			shoe.setTOTAL_PRICE(dataJson.getDouble("sum"));
+			shoe.setCOUNT(dataJson.getInteger("count"));
+			shoe.setCOMMENT(dataJson.getString("note"));
+			shoe.setPAY_MODE(dataJson.getByte("pay_for"));
+		
+			//??
+			shoe.setSTAFF_ID(0);
+			shoe.setSTAFF_NAME("null");
+			//
+			Date importTime = new Date();
+			shoe.setIMPORT_TIME(importTime);
+			shoe.setEDIT_TIME(importTime);
+			
+			return serverService.addShoeCleaning(shoe);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/roomSearchShoeCleaning") // 明细流水（擦鞋费）
+	@ResponseBody  
+	public Map<String, Object> roomSearchShoeCleaning(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String rn = dataJson.getString("rNum");
+		if(rn == null) rn = "";
+		Date date = dataJson.getDate("date");
+		
+		int eachPage = Config.settingsInt.get("list_size");
+		int recordTotal = serverService.getTotalShoeCleaningRow(rn,date);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<ShoesPolishing> record = serverService.searchShoeCleaning(rn, date,st, eachPage);
+
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/deleteShoeCleaning") // 删除餐费记录
+	@ResponseBody  
+	public Integer deleteShoeCleaning(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return serverService.deleteShoesPolishing(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchShoeCleaningById") // 根据id号查询餐费记录
+	@ResponseBody  
+	public Map<String,Object> searchShoeCleaningById(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Map<String, Object> ans = new HashMap<String, Object>();
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			ShoesPolishing shoe = serverService.getShoesPolishingById(id);
+			ans.put("record", shoe);
+			return ans;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ans;
+		}
+	}
+	
+	@RequestMapping("/updateshoeCleaningById")   // 更新擦鞋收费记录
+	@ResponseBody 
+	public Integer updateshoeCleaningById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+
+			ShoesPolishing shoe = serverService.getShoesPolishingById(dataJson.getInteger("id"));
+        
+			shoe.setTOTAL_PRICE(dataJson.getDouble("sum"));
+			shoe.setCOUNT(dataJson.getInteger("count"));
+			shoe.setCOMMENT(dataJson.getString("note"));
+			shoe.setPAY_MODE(dataJson.getByte("pay_for"));
+			Date editTime = new Date();
+			shoe.setEDIT_TIME(editTime);		
+			return serverService.updateShoesPolishing(shoe);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchAllShoeCleaning") // 按房间号查询所有擦鞋信息(一组)
+	@ResponseBody  
+	public Map<String, Object> searchAllShoeCleaning(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");		
+		Date date = dataJson.getDate("date");
+		List<ShoesPolishing> allRecord = serverService.getAllShoesPolishing(roomNum , date);
+		ans.put("dataList", allRecord);		
+		return ans;
+	}
+	
+	@RequestMapping("/addShopping")   // 添加代购费记录
+	@ResponseBody 
+	public Integer addShopping(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			System.out.println("新增代购费");
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法	
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+			int id = guest.getID();
+			String guestName = guest.getGUEST_NAME();
+			Date occurTime = dataJson.getDate("time");
+
+			AgentPurchase agent = new AgentPurchase();
+			agent.setOCCUR_TIME(occurTime);
+			agent.setROOM_NUM(dataJson.getString("roomNumber"));
+			agent.setGUEST_ID(id);
+			agent.setGUEST_NAME(guestName);
+			agent.setGOOD_NAME(dataJson.getString("item"));
+			agent.setCOUNT(dataJson.getInteger("count"));
+			agent.setCOVER_PRICE(dataJson.getDouble("sum"));
+			agent.setSERVICE_PRICE(dataJson.getDouble("tip"));
+			agent.setCOMMENT(dataJson.getString("note"));		
+			agent.setPAY_MODE(dataJson.getByte("pay_for"));
+			agent.setSTAFF_ID(dataJson.getInteger("staff_id"));
+			agent.setSTAFF_NAME(dataJson.getString("staff_name"));
+			
+			Date importTime = new Date();
+			agent.setIMPORT_TIME(importTime);
+			agent.setEDIT_TIME(importTime);
+			
+			return serverService.addAgentPurchase(agent);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/roomSearchAgentPurchase") // 明细流水（代购费）
+	@ResponseBody  
+	public Map<String, Object> roomSearchAgentPurchase(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		int pageNumber = dataJson.getIntValue("pageNum");
+		String rn = dataJson.getString("rNum");
+		if(rn == null) rn = "";
+		Date date = dataJson.getDate("date");
+
+		int eachPage = Config.settingsInt.get("list_size");
+		int recordTotal = serverService.getTotalAgentPurchaseRow(rn , date);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if (recordTotal != 0) {
+			if (pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int st = (pageNumber - 1) * eachPage;
+			List<AgentPurchase> agent = serverService.searchAgentPurchase(rn,date, st, eachPage);
+
+			ans.put("pageList", agent);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
+	
+	@RequestMapping("/deleteShopping") // 删除餐费记录
+	@ResponseBody  
+	public Integer deleteShopping(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			return serverService.deleteAgentPurchase(id);
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchShoppingById") // 根据id号查询代购费记录
+	@ResponseBody  
+	public Map<String,Object> searchShoppingById(HttpSession session,  @RequestBody String data){
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		Map<String, Object> ans = new HashMap<String, Object>();
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+		
+		try{
+			Integer id = dataJson.getInteger("id");
+			AgentPurchase agent = serverService.getAgentPurchaseById(id);
+			ans.put("record", agent);
+			return ans;
+		}catch(Exception e){
+			e.printStackTrace();
+			return ans;
+		}
+	}
+	
+	@RequestMapping("/updateShoppingById")   // 更新代购鞋收费记录
+	@ResponseBody 
+	public Integer updateShoppingById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+		try{
+			System.out.println(data);
+			String roomNum = dataJson.getString("roomNumber");
+			if(roomNum == null) return 0; //检测房间号是否合法
+			Guest guest = guestService.getGuestByRoomNumber(roomNum);
+			if(guest == null) return 0;
+
+			AgentPurchase agent = serverService.getAgentPurchaseById(dataJson.getInteger("id"));
+			
+			agent.setGOOD_NAME(dataJson.getString("item"));
+			agent.setCOUNT(dataJson.getInteger("count"));
+			agent.setCOVER_PRICE(dataJson.getDouble("sum"));
+			agent.setSERVICE_PRICE(dataJson.getDouble("tip"));
+			agent.setCOMMENT(dataJson.getString("note"));
+			agent.setPAY_MODE(dataJson.getByte("pay_for"));
+			agent.setOCCUR_TIME(dataJson.getDate("time"));
+			agent.setSTAFF_ID(dataJson.getInteger("staff_id"));
+			agent.setSTAFF_NAME(dataJson.getString("staff_name"));
+			Date editTime = new Date();
+			agent.setEDIT_TIME(editTime);		
+			return serverService.updateAgentPurchase(agent);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@RequestMapping("/searchAllShopping") // 按房间号查询所有代购信息(一组)
+	@ResponseBody  
+	public Map<String, Object> searchAllShopping(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		String roomNum = dataJson.getString("roomNum");	
+		Date date = dataJson.getDate("date");
+		List<AgentPurchase> allRecord = serverService.getAllAgentPurchase(roomNum , date);
+		ans.put("dataList", allRecord);	
+		return ans;
+	}
+	
+	
+	//lyd end
 	
 	/**
 	 * 其它车费

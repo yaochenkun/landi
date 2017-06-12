@@ -81,4 +81,26 @@ public class UserController {
 
 		return ans;
 	}
+
+	//查询目前多有用户
+	@RequestMapping("/searchAllUsers")
+	@ResponseBody
+	public Map<String, Object> searchAllUsers(HttpSession session) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		List<User> recordList = userService.getAllUsers();
+		ans.put("State", "Valid");
+		ans.put("record", recordList);
+		return ans;
+
+
+	}
 }

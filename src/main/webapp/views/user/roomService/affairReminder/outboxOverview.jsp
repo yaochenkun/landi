@@ -23,7 +23,7 @@
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
-
+			<span id="sid" sid="${curUser.ID}"/>
 			<div class="nav-path nav-path0">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
@@ -38,11 +38,7 @@
 			<div class="nav-path">
 				<span>关键字：</span><input id="keyword" type="text" value="">
 				<span style="margin-left:30px;">提醒时间：</span><input type="text" class="pack_maintain">
-
-
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
-				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchMailReminderByPage(1);">搜索</a>
 			</div>
 
 			<div class="bill-area">
@@ -60,22 +56,13 @@
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
-						<tbody id="itemOverviewTbody">
-							<tr>
-								<td>1</td>
-								<td>姚陈堃</td>
-								<td>W33-6客房的客人周末要预订一桶水W33-6客房的客人周末要预订一桶水</td>
-								<td>2017-06-08</td>
-								<td>2017-06-08</td>
-								<td>未完成</td>
-								<td><a href="#" class="detail">详情</a><a href="#" class="delete">撤回</a></td>
-							</tr>
+						<tbody id="reminderOverviewTbody">
 						</tbody>
 					</table>
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="itemOverviewBottom" class="bottom"></div>
+					<div id="reminderOverviewBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
 				</div>
 			</div>
@@ -99,10 +86,16 @@
 
 	<!-- 打印插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/mailReminder.js"></script>
+
+
 	<script>
         var nowDate = new Date();
         $(".pack_maintain").val(formatDateForm(nowDate));
         $('.pack_maintain').date_input();
+
+        searchMailReminderByPage(1);
 	</script>
 </body>
 </html>

@@ -6,20 +6,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 <title>代购费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -30,41 +26,32 @@
 					href="serviceIndex.jsp">客房服务</a> <i class="icon-path"></i> <a
 					href="serviceShopping.jsp">代购费</a>
 			</div>
-			<a class="btn btn-new btnnew" href="serviceNew.jsp?type=4">新增代购费记录</a>
+			<a class="btn btn-new btnnew" href="serviceNewShopping.jsp">新增代购费记录</a>												
+			
 			<div class="bill-area">
+			    <div class="search">
+			        <span>房间号：</span><input id="search-input" type="text" value="">
+					<span>日期：</span><input type="text" class="pack_maintain">
+					<a class="btn btn-edit btnEdit" onclick="requestFirstShoppingByRoomNum(this);" >搜索</a>
+			        <a class="btn btn-edit btnEdit btnRight" onclick="exportList();" >导出</a>
+			        <a class="btn btn-edit btnEdit" onclick="printList('hahaha');">打印</a>	
+			    </div>
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
 							<tr>
-								<th><span>房间号</span>
-								<p>Room No.</p>
-									<div class="search-roomNo">
-										<div class="search-wrap">
-											<input type="text" class="search-input"
-												placeholder="请输入房间号..." /> <a class="search-btn" href=""
-												style="right: 110px;"></a> <a class="btn btn-edit btnedit"
-												onclick="requestFirstShoppingByRoomNum(this)">搜索代购费</a>
-										</div>
-									</div></th>
-								<th><span>客户姓名</span>
-								<p>Customer Name</p> <!--<div class="search-customerName">
-									<div class="search-wrap">
-										<input type="text" class="search-input" placeholder="请输入客户姓名..." />
-										<a class="search-btn" href=""></a>
-										<a class="btn btn-edit btnedit">搜索</a>
-									</div>
-								</div>--></th>
-								<th><span>物品</span>
-								<p>Items</p> <!--<div class="search-items"></div>--></th>
-								<th><span>数量</span>
-								<p>Quantity</p></th>
-								<th><span>送交时间</span>
-								<p>Time for delivery</p></th>
-								<th><span>金额</span>
-								<p>Sum</p></th>
-								<th><span>备注</span>
-								<p>Note</p></th>
+								<th style="width:7%">房间号</th>
+								<th style="width:7%">客户姓名</th>
+								<th style="width:7%">物品</th>
+								<th style="width:7%">数量</th>
+								<th style="width:7%">垫付费</th>
+								<th style="width:7%">服务费</th>
+								<th style="width:7%">备注</th>
+								<th style="width:8%">发生时间</th>
+								<th style="width:15%">上传时间</th>
+								<th style="width:15%">编辑时间</th>
+								<th style="width:10%">操作</th>
 							</tr>
 						</thead>
 						<tbody id="shoppingTbody"></tbody>
@@ -74,34 +61,32 @@
 					<!-- 底部页面 start -->
 					<div id="serviceShoppingBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
-
-					<!--<div class="page-bottom">
-						<div class="page-wrap">
-							<a data-target="1" href="">1</a>
-							<a data-target="2" href="">2</a>
-							<span>...</span>
-							<a data-target="3" href="">3</a>
-							<a data-target="2" href="" class="down-page"><em>下一页</em><i class="next-i">></i></a>
-							<span>共15条记录</span>
-						</div>
-					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="shadow"></div>
 	<!-- 页面内容 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceShopping.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
+		
+	<!-- 导出插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
+
+	<!-- 打印插件 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/service/serviceShopping.js"></script>
 	<script type="text/javascript">
+	    var nowDate = new Date();
+	    $(".pack_maintain").val(formatDateForm(nowDate));
+        $('.pack_maintain').date_input();
 	    // 拉取第一页 代购费信息
 		requestFirstShopping();
 	</script>

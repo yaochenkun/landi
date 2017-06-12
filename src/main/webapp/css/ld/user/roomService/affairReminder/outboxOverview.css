@@ -8,10 +8,13 @@
 .bill-table tbody tr .detail{
     margin-right:10px;
     color:#2277da;
+    font-weight:normal;
 }
 
 .bill-table tbody tr .delete{
     color:#e45e00;
+    cursor: pointer;
+    font-weight:normal;
 }
 
 /* 操作样式 */

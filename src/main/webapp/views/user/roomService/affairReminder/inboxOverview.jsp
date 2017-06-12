@@ -23,7 +23,7 @@
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
-
+			<span id="rid" rid="${curUser.ID}"/>
 			<div class="nav-path nav-path0">
 				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
@@ -37,11 +37,7 @@
 			<div class="nav-path">
 				<span>关键字：</span><input id="keyword" type="text" value="">
 				<span style="margin-left:30px;">提醒时间：</span><input type="text" class="pack_maintain">
-
-
 				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
-				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
 
 			<div class="bill-area">
@@ -54,12 +50,12 @@
 								<th><span>发件人</span></th>
 								<th><span>主题</span></th>
 								<th><span>提醒时间</span></th>
-								<th><span>收件时间</span></th>
+								<th><span>发件时间</span></th>
 								<th><span>完成情况</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>
-						<tbody id="itemOverviewTbody">
+						<tbody id="reminderOverviewTbody">
 							<tr>
 								<td>1</td>
 								<td>姚陈堃</td>
@@ -74,7 +70,7 @@
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="itemOverviewBottom" class="bottom"></div>
+					<div id="reminderOverviewBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
 				</div>
 			</div>

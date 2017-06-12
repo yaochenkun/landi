@@ -10,7 +10,7 @@
 	<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/public.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/writeMail.css" rel="stylesheet" type="text/css" />
-	<title>写日志</title>
+	<title>个人日志详情</title>
 </head>
 <body>
 <jsp:include page="../../_header.jsp"></jsp:include>
@@ -27,17 +27,16 @@
 			<i class="icon-path"></i>
 			<a href="diaryOverview.jsp;">个人日志</a>
 			<i class="icon-path"></i>
-			<a href="javascript:void(0);">写日志</a>
+			<a href="javascript:void(0);">详情</a>
 		</div>
 		<div class="body">
-			<span id="uid" uid="${curUser.ID}"/>
 			<div class="body-content">
 				<ul>
 					<li><span>提醒时间：</span><input type="text" class="pack_maintain"></li>
 					<li><span>主题：</span><input type="text" id="reminderTitle"/></li>
 					<li style="margin-bottom: -15px;"><span>内容：</span></li>
 					<textarea id="reminderContent" cols="155" rows="10"></textarea>
-					<li><a onclick="requestAddDiaryReminder();" class="btn btn-goback goback">发表</a></li>
+					<li><a onclick="updateDiaryReminder(${param.id});" class="btn btn-goback goback">更新</a></li>
 				</ul>
 			</div>
 		</div>
@@ -59,7 +58,7 @@
     $(".pack_maintain").val(formatDateForm(nowDate));
     $('.pack_maintain').date_input();
 
-
+	searchDiaryReminderDetail('${param.id}');
 </script>
 </body>
 </html>

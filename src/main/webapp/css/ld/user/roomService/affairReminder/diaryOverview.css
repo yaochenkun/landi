@@ -12,6 +12,7 @@
 
 .bill-table tbody tr .delete{
     color:#e45e00;
+    cursor: pointer;
 }
 
 /* 操作样式 */

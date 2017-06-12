@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
 	public int totalRow() {
 		return userInfoMapper.totalRow();
 	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userInfoMapper.selectAll();
+	}
 }

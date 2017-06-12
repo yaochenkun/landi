@@ -176,4 +176,10 @@
   	select count(*) from user
   	]]>
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    <![CDATA[
+  	select * from user
+  	]]>
+  </select>
 </mapper>

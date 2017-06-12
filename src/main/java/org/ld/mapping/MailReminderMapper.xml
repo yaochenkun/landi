@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.MailReminderMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.MailReminder" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="SENDER_ID" property="SENDER_ID" jdbcType="INTEGER" />
+    <result column="SENDER_NAME" property="SENDER_NAME" jdbcType="VARCHAR" />
+    <result column="RECEIVER_ID" property="RECEIVER_ID" jdbcType="INTEGER" />
+    <result column="RECEIVER_NAME" property="RECEIVER_NAME" jdbcType="VARCHAR" />
+    <result column="TITLE" property="TITLE" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="CONTENT" jdbcType="VARCHAR" />
+    <result column="REMIND_DATE" property="REMIND_DATE" jdbcType="DATE" />
+    <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
+    <result column="STATE" property="STATE" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SENDER_ID, SENDER_NAME, RECEIVER_ID, RECEIVER_NAME, TITLE, CONTENT, REMIND_DATE, 
+    EDIT_TIME, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mail_reminder
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mail_reminder
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.MailReminder" >
+    insert into mail_reminder (ID, SENDER_ID, SENDER_NAME, 
+      RECEIVER_ID, RECEIVER_NAME, TITLE, 
+      CONTENT, REMIND_DATE, EDIT_TIME, 
+      STATE)
+    values (#{ID,jdbcType=INTEGER}, #{SENDER_ID,jdbcType=INTEGER}, #{SENDER_NAME,jdbcType=VARCHAR}, 
+      #{RECEIVER_ID,jdbcType=INTEGER}, #{RECEIVER_NAME,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, 
+      #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{EDIT_TIME,jdbcType=TIMESTAMP}, 
+      #{STATE,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.MailReminder" >
+    insert into mail_reminder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="SENDER_ID != null" >
+        SENDER_ID,
+      </if>
+      <if test="SENDER_NAME != null" >
+        SENDER_NAME,
+      </if>
+      <if test="RECEIVER_ID != null" >
+        RECEIVER_ID,
+      </if>
+      <if test="RECEIVER_NAME != null" >
+        RECEIVER_NAME,
+      </if>
+      <if test="TITLE != null" >
+        TITLE,
+      </if>
+      <if test="CONTENT != null" >
+        CONTENT,
+      </if>
+      <if test="REMIND_DATE != null" >
+        REMIND_DATE,
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME,
+      </if>
+      <if test="STATE != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="SENDER_ID != null" >
+        #{SENDER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="SENDER_NAME != null" >
+        #{SENDER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVER_ID != null" >
+        #{RECEIVER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="RECEIVER_NAME != null" >
+        #{RECEIVER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null" >
+        #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTENT != null" >
+        #{CONTENT,jdbcType=VARCHAR},
+      </if>
+      <if test="REMIND_DATE != null" >
+        #{REMIND_DATE,jdbcType=DATE},
+      </if>
+      <if test="EDIT_TIME != null" >
+        #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="STATE != null" >
+        #{STATE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.MailReminder" >
+    update mail_reminder
+    <set >
+      <if test="SENDER_ID != null" >
+        SENDER_ID = #{SENDER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="SENDER_NAME != null" >
+        SENDER_NAME = #{SENDER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVER_ID != null" >
+        RECEIVER_ID = #{RECEIVER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="RECEIVER_NAME != null" >
+        RECEIVER_NAME = #{RECEIVER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="TITLE != null" >
+        TITLE = #{TITLE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTENT != null" >
+        CONTENT = #{CONTENT,jdbcType=VARCHAR},
+      </if>
+      <if test="REMIND_DATE != null" >
+        REMIND_DATE = #{REMIND_DATE,jdbcType=DATE},
+      </if>
+      <if test="EDIT_TIME != null" >
+        EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="STATE != null" >
+        STATE = #{STATE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.MailReminder" >
+    update mail_reminder
+    set SENDER_ID = #{SENDER_ID,jdbcType=INTEGER},
+      SENDER_NAME = #{SENDER_NAME,jdbcType=VARCHAR},
+      RECEIVER_ID = #{RECEIVER_ID,jdbcType=INTEGER},
+      RECEIVER_NAME = #{RECEIVER_NAME,jdbcType=VARCHAR},
+      TITLE = #{TITLE,jdbcType=VARCHAR},
+      CONTENT = #{CONTENT,jdbcType=VARCHAR},
+      REMIND_DATE = #{REMIND_DATE,jdbcType=DATE},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+      STATE = #{STATE,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectTotal" parameterType="map" resultType="java.lang.Integer">
+    select count(*) from mail_reminder
+    where SENDER_ID = #{SENDER_ID}
+    and   (TITLE like CONCAT('%', #{KEYWORD}, '%') or CONTENT like CONCAT('%', #{KEYWORD}, '%'))
+    <if test="REMIND_DATE != null">
+      and   REMIND_DATE = #{REMIND_DATE}
+    </if>
+  </select>
+
+  <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
+    select * from mail_reminder
+    where SENDER_ID = #{SENDER_ID}
+    and   (TITLE like CONCAT('%', #{KEYWORD}, '%') or CONTENT like CONCAT('%', #{KEYWORD}, '%'))
+    <if test="REMIND_DATE != null">
+      and   REMIND_DATE = #{REMIND_DATE}
+    </if>
+    order by REMIND_DATE desc
+    limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+
+</mapper>

@@ -118,7 +118,7 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/inboxOverview.jsp">站内信</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/mailboxIndex.jsp">站内信</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/diaryOverview.jsp">个人日志</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/systemOverview.jsp">系统提醒</a></li>
 					</ul>

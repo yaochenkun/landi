@@ -185,4 +185,24 @@
       EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
+    <if test = "OCCUR_TIME != null">
+      and OCCUR_TIME = #{OCCUR_TIME}
+    </if>
+  </select>
+  <select id="getShoesPolishingRange" resultMap="BaseResultMap" parameterType="map">
+    select * from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
+    <if test = "DATE != null">
+      and OCCUR_TIME = #{DATE}
+    </if>
+    order by ID
+    limit #{ST}, #{EACH}
+  </select>
+  <select id="getAll" parameterType="map" resultMap="BaseResultMap">
+    select * from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
+    <if test = "OCCUR_TIME != null">
+      and OCCUR_TIME = #{OCCUR_TIME}
+    </if>
+  </select>
 </mapper>

@@ -20,4 +20,7 @@ public interface UserService {
 	List<User> selectUserRange(int st, int each);
 
 	int totalRow();
+
+	//获取所有用户
+	List<User> getAllUsers();
 }

@@ -37,11 +37,7 @@
 		<div class="nav-path">
 			<span>关键字：</span><input id="keyword" type="text" value="">
 			<span style="margin-left:30px;">提醒时间：</span><input type="text" class="pack_maintain">
-
-
 			<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
-			<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-			<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 		</div>
 
 		<div class="bill-area">
@@ -53,7 +49,6 @@
 						<th><span>序号</span></th>
 						<th><span>主题</span></th>
 						<th><span>提醒时间</span></th>
-						<th><span>发件时间</span></th>
 						<th><span>完成情况</span></th>
 						<th><span>操作</span></th>
 					</tr>
@@ -62,7 +57,6 @@
 						<tr>
 							<td>1</td>
 							<td>W33-6客房的客人周末要预订一桶水W33-6客房的客人周末要预订一桶水</td>
-							<td>2017-06-08</td>
 							<td>2017-06-08</td>
 							<td>未完成</td>
 							<td><a href="#" class="detail">详情</a></td>
