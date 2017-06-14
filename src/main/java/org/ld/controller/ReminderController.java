@@ -231,7 +231,7 @@ public class ReminderController {
 	}
 
 	/**
-	 * 查询站内信
+	 * 查询站内信(由发件人找)
 	 */
 	@RequestMapping("/searchMailRemindersByPage")
 	@ResponseBody
@@ -275,6 +275,50 @@ public class ReminderController {
 		return ans;
 	}
 
+	/**
+	 * 查询站内信(由收件人找)
+	 */
+	@RequestMapping("/searchInboxMailRemindersByPage")
+	@ResponseBody
+	public Map<String, Object> searchInboxMailRemindersByPage(HttpSession session, @RequestBody String data) {
+
+
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Integer rid = dataJson.getIntValue("rid");
+		int pageNumber = dataJson.getIntValue("pageNum");
+		Date remindDate = dataJson.getDate("remindDate");
+		String keyword = dataJson.getString("keyword");
+
+		//分页
+		int eachPage = Config.getSettingsInt().get("list_size");
+		int recordTotal = reminderService.getTotalInBoxMailReminders(rid, keyword, remindDate);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		if(recordTotal != 0) {
+			if(pageNumber > pageTotal)
+				pageNumber = pageTotal;
+
+			int startPage = (pageNumber - 1) * eachPage;
+			List<MailReminder> record = reminderService.getInboxMailRemindersByPage(rid, keyword, remindDate, startPage, eachPage);
+			ans.put("pageList", record);
+		}
+
+		ans.put("pageNow", pageNumber);
+		ans.put("pageTotal", pageTotal);
+		ans.put("recordTotal", recordTotal);
+
+		return ans;
+	}
 
 	/**
 	 * 删除站内信

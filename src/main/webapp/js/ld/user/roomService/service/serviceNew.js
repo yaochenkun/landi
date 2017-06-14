@@ -35,12 +35,10 @@
 //获取点餐人
 var requestStaff=function(duty){
 	//var duty="点餐";
-	
+
 	$.ajax({
-		url:'/LD/userRoom/searchStaff.action',
-		type:'post',
-		contentType:'application/json',
-		data:'{"duty":"'+ duty +'"}',
+		url:'/LD/HomeUser/searchAllUsers.action',
+		type:'get',
 		dataType:'json',
 		success:function(data){
 			console.log(data);
@@ -48,12 +46,12 @@ var requestStaff=function(duty){
 				$("#staffInput").val("信息获取失败!");
 				return;
 			}
-			if(data.staffs == null){
+			if(data.record == null){
 				$("#staffInput").val("无相关信息！");
 				return;
 			}
-			for(var i=0;i<data.staffs.length;i++){
-				var staff=data.staffs[i];
+			for(var i=0;i<data.record.length;i++){
+				var staff=data.record[i];
 				$("#staff").append("<li>"+staff.id+" "+staff.name+"</li>");
 				//if(i == 0) $("#staffInput").val(staff.id+" "+staff.name);
 			}
@@ -65,6 +63,28 @@ var requestStaff=function(duty){
 	});
 
 }
+
+//获取饭店
+var requestRestaurant=function(){
+
+    $.ajax({
+        url:'/LD/userRoom/searchRestaurant.action',
+        type:'get',
+        dataType:'json',
+        success:function(data){
+            console.log(data);
+            for(var restaurantName in data) {
+                $(".resMenu ul").append("<li>"+restaurantName+"</li>");
+			}
+        }
+    });
+    //为动态添加的元素加入事件
+    $(".resMenu ul li").live("click",function(){
+        $("#resInput").val($(this).text());
+    });
+
+}
+
 
 // 添加餐费服务
 var addservice_Takeaway = function(){

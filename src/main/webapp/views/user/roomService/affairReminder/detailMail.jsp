@@ -27,7 +27,7 @@
 				<i class="icon-path"></i>
 				<a href="mailboxIndex.jsp;">站内信</a>
 				<i class="icon-path"></i>
-				<a href="outboxOverview.jsp">发件箱</a>
+				<a href="inboxOverview.jsp">收件箱</a>
 				<i class="icon-path"></i>
 				<a href="javascript:void(0);">详情</a>
 			</div>
@@ -35,18 +35,14 @@
 				<div class="body-content">
 					<ul>
 						<li id="dropDownList">
-							<span>收件人：</span>
-							<input type="text" id="dropDownInput" value="" rid="" readonly/>
-							<div class="dropDownMenu">
-								<ul>
-								</ul>
-							</div>
+							<span>发件人：</span>
+							<input type="text" id="dropDownInput" value="" readonly/>
 						</li>
-						<li><span>提醒时间：</span><input type="text" class="pack_maintain"></li>
-						<li><span>主题：</span><input type="text" id="reminderTitle"/></li>
+						<li><span>提醒时间：</span><input type="text" class="pack_maintain" readonly></li>
+						<li><span>主题：</span><input type="text" id="reminderTitle" readonly/></li>
 						<li style="margin-bottom: -15px;"><span>内容：</span></li>
-						<textarea id="reminderContent" cols="155" rows="10"></textarea>
-						<li><a onclick="updateMailReminder(${param.id});" class="btn btn-goback goback">更新</a></li>
+						<textarea id="reminderContent" cols="155" rows="10" readonly></textarea>
+						<li><a href="inboxOverview.jsp" class="btn btn-goback goback">返回</a></li>
 					</ul>
 				</div>
 			</div>
@@ -60,34 +56,11 @@
 	<script src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/outboxMailReminder.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/inboxMailReminder.js"></script>
 	<script type="text/javascript">
 
-		// 设置为当前时间
-		var nowDate = new Date();
-		$(".pack_maintain").val(formatDateForm(nowDate));
-		$('.pack_maintain').date_input();
 
-
-		// 事件冒泡（隐藏下拉菜单）
-		$(document).on("click",function(e){
-			$(".dropDownMenu").css("display","none");
-
-		})
-
-		// 显示问题分类下拉菜单
-		$("#dropDownInput").click(function(e){
-			$(".dropDownMenu").css("display","block");
-
-			// 阻止事件冒泡
-			e.stopPropagation();
-		});
-
-		//拉取所有用户
-		searchAllUsers();
-
-
-		searchMailReminderDetail('${param.id}');
+		searchInboxMailReminderDetail('${param.id}');
 	</script>
 </body>
 </html>

@@ -13,12 +13,13 @@
     <result column="CTIME" property="CTIME" jdbcType="DATE" />
     <result column="LTIME" property="LTIME" jdbcType="DATE" />
     <result column="STATE" property="STATE" jdbcType="INTEGER" />
+    <result column="RESET_PASSWD" property="RESET_PASSWD" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, USERNAME, PASSWD, NAME, NUM, DEPART, ROLE, AUTH, CTIME, LTIME, STATE
+    ID, USERNAME, PASSWD, NAME, NUM, DEPART, ROLE, AUTH, CTIME, LTIME, STATE, RESET_PASSWD
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where ID = #{ID,jdbcType=INTEGER}
@@ -28,16 +29,16 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.User" >
-    insert into user (ID, USERNAME, PASSWD, 
-      NAME, NUM, DEPART, 
-      ROLE, AUTH, CTIME, LTIME, 
-      STATE)
-    values (#{ID,jdbcType=INTEGER}, #{USERNAME,jdbcType=VARCHAR}, #{PASSWD,jdbcType=VARCHAR}, 
-      #{NAME,jdbcType=VARCHAR}, #{NUM,jdbcType=VARCHAR}, #{DEPART,jdbcType=VARCHAR}, 
-      #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE}, 
-      #{STATE,jdbcType=INTEGER})
+    insert into user (ID, USERNAME, PASSWD,
+    NAME, NUM, DEPART,
+    ROLE, AUTH, CTIME, LTIME,
+    STATE, RESET_PASSWD)
+    values (#{ID,jdbcType=INTEGER}, #{USERNAME,jdbcType=VARCHAR}, #{PASSWD,jdbcType=VARCHAR},
+    #{NAME,jdbcType=VARCHAR}, #{NUM,jdbcType=VARCHAR}, #{DEPART,jdbcType=VARCHAR},
+    #{ROLE,jdbcType=INTEGER}, #{AUTH,jdbcType=INTEGER}, #{CTIME,jdbcType=DATE}, #{LTIME,jdbcType=DATE},
+    #{STATE,jdbcType=INTEGER}, #{RESET_PASSWD,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.User">
+  <insert id="insertSelective" parameterType="org.ld.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -72,6 +73,9 @@
       </if>
       <if test="STATE != null" >
         STATE,
+      </if>
+      <if test="RESET_PASSWD != null" >
+        RESET_PASSWD,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -108,6 +112,9 @@
       <if test="STATE != null" >
         #{STATE,jdbcType=INTEGER},
       </if>
+      <if test="RESET_PASSWD != null" >
+        #{RESET_PASSWD,jdbcType=TINYINT},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.User" >
@@ -143,21 +150,25 @@
       <if test="STATE != null" >
         STATE = #{STATE,jdbcType=INTEGER},
       </if>
+      <if test="RESET_PASSWD != null" >
+        RESET_PASSWD = #{RESET_PASSWD,jdbcType=TINYINT},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.User" >
     update user
     set USERNAME = #{USERNAME,jdbcType=VARCHAR},
-      PASSWD = #{PASSWD,jdbcType=VARCHAR},
-      NAME = #{NAME,jdbcType=VARCHAR},
-      NUM = #{NUM,jdbcType=VARCHAR},
-      DEPART = #{DEPART,jdbcType=VARCHAR},
-      ROLE = #{ROLE,jdbcType=INTEGER},
-      AUTH = #{AUTH,jdbcType=INTEGER},
-      CTIME = #{CTIME,jdbcType=DATE},
-      LTIME = #{LTIME,jdbcType=DATE},
-      STATE = #{STATE,jdbcType=INTEGER}
+    PASSWD = #{PASSWD,jdbcType=VARCHAR},
+    NAME = #{NAME,jdbcType=VARCHAR},
+    NUM = #{NUM,jdbcType=VARCHAR},
+    DEPART = #{DEPART,jdbcType=VARCHAR},
+    ROLE = #{ROLE,jdbcType=INTEGER},
+    AUTH = #{AUTH,jdbcType=INTEGER},
+    CTIME = #{CTIME,jdbcType=DATE},
+    LTIME = #{LTIME,jdbcType=DATE},
+    STATE = #{STATE,jdbcType=INTEGER},
+    RESET_PASSWD = #{RESET_PASSWD,jdbcType=TINYINT}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >

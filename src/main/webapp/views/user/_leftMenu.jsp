@@ -12,23 +12,23 @@
 				</span>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">
+			<li><a class="linormal" onclick="handleClickMenuItem('${curUser.RESET_PASSWD}', '${pageContext.request.contextPath}' + '/views/user/home/homeUser.jsp')" href="javascript:void(0)">
 				<span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;首页</a>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">
+			<li><a class="linormal" onclick="handleClickMenuItem('${curUser.RESET_PASSWD}', '${pageContext.request.contextPath}' + '/views/user/tenant/generalMap.jsp')" href="javascript:void(0)">
 				<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;租客管理</a>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomService/roomServiceIndex.jsp">
+			<li><a class="linormal" onclick="handleClickMenuItem('${curUser.RESET_PASSWD}', '${pageContext.request.contextPath}' + '/views/user/roomService/roomServiceIndex.jsp')" href="javascript:void(0)">
 				<span class="glyphicon glyphicon-usd"></span>&nbsp;&nbsp;客房服务管理</a>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/roomItem/itemRoomOverview.jsp">
+			<li><a class="linormal" onclick="handleClickMenuItem('${curUser.RESET_PASSWD}', '${pageContext.request.contextPath}' + '/views/user/roomItem/itemRoomOverview.jsp')" href="javascript:void(0)">
 				<span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;客房物品管理</a>
 			</li>
 
-			<li><a class="linormal" href="${pageContext.request.contextPath}/views/user/office/shopManage.jsp">
+			<li><a class="linormal" onclick="handleClickMenuItem('${curUser.RESET_PASSWD}', '${pageContext.request.contextPath}' + '/views/user/office/shopManage.jsp')" href="javascript:void(0)">
 				<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;办公室管理</a>
 			</li>
 
@@ -38,4 +38,20 @@
 		</ul>
 	</div>
 </div>
+<script>
+
+	var handleClickMenuItem = function(hasResetPasswd, targetUrl) {
+
+        //检查是否修改过密码
+	    if(hasResetPasswd == 0) {
+
+			showModalBox("error", "请先在首页修改初始密码！")
+		} else {
+
+	        //跳转到目标url
+            window.location.href = targetUrl;
+		}
+	}
+
+</script>
 <!-- 二级导航栏 end-->

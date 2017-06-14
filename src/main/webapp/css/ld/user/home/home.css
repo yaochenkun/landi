@@ -156,3 +156,145 @@ header .homeMenu .span {
 .modal-body {
 	padding: 15px 20px 0;
 }
+
+/*日历插件*/
+
+#full-clndr {
+	width: 100%;
+	max-width: 600px;
+	margin: 10px auto;
+	background-color: #CCC1;
+	float:left;
+}
+#full-clndr .clndr-controls {
+	color: white;
+	text-align: center;
+	background-color: #414141;
+	height:40px;
+	text-align: center;
+	padding-top: 10px;
+	/* 日历标题样式 */
+}
+#full-clndr .clndr-controls .clndr-previous-button {
+	float: left;
+	text-align: left;
+	margin-left: 50px;
+	height:20px;
+}
+#full-clndr .clndr-controls .clndr-next-button {
+	float: right;
+	text-align: right;
+	margin-right: 50px;
+}
+#full-clndr .clndr-controls .clndr-previous-button,
+#full-clndr .clndr-controls .clndr-next-button {
+	width: 30px;
+	cursor: pointer;
+}
+#full-clndr .clndr-controls .clndr-previous-button:hover,
+#full-clndr .clndr-controls .clndr-next-button:hover {
+	opacity: 0.5;
+}
+#full-clndr .clndr-grid {
+	width: 100%;
+}
+#full-clndr .clndr-grid .days-of-the-week {
+	width: 100%;
+	background-color: #0D70A6;
+	height:40px;
+	padding-top: 10px;
+	background: #2277da;
+}
+#full-clndr .clndr-grid .days-of-the-week .header-day {
+	width: 14.28%;
+	padding: 0px;
+	margin:0px;
+	text-align: center;
+	color: white;
+	display: inline-block;    /* 日期头样式 */
+}
+#full-clndr .clndr-grid .days {
+	width: 100%;
+}
+#full-clndr .clndr-grid .days .day,
+#full-clndr .clndr-grid .days .empty {
+	width: 14.28%;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	color: #000;
+	background-color: #E6E6E6;
+	display: inline-block;
+	margin-bottom:2px;
+	/* 日期样式 */
+}
+#full-clndr .clndr-grid .days .day.event .day-number,
+#full-clndr .clndr-grid .days .empty.event .day-number {
+	padding-bottom: 4px;
+	border-bottom: 2px solid #3883a3;
+}
+#full-clndr .clndr-grid .days .day.adjacent-month .day-number,
+#full-clndr .clndr-grid .days .empty.adjacent-month .day-number {
+	opacity: 0.3;
+}
+#full-clndr .clndr-grid .days .today {
+	background-color: #AAA;
+}
+#full-clndr .clndr-grid .days .past:hover{
+	background-color: #999;
+	cursor: pointer;
+}
+#full-clndr .clndr-grid .days .today:hover{
+	background-color: #999;
+	cursor: pointer;
+}
+.focusIn{
+	background-color:#0D70A6 !important;
+}
+
+#event{
+	float:left;
+	padding-top: 10px;
+	margin-bottom:50px;
+}
+
+#event .event-header1{
+	text-align: center;
+	background-color: #414141;
+	height:40px;
+	width:400px;
+}
+
+#event .event-header2{
+	background: #2277da;
+	height:40px;
+	text-align: center;
+	padding-top: 10px;
+	color:white;
+	margin-left:2px;
+}
+
+#event .event-content{
+	margin-left:2px;
+	height:250px;
+	overflow: auto;
+	width:398px;
+}
+
+#event .event-content .event-item{
+	text-overflow : ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	background-color: #E6E6E6;
+	height:40px;
+	margin-bottom: 2px;
+	text-align: center;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right:20px;
+}
+
+#event .event-content .event-item:hover{
+	background-color: #999;
+	cursor: pointer;
+}

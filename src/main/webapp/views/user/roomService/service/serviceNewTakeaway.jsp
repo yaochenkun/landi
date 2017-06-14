@@ -42,10 +42,6 @@
 						<li id="resSort"><span class="span">餐厅：</span><input type="text" id="resInput" value="其他"/>
 								<div class="resMenu">
 										<ul>
-											<li>干秀</li>
-											<li>银杏</li>
-											<li>波德</li>
-											<li>亚当饼王</li>
 										</ul>
 									</div>
 						</li>
@@ -85,6 +81,10 @@
 		var nowDate = new Date();
 		$(".pack_maintain").val(formatDateForm(nowDate));
 	    $('.pack_maintain').date_input();
+
+        //获取饭店
+        requestRestaurant();
+
 	    //获取点餐人
 	    requestStaff("点餐");
 	</script>

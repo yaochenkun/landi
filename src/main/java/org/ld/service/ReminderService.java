@@ -39,8 +39,10 @@ public interface ReminderService {
 
 	MailReminder getMailReminderById(Integer id);
 
+	//收件人
+	int getTotalInBoxMailReminders(Integer rid, String keyword, Date remindDate);
 
-
+	List<MailReminder> getInboxMailRemindersByPage(Integer rid, String keyword, Date remindDate, int startPage, int eachPage);
 
 	/**
 	 * 系统提醒

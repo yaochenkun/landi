@@ -96,7 +96,6 @@ function formatYearMonth(date) {
 };
 
 
-
 // 显示关闭弹出框
 var showPopMenu = function(DivId){
     var $popDiv = $("#" + DivId);

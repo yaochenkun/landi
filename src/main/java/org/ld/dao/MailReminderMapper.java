@@ -21,4 +21,7 @@ public interface MailReminderMapper {
     //add by yck
     int selectTotal(Map<String, Object> map);
     List<MailReminder> selectByPage(Map<String, Object> map);
+
+    int selectTotalInboxMail(Map<String, Object> map);
+    List<MailReminder> selectInboxMailByPage(Map<String, Object> map);
 }

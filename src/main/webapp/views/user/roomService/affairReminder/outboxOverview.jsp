@@ -87,7 +87,7 @@
 	<!-- 打印插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
 
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/mailReminder.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/outboxMailReminder.js"></script>
 
 
 	<script>

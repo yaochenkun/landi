@@ -12,12 +12,36 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/home.css" rel="stylesheet" type="text/css" />
+<script>
+	//将英文月份转换成数字月份
+	function formateMonth(month) {
+
+		var res = 1;
+		switch(month){
+			case 'January':res = 1;break;
+			case 'February':res = 2;break;
+			case 'March':res = 3;break;
+			case 'April':res = 4;break;
+			case 'May':res = 5;break;
+			case 'June':res = 6;break;
+			case 'July':res = 7;break;
+			case 'August':res = 8;break;
+			case 'September':res = 9;break;
+			case 'October':res = 10;break;
+			case 'November':res = 11;break;
+			case 'December':res = 12;break;
+		}
+
+		return res;
+	}
+</script>
 <title>用户首页</title>
 </head>
 <body>
 
 	<jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
+	<jsp:include page="../_modal.jsp" />
 
 	<!-- 页面内容 start-->
 	<div class="title">
@@ -69,6 +93,45 @@
 					<dd><%= stateString %></dd>
 				</dl>
 			</div>
+
+			<div class="detail-head">
+				<span>事务提醒</span>
+			</div>
+
+			<div style="margin:auto 50px;">
+				<div id="full-clndr" style="display:inline;">
+					<script type="text/template" id="id_clndr_template">
+						<div class="clndr-controls">
+							<div class="clndr-previous-button"><<</div>
+							<div class="clndr-next-button">>></div>
+							<div class="month"><\%= year + ' 年 ' %><\%= formateMonth(month) + ' 月'%></div>
+						</div>
+						<div class="clndr-grid">
+							<div class="days-of-the-week">
+								<\% _.each(daysOfTheWeek, function(day) { %><div class="header-day"><\%= day %></div><\% }); %>
+							</div>
+							<div class="days">
+								<\% _.each(days, function(day) { %><div class="<\%= day.classes %>" id="<\%= day.id %>"><span class="day-number"><\%= day.day %></span></div><\% }); %>
+							</div>
+						</div>
+					</script>
+				</div>
+				<div id="event">
+					<div class="event-header1"></div>
+					<div class="event-header2">本&nbsp;&nbsp;日&nbsp;&nbsp;事&nbsp;&nbsp;务</div>
+					<ul class="event-content">
+						<li class="event-item">路上看见的福利卡见识到了；看风景啊；绿山咖啡骄傲了；开始减肥啦水电费</li>
+						<li class="event-item">22</li>
+						<li class="event-item">33</li>
+						<li class="event-item">44</li>
+						<li class="event-item">55</li>
+						<li class="event-item">66</li>
+						<li class="event-item">77</li>
+						<li class="event-item">88</li>
+
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- 页面内容 end-->
@@ -105,12 +168,42 @@
 	</div>
 	<!-- /.modal -->
 	<!-- 修改密码模态框 end -->
-
+	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/underscore.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/moment.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/clndr.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
 	<script type="text/javascript">
+
+
+
+        $("#full-clndr").clndr({
+            template: $('#id_clndr_template').html(),
+            clickEvents: {
+                onMonthChange: function(month) {
+                    // TODO: 这边写月份改变事件，控制底部线条图的变化
+					console.log(formatDateForm(new Date(month)));
+                },
+                click: function(target){
+                    var dateDom = $(target.element);
+                    if((!dateDom.hasClass("focusIn")) && (dateDom.hasClass("past") || dateDom.hasClass("today"))){
+                        $(".focusIn").removeClass("focusIn");
+                        dateDom.addClass("focusIn");
+                        // TODO: 这边写日期改变的事件，控制右边环形图的变化
+                        console.log(target.date._i);
+                    }
+                },
+            },
+            daysOfTheWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+            forceSixRows : true,
+            adjacentDaysChangeMonth : true,
+        });
+
+
+
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
     	    requestAjaxRoleArraySave();

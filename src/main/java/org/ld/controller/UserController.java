@@ -58,6 +58,7 @@ public class UserController {
 		String password = passwordJson.getString("password");
 		User curUser = (User) session.getAttribute("curUser");
 		curUser.setPASSWD(MD5Builder.create(password));
+		curUser.setRESET_PASSWD((byte)1);
 
 		if (userService.updateUserInfo(curUser) == 1) {
 			logger.info("Change password of " + curUser.getNAME());

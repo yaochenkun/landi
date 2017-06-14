@@ -29,7 +29,7 @@ var searchAllUsers = function() {
 
 
 
-// 按关键字和提醒日期查询站内信信息
+// 按关键字和提醒日期查询站内信信息(发件箱)
 var searchMailReminderByPage = function(pageNum){
 
     var sid = Number($("#sid").attr("sid"));
@@ -60,7 +60,7 @@ var searchMailReminderByPage = function(pageNum){
 			$("#reminderOverviewBottom").html("");
 
 			if (data.recordTotal == 0) {
-				$("#reminderOverviewTbody").append("<tr><td colspan='6' style='color: #ff4d4d;'>没有相关信息！</td></tr>");
+				$("#reminderOverviewTbody").append("<tr><td colspan='7' style='color: #ff4d4d;'>没有相关信息！</td></tr>");
 				return;
 			} else {
 				for (var i = 0; i < data.pageList.length; i++) {
@@ -87,6 +87,8 @@ var searchMailReminderByPage = function(pageNum){
 		}
 	});
 };
+
+
 //拉取上一页 车费信息
 var requestBeforeMailReminder = function(){
 	var nowpage = parseInt($("#reminder_nowpage").val());

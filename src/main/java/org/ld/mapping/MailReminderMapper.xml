@@ -171,4 +171,24 @@
     limit #{START_PAGE}, #{EACH_PAGE}
   </select>
 
+  <select id="selectTotalInboxMail" parameterType="map" resultType="java.lang.Integer">
+    select count(*) from mail_reminder
+    where RECEIVER_ID = #{RECEIVER_ID}
+    and   (TITLE like CONCAT('%', #{KEYWORD}, '%') or CONTENT like CONCAT('%', #{KEYWORD}, '%'))
+    <if test="REMIND_DATE != null">
+      and   REMIND_DATE = #{REMIND_DATE}
+    </if>
+  </select>
+
+  <select id="selectInboxMailByPage" parameterType="map" resultMap="BaseResultMap">
+    select * from mail_reminder
+    where RECEIVER_ID = #{RECEIVER_ID}
+    and   (TITLE like CONCAT('%', #{KEYWORD}, '%') or CONTENT like CONCAT('%', #{KEYWORD}, '%'))
+    <if test="REMIND_DATE != null">
+      and   REMIND_DATE = #{REMIND_DATE}
+    </if>
+    order by REMIND_DATE desc
+    limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+
 </mapper>

@@ -20,6 +20,7 @@ public class Config {
 	public static Map<String, Set<String>> item_cat;
 	public static Map<String, Set<String>> item_com;
 	public static Map<String, Integer> charge;
+	public static Map<String, Integer> restaurant;
 	public static Map<String, Map<String, Integer>> laundry_price;
 
 	//初始化配置文件只常量中
@@ -33,6 +34,7 @@ public class Config {
 		item_cat = readItem_cat();
 		item_com = readItem_com();
 		charge = readCharge();
+		restaurant = readRestaurant();
 		laundry_price = readLaundry_price();
 	}
 
@@ -140,6 +142,16 @@ public class Config {
 
 		charge = Para.getParaPairInt("charge", 0, 1);
 		return charge;
+	}
+
+	public static synchronized Map<String, Integer> getRestaurant() {
+		return restaurant;
+	}
+
+	public static synchronized Map<String, Integer> readRestaurant() {
+
+		restaurant = Para.getParaPairInt("restaurant", 0, 1);
+		return restaurant;
 	}
 
 	public static synchronized Map<String, Map<String, Integer>> getLaundry_price() {

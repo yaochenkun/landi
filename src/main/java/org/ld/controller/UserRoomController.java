@@ -2717,4 +2717,12 @@ public class UserRoomController {
 		
 		return ans;
 	}
+
+
+	@RequestMapping("/searchRestaurant")
+	@ResponseBody
+	public Map<String, Integer> searchRestaurant(HttpSession session) {
+
+		return Para.getParaPairInt("restaurant", 0, 1);
+	}
 }

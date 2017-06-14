@@ -147,4 +147,26 @@ public class ReminderServiceImpl implements ReminderService{
 	public MailReminder getMailReminderById(Integer id) {
 		return mailReminderMapper.selectByPrimaryKey(id);
 	}
+
+	@Override
+	public int getTotalInBoxMailReminders(Integer rid, String keyword, Date remindDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("RECEIVER_ID", rid);
+		map.put("KEYWORD", keyword);
+		map.put("REMIND_DATE", remindDate);
+
+		return mailReminderMapper.selectTotalInboxMail(map);
+	}
+
+	@Override
+	public List<MailReminder> getInboxMailRemindersByPage(Integer rid, String keyword, Date remindDate, int startPage, int eachPage) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("RECEIVER_ID", rid);
+		map.put("KEYWORD", keyword);
+		map.put("REMIND_DATE", remindDate);
+		map.put("START_PAGE", startPage);
+		map.put("EACH_PAGE", eachPage);
+
+		return mailReminderMapper.selectInboxMailByPage(map);
+	}
 }

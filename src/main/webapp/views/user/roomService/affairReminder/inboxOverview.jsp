@@ -37,7 +37,7 @@
 			<div class="nav-path">
 				<span>关键字：</span><input id="keyword" type="text" value="">
 				<span style="margin-left:30px;">提醒时间：</span><input type="text" class="pack_maintain">
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchInboxMailRemindersByPage(1);">搜索</a>
 			</div>
 
 			<div class="bill-area">
@@ -56,15 +56,6 @@
 							</tr>
 						</thead>
 						<tbody id="reminderOverviewTbody">
-							<tr>
-								<td>1</td>
-								<td>姚陈堃</td>
-								<td>W33-6客房的客人周末要预订一桶水W33-6客房的客人周末要预订一桶水</td>
-								<td>2017-06-08</td>
-								<td>2017-06-08</td>
-								<td>完成</td>
-								<td><a href="#" class="detail">详情</a></td>
-							</tr>
 						</tbody>
 					</table>
 					<!-- 费用 table end -->
@@ -94,12 +85,17 @@
 
 	<!-- 打印插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/affairReminder/inboxMailReminder.js"></script>
+
+
 	<script>
 
         var nowDate = new Date();
         $(".pack_maintain").val(formatDateForm(nowDate));
         $('.pack_maintain').date_input();
 
+        searchInboxMailRemindersByPage(1);
 	</script>
 </body>
 </html>

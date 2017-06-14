@@ -40,13 +40,21 @@ public class LoginIntercepter implements HandlerInterceptor {
 				return false;
 			} else {
 				//是合法已登录过的用户
-				
-				//从cur_eve.getUser()中获取resetPass字段查看是否重置了密码
-				//if(重置过)
-				//	放行return true
-				//else(未重置)
-				//  重定向到homeUser.action， 要求用户修改密码（前端界面通过cur_user.getUser().resetPass判定用户是否重置过密码）
-				
+
+				//正是要改密码放行
+				if(url.endsWith("changePassword.action"))
+					return true;
+
+
+				//未重置过密码不放行
+				if(curUser.getRESET_PASSWD() == 0) {
+
+					//重定向到homeUser.action
+					response.sendRedirect(request.getContextPath() + "/views/user/home/homeUser.jsp");
+					return false;
+				}
+
+				//放行
 				return true;
 			}
 		}
