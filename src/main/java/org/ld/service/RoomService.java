@@ -16,6 +16,7 @@ import org.ld.model.RoomMeter;
 import org.ld.model.RoomPic;
 import org.ld.model.RoomState;
 import org.ld.model.ShuttleBus;
+import org.ld.model.Meal;
 
 public interface RoomService {
 

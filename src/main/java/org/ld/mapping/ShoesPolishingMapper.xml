@@ -185,4 +185,31 @@
       EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+  	select count(*) from shoes_polishing 
+  	 <if test="RN == null">where OCCUR_TIME = #{OCCUR_TIME}</if> 
+  	 <if test="RN != null" >where
+        ROOM_NUM = #{RN} 
+        <if test="OCCUR_TIME != null">and OCCUR_TIME = #{OCCUR_TIME} </if>
+     </if> 
+  </select>
+  <select id="getShoesPolishingRange" resultMap="BaseResultMap" parameterType="map">
+  	select * from shoes_polishing where
+       ROOM_NUM = #{RN} 
+       <if test="DATE != null">and OCCUR_TIME = #{DATE} </if> 
+  	   limit #{ST}, #{EACH}  
+  </select>
+  <select id="getAllShoesPolishingServiceRange" resultMap="BaseResultMap" parameterType="map">
+  	select * from shoes_polishing 
+  	<if test="DATE != null">where OCCUR_TIME = #{DATE} </if>
+  	limit #{ST}, #{EACH}    
+  </select>
+  <select id="getAll" parameterType="map" resultMap="BaseResultMap">
+  	select * from shoes_polishing 
+  	<if test="RN == null">where OCCUR_TIME = #{OCCUR_TIME}</if>
+  	<if test="RN != null" >where
+  	  ROOM_NUM = #{RN}
+  	  <if test="OCCUR_TIME != null">and OCCUR_TIME = #{OCCUR_TIME}</if>
+  	</if>
+  </select>
 </mapper>

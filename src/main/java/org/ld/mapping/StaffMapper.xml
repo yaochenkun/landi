@@ -103,4 +103,11 @@
       STATE = #{STATE,jdbcType=TINYINT}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="selectByDuty" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <![CDATA[
+  	select * 
+  	from staff
+  	where DUTY = #{DUTY,jdbcType=VARCHAR} and STATE = 1
+  ]]>
+  </select>
 </mapper>

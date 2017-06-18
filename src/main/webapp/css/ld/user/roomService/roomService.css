@@ -1,3 +1,27 @@
+.bill-table thead tr{height: 4em; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
+.bill-table th{background-color: #2277da; color: #fff; text-align: center;}
+.bill-table td{line-height: 26px; padding: 8px 0; text-align: center; font-size: 14px; border-bottom: 1px solid #ccc;white-space:nowrap;overflow:hidden;}
+.bill-table td:nth-child(5){color: #ff5722; font-weight: bold;}
+
+.bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px;}
+.search input{padding: 0 5px; margin-left: 10px; margin-right: 30px;}
+.btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px;}
+.btnRight{margin-left: 223px;}
+
+.totalPrice{margin-left: 30px;}
+.totalPrice span{color: #ff5722; font-weight: bold;}
+
+.emptyData{text-align: center; color: #ff4d4d;}
+
+.bottom-page{margin: 0; margin-top: 3em;}
+.bottom-page .recorTotal{color: #2277da;}
+
+#editCom{color: #2277da;margin-right:10px;}
+#editCom:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
+
+#deleteCom{color: #e45e00;}
+#deleteCom:hover{color: #e45e00; border-bottom: 1px solid #e45e00;cursor: pointer;}
+
 /* 导航栏样式 */
 header .header-logo {
 	left: 45%;
@@ -69,36 +93,7 @@ header .homeMenu .span {
 }
 
 /************* 导航栏样式 start **********/
-// .roomNav {
-// 	border-bottom: 3px solid #2277da;
-// 	margin-top: 50px;
-// }
 
-// .roomNav .roomNavInner {
-// 	padding-top: 24px;
-// 	width: 1100px;
-// 	margin: auto;
-// 	height: 60px;
-// }
-
-// .roomNavInner .nav-li {
-// 	margin-left: 20px;
-// 	float: left;
-// 	overflow: hidden;
-// }
-
-// .roomNavInner .nav-li a {
-// 	height: 37px;
-// 	line-height: 37px;
-// 	color: #5e5e5e;
-// 	padding: 0 20px;
-// 	font-size: 15px;
-// 	cursor: pointer;
-// }
-
-// .roomNavInner .nav-li:hover a {
-// 	color: #2277da;
-// }
 /************* 导航栏样式 end **********/
 
 /***************** 客房服务类型 start ****************/

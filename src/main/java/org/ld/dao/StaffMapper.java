@@ -1,6 +1,10 @@
 package org.ld.dao;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.ld.model.Staff;
+import org.ld.model.User;
 
 public interface StaffMapper {
     int deleteByPrimaryKey(Integer ID);
@@ -14,4 +18,6 @@ public interface StaffMapper {
     int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(Staff record);
+    //Ôö¼Ó
+    List<Staff> selectByDuty(String DUTY);
 }
