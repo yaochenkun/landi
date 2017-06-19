@@ -120,15 +120,6 @@
 					<div class="event-header1"></div>
 					<div class="event-header2">本&nbsp;&nbsp;日&nbsp;&nbsp;事&nbsp;&nbsp;务</div>
 					<ul class="event-content">
-						<li class="event-item">路上看见的福利卡见识到了；看风景啊；绿山咖啡骄傲了；开始减肥啦水电费</li>
-						<li class="event-item">22</li>
-						<li class="event-item">33</li>
-						<li class="event-item">44</li>
-						<li class="event-item">55</li>
-						<li class="event-item">66</li>
-						<li class="event-item">77</li>
-						<li class="event-item">88</li>
-
 					</ul>
 				</div>
 			</div>
@@ -168,6 +159,34 @@
 	</div>
 	<!-- /.modal -->
 	<!-- 修改密码模态框 end -->
+
+
+	<!-- 事件详情对话框 -->
+	<div id="reminderDetailMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				事务详情
+				<span onclick="closeReminderDetailDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="room-number" class="item">
+					<span class="span">主题：</span>
+					<div class="item-content"><input id="reminderTitle" type="text" value="" readonly/></div>
+				</div>
+				<div id="tag-name" class="item">
+					<span class="span">内容：</span>
+					<div class="item-content"><textarea id="reminderContent" cols="155" rows="10" readonly></textarea></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<span id="currentDate" style="display:none"></span>
+				<a class="btn btn-submit" id="finishBtn" onclick="requestFinishReminder(this, '${curUser.ID}');">确认完成</a>
+			</div>
+		</div>
+	</div>
+
+
+
 	<div class="shadow"></div>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
@@ -179,36 +198,47 @@
 	<script type="text/javascript">
 
 
-
-        $("#full-clndr").clndr({
-            template: $('#id_clndr_template').html(),
-            clickEvents: {
-                onMonthChange: function(month) {
-                    // TODO: 这边写月份改变事件，控制底部线条图的变化
-					console.log(formatDateForm(new Date(month)));
-                },
-                click: function(target){
-                    var dateDom = $(target.element);
-                    if((!dateDom.hasClass("focusIn")) && (dateDom.hasClass("past") || dateDom.hasClass("today"))){
-                        $(".focusIn").removeClass("focusIn");
-                        dateDom.addClass("focusIn");
-                        // TODO: 这边写日期改变的事件，控制右边环形图的变化
-                        console.log(target.date._i);
-                    }
-                },
-            },
-            daysOfTheWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
-            forceSixRows : true,
-            adjacentDaysChangeMonth : true,
-        });
-
-
-
        // 请求 角色 ID-名称 对应关系（拉取第一页用户编号）
        $(function(){
     	    requestAjaxRoleArraySave();
 	    	  changeLeftMenu(0);
        });
+
+
+       $("#full-clndr").clndr({
+           template: $('#id_clndr_template').html(),
+           clickEvents: {
+               onMonthChange: function(month) {
+                   // TODO: 这边写月份改变事件，控制底部线条图的变化
+
+                   requestRemindDays(${curUser.ID}, formatDateForm(new Date(month)));
+                   setFutureDaysClickable();
+               },
+               click: function(target){
+                   var dateDom = $(target.element);
+                   if((!dateDom.hasClass("focusIn")) && (dateDom.hasClass("past") || dateDom.hasClass("today"))){
+                       $(".focusIn").removeClass("focusIn");
+                       dateDom.addClass("focusIn");
+                       // TODO: 这边写日期改变的事件，控制右边环形图的变化
+
+                       requestReminder(${curUser.ID}, target.date._i);
+                       $("#currentDate").text(target.date._i);
+                   }
+               },
+           },
+           daysOfTheWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+           forceSixRows : true,
+           adjacentDaysChangeMonth : true
+       });
+
+       //拉取今天的的站内信、个人日志、系统提醒 事务数据，显示到右侧事件下拉表中
+	   	currentDate = formatDateForm(new Date());
+		requestReminder(${curUser.ID}, currentDate);
+		$("#currentDate").text(currentDate);
+
+		//拉取这个月的所有有事件的天，标记为红色字体
+		requestRemindDays(${curUser.ID}, currentDate);
+       	setFutureDaysClickable();
     </script>
 
 </body>

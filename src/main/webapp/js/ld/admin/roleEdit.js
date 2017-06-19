@@ -37,6 +37,7 @@ var chooseRoleEdit = function(li){
 
 //发出请求获取角色对应的权限
 var requestAjaxRoleAuth = function(role){
+
 	console.log("request ajax RoleAuth");
 	$.ajax({
 		type:'post',
@@ -49,12 +50,12 @@ var requestAjaxRoleAuth = function(role){
 //				$(this).attr("checked");
 //			});
 			// 取消选中
-			for(k=1; k<=18; k++){
+			for(k=1; k<=21; k++){
 				$("#checkbox_role" + k).removeAttr("checked");
 			}			
 			
 			// 更新复选框选中状态
-			for(i=1; i<=18; i++){
+			for(i=1; i<=21; i++){
 				let curCheck = data % 2;
 				data = parseInt(data/2);
 				//console.log(curCheck);

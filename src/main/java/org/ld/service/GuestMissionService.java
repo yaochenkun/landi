@@ -37,7 +37,8 @@ public interface GuestMissionService {
 	//add by yck
 	int getTotalByName_RoomNumber(String name, String roomNumber);
 	List<Guest> getGuestByName_RoomNumber(String name, String roomNumber, int st, int eachPage);
-	
+	List<Guest> getAllGuestByName_RoomNumber(String name, String roomNumber);
+
 	//查询为租客gid提供的服务项 (item是要查的条目名)
 	GuestService getCertainGuestService(Integer gid, String item);
 

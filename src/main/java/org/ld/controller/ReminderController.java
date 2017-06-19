@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 事务提醒相关
@@ -31,6 +28,160 @@ public class ReminderController {
 
 	@Autowired
 	private ReminderService reminderService;
+
+	/**
+	 * 公用
+	 */
+
+	//根据日期查询所有站内信、个人日志、系统提醒reminder
+	@RequestMapping("/searchReminderByDate")
+	@ResponseBody
+	public Map<String, Object> searchReminderByDate(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		Integer uid = dataJson.getInteger("uid");
+		Date remindDate = dataJson.getDate("remindDate");
+
+		//查询所有mailReminder
+		List<MailReminder> mailReminders = reminderService.getInboxMailRemindersByDate(uid, remindDate);
+
+		//查询所有diaryReminder
+		List<DiaryReminder> diaryReminders = reminderService.getDiaryRemindersByDate(uid, remindDate);
+
+		//查询所有systemReminder
+		//....
+
+		ans.put("mailReminder", mailReminders);
+		ans.put("diaryReminder", diaryReminders);
+		ans.put("systemReminder", null);
+		return ans;
+	}
+
+	//根据月份查询当月所有有事务的天数
+	@RequestMapping("/searchRemindDays")
+	@ResponseBody
+	public Map<String, Object> searchRemindDays(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		Integer uid = dataJson.getInteger("uid");
+		Date month = dataJson.getDate("month");
+
+		//将month转成当月1.1日
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(month);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+
+		Date fromDate = calendar.getTime();
+		System.out.println(fromDate);
+
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date toDate = calendar.getTime();
+		System.out.println(toDate);
+
+		List<String> remindDays = reminderService.getRemindDaysInMonth(uid, fromDate, toDate);
+		ans.put("dataList", remindDays);
+		return ans;
+	}
+
+	/**
+	 * 查询个人日志
+	 */
+	@RequestMapping("/searchReminderById_Type")
+	@ResponseBody
+	public Map<String, Object> searchReminderById_Type(HttpSession session, @RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Integer id = dataJson.getInteger("id");
+		String reminderType = dataJson.getString("reminderType");
+		Object record = null;
+		if("diaryReminder".equals(reminderType))
+			record = reminderService.getDiaryReminderById(id);
+		else if("mailReminder".equals(reminderType))
+			record = reminderService.getMailReminderById(id);
+		else
+			record = null;
+//			record = reminderService.getSystemReminderById(id);
+
+
+		ans.put("State", "Valid");
+		ans.put("record", record);
+		return ans;
+	}
+
+	/**
+	 * 更新完成状态
+	 */
+	@RequestMapping("/updateReminderStateById_Type") // 更新其它车费记录
+	@ResponseBody
+	public Integer updateReminderStateById_Type(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+//			return 0;
+//		}
+
+		try{
+
+			Integer id = dataJson.getInteger("id");
+			String reminderType = dataJson.getString("reminderType");
+
+			if("diaryReminder".equals(reminderType)) {
+
+				DiaryReminder reminder = reminderService.getDiaryReminderById(id);
+				reminder.setSTATE("完成");
+				reminder.setEDIT_TIME(new Date());
+				return reminderService.updateDiaryReminder(reminder);
+
+			} else if("mailReminder".equals(reminderType)) {
+
+				MailReminder reminder = reminderService.getMailReminderById(id);
+				reminder.setSTATE("完成");
+				reminder.setEDIT_TIME(new Date());
+				return reminderService.updateMailReminder(reminder);
+
+			} else {
+
+				//  reminder = reminderService.getSystemReminderById(id);
+				return 1;
+			}
+
+		}catch(Exception e){
+			System.err.println(e);
+			return 0;
+		}
+	}
+
+
 
 	/**
 	 * 1.个人日志

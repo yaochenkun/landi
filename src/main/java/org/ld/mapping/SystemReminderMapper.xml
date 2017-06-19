@@ -3,13 +3,14 @@
 <mapper namespace="org.ld.dao.SystemReminderMapper" >
   <resultMap id="BaseResultMap" type="org.ld.model.SystemReminder" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="USER_ID" property="USER_ID" jdbcType="INTEGER" />
     <result column="TITLE" property="TITLE" jdbcType="VARCHAR" />
     <result column="CONTENT" property="CONTENT" jdbcType="VARCHAR" />
     <result column="REMIND_DATE" property="REMIND_DATE" jdbcType="DATE" />
     <result column="STATE" property="STATE" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TITLE, CONTENT, REMIND_DATE, STATE
+    ID, USER_ID, TITLE, CONTENT, REMIND_DATE, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -22,16 +23,21 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.SystemReminder" >
-    insert into system_reminder (ID, TITLE, CONTENT, 
-      REMIND_DATE, STATE)
-    values (#{ID,jdbcType=INTEGER}, #{TITLE,jdbcType=VARCHAR}, #{CONTENT,jdbcType=VARCHAR}, 
-      #{REMIND_DATE,jdbcType=DATE}, #{STATE,jdbcType=VARCHAR})
+    insert into system_reminder (ID, USER_ID, TITLE, 
+      CONTENT, REMIND_DATE, STATE
+      )
+    values (#{ID,jdbcType=INTEGER}, #{USER_ID,jdbcType=INTEGER}, #{TITLE,jdbcType=VARCHAR}, 
+      #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{STATE,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.SystemReminder" >
     insert into system_reminder
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
         ID,
+      </if>
+      <if test="USER_ID != null" >
+        USER_ID,
       </if>
       <if test="TITLE != null" >
         TITLE,
@@ -50,6 +56,9 @@
       <if test="ID != null" >
         #{ID,jdbcType=INTEGER},
       </if>
+      <if test="USER_ID != null" >
+        #{USER_ID,jdbcType=INTEGER},
+      </if>
       <if test="TITLE != null" >
         #{TITLE,jdbcType=VARCHAR},
       </if>
@@ -67,6 +76,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.SystemReminder" >
     update system_reminder
     <set >
+      <if test="USER_ID != null" >
+        USER_ID = #{USER_ID,jdbcType=INTEGER},
+      </if>
       <if test="TITLE != null" >
         TITLE = #{TITLE,jdbcType=VARCHAR},
       </if>
@@ -84,7 +96,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.SystemReminder" >
     update system_reminder
-    set TITLE = #{TITLE,jdbcType=VARCHAR},
+    set USER_ID = #{USER_ID,jdbcType=INTEGER},
+      TITLE = #{TITLE,jdbcType=VARCHAR},
       CONTENT = #{CONTENT,jdbcType=VARCHAR},
       REMIND_DATE = #{REMIND_DATE,jdbcType=DATE},
       STATE = #{STATE,jdbcType=VARCHAR}

@@ -40,6 +40,16 @@ public class AdminController {
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, @PathVariable int pageNumber) {
 
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
 		Map<String, Object> res_map = new HashMap<String, Object>();
 
 		int eachPage = Config.getSettingsInt().get("list_size");
@@ -62,6 +72,12 @@ public class AdminController {
 		JSONObject userJson = (JSONObject) JSONObject.parse(userString);
 
 		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
+
+
 
 		User newUser = new User();
 
@@ -76,6 +92,7 @@ public class AdminController {
 		newUser.setCTIME(new Date());
 		newUser.setLTIME(new Date());
 		newUser.setSTATE(1);
+		newUser.setRESET_PASSWD((byte)0);
 
 		if (userService.insert(newUser) == 1) {
 			logger.info(curUser.getNAME() + " create a new user " + newUser.getNAME());
@@ -87,7 +104,16 @@ public class AdminController {
 	}
 
 	@RequestMapping("/requestDepart")
-	public @ResponseBody Map<String, List<String>> departMenu() {
+	public @ResponseBody Map<String, Object> departMenu(HttpSession session) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> res = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			res.put("State", "Invalid");
+			return res;
+		} else {
+			res.put("State", "Valid");
+		}
 
 		Map<String, List<String>> temp = Para.getParaList("depart");
 		List<String> ans = new ArrayList<String>();
@@ -95,17 +121,23 @@ public class AdminController {
 			ans.add(x);
 		}
 
-		Map<String, List<String>> res = new HashMap<String, List<String>>();
 		res.put("departList", ans);
 
 		return res;
 	}
 
 	@RequestMapping("/requestRole")
-	public @ResponseBody Map<Integer, String> departRole() {
+	public @ResponseBody Map<Integer, Object> departRole(HttpSession session) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<Integer, Object> res = new HashMap<Integer, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			res.put(-1, "无此权限!");
+			return res;
+		}
 
 		Map<String, List<String>> temp = Para.getParaList("role");
-		Map<Integer, String> ans = new HashMap<Integer, String>();
+		Map<Integer, Object> ans = new HashMap<Integer, Object>();
 		Iterator<Entry<String, List<String>>> it = temp.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, List<String>> entry = it.next();
@@ -115,7 +147,13 @@ public class AdminController {
 	}
 
 	@RequestMapping("/requestCap/{role}")
-	public @ResponseBody Integer Cap(@PathVariable Integer role) {
+	public @ResponseBody Integer Cap(@PathVariable Integer role, HttpSession session) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
+
 
 		String[] ps = Para.ReadParas("role", role.toString());
 		return Integer.parseInt(ps[2]);
@@ -127,6 +165,7 @@ public class AdminController {
 		String password = passwordJson.getString("password");
 		User curUser = (User) session.getAttribute("curUser");
 		curUser.setPASSWD(MD5Builder.create((password)));
+		curUser.setRESET_PASSWD((byte)1);
 
 		if (userService.updateUserInfo(curUser) == 1) {
 			logger.info("Change password of " + curUser.getNAME());
@@ -137,9 +176,39 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping("/changeRole")
+	public @ResponseBody Integer changeRole(HttpSession session, @RequestBody String data) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = (JSONObject) JSONObject.parse(data);
+		Integer id = dataJson.getInteger("id");
+		Integer role = dataJson.getInteger("role");
+		User user = userService.getUserById(id);
+		user.setROLE(role);
+		user.setAUTH(
+				Integer.parseInt(Para.ReadParaPair("role", role.toString(), 0, 2)[1]));
+
+		if (userService.updateUserInfo(user) == 1) {
+			logger.info("Change role of " + user.getNAME());
+			return 1;
+		} else {
+			logger.error("Failed to change role of " + user.getNAME());
+			return 0;
+		}
+	}
+
 	@RequestMapping("/resetPasswd/{user_id}")
 	public @ResponseBody Integer resetPasswd(HttpSession session, @PathVariable Integer user_id) {
+
 		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
+
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setPASSWD(Config.getSettings().get("default_passwd"));
@@ -156,6 +225,10 @@ public class AdminController {
 	@RequestMapping("/forbidUser/{user_id}")
 	public @ResponseBody Integer forbidUser(HttpSession session, @PathVariable int user_id) {
 		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
+
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setSTATE(Config.getSettingsInt().get("forbid_state"));
@@ -172,6 +245,9 @@ public class AdminController {
 	@RequestMapping("/enableUser/{user_id}")
 	public @ResponseBody Integer enableUser(HttpSession session, @PathVariable int user_id) {
 		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {
+			return 0;
+		}
 		User temp = new User();
 		temp.setID(user_id);
 		temp.setSTATE(Config.getSettingsInt().get("normal_state"));
@@ -188,12 +264,25 @@ public class AdminController {
 	@RequestMapping("/getRate")
 	public @ResponseBody Map<String, String> getRate(HttpSession session) {
 
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, String> res = new HashMap<String, String>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			res.put("State", "Invalid");
+			return res;
+		} else {
+			res.put("State", "Valid");
+		}
+
 		return Para.getParaPair("rate", 0, 1);
 	}
 
 	@RequestMapping("/setRate")
 	public @ResponseBody Integer setRate(HttpSession session, @RequestBody Map<String, String> rate) {
 		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			return 0;
+		}
 
 		if (Para.setPair("rate", rate) == 1) {
 			logger.info(curUser.getNAME() + " set rate " + rate.toString());
@@ -207,12 +296,24 @@ public class AdminController {
 	@RequestMapping("/getCharge")
 	public @ResponseBody Map<String, String> getCharge(HttpSession session) {
 
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, String> res = new HashMap<String, String>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			res.put("State", "Invalid");
+			return res;
+		} else {
+			res.put("State", "Valid");
+		}
 		return Para.getParaPair("charge", 0, 1);
 	}
 
 	@RequestMapping("/setCharge")
 	public @ResponseBody Integer setCharge(HttpSession session, @RequestBody Map<String, String> charge) {
 		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			return 0;
+		}
+
 		if (Para.setPair("charge", charge) == 1) {
 			logger.info(curUser.getNAME() + " set charge " + charge.toString());
 			return 1;
@@ -225,12 +326,26 @@ public class AdminController {
 	@RequestMapping("/getLaundryPrice")
 	public @ResponseBody Map<String, String> getLaundryPrice(HttpSession session) {
 
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, String> res = new HashMap<String, String>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			res.put("State", "Invalid");
+			return res;
+		} else {
+			res.put("State", "Valid");
+		}
+
 		return Para.getParaPair("laundry_price", 0, 1);
 	}
 
 	@RequestMapping("/setLaundryPrice")
 	public @ResponseBody Integer setLaundryPrice(HttpSession session, @RequestBody Map<String, String> laundry_price) {
 		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			return 0;
+		}
+
 		if (Para.setPair("laundry_price", laundry_price) == 1) {
 			logger.info(curUser.getNAME() + " set laundry_price " + laundry_price.toString());
 			return 1;

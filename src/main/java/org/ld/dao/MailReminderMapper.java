@@ -24,4 +24,7 @@ public interface MailReminderMapper {
 
     int selectTotalInboxMail(Map<String, Object> map);
     List<MailReminder> selectInboxMailByPage(Map<String, Object> map);
+    List<MailReminder> selectInboxMailByDate(Map<String, Object> map);
+
+    List<String> selectRemindDaysInMonth(Map<String, Object> map);
 }

@@ -48,8 +48,20 @@
 							<div class="fl">
 								<input id="guest_name" type="text" class="text" value="Ada" />
 							</div>
+							<span class="spanLabel"><span class="red">*&nbsp;</span>客源类型：</span>
 							<div class="fl">
-								<input type="checkbox" class="checkbox" /><span>即将入住</span>
+								<input type="radio" name="guestType"/><span style="margin-left:10px;margin-right:10px">欧美</span>
+								<input type="radio" name="guestType"/><span style="margin-left:10px;margin-right:10px">日本</span>
+								<input type="radio" name="guestType"/><span style="margin-left:10px;">其它</span>
+							</div>
+						</div>
+						<div class="item item-guestothers">
+							<span class="spanLabel"><span class="red">*&nbsp;</span>其它租客：</span>
+							<div class="fl">
+								<input id="guest_others" type="text" class="text" value="张三,李四,王五" />
+							</div>
+							<div class="fl">
+							<input type="checkbox" class="checkbox" /><span>即将入住</span>
 							</div>
 						</div>
 						<div class="item item-room">
@@ -106,6 +118,44 @@
 								<input type="text" class="text" value="T3" />
 							</div>
 						</div>
+						<div class="item item-birthday">
+							<span class="spanLabel">生日：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+							<span class="spanLabel">Email：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+						</div>
+						<div class="item item-companytel">
+							<span class="spanLabel">单位联系人姓名：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+							<span class="spanLabel">单位联系人电话：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+						</div>
+						<div class="item item-companyaccount">
+							<span class="spanLabel">单位账户信息：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+							<span class="spanLabel">单位开票信息：</span>
+							<div class="fl">
+								<input type="text" class="text" value="无" />
+							</div>
+						</div>
+						<div class="item item-companypay">
+							<span class="spanLabel">单位付款方式：</span>
+							<div class="fl">
+								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">现金</span>
+								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">银行转账</span>
+								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">支票</span>
+							</div>
+						</div>
 						<div class="item item-remark">
 							<span class="spanLabel">备注：</span>
 							<div class="fl">
@@ -128,6 +178,17 @@
 			<div class="extra-body">
 				<div class="tab-content-body">
 					<div class="form">
+						<div class="item item-type">
+							<span class="spanLabel">业主类型：</span>
+							<div class="fl">
+								<input type="radio" name="ownerType"/><span style="margin-left:10px;margin-right:10px">SPC</span>
+								<input type="radio" name="ownerType"/><span style="margin-left:10px;margin-right:10px">小业主</span>
+							</div>
+							<span class="spanLabel">证件号：</span>
+							<div class="fl">
+								<input type="text" class="text" value="09478093845093840593845" />
+							</div>
+						</div>
 						<div class="item item-name">
 							<span class="spanLabel">业主姓名：</span>
 							<div class="fl">
@@ -149,7 +210,36 @@
 							<div class="fl">
 								<input type="text" class="text" value="5000.5" />
 							</div>
-							<span class="spanLabel">其他费用：</span>
+							<span class="spanLabel">税金：</span>
+							<div class="fl">
+								<input type="text" class="text" value="5000.5" />
+							</div>
+						</div>
+						<div class="item item-money1">
+							<span class="spanLabel">物业费：</span>
+							<div class="fl">
+								<input type="text" class="text" value="5000.5" />
+							</div>
+							<span class="spanLabel">采暖费：</span>
+							<div class="fl">
+								<input type="text" class="text" value="5000.5" />
+							</div>
+						</div>
+						<div class="item item-money2">
+							<span class="spanLabel">其它费用：</span>
+							<div class="fl">
+								<input type="text" class="text" value="5000.5" />
+							</div>
+							<span class="spanLabel">实际返还：</span>
+							<div class="fl">
+								<input type="text" class="text" value="5000.5" />
+							</div>
+						</div>
+
+
+
+						<div class="item item-account">
+							<span class="spanLabel">业主账户信息：</span>
 							<div class="fl">
 								<input type="text" class="text" value="5000.5" />
 							</div>
@@ -232,6 +322,26 @@
 			<div class="extra-body">
 				<div class="tab-content-body">
 					<div class="form">
+
+						<div class="item-list item-bill">
+							<div class="item item-date">
+								<span class="spanLabel">开发票日期：</span>
+								<div class="fl">
+									<input type="text" class="text" value="4" />
+								</div>
+							</div>
+							<div class="item item-cycle">
+								<span class="spanLabel">周期：</span>
+								<div class="fl">
+									<input type="text" class="text" value="30" />
+								</div>
+								<span class="spanLabel">提前时间：</span>
+								<div class="fl">
+									<input type="text" class="text" value="30" />
+								</div>
+							</div>
+						</div>
+
 						<div class="item-list item-rent">
 							<div class="item item-date">
 								<span class="spanLabel">收租金日期：</span>
@@ -264,19 +374,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="item-list item-bill">
+
+
+						<div class="item-list item-beginenddate">
 							<div class="item item-date">
-								<span class="spanLabel">开发票日期：</span>
+								<span class="spanLabel">起始日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="4" />
+									<input type="text" class="text" value="1" />
 								</div>
 							</div>
-							<div class="item item-cycle">
-								<span class="spanLabel">周期：</span>
-								<div class="fl">
-									<input type="text" class="text" value="30" />
-								</div>
-								<span class="spanLabel">提前时间：</span>
+							<div class="item item-date">
+								<span class="spanLabel">结束日期：</span>
 								<div class="fl">
 									<input type="text" class="text" value="30" />
 								</div>
@@ -537,6 +645,34 @@
 		</div>
 		<!-- 服务 end -->
 
+		<!-- 扫描件 start -->
+		<div class="tab-content tab-content-owner">
+			<div class="tab-content-title">
+				<span>6</span>扫描件
+			</div>
+			<!--  extra body start-->
+			<div class="extra-body">
+				<div class="tab-content-body">
+					<div class="form">
+						<div class="item item-LE" style="margin-bottom:-20px;">
+							<div class="btn btn-upload" onclick="addLEPicture();">+ LE条件书</div>
+							<input id="uploadLE" type="file" name="file" multiple="multiple" />
+						</div>
+						<div class="item item-SPC" style="margin-bottom:-20px;">
+							<div class="btn btn-upload" onclick="addSPCPicture();">+ SPC条件书</div>
+							<input id="uploadSPC" type="file" name="file" multiple="multiple" />
+						</div>
+						<div class="item item-guestID" style="margin-bottom:-20px;">
+							<div class="btn btn-upload" onclick="addGuestIDPicture();">+ 客人证件</div>
+							<input id="uploadGuestID" type="file" name="file" multiple="multiple" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--  extra body end-->
+		</div>
+		<!--  扫描件-->
+
 		<div class="newGuestBtn">
 			<a class="btnnew" onclick="addGuest();">确认添加</a>
 		</div>
@@ -566,6 +702,10 @@
 			<a class="list-icon-link" href="javascript:void(0);">5</a>
 			<div class="list-icon-text">
 				<div class="inner">服务</div>
+			</div>
+			<a class="list-icon-link" href="javascript:void(0);">6</a>
+			<div class="list-icon-text">
+				<div class="inner">扫描件</div>
 			</div>
 		</div>
 	</div>

@@ -10,13 +10,28 @@
 }
 
 /* 设置用户表格每列大小 */
-table tr th:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(9)
-	{
-	width: 6%;
+/*table tr th:nth-child(1), table tr th:nth-child(5), table tr th:nth-child(9)*/
+	/*{*/
+	/*width: 6%;*/
+/*}*/
+
+table tr th{
+	width:5%;
+}
+table tr th:nth-child(1) {
+	width:3%;
+}
+table tr th:nth-child(2), table tr th:nth-child(3),table tr th:nth-child(4), table tr th:nth-child(7), table tr th:nth-child(8){
+	width:6%;
 }
 
-table tr th:nth-child(7), table tr th:nth-child(8), table tr th:nth-child(10)
-	{
+table tr th:nth-child(6) {
+	width:7%;
+ }
+table tr th:nth-child(9) {
+	width: 3%
+}
+table tr th:nth-child(10) {
 	width: 12%
 }
 
@@ -177,3 +192,24 @@ table tr th:nth-child(7), table tr th:nth-child(8), table tr th:nth-child(10)
 	text-align: center;
 	width: 100%;
 }
+
+.shadow{display: none; width: 100%; height: 100%; top: 0; left: 0; position: fixed; z-index: 200; background: rgba(0,0,0,.3);}
+.addItemDiv{display: none; position: fixed; width: 60%; height: 200px; top: 50px; left: 20%; z-index: 400; background: #fff;
+	box-shadow: 3px 3px 5px rgba(0,0,0,0.3);}
+.addItemDiv .fac-title{height: 45px; line-height: 45px; padding: 0 20px; color: #000; background: #eee; font-size: 15px; border-bottom: 1px solid #444;}
+.addItemDiv .fac-title span{float: right; font-size: 24px; cursor: pointer;}
+.addItemDiv .fac-title span:hover{color: #666;}
+
+.fac-body{max-height: 360px; overflow-y: auto; padding-top: 30px; padding-left: 10%;}
+.fac-body .item:after{content: ""; display: block; clear: both;}
+.fac-body .item{zoom: 1;}
+.fac-body .span{width: 7%; font-weight: bold; float: left; clear: left; min-height: 50px;}
+.fac-body .item-content{float: left; width: 50%; margin-bottom: 20px;}
+.fac-body .item-content input{padding: 0 10px;}
+.fac-body .btn-item{width: 130px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
+.fac-body .btn-item:hover{border-color: #2277da; color: #2277da; background: #fff;}
+.addItemDiv .item-content .item-active{border: 1px solid #2277da; color: #fff; background: #2277da;}
+
+.fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
+.fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
+.fac-foot .btn-submit:hover{background: #fafafa;}

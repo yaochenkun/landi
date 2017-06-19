@@ -4,7 +4,8 @@ var firstTabContent = $(".tab-content").eq(0).outerHeight() + 90 -32,
 	thirdTabContent = secondTabContent + $(".tab-content").eq(2).outerHeight() -32,
 	fourthTabContent = thirdTabContent + $(".tab-content").eq(3).outerHeight() -32,
 	fifthTabContent = fourthTabContent + $(".tab-content").eq(4).outerHeight() -32;
-var arrayTabContent = [90,firstTabContent+32,secondTabContent+32,thirdTabContent+32,fourthTabContent+32];
+	sixthTabContent = fifthTabContent + $(".tab-content").eq(5).outerHeight() -32;
+var arrayTabContent = [90,firstTabContent+32,secondTabContent+32,thirdTabContent+32,fourthTabContent+32,sixthTabContent+32];
     
 $(function(){
 	$(window).scroll(function(){
@@ -19,7 +20,7 @@ $(function(){
 			else if(nowScrollTop>secondTabContent&&nowScrollTop<thirdTabContent){changeTabContent(2);}
 			else if(nowScrollTop>thirdTabContent&&nowScrollTop<fourthTabContent){changeTabContent(3);}
 			else if(nowScrollTop>fourthTabContent&&nowScrollTop<fifthTabContent){changeTabContent(4);}
-
+            else if(nowScrollTop>fifthTabContent&&nowScrollTop<sixthTabContent){changeTabContent(5);}
 			// if(nowScrollTop < 200){
 			// 	$(".navbar-ld").addClass("topNormal");
 			// }

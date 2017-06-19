@@ -33,4 +33,6 @@ public interface GuestMapper {
 	int getTotalByName_RoomNumber(HashMap<String, Object> map);
 	
 	List<Guest> selectByName_RoomNumber(HashMap<String, Object> map);
+
+	List<Guest> selectAllByName_RoomNumber(HashMap<String, Object> map);
 }

@@ -481,3 +481,32 @@ tbody .operation:hover {
 .bar .bar-top:hover, .bar .bar-bottom:hover {
 	background-color: #6aaefb;
 }
+
+.radio {
+	margin-left:5px;
+}
+
+.btn{
+	cursor: none;
+}
+
+.btn-upload{
+	width: 150px;
+	line-height: 30px;
+	padding: 0;
+	background: #289073;
+	border-color: #207d4e;
+	color: #fff;
+	margin-right:20px;
+	margin-bottom:20px;
+	z-index: 10;
+}
+
+input[type="file"] {
+	position: relative;
+	opacity: 0;
+	bottom:40px;
+	z-index: 20;
+	width: 150px;
+	height: 30px;
+}

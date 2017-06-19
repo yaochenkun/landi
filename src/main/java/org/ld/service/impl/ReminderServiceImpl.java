@@ -28,6 +28,16 @@ public class ReminderServiceImpl implements ReminderService{
 	private MailReminderMapper mailReminderMapper;
 
 	@Override
+	public List<String> getRemindDaysInMonth(Integer uid, Date fromDate, Date toDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("UID", uid);
+		map.put("FROM_DATE", fromDate);
+		map.put("TO_DATE", toDate);
+
+		return mailReminderMapper.selectRemindDaysInMonth(map);
+	}
+
+	@Override
 	public int addDiaryReminder(DiaryReminder diaryReminder) {
 
 		try{
@@ -85,6 +95,15 @@ public class ReminderServiceImpl implements ReminderService{
 	@Override
 	public DiaryReminder getDiaryReminderById(Integer id) {
 		return diaryReminderMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<DiaryReminder> getDiaryRemindersByDate(Integer uid, Date remindDate) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("USER_ID", uid);
+		map.put("REMIND_DATE", remindDate);
+
+		return diaryReminderMapper.selectByDate(map);
 	}
 
 
@@ -168,5 +187,15 @@ public class ReminderServiceImpl implements ReminderService{
 		map.put("EACH_PAGE", eachPage);
 
 		return mailReminderMapper.selectInboxMailByPage(map);
+	}
+
+	@Override
+	public List<MailReminder> getInboxMailRemindersByDate(Integer uid, Date remindDate) {
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("RECEIVER_ID", uid);
+		map.put("REMIND_DATE", remindDate);
+
+		return mailReminderMapper.selectInboxMailByDate(map);
 	}
 }

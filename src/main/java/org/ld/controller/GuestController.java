@@ -387,4 +387,33 @@ public class GuestController {
 		
 		return ans;
 	}
+
+
+
+	//add by yck
+	@RequestMapping("/searchAllGuestByName")
+	@ResponseBody
+	public Map<String, Object> searchAllGuestByName_RoomNumber(HttpSession session, @RequestBody String data) {
+
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		//放行，获取数据
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String name = dataJson.getString("name");
+		String roomNumber = dataJson.getString("roomId");
+
+
+		List<Guest> record = guestMissionService.getAllGuestByName_RoomNumber(name, roomNumber);
+		ans.put("dataList", record);
+		return ans;
+	}
+
 }

@@ -9,6 +9,8 @@ import java.util.List;
 public interface ReminderService {
 
 
+	List<String> getRemindDaysInMonth(Integer uid, Date fromDate, Date toDate);
+
 	/**
 	 * 个人日志
 	 */
@@ -23,6 +25,8 @@ public interface ReminderService {
 	int updateDiaryReminder(DiaryReminder diaryReminder);
 
 	DiaryReminder getDiaryReminderById(Integer id);
+
+	List<DiaryReminder> getDiaryRemindersByDate(Integer uid, Date remindDate);
 
 	/**
 	 * 站内信
@@ -43,6 +47,8 @@ public interface ReminderService {
 	int getTotalInBoxMailReminders(Integer rid, String keyword, Date remindDate);
 
 	List<MailReminder> getInboxMailRemindersByPage(Integer rid, String keyword, Date remindDate, int startPage, int eachPage);
+
+	List<MailReminder> getInboxMailRemindersByDate(Integer uid, Date remindDate);
 
 	/**
 	 * 系统提醒

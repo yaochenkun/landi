@@ -22,4 +22,5 @@ public interface DiaryReminderMapper {
     //add by yck
     int selectTotal(Map<String, Object> map);
     List<DiaryReminder> selectByPage(Map<String, Object> map);
+    List<DiaryReminder> selectByDate(Map<String, Object> map);
 }

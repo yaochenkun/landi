@@ -80,7 +80,7 @@ var requestAjaxUserList = function(pageNum){
                    		 "<td>"+ peruser.username +"</td>"+"<td>"+ peruser.name +"</td>"+
                    	     "<td>"+ peruser.num +"</td>"+"<td>"+ peruser.depart +"</td>"+
                    	     "<td>"+ roleMap[peruser.role] +"</td>"+"<td>"+ createDate +"</td>"+ "<td>"+ loginDate +"</td>"+ "<td>正常</td>"+
-                   	     "<td><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码</span>"+
+                   	     "<td><span onclick=\"showChangeRoleModal("+ peruser.id + ",'" + peruser.role +"');\" class='spanblue'>更改角色</span><span onclick=\"sureResetPasswd("+ peruser.id + ",'" + peruser.username +"');\" class='spanblue'>重置密码</span>"+
                    	     "<span onclick=\"sureForbidUser("+ peruser.id +",'"+ peruser.username +"')\" class='spanred'>禁用</span></td></tr>");
             	}
             	// 禁用状态
@@ -336,6 +336,7 @@ var requestAjaxRole = function(){
 	$.ajax({
 		type:'post',
 		url:'/LD/HomeAdmin/requestRole.action',
+		async:false,
 		success:function(data){
 			// {,,,}
 			//console.log(data);
@@ -352,7 +353,8 @@ var requestAjaxRole = function(){
 				  "onclick='chooseAdminRole(this);'>"+ data[item] +"</li>");
 			}
 		}
-	});	
+	});
+
 }
 
 // 选择用户角色
@@ -417,8 +419,60 @@ var exportUserList = function(){
 }
 
 
+// 打开更改角色弹出框
+var showChangeRoleModal = function(id, role) {
 
 
+    $(".shadow").css("display","block");
+    $('#changeRoleMenu').css("display","block");
+
+    setTimeout(function(){$('#changeRoleMenu').addClass('showMenuModal');},50);
+    $("#changeRoleMenu").addClass("effect-fade");
+
+    //将id藏在span中
+	$("#userId").text(id);
+
+    //默认选中role下拉项
+    requestAjaxRole();
+    chooseAdminRole($("#AdminRoleUL li").eq(role).get(0));
+}
+
+
+// 关闭更改角色弹出框
+var closeChangeRoleDiv = function(){
+    $(".shadow").css("display","none");
+    $("#changeRoleMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#changeRoleMenu").css("display","none");},200);
+};
+
+
+//请求修改角色
+var requestChangeRole = function() {
+
+    var id = Number($("#userId").text());
+    var role = Number($("#AdminRoleSpan").text());
+
+    console.log("请求更改"+ id+ "号用户的角色为" + role);
+    $.ajax({
+        type:'post',
+        url:'/LD/HomeAdmin/changeRole.action',
+        contentType:'application/json',
+        dataType:"json",
+        data: JSON.stringify({"id": id, "role": role}),
+        success:function(data){
+			if(data == 1) {
+
+				//重查一遍
+                alert("更改成功");
+                requestAjaxUserList(1);
+                closeChangeRoleDiv();
+			} else {
+				alert("更改失败");
+			}
+        }
+    });
+
+}
 
 
 

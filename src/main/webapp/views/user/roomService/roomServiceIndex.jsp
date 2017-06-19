@@ -101,7 +101,7 @@
 				<div class="content-title content-title-index">
 					<ul>
 						<li><a href="">统计费用</a></li>
-						<li><a href="">其他费用</a></li>
+						<li><a href="">LE承担费用</a></li>
 					</ul>
 				</div>
 				<!-- 客房费用结算 end -->

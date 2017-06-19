@@ -38,31 +38,119 @@ var requestNextGuestList = function(){
 };
 
 //导出租客列表至 excel中
-var exportGuestList = function(){
+// var exportGuestList = function(){
+//     var BB = self.Blob;
+//     var fileName = "guestList.csv";
+//     var content = ",,,,,租客信息表\n姓名,房间号,公司,职务,电话,入住人数,车位,租金,入住时间,到期时间,备注\n";
+//     $(".bill-table tr").each(function(i){
+//     	   if (i != 0) {
+//     		   content += $(this).children("td").eq(0).text() + "," + $(this).children("td").eq(1).text() + "," +
+//     		              $(this).children("td").eq(2).text() + "," + $(this).children("td").eq(3).text() + "," +
+//     		              $(this).children("td").eq(4).text() + "," + $(this).children("td").eq(5).text() + "," +
+//     		              $(this).children("td").eq(6).text() + "," + $(this).children("td").eq(7).text() + "," +
+//     		              $(this).children("td").eq(8).text() + "," + $(this).children("td").eq(9).text() + "," +
+//     		              $(this).children("td").eq(10).text() + "\n";
+//     	   }
+//         }
+//     );
+//
+//     saveAs(
+//           new BB(
+//               // ["\ufeff" + document.getElementById("content").value] //\ufeff防止utf8 bom防止中文乱码
+//               ["\ufeff" + content] //\ufeff防止utf8 bom防止中文乱码
+//             , {type: "text/plain;charset=utf8"}
+//         )
+//         , fileName
+//     );
+// };
+
+
+
+//导出其它费用列表至 excel中
+var exportList = function(){
     var BB = self.Blob;
-    var fileName = "guestList.csv";
+    var fileName = "GuestList_" + formatDateDot(new Date()) + ".csv";
     var content = ",,,,,租客信息表\n姓名,房间号,公司,职务,电话,入住人数,车位,租金,入住时间,到期时间,备注\n";
-    $(".bill-table tr").each(function(i){
-    	   if (i != 0) {
-    		   content += $(this).children("td").eq(0).text() + "," + $(this).children("td").eq(1).text() + "," +
-    		              $(this).children("td").eq(2).text() + "," + $(this).children("td").eq(3).text() + "," +
-    		              $(this).children("td").eq(4).text() + "," + $(this).children("td").eq(5).text() + "," +
-    		              $(this).children("td").eq(6).text() + "," + $(this).children("td").eq(7).text() + "," +
-    		              $(this).children("td").eq(8).text() + "," + $(this).children("td").eq(9).text() + "," +
-    		              $(this).children("td").eq(10).text() + "\n";
-    	   } 
+
+    //获取筛选项中的用户名、房间号
+	var name = $(".main-title input").eq(0).val();
+	var roomId = $(".main-title input").eq(1).val();
+
+    $.ajax({
+        url:'/LD/guest/searchAllGuestByName.action',
+        type:'post',
+        dataType:'json',
+        data:'{"name":"'+ name +'","roomId":"'+ roomId +'"}',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+
+            (data.dataList).map(function(record){
+
+                content += record.guest_NAME + "," +
+                    record.room_NUMBER + "," +
+                    record.company + "," +
+                    record.title + "," +
+                    record.tel + "," +
+                    record.persons + "," +
+                    record.parking + "," +
+                    record.charge + "," +
+                    formatDateForm(new Date(record.timein)) + "," +
+                    formatDateForm(new Date(record.timeout)) + "," +
+                    record.comment + "\n";
+            });
+
+            saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
         }
-    );
-      
-    saveAs(
-          new BB(
-              // ["\ufeff" + document.getElementById("content").value] //\ufeff防止utf8 bom防止中文乱码
-              ["\ufeff" + content] //\ufeff防止utf8 bom防止中文乱码
-            , {type: "text/plain;charset=utf8"}
-        )
-        , fileName
-    );
+    });
 };
+
+//打印其它车费
+var printList = function()
+{
+    printData = [];
+
+    //获取筛选项中的用户名、房间号
+    var name = $(".main-title input").eq(0).val();
+    var roomId = $(".main-title input").eq(1).val();
+
+    $.ajax({
+        url:'/LD/guest/searchAllGuestByName.action',
+        type:'post',
+        dataType:'json',
+        data:'{"name":"'+ name +'","roomId":"'+ roomId +'"}',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+
+            (data.dataList).map(function(record){
+
+                curRow = {};
+                curRow["姓名"] = record.guest_NAME;
+                curRow["房间号"] = record.room_NUMBER;
+                curRow["公司"] = record.company;
+                curRow["职务"] = record.title;
+                curRow["电话"] = record.tel;
+                curRow["入住人数"] = record.persons;
+                curRow["车位"] = record.parking;
+                curRow["租金"] = record.charge;
+                curRow["入住时间"] = formatDateForm(new Date(record.timein));
+                curRow["到期时间"] = formatDateForm(new Date(record.timeout));
+                curRow["备注"] = record.comment;
+
+                printData.push(curRow);
+            });
+
+            //打印
+            printJS({printable: printData,
+                properties: ['姓名','房间号','公司','职务','电话','入住人数','车位','租金','入住时间','到期时间','备注'],
+                type: 'json',
+                font_size: '8pt'});
+        }
+    });
+};
+
+
 
 // 根据房间号或姓名搜索用户
 $(".btnSearch").bind("click", function(){
@@ -123,8 +211,8 @@ var addGuestTable = function(recordTotal, pageList){
 	for(var i = 0; i < pageList.length; i++){
 		var perRecord = pageList[i];
 
-		var checkIn = formatDate(new Date(perRecord.timein));
-		var checkOut = formatDate(new Date(perRecord.timeout));
+		var checkIn = formatDateForm(new Date(perRecord.timein));
+		var checkOut = formatDateForm(new Date(perRecord.timeout));
 
 		$("#guestListTbody").append("<tr><td>"+ perRecord.guest_NAME +"</td>"+
 			"<td>"+ perRecord.room_NUMBER +"</td><td>"+ perRecord.company +"</td>"+

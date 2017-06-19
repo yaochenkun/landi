@@ -42,14 +42,18 @@
 	margin-bottom: 30px;
 }
 
-.body-first, .body-second, .body-third, .body-fourth {
+.body-first, .body-second, .body-third, .body-fourth, .body-fifth {
 	float: left;
 	border-right: 1px dashed #ccc;
 	margin-right: 30px;
 	height: 230px;
 }
 
-.body-fifth {
+.body-fifth{
+	border-right:0px dashed #ccc;
+}
+
+.body-sixth {
 	float: left;
 	margin-right: 30px;
 	height: 230px;
@@ -59,8 +63,33 @@
 	width: 160px;
 }
 
-.body-second, .body-third, .body-fifth {
+
+.body-second, .body-third,.body-fifth, .body-sixth {
 	width: 190px;
+}
+
+.footer{
+	float: left;
+	width: 100%;
+	margin-top:500px;
+}
+
+/******* 提交修改 样式 ********/
+.btn-submit {
+	float: right;
+	background:#0C89FD;
+	color: #fff;
+	border-color: #fffafa;
+	margin-bottom: 7em;
+	width: 220px;
+	height: 40px;
+	line-height: 28px;
+	font-size: 15px;
+}
+
+.btn-submit:hover {
+	background: #2277da;
+	color: #fff;
 }
 
 /******************** 复选框样式 start ******************************/
@@ -71,7 +100,7 @@
 }
 
 .checkbox-text1, .checkbox-text2, .checkbox-text3, .checkbox-text4,
-	.checkbox-text5 {
+	.checkbox-text5,.checkbox-text6 {
 	float: left;
 	height: 36px;
 }
@@ -80,7 +109,7 @@
 	width: 120px;
 }
 
-.checkbox-text2, .checkbox-text3, .checkbox-text5 {
+.checkbox-text2, .checkbox-text3, .checkbox-text5, .checkbox-text6 {
 	width: 150px;
 }
 
@@ -89,7 +118,7 @@
 }
 
 .checkbox+label {
-	cursor: not-allowed;
+
 	background-color: #FFF;
 	border: 1px solid #C1CACA;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px
@@ -102,7 +131,7 @@
 }
 
 .checkbox:checked+label {
-	cursor: not-allowed;
+
 	background-color: #ECF2F7;
 	border: 1px solid #92A1AC;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px

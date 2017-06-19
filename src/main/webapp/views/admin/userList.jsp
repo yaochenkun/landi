@@ -54,6 +54,34 @@
 	</div>
 	<!-- 页面内容 end-->
 
+
+	<div class="shadow"></div>
+	<!-- 更改角色对话框 -->
+	<div id="changeRoleMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				更改角色
+				<span onclick="closeChangeRoleDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="room-number" class="item">
+					<div id="AdminRole" onclick="requestAjaxRole();" class="form-control" style="width:300px; display:inline-block;">
+						<span class="caret" style="float:right; margin-top: 10px;"></span>
+					</div>
+					<div id="AdminRoleMenu" class="dropdownMenu"></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<span id="currentDate" style="display:none"></span>
+				<span id="userId" style="display:none"></span>
+				<a class="btn btn-submit" id="finishBtn" onclick="requestChangeRole();">确认更改</a>
+			</div>
+		</div>
+	</div>
+
+
+
+
 	<!-- 重置密码弹出框 start -->
 	<div class="dialog-resetPasswd-success">
 		<div class="dialog-main">

@@ -177,6 +177,14 @@ public class GuestMissionServiceImpl implements GuestMissionService {
 		return guestMapper.selectByName_RoomNumber(map);
 	}
 
+	@Override
+	public List<Guest> getAllGuestByName_RoomNumber(String name, String roomNumber) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("NAME", name);
+		map.put("ROOM_NUMBER", roomNumber);
+		return guestMapper.selectAllByName_RoomNumber(map);
+	}
+
 	/**
 	 * 饮用水费
 	 */

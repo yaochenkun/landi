@@ -45,7 +45,10 @@ var changePassword = function(){
 		dataType:"json",
 		success:function(data){
 			console.log(data);
+
 			alert("密码修改成功！");
+            //刷新当前页面重新获取session
+            window.location.href = "http://" + window.location.host + "/LD/views/admin/homeAdmin.jsp";
 		}
 	});
 }

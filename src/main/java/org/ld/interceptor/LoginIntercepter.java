@@ -34,7 +34,7 @@ public class LoginIntercepter implements HandlerInterceptor {
 			return false;
 		} else {
 			// 用户不是管理员且要访问管理员页面
-			if (url.toLowerCase().indexOf("admin") >= 0 && curUser.getROLE() > 0) {
+			if (url.toLowerCase().indexOf("admin") >= 0 && curUser.getROLE() >= 4) {
 				System.out.println("用户不是管理员且要访问管理员页面");
 				response.sendRedirect(request.getContextPath() + "/views/login.jsp");
 				return false;
@@ -42,7 +42,7 @@ public class LoginIntercepter implements HandlerInterceptor {
 				//是合法已登录过的用户
 
 				//正是要改密码放行
-				if(url.endsWith("changePassword.action"))
+				if(url.endsWith("changePassword.action") || url.endsWith("logout.action"))
 					return true;
 
 
@@ -50,7 +50,10 @@ public class LoginIntercepter implements HandlerInterceptor {
 				if(curUser.getRESET_PASSWD() == 0) {
 
 					//重定向到homeUser.action
-					response.sendRedirect(request.getContextPath() + "/views/user/home/homeUser.jsp");
+					if(curUser.getROLE() >= 4)
+						response.sendRedirect(request.getContextPath() + "/views/user/home/homeUser.jsp");
+					else
+						response.sendRedirect(request.getContextPath() + "/views/admin/homeAdmin.jsp");
 					return false;
 				}
 

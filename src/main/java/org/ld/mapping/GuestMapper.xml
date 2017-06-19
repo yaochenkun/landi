@@ -272,5 +272,10 @@
   	select * from guest where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and GUEST_NAME like CONCAT('%', #{NAME}, '%') limit #{ST}, #{EACH}
   	]]>
   </select>
-  
+
+  <select id="selectAllByName_RoomNumber" resultMap="BaseResultMap" parameterType="map">
+  <![CDATA[
+      select * from guest where ROOM_NUMBER like CONCAT('%', #{ROOM_NUMBER}, '%') and GUEST_NAME like CONCAT('%', #{NAME}, '%')
+      ]]>
+  </select>
 </mapper>

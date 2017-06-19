@@ -5,6 +5,8 @@ import java.util.Date;
 public class SystemReminder {
     private Integer ID;
 
+    private Integer USER_ID;
+
     private String TITLE;
 
     private String CONTENT;
@@ -19,6 +21,14 @@ public class SystemReminder {
 
     public void setID(Integer ID) {
         this.ID = ID;
+    }
+
+    public Integer getUSER_ID() {
+        return USER_ID;
+    }
+
+    public void setUSER_ID(Integer USER_ID) {
+        this.USER_ID = USER_ID;
     }
 
     public String getTITLE() {

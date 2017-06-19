@@ -27,7 +27,6 @@ public class LoginController {
 	public ModelAndView login(HttpSession session, String name, String passwd) throws Exception {
 		// 调用service进行用户身份验证
 		User user = userService.getUserByUserName(name);
-		System.out.println(user);
 		
 		//返回ModelAndView
 		ModelAndView modelAndView =  new ModelAndView();
@@ -56,8 +55,8 @@ public class LoginController {
 			// 重定向到首页(.action)
 
 			logger.info("User Login: " + name);
-
-			if (user.getROLE() == 0)
+			Integer role = user.getROLE();
+			if (role == 0 || role == 1 || role == 2 || role == 3)
 				modelAndView.setViewName("redirect:/homeAdmin.action");
 			else
 				modelAndView.setViewName("redirect:/homeUser.action");

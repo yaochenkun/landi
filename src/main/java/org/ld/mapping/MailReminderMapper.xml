@@ -14,11 +14,11 @@
     <result column="STATE" property="STATE" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, SENDER_ID, SENDER_NAME, RECEIVER_ID, RECEIVER_NAME, TITLE, CONTENT, REMIND_DATE, 
+    ID, SENDER_ID, SENDER_NAME, RECEIVER_ID, RECEIVER_NAME, TITLE, CONTENT, REMIND_DATE,
     EDIT_TIME, STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from mail_reminder
     where ID = #{ID,jdbcType=INTEGER}
@@ -28,13 +28,13 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.MailReminder" >
-    insert into mail_reminder (ID, SENDER_ID, SENDER_NAME, 
-      RECEIVER_ID, RECEIVER_NAME, TITLE, 
-      CONTENT, REMIND_DATE, EDIT_TIME, 
+    insert into mail_reminder (ID, SENDER_ID, SENDER_NAME,
+      RECEIVER_ID, RECEIVER_NAME, TITLE,
+      CONTENT, REMIND_DATE, EDIT_TIME,
       STATE)
-    values (#{ID,jdbcType=INTEGER}, #{SENDER_ID,jdbcType=INTEGER}, #{SENDER_NAME,jdbcType=VARCHAR}, 
-      #{RECEIVER_ID,jdbcType=INTEGER}, #{RECEIVER_NAME,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, 
-      #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{EDIT_TIME,jdbcType=TIMESTAMP}, 
+    values (#{ID,jdbcType=INTEGER}, #{SENDER_ID,jdbcType=INTEGER}, #{SENDER_NAME,jdbcType=VARCHAR},
+      #{RECEIVER_ID,jdbcType=INTEGER}, #{RECEIVER_NAME,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR},
+      #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{EDIT_TIME,jdbcType=TIMESTAMP},
       #{STATE,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.MailReminder" >
@@ -189,6 +189,23 @@
     </if>
     order by REMIND_DATE desc
     limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+
+  <select id="selectInboxMailByDate" parameterType="map" resultMap="BaseResultMap">
+    select * from mail_reminder
+    where RECEIVER_ID = #{RECEIVER_ID}
+    <if test="REMIND_DATE != null">
+      and   REMIND_DATE = #{REMIND_DATE}
+    </if>
+    order by ID
+  </select>
+
+  <select id="selectRemindDaysInMonth" parameterType="map" resultType="String">
+    select REMIND_DATE from mail_reminder where RECEIVER_ID = #{UID} and REMIND_DATE between #{FROM_DATE} and #{TO_DATE}
+    union
+    select REMIND_DATE from diary_reminder where USER_ID = #{UID} and REMIND_DATE between #{FROM_DATE} and #{TO_DATE}
+    union
+    select REMIND_DATE from system_reminder where USER_ID = #{UID} and REMIND_DATE between #{FROM_DATE} and #{TO_DATE}
   </select>
 
 </mapper>
