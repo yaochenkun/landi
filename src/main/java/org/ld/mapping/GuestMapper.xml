@@ -19,13 +19,24 @@
     <result column="TIMEIN" property="TIMEIN" jdbcType="TIMESTAMP" />
     <result column="TIMEOUT" property="TIMEOUT" jdbcType="TIMESTAMP" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="OTHER_GUESTS" property="OTHER_GUESTS" jdbcType="VARCHAR" />
+    <result column="GUEST_TYPE" property="GUEST_TYPE" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="BIRTHDAY" jdbcType="DATE" />
+    <result column="EMAIL" property="EMAIL" jdbcType="VARCHAR" />
+    <result column="COMPANY_CONTACTOR" property="COMPANY_CONTACTOR" jdbcType="VARCHAR" />
+    <result column="COMPANY_TEL" property="COMPANY_TEL" jdbcType="VARCHAR" />
+    <result column="COMPANY_ACCOUNT" property="COMPANY_ACCOUNT" jdbcType="VARCHAR" />
+    <result column="COMPANY_INVOICE" property="COMPANY_INVOICE" jdbcType="VARCHAR" />
+    <result column="COMPANY_PAYMODE" property="COMPANY_PAYMODE" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, GUEST_NAME, ROOM_NUMBER, ROOM_TYPE, CONTRACT_NUMBER, TEL, COMPANY, TITLE, PERSONS, 
-    COMING, PARKING, CAR, COMMENT, CHARGE, TIMEIN, TIMEOUT, SYS_STATE
+    ID, GUEST_NAME, ROOM_NUMBER, ROOM_TYPE, CONTRACT_NUMBER, TEL, COMPANY, TITLE, PERSONS,
+    COMING, PARKING, CAR, COMMENT, CHARGE, TIMEIN, TIMEOUT, SYS_STATE, OTHER_GUESTS,
+    GUEST_TYPE, BIRTHDAY, EMAIL, COMPANY_CONTACTOR, COMPANY_TEL, COMPANY_ACCOUNT, COMPANY_INVOICE,
+    COMPANY_PAYMODE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from guest
     where ID = #{ID,jdbcType=INTEGER}
@@ -35,18 +46,24 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Guest" >
-    insert into guest (ID, GUEST_NAME, ROOM_NUMBER, 
-      ROOM_TYPE, CONTRACT_NUMBER, TEL, 
-      COMPANY, TITLE, PERSONS, 
-      COMING, PARKING, CAR, 
-      COMMENT, CHARGE, TIMEIN, 
-      TIMEOUT, SYS_STATE)
-    values (#{ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
-      #{ROOM_TYPE,jdbcType=VARCHAR}, #{CONTRACT_NUMBER,jdbcType=VARCHAR}, #{TEL,jdbcType=VARCHAR}, 
-      #{COMPANY,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, #{PERSONS,jdbcType=INTEGER}, 
-      #{COMING,jdbcType=INTEGER}, #{PARKING,jdbcType=VARCHAR}, #{CAR,jdbcType=VARCHAR}, 
-      #{COMMENT,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, #{TIMEIN,jdbcType=TIMESTAMP}, 
-      #{TIMEOUT,jdbcType=TIMESTAMP}, #{SYS_STATE,jdbcType=INTEGER})
+    insert into guest (ID, GUEST_NAME, ROOM_NUMBER,
+    ROOM_TYPE, CONTRACT_NUMBER, TEL,
+    COMPANY, TITLE, PERSONS,
+    COMING, PARKING, CAR,
+    COMMENT, CHARGE, TIMEIN,
+    TIMEOUT, SYS_STATE, OTHER_GUESTS,
+    GUEST_TYPE, BIRTHDAY, EMAIL,
+    COMPANY_CONTACTOR, COMPANY_TEL, COMPANY_ACCOUNT,
+    COMPANY_INVOICE, COMPANY_PAYMODE)
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_NAME,jdbcType=VARCHAR}, #{ROOM_NUMBER,jdbcType=VARCHAR},
+    #{ROOM_TYPE,jdbcType=VARCHAR}, #{CONTRACT_NUMBER,jdbcType=VARCHAR}, #{TEL,jdbcType=VARCHAR},
+    #{COMPANY,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR}, #{PERSONS,jdbcType=INTEGER},
+    #{COMING,jdbcType=INTEGER}, #{PARKING,jdbcType=VARCHAR}, #{CAR,jdbcType=VARCHAR},
+    #{COMMENT,jdbcType=VARCHAR}, #{CHARGE,jdbcType=DOUBLE}, #{TIMEIN,jdbcType=TIMESTAMP},
+    #{TIMEOUT,jdbcType=TIMESTAMP}, #{SYS_STATE,jdbcType=INTEGER}, #{OTHER_GUESTS,jdbcType=VARCHAR},
+    #{GUEST_TYPE,jdbcType=VARCHAR}, #{BIRTHDAY,jdbcType=DATE}, #{EMAIL,jdbcType=VARCHAR},
+    #{COMPANY_CONTACTOR,jdbcType=VARCHAR}, #{COMPANY_TEL,jdbcType=VARCHAR}, #{COMPANY_ACCOUNT,jdbcType=VARCHAR},
+    #{COMPANY_INVOICE,jdbcType=VARCHAR}, #{COMPANY_PAYMODE,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Guest" >
     insert into guest
@@ -102,6 +119,33 @@
       <if test="SYS_STATE != null" >
         SYS_STATE,
       </if>
+      <if test="OTHER_GUESTS != null" >
+        OTHER_GUESTS,
+      </if>
+      <if test="GUEST_TYPE != null" >
+        GUEST_TYPE,
+      </if>
+      <if test="BIRTHDAY != null" >
+        BIRTHDAY,
+      </if>
+      <if test="EMAIL != null" >
+        EMAIL,
+      </if>
+      <if test="COMPANY_CONTACTOR != null" >
+        COMPANY_CONTACTOR,
+      </if>
+      <if test="COMPANY_TEL != null" >
+        COMPANY_TEL,
+      </if>
+      <if test="COMPANY_ACCOUNT != null" >
+        COMPANY_ACCOUNT,
+      </if>
+      <if test="COMPANY_INVOICE != null" >
+        COMPANY_INVOICE,
+      </if>
+      <if test="COMPANY_PAYMODE != null" >
+        COMPANY_PAYMODE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -154,6 +198,33 @@
       </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="OTHER_GUESTS != null" >
+        #{OTHER_GUESTS,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_TYPE != null" >
+        #{GUEST_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="BIRTHDAY != null" >
+        #{BIRTHDAY,jdbcType=DATE},
+      </if>
+      <if test="EMAIL != null" >
+        #{EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_CONTACTOR != null" >
+        #{COMPANY_CONTACTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_TEL != null" >
+        #{COMPANY_TEL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_ACCOUNT != null" >
+        #{COMPANY_ACCOUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_INVOICE != null" >
+        #{COMPANY_INVOICE,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_PAYMODE != null" >
+        #{COMPANY_PAYMODE,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -208,29 +279,66 @@
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
       </if>
+      <if test="OTHER_GUESTS != null" >
+        OTHER_GUESTS = #{OTHER_GUESTS,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_TYPE != null" >
+        GUEST_TYPE = #{GUEST_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="BIRTHDAY != null" >
+        BIRTHDAY = #{BIRTHDAY,jdbcType=DATE},
+      </if>
+      <if test="EMAIL != null" >
+        EMAIL = #{EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_CONTACTOR != null" >
+        COMPANY_CONTACTOR = #{COMPANY_CONTACTOR,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_TEL != null" >
+        COMPANY_TEL = #{COMPANY_TEL,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_ACCOUNT != null" >
+        COMPANY_ACCOUNT = #{COMPANY_ACCOUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_INVOICE != null" >
+        COMPANY_INVOICE = #{COMPANY_INVOICE,jdbcType=VARCHAR},
+      </if>
+      <if test="COMPANY_PAYMODE != null" >
+        COMPANY_PAYMODE = #{COMPANY_PAYMODE,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.Guest" >
     update guest
     set GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
-      ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      ROOM_TYPE = #{ROOM_TYPE,jdbcType=VARCHAR},
-      CONTRACT_NUMBER = #{CONTRACT_NUMBER,jdbcType=VARCHAR},
-      TEL = #{TEL,jdbcType=VARCHAR},
-      COMPANY = #{COMPANY,jdbcType=VARCHAR},
-      TITLE = #{TITLE,jdbcType=VARCHAR},
-      PERSONS = #{PERSONS,jdbcType=INTEGER},
-      COMING = #{COMING,jdbcType=INTEGER},
-      PARKING = #{PARKING,jdbcType=VARCHAR},
-      CAR = #{CAR,jdbcType=VARCHAR},
-      COMMENT = #{COMMENT,jdbcType=VARCHAR},
-      CHARGE = #{CHARGE,jdbcType=DOUBLE},
-      TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
-      TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+    ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
+    ROOM_TYPE = #{ROOM_TYPE,jdbcType=VARCHAR},
+    CONTRACT_NUMBER = #{CONTRACT_NUMBER,jdbcType=VARCHAR},
+    TEL = #{TEL,jdbcType=VARCHAR},
+    COMPANY = #{COMPANY,jdbcType=VARCHAR},
+    TITLE = #{TITLE,jdbcType=VARCHAR},
+    PERSONS = #{PERSONS,jdbcType=INTEGER},
+    COMING = #{COMING,jdbcType=INTEGER},
+    PARKING = #{PARKING,jdbcType=VARCHAR},
+    CAR = #{CAR,jdbcType=VARCHAR},
+    COMMENT = #{COMMENT,jdbcType=VARCHAR},
+    CHARGE = #{CHARGE,jdbcType=DOUBLE},
+    TIMEIN = #{TIMEIN,jdbcType=TIMESTAMP},
+    TIMEOUT = #{TIMEOUT,jdbcType=TIMESTAMP},
+    SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+    OTHER_GUESTS = #{OTHER_GUESTS,jdbcType=VARCHAR},
+    GUEST_TYPE = #{GUEST_TYPE,jdbcType=VARCHAR},
+    BIRTHDAY = #{BIRTHDAY,jdbcType=DATE},
+    EMAIL = #{EMAIL,jdbcType=VARCHAR},
+    COMPANY_CONTACTOR = #{COMPANY_CONTACTOR,jdbcType=VARCHAR},
+    COMPANY_TEL = #{COMPANY_TEL,jdbcType=VARCHAR},
+    COMPANY_ACCOUNT = #{COMPANY_ACCOUNT,jdbcType=VARCHAR},
+    COMPANY_INVOICE = #{COMPANY_INVOICE,jdbcType=VARCHAR},
+    COMPANY_PAYMODE = #{COMPANY_PAYMODE,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+
   <select id="selectByRoomNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

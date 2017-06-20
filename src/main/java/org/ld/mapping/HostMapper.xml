@@ -10,13 +10,21 @@
     <result column="RETURN_MONEY" property="RETURN_MONEY" jdbcType="DOUBLE" />
     <result column="OTHER_CHARGE" property="OTHER_CHARGE" jdbcType="DOUBLE" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="HOST_TYPE" property="HOST_TYPE" jdbcType="VARCHAR" />
+    <result column="HOST_IDENTITY" property="HOST_IDENTITY" jdbcType="VARCHAR" />
+    <result column="HOST_ACCOUNT" property="HOST_ACCOUNT" jdbcType="VARCHAR" />
+    <result column="TAX_CHARGE" property="TAX_CHARGE" jdbcType="DOUBLE" />
+    <result column="TENET_CHARGE" property="TENET_CHARGE" jdbcType="DOUBLE" />
+    <result column="HEATING_CHARGE" property="HEATING_CHARGE" jdbcType="DOUBLE" />
+    <result column="ACTUAL_CHARGE" property="ACTUAL_CHARGE" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, GUEST_ID, HOST_NAME, RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, OTHER_CHARGE, 
-    SYS_STATE
+    ID, GUEST_ID, HOST_NAME, RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, OTHER_CHARGE,
+    SYS_STATE, HOST_TYPE, HOST_IDENTITY, HOST_ACCOUNT, TAX_CHARGE, TENET_CHARGE, HEATING_CHARGE,
+    ACTUAL_CHARGE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from host
     where ID = #{ID,jdbcType=INTEGER}
@@ -26,12 +34,18 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Host" >
-    insert into host (ID, GUEST_ID, HOST_NAME, 
-      RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, 
-      OTHER_CHARGE, SYS_STATE)
-    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{HOST_NAME,jdbcType=VARCHAR}, 
-      #{RENT_CHARGE,jdbcType=DOUBLE}, #{SERVICE_CHARGE,jdbcType=DOUBLE}, #{RETURN_MONEY,jdbcType=DOUBLE}, 
-      #{OTHER_CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
+    insert into host (ID, GUEST_ID, HOST_NAME,
+    RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY,
+    OTHER_CHARGE, SYS_STATE, HOST_TYPE,
+    HOST_IDENTITY, HOST_ACCOUNT, TAX_CHARGE,
+    TENET_CHARGE, HEATING_CHARGE, ACTUAL_CHARGE
+    )
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{HOST_NAME,jdbcType=VARCHAR},
+    #{RENT_CHARGE,jdbcType=DOUBLE}, #{SERVICE_CHARGE,jdbcType=DOUBLE}, #{RETURN_MONEY,jdbcType=DOUBLE},
+    #{OTHER_CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER}, #{HOST_TYPE,jdbcType=VARCHAR},
+    #{HOST_IDENTITY,jdbcType=VARCHAR}, #{HOST_ACCOUNT,jdbcType=VARCHAR}, #{TAX_CHARGE,jdbcType=DOUBLE},
+    #{TENET_CHARGE,jdbcType=DOUBLE}, #{HEATING_CHARGE,jdbcType=DOUBLE}, #{ACTUAL_CHARGE,jdbcType=DOUBLE}
+    )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Host" >
     insert into host
@@ -60,6 +74,27 @@
       <if test="SYS_STATE != null" >
         SYS_STATE,
       </if>
+      <if test="HOST_TYPE != null" >
+        HOST_TYPE,
+      </if>
+      <if test="HOST_IDENTITY != null" >
+        HOST_IDENTITY,
+      </if>
+      <if test="HOST_ACCOUNT != null" >
+        HOST_ACCOUNT,
+      </if>
+      <if test="TAX_CHARGE != null" >
+        TAX_CHARGE,
+      </if>
+      <if test="TENET_CHARGE != null" >
+        TENET_CHARGE,
+      </if>
+      <if test="HEATING_CHARGE != null" >
+        HEATING_CHARGE,
+      </if>
+      <if test="ACTUAL_CHARGE != null" >
+        ACTUAL_CHARGE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -85,6 +120,27 @@
       </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="HOST_TYPE != null" >
+        #{HOST_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="HOST_IDENTITY != null" >
+        #{HOST_IDENTITY,jdbcType=VARCHAR},
+      </if>
+      <if test="HOST_ACCOUNT != null" >
+        #{HOST_ACCOUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="TAX_CHARGE != null" >
+        #{TAX_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="TENET_CHARGE != null" >
+        #{TENET_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="HEATING_CHARGE != null" >
+        #{HEATING_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="ACTUAL_CHARGE != null" >
+        #{ACTUAL_CHARGE,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -112,6 +168,27 @@
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
       </if>
+      <if test="HOST_TYPE != null" >
+        HOST_TYPE = #{HOST_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="HOST_IDENTITY != null" >
+        HOST_IDENTITY = #{HOST_IDENTITY,jdbcType=VARCHAR},
+      </if>
+      <if test="HOST_ACCOUNT != null" >
+        HOST_ACCOUNT = #{HOST_ACCOUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="TAX_CHARGE != null" >
+        TAX_CHARGE = #{TAX_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="TENET_CHARGE != null" >
+        TENET_CHARGE = #{TENET_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="HEATING_CHARGE != null" >
+        HEATING_CHARGE = #{HEATING_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="ACTUAL_CHARGE != null" >
+        ACTUAL_CHARGE = #{ACTUAL_CHARGE,jdbcType=DOUBLE},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -123,7 +200,14 @@
       SERVICE_CHARGE = #{SERVICE_CHARGE,jdbcType=DOUBLE},
       RETURN_MONEY = #{RETURN_MONEY,jdbcType=DOUBLE},
       OTHER_CHARGE = #{OTHER_CHARGE,jdbcType=DOUBLE},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      HOST_TYPE = #{HOST_TYPE,jdbcType=VARCHAR},
+      HOST_IDENTITY = #{HOST_IDENTITY,jdbcType=VARCHAR},
+      HOST_ACCOUNT = #{HOST_ACCOUNT,jdbcType=VARCHAR},
+      TAX_CHARGE = #{TAX_CHARGE,jdbcType=DOUBLE},
+      TENET_CHARGE = #{TENET_CHARGE,jdbcType=DOUBLE},
+      HEATING_CHARGE = #{HEATING_CHARGE,jdbcType=DOUBLE},
+      ACTUAL_CHARGE = #{ACTUAL_CHARGE,jdbcType=DOUBLE}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 </mapper>

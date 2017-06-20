@@ -1,5 +1,6 @@
 package org.ld.controller;
 
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,15 +9,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
-import org.ld.model.Guest;
-import org.ld.model.GuestBalance;
-import org.ld.model.GuestService;
-import org.ld.model.Host;
-import org.ld.model.Intern;
-import org.ld.model.RoomState;
-import org.ld.model.User;
+import org.ld.model.*;
 import org.ld.service.GuestMissionService;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
@@ -26,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+
 import com.alibaba.fastjson.JSONObject;
 
 @Controller
@@ -42,10 +38,6 @@ public class GuestController {
 
 	private static Logger logger = Logger.getLogger("logRec");
 
-	/**
-	 * @param obj
-	 * @param s
-	 */
 
 	@RequestMapping("/addGuest")
 	@ResponseBody
@@ -89,6 +81,17 @@ public class GuestController {
 			date = ft.parse(obj.getString("STR_TimeOut"));
 			newGuest.setTIMEOUT(date);
 
+			newGuest.setOTHER_GUESTS(obj.getString("STR_GuestOthers"));
+			newGuest.setGUEST_TYPE(obj.getString("STR_GuestType"));
+			newGuest.setBIRTHDAY(obj.getDate("STR_Birthday"));
+			newGuest.setEMAIL(obj.getString("STR_Email"));
+			newGuest.setCOMPANY_CONTACTOR(obj.getString("STR_CompanyContactor"));
+			newGuest.setCOMPANY_TEL(obj.getString("STR_CompanyTel"));
+			newGuest.setCOMPANY_ACCOUNT(obj.getString("STR_CompanyAccount"));
+			newGuest.setCOMPANY_INVOICE(obj.getString("STR_CompanyInvoice"));
+			newGuest.setCOMPANY_PAYMODE(obj.getString("STR_CompanyPayMode"));
+
+
 			if (guestMissionService.addGuest(newGuest) == 1) {
 				newGuest = guestMissionService.getGuestByContract(obj.getString("STR_ContractID"));
 				System.out.println("Finish Guest");
@@ -107,12 +110,21 @@ public class GuestController {
 		obj = objs.getJSONObject("host");
 		try {
 			newHost.setGUEST_ID(newGuest.getID());
-			newHost.setHOST_NAME(obj.getString("STR_Name"));
 			newHost.setRENT_CHARGE(obj.getDouble("DOU_Rent"));
 			newHost.setSERVICE_CHARGE(obj.getDouble("DOU_Service"));
-			newHost.setRETURN_MONEY(obj.getDouble("DOU_Return"));
-			newHost.setOTHER_CHARGE(obj.getDouble("DOU_OTHER")); // other is
-																	// charge
+			newHost.setRETURN_MONEY(obj.getDouble("DOU_SignReturn"));
+			newHost.setOTHER_CHARGE(obj.getDouble("DOU_OtherMoney")); // other is
+																		// charge
+			String hostType = obj.getString("STR_Type");
+			newHost.setHOST_TYPE(hostType);
+			newHost.setHOST_NAME("SPC".equals(hostType) ? "SPC" : obj.getString("STR_Name"));
+			newHost.setHOST_IDENTITY(obj.getString("STR_IDNumber"));
+			newHost.setHOST_ACCOUNT(obj.getString("STR_Account"));
+			newHost.setTAX_CHARGE(obj.getDouble("DOU_Taxes"));
+			newHost.setTENET_CHARGE(obj.getDouble("DOU_SPC"));
+			newHost.setHEATING_CHARGE(obj.getDouble("DOU_Heating"));
+			newHost.setACTUAL_CHARGE(obj.getDouble("DOU_ActualReturn"));
+
 			newHost.setSYS_STATE(0);
 
 			if (guestMissionService.addHost(newHost) == 1) {
@@ -166,14 +178,16 @@ public class GuestController {
 		try {
 			newBalance.setGUEST_ID(newGuest.getID());
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
-			newBalance.setCHARGE_DAY(obj.getInteger("INT_RentNumber"));
+			newBalance.setCHARGE_DAY(obj.getDate("STR_RentNumber"));
 			newBalance.setCHARGE_TURN(obj.getInteger("INT_RentCycle"));
 			newBalance.setCHARGE_WAY(obj.getString("STR_RentWay"));
-			newBalance.setRETURN_DAY(obj.getInteger("INT_ReturnNumber"));
+			newBalance.setRETURN_DAY(obj.getDate("STR_ReturnNumber"));
 			newBalance.setRETURN_TURN(obj.getInteger("INT_ReturnCycle"));
-			newBalance.setINVOICE_DAY(obj.getInteger("INT_BillNumber"));
+			newBalance.setINVOICE_DAY(obj.getDate("STR_BillNumber"));
 			newBalance.setINVOICE_TURN(obj.getInteger("INT_BillCycle"));
 			newBalance.setINVOICE_AHEAD(obj.getInteger("INT_BillTime"));
+			newBalance.setBEGIN_DAY(obj.getDate("STR_BeginDate"));
+			newBalance.setEND_DAY(obj.getDate("STR_EndDate"));
 			newBalance.setSYS_STATE(0);
 
 			if (guestMissionService.addGuestBalance(newBalance) == 1) {
@@ -289,7 +303,7 @@ public class GuestController {
 				return ans;
 			}
 		}
-		
+
 		try{
 			Integer rid = roomService.getRoomByNumber(newGuest.getROOM_NUMBER()).getID();
 			RoomState rs = new RoomState();

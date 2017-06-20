@@ -1,5 +1,7 @@
 package org.ld.model;
 
+import java.util.Date;
+
 public class GuestBalance {
     private Integer ID;
 
@@ -7,21 +9,25 @@ public class GuestBalance {
 
     private String ROOM_NUMBER;
 
-    private Integer CHARGE_DAY;
+    private Date CHARGE_DAY;
 
     private Integer CHARGE_TURN;
 
     private String CHARGE_WAY;
 
-    private Integer RETURN_DAY;
+    private Date RETURN_DAY;
 
     private Integer RETURN_TURN;
 
-    private Integer INVOICE_DAY;
+    private Date INVOICE_DAY;
 
     private Integer INVOICE_TURN;
 
     private Integer INVOICE_AHEAD;
+
+    private Date BEGIN_DAY;
+
+    private Date END_DAY;
 
     private Integer SYS_STATE;
 
@@ -49,11 +55,11 @@ public class GuestBalance {
         this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
     }
 
-    public Integer getCHARGE_DAY() {
+    public Date getCHARGE_DAY() {
         return CHARGE_DAY;
     }
 
-    public void setCHARGE_DAY(Integer CHARGE_DAY) {
+    public void setCHARGE_DAY(Date CHARGE_DAY) {
         this.CHARGE_DAY = CHARGE_DAY;
     }
 
@@ -73,11 +79,11 @@ public class GuestBalance {
         this.CHARGE_WAY = CHARGE_WAY == null ? null : CHARGE_WAY.trim();
     }
 
-    public Integer getRETURN_DAY() {
+    public Date getRETURN_DAY() {
         return RETURN_DAY;
     }
 
-    public void setRETURN_DAY(Integer RETURN_DAY) {
+    public void setRETURN_DAY(Date RETURN_DAY) {
         this.RETURN_DAY = RETURN_DAY;
     }
 
@@ -89,11 +95,11 @@ public class GuestBalance {
         this.RETURN_TURN = RETURN_TURN;
     }
 
-    public Integer getINVOICE_DAY() {
+    public Date getINVOICE_DAY() {
         return INVOICE_DAY;
     }
 
-    public void setINVOICE_DAY(Integer INVOICE_DAY) {
+    public void setINVOICE_DAY(Date INVOICE_DAY) {
         this.INVOICE_DAY = INVOICE_DAY;
     }
 
@@ -111,6 +117,22 @@ public class GuestBalance {
 
     public void setINVOICE_AHEAD(Integer INVOICE_AHEAD) {
         this.INVOICE_AHEAD = INVOICE_AHEAD;
+    }
+
+    public Date getBEGIN_DAY() {
+        return BEGIN_DAY;
+    }
+
+    public void setBEGIN_DAY(Date BEGIN_DAY) {
+        this.BEGIN_DAY = BEGIN_DAY;
+    }
+
+    public Date getEND_DAY() {
+        return END_DAY;
+    }
+
+    public void setEND_DAY(Date END_DAY) {
+        this.END_DAY = END_DAY;
     }
 
     public Integer getSYS_STATE() {

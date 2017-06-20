@@ -6,7 +6,11 @@ var firstTabContent = $(".tab-content").eq(0).outerHeight() + 90 -32,
 	fifthTabContent = fourthTabContent + $(".tab-content").eq(4).outerHeight() -32;
 	sixthTabContent = fifthTabContent + $(".tab-content").eq(5).outerHeight() -32;
 var arrayTabContent = [90,firstTabContent+32,secondTabContent+32,thirdTabContent+32,fourthTabContent+32,sixthTabContent+32];
-    
+
+
+//存储当前赠送复选框Input DOM元素
+var giveInput;
+
 $(function(){
 	$(window).scroll(function(){
 			var nowScrollTop = $(document).scrollTop();
@@ -122,6 +126,24 @@ $(function(){
 			//});
 		};
 	});
+
+
+    // 选择上传文件 绑定事件
+    $("#uploadLE").change(function(){
+        var files = document.getElementById('uploadLE').files;
+		$("#uploadLE").parent().children(".fileName").text(files[0].name);
+    });
+
+    $("#uploadSPC").change(function(){
+        var files = document.getElementById('uploadSPC').files;
+        $("#uploadSPC").parent().children(".fileName").text(files[0].name);
+    });
+
+    $("#uploadGuestID").change(function(){
+        var files = document.getElementById('uploadGuestID').files;
+        $("#uploadGuestID").parent().children(".fileName").text(files[0].name);
+
+    });
 });
 
 // 显示选择饭店窗口
@@ -203,13 +225,17 @@ var changeTabContent = function(index){
 
 // 添加租客
 var addGuest = function(){
+
 	// 获取租客信息
 	var name = $(".tab-content-guest .item-name input").eq(0).val(),
-	    checkin = Number($(".tab-content-guest .item-name input[type='checkbox']").is(":checked")),
+        guestType = $(".tab-content-guest .item-name input[type='radio']:checked").val(),
+        guestOthers = $(".tab-content-guest .item-guestothers input").eq(0).val(),
+	    checkin = Number($(".tab-content-guest .item-guestothers input[type='checkbox']").is(":checked")),
 	    roomID = $(".tab-content-guest .item-room input").eq(0).val(),
 	    type = $(".tab-content-guest .item-room input").eq(1).val(),
 	    contractID = $(".tab-content-guest .item-tel input").eq(0).val(),
 	    tel = $(".tab-content-guest .item-tel input").eq(1).val();
+
 
 	// 判断必填项不能为空
 	if(name == "" || roomID == "" || contractID == "" || tel == ""){
@@ -236,30 +262,54 @@ var addGuest = function(){
 	var company = $(".tab-content-guest .item-company input").eq(0).val(),
 		position = $(".tab-content-guest .item-company input").eq(1).val(),
 	    guestNumber = $(".tab-content-guest .item-guestnumber input").eq(0).val(),
-		timeIn = $(".tab-content-guest .item-time input").eq(0).val(),
-		timeOut = $(".tab-content-guest .item-time input").eq(1).val(),
+		timeIn = formatDateForm(new Date($(".tab-content-guest .item-time input").eq(0).val())),
+		timeOut = formatDateForm(new Date($(".tab-content-guest .item-time input").eq(1).val())),
 		rent = Number($(".tab-content-guest .item-car input").eq(0).val()),
 		carport = $(".tab-content-guest .item-car input").eq(1).val(),
-		remark = $(".tab-content-guest .item-remark input").eq(0).val();
+		remark = $(".tab-content-guest .item-remark input").eq(0).val(),
+
+
+        birthday = formatDateForm(new Date($(".tab-content-guest .item-birthday input").eq(0).val())),
+        email = $(".tab-content-guest .item-birthday input").eq(1).val(),
+		companyContactor = $(".tab-content-guest .item-companytel input").eq(0).val(),
+        companyTel = $(".tab-content-guest .item-companytel input").eq(1).val(),
+        companyAccount = $(".tab-content-guest .item-companyaccount input").eq(0).val(),
+        companyInvoice = $(".tab-content-guest .item-companyaccount input").eq(1).val(),
+        companyPayMode = $(".tab-content-guest .item-companypay input[type='radio']:checked").val();
 
 	let guestData = '"guest":{"STR_Name":"'+ name +'","BOOL_Checkin":'+ checkin +',"STR_RommID":"'+ roomID +'","STR_Type":"'+ type +'",'
 		    +'"STR_ContractID":"'+ contractID +'","STR_Tel":"'+ tel +'","STR_Company":"'+ company +'",'
 		    +'"STR_Position":"'+ position +'","INT_GuestNumber":'+ guestNumber +','
 		    +'"STR_TimeIn":"'+ timeIn +'","STR_TimeOut":"'+ timeOut +'","DOU_Rent":'+ rent +',"STR_Carport":"'+ carport +'",'
-		    +'"STR_Remark":"'+ remark +'"},';
-
+        	+'"STR_GuestType":"'+ guestType +'","STR_GuestOthers":"'+ guestOthers +'","STR_CompanyContactor":"'+ companyContactor +'",'
+        	+'"STR_CompanyTel":"'+ companyTel +'","STR_CompanyAccount":"'+ companyAccount +'","STR_CompanyInvoice":"'+ companyInvoice +'",'
+        	+'"STR_CompanyPayMode":"'+ companyPayMode +'",'
+       	 	+'"STR_Birthday":"'+ birthday +'",'
+        	+'"STR_Email":"'+ email +'",'
+			+'"STR_Remark":"'+ remark +'"},';
 
 
 	// 获取业主信息
 	var Name = $(".tab-content-owner .item-name input").eq(0).val(),
+        Type = $(".tab-content-owner .item-type input[type='radio']:checked").val(),
+        IDNumber = $(".tab-content-owner .item-type input").eq(2).val(),
 		Rent = Number($(".tab-content-owner .item-rent input").eq(0).val()),
 		Service = Number($(".tab-content-owner .item-rent input").eq(1).val()),
-		Return = Number($(".tab-content-owner .item-other input").eq(0).val()),
-		Other = Number($(".tab-content-owner .item-other input").eq(1).val());
+		signReturn = $(".tab-content-owner .item-signreturn input").eq(0).val(),
+		taxes = $(".tab-content-owner .item-signreturn input").eq(1).val(),
+		spc = $(".tab-content-owner .item-spc input").eq(0).val(),
+		heating = $(".tab-content-owner .item-spc input").eq(1).val(),
+		otherMoney = $(".tab-content-owner .item-othermoney input").eq(0).val(),
+		actualReturn = $(".tab-content-owner .item-othermoney input").eq(1).val(),
+        account = $(".tab-content-owner .item-account input").eq(0).val();
 
 	let hostData = '"host":{"STR_Name":"'+ Name +'","DOU_Rent":'+ Rent +',"DOU_Service":'+ Service +','
-		    +'"DOU_Return":'+ Return +',"STR_Other":'+ Other +'},';
-
+        	+'"DOU_SignReturn":'+ signReturn +',"DOU_Taxes":'+ taxes +','
+        	+'"DOU_SPC":'+ spc +',"DOU_Heating":'+ heating +','
+        	+'"STR_Account":"'+ account +'","STR_IDNumber":"'+ IDNumber +'",'
+        	+'"STR_Type":"'+ Type +'",'
+		    +'"DOU_ActualReturn":'+ actualReturn +',"DOU_OtherMoney":'+ otherMoney +'},';
+    console.log(hostData);
 
 	// 获取中介信息
 	var agentCompany = $(".tab-content-agency .item-company input").eq(0).val(),
@@ -278,18 +328,25 @@ var addGuest = function(){
 
 
 	// 获取房款收付信息
-	var RentNumber = Number($(".tab-content-housepay .item-rent .item-date input").eq(0).val()),
+	var RentNumber = formatDateForm(new Date($(".tab-content-housepay .item-rent .item-date input").eq(0).val())),
 		RentCycle = Number($(".tab-content-housepay .item-rent .item-cycle input").eq(0).val()),
 		RentWay = $(".tab-content-housepay .item-rent .item-cycle input").eq(1).val(),
-		ReturnNumber = Number($(".tab-content-housepay .item-return .item-date input").eq(0).val()),
+		ReturnNumber = formatDateForm(new Date($(".tab-content-housepay .item-return .item-date input").eq(0).val())),
 		ReturnCycle = Number($(".tab-content-housepay .item-return .item-cycle input").eq(0).val()),
-		BillNumber = Number($(".tab-content-housepay .item-bill .item-date input").eq(0).val()),
+		BillNumber = formatDateForm(new Date($(".tab-content-housepay .item-bill .item-date input").eq(0).val())),
 		BillCycle = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(0).val()),
-		BillTime = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(1).val());
+		BillTime = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(1).val()),
+		BeginDate = formatDateForm(new Date($(".tab-content-housepay .item-beginenddate .item-begindate input").val())),
+		EndDate = formatDateForm(new Date($(".tab-content-housepay .item-beginenddate .item-enddate input").val()));
 
-	let rentData = '"balance":{"INT_RentNumber":'+ RentNumber +',"INT_RentCycle":'+ RentCycle +',"STR_RentWay":"'+ RentWay +'",'
-            +'"INT_ReturnNumber":'+ ReturnNumber +',"INT_ReturnCycle":'+ ReturnCycle +','
-		    +'"INT_BillNumber":'+ BillNumber +',"INT_BillCycle":'+ BillCycle +',"INT_BillTime":'+ BillTime +'},';	
+
+
+	let rentData = '"balance":{"STR_RentNumber":"'+ RentNumber +'","INT_RentCycle":'+ RentCycle +',"STR_RentWay":"'+ RentWay +'",'
+            +'"STR_ReturnNumber":"'+ ReturnNumber +'","INT_ReturnCycle":'+ ReturnCycle +','
+        	+'"STR_BeginDate":"'+ BeginDate +'","STR_EndDate":"'+ EndDate +'",'
+		    +'"STR_BillNumber":"'+ BillNumber +'","INT_BillCycle":'+ BillCycle +',"INT_BillTime":'+ BillTime +'},';
+
+		console.log(rentData);
 
 	// 获取服务信息
 	// 网费
@@ -516,4 +573,78 @@ var addGuest = function(){
         	}
         }
 	});
+}
+
+
+//计算实际返还
+var calActualReturn = function() {
+
+	//获取签约返还、税金、物业费、采暖费、其它费用
+	var signReturn = $(".tab-content-owner .item-signreturn input").eq(0).val();
+    var taxes = $(".tab-content-owner .item-signreturn input").eq(1).val();
+    var spc = $(".tab-content-owner .item-spc input").eq(0).val();
+    var heating = $(".tab-content-owner .item-spc input").eq(1).val();
+    var otherMoney = $(".tab-content-owner .item-othermoney input").eq(0).val();
+
+
+	//计算实际返还
+	var actualReturn = signReturn - taxes - spc - heating - otherMoney;
+
+	//更新实际返还输入框内容
+	$(".tab-content-owner .item-othermoney input").eq(1).val(actualReturn.toFixed(2));
+
+}
+
+
+var clickXiaoYeZhu = function() {
+	$("#xiaoyezhuName").show();
+}
+
+var clickSPC = function() {
+    $("#xiaoyezhuName").hide();
+}
+
+
+//勾选/去掉 赠送复选框
+var clickGive = function(element) {
+
+	//根据当前复选框状态
+	if($(element).is(":checked")) {
+
+		//打开对话框
+        $(".shadow").css("display","block");
+        $('#newGiveMenu').css("display","block");
+
+        setTimeout(function(){$('#newGiveMenu').addClass('showMenuModal');},50);
+        $("#newGiveMenu").addClass("effect-fade");
+
+
+        //获取原有的赠送金额、赠送原因，显示到对话框中
+		var giveMoney = $(element).attr("giveMoney");
+        var giveComment = $(element).attr("giveComment");
+
+		$("#give-money input").val(giveMoney);
+        $("#give-comment input").val(giveComment);
+
+
+        //把当前这个复选框元素存进全局变量中
+        giveInput = element;
+
+	} else {
+
+	}
+}
+
+
+// 关闭事务详情弹出框
+var closeGiveDiv = function(){
+    $(".shadow").css("display","none");
+    $("#newGiveMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newGiveMenu").css("display","none");},200);
+};
+
+
+//确定添加赠送信息
+var addGive = function() {
+
 }

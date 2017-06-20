@@ -5,22 +5,24 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
-    <result column="CHARGE_DAY" property="CHARGE_DAY" jdbcType="INTEGER" />
+    <result column="CHARGE_DAY" property="CHARGE_DAY" jdbcType="DATE" />
     <result column="CHARGE_TURN" property="CHARGE_TURN" jdbcType="INTEGER" />
     <result column="CHARGE_WAY" property="CHARGE_WAY" jdbcType="VARCHAR" />
-    <result column="RETURN_DAY" property="RETURN_DAY" jdbcType="INTEGER" />
+    <result column="RETURN_DAY" property="RETURN_DAY" jdbcType="DATE" />
     <result column="RETURN_TURN" property="RETURN_TURN" jdbcType="INTEGER" />
-    <result column="INVOICE_DAY" property="INVOICE_DAY" jdbcType="INTEGER" />
+    <result column="INVOICE_DAY" property="INVOICE_DAY" jdbcType="DATE" />
     <result column="INVOICE_TURN" property="INVOICE_TURN" jdbcType="INTEGER" />
     <result column="INVOICE_AHEAD" property="INVOICE_AHEAD" jdbcType="INTEGER" />
+    <result column="BEGIN_DAY" property="BEGIN_DAY" jdbcType="DATE" />
+    <result column="END_DAY" property="END_DAY" jdbcType="DATE" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, GUEST_ID, ROOM_NUMBER, CHARGE_DAY, CHARGE_TURN, CHARGE_WAY, RETURN_DAY, RETURN_TURN, 
-    INVOICE_DAY, INVOICE_TURN, INVOICE_AHEAD, SYS_STATE
+    ID, GUEST_ID, ROOM_NUMBER, CHARGE_DAY, CHARGE_TURN, CHARGE_WAY, RETURN_DAY, RETURN_TURN,
+    INVOICE_DAY, INVOICE_TURN, INVOICE_AHEAD, BEGIN_DAY, END_DAY, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from guest_balance
     where ID = #{ID,jdbcType=INTEGER}
@@ -30,16 +32,16 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.GuestBalance" >
-    insert into guest_balance (ID, GUEST_ID, ROOM_NUMBER, 
-      CHARGE_DAY, CHARGE_TURN, CHARGE_WAY, 
-      RETURN_DAY, RETURN_TURN, INVOICE_DAY, 
-      INVOICE_TURN, INVOICE_AHEAD, SYS_STATE
-      )
-    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, 
-      #{CHARGE_DAY,jdbcType=INTEGER}, #{CHARGE_TURN,jdbcType=INTEGER}, #{CHARGE_WAY,jdbcType=VARCHAR}, 
-      #{RETURN_DAY,jdbcType=INTEGER}, #{RETURN_TURN,jdbcType=INTEGER}, #{INVOICE_DAY,jdbcType=INTEGER}, 
-      #{INVOICE_TURN,jdbcType=INTEGER}, #{INVOICE_AHEAD,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER}
-      )
+    insert into guest_balance (ID, GUEST_ID, ROOM_NUMBER,
+    CHARGE_DAY, CHARGE_TURN, CHARGE_WAY,
+    RETURN_DAY, RETURN_TURN, INVOICE_DAY,
+    INVOICE_TURN, INVOICE_AHEAD, BEGIN_DAY,
+    END_DAY, SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR},
+    #{CHARGE_DAY,jdbcType=DATE}, #{CHARGE_TURN,jdbcType=INTEGER}, #{CHARGE_WAY,jdbcType=VARCHAR},
+    #{RETURN_DAY,jdbcType=DATE}, #{RETURN_TURN,jdbcType=INTEGER}, #{INVOICE_DAY,jdbcType=DATE},
+    #{INVOICE_TURN,jdbcType=INTEGER}, #{INVOICE_AHEAD,jdbcType=INTEGER}, #{BEGIN_DAY,jdbcType=DATE},
+    #{END_DAY,jdbcType=DATE}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.GuestBalance" >
     insert into guest_balance
@@ -77,6 +79,12 @@
       <if test="INVOICE_AHEAD != null" >
         INVOICE_AHEAD,
       </if>
+      <if test="BEGIN_DAY != null" >
+        BEGIN_DAY,
+      </if>
+      <if test="END_DAY != null" >
+        END_DAY,
+      </if>
       <if test="SYS_STATE != null" >
         SYS_STATE,
       </if>
@@ -92,7 +100,7 @@
         #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
       <if test="CHARGE_DAY != null" >
-        #{CHARGE_DAY,jdbcType=INTEGER},
+        #{CHARGE_DAY,jdbcType=DATE},
       </if>
       <if test="CHARGE_TURN != null" >
         #{CHARGE_TURN,jdbcType=INTEGER},
@@ -101,19 +109,25 @@
         #{CHARGE_WAY,jdbcType=VARCHAR},
       </if>
       <if test="RETURN_DAY != null" >
-        #{RETURN_DAY,jdbcType=INTEGER},
+        #{RETURN_DAY,jdbcType=DATE},
       </if>
       <if test="RETURN_TURN != null" >
         #{RETURN_TURN,jdbcType=INTEGER},
       </if>
       <if test="INVOICE_DAY != null" >
-        #{INVOICE_DAY,jdbcType=INTEGER},
+        #{INVOICE_DAY,jdbcType=DATE},
       </if>
       <if test="INVOICE_TURN != null" >
         #{INVOICE_TURN,jdbcType=INTEGER},
       </if>
       <if test="INVOICE_AHEAD != null" >
         #{INVOICE_AHEAD,jdbcType=INTEGER},
+      </if>
+      <if test="BEGIN_DAY != null" >
+        #{BEGIN_DAY,jdbcType=DATE},
+      </if>
+      <if test="END_DAY != null" >
+        #{END_DAY,jdbcType=DATE},
       </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
@@ -130,7 +144,7 @@
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
       <if test="CHARGE_DAY != null" >
-        CHARGE_DAY = #{CHARGE_DAY,jdbcType=INTEGER},
+        CHARGE_DAY = #{CHARGE_DAY,jdbcType=DATE},
       </if>
       <if test="CHARGE_TURN != null" >
         CHARGE_TURN = #{CHARGE_TURN,jdbcType=INTEGER},
@@ -139,19 +153,25 @@
         CHARGE_WAY = #{CHARGE_WAY,jdbcType=VARCHAR},
       </if>
       <if test="RETURN_DAY != null" >
-        RETURN_DAY = #{RETURN_DAY,jdbcType=INTEGER},
+        RETURN_DAY = #{RETURN_DAY,jdbcType=DATE},
       </if>
       <if test="RETURN_TURN != null" >
         RETURN_TURN = #{RETURN_TURN,jdbcType=INTEGER},
       </if>
       <if test="INVOICE_DAY != null" >
-        INVOICE_DAY = #{INVOICE_DAY,jdbcType=INTEGER},
+        INVOICE_DAY = #{INVOICE_DAY,jdbcType=DATE},
       </if>
       <if test="INVOICE_TURN != null" >
         INVOICE_TURN = #{INVOICE_TURN,jdbcType=INTEGER},
       </if>
       <if test="INVOICE_AHEAD != null" >
         INVOICE_AHEAD = #{INVOICE_AHEAD,jdbcType=INTEGER},
+      </if>
+      <if test="BEGIN_DAY != null" >
+        BEGIN_DAY = #{BEGIN_DAY,jdbcType=DATE},
+      </if>
+      <if test="END_DAY != null" >
+        END_DAY = #{END_DAY,jdbcType=DATE},
       </if>
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
@@ -163,14 +183,16 @@
     update guest_balance
     set GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      CHARGE_DAY = #{CHARGE_DAY,jdbcType=INTEGER},
+      CHARGE_DAY = #{CHARGE_DAY,jdbcType=DATE},
       CHARGE_TURN = #{CHARGE_TURN,jdbcType=INTEGER},
       CHARGE_WAY = #{CHARGE_WAY,jdbcType=VARCHAR},
-      RETURN_DAY = #{RETURN_DAY,jdbcType=INTEGER},
+      RETURN_DAY = #{RETURN_DAY,jdbcType=DATE},
       RETURN_TURN = #{RETURN_TURN,jdbcType=INTEGER},
-      INVOICE_DAY = #{INVOICE_DAY,jdbcType=INTEGER},
+      INVOICE_DAY = #{INVOICE_DAY,jdbcType=DATE},
       INVOICE_TURN = #{INVOICE_TURN,jdbcType=INTEGER},
       INVOICE_AHEAD = #{INVOICE_AHEAD,jdbcType=INTEGER},
+      BEGIN_DAY = #{BEGIN_DAY,jdbcType=DATE},
+      END_DAY = #{END_DAY,jdbcType=DATE},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>

@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/tenant/newGuest.css" rel="stylesheet" type="text/css" />
 <title>房间管理</title>
@@ -50,18 +51,18 @@
 							</div>
 							<span class="spanLabel"><span class="red">*&nbsp;</span>客源类型：</span>
 							<div class="fl">
-								<input type="radio" name="guestType"/><span style="margin-left:10px;margin-right:10px">欧美</span>
-								<input type="radio" name="guestType"/><span style="margin-left:10px;margin-right:10px">日本</span>
-								<input type="radio" name="guestType"/><span style="margin-left:10px;">其它</span>
+								<input type="radio" name="guestType" value="欧美" checked="checked"/><span style="margin-left:10px;margin-right:10px">欧美</span>
+								<input type="radio" name="guestType" value="日本"/><span style="margin-left:10px;margin-right:10px">日本</span>
+								<input type="radio" name="guestType" value="其它"/><span style="margin-left:10px;">其它</span>
 							</div>
 						</div>
 						<div class="item item-guestothers">
-							<span class="spanLabel"><span class="red">*&nbsp;</span>其它租客：</span>
+							<span class="spanLabel">其它租客：</span>
 							<div class="fl">
 								<input id="guest_others" type="text" class="text" value="张三,李四,王五" />
 							</div>
 							<div class="fl">
-							<input type="checkbox" class="checkbox" /><span>即将入住</span>
+								<input type="checkbox" class="checkbox" style="display: inline; margin-right:10px;"/><span class="spanLabel">即将入住</span>
 							</div>
 						</div>
 						<div class="item item-room">
@@ -101,11 +102,11 @@
 						<div class="item item-time">
 							<span class="spanLabel">入住日期：</span>
 							<div class="fl">
-								<input type="text" class="text" value="2016-11-11 11:11:12" />
+								<input type="text" class="text pack_maintain"/>
 							</div>
 							<span class="spanLabel">到期时间：</span>
 							<div class="fl">
-								<input type="text" class="text" value="2017-11-11 11:12:12" />
+								<input type="text" class="text pack_maintain" />
 							</div>
 						</div>
 						<div class="item item-car">
@@ -121,7 +122,7 @@
 						<div class="item item-birthday">
 							<span class="spanLabel">生日：</span>
 							<div class="fl">
-								<input type="text" class="text" value="无" />
+								<input type="text" class="text pack_maintain"/>
 							</div>
 							<span class="spanLabel">Email：</span>
 							<div class="fl">
@@ -151,9 +152,9 @@
 						<div class="item item-companypay">
 							<span class="spanLabel">单位付款方式：</span>
 							<div class="fl">
-								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">现金</span>
-								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">银行转账</span>
-								<input type="radio" name="payMode"/><span style="margin-left:10px;margin-right:10px">支票</span>
+								<input type="radio" name="payMode" value="现金" checked="checked"/><span style="margin-left:10px;margin-right:10px">现金</span>
+								<input type="radio" name="payMode" value="银行转账"/><span style="margin-left:10px;margin-right:10px">银行转账</span>
+								<input type="radio" name="payMode" value="支票"/><span style="margin-left:10px;margin-right:10px">支票</span>
 							</div>
 						</div>
 						<div class="item item-remark">
@@ -181,18 +182,18 @@
 						<div class="item item-type">
 							<span class="spanLabel">业主类型：</span>
 							<div class="fl">
-								<input type="radio" name="ownerType"/><span style="margin-left:10px;margin-right:10px">SPC</span>
-								<input type="radio" name="ownerType"/><span style="margin-left:10px;margin-right:10px">小业主</span>
+								<input type="radio" name="ownerType" value="SPC" checked ="checked" onclick="clickSPC();"/><span style="margin-left:10px;margin-right:10px">SPC</span>
+								<input type="radio" name="ownerType" value="小业主" onclick="clickXiaoYeZhu();"/><span style="margin-left:10px;margin-right:10px">小业主</span>
 							</div>
 							<span class="spanLabel">证件号：</span>
 							<div class="fl">
 								<input type="text" class="text" value="09478093845093840593845" />
 							</div>
 						</div>
-						<div class="item item-name">
+						<div class="item item-name" id="xiaoyezhuName" style="display: none;">
 							<span class="spanLabel">业主姓名：</span>
 							<div class="fl">
-								<input type="text" class="text" value="bob" />
+								<input type="text" class="text" value="bob"/>
 							</div>
 						</div>
 						<div class="item item-rent">
@@ -205,34 +206,34 @@
 								<input type="text" class="text" value="10000.5" />
 							</div>
 						</div>
-						<div class="item item-other">
+						<div class="item item-signreturn">
 							<span class="spanLabel">签约返还：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" oninput="calActualReturn();"/>
 							</div>
 							<span class="spanLabel">税金：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" oninput="calActualReturn();"/>
 							</div>
 						</div>
-						<div class="item item-money1">
+						<div class="item item-spc">
 							<span class="spanLabel">物业费：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" oninput="calActualReturn();"/>
 							</div>
 							<span class="spanLabel">采暖费：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" oninput="calActualReturn();"/>
 							</div>
 						</div>
-						<div class="item item-money2">
+						<div class="item item-othermoney">
 							<span class="spanLabel">其它费用：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" oninput="calActualReturn();" />
 							</div>
 							<span class="spanLabel">实际返还：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="0" disabled/>
 							</div>
 						</div>
 
@@ -241,7 +242,7 @@
 						<div class="item item-account">
 							<span class="spanLabel">业主账户信息：</span>
 							<div class="fl">
-								<input type="text" class="text" value="5000.5" />
+								<input type="text" class="text" value="98320192830192" />
 							</div>
 						</div>
 					</div>
@@ -327,7 +328,7 @@
 							<div class="item item-date">
 								<span class="spanLabel">开发票日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="4" />
+									<input type="text" class="text pack_maintain" />
 								</div>
 							</div>
 							<div class="item item-cycle">
@@ -346,7 +347,7 @@
 							<div class="item item-date">
 								<span class="spanLabel">收租金日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="20" />
+									<input type="text" class="text pack_maintain"/>
 								</div>
 							</div>
 							<div class="item item-cycle">
@@ -364,7 +365,7 @@
 							<div class="item item-date">
 								<span class="spanLabel">付返款日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="1" />
+									<input type="text" class="text pack_maintain" />
 								</div>
 							</div>
 							<div class="item item-cycle">
@@ -377,16 +378,16 @@
 
 
 						<div class="item-list item-beginenddate">
-							<div class="item item-date">
+							<div class="item item-begindate">
 								<span class="spanLabel">起始日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="1" />
+									<input type="text" class="text pack_maintain"/>
 								</div>
 							</div>
-							<div class="item item-date">
+							<div class="item item-enddate">
 								<span class="spanLabel">结束日期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="30" />
+									<input type="text" class="text pack_maintain" />
 								</div>
 							</div>
 						</div>
@@ -434,7 +435,7 @@
 									<td>1</td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td class="operation"></td>
 								</tr>
 								<tr class="col-wash">
@@ -445,7 +446,7 @@
 									<td></td>
 									<td>1</td>
 									<td>1</td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-consume">
@@ -456,7 +457,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-car">
@@ -467,7 +468,7 @@
 									<td></td>
 									<td>1</td>
 									<td>1</td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-light">
@@ -478,7 +479,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-tax">
@@ -489,7 +490,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-Int">
@@ -500,7 +501,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-resource">
@@ -512,7 +513,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-breakfast">
@@ -523,7 +524,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 
@@ -536,7 +537,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-tv">
@@ -547,7 +548,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-newspaper">
@@ -558,7 +559,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-cloth">
@@ -569,7 +570,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-lunch-choose">
@@ -585,7 +586,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-shopping">
@@ -596,7 +597,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-barrelwater">
@@ -607,7 +608,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="2.36" giveComment="呵呵" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-bottlewater">
@@ -618,7 +619,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-daily">
@@ -629,7 +630,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-add-add">
@@ -654,17 +655,20 @@
 			<div class="extra-body">
 				<div class="tab-content-body">
 					<div class="form">
-						<div class="item item-LE" style="margin-bottom:-20px;">
-							<div class="btn btn-upload" onclick="addLEPicture();">+ LE条件书</div>
-							<input id="uploadLE" type="file" name="file" multiple="multiple" />
+						<div class="item item-LE" style="margin-bottom:20px;">
+							<div class="btn btn-upload">+ LE条件书</div>
+							<div class="fileName"></div>
+							<input id="uploadLE" type="file" name="file"/>
 						</div>
-						<div class="item item-SPC" style="margin-bottom:-20px;">
-							<div class="btn btn-upload" onclick="addSPCPicture();">+ SPC条件书</div>
-							<input id="uploadSPC" type="file" name="file" multiple="multiple" />
+						<div class="item item-SPC" style="margin-bottom:20px;">
+							<div class="btn btn-upload">+ SPC条件书</div>
+							<div class="fileName"></div>
+							<input id="uploadSPC" type="file" name="file"/>
 						</div>
-						<div class="item item-guestID" style="margin-bottom:-20px;">
-							<div class="btn btn-upload" onclick="addGuestIDPicture();">+ 客人证件</div>
-							<input id="uploadGuestID" type="file" name="file" multiple="multiple" />
+						<div class="item item-guestID">
+							<div class="btn btn-upload">+ 客人证件</div>
+							<div class="fileName"></div>
+							<input id="uploadGuestID" type="file" name="file"/>
 						</div>
 					</div>
 				</div>
@@ -740,12 +744,49 @@
 	</div>
 	<!-- 回到顶部底部 end-->
 
+
+	<!-- 赠送弹出框start -->
+	<div id="newGiveMenu" class="addItemDiv">
+		<div class="facContent">
+			<div class="fac-title">
+				赠送详情
+				<span onclick="closeGiveDiv();">×</span>
+			</div>
+			<div class="fac-body">
+
+				<div id="give-money" class="item">
+					<span class="span">赠送金额：</span>
+					<div class="item-content"><input type="text" value="" />&nbsp;&nbsp;元</div>
+				</div>
+
+				<div id="give-comment" class="item">
+					<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="" style="width:300px"/></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="addGive();">确定</a>
+			</div>
+		</div>
+	</div>
+	<!-- 赠送弹出框 end -->
+
+
+
 	<div class="shadow"></div>
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/newGuest.js"></script>
 	<script>(function(){changeLeftMenu(1);})(); </script>
+	<script type="text/javascript">
+        // 设置为当前时间
+        var nowDate = new Date();
+        $(".pack_maintain").val(formatDateForm(nowDate));
+        $('.pack_maintain').date_input();
+	</script>
 </body>
 </html>
