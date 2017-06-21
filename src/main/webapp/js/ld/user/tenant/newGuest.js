@@ -11,6 +11,9 @@ var arrayTabContent = [90,firstTabContent+32,secondTabContent+32,thirdTabContent
 //存储当前赠送复选框Input DOM元素
 var giveInput;
 
+//存储当前生日复选框Input DOM元素
+var birthdayReminderInput;
+
 $(function(){
 	$(window).scroll(function(){
 			var nowScrollTop = $(document).scrollTop();
@@ -177,7 +180,7 @@ var chooseRestaurant = function(){
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td><td></td></tr>");
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox' giveMoney='0' giveComment='' onclick='clickGive(this);'></td><td></td></tr>");
 	});
 
     // 其他费用列数增加
@@ -194,7 +197,7 @@ var addServiceTr = function(){
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td>"+
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox' giveMoney='0' giveComment='' onclick='clickGive(this);'></td>"+
 	            "<td class='operation' onclick='deleteServiceAdd(this)'>删除</td></tr>");
 	}
 	else{
@@ -202,7 +205,7 @@ var addServiceTr = function(){
 				"<td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1000'/></td>"+
 	            "<td><input type='text' value='1'/></td><td><input type='text' value='1'/></td>"+
-	            "<td><input type='text' value='无'/></td><td><input type='checkbox'></td>"+
+	            "<td><input type='text' value='无'/></td><td><input type='checkbox' giveMoney='0' giveComment='' onclick='clickGive(this);'></td>"+
 	            "<td class='operation' onclick='deleteServiceAdd(this)'>删除</td></tr>");
 	}
 }
@@ -270,6 +273,11 @@ var addGuest = function(){
 
 
         birthday = formatDateForm(new Date($(".tab-content-guest .item-birthday input").eq(0).val())),
+		isRemind = Number($("#birthday-reminder").is(":checked")),
+        uid = Number($("#birthday-reminder").attr("uid")),
+        remindTitle = $("#birthday-reminder").attr("title"),
+        remindContent = $("#birthday-reminder").attr("content"),
+
         email = $(".tab-content-guest .item-birthday input").eq(1).val(),
 		companyContactor = $(".tab-content-guest .item-companytel input").eq(0).val(),
         companyTel = $(".tab-content-guest .item-companytel input").eq(1).val(),
@@ -284,6 +292,10 @@ var addGuest = function(){
         	+'"STR_GuestType":"'+ guestType +'","STR_GuestOthers":"'+ guestOthers +'","STR_CompanyContactor":"'+ companyContactor +'",'
         	+'"STR_CompanyTel":"'+ companyTel +'","STR_CompanyAccount":"'+ companyAccount +'","STR_CompanyInvoice":"'+ companyInvoice +'",'
         	+'"STR_CompanyPayMode":"'+ companyPayMode +'",'
+        	+'"BOOL_IsRemind":'+ isRemind +','
+			+'"INT_Uid":'+ uid +','
+        	+'"STR_RemindTitle":"'+ remindTitle +'",'
+        	+'"STR_RemindContent":"'+ remindContent +'",'
        	 	+'"STR_Birthday":"'+ birthday +'",'
         	+'"STR_Email":"'+ email +'",'
 			+'"STR_Remark":"'+ remark +'"},';
@@ -357,11 +369,14 @@ var addGuest = function(){
 		IntSPCCount = serviceIntInput.eq(3).val(),
 		IntCycle = Number(serviceIntInput.eq(4).val()),
 		IntNote = serviceIntInput.eq(5).val(),
-		IntGive = Number($(".tab-content-service .col-Int input[type='checkbox']").is(":checked"));
+		IntGive = Number($(".tab-content-service .col-Int input[type='checkbox']").is(":checked")),
+		IntGiveMoney = Number($(".tab-content-service .col-Int input[type='checkbox']").attr('giveMoney')),
+		IntGiveComment = $(".tab-content-service .col-Int input[type='checkbox']").attr('giveComment');
 
 	let IntData = '"DOU_LECharge":'+ IntLECharge +',"INT_LECount":'+ IntLECount +','
 		    +'"DOU_SPCCharge":'+ IntSPCCharge +',"INT_SPCCount":'+ IntSPCCount+','
-		    +'"INT_Cycle":'+ IntCycle +',"STR_Note":"'+ IntNote +'","BOOL_Give":'+ IntGive;
+		    +'"INT_Cycle":'+ IntCycle +',"STR_Note":"'+ IntNote +'","BOOL_Give":'+ IntGive + ',"DOU_GiveMoney":'+ IntGiveMoney+ ',"STR_GiveComment":"'+ IntGiveComment +'"';
+
 
     // 能源费
     var serviceResourceInput = $(".tab-content-service .col-resource input"),
@@ -372,12 +387,15 @@ var addGuest = function(){
 		resourceSPCCount = serviceResourceInput.eq(4).val(),
 		resourceCycle = serviceResourceInput.eq(5).val(),
 		resourceNote = serviceResourceInput.eq(6).val(),
-		resourceGive = Number(serviceResourceInput.eq(7).is(":checked"));
+		resourceGive = Number(serviceResourceInput.eq(7).is(":checked")),
+        resourceGiveMoney = Number(serviceResourceInput.eq(7).attr('giveMoney')),
+        resourceGiveComment = serviceResourceInput.eq(7).attr('giveComment');
+
 
 	let resourceData = '"BOOL_Selfpay":'+ resourceSelfpay+','
 			+'"DOU_LECharge":'+ resourceLECharge +',"INT_LECount":'+ resourceLECount +','
 		    +'"DOU_SPCCharge":'+ resourceSPCCharge +',"INT_SPCCount":'+ resourceSPCCount+','
-		    +'"INT_Cycle":'+ resourceCycle +',"STR_Note":"'+ resourceNote +'","BOOL_Give":'+ resourceGive;
+		    +'"INT_Cycle":'+ resourceCycle +',"STR_Note":"'+ resourceNote +'","BOOL_Give":'+ resourceGive + ',"DOU_GiveMoney":'+ resourceGiveMoney+ ',"STR_GiveComment":"'+ resourceGiveComment +'"';
 
 	// 早餐人数
 	var serviceBFInput = $(".tab-content-service .col-breakfast input"),
@@ -387,11 +405,13 @@ var addGuest = function(){
 		breakfastSPCCount = serviceBFInput.eq(3).val(),
 		breakfastCycle = serviceBFInput.eq(4).val(),
 		breakfastNote = serviceBFInput.eq(5).val(),
-		breakfastGive = Number($(".tab-content-service .col-breakfast input[type='checkbox']").is(":checked"));
+		breakfastGive = Number($(".tab-content-service .col-breakfast input[type='checkbox']").is(":checked")),
+		breakfastGiveMoney = Number($(".tab-content-service .col-breakfast input[type='checkbox']").attr('giveMoney')),
+		breakfastGiveComment = $(".tab-content-service .col-breakfast input[type='checkbox']").attr('giveComment');
 
 	let breakfastData = '"DOU_LECharge":'+ breakfastLECharge +',"INT_LECount":'+ breakfastLECount +','
 		    +'"DOU_SPCCharge":'+ breakfastSPCCharge +',"INT_SPCCount":'+ breakfastSPCCount+','
-		    +'"INT_Cycle":'+ breakfastCycle +',"STR_Note":"'+ breakfastNote +'","BOOL_Give":'+ breakfastGive;
+		    +'"INT_Cycle":'+ breakfastCycle +',"STR_Note":"'+ breakfastNote +'","BOOL_Give":'+ breakfastGive + ',"DOU_GiveMoney":'+ breakfastGiveMoney+ ',"STR_GiveComment":"'+ breakfastGiveComment +'"';
 
 	// 停车费
 	var serviceParkInput = $(".tab-content-service .col-park input"),
@@ -401,11 +421,13 @@ var addGuest = function(){
 		parkSPCCount = serviceParkInput.eq(3).val(),
 		parkCycle = serviceParkInput.eq(4).val(),
 		parkNote = serviceParkInput.eq(5).val(),
-		parkGive = Number($(".tab-content-service .col-park input[type='checkbox']").is(":checked"));
+		parkGive = Number($(".tab-content-service .col-park input[type='checkbox']").is(":checked")),
+		parkGiveMoney = Number($(".tab-content-service .col-park input[type='checkbox']").attr('giveMoney')),
+		parkGiveComment = $(".tab-content-service .col-park input[type='checkbox']").attr('giveComment');
 
 	let parkData = '"DOU_LECharge":'+ parkLECharge +',"INT_LECount":'+ parkLECount +','
 		    +'"DOU_SPCCharge":'+ parkSPCCharge +',"INT_SPCCount":'+ parkSPCCount+','
-		    +'"INT_Cycle":'+ parkCycle +',"STR_Note":"'+ parkNote +'","BOOL_Give":'+ parkGive;
+		    +'"INT_Cycle":'+ parkCycle +',"STR_Note":"'+ parkNote +'","BOOL_Give":'+ parkGive + ',"DOU_GiveMoney":'+ parkGiveMoney+ ',"STR_GiveComment":"'+ parkGiveComment +'"';
 
 	// 电视费
 	var serviceTVInput = $(".tab-content-service .col-tv input"),
@@ -415,11 +437,13 @@ var addGuest = function(){
 		tvSPCCount = serviceTVInput.eq(3).val(),
 		tvCycle = serviceTVInput.eq(4).val(),
 		tvNote = serviceTVInput.eq(5).val(),
-		tvGive = Number($(".tab-content-service .col-tv input[type='checkbox']").is(":checked"));
+		tvGive = Number($(".tab-content-service .col-tv input[type='checkbox']").is(":checked")),
+		tvGiveMoney = Number($(".tab-content-service .col-tv input[type='checkbox']").attr('giveMoney')),
+		tvGiveComment = $(".tab-content-service .col-tv input[type='checkbox']").attr('giveComment');
 
 	let tvData = '"DOU_LECharge":'+ tvLECharge +',"INT_LECount":'+ tvLECount +','
 		    +'"DOU_SPCCharge":'+ tvSPCCharge +',"INT_SPCCount":'+ tvSPCCount+','
-		    +'"INT_Cycle":'+ tvCycle +',"STR_Note":"'+ tvNote +'","BOOL_Give":'+ tvGive;
+		    +'"INT_Cycle":'+ tvCycle +',"STR_Note":"'+ tvNote +'","BOOL_Give":'+ tvGive + ',"DOU_GiveMoney":'+ tvGiveMoney+ ',"STR_GiveComment":"'+ tvGiveComment +'"';
 
 	// 报刊杂志费
 	var serviceNPInput = $(".tab-content-service .col-newspaper input"),
@@ -429,11 +453,15 @@ var addGuest = function(){
 		newspaperSPCCount = serviceNPInput.eq(3).val(),
 		newspaperCycle = serviceNPInput.eq(4).val(),
 		newspaperNote = serviceNPInput.eq(5).val(),
-		newspaperGive = Number($(".tab-content-service .col-newspaper input[type='checkbox']").is(":checked"));
+		newspaperGive = Number($(".tab-content-service .col-newspaper input[type='checkbox']").is(":checked")),
+		newspaperGiveMoney = Number($(".tab-content-service .col-newspaper input[type='checkbox']").attr('giveMoney')),
+        newspaperGiveComment = $(".tab-content-service .col-newspaper input[type='checkbox']").attr('giveComment');
+
+
 
 	let newspaperData = '"DOU_LECharge":'+ newspaperLECharge +',"INT_LECount":'+ newspaperLECount +','
 		    +'"DOU_SPCCharge":'+ newspaperSPCCharge +',"INT_SPCCount":'+ newspaperSPCCount+','
-		    +'"INT_Cycle":'+ newspaperCycle +',"STR_Note":"'+ newspaperNote +'","BOOL_Give":'+ newspaperGive;
+		    +'"INT_Cycle":'+ newspaperCycle +',"STR_Note":"'+ newspaperNote +'","BOOL_Give":'+ newspaperGive + ',"DOU_GiveMoney":'+ newspaperGiveMoney+ ',"STR_GiveComment":"'+ newspaperGiveComment +'"';
 
     // 洗衣费
 	var clothLECharge = $(".tab-content-service .col-cloth input").eq(0).val(),
@@ -442,11 +470,13 @@ var addGuest = function(){
 		clothSPCCount = $(".tab-content-service .col-cloth input").eq(3).val(),
 		clothCycle = $(".tab-content-service .col-cloth input").eq(4).val(),
 		clothNote = $(".tab-content-service .col-cloth input").eq(5).val(),
-		clothGive = Number($(".tab-content-service .col-cloth input[type='checkbox']").is(":checked"));
+		clothGive = Number($(".tab-content-service .col-cloth input[type='checkbox']").is(":checked")),
+        clothGiveMoney = Number($(".tab-content-service .col-cloth input[type='checkbox']").attr('giveMoney')),
+        clothGiveComment = $(".tab-content-service .col-cloth input[type='checkbox']").attr('giveComment');
 
 	let clothData = '"DOU_LECharge":'+ clothLECharge +',"INT_LECount":'+ clothLECount +','
 		    +'"DOU_SPCCharge":'+ clothSPCCharge +',"INT_SPCCount":'+ clothSPCCount+','
-		    +'"INT_Cycle":'+ clothCycle +',"STR_Note":"'+ clothNote +'","BOOL_Give":'+ clothGive;
+		    +'"INT_Cycle":'+ clothCycle +',"STR_Note":"'+ clothNote +'","BOOL_Give":'+ clothGive + ',"DOU_GiveMoney":'+ clothGiveMoney+ ',"STR_GiveComment":"'+ clothGiveComment +'"';
 
 	// 餐券
 	var lunchData = "";
@@ -458,7 +488,7 @@ var addGuest = function(){
 		    +'"DOU_LECharge":'+ R.eq(0).val() +',"INT_LECount":'+ R.eq(1).val() +','
 		    +'"DOU_SPCCharge":' + R.eq(2).val() +',"INT_SPCCount":'+ R.eq(3).val() +','
 		    +'"INT_Cycle":'+ R.eq(4).val() +',"STR_Note":"'+ R.eq(5).val() +'",'
-		    +'"BOOL_Give":'+ Number($(".tab-content-service .col-lunch:nth-child("+ i +") td input[type='checkbox']").is("checked")) +'},';
+		    +'"BOOL_Give":'+ Number(R.eq(6).is(":checked")) + ',"DOU_GiveMoney":'+ Number(R.eq(6).attr('giveMoney'))+ ',"STR_GiveComment":"'+ R.eq(6).attr('giveComment') +'"},';
 		lunchData += perRestaurant;
 	}
 	if(lunchData.length!=0) lunchData = lunchData.substring(0,lunchData.length-1);
@@ -471,7 +501,9 @@ var addGuest = function(){
 		breakSPCCount = $(".tab-content-service .col-break input").eq(3).val(),
 		breakCycle = $(".tab-content-service .col-break input").eq(4).val(),
 		breakNote = $(".tab-content-service .col-break input").eq(5).val(),
-		breakGive = Number($(".tab-content-service .col-break input[type='checkbox']").is(":checked"));
+		breakGive = Number($(".tab-content-service .col-break input[type='checkbox']").is(":checked")),
+        breakGiveMoney = Number($(".tab-content-service .col-break input[type='checkbox']").attr('giveMoney')),
+        breakGiveComment = $(".tab-content-service .col-break input[type='checkbox']").attr('giveComment');
 
 	// 购物卡
 	var shoppingLECharge = $(".tab-content-service .col-shopping input").eq(0).val(),
@@ -480,7 +512,9 @@ var addGuest = function(){
 		shoppingSPCCount = $(".tab-content-service .col-shopping input").eq(3).val(),
 		shoppingCycle = $(".tab-content-service .col-shopping input").eq(4).val(),
 		shoppingNote = $(".tab-content-service .col-shopping input").eq(5).val(),
-		shoppingGive = Number($(".tab-content-service .col-shopping input[type='checkbox']").is(":checked"));
+		shoppingGive = Number($(".tab-content-service .col-shopping input[type='checkbox']").is(":checked")),
+        shoppingGiveMoney = Number($(".tab-content-service .col-shopping input[type='checkbox']").attr('giveMoney')),
+        shoppingGiveComment = $(".tab-content-service .col-shopping input[type='checkbox']").attr('giveComment');
 
 	// 饮用水
 	var barrelwaterLECharge = $(".tab-content-service .col-barrelwater input").eq(0).val(),
@@ -489,7 +523,9 @@ var addGuest = function(){
 		barrelwaterSPCCount = $(".tab-content-service .col-barrelwater input").eq(3).val(),
 		barrelwaterCycle = $(".tab-content-service .col-barrelwater input").eq(4).val(),
 		barrelwaterNote = $(".tab-content-service .col-barrelwater input").eq(5).val(),
-		barrelwaterGive = Number($(".tab-content-service .col-barrelwater input[type='checkbox']").is(":checked"));
+		barrelwaterGive = Number($(".tab-content-service .col-barrelwater input[type='checkbox']").is(":checked")),
+        barrelwaterGiveMoney = Number($(".tab-content-service .col-barrelwater input[type='checkbox']").attr('giveMoney')),
+        barrelwaterGiveComment = $(".tab-content-service .col-barrelwater input[type='checkbox']").attr('giveComment');
 
 	// 饮用水
 	var bottlewaterLECharge = $(".tab-content-service .col-bottlewater input").eq(0).val(),
@@ -498,7 +534,9 @@ var addGuest = function(){
 		bottlewaterSPCCount = $(".tab-content-service .col-bottlewater input").eq(3).val(),
 		bottlewaterCycle = $(".tab-content-service .col-bottlewater input").eq(4).val(),
 		bottlewaterNote = $(".tab-content-service .col-bottlewater input").eq(5).val(),
-		bottlewaterGive = Number($(".tab-content-service .col-bottlewater input[type='checkbox']").is(":checked"));
+		bottlewaterGive = Number($(".tab-content-service .col-bottlewater input[type='checkbox']").is(":checked")),
+        bottlewaterGiveMoney = Number($(".tab-content-service .col-bottlewater input[type='checkbox']").attr('giveMoney')),
+        bottlewaterGiveComment = $(".tab-content-service .col-bottlewater input[type='checkbox']").attr('giveComment');
 
 	// 日用品
 	var dailyLECharge = $(".tab-content-service .col-daily input").eq(0).val(),
@@ -507,7 +545,9 @@ var addGuest = function(){
 		dailySPCCount = $(".tab-content-service .col-daily input").eq(3).val(),
 		dailyCycle = $(".tab-content-service .col-daily input").eq(4).val(),
 		dailyNote = $(".tab-content-service .col-daily input").eq(5).val(),
-		dailyGive = Number($(".tab-content-service .col-daily input[type='checkbox']").is(":checked"));
+		dailyGive = Number($(".tab-content-service .col-daily input[type='checkbox']").is(":checked")),
+        dailyGiveMoney = Number($(".tab-content-service .col-daily input[type='checkbox']").attr('giveMoney')),
+        dailyGiveComment = $(".tab-content-service .col-daily input[type='checkbox']").attr('giveComment');
 
 
 	// 新增加的项目
@@ -520,7 +560,7 @@ var addGuest = function(){
     		+'"DOU_LECharge":'+ A.eq(1).val() +',"INT_LECount":'+ A.eq(2).val() +','
 		    +'"DOU_SPCCharge":' + A.eq(3).val() +',"INT_SPCCount":'+ A.eq(4).val() +','
 		    +'"INT_Cycle":'+ A.eq(5).val() +',"STR_Note":"'+ A.eq(6).val() +'",'
-		    +'"BOOL_Give":'+ Number($(".tab-content-service .col-add:nth-child("+ i +") td input[type='checkbox']").is("checked")) +'},';
+		    +'"BOOL_Give":'+ Number(A.eq(7).is(":checked")) + ',"DOU_GiveMoney":'+ Number(A.eq(7).attr("giveMoney")) + ',"STR_GiveComment":"'+ A.eq(7).attr("giveComment") +'"},';
     	    
     	    addData += perAdd;
     	}
@@ -543,23 +583,23 @@ var addGuest = function(){
 
 		    +'"break":{"DOU_LECharge":'+ breakLECharge +',"INT_LECount":'+ breakLECount +','
 		    +'"DOU_SPCCharge":'+ breakSPCCharge +',"INT_SPCCount":'+ breakSPCCount+','
-		    +'"INT_Cycle":'+ breakCycle +',"STR_Note":"'+ breakNote +'","BOOL_Give":'+ breakGive +'},'
+		    +'"INT_Cycle":'+ breakCycle +',"STR_Note":"'+ breakNote +'","BOOL_Give":'+ breakGive + ',"DOU_GiveMoney":'+ breakGiveMoney+ ',"STR_GiveComment":"'+ breakGiveComment +'"},'
 		    // 购物卡
 		    +'"shopping":{"DOU_LECharge":'+ shoppingLECharge +',"INT_LECount":'+ shoppingLECount +','
 		    +'"DOU_SPCCharge":'+ shoppingSPCCharge +',"INT_SPCCount":'+ shoppingSPCCount+','
-		    +'"INT_Cycle":'+ shoppingCycle +',"STR_Note":"'+ shoppingNote +'","BOOL_Give":'+ shoppingGive +'},'
+		    +'"INT_Cycle":'+ shoppingCycle +',"STR_Note":"'+ shoppingNote +'","BOOL_Give":'+ shoppingGive + ',"DOU_GiveMoney":'+ shoppingGiveMoney+ ',"STR_GiveComment":"'+ shoppingGiveComment +'"},'
 		    // 桶装水
 		    +'"barrelwater":{"DOU_LECharge":'+ barrelwaterLECharge +',"INT_LECount":'+ barrelwaterLECount +','
 		    +'"DOU_SPCCharge":'+ barrelwaterSPCCharge +',"INT_rSPCCount":'+ barrelwaterSPCCount+','
-		    +'"INT_Cycle":'+ barrelwaterCycle +',"STR_Note":"'+ barrelwaterNote +'","BOOL_Give":'+ barrelwaterGive +'},'
+		    +'"INT_Cycle":'+ barrelwaterCycle +',"STR_Note":"'+ barrelwaterNote +'","BOOL_Give":'+ barrelwaterGive + ',"DOU_GiveMoney":'+ barrelwaterGiveMoney+ ',"STR_GiveComment":"'+ barrelwaterGiveComment +'"},'
 		    // 矿泉水
 		    +'"bottlewater":{"DOU_LECharge":'+ bottlewaterLECharge +',"INT_LECount":'+ bottlewaterLECount +','
 		    +'"DOU_SPCCharge":'+ bottlewaterSPCCharge +',"INT_rSPCCount":'+ bottlewaterSPCCount+','
-		    +'"INT_Cycle":'+ bottlewaterCycle +',"STR_Note":"'+ bottlewaterNote +'","BOOL_Give":'+ bottlewaterGive +'},'
+		    +'"INT_Cycle":'+ bottlewaterCycle +',"STR_Note":"'+ bottlewaterNote +'","BOOL_Give":'+ bottlewaterGive + ',"DOU_GiveMoney":'+ bottlewaterGiveMoney+ ',"STR_GiveComment":"'+ bottlewaterGiveComment +'"},'
 		    //日用品
 			+'"daily":{"DOU_LECharge":'+ dailyLECharge +',"INT_LECount":'+ dailyLECount +','
 		    +'"DOU_SPCCharge":'+ dailySPCCharge +',"INT_SPCCount":'+ dailySPCCount+','
-		    +'"INT_Cycle":'+ dailyCycle +',"STR_Note":"'+ dailyNote +'","BOOL_Give":'+ dailyGive +'},'
+		    +'"INT_Cycle":'+ dailyCycle +',"STR_Note":"'+ dailyNote +'","BOOL_Give":'+ dailyGive + ',"DOU_GiveMoney":'+ dailyGiveMoney+ ',"STR_GiveComment":"'+ dailyGiveComment +'"},'
 		    +'"OBJ_ADDLIST":{'+ addData +'}'
 		    +'}'
 		    
@@ -632,11 +672,18 @@ var clickGive = function(element) {
 
 	} else {
 
+		if(window.confirm("您确定要取消赠送?这将清空赠送金额与备注!")) {
+            $(element).attr("giveMoney", "0");
+            $(element).attr("giveComment", "");
+        } else {
+			//置为选中
+            $(element).attr("checked","checked");
+		}
 	}
 }
 
 
-// 关闭事务详情弹出框
+// 关闭赠送详情弹出框
 var closeGiveDiv = function(){
     $(".shadow").css("display","none");
     $("#newGiveMenu").removeClass('showMenuModal');
@@ -647,4 +694,116 @@ var closeGiveDiv = function(){
 //确定添加赠送信息
 var addGive = function() {
 
+
+	//获取用户填写的赠送信息
+	var giveMoney = $("#give-money input").val();
+	var giveComment = $("#give-comment input").val();
+
+
+	//将这两个值存于giveInput的两个属性中去
+    $(giveInput).attr("giveMoney", giveMoney);
+	$(giveInput).attr("giveComment", giveComment);
+
+    closeGiveDiv();
 }
+
+
+//生日提醒
+
+
+var clickBirthdayReminder = function(element) {
+
+    //根据当前复选框状态
+    if($(element).is(":checked")) {
+
+        //打开对话框
+        $(".shadow").css("display","block");
+        $('#newBirthdayReminderMenu').css("display","block");
+
+        setTimeout(function(){$('#newBirthdayReminderMenu').addClass('showMenuModal');},50);
+        $("#newBirthdayReminderMenu").addClass("effect-fade");
+
+
+        //获取原有的赠送金额、赠送原因，显示到对话框中
+		var uid = $(element).attr("uid");
+        var username = $(element).attr("username");
+        var title = $(element).attr("title");
+        var content = $(element).attr("content");
+
+        $("#dropDownInput").attr("uid", uid);
+        $("#dropDownInput").val(username);
+        $("#reminder-title input").val(title);
+        $("#reminderContent").val(content);
+
+
+        //把当前这个复选框元素存进全局变量中
+        birthdayReminderInput = element;
+
+    } else {
+
+        if(window.confirm("您确定要取消生日提醒?这将清空之前的信息!")) {
+            $(element).attr("uid", "-1");
+            $(element).attr("username", "");
+            $(element).attr("title", "");
+            $(element).attr("content", "");
+        } else {
+            //置为选中
+            $(element).attr("checked","checked");
+        }
+    }
+
+}
+
+var addBirthdayReminder = function() {
+
+    //获取用户填写的赠送信息
+    var uid = $("#dropDownInput").attr("uid");
+    var username = $("#dropDownInput").val();
+    var title = $("#reminder-title input").val();
+    var content = $("#reminderContent").val();
+
+    //将这两个值存于giveInput的两个属性中去
+    $(birthdayReminderInput).attr("uid", uid);
+    $(birthdayReminderInput).attr("username", username);
+    $(birthdayReminderInput).attr("title", title);
+    $(birthdayReminderInput).attr("content", content);
+
+    closeBirthdayReminderMenu();
+
+}
+
+// 关闭生日提醒弹出框
+var closeBirthdayReminderMenu = function(){
+    $(".shadow").css("display","none");
+    $("#newBirthdayReminderMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newBirthdayReminderMenu").css("display","none");},200);
+};
+
+//拉取所有用户存入下拉菜单
+var searchAllUsers = function() {
+
+    $.ajax({
+        url:'/LD/HomeUser/searchAllUsers.action',
+        type:'get',
+        dataType:'json',
+        success:function(data){
+
+            console.log(data);
+            if(data.record != null) {
+
+                //放入下拉列表
+                for(var i = 0; i < data.record.length; i++)
+                    $(".dropDownMenu ul").append("<li style='height:30px;' rid='"+ data.record[i].id +"'>"+ data.record[i].username +"</li>");
+
+                // 选择问题分类
+                $(".dropDownMenu ul li").click(function(){
+                    var id = Number($(this).attr('rid'));
+                    var username = $(this).text();
+                    $("#dropDownInput").val(username);
+                    $("#dropDownInput").attr("uid", id);
+                });
+
+            }
+        }
+    });
+};

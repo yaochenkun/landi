@@ -1,123 +1,143 @@
 package org.ld.model;
 
 public class GuestService {
-	private Integer ID;
+    private Integer ID;
 
-	private Integer GUEST_ID;
+    private Integer GUEST_ID;
 
-	private String ROOM_NUMBER;
+    private String ROOM_NUMBER;
 
-	private String NAME;
+    private String NAME;
 
-	private Double LECHARGE;
+    private Double LECHARGE;
 
-	private Integer LECOUNT;
+    private Integer LECOUNT;
 
-	private Double SPCHARGE;
+    private Double SPCHARGE;
 
-	private Integer SPCOUNT;
+    private Integer SPCOUNT;
 
-	private Integer TURN;
+    private Integer TURN;
 
-	private String COMMENT;
+    private String COMMENT;
 
-	private Integer FREE;
+    private Integer FREE;
 
-	private Integer SYS_STATE;
+    private Integer SYS_STATE;
 
-	public Integer getID() {
-		return ID;
-	}
+    private Double FREE_MONEY;
 
-	public void setID(Integer ID) {
-		this.ID = ID;
-	}
+    private String FREE_REASON;
 
-	public Integer getGUEST_ID() {
-		return GUEST_ID;
-	}
+    public Integer getID() {
+        return ID;
+    }
 
-	public void setGUEST_ID(Integer GUEST_ID) {
-		this.GUEST_ID = GUEST_ID;
-	}
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
 
-	public String getROOM_NUMBER() {
-		return ROOM_NUMBER;
-	}
+    public Integer getGUEST_ID() {
+        return GUEST_ID;
+    }
 
-	public void setROOM_NUMBER(String ROOM_NUMBER) {
-		this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
-	}
+    public void setGUEST_ID(Integer GUEST_ID) {
+        this.GUEST_ID = GUEST_ID;
+    }
 
-	public String getNAME() {
-		return NAME;
-	}
+    public String getROOM_NUMBER() {
+        return ROOM_NUMBER;
+    }
 
-	public void setNAME(String NAME) {
-		this.NAME = NAME == null ? null : NAME.trim();
-	}
+    public void setROOM_NUMBER(String ROOM_NUMBER) {
+        this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
+    }
 
-	public Double getLECHARGE() {
-		return LECHARGE;
-	}
+    public String getNAME() {
+        return NAME;
+    }
 
-	public void setLECHARGE(Double LECHARGE) {
-		this.LECHARGE = LECHARGE;
-	}
+    public void setNAME(String NAME) {
+        this.NAME = NAME == null ? null : NAME.trim();
+    }
 
-	public Integer getLECOUNT() {
-		return LECOUNT;
-	}
+    public Double getLECHARGE() {
+        return LECHARGE;
+    }
 
-	public void setLECOUNT(Integer LECOUNT) {
-		this.LECOUNT = LECOUNT;
-	}
+    public void setLECHARGE(Double LECHARGE) {
+        this.LECHARGE = LECHARGE;
+    }
 
-	public Double getSPCHARGE() {
-		return SPCHARGE;
-	}
+    public Integer getLECOUNT() {
+        return LECOUNT;
+    }
 
-	public void setSPCHARGE(Double SPCHARGE) {
-		this.SPCHARGE = SPCHARGE;
-	}
+    public void setLECOUNT(Integer LECOUNT) {
+        this.LECOUNT = LECOUNT;
+    }
 
-	public Integer getSPCOUNT() {
-		return SPCOUNT;
-	}
+    public Double getSPCHARGE() {
+        return SPCHARGE;
+    }
 
-	public void setSPCOUNT(Integer SPCOUNT) {
-		this.SPCOUNT = SPCOUNT;
-	}
+    public void setSPCHARGE(Double SPCHARGE) {
+        this.SPCHARGE = SPCHARGE;
+    }
 
-	public Integer getTURN() {
-		return TURN;
-	}
+    public Integer getSPCOUNT() {
+        return SPCOUNT;
+    }
 
-	public void setTURN(Integer TURN) {
-		this.TURN = TURN;
-	}
+    public void setSPCOUNT(Integer SPCOUNT) {
+        this.SPCOUNT = SPCOUNT;
+    }
 
-	public String getCOMMENT() {
-		return COMMENT;
-	}
+    public Integer getTURN() {
+        return TURN;
+    }
 
-	public void setCOMMENT(String COMMENT) {
-		this.COMMENT = COMMENT == null ? null : COMMENT.trim();
-	}
+    public void setTURN(Integer TURN) {
+        this.TURN = TURN;
+    }
 
-	public Integer getFREE() {
-		return FREE;
-	}
+    public String getCOMMENT() {
+        return COMMENT;
+    }
 
-	public void setFREE(Integer FREE) {
-		this.FREE = FREE;
-	}
+    public void setCOMMENT(String COMMENT) {
+        this.COMMENT = COMMENT == null ? null : COMMENT.trim();
+    }
 
-	public Integer getSYS_STATE() {
-		return SYS_STATE;
-	}
+    public Integer getFREE() {
+        return FREE;
+    }
 
-	public void setSYS_STATE(Integer SYS_STATE) {
-		this.SYS_STATE = SYS_STATE;
-	}
+    public void setFREE(Integer FREE) {
+        this.FREE = FREE;
+    }
+
+    public Integer getSYS_STATE() {
+        return SYS_STATE;
+    }
+
+    public void setSYS_STATE(Integer SYS_STATE) {
+        this.SYS_STATE = SYS_STATE;
+    }
+
+    public Double getFREE_MONEY() {
+        return FREE_MONEY;
+    }
+
+    public void setFREE_MONEY(Double FREE_MONEY) {
+        this.FREE_MONEY = FREE_MONEY;
+    }
+
+    public String getFREE_REASON() {
+        return FREE_REASON;
+    }
+
+    public void setFREE_REASON(String FREE_REASON) {
+        this.FREE_REASON = FREE_REASON == null ? null : FREE_REASON.trim();
+    }
 }

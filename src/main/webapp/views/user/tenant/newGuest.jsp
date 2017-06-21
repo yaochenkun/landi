@@ -122,7 +122,8 @@
 						<div class="item item-birthday">
 							<span class="spanLabel">生日：</span>
 							<div class="fl">
-								<input type="text" class="text pack_maintain"/>
+								<input type="text" class="text pack_maintain" style="width:150px"/>
+								<input id="birthday-reminder" type="checkbox" class="checkbox" style="display: inline; margin-right:10px;" onclick="clickBirthdayReminder(this);" uid="-1" username="" title="" content=""/><span class="spanLabel">设置提醒</span>
 							</div>
 							<span class="spanLabel">Email：</span>
 							<div class="fl">
@@ -435,7 +436,7 @@
 									<td>1</td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td class="operation"></td>
 								</tr>
 								<tr class="col-wash">
@@ -446,7 +447,7 @@
 									<td></td>
 									<td>1</td>
 									<td>1</td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td></td>
 								</tr>
 								<tr class="col-consume">
@@ -457,7 +458,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td></td>
 								</tr>
 								<tr class="col-car">
@@ -468,7 +469,7 @@
 									<td></td>
 									<td>1</td>
 									<td>1</td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td></td>
 								</tr>
 								<tr class="col-light">
@@ -479,7 +480,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td></td>
 								</tr>
 								<tr class="col-tax">
@@ -490,7 +491,7 @@
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td></td>
 									<td></td>
 								</tr>
 								<tr class="col-Int">
@@ -501,7 +502,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-resource">
@@ -513,7 +514,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-breakfast">
@@ -524,7 +525,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 
@@ -537,7 +538,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-tv">
@@ -548,7 +549,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-newspaper">
@@ -559,7 +560,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-cloth">
@@ -570,7 +571,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-lunch-choose">
@@ -586,7 +587,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-shopping">
@@ -597,7 +598,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-barrelwater">
@@ -608,7 +609,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="2.36" giveComment="呵呵" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-bottlewater">
@@ -619,7 +620,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-daily">
@@ -630,7 +631,7 @@
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="1" /></td>
 									<td><input type="text" value="无" /></td>
-									<td><input type="checkbox" giveMoney="" giveComment="" onclick="clickGive(this);"/></td>
+									<td><input type="checkbox" giveMoney="0" giveComment="" onclick="clickGive(this);"/></td>
 									<td></td>
 								</tr>
 								<tr class="col-add-add">
@@ -772,6 +773,44 @@
 	<!-- 赠送弹出框 end -->
 
 
+	<!-- 生日提醒弹出框start -->
+	<div id="newBirthdayReminderMenu" class="addItemDiv" style="height:500px;">
+		<div class="facContent">
+			<div class="fac-title">
+				生日提醒
+				<span onclick="closeBirthdayReminderMenu();">×</span>
+			</div>
+			<div class="fac-body" style=" overflow-y:none;">
+
+				<div  class="item">
+					<span class="span">提醒人：</span>
+					<div class="item-content">
+					<input type="text" id="dropDownInput" value="" uid="" readonly/>
+					<div class="dropDownMenu">
+						<ul>
+						</ul>
+					</div>
+					</div>
+				</div>
+
+				<div id="reminder-title" class="item">
+					<span class="span">主题：</span>
+					<div class="item-content"><input id="reminderTitle" type="text" value=""/></div>
+				</div>
+				<div id="reminder-content" class="item">
+					<span class="span">内容：</span>
+					<div class="item-content"><textarea id="reminderContent" cols="155" rows="10"></textarea></div>
+				</div>
+			</div>
+			<div class="fac-foot">
+				<span id="currentDate" style="display:none"></span>
+				<a class="btn btn-submit" id="finishBtn" onclick="addBirthdayReminder();">确认</a>
+			</div>
+		</div>
+	</div>
+	<!-- 生日提醒弹出框 end -->
+
+
 
 	<div class="shadow"></div>
 
@@ -787,6 +826,23 @@
         var nowDate = new Date();
         $(".pack_maintain").val(formatDateForm(nowDate));
         $('.pack_maintain').date_input();
+
+        // 事件冒泡（隐藏下拉菜单）
+        $(document).on("click",function(e){
+            $(".dropDownMenu").css("display","none");
+
+        })
+
+        // 显示问题分类下拉菜单
+        $("#dropDownInput").click(function(e){
+            $(".dropDownMenu").css("display","block");
+
+            // 阻止事件冒泡
+            e.stopPropagation();
+        });
+
+        //拉取所有用户
+        searchAllUsers();
 	</script>
 </body>
 </html>

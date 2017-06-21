@@ -84,6 +84,12 @@ public class GuestController {
 			newGuest.setOTHER_GUESTS(obj.getString("STR_GuestOthers"));
 			newGuest.setGUEST_TYPE(obj.getString("STR_GuestType"));
 			newGuest.setBIRTHDAY(obj.getDate("STR_Birthday"));
+
+			//根据BOOL_ISREMIND决定是否添加系统提醒
+			//若是 进一步获取UID、TITLE、CONTENT、并根据birthday和到期时间 计算总共X年，然后生成X条系统提醒
+
+
+
 			newGuest.setEMAIL(obj.getString("STR_Email"));
 			newGuest.setCOMPANY_CONTACTOR(obj.getString("STR_CompanyContactor"));
 			newGuest.setCOMPANY_TEL(obj.getString("STR_CompanyTel"));
@@ -225,6 +231,9 @@ public class GuestController {
 						newService.setCOMMENT(obj3.getString("STR_Note"));
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
 
+						newService.setFREE_MONEY(obj3.getBooleanValue("BOOL_Give") ? obj3.getDouble("DOU_GiveMoney") : 0);
+						newService.setFREE_REASON(obj3.getBooleanValue("BOOL_Give") ? obj3.getString("STR_GiveComment") : "");
+
 						if (guestMissionService.addGuestService(newService) == 1) {
 							System.out.println("Finish launch");
 						} else {
@@ -247,6 +256,9 @@ public class GuestController {
 						newService.setCOMMENT(obj3.getString("STR_Note"));
 						newService.setFREE(obj3.getBooleanValue("BOOL_Give") ? 1 : 0);
 
+						newService.setFREE_MONEY(obj3.getBooleanValue("BOOL_Give") ? obj3.getDouble("DOU_GiveMoney") : 0);
+						newService.setFREE_REASON(obj3.getBooleanValue("BOOL_Give") ? obj3.getString("STR_GiveComment") : "");
+
 						if (guestMissionService.addGuestService(newService) == 1) {
 							System.out.println("Finish service_add");
 						} else {
@@ -267,6 +279,9 @@ public class GuestController {
 					newService.setCOMMENT(obj2.getString("STR_Note"));
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
 
+					newService.setFREE_MONEY(obj2.getBooleanValue("BOOL_Give") ? obj2.getDouble("DOU_GiveMoney") : 0);
+					newService.setFREE_REASON(obj2.getBooleanValue("BOOL_Give") ? obj2.getString("STR_GiveComment") : "");
+
 					if (guestMissionService.addGuestService(newService) == 1) {
 						System.out.println("Finish service_source");
 					} else {
@@ -285,6 +300,9 @@ public class GuestController {
 					newService.setTURN(obj2.getInteger("INT_Cycle"));
 					newService.setCOMMENT(obj2.getString("STR_Note"));
 					newService.setFREE(obj2.getBooleanValue("BOOL_Give") ? 1 : 0);
+
+					newService.setFREE_MONEY(obj2.getBooleanValue("BOOL_Give") ? obj2.getDouble("DOU_GiveMoney") : 0);
+					newService.setFREE_REASON(obj2.getBooleanValue("BOOL_Give") ? obj2.getString("STR_GiveComment") : "");
 
 					if (guestMissionService.addGuestService(newService) == 1) {
 						System.out.println("Finish service");

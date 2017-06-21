@@ -540,3 +540,24 @@ input[type="file"] {
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .fac-foot .btn-submit:hover{background: #fafafa;cursor:pointer;}
+
+
+#reminderTitle {
+	width:400px;
+}
+
+#reminderContent {
+	padding-left:10px;
+	border-color: #B1B2B3;
+	resize: none;
+	width:550px;
+	height:220px;
+}
+
+/* 下拉列表 */
+#dropDownList{position: relative;}
+#dropDownInput{cursor: pointer;}
+#spanExist, #dropDownList .span{width: 116px;}
+.dropDownMenu{width:173px;display: none; z-index: 999; position: absolute; background: #fafafa; border: 1px solid #aaa; box-shadow: 2px 2px 2px rgba(0,0,0,.3); margin-bottom: 5em;}
+.dropDownMenu li{height: 30px; line-height: 30px; text-align: center; border-bottom: 1px solid #aaa; color: #2277da; cursor: pointer;}
+.dropDownMenu li:hover{background: #2277da; color: #fff;}
