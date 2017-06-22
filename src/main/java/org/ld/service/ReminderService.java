@@ -2,6 +2,7 @@ package org.ld.service;
 
 import org.ld.model.DiaryReminder;
 import org.ld.model.MailReminder;
+import org.ld.model.SystemReminder;
 
 import java.util.Date;
 import java.util.List;
@@ -53,4 +54,6 @@ public interface ReminderService {
 	/**
 	 * 系统提醒
 	 */
+
+	int addSystemReminder(SystemReminder systemReminder);
 }

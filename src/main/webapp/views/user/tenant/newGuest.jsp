@@ -656,21 +656,29 @@
 			<div class="extra-body">
 				<div class="tab-content-body">
 					<div class="form">
-						<div class="item item-LE" style="margin-bottom:20px;">
-							<div class="btn btn-upload">+ LE条件书</div>
-							<div class="fileName"></div>
-							<input id="uploadLE" type="file" name="file"/>
-						</div>
-						<div class="item item-SPC" style="margin-bottom:20px;">
-							<div class="btn btn-upload">+ SPC条件书</div>
-							<div class="fileName"></div>
-							<input id="uploadSPC" type="file" name="file"/>
-						</div>
-						<div class="item item-guestID">
-							<div class="btn btn-upload">+ 客人证件</div>
-							<div class="fileName"></div>
-							<input id="uploadGuestID" type="file" name="file"/>
-						</div>
+						<form modelAttribute="user" method="post"
+							  enctype="multipart/form-data"
+							  action="${pageContext.request.contextPath }/guest/uploadGuestScanning.action">
+							<div class="item item-LE" style="margin-bottom:20px;">
+								<div class="btn btn-upload">+ LE条件书</div>
+								<div class="fileName"></div>
+								<input id="uploadLE" type="file" name="file"/>
+							</div>
+							<div class="item item-SPC" style="margin-bottom:20px;">
+								<div class="btn btn-upload">+ SPC条件书</div>
+								<div class="fileName"></div>
+								<input id="uploadSPC" type="file" name="file"/>
+							</div>
+							<div class="item item-guestID">
+								<div class="btn btn-upload">+ 客人证件</div>
+								<div class="fileName"></div>
+								<input id="uploadGuestID" type="file" name="file"/>
+							</div>
+
+							<!--提交按钮-->
+							<input type="submit" id = "requestUploadBtn" style="display:none;" value="" />
+							<input id="guestId" name="guestId" value="-1" style="display:none;">
+						</form>
 					</div>
 				</div>
 			</div>

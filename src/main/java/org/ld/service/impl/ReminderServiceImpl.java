@@ -3,8 +3,10 @@ package org.ld.service.impl;
 import org.apache.log4j.Logger;
 import org.ld.dao.DiaryReminderMapper;
 import org.ld.dao.MailReminderMapper;
+import org.ld.dao.SystemReminderMapper;
 import org.ld.model.DiaryReminder;
 import org.ld.model.MailReminder;
+import org.ld.model.SystemReminder;
 import org.ld.service.ReminderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class ReminderServiceImpl implements ReminderService{
 
 	@Autowired
 	private MailReminderMapper mailReminderMapper;
+
+	@Autowired
+	private SystemReminderMapper systemReminderMapper;
 
 	@Override
 	public List<String> getRemindDaysInMonth(Integer uid, Date fromDate, Date toDate) {
@@ -197,5 +202,19 @@ public class ReminderServiceImpl implements ReminderService{
 		map.put("REMIND_DATE", remindDate);
 
 		return mailReminderMapper.selectInboxMailByDate(map);
+	}
+
+
+	/**
+	 * 系统提醒
+	 */
+	@Override
+	public int addSystemReminder(SystemReminder systemReminder) {
+		try{
+			return systemReminderMapper.insert(systemReminder);
+		} catch(Exception e){
+			System.err.println(e.getCause());
+			return 0;
+		}
 	}
 }

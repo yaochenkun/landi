@@ -125,6 +125,8 @@ public interface RoomService {
 	RoomState getCertainRSbyID(Integer id);
 	
 	RoomState getCertainRSbyNumber(String number);
+
+	RoomState getCertainRSbyRoomNumber(String number);
 	
 	/**
 	 * 接送机

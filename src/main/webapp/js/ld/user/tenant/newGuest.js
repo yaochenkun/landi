@@ -229,6 +229,22 @@ var changeTabContent = function(index){
 // 添加租客
 var addGuest = function(){
 
+	//检查扫描件是否上传了
+	if($(".item-LE .fileName").text().trim() == ""){
+        showModalBox("error","请上传LE条件书！");
+        return;
+	} else if($(".item-SPC .fileName").text().trim() == ""){
+        showModalBox("error","请上传SPC条件书！");
+        return;
+    } else if($(".item-guestID .fileName").text().trim() == ""){
+        showModalBox("error","请上传客人证件！");
+        return;
+    }
+
+
+
+
+
 	// 获取租客信息
 	var name = $(".tab-content-guest .item-name input").eq(0).val(),
         guestType = $(".tab-content-guest .item-name input[type='radio']:checked").val(),
@@ -607,7 +623,18 @@ var addGuest = function(){
         success:function(data){
         	console.log(data);
         	if(data.State == "Valid"){
-        		showModalBox("success","添加成功！");
+
+        		//同步请求上传3个扫描件
+				var guestId = data.guestId; //客人ID
+
+				//将guesteId放置于input中
+				$("#guestId").val(guestId);
+
+				//触发上传提交图片
+				$("#requestUploadBtn").trigger("click");
+
+                showModalBox("success","添加成功！");
+
         	} else{
         		showModalBox("error","添加失败！");
         	}

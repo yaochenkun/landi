@@ -118,4 +118,9 @@
   	select * from room_state where STATE != 0 and ROOM_NUMBER = #{RN,jdbcType=VARCHAR}
   	]]>
   </select>
+  <select id="getCertainRoomStateByRoomNumber" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <![CDATA[
+  	select * from room_state where ROOM_NUMBER = #{RN,jdbcType=VARCHAR}
+  	]]>
+  </select>
 </mapper>

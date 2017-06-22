@@ -486,6 +486,12 @@ public class RoomServiceImpl implements RoomService {
 		return roomStateMapper.getCertainRoomStateByNumber(number);
 	}
 
+	@Override
+	public RoomState getCertainRSbyRoomNumber(String number) {
+		// TODO Auto-generated method stub
+		return roomStateMapper.getCertainRoomStateByRoomNumber(number);
+	}
+
 	/**
 	 * 接送机
 	 */

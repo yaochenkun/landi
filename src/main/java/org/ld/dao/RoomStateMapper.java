@@ -25,4 +25,6 @@ public interface RoomStateMapper {
 	RoomState getCertainRoomStateByID(Integer RID);
 	
 	RoomState getCertainRoomStateByNumber(String RN);
+
+	RoomState getCertainRoomStateByRoomNumber(String RN);
 }

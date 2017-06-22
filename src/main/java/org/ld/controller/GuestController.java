@@ -1,29 +1,30 @@
 package org.ld.controller;
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
 import org.ld.model.*;
 import org.ld.service.GuestMissionService;
+import org.ld.service.ReminderService;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/guest")
@@ -35,8 +36,40 @@ public class GuestController {
 	private RoomService roomService;
 	@Autowired
 	private GuestMissionService guestMissionService;
+	@Autowired
+	private ReminderService reminderService;
 
 	private static Logger logger = Logger.getLogger("logRec");
+
+
+	// 多文件上传
+	@RequestMapping(value = "/uploadGuestScanning", method = RequestMethod.POST)
+	public String uploadGuestScanning(@RequestParam("file") MultipartFile[] file, Integer guestId, HttpServletRequest request) {
+		// System.out.println(request.getSession().getServletContext().getRealPath(""));
+		System.out.println("guestId：" + guestId);
+
+		// 遍历文件
+		int index = 0;
+		String[]  foldersName = {"LE_condition", "SPC_condition", "guest_idcard"};
+		for (MultipartFile mul : file) {
+			System.out.println(mul.getName() + "---" + mul.getContentType() + "---" + mul.getOriginalFilename());
+			try {
+				if (!mul.isEmpty()) {
+					Streams.copy(mul.getInputStream(),
+							new FileOutputStream(request.getSession().getServletContext().getRealPath("")
+									+ "/resources/"+ foldersName[index] +"/" + guestId + "_" + mul.getOriginalFilename()),
+							true);
+					index++;
+				}
+			} catch (IOException e) {
+				System.out.println("文件上传失败");
+				e.printStackTrace();
+			}
+		}
+
+		return "redirect:/views/user/tenant/newGuest.jsp";
+	}
+
 
 
 	@RequestMapping("/addGuest")
@@ -58,8 +91,18 @@ public class GuestController {
 		GuestBalance newBalance = new GuestBalance();
 		GuestService newService = new GuestService();
 
+
 		JSONObject obj = objs.getJSONObject("guest");
 		try {
+
+			//先检查roomNumber房间是否已经有人入住 即free字段为1则不能添加
+			Integer state = roomService.getCertainRSbyRoomNumber(obj.getString("STR_RommID")).getSTATE();
+			if(state == 1) //已有人入住
+			{
+				ans.put("State", "该房间已有人入住");
+				return ans;
+			}
+
 			newGuest.setGUEST_NAME(obj.getString("STR_Name"));
 			newGuest.setROOM_NUMBER(obj.getString("STR_RommID"));
 			newGuest.setROOM_TYPE(roomService.getRoomByNumber(obj.getString("STR_RommID")).getTYPE());
@@ -85,10 +128,6 @@ public class GuestController {
 			newGuest.setGUEST_TYPE(obj.getString("STR_GuestType"));
 			newGuest.setBIRTHDAY(obj.getDate("STR_Birthday"));
 
-			//根据BOOL_ISREMIND决定是否添加系统提醒
-			//若是 进一步获取UID、TITLE、CONTENT、并根据birthday和到期时间 计算总共X年，然后生成X条系统提醒
-
-
 
 			newGuest.setEMAIL(obj.getString("STR_Email"));
 			newGuest.setCOMPANY_CONTACTOR(obj.getString("STR_CompanyContactor"));
@@ -101,6 +140,73 @@ public class GuestController {
 			if (guestMissionService.addGuest(newGuest) == 1) {
 				newGuest = guestMissionService.getGuestByContract(obj.getString("STR_ContractID"));
 				System.out.println("Finish Guest");
+
+				//生日提醒设置
+				//根据BOOL_IsRemind决定是否添加系统提醒
+				//若是 进一步获取UID、TITLE、CONTENT、并根据birthday和到期时间 计算总共X年，然后生成X条系统提醒
+				if(obj.getBooleanValue("BOOL_IsRemind")) {
+
+					Integer uid = obj.getInteger("INT_Uid");
+					String title = obj.getString("STR_RemindTitle");
+					String content = obj.getString("STR_RemindContent");
+					Date birthday = obj.getDate("STR_Birthday");
+
+
+
+
+					Calendar timeIn = Calendar.getInstance();
+					Calendar timeOut = Calendar.getInstance();
+					Calendar birth = Calendar.getInstance();
+					timeIn.setTime(obj.getDate("STR_TimeIn"));
+					timeOut.setTime(obj.getDate("STR_TimeOut"));
+					birth.setTime(birthday);
+
+					Calendar endTime = Calendar.getInstance();
+					endTime.set(timeOut.get(Calendar.YEAR), timeOut.get(Calendar.MONTH), timeOut.get(Calendar.DAY_OF_MONTH));
+
+
+					int startYear = timeIn.get(Calendar.YEAR);
+					int endYear = timeOut.get(Calendar.YEAR);
+
+					if(birth.get(Calendar.DAY_OF_YEAR) < timeIn.get(Calendar.DAY_OF_YEAR))
+						startYear++;
+
+					int birthMonth = birth.get(Calendar.MONTH);
+					int birthDay = birth.get(Calendar.DAY_OF_MONTH);
+
+					//计算生日提醒的 年/月/日 - 3天
+					Calendar remind = Calendar.getInstance();
+					for(int year = startYear; year <= endYear; year++) {
+						remind.set(year, birthMonth, birthDay);
+
+						if(remind.compareTo(endTime) <= 0) {
+
+							remind.add(Calendar.DAY_OF_MONTH, -3);
+							Date remindDate = remind.getTime();
+
+							//写入系统提醒
+							SystemReminder sr = new SystemReminder();
+							sr.setREMIND_DATE(remindDate);
+							sr.setUSER_ID(uid);
+							sr.setTITLE(title);
+							sr.setCONTENT(content);
+							sr.setSTATE("未完成");
+
+							if(reminderService.addSystemReminder(sr) == 1){
+								System.out.println("Finish System Reminder of Birthday");
+							} else  {
+								ans.remove("State");
+								ans.put("State", "Invalid: Birthday Reminder info error");
+								return ans;
+							}
+						} else {
+							break;
+						}
+					}
+
+				}
+
+
 			} else {
 				ans.remove("State");
 				ans.put("State", "Invalid: Guest info error");
@@ -339,6 +445,9 @@ public class GuestController {
 		}
 		
 		logger.info(curUser.getNAME() + " add new guest " + newGuest.getGUEST_NAME() + " in " + newGuest.getROOM_NUMBER());
+
+		//返回guestId作为之后上传3个扫描件文件命名使用 guestId_XX_MMMM
+		ans.put("guestId", newGuest.getID());
 		return ans;
 	}
 
