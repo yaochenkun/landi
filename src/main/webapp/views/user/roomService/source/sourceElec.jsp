@@ -6,25 +6,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceElec.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceElec.css" rel="stylesheet" type="text/css" />
 <title>电费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
-	<!-- 页面内容 strat -->
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
@@ -33,22 +26,16 @@
 					href="sourceIndex.jsp">能源费结算</a> <i class="icon-path"></i> <a
 					href="sourceElec.jsp">电费</a>
 			</div>
-			<a class="btn btn-new btnnew" href="sourceNew.jsp?type=2">新增电费记录</a>
+			<a class="btn btn-new btnnew" href="sourceNew.jsp?type=elec">新增电费记录</a>
 			<div class="bill-area">
+				<input type="text" class="search-input" id="roomNumber" placeholder="房间号..." />
+				<a class="btn btn-edit btnSearch" onclick="requestElec($('#roomNumber').val(),parseInt(1))">搜索</a>
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
 							<tr>
-								<th><span>房间号</span>
-									<div class="search-roomNo">
-										<div class="search-wrap">
-											<input type="text" class="search-input"
-												placeholder="请输入房间号..." /> <a class="search-btn" href=""></a>
-											<a class="btn btn-edit btnedit"
-												onclick="requestFirstElecByRoomNum(this)">搜索电费</a>
-										</div>
-									</div></th>
+								<th><span>房间号</span></th>
 								<th><span>客户姓名</span></th>
 								<th><span>表号</span></th>
 								<th><span>上月表数</span></th>
@@ -70,19 +57,14 @@
 	</div>
 	<!-- 页面内容 end -->
 
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceElec.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceElec.js"></script>
 	<script type="text/javascript">
-	    // 拉取第一页餐费信息
-		requestFirstElec();
+	    // 拉取第一页电费信息
+        requestElec($("#roomNumber").val(),parseInt(1));
 	</script>
 </body>
 </html>

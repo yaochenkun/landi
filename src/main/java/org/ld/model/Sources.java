@@ -7,21 +7,19 @@ public class Sources {
 
     private String ROOM_NUMBER;
 
-    private Integer GUEST_ID;
-
     private String GUEST_NAME;
 
-    private Date TIME;
+    private Date CUR_TIME;
 
-    private Integer TYPE;
+    private String TYPE;
 
     private String METER;
 
-    private Double LAST_DATA;
+    private Double YEAR_INIT_VAL;
 
-    private Double CURRENT_DATA;
+    private Double LAST_MONTH_VAL;
 
-    private Double COUNT;
+    private Double CUR_MONTH_VAL;
 
     private Double MONEY;
 
@@ -43,14 +41,6 @@ public class Sources {
         this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
     }
 
-    public Integer getGUEST_ID() {
-        return GUEST_ID;
-    }
-
-    public void setGUEST_ID(Integer GUEST_ID) {
-        this.GUEST_ID = GUEST_ID;
-    }
-
     public String getGUEST_NAME() {
         return GUEST_NAME;
     }
@@ -59,20 +49,20 @@ public class Sources {
         this.GUEST_NAME = GUEST_NAME == null ? null : GUEST_NAME.trim();
     }
 
-    public Date getTIME() {
-        return TIME;
+    public Date getCUR_TIME() {
+        return CUR_TIME;
     }
 
-    public void setTIME(Date TIME) {
-        this.TIME = TIME;
+    public void setCUR_TIME(Date CUR_TIME) {
+        this.CUR_TIME = CUR_TIME;
     }
 
-    public Integer getTYPE() {
+    public String getTYPE() {
         return TYPE;
     }
 
-    public void setTYPE(Integer TYPE) {
-        this.TYPE = TYPE;
+    public void setTYPE(String TYPE) {
+        this.TYPE = TYPE == null ? null : TYPE.trim();
     }
 
     public String getMETER() {
@@ -83,28 +73,28 @@ public class Sources {
         this.METER = METER == null ? null : METER.trim();
     }
 
-    public Double getLAST_DATA() {
-        return LAST_DATA;
+    public Double getYEAR_INIT_VAL() {
+        return YEAR_INIT_VAL;
     }
 
-    public void setLAST_DATA(Double LAST_DATA) {
-        this.LAST_DATA = LAST_DATA;
+    public void setYEAR_INIT_VAL(Double YEAR_INIT_VAL) {
+        this.YEAR_INIT_VAL = YEAR_INIT_VAL;
     }
 
-    public Double getCURRENT_DATA() {
-        return CURRENT_DATA;
+    public Double getLAST_MONTH_VAL() {
+        return LAST_MONTH_VAL;
     }
 
-    public void setCURRENT_DATA(Double CURRENT_DATA) {
-        this.CURRENT_DATA = CURRENT_DATA;
+    public void setLAST_MONTH_VAL(Double LAST_MONTH_VAL) {
+        this.LAST_MONTH_VAL = LAST_MONTH_VAL;
     }
 
-    public Double getCOUNT() {
-        return COUNT;
+    public Double getCUR_MONTH_VAL() {
+        return CUR_MONTH_VAL;
     }
 
-    public void setCOUNT(Double COUNT) {
-        this.COUNT = COUNT;
+    public void setCUR_MONTH_VAL(Double CUR_MONTH_VAL) {
+        this.CUR_MONTH_VAL = CUR_MONTH_VAL;
     }
 
     public Double getMONEY() {

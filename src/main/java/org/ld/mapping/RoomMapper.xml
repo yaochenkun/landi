@@ -9,12 +9,17 @@
     <result column="RENT" property="RENT" jdbcType="INTEGER" />
     <result column="STATE" property="STATE" jdbcType="INTEGER" />
     <result column="COMM" property="COMM" jdbcType="VARCHAR" />
+    <result column="OWNER_NAME" property="OWNER_NAME" jdbcType="VARCHAR" />
+    <result column="RECEIPT_TIME" property="RECEIPT_TIME" jdbcType="TIMESTAMP" />
+    <result column="REFUND_TIME" property="REFUND_TIME" jdbcType="TIMESTAMP" />
+    <result column="REPLACE_ROOM" property="REPLACE_ROOM" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, TYPE, AREA, RENT, STATE, COMM
+    ID, ROOM_NUMBER, TYPE, AREA, RENT, STATE, COMM, OWNER_NAME, RECEIPT_TIME, REFUND_TIME,
+    REPLACE_ROOM
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from room
     where ID = #{ID,jdbcType=INTEGER}
@@ -24,12 +29,14 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Room" >
-    insert into room (ID, ROOM_NUMBER, TYPE, 
-      AREA, RENT, STATE, COMM
-      )
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR}, 
-      #{AREA,jdbcType=DOUBLE}, #{RENT,jdbcType=INTEGER}, #{STATE,jdbcType=INTEGER}, #{COMM,jdbcType=VARCHAR}
-      )
+    insert into room (ID, ROOM_NUMBER, TYPE,
+      AREA, RENT, STATE, COMM,
+      OWNER_NAME, RECEIPT_TIME, REFUND_TIME,
+      REPLACE_ROOM)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{TYPE,jdbcType=VARCHAR},
+      #{AREA,jdbcType=DOUBLE}, #{RENT,jdbcType=INTEGER}, #{STATE,jdbcType=INTEGER}, #{COMM,jdbcType=VARCHAR},
+      #{OWNER_NAME,jdbcType=VARCHAR}, #{RECEIPT_TIME,jdbcType=TIMESTAMP}, #{REFUND_TIME,jdbcType=TIMESTAMP},
+      #{REPLACE_ROOM,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Room" >
     insert into room
@@ -55,6 +62,18 @@
       <if test="COMM != null" >
         COMM,
       </if>
+      <if test="OWNER_NAME != null" >
+        OWNER_NAME,
+      </if>
+      <if test="RECEIPT_TIME != null" >
+        RECEIPT_TIME,
+      </if>
+      <if test="REFUND_TIME != null" >
+        REFUND_TIME,
+      </if>
+      <if test="REPLACE_ROOM != null" >
+        REPLACE_ROOM,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -77,6 +96,18 @@
       </if>
       <if test="COMM != null" >
         #{COMM,jdbcType=VARCHAR},
+      </if>
+      <if test="OWNER_NAME != null" >
+        #{OWNER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIPT_TIME != null" >
+        #{RECEIPT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="REFUND_TIME != null" >
+        #{REFUND_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="REPLACE_ROOM != null" >
+        #{REPLACE_ROOM,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -101,6 +132,18 @@
       <if test="COMM != null" >
         COMM = #{COMM,jdbcType=VARCHAR},
       </if>
+      <if test="OWNER_NAME != null" >
+        OWNER_NAME = #{OWNER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIPT_TIME != null" >
+        RECEIPT_TIME = #{RECEIPT_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="REFUND_TIME != null" >
+        REFUND_TIME = #{REFUND_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="REPLACE_ROOM != null" >
+        REPLACE_ROOM = #{REPLACE_ROOM,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -111,7 +154,11 @@
       AREA = #{AREA,jdbcType=DOUBLE},
       RENT = #{RENT,jdbcType=INTEGER},
       STATE = #{STATE,jdbcType=INTEGER},
-      COMM = #{COMM,jdbcType=VARCHAR}
+      COMM = #{COMM,jdbcType=VARCHAR},
+      OWNER_NAME = #{OWNER_NAME,jdbcType=VARCHAR},
+      RECEIPT_TIME = #{RECEIPT_TIME,jdbcType=TIMESTAMP},
+      REFUND_TIME = #{REFUND_TIME,jdbcType=TIMESTAMP},
+      REPLACE_ROOM = #{REPLACE_ROOM,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -124,7 +171,7 @@
     select 
     <include refid="Base_Column_List" />
     from room
-    where TYPE = #{TYPE,jdbcType=VARCHAR}
+    where TYPE = #{ROOM_TYPE,jdbcType=VARCHAR}
   </select>
   <select id="getRoomByState" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -142,4 +189,29 @@
   	select count(*) from room
   	]]>
   </select>
+  <select id="getAllTypeNotNullRoom" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room
+    where TYPE IS NOT NULL
+  </select>
+  <select id="totalRoom" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from room
+    where ROOM_NUMBER like concat('%',#{Room_Number},'%') and TYPE like concat('%',#{Type},'%')
+  </select>
+  <select id="getRoomBySearch" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from room
+    where ROOM_NUMBER like concat('%',#{Room_Number},'%') and TYPE like concat('%',#{Type},'%')
+    order by ID
+    limit #{ST}, #{EACH}
+  </select>
+ <select id="getAllRoomBySearch" resultMap="BaseResultMap" parameterType="map">
+   select
+   <include refid="Base_Column_List" />
+   from room
+   where ROOM_NUMBER like concat('%',#{Room_Number},'%') and TYPE like concat('%',#{TYPE},'%')
+ </select>
 </mapper>

@@ -25,3 +25,10 @@ tbody td:nth-child(5) {
 tbody td:nth-child(6) {
 	color: #f1551a;
 }
+
+.btnSearch {
+	border: 1px solid #aaa;
+	padding: 2px 12px;
+	cursor:pointer;
+	margin-left: 30px;
+}

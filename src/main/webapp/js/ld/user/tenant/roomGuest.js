@@ -1,3 +1,14 @@
+var manage_type = "";
+var room_type = "";
+var owner_name = "";
+var set_time = "";
+var commend = "";
+var replace_room = "";
+
+var crossQuit = function () {
+    $(".manage").css("display","none");
+    $(".shadow").css("display","none");
+}
 // 获取租客信息（guest表）
 var getGuestInfo = function (rid, rNum) {
 	$.ajax({
@@ -389,4 +400,165 @@ var requestNextLittle = function(){
 	getLittle(nowpage+1);
 };
 
+//房源管理
 
+var changeSelection = function(element) {
+	$(element).siblings().each(function(){$(this).removeClass("item-active");});
+	$("#room-type a").each(function(){$(this).removeClass("item-active");});
+	$(element).addClass("item-active");
+}
+
+
+//房源管理选择操作类型 弹窗布局
+var initChoiceManageDiv = function (type , state) {
+    $(".item:eq(0)").show();
+    if(state == null ) {
+    	$("#addroom").show();
+    	$("#replaceroom").hide();
+    	$("#deleteroom").hide();
+	}
+	else if(type == "LE" || type == "小业主") {
+		$("#deleteroom").show();
+		$("#replaceroom").hide();
+		$("#addroom").hide();
+	}
+	else if(type == "SPC") {
+		$("#replaceroom").show();
+		$("#deleteroom").show();
+		$("#addroom").hide();
+
+	}
+	$(".item:gt(0)").hide();
+	$("#man-foot-content").hide();
+}
+
+//添加房源 弹窗布局
+var addRoomDiv = function() {
+	$("#room-type").show();
+	$(".item:gt(1)").hide();
+    $("#man-foot-content").show();
+}
+var addRoomDivForLEAndSPC = function () {
+	$("#room-name").hide();
+	$("#room-replace").hide();
+	$("#man-date").show();
+	$("#man-date .span").text("接收日期");
+	$("#com").show();
+	$("#man-foot-content").show();
+}
+
+var addRoomDivForOwner = function () {
+	addRoomDivForLEAndSPC();
+	$("#room-name").show();
+}
+//替换房源 弹窗布局
+var replaceRoomDiv = function () {
+	$("#room-type").hide();
+	$("#room-name").hide();
+	$("#room-replace").show();
+	$("#man-date").show();
+	$("#man-date .span").text("替换日期");
+	$("#com").show();
+    $("#man-foot-content").show();
+}
+//退还房源 弹窗布局
+var deleteRoomDiv = function () {
+	replaceRoomDiv();
+	$("#room-replace").hide();
+	$("#man-date .span").text("退还日期");
+}
+
+var addChange = function (element) {
+	manage_type = "添加房源";
+    changeSelection(element);
+    addRoomDiv();
+}
+
+var replaceChange = function (element) {
+	manage_type = "替换房源";
+	changeSelection(element);
+	replaceRoomDiv();
+}
+
+var delChange = function (element) {
+	manage_type = "退还房源";
+ 	changeSelection(element);
+ 	deleteRoomDiv();
+}
+
+var addForLE = function (element) {
+	room_type = "LE";
+	changeSelection(element);
+	addRoomDivForLEAndSPC();
+}
+
+var addForSPC = function (element) {
+	room_type = "SPC";
+	changeSelection(element);
+	addRoomDivForLEAndSPC();
+}
+var addForOwner = function (element) {
+	room_type = "小业主";
+	changeSelection(element);
+	addRoomDivForOwner();
+}
+
+
+var roomManage = function(rNum) {
+    $(".shadow").css("display","block");
+    $(".manage").css("display","block");
+			console.log(manage_type);
+	var roomType;
+	var roomState;
+    $.ajax({
+		type:'post',
+		url:'/LD/userRoom/getManageOption.action',
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"rNum":"'+ rNum +'"}',
+		success:function(data){
+			console.log(data);
+			if(data.State == "Invalid") {
+                crossQuit();
+                console.log("房源管理失败！");
+			}
+			else {
+				roomType = data.RoomType;
+				roomState = data.State;
+				console.log(roomType);
+                initChoiceManageDiv(roomType , roomState);
+
+			}
+
+		}
+	});
+}
+
+var addManage = function(rNum) {
+	owner_name = $("#owner").val();
+	set_time = formatDateForm(new Date($(".pack_maintain").val()));
+	replace_room = $("#replace_room").val();
+	commend = $("#commend").val();
+
+	console.log('{"rNum":"' + rNum + '","room_type":"' + room_type + '","name":"' + owner_name + '","time":"' +
+        set_time + '","replace_room":"' + replace_room + '","com":"' + commend + '","manage":"' + manage_type + '"}');
+	$.ajax({
+		type:'POST',
+		url:'/LD/userRoom/updateRoomInfo.action',
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"rNum":"' + rNum + '","room_type":"' + room_type + '","name":"' + owner_name + '","time":"' +
+		set_time + '","replace_room":"' + replace_room + '","com":"' + commend + '","manage":"' + manage_type + '"}',
+		success:function(data){
+			if(data == 0){
+                crossQuit();
+				showModalBox("error","操作失败！");
+			}else {
+                crossQuit();
+				showModalBox("success","操作成功！")
+			}
+
+		}
+
+	});
+}

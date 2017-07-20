@@ -1,6 +1,7 @@
 package org.ld.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.ld.model.Room;
 
@@ -20,11 +21,19 @@ public interface RoomMapper {
 	// add
 	Room selectByNumber(String RN);
 
-	List<Room> getRoomByType(String TYPE);
+	List<Room> getRoomByType(String ROOM_TYPE);
 
 	List<Room> getRoomByState(int STATE);
 
 	List<Room> getAllRoom();
 
 	int totalRow();
+
+	List<Room> getAllTypeNotNullRoom();
+
+	int totalRoom(Map<String,Object> map);
+
+	List<Room> getRoomBySearch(Map<String,Object> map);
+
+	List<Room> getAllRoomBySearch(Map<String,Object> map);
 }

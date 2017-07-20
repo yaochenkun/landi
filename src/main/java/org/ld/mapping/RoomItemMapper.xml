@@ -157,7 +157,7 @@
     </update>
   <select id="getItems" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where ROOM_ID = #{ROOM_ID} and TYPE = #{TYPE} limit #{ST}, #{EACH}
+  	select * from room_item where ID = #{ROOM_ID} and TYPE = #{TYPE} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getItemsByType" resultMap="BaseResultMap" parameterType="map">
@@ -167,7 +167,7 @@
 	</select>
 	<select id="getItemsByRoom" resultMap="BaseResultMap" parameterType="map">
   	<![CDATA[
-  	select * from room_item where ROOM_ID = #{ROOM_ID} limit #{ST}, #{EACH}
+  	select * from room_item where ID = #{ROOM_ID} limit #{ST}, #{EACH}
     ]]>
 	</select>
 	<select id="getItemsByItemID" resultMap="BaseResultMap" parameterType="map">
@@ -182,7 +182,7 @@
 	</select>
 	<select id="getTotal" resultType="java.lang.Integer" parameterType="map">
   	<![CDATA[
-  	select count(*) from room_item where ROOM_ID = #{ROOM_ID} and TYPE = #{TYPE}
+  	select count(*) from room_item where ID = #{ROOM_ID} and TYPE = #{TYPE}
     ]]>
 	</select>
 	<select id="getTotalByType" resultType="java.lang.Integer" parameterType="java.lang.String">
@@ -192,7 +192,7 @@
 	</select>
 	<select id="getTotalByRoom" resultType="java.lang.Integer" parameterType="java.lang.Integer">
   	<![CDATA[
-  	select count(*) from room_item where ROOM_ID = #{RID,jdbcType=INTEGER}
+  	select count(*) from room_item where ID = #{RID,jdbcType=INTEGER}
     ]]>
 	</select>
 	<select id="getAllTotal" resultType="java.lang.Integer">

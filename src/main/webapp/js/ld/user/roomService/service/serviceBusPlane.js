@@ -244,9 +244,9 @@ var associateGuestName = function(element){
 
 //导出接送机列表至 excel中
 var exportList = function(){
-    var BB = self.Blob;
-    var fileName = "BusPlaneList_" + formatDateDot(new Date()) + ".csv";
-    var content = ",,,,,接送机记录表\n房间号,客户姓名,接送/送机,航班,车牌,接送人（电话）,联络人（电话）,发生时间,上传时间,最后编辑时间\n";
+    // var BB = self.Blob;
+    // var fileName = "BusPlaneList_" + formatDateDot(new Date()) + ".csv";
+    // var content = ",,,,,接送机记录表\n房间号,客户姓名,接送/送机,航班,车牌,接送人（电话）,联络人（电话）,发生时间,上传时间,最后编辑时间\n";
     
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
@@ -260,22 +260,26 @@ var exportList = function(){
 		contentType:'application/json',
 		success:function(data){
 			console.log(data);
-
-			(data.dataList).map(function(record){
-	
-				content += record.room_NUMBER + "," + 
-						   record.guest_NAME + "," + 
-						   (record.type == "welcome" ? "接机":"送机") + "," +
-						   record.flight_NUMBER + "," + 
-						   record.plate_NUMBER + "," +
-						   record.picker_NAME + "（" + record.picker_TELE + "）" + "," + 
-						   record.contact_NAME + "（" + record.contact_TELE + "）" + "," + 
-						   formatDate(new Date(record.occur_TIME)) + "," + 
-						   formatDate(new Date(record.import_TIME)) + "," + 
-						   formatDate(new Date(record.edit_TIME)) + "\n";
-			});
-
-			saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+			if(data.State == "Valid"){
+				//window.location.href = "http://" + window.location.host + "/LD/excel/flightpicking.xlsx";
+				//window.open("/LD/excel/flightpicking.xlsx");
+				window.location.href = "http://" + window.location.host + "/LD/download.action?fp=/excel/flightpicking.xlsx";
+			}
+			// (data.dataList).map(function(record){
+            //
+			// 	content += record.room_NUMBER + "," +
+			// 			   record.guest_NAME + "," +
+			// 			   (record.type == "welcome" ? "接机":"送机") + "," +
+			// 			   record.flight_NUMBER + "," +
+			// 			   record.plate_NUMBER + "," +
+			// 			   record.picker_NAME + "（" + record.picker_TELE + "）" + "," +
+			// 			   record.contact_NAME + "（" + record.contact_TELE + "）" + "," +
+			// 			   formatDate(new Date(record.occur_TIME)) + "," +
+			// 			   formatDate(new Date(record.import_TIME)) + "," +
+			// 			   formatDate(new Date(record.edit_TIME)) + "\n";
+			// });
+            //
+			// saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
 		}
 	});
 };

@@ -4,23 +4,22 @@
   <resultMap id="BaseResultMap" type="org.ld.model.Sources" >
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
-    <result column="GUEST_ID" property="GUEST_ID" jdbcType="INTEGER" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
-    <result column="TIME" property="TIME" jdbcType="TIMESTAMP" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
+    <result column="CUR_TIME" property="CUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
     <result column="METER" property="METER" jdbcType="VARCHAR" />
-    <result column="LAST_DATA" property="LAST_DATA" jdbcType="DOUBLE" />
-    <result column="CURRENT_DATA" property="CURRENT_DATA" jdbcType="DOUBLE" />
-    <result column="COUNT" property="COUNT" jdbcType="DOUBLE" />
+    <result column="YEAR_INIT_VAL" property="YEAR_INIT_VAL" jdbcType="DOUBLE" />
+    <result column="LAST_MONTH_VAL" property="LAST_MONTH_VAL" jdbcType="DOUBLE" />
+    <result column="CUR_MONTH_VAL" property="CUR_MONTH_VAL" jdbcType="DOUBLE" />
     <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, GUEST_ID, GUEST_NAME, TIME, TYPE, METER, LAST_DATA, CURRENT_DATA, 
-    COUNT, MONEY, SYS_STATE
+    ID, ROOM_NUMBER, GUEST_NAME, CUR_TIME, TYPE, METER, YEAR_INIT_VAL, LAST_MONTH_VAL,
+    CUR_MONTH_VAL, MONEY, SYS_STATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from sources
     where ID = #{ID,jdbcType=INTEGER}
@@ -30,16 +29,14 @@
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="org.ld.model.Sources" >
-    insert into sources (ID, ROOM_NUMBER, GUEST_ID, 
-      GUEST_NAME, TIME, TYPE, 
-      METER, LAST_DATA, CURRENT_DATA, 
-      COUNT, MONEY, SYS_STATE
-      )
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_ID,jdbcType=INTEGER}, 
-      #{GUEST_NAME,jdbcType=VARCHAR}, #{TIME,jdbcType=TIMESTAMP}, #{TYPE,jdbcType=INTEGER}, 
-      #{METER,jdbcType=VARCHAR}, #{LAST_DATA,jdbcType=DOUBLE}, #{CURRENT_DATA,jdbcType=DOUBLE}, 
-      #{COUNT,jdbcType=DOUBLE}, #{MONEY,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER}
-      )
+    insert into sources (ID, ROOM_NUMBER, GUEST_NAME,
+    CUR_TIME, TYPE, METER,
+    YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_MONTH_VAL,
+    MONEY, SYS_STATE)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_NAME,jdbcType=VARCHAR},
+    #{CUR_TIME,jdbcType=TIMESTAMP}, #{TYPE,jdbcType=VARCHAR}, #{METER,jdbcType=VARCHAR},
+    #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE}, #{CUR_MONTH_VAL,jdbcType=DOUBLE},
+    #{MONEY,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Sources" >
     insert into sources
@@ -50,14 +47,11 @@
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER,
       </if>
-      <if test="GUEST_ID != null" >
-        GUEST_ID,
-      </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME,
       </if>
-      <if test="TIME != null" >
-        TIME,
+      <if test="CUR_TIME != null" >
+        CUR_TIME,
       </if>
       <if test="TYPE != null" >
         TYPE,
@@ -65,14 +59,14 @@
       <if test="METER != null" >
         METER,
       </if>
-      <if test="LAST_DATA != null" >
-        LAST_DATA,
+      <if test="YEAR_INIT_VAL != null" >
+        YEAR_INIT_VAL,
       </if>
-      <if test="CURRENT_DATA != null" >
-        CURRENT_DATA,
+      <if test="LAST_MONTH_VAL != null" >
+        LAST_MONTH_VAL,
       </if>
-      <if test="COUNT != null" >
-        COUNT,
+      <if test="CUR_MONTH_VAL != null" >
+        CUR_MONTH_VAL,
       </if>
       <if test="MONEY != null" >
         MONEY,
@@ -88,29 +82,26 @@
       <if test="ROOM_NUMBER != null" >
         #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
-      <if test="GUEST_ID != null" >
-        #{GUEST_ID,jdbcType=INTEGER},
-      </if>
       <if test="GUEST_NAME != null" >
         #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="TIME != null" >
-        #{TIME,jdbcType=TIMESTAMP},
+      <if test="CUR_TIME != null" >
+        #{CUR_TIME,jdbcType=TIMESTAMP},
       </if>
       <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+        #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="METER != null" >
         #{METER,jdbcType=VARCHAR},
       </if>
-      <if test="LAST_DATA != null" >
-        #{LAST_DATA,jdbcType=DOUBLE},
+      <if test="YEAR_INIT_VAL != null" >
+        #{YEAR_INIT_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CURRENT_DATA != null" >
-        #{CURRENT_DATA,jdbcType=DOUBLE},
+      <if test="LAST_MONTH_VAL != null" >
+        #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="COUNT != null" >
-        #{COUNT,jdbcType=DOUBLE},
+      <if test="CUR_MONTH_VAL != null" >
+        #{CUR_MONTH_VAL,jdbcType=DOUBLE},
       </if>
       <if test="MONEY != null" >
         #{MONEY,jdbcType=DOUBLE},
@@ -126,29 +117,26 @@
       <if test="ROOM_NUMBER != null" >
         ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       </if>
-      <if test="GUEST_ID != null" >
-        GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
-      </if>
       <if test="GUEST_NAME != null" >
         GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="TIME != null" >
-        TIME = #{TIME,jdbcType=TIMESTAMP},
+      <if test="CUR_TIME != null" >
+        CUR_TIME = #{CUR_TIME,jdbcType=TIMESTAMP},
       </if>
       <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+        TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="METER != null" >
         METER = #{METER,jdbcType=VARCHAR},
       </if>
-      <if test="LAST_DATA != null" >
-        LAST_DATA = #{LAST_DATA,jdbcType=DOUBLE},
+      <if test="YEAR_INIT_VAL != null" >
+        YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CURRENT_DATA != null" >
-        CURRENT_DATA = #{CURRENT_DATA,jdbcType=DOUBLE},
+      <if test="LAST_MONTH_VAL != null" >
+        LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="COUNT != null" >
-        COUNT = #{COUNT,jdbcType=DOUBLE},
+      <if test="CUR_MONTH_VAL != null" >
+        CUR_MONTH_VAL = #{CUR_MONTH_VAL,jdbcType=DOUBLE},
       </if>
       <if test="MONEY != null" >
         MONEY = #{MONEY,jdbcType=DOUBLE},
@@ -162,16 +150,44 @@
   <update id="updateByPrimaryKey" parameterType="org.ld.model.Sources" >
     update sources
     set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
-      GUEST_ID = #{GUEST_ID,jdbcType=INTEGER},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
-      TIME = #{TIME,jdbcType=TIMESTAMP},
-      TYPE = #{TYPE,jdbcType=INTEGER},
+      CUR_TIME = #{CUR_TIME,jdbcType=TIMESTAMP},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
       METER = #{METER,jdbcType=VARCHAR},
-      LAST_DATA = #{LAST_DATA,jdbcType=DOUBLE},
-      CURRENT_DATA = #{CURRENT_DATA,jdbcType=DOUBLE},
-      COUNT = #{COUNT,jdbcType=DOUBLE},
+      YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
+      LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
+      CUR_MONTH_VAL = #{CUR_MONTH_VAL,jdbcType=DOUBLE},
       MONEY = #{MONEY,jdbcType=DOUBLE},
       SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from sources
+    where ROOM_NUMBER like CONCAT('%', #{RN}, '%')  and TYPE = #{TYPE} and SYS_STATE = 1
+  </select>
+  <select id="getSourcesRange" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER like CONCAT('%', #{RN}, '%') and TYPE = #{TYPE} and SYS_STATE = 1
+    order by ID
+    limit #{ST}, #{EACH}
+  </select>
+  <select id="getSources" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER = #{ROOM_NUMBER} and TYPE = #{TYPE,jdbcType=VARCHAR} and SYS_STATE = 1
+    order by ID desc
+    limit 0, 1
+  </select>
+  <select id="getSingleSources" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER = #{ROOM_NUMBER} and METER = #{METER,jdbcType=VARCHAR} and SYS_STATE = 1
+    order by ID desc
+    limit 0, 1
+  </select>
 </mapper>

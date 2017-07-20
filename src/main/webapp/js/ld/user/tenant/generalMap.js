@@ -77,25 +77,46 @@ $(function(){
 	$(".main-nav").css('height',parseInt($(document).height())-50);
 });
 
+var formateOwner = function(name , state) { //name 为房间类型
+	if(name == "小业主") return "owner";
+	if(name == null) return "null";
+	if(name == "LE" && state == null) return "LE_out";
+	if(name == "LE" && state == 1) return "LE_in";
+
+	else return name;
+}
+
 var getRoomState = function () {
+
     $.ajax({
 	    type: 'GET',
 	    url: '/LD/userRoom/getAllRoomState.action',
 	    success: function(data) {
 	    	console.log(data);
-	      	let roomList = data.roomStateList;
+	      	var roomList = data.roomStateList;
+	      	var roomType = data.roomType;
+	      	var roomState = data.roomState;
+
+			console.log(roomType);
+			console.log(roomState);
+
 	     	for (item in roomList) {
 		        let roomNum = roomList[item].room_NUMBER;
 		        let userName = roomList[item].cus_NAME;
 		        let roomID = roomList[item].room_ID;
 		        let cusID = roomList[item].cus_ID;
 		        $("." + roomNum).children("p").text("租客："+userName);
-		        //console.log(roomNum,'roomNum')
 		        $("." + roomNum).attr("href", "./roomGuest.jsp?rid="+roomID+"&rNum="+roomNum);
 		        // For those have no returned room_ID, how to link to the RoomInfo page?
 		        // Test for transmitting the roomName as the request param.
 		        // /[^\d]/.test('W-132')      
-	        }    
+	        }
+
+	        for(var num in roomType) {
+                $("." + num).addClass(formateOwner(roomType[num],roomState[num]));
+                $("." + num).children("p").css("font-weight","normal");
+
+            }
 	    }
     });
 }

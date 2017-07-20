@@ -340,10 +340,12 @@
   </update>
 
   <select id="selectByRoomNumber" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from guest
-    where ROOM_NUMBER = #{RN,jdbcType=VARCHAR} and SYS_STATE = 0;
+    where ROOM_NUMBER = #{RN,jdbcType=VARCHAR} and SYS_STATE = 0
+    order by ID desc
+    limit 0 ,1
   </select>
   <select id="selectByName" resultMap="BaseResultMap" parameterType="map" >
     <![CDATA[

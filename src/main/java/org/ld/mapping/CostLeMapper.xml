@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.CostLeMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.CostLe" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="PROJECT" property="PROJECT" jdbcType="VARCHAR" />
+    <result column="CUSTOMER_SERVICE_STAFF" property="CUSTOMER_SERVICE_STAFF" jdbcType="VARCHAR" />
+    <result column="OPERATION_STAFF" property="OPERATION_STAFF" jdbcType="VARCHAR" />
+    <result column="REASON" property="REASON" jdbcType="VARCHAR" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="COST" property="COST" jdbcType="DOUBLE" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="STATE" property="STATE" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, GUEST_NAME, PROJECT, CUSTOMER_SERVICE_STAFF, OPERATION_STAFF, REASON,
+    OCCUR_TIME, COST, TYPE, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from cost_le
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cost_le
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.CostLe" >
+    insert into cost_le (ID, ROOM_NUM, GUEST_NAME,
+    PROJECT, CUSTOMER_SERVICE_STAFF, OPERATION_STAFF,
+    REASON, OCCUR_TIME, COST,
+    TYPE, STATE)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{GUEST_NAME,jdbcType=VARCHAR},
+    #{PROJECT,jdbcType=VARCHAR}, #{CUSTOMER_SERVICE_STAFF,jdbcType=VARCHAR}, #{OPERATION_STAFF,jdbcType=VARCHAR},
+    #{REASON,jdbcType=VARCHAR}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{COST,jdbcType=DOUBLE},
+    #{TYPE,jdbcType=VARCHAR}, #{STATE,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.CostLe" >
+    insert into cost_le
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="PROJECT != null" >
+        PROJECT,
+      </if>
+      <if test="CUSTOMER_SERVICE_STAFF != null" >
+        CUSTOMER_SERVICE_STAFF,
+      </if>
+      <if test="OPERATION_STAFF != null" >
+        OPERATION_STAFF,
+      </if>
+      <if test="REASON != null" >
+        REASON,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="COST != null" >
+        COST,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="STATE != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT != null" >
+        #{PROJECT,jdbcType=VARCHAR},
+      </if>
+      <if test="CUSTOMER_SERVICE_STAFF != null" >
+        #{CUSTOMER_SERVICE_STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="OPERATION_STAFF != null" >
+        #{OPERATION_STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="REASON != null" >
+        #{REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="COST != null" >
+        #{COST,jdbcType=DOUBLE},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATE != null" >
+        #{STATE,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.CostLe" >
+    update cost_le
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT != null" >
+        PROJECT = #{PROJECT,jdbcType=VARCHAR},
+      </if>
+      <if test="CUSTOMER_SERVICE_STAFF != null" >
+        CUSTOMER_SERVICE_STAFF = #{CUSTOMER_SERVICE_STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="OPERATION_STAFF != null" >
+        OPERATION_STAFF = #{OPERATION_STAFF,jdbcType=VARCHAR},
+      </if>
+      <if test="REASON != null" >
+        REASON = #{REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="COST != null" >
+        COST = #{COST,jdbcType=DOUBLE},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="STATE != null" >
+        STATE = #{STATE,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.CostLe" >
+    update cost_le
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      PROJECT = #{PROJECT,jdbcType=VARCHAR},
+      CUSTOMER_SERVICE_STAFF = #{CUSTOMER_SERVICE_STAFF,jdbcType=VARCHAR},
+      OPERATION_STAFF = #{OPERATION_STAFF,jdbcType=VARCHAR},
+      REASON = #{REASON,jdbcType=VARCHAR},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      COST = #{COST,jdbcType=DOUBLE},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      STATE = #{STATE,jdbcType=INTEGER}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="totalExpense" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from cost_le
+    where STATE = 1 AND  TYPE = #{TYPE} AND ROOM_NUM like concat('%', #{Room_Number}, '%')
+  </select>
+  <select id="getExpenseBySearch" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from cost_le
+    where STATE = 1 AND  TYPE = #{TYPE} AND ROOM_NUM like concat('%', #{Room_Number},'%')
+
+    order by ID
+    limit #{ST}, #{EACH}
+  </select>
+  <select id="getAllExpenseBySearch" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from cost_le
+    where STATE = 1 AND  TYPE = #{TYPE}
+  </select>
+</mapper>

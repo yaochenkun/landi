@@ -22,6 +22,14 @@
   font-size: 22px;
   font-weight: bold;
 }
+.btn-man {
+  float: left;
+  background-color: #3a930d;
+  border-color: #38ae67;
+  color: #fff;
+  margin-top:-30px;
+
+}
 .body-content .btngoback {
   width: 120px;
   height: 28px;
@@ -114,3 +122,121 @@ h3 {
 .no-data {
   color: #2277da;
 }
+
+/************房源管理弹窗样式*****************/
+.shadow {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left:0;
+  position: fixed;
+  z-index: 200;
+  background: rgba(0,0,0,.3);
+}
+
+.manage {
+  display: none;
+  width:43%;
+  height:430px;
+  position: fixed;
+  top:50px;
+  left:30%;
+  z-index:400;
+  background: #fff;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+}
+
+.manage .man-title {
+  height:45px;
+  line-height:45px;
+  padding:0 20px;
+  color:#000;
+  background: #eee;
+  font-size:15px;
+  border-bottom:1px solid #444;
+}
+.manage .man-title .cross {
+  float:right;
+  font-size: 24px;
+  cursor:pointer;
+}
+
+.manage .man-title .cross:hover {
+  color:#666;
+}
+
+.man-body {
+  max-height: 430px;
+  overflow-y:auto;
+  padding: 30px 0;
+}
+
+.man-body .span {
+  width: 15%;
+  font-weight:bold;
+  float:left;
+  clear:left;
+  min-height: 50px;
+}
+
+.man-body .item {
+  padding: 0 40px;
+}
+
+
+.man-body .item-content {
+  float:left;
+  width:85%;
+  margin-bottom: 20px;
+  padding-left:20px;
+}
+
+.man-body .item-content input {
+  padding: 0 10px;
+}
+
+.man-body .btn-item {
+  width:130px;
+  height:25px;
+  border-radius: 0;
+  line-height: 11px;
+  border-color:#555;
+  margin-right:20px;
+  margin-bottom:5px;
+}
+
+.man-body .btn-item:hover {
+  border-corlor:#2277da;
+  color:#2277da;
+  background:#fff;
+}
+
+.man-body .item-active {
+  border:1px solid #2277da;
+  color:#fff;
+  background:#2277da;
+}
+.man-foot {
+  background:#eee;
+  position:absolute;
+  height:50px;
+  width:100%;
+  bottom:0;
+  border-top: 1px solid #444;
+}
+
+.man-foot .btn-submit{
+  width:100px;
+  height:30px;
+  line-height:17px;
+  float:right;
+  color:#222;
+  border-color:#222;
+  margin:10px;
+  border-radius:0;
+}
+
+.man-foot .btn-submit:hover{
+  backgroung:#ccc;
+}
+

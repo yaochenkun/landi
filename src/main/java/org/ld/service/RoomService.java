@@ -5,17 +5,7 @@ import java.util.List;
 
 import javax.print.attribute.standard.MediaSize.Other;
 
-import org.ld.model.DrinkingWater;
-import org.ld.model.FlightPicking;
-import org.ld.model.Laundry;
-import org.ld.model.Maintain;
-import org.ld.model.OtherFare;
-import org.ld.model.Room;
-import org.ld.model.RoomItem;
-import org.ld.model.RoomMeter;
-import org.ld.model.RoomPic;
-import org.ld.model.RoomState;
-import org.ld.model.ShuttleBus;
+import org.ld.model.*;
 
 public interface RoomService {
 
@@ -40,17 +30,35 @@ public interface RoomService {
 
 
 	List<RoomPic> getPic(Integer rid);
+	//房间更新
+	int updateRoom(Room room);
+
+	List<Room> getAllEditedTypeRoom();
+
+	int getTotalRoom(String rNum, String roomType);
+
+	List<Room> searchRoom(String rNum, String roomType,Integer st, Integer eachPage);
+
+	List<Room> searchAllRoom(String rnum,String type);
+
+	//LE 承担费用
+	int getTotalExpense(String rNum, String type);
+
+	List<CostLe> searchExpense(String rNum, String type, Integer st, Integer eachPage);
+
+	List<CostLe> searchAllExpense(String rnum,String type);
+
 
 	/**
 	 * 能源
 	 */
 	int insertRoomPic(RoomPic roomPic);
 
-	List<RoomMeter> getMeters(Integer rid, Integer type);
+	//List<RoomMeter> getMeters(Integer rid, Integer type);
 
-	RoomMeter getMeter(String mn);
-	
-	int updateMeter(RoomMeter MeterInfo);
+//	RoomMeter getMeter(String mn);
+//
+//	int updateMeter(RoomMeter MeterInfo);
 	
 	/**
 	 * 房间物品

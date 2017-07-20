@@ -20,7 +20,7 @@ public class MyTest {
 //		List<ExcelCell> list = new ArrayList<ExcelCell>();
 //		ExcelCell ec = new ExcelCell();
 //		ec.setRow(1);
-//		ec.setCol(2);
+//		ec.setCol(1);
 //		ec.setContent("yaochenkun");
 //		list.add(ec);
 //

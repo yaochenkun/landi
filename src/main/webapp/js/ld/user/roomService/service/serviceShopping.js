@@ -13,12 +13,12 @@ $(function(){
 
 
 //拉取第一页 代购费信息
-var requestFirstShopping = function(){
+var requestFirstShopping = function() {
 	requestAjaxShopping(parseInt(1));    
 }
 
 //拉取上一页 代购费信息
-var requestBeforeShopping = function(){
+var requestBeforeShopping = function() {
 	var nowpage = parseInt($("#shoppinglist_nowpage").val());
 	if(nowpage == 1) return;
 	requestAjaxShopping(nowpage-1);

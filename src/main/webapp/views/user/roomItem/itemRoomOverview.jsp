@@ -31,7 +31,7 @@
 		</div>
 	</div>
 
-	<!-- 页面内容 strat -->
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
@@ -57,12 +57,6 @@
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
 
-			<%-- <div style="display:inline-block">
-				<span>房间号：</span><input id="searchRoomNum" type="text" value="">
-				<a class="btn btn-edit btnEdit" onclick="searchBusOther(1);">搜索</a>
-				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
-			</div> --%>
 
 			<!-- <a class="btn btn-new btnnew" href="sourceNew.jsp?type=2">新增电费记录</a> -->
 			<div class="bill-area">

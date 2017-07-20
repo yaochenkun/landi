@@ -1,0 +1,30 @@
+.btn-edit {
+    float: right;
+}
+
+.btnSearch {
+    border: 1px solid #aaa;
+    padding: 2px 12px;
+    cursor:pointer;
+    margin-left: 30px;
+}
+
+
+.main .new {
+    display: block;
+    float:right;
+    background-color: #38ae67;
+    border-color: #38ae67;
+    color: #fff;
+    clear: both;
+    margin-top:10px;
+}
+
+.main .new:hover {
+    background-color: #2faa60;
+}
+
+.main-title {
+    clear:both;
+    padding-top:20px;
+}

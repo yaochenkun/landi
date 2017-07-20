@@ -6,8 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/ld/user/tenant/roomGuest.css" rel="stylesheet" type="text/css" />
 <title>房间信息</title>
@@ -15,6 +19,7 @@
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
 	<jsp:include page="../_leftMenu.jsp"></jsp:include>
+	<jsp:include page="../_modal.jsp"></jsp:include>
 
 	<% String rid = request.getParameter("rid"); %>
 	<% String rNum = request.getParameter("rNum"); %>
@@ -40,6 +45,7 @@
 		<div class="tenant-title">
 			<span><span class="roomNumber"><%=rNum%></span>&nbsp;&nbsp;房间</span>
 		</div>
+		<a class="btn btn-man"  onclick="roomManage('<%=rNum%>');">房源管理</a>
 		<a class="btn btngoback" href="generalMap.jsp">返回租客一览图</a>
 
 		<!-- 房间信息 start -->
@@ -207,8 +213,63 @@
 		<!-- 物品信息 start -->
 	</div>
 
+	<!-- 房源管理 start-->
+	<div class="shadow"></div>
+	<div class="manage">
+		<div class="man-content">
+			<div class="man-title">
+				<span class="span">添加房源信息</span>
+				<span class="cross" onclick="crossQuit();">x</span>
+			</div>
+			<div class="man-body">
+				<div id="man-type" class="item">
+					<span class="span">房源管理:</span>
+					<div class="item-content">
+						<a class="btn btn-item" id="addroom" onclick="addChange(this);">添加房源</a>
+						<a class="btn btn-item" id="replaceroom" onclick="replaceChange(this);">替换房源</a>
+						<a class="btn btn-item" id="deleteroom" onclick="delChange(this);">退还房源</a>
+					</div>
+				</div>
+				<div id="room-type" class="item" >
+					<span class="span">房源类型:</span>
+					<div class="item-content">
+						<a class="btn btn-item" onclick="addForLE(this);">LE</a>
+						<a class="btn btn-item" onclick="addForSPC(this);">SPC</a>
+						<a class="btn btn-item" onclick="addForOwner(this);">小业主</a>
+					</div>
+				</div>
+				<div id="room-name" class="item" >
+					<span class="span">业主姓名:</span>
+					<div class="item-content"><input type="text" id="owner"/></div>
+				</div>
+				<div id="room-replace" class="item" >
+					<span class="span">替换为：</span>
+					<div class="item-content"><input type="text" id="replace_room"/></div>
+				</div>
+				<div id="man-date" class="item" >
+					<span id="change-date" class="span">接收日期</span>
+					<div class="item-content"><input type="text" class="pack_maintain"/></div>
+				</div>
+				<div id="com" class="item" >
+					<span class="span">备注：</span>
+					<div class="item-content"><input type="text" value="无" id="commend"/></div>
+				</div>
+			</div>
+			<div class="man-foot">
+				<div id="man-foot-content" >
+					<a class="btn btn-submit" onclick="addManage('<%=rNum%>');">确定</a>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- 房源管理 end-->
+
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/tenant/roomGuest.js"></script>
 	<script>
@@ -238,6 +299,10 @@
 				$("#item_little").append("<tr><td class='no-data' colspan='6' style='color: #f95c00'>"+
 					"没有相关数据！</td></tr>");
 			}
+
+            var nowDate = new Date();
+            $(".pack_maintain").val(formatDateForm(nowDate));
+            $('.pack_maintain').date_input();
 		});
 	</script>
 </body>

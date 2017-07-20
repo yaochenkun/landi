@@ -23,5 +23,8 @@ public interface SourcesMapper {
 
 	List<Sources> getSourcesRange(Map<String, Object> map);
 
-	List<Sources> getAllSourcesRange(Map<String, Object> map);
+	Sources getSources(Map<String, Object> map);
+
+	Sources getSingleSources(Map<String, Object> map);
+
 }

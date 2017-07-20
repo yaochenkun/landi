@@ -32,11 +32,11 @@
 }
 
 .bill-table thead .gasOne {
-	color: #777;
+	color: rgba(0, 0, 0, .5);
 }
 
 .bill-table thead .gasTwo {
-	color: #7a7a7a;
+	color: rgba(0, 0, 0, .5);
 }
 
 #trTwo th {
@@ -44,9 +44,7 @@
 	font-size: 14px;
 }
 
-// #trOne th:nth-child(3), #trOne th:nth-child(4),
-// #trOne th:nth-child(5), #trTwo th:nth-child(1),
-// #trTwo th:nth-child(5), #trTwo th:nth-child(9){border-left: 2px solid #bf845e;}
+
 
 /* 燃气表 表格样式  start */
 tbody td:nth-child(3), tbody td:nth-child(4),
@@ -58,6 +56,13 @@ tbody td:nth-child(8), tbody td:nth-child(10)
 
 tbody td:nth-child(5), tbody td:nth-child(9){ color: #f1551a;}
 
-// tbody td:nth-child(3), tbody td:nth-child(7),
-// tbody td:nth-child(11) { border-left: 2px solid #bf845e; }
 /* 燃气表 表格样式  start */
+
+.btnSearch {
+	border: 1px solid #aaa;
+	padding: 2px 12px;
+	cursor:pointer;
+	margin-left: 30px;
+}
+
+.bill-table td:nth-child(9){color: #ff5722; font-weight: bold;}

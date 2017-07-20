@@ -21,13 +21,13 @@ a, a:hover, a:link, a:visited {
 	color: #848484;
 }
 /* 绿色新建按钮 */
-.btn.btn-new {
+.btn .btn-new {
 	background-color: #38ae67;
 	border-color: #38ae67;
 	color: #fff;
 }
 
-.btn.btn-new:hover {
+.btn .btn-new:hover {
 	background-color: #2faa60;
 }
 

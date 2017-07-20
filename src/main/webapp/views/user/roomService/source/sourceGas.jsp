@@ -6,25 +6,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceGas.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceGas.css" rel="stylesheet" type="text/css" />
 <title>燃气费</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
 
-	<!-- 页面内容 strat -->
+	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
@@ -35,20 +27,14 @@
 			</div>
 			<a class="btn btn-new btnnew" href="sourceGasNew.jsp">新增燃气费记录</a>
 			<div class="bill-area">
+				<input id="roomNumber" type="text" class="search-input" placeholder="请输入房间号..." />
+				<a class="btn btn-edit btnSearch" onclick="requestGas($('#roomNumber').val(),parseInt(1))">搜索燃气费</a>
 				<div class="bill-table">
 					<!-- 费用 table start -->
 					<table>
 						<thead>
 							<tr id="trOne">
-								<th rowspan="2"><span>房间号</span>
-									<div class="search-roomNo">
-										<div class="search-wrap">
-											<input type="text" class="search-input"
-												placeholder="请输入房间号..." /> <a class="search-btn" href=""></a>
-											<a class="btn btn-edit btnedit"
-												onclick="requestFirstGasByRoomNum(this)">搜索燃气费</a>
-										</div>
-									</div></th>
+								<th rowspan="2"><span>房间号</span></th>
 								<th rowspan="2"><span>客户姓名</span></th>
 								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;一</span></th>
 								<th colspan="4"><span>燃&nbsp;气&nbsp;表&nbsp;二</span></th>
@@ -91,7 +77,7 @@
 		src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceGas.js"></script>
 	<script type="text/javascript">
 	    // 拉取第一页餐费信息
-		requestFirstGas();
+		requestGas($('#roomNumber').val(),parseInt(1));
 	</script>
 </body>
 </html>

@@ -32,7 +32,7 @@
 				<div class="body-content">
 					<ul>
 						<li><span>房间号：</span>
-							<input id="serviceRoomNumber" type="text" valueue="" onblur="associateGuestName(this)"/>
+							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this)"/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span ></span><span class="red">不能为空！</span></li>
 						<li><span>客户姓名：</span><input id="guestName" type="text" value="" disabled="disabled"/><li>

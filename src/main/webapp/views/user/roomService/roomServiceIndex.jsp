@@ -100,8 +100,8 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<li><a href="">统计费用</a></li>
-						<li><a href="">LE承担费用</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseStatistics.jsp">统计费用</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseLE.jsp?type=welfare">LE承担费用</a></li>
 					</ul>
 				</div>
 				<!-- 客房费用结算 end -->

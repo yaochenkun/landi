@@ -7,28 +7,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
-import org.ld.dao.DrinkingWaterMapper;
-import org.ld.dao.FlightPickingMapper;
-import org.ld.dao.LaundryMapper;
-import org.ld.dao.MaintainMapper;
-import org.ld.dao.OtherFareMapper;
-import org.ld.dao.RoomItemMapper;
-import org.ld.dao.RoomMapper;
-import org.ld.dao.RoomMeterMapper;
-import org.ld.dao.RoomPicMapper;
-import org.ld.dao.RoomStateMapper;
-import org.ld.dao.ShuttleBusMapper;
-import org.ld.model.DrinkingWater;
-import org.ld.model.FlightPicking;
-import org.ld.model.Laundry;
-import org.ld.model.Maintain;
-import org.ld.model.OtherFare;
-import org.ld.model.Room;
-import org.ld.model.RoomItem;
-import org.ld.model.RoomMeter;
-import org.ld.model.RoomPic;
-import org.ld.model.RoomState;
-import org.ld.model.ShuttleBus;
+import org.ld.dao.*;
+import org.ld.model.*;
 import org.ld.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +41,8 @@ public class RoomServiceImpl implements RoomService {
 	private OtherFareMapper otherFareMapper;
 	@Autowired
 	private DrinkingWaterMapper drinkingWaterMapper;
+	@Autowired
+	private CostLeMapper costLeMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -111,16 +93,28 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int updateMeter(RoomMeter meterInfo) {
-		// TODO Auto-generated method stub
+	public int updateRoom(Room room) {
+		//add by lyd
 		try {
-			roomMeterMapper.updateByPrimaryKeySelective(meterInfo);
+			roomMapper.updateByPrimaryKey(room);
 			return 1;
-		} catch (Exception e) {
+		}catch(Exception e) {
 			logger.error(e.getCause());
-			return 0;
+			return 0 ;
 		}
 	}
+
+//	@Override
+//	public int updateMeter(RoomMeter meterInfo) {
+//		// TODO Auto-generated method stub
+//		try {
+//			roomMeterMapper.updateByPrimaryKeySelective(meterInfo);
+//			return 1;
+//		} catch (Exception e) {
+//			logger.error(e.getCause());
+//			return 0;
+//		}
+//	}
 
 	@Override
 	public int totalRow() {
@@ -141,6 +135,44 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
+	public List<Room> getAllEditedTypeRoom() {
+
+		return roomMapper.getAllTypeNotNullRoom();
+
+	}
+
+	@Override
+	public int getTotalRoom(String rNum, String roomType) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("Room_Number",rNum);
+		map.put("Type",roomType);
+
+		return roomMapper.totalRoom(map);
+	}
+
+	@Override
+	public List<Room> searchRoom(String rNum, String roomType,Integer st, Integer eachPage) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+
+		map.put("Room_Number",rNum);
+		map.put("Type",roomType);
+		map.put("ST",st);
+		map.put("EACH",eachPage);
+
+		return roomMapper.getRoomBySearch(map);
+
+	}
+
+	@Override
+	public List<Room> searchAllRoom(String rnum,String type){
+		Map<String,Object> map = new HashMap<>();
+
+		map.put("Room_Number",rnum);
+		map.put("TYPE",type);
+		return roomMapper.getAllRoomBySearch(map);
+	}
+
+	@Override
 	public List<RoomItem> getItems(Integer rid, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -150,6 +182,38 @@ public class RoomServiceImpl implements RoomService {
 		map.put("EACH", eachPage);
 		return roomItemMapper.getItems(map);
 	}
+
+	@Override
+	public int getTotalExpense(String rNum, String type) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("Room_Number",rNum);
+		map.put("TYPE",type);
+
+		return costLeMapper.totalExpense(map);
+	}
+
+	@Override
+	public List<CostLe> searchExpense(String rNum, String type,Integer st, Integer eachPage) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+
+		map.put("Room_Number",rNum);
+		map.put("TYPE",type);
+		map.put("ST",st);
+		map.put("EACH",eachPage);
+
+		return costLeMapper.getExpenseBySearch(map);
+
+	}
+
+	@Override
+	public List<CostLe> searchAllExpense(String rnum,String type){
+		Map<String,Object> map = new HashMap<>();
+
+		map.put("Room_Number",rnum);
+		map.put("TYPE",type);
+		return costLeMapper.getAllExpenseBySearch(map);
+	}
+
 
 	@Override
 	public List<RoomPic> getPic(Integer rid) {
@@ -163,20 +227,20 @@ public class RoomServiceImpl implements RoomService {
 		return roomPicMapper.insertSelective(roomPic);
 	}
 
-	@Override
-	public List<RoomMeter> getMeters(Integer rid, Integer type) {
-		// TODO Auto-generated method stub
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("ROOM_ID", rid);
-		map.put("TYPE", type);
-		return roomMeterMapper.getMeters(map);
-	}
-
-	@Override
-	public RoomMeter getMeter(String mn) {
-		// TODO Auto-generated method stub
-		return roomMeterMapper.getMeter(mn);
-	}
+//	@Override
+//	public List<RoomMeter> getMeters(Integer rid, Integer type) {
+//		// TODO Auto-generated method stub
+//		HashMap<String, Integer> map = new HashMap<String, Integer>();
+//		map.put("ROOM_ID", rid);
+//		map.put("TYPE", type);
+//		return roomMeterMapper.getMeters(map);
+//	}
+//
+//	@Override
+//	public RoomMeter getMeter(String mn) {
+//		// TODO Auto-generated method stub
+//		return roomMeterMapper.getMeter(mn);
+//	}
 
 	@Override
 	public int totalRowByItem(Integer fac_id) {

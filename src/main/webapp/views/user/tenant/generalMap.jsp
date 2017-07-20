@@ -25,6 +25,7 @@
 					<li class="liactive"><a href="javascript:void(0);">租客一览图</a></li>
 					<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
 					<li class="linormal"><a href="newGuest.jsp">新增租客</a></li>
+					<li class="linormal"><a href="roomManage.jsp">房源管理</a></li>
 				</ul>
 			</div>
 		</div>
@@ -35,6 +36,17 @@
 	<div class="body-content">
 		<div class="general-map">
 			<table id="building"></table>
+		</div>
+	</div>
+
+	<div class="hint">
+		<div class="hint-content">
+			<ul>
+				<li><div class="hint-circle"></div><span class="span">LE 未入住</span></li>
+				<li><div class="hint-circle"></div><span class="span">LE 已入住</span></li>
+				<li><div class="hint-circle"></div><span class="span">SPC 小业主</span></li>
+				<li><div class="hint-circle"></div><span class="span">未设置</span></li>
+			</ul>
 		</div>
 	</div>
 

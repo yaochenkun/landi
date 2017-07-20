@@ -19,6 +19,7 @@
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
 	<jsp:include page="../../_leftMenu.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -37,30 +38,43 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
-						<li><span class="span spanGas">房间号：</span>
-							<input id="sourceRoomNumber" type="text" value="W34" />
+						<li><span class="span">房间号：</span>
+							<input id="sourceRoomNumber" type="text" value="W33-3" onblur="associateGuestName(this)"/>
 							<span class="red red-right">*&nbsp;必填</span>
 						</li>
-						<li id="roomIdWarning">
-							<span class="span"></span>
-							<span class="red">不能为空！</span>
-						</li>
-						<li><span class="span">租客：</span><input type="text" value="Alice" /></li>
+						<li><span class="span">租客：</span><input type="text" value="" id="guestName"/></li>
 
 						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;一</li>
 						<li><span class="span">表号：</span>
-							<span id="meterOne">不存在该房间！</span>
+							<input id="meterOne" type="text" value="" disabled="disabled"/>
+
 						</li>
-						<li><span class="span">抄表：</span><input type="text" value="12.5" /></li>
-						<li><span class="span">费用：</span><input type="text" value="12" /></li>
+						<li><span class="span">上月表数：</span><input id="lastVal_1" type="text" value="" disabled="disabled"/></li>
+						<li><span class="span">抄表：</span>
+							<input id="firstVal" type="text" value="" oninput="differentialPriceOne(this)"/>
+							<span class="red red-right" id="error_1"></span>
+						</li>
+						<li class="waterfare"><span class="span">一阶：</span><input id="first_1" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">二阶：</span><input id="second_1" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">三阶：</span><input id="third_1" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">四阶：</span><input id="forth_1" type="text" value="" disabled="disabled"/></li>
+						<li><span class="span">费用：</span><input type="text" value="0" id="cost_1"/></li>
 
 						<li class="gasName"><span class="span"></span>燃&nbsp;气&nbsp;表&nbsp;二</li>
 						<li><span class="span">表号：</span>
-							<span id="meterTwo">不存在该房间！</span>
-						</li>
-						<li><span class="span">抄表：</span><input type="text" value="12.5" /></li>
-						<li><span class="span">费用：</span><input type="text" value="12" /></li>
+							<input id="meterTwo" type="text" value="" disabled="disabled"/>
 
+						</li>
+						<li><span class="span">上月表数：</span><input id="lastVal_2" type="text" value="" disabled="disabled"/></li>
+						<li><span class="span">抄表：</span>
+							<input id="secondVal" type="text" value="" oninput="differentialPriceTwo(this)"/>
+							<span class="red red-right" id="error_2"></span>
+						</li>
+						<li class="waterfare"><span class="span">一阶：</span><input id="first_2" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">二阶：</span><input id="second_2" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">三阶：</span><input id="third_2" type="text" value="" disabled="disabled"/></li>
+						<li class="waterfare"><span class="span">四阶：</span><input id="forth_2" type="text" value="" disabled="disabled"/>
+						<li><span class="span">费用：</span><input type="text" value="0" id="cost_2"/></li>
 
 						<li><span class="span"></span>
 							<a onclick="addSourceGas();" class="btn btn-goback goback">确认添加</a>
@@ -79,5 +93,9 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceGasNew.js"></script>
+	<script type="text/javascript" >
+        associateGuestName(document.getElementById("sourceRoomNumber"));
+        requestAjaxRate();
+	</script>
 </body>
 </html>

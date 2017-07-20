@@ -26,6 +26,7 @@
 					<li class="linormal"><a	href="generalMap.jsp">租客一览图</a></li>
 					<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
 					<li class="liactive"><a	href="newGuest.jsp">新增租客</a></li>
+					<li class="linormal"><a href="roomManage.jsp">房源管理</a></li>
 				</ul>
 			</div>
 		</div>

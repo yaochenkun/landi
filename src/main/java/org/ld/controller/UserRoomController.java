@@ -4,11 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.print.attribute.standard.MediaSize.Other;
 import javax.servlet.http.HttpServletRequest;
@@ -16,33 +12,18 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
+import org.apache.poi.xslf.model.geom.CosExpression;
 import org.ld.app.Config;
-import org.ld.model.DailyService;
-import org.ld.model.DrinkingWater;
-import org.ld.model.FlightPicking;
-import org.ld.model.Guest;
-import org.ld.model.GuestService;
-import org.ld.model.Laundry;
-import org.ld.model.Maintain;
-import org.ld.model.OtherFare;
-import org.ld.model.Room;
-import org.ld.model.RoomItem;
-import org.ld.model.RoomMeter;
-import org.ld.model.RoomPic;
-import org.ld.model.RoomState;
-import org.ld.model.ShuttleBus;
-import org.ld.model.Sources;
-import org.ld.model.User;
-import org.ld.model.Meal;
-import org.ld.model.Staff;
-import org.ld.model.ShoesPolishing;
-import org.ld.model.AgentPurchase;
+import org.ld.model.*;
+import org.ld.model.CostLe;
 import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
 import org.ld.service.ServerService;
 import org.ld.service.UserService;
 import org.ld.utils.BeanPrinter;
+import org.ld.utils.ExcelCell;
+import org.ld.utils.ExcelHelper;
 import org.ld.utils.Para;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,17 +101,17 @@ public class UserRoomController {
 		return roomPic;
 	}
 
-	// 根据roomNumber 查询 roomID
-	@RequestMapping(value = "/getRoomIDByNumber")
-	@ResponseBody
-	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
-			throws Exception {
-
-		System.out.println(roomNumber);
-		Room room = roomService.getRoomByNumber(roomNumber);
-
-		return room;
-	}
+//	// 根据roomNumber 查询 roomID
+//	@RequestMapping(value = "/getRoomIDByNumber")
+//	@ResponseBody
+//	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
+//			throws Exception {
+//
+//		System.out.println(roomNumber);
+//		Room room = roomService.getRoomByNumber(roomNumber);
+//
+//		return room;
+//	}
 
 	@RequestMapping("/getAllRoom") // 所有房间
 	@ResponseBody
@@ -165,8 +146,96 @@ public class UserRoomController {
 		List<RoomState> rooms = roomService.getAllRoomState();
 		ans.put("roomStateList", rooms);
 
+		List<Room> type_room = roomService.getAllEditedTypeRoom();
+
+		Map<String,Object> toType = new HashMap<String,Object>() ;
+		Map<String,Object> toState = new HashMap<String,Object>();
+
+		if(type_room != null) {
+			for(Room r : type_room) {
+				toType.put(r.getROOM_NUMBER(),r.getTYPE());
+				toState.put(r.getROOM_NUMBER(),r.getSTATE());
+			}
+		}
+		ans.put("roomType",toType);
+		ans.put("roomState",toState);
+
 		return ans;
 	}
+
+
+	@RequestMapping("/getManageOption") //获取房间管理状况
+	@ResponseBody
+	public Map<String,Object> getManageOption(HttpSession session ,@RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String rn = dataJson.getString("rNum");
+		Room room = roomService.getRoomByNumber(rn);
+
+		if(room == null) ans.put("State","Invalid");
+		else {
+			ans.put("RoomType",room.getTYPE());
+			ans.put("State",room.getSTATE());
+		}
+
+		return ans;
+
+	}
+
+	@RequestMapping("/updateRoomInfo")
+	@ResponseBody
+	public Integer 	updateRoomInfo(HttpSession session , @RequestBody String data){
+		User curUser = (User) session.getAttribute("curUser");
+		if((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String rNum = dataJson.getString("rNum");
+		String room_type = dataJson.getString("room_type");
+		String owner = dataJson.getString("name").equals("") ?  null: dataJson.getString("name");
+		Date time = dataJson.getDate("time");
+		String manage = dataJson.getString("manage");
+		String replace_room = dataJson.getString("replace_room").equals("") ?  null: dataJson.getString("replace_room") ;
+		String com = dataJson.getString("com");
+
+		Room room = roomService.getRoomByNumber(rNum);
+		room.setCOMM(com);
+
+		if(room != null){
+			if(manage.equals("添加房源") ) {
+				room.setTYPE(room_type);
+				room.setOWNER_NAME(owner);
+				room.setSTATE(1);
+				room.setRECEIPT_TIME(time);
+				room.setREFUND_TIME(null);
+				room.setREPLACE_ROOM(null);
+
+
+			}else if(manage.equals("替换房源")) {
+				room.setREPLACE_ROOM(replace_room);
+
+			}else if(manage.equals("退还房源")) {
+				room.setREFUND_TIME(time);   //由于数据库表结构 没有存历史记录  退还后该记录保存 是为了查阅的功能
+				room.setSTATE(null);
+			}
+
+			roomService.updateRoom(room);
+			return 1;
+		}
+		else return 0;
+
+	}
+
 
 	@RequestMapping("/getRoomInfo") // 获取房间详细信息
 	@ResponseBody
@@ -219,6 +288,158 @@ public class UserRoomController {
 		return ans;
 	}
 
+	@RequestMapping("getRoomManageInfo")
+	@ResponseBody
+	public Map<String , Object> getRoomManageInfo(HttpSession session , @RequestBody String data) {
+
+		Map<String , Object> ans = new HashMap<String, Object>();
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject datajson = JSONObject.parseObject(data);
+		String rNum = datajson.getString("rNum");
+		String roomType = datajson.getString("rType");
+		Integer pageNow = datajson.getInteger("pageNow");
+
+		System.out.println(rNum);
+		System.out.println(roomType);
+
+		int eachPage = Config.settingsInt.get("list_size");
+		int recordTotal = roomService.getTotalRoom(rNum,roomType);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if(recordTotal != 0) {
+			if(pageNow > pageTotal) pageNow = pageTotal;
+
+			int st = (pageNow - 1) * eachPage;
+			List<Room> room = roomService.searchRoom(rNum,roomType,st,eachPage);
+			ans.put("pageList",room);
+		}
+		System.out.println(recordTotal);
+
+		ans.put("pageTotal",pageTotal);
+		ans.put("pageNow",pageNow);
+		ans.put("recordTotal",recordTotal);
+
+		return ans;
+	}
+
+	@RequestMapping("/getAllRoomManageInfo")  //获取所有房源管理信息
+	@ResponseBody
+	public Map<String,Object> getAllRoomManageInfo(HttpSession session , @RequestBody String data) {
+		Map<String ,Object> ans = new HashMap<>();
+		User curUser = (User) session.getAttribute("curUser");
+		if((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State","Invalid");
+		}
+		else ans.put("State","Valid");
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String rnum = dataJson.getString("rNum");
+		String type = dataJson.getString("type");
+
+		List<Room> rooms = roomService.searchAllRoom(rnum,type);
+		ans.put("dataList",rooms);
+
+		return ans;
+	}
+
+
+	@RequestMapping("/getAllExpenseInfo")  //获取所有LE承担费用信息
+	@ResponseBody
+	public Map<String,Object> getAllExpenseInfo(HttpSession session , @RequestBody String data) {
+		Map<String ,Object> ans = new HashMap<>();
+		User curUser = (User) session.getAttribute("curUser");
+		if((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State","Invalid");
+		}
+		else ans.put("State","Valid");
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String rnum = dataJson.getString("rNum");
+		String type = dataJson.getString("type");
+
+		List<CostLe> costs = roomService.searchAllExpense(rnum,type);
+		ans.put("dataList",costs);
+
+		return ans;
+	}
+
+	@RequestMapping("getExpenseInfo")  //获取LE承担费用信息
+	@ResponseBody
+	public Map<String , Object> getExpenseInfo(HttpSession session , @RequestBody String data) {
+
+		Map<String , Object> ans = new HashMap<String, Object>();
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject datajson = JSONObject.parseObject(data);
+		String rNum = datajson.getString("rNum");
+		String roomType = datajson.getString("rType");
+		Integer pageNow = datajson.getInteger("pageNow");
+
+		System.out.println(rNum);
+		System.out.println(roomType);
+
+		int eachPage = Config.settingsInt.get("list_size");
+		int recordTotal = roomService.getTotalExpense(rNum,roomType);
+		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+		if(recordTotal != 0) {
+			if(pageNow > pageTotal) pageNow = pageTotal;
+
+			int st = (pageNow - 1) * eachPage;
+			List<CostLe> expense = roomService.searchExpense(rNum,roomType,st,eachPage);
+			ans.put("pageList",expense);
+		}
+		System.out.println(recordTotal);
+
+		ans.put("pageTotal",pageTotal);
+		ans.put("pageNow",pageNow);
+		ans.put("recordTotal",recordTotal);
+
+		return ans;
+	}
+
+	@RequestMapping("/addExpenseOfLE") // 添加LE费用
+	@ResponseBody
+	public Integer addExpenseOfLE(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			return 0;
+		}
+		try {
+			JSONObject dataJson = JSONObject.parseObject(data);
+			CostLe newCost = new CostLe();
+			newCost.setROOM_NUM(dataJson.getString("rNum"));
+			newCost.setPROJECT(dataJson.getString("project"));
+			newCost.setCUSTOMER_SERVICE_STAFF(dataJson.getString("service"));
+			newCost.setOPERATION_STAFF(dataJson.getString("operation"));
+			newCost.setREASON(dataJson.getString("reason"));
+			newCost.setCOST(dataJson.getDouble("cost"));
+			newCost.setTYPE(dataJson.getString("type"));
+			newCost.setGUEST_NAME(dataJson.getString("guest"));
+			newCost.setSTATE(1);
+
+			Date date = new Date();
+			newCost.setOCCUR_TIME(date);
+			return serverService.addExpenseOfLE(newCost);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
 	@RequestMapping("/getPics")
 	@ResponseBody
 	public Map<String, Object> getPics(HttpSession session, @RequestBody Integer rid) {
@@ -235,21 +456,60 @@ public class UserRoomController {
 		ans.put("pics", pic);
 		return ans;
 	}
+//	@RequestMapping("/getMeters") // 查meter（一行）
+//	@ResponseBody
+//	public Map<String, Object> getMeters(HttpSession session, Integer rid, Integer type) {
+//		User curUser = (User) session.getAttribute("curUser");
+//		Map<String, Object> ans = new HashMap<String, Object>();
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+//
+//		List<RoomMeter> meters = roomService.getMeters(rid, type);
+//		ans.put("meters" + type, meters);
+//		return ans;
+//	}
 
-	@RequestMapping("/getMeters") // 查meter（一行）
+	@RequestMapping("/getSourceInfo") // 查source（一行）
 	@ResponseBody
-	public Map<String, Object> getMeters(HttpSession session, Integer rid, Integer type) {
+	public Map<String, Object> getSourceInfo(HttpSession session, @RequestBody String data) {
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
-		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
 		} else {
 			ans.put("State", "Valid");
 		}
 
-		List<RoomMeter> meters = roomService.getMeters(rid, type);
-		ans.put("meters" + type, meters);
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String num = dataJson.getString("rNum");
+		String type = dataJson.getString("type");
+
+		Sources source = serverService.getSource(num, type);
+		ans.put("Source", source);
+		return ans;
+	}
+
+	@RequestMapping("/getGasSourcesInfo") // 查gas source（两行）
+	@ResponseBody
+	public Map<String, Object> getGasSourcesInfo(HttpSession session, @RequestBody String data) {
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<String, Object>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJson = JSONObject.parseObject(data);
+		String num = dataJson.getString("rNum");
+		List<Sources> source = serverService.getPairSource(num);
+		ans.put("Source", source);
 		return ans;
 	}
 
@@ -306,8 +566,7 @@ public class UserRoomController {
 
 		JSONObject dataJson = JSONObject.parseObject(data);
 
-		// 1 water 2 power 3 gas
-		int type = dataJson.getIntValue("type");
+		String type = dataJson.getString("type");
 		int pageNumber = dataJson.getIntValue("pageNum");
 		String rn = dataJson.getString("rNum");
 
@@ -368,37 +627,21 @@ public class UserRoomController {
 		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
-		try {
-			JSONObject dataJson = JSONObject.parseObject(data);
-			RoomMeter meter = roomService.getMeter(dataJson.getString("meterNo"));
-			Sources newSrc = new Sources();
-			newSrc.setROOM_NUMBER(dataJson.getString("roomNumber"));
-			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
-			newSrc.setCURRENT_DATA(dataJson.getDouble("thisMonthNum"));
-			newSrc.setMONEY(dataJson.getDouble("charge"));
-			newSrc.setTYPE(dataJson.getInteger("type"));
-			newSrc.setMETER(dataJson.getString("meterNo"));
-			newSrc.setLAST_DATA(meter.getCUR_VAL());
-			newSrc.setCOUNT(newSrc.getCURRENT_DATA()-newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date;
-			date = ft.parse(dataJson.getString("meterDate"));
-			newSrc.setTIME(date);
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Sources newSrc = new Sources();
+		newSrc.setROOM_NUMBER(dataJson.getString("rNum"));
+		newSrc.setCUR_TIME(new Date());
+		newSrc.setGUEST_NAME(dataJson.getString("name"));
+		newSrc.setTYPE(dataJson.getString("type"));
+		newSrc.setMETER(dataJson.getString("meter"));
+		newSrc.setLAST_MONTH_VAL(dataJson.getDouble("last"));
+		newSrc.setCUR_MONTH_VAL(dataJson.getDouble("cur"));
+		newSrc.setSYS_STATE(1);
+		newSrc.setMONEY(dataJson.getDouble("cost"));
 
-			 meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-			 meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-			 meter.setCUR_TIME(newSrc.getTIME());
+		return serverService.addSources(newSrc);
 
-			if (serverService.addSources(newSrc) == 1) {
-				 return roomService.updateMeter(meter);
-			} else {
-				return 0;
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-			return 0;
-		}
 	}
 
 	@RequestMapping("/addSourceGas") // 添加燃气费
@@ -408,54 +651,37 @@ public class UserRoomController {
 		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wDaily"))) == 0) {
 			return 0;
 		}
-		try {
-			JSONObject dataJson = JSONObject.parseObject(data);
-			RoomMeter meter = roomService.getMeter(dataJson.getString("firstMeterNo"));
-			Sources newSrc = new Sources();
-			newSrc.setROOM_NUMBER(dataJson.getString("roomNumber"));
-			newSrc.setGUEST_NAME(dataJson.getString("guestName"));
-			newSrc.setCURRENT_DATA(dataJson.getDouble("firstthisMonthNum"));
-			newSrc.setMONEY(dataJson.getDouble("firstCharge"));
-			newSrc.setTYPE((Integer) Config.getSettingsInt().get("source_gas"));
-			newSrc.setMETER(dataJson.getString("firstMeterNo"));
-			newSrc.setLAST_DATA(meter.getCUR_VAL());
-			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
 
-			SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date;
-			date = ft.parse(dataJson.getString("meterDate"));
-			newSrc.setTIME(date);
+		JSONObject dataJson = JSONObject.parseObject(data);
+		Sources srcOne = new Sources();
+		Sources srcTwo = new Sources();
 
-			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-			meter.setCUR_TIME(newSrc.getTIME());
+		srcOne.setROOM_NUMBER(dataJson.getString("rNum"));
+		srcOne.setGUEST_NAME(dataJson.getString("name"));
+		srcOne.setMETER(dataJson.getString("meterOne"));
+		srcOne.setLAST_MONTH_VAL(dataJson.getDouble("firstLast"));
+		srcOne.setCUR_MONTH_VAL(dataJson.getDouble("firstVal"));
+		srcOne.setMONEY(dataJson.getDouble("firstCharge"));
+		srcOne.setTYPE("gas");
+		srcOne.setCUR_TIME(new Date());
+		srcOne.setSYS_STATE(1);
 
-			if (serverService.addSources(newSrc) == 1) {
-				roomService.updateMeter(meter);
-			} else {
-				return 0;
-			}
+		srcTwo.setROOM_NUMBER(dataJson.getString("rNum"));
+		srcTwo.setGUEST_NAME(dataJson.getString("name"));
+		srcTwo.setMETER(dataJson.getString("meterTwo"));
+		srcTwo.setLAST_MONTH_VAL(dataJson.getDouble("secondLast"));
+		srcTwo.setCUR_MONTH_VAL(dataJson.getDouble("secondVal"));
+		srcTwo.setMONEY(dataJson.getDouble("secondCharge"));
+		srcTwo.setTYPE("gas");
+		srcTwo.setCUR_TIME(new Date());
+		srcTwo.setSYS_STATE(1);
 
-			meter = roomService.getMeter(dataJson.getString("secondMeterNo"));
-			newSrc.setCURRENT_DATA(dataJson.getDouble("secondthisMonthNum"));
-			newSrc.setMONEY(dataJson.getDouble("secondCharge"));
-			newSrc.setTYPE((Integer) Config.getSettingsInt().get("source_gas"));
-			newSrc.setMETER(dataJson.getString("secondMeterNo"));
-			newSrc.setLAST_DATA(meter.getCUR_VAL());
-			newSrc.setCOUNT(newSrc.getCURRENT_DATA() - newSrc.getLAST_DATA());
-
-			meter.setLAST_MONTH_VAL(meter.getCUR_VAL());
-			meter.setCUR_VAL(newSrc.getCURRENT_DATA());
-			meter.setCUR_TIME(newSrc.getTIME());
-
-			if (serverService.addSources(newSrc) == 1) {
-				return roomService.updateMeter(meter);
-			} else {
-				return 0;
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if(serverService.addSources(srcOne) == 0){
 			return 0;
+		}else if(serverService.addSources(srcTwo) == 0){
+			return 0;
+		}else{
+			return 1;
 		}
 	}
 	
@@ -1497,7 +1723,7 @@ public class UserRoomController {
 	
 	@RequestMapping("/searchAllFlightPickings") // 按房间号+时间查询所有车费信息(一组)
 	@ResponseBody
-	public Map<String, Object> searchAllFlightPickings(HttpSession session, @RequestBody String data) {
+	public Map<String,Object> searchAllFlightPickings(HttpSession session, @RequestBody String data) {
 		JSONObject dataJson = JSONObject.parseObject(data);
 
 		User curUser = (User) session.getAttribute("curUser");
@@ -1506,14 +1732,88 @@ public class UserRoomController {
 		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
 			ans.put("State", "Invalid");
 			return ans;
-		} else {
-			ans.put("State", "Valid");
 		}
 
 		String roomNum = dataJson.getString("roomNum");
 		Date date = dataJson.getDate("date");
 		List<FlightPicking> allRecord = roomService.getAllFlightPickings(roomNum, date);
-		ans.put("dataList", allRecord);
+
+		List<ExcelCell> list = new ArrayList<ExcelCell>();
+        ExcelCell ec = new ExcelCell();
+        ec.setRow(3);
+        ec.setCol(2);
+        ec.setContent(allRecord.get(0).getGUEST_NAME());
+		list.add(ec);
+
+
+		ExcelCell ec1 = new ExcelCell();
+		ec1.setRow(3);
+		ec1.setCol(5);
+		ec1.setContent(allRecord.get(0).getFLIGHT_NUMBER());
+		list.add(ec1);
+
+		ExcelCell ec2 = new ExcelCell();
+		ec2.setRow(4);
+		ec2.setCol(5);
+		ec2.setContent(allRecord.get(0).getPLATE_NUMBER());
+		list.add(ec2);
+
+		ExcelCell ec3 = new ExcelCell();
+
+		ec3.setRow(5);
+		ec3.setCol(2);
+		ec3.setContent(allRecord.get(0).getPICKER_NAME());
+		list.add(ec3);
+
+		ExcelCell ec4 = new ExcelCell();
+
+		ec4.setRow(5);
+		ec4.setCol(5);
+		ec4.setContent(allRecord.get(0).getPICKER_TELE());
+		list.add(ec4);
+
+		ExcelCell ec5 = new ExcelCell();
+		ec5.setRow(6);
+		ec5.setCol(2);
+		ec5.setContent(allRecord.get(0).getCONTACT_NAME());
+		list.add(ec5);
+
+		ExcelCell ec6 = new ExcelCell();
+		ec6.setRow(6);
+		ec6.setCol(5);
+		ec6.setContent(allRecord.get(0).getCONTACT_TELE());
+		list.add(ec6);
+
+		if(allRecord.get(0).getOCCUR_TIME() != null){
+			System.out.println(allRecord.get(0).getOCCUR_TIME().toString());
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String str = format.format(allRecord.get(0).getOCCUR_TIME());
+			System.out.println(str);
+
+			ExcelCell ec7= new ExcelCell();
+			ec7.setRow(4); //出发时间
+			ec7.setCol(2);
+			ec7.setContent(str.split(" ")[1]);
+			list.add(ec7);
+
+			ExcelCell ec9 = new ExcelCell();
+			ec9.setRow(2);
+			ec9.setCol(5);
+			ec9.setContent(str.split(" ")[0].split("-")[1]);
+			list.add(ec9);
+
+			ExcelCell ec10 = new ExcelCell();
+			ec10.setRow(2);
+			ec10.setCol(7);
+			ec10.setContent(str.split(" ")[0].split("-")[2]);
+			list.add(ec10);
+		}
+
+		if(ExcelHelper.write("excel/flightpicking.xlsx",list)){
+			ans.put("State", "Valid");
+			return ans;
+		}
+		ans.put("State", "Invalid");
 		return ans;
 	}
 	
@@ -2725,4 +3025,62 @@ public class UserRoomController {
 
 		return Para.getParaPairInt("restaurant", 0, 1);
 	}
+
+	@RequestMapping("/getRate")
+	public @ResponseBody Map<String, String> getRate(HttpSession session) {
+
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, String> res = new HashMap<String, String>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+			res.put("State", "Invalid");
+			return res;
+		} else {
+			res.put("State", "Valid");
+		}
+
+		return Para.getParaPair("rate", 0, 1);
+	}
+
+	@RequestMapping("/getAllStatistics") //客房费用结算 -- 统计费用
+	@ResponseBody Map<String,Object> getAllStatistics(HttpSession session,@RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJSON = JSONObject.parseObject(data);
+
+		String num = dataJSON.getString("rNum");
+
+		//水费
+		int waterTotal = serverService.getTotalSourcesRow(num,"water");
+		List<Sources> waters = serverService.searchSource(num,"water",0,waterTotal);
+
+		//电费
+
+		int elecTotal = serverService.getTotalSourcesRow(num,"elec");
+		List<Sources> elecs = serverService.searchSource(num,"elec",0,elecTotal);
+
+		//燃气费
+
+		int gasTotal = serverService.getTotalSourcesRow(num,"gas");
+		List<Sources> gass = serverService.searchSource(num,"gas",0,gasTotal);
+
+		ans.put("waterTotal",waterTotal);
+		ans.put("elecTotal",elecTotal);
+		ans.put("gasTotal",gasTotal);
+
+		ans.put("waterRecord",waters);
+		ans.put("elecsRecord",elecs);
+		ans.put("gasRecord",gass);
+
+		return ans;
+	}
 }
+
+

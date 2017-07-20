@@ -13,13 +13,14 @@
 	font-size: 15px;
 }
 
+.waterfare {
+	height:2.5em;
+}
 .body-content li:first-child .span {
 	width: 116px;
 }
 
-// .body-content li .spanGas{
-// 	width: 120px !important; 
-// }
+
 .body-content li .span {
 	width: 8em;
 	display: inline-block;
@@ -30,7 +31,7 @@
 	padding: .1em .8em;
 }
 
-#meter, #meterOne, #meterTwo{color: #ca5300;}
+.meter, #meterOne, #meterTwo{color: #ca5300;}
 
 /* 警告不能为空样式 */
 .red-right {

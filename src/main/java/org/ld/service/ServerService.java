@@ -3,27 +3,25 @@ package org.ld.service;
 import java.util.Date;
 import java.util.List;
 
-import org.ld.model.AgentPurchase;
-import org.ld.model.DailyService;
-import org.ld.model.Laundry;
-import org.ld.model.Meal;
-import org.ld.model.Sources;
-import org.ld.model.Staff;
-import org.ld.model.ShoesPolishing;
+import org.ld.model.*;
 
 public interface ServerService {
 
 	int getTotalDailyServiceRow(String rn, int type);
 
-	int getTotalSourcesRow(String rn, int type);
+	int getTotalSourcesRow(String rn, String type);
 
 	List<DailyService> searchBill(String rn, int type, int st, int eachPage);
 
-	List<Sources> searchSource(String rn, int type, int st, int eachPage);
+	List<Sources> searchSource(String rn, String type, int st, int eachPage);
 
 	int addDailyService(DailyService service);
 
 	int addSources(Sources source);
+
+	Sources getSource(String num, String type);
+
+	List<Sources> getPairSource(String num);
 	
 	//by lyd
 	List<Staff> searchStaff(String DUTY);
@@ -69,4 +67,6 @@ public interface ServerService {
 	List<ShoesPolishing> getAllShoesPolishing(String rn , Date date);
 	
 	List<Meal> getAllMeal(String rn , Date date);
+
+	int addExpenseOfLE(CostLe cost);
 }
