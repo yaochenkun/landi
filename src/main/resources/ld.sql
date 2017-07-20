@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-06-30 16:24:05
+Date: 2017-07-20 21:33:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,6 +66,34 @@ CREATE TABLE `contract_income` (
 -- ----------------------------
 -- Records of contract_income
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `cost_le`
+-- ----------------------------
+DROP TABLE IF EXISTS `cost_le`;
+CREATE TABLE `cost_le` (
+  `ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ROOM_NUM` varchar(64) DEFAULT NULL,
+  `GUEST_NAME` varchar(64) DEFAULT NULL,
+  `PROJECT` varchar(64) DEFAULT NULL,
+  `CUSTOMER_SERVICE_STAFF` varchar(64) DEFAULT NULL,
+  `OPERATION_STAFF` varchar(64) DEFAULT NULL,
+  `REASON` varchar(64) DEFAULT NULL,
+  `OCCUR_TIME` datetime DEFAULT NULL,
+  `COST` double DEFAULT '0',
+  `TYPE` varchar(64) DEFAULT NULL COMMENT '表示福利费，还是安抚费 ',
+  `STATE` int(3) DEFAULT NULL COMMENT '1 表示数据有效，0 表示数据无效',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cost_le
+-- ----------------------------
+INSERT INTO `cost_le` VALUES ('12', 'W33-3', 'Ada', '', '', '', '', '2017-07-12 14:42:40', '0', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('13', 'W33-3', 'Ada', '', '', '', '', '2017-07-12 14:48:35', '0', 'appease', '1');
+INSERT INTO `cost_le` VALUES ('14', 'W33-3', 'Ada', '', '', '', '', '2017-07-17 10:34:52', '0', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('15', 'W33-2', 'Ada', '', '', '', '', '2017-07-17 10:35:08', '0', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('16', 'W24-1', 'Ada', '', '', '', '', '2017-07-17 10:35:45', '0', 'welfare', '1');
 
 -- ----------------------------
 -- Table structure for `daily_service`
@@ -379,7 +407,7 @@ CREATE TABLE `guest` (
 -- Records of guest
 -- ----------------------------
 INSERT INTO `guest` VALUES ('1', 'Ada', 'W33-3', null, 'S131', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
-INSERT INTO `guest` VALUES ('2', 'Alice1', 'W32-1', null, 'S132', '13581818112', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
+INSERT INTO `guest` VALUES ('2', 'Alice1', 'W32-1', null, 'S132', '13581818112', 'Amazon', '经理', '2', null, 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
 INSERT INTO `guest` VALUES ('3', 'Tom', 'W2-1', null, 'S12', '13581818112', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
 INSERT INTO `guest` VALUES ('47', 'Ada3', 'W10-3', null, 'S1313', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
 INSERT INTO `guest` VALUES ('49', 'Ada5', 'W11-1', null, 'S1311', '13581818113', 'Amazon', '主管', '2', '0', 'T3', null, '无', '15000.5', '2016-11-11 00:00:00', '2017-11-11 00:00:00', '0', null, null, null, null, null, null, null, null, null);
@@ -1922,7 +1950,7 @@ INSERT INTO `room` VALUES ('88', 'W24-1', null, null, null, null, null, null, nu
 INSERT INTO `room` VALUES ('89', 'W24-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('90', 'W24-3', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('91', 'W24-5', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('92', 'W25-1', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('92', 'W25-1', '小业主', null, null, '1', '无', 'wewe', '2017-07-20 00:00:00', null, null);
 INSERT INTO `room` VALUES ('93', 'W25-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('94', 'W25-3', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('95', 'W26-1', null, null, null, null, null, null, null, null, '');
@@ -1939,20 +1967,20 @@ INSERT INTO `room` VALUES ('105', 'W29-2', null, null, null, null, null, null, n
 INSERT INTO `room` VALUES ('106', 'W29-3', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('107', 'W30-1', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('108', 'W30-2', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('109', 'W30-3', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('109', 'W30-3', 'LE', null, null, null, '无', null, '2017-07-04 00:00:00', '2017-07-04 00:00:00', null);
 INSERT INTO `room` VALUES ('110', 'W31-1', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('111', 'W31-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('112', 'W31-3', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('113', 'W32-1', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('114', 'W32-2', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('113', 'W32-1', '小业主', null, null, '1', '无', null, '2017-07-04 00:00:00', null, null);
+INSERT INTO `room` VALUES ('114', 'W32-2', 'SPC', null, null, '1', '无', null, '2017-07-04 00:00:00', null, null);
 INSERT INTO `room` VALUES ('115', 'W32-3', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('116', 'W33-1', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('117', 'W33-2', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('118', 'W33-3', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('116', 'W33-1', '小业主', null, null, '1', '无', '', '2017-07-04 00:00:00', null, null);
+INSERT INTO `room` VALUES ('117', 'W33-2', '小业主', null, null, '1', '无', '', '2017-07-06 00:00:00', null, null);
+INSERT INTO `room` VALUES ('118', 'W33-3', 'LE', null, null, '1', '无', null, '2017-07-04 00:00:00', null, null);
 INSERT INTO `room` VALUES ('119', 'W34-1', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('120', 'W34-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('121', 'W34-3', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('122', 'W35-1', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('122', 'W35-1', 'LE', null, null, '1', '无', null, '2017-07-10 00:00:00', null, null);
 INSERT INTO `room` VALUES ('123', 'W35-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('124', 'E2-1', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('125', 'E2-2', null, null, null, null, null, null, null, null, '');
@@ -2602,23 +2630,42 @@ DROP TABLE IF EXISTS `sources`;
 CREATE TABLE `sources` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ROOM_NUMBER` varchar(64) DEFAULT NULL,
-  `GUEST_ID` int(11) DEFAULT NULL,
   `GUEST_NAME` varchar(64) DEFAULT NULL,
-  `TIME` datetime DEFAULT NULL,
-  `TYPE` int(11) DEFAULT NULL,
+  `CUR_TIME` datetime DEFAULT NULL,
+  `TYPE` varchar(11) DEFAULT NULL COMMENT '水费 电费 燃气费',
   `METER` varchar(64) DEFAULT NULL,
-  `LAST_DATA` double DEFAULT NULL,
-  `CURRENT_DATA` double DEFAULT NULL,
-  `COUNT` double DEFAULT NULL,
+  `YEAR_INIT_VAL` double DEFAULT NULL,
+  `LAST_MONTH_VAL` double DEFAULT NULL,
+  `CUR_MONTH_VAL` double DEFAULT NULL,
   `MONEY` double DEFAULT NULL,
-  `SYS_STATE` int(11) DEFAULT '1',
+  `SYS_STATE` int(11) DEFAULT '1' COMMENT '0 表示历史记录 1表示现在记录',
   PRIMARY KEY (`ID`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sources
 -- ----------------------------
+INSERT INTO `sources` VALUES ('1', 'W33-3', 'Ada', '2017-07-14 15:28:52', 'water', 'W33-3', null, '0', '1', '2', '1');
+INSERT INTO `sources` VALUES ('2', 'W33-3', 'Ada', '2017-07-14 15:42:39', 'water', 'W33-3', null, '1', '2', '2', '1');
+INSERT INTO `sources` VALUES ('3', 'W33-3', 'Ada', '2017-07-14 15:44:14', 'water', 'W33-3', null, '2', '12', '4', '1');
+INSERT INTO `sources` VALUES ('4', 'W33-3', 'Ada', '2017-07-14 15:48:50', 'elec', 'W33-3', null, '0', '10', '4', '1');
+INSERT INTO `sources` VALUES ('5', 'W33-3', 'Ada', '2017-07-14 15:49:02', 'elec', 'W33-3', null, '10', '20', '4', '1');
+INSERT INTO `sources` VALUES ('6', 'W33-3', 'Ada', '2017-07-14 15:49:16', 'elec', 'W33-3', null, '20', '30', '4', '1');
+INSERT INTO `sources` VALUES ('7', 'W33-3', 'Ada', '2017-07-14 16:04:48', 'water', 'W33-3', null, '12', '23', '4.4', '1');
+INSERT INTO `sources` VALUES ('8', 'W33-3', 'Ada', '2017-07-14 16:05:00', 'water', 'W33-3', null, '23', '24', '0.4', '1');
+INSERT INTO `sources` VALUES ('9', 'W33-3', 'Ada', '2017-07-14 16:29:15', 'elec', 'W33-3', null, '30', '40', '4', '1');
+INSERT INTO `sources` VALUES ('10', 'W33-3', 'Ada', '2017-07-14 16:29:30', 'elec', 'W33-3', null, '40', '50', '4', '1');
+INSERT INTO `sources` VALUES ('11', 'W33-3', 'Ada', '2017-07-17 10:18:10', 'water', 'W33-3', null, '24', '25', '0.4', '1');
+INSERT INTO `sources` VALUES ('12', 'W33-3', 'Ada', '2017-07-17 10:18:28', 'elec', 'W33-3', null, '50', '51', '0.4', '1');
+INSERT INTO `sources` VALUES ('13', 'W33-3', 'Ada', '2017-07-17 11:05:05', 'gas', 'W33-3_1', null, '0', '2', '0.6', '1');
+INSERT INTO `sources` VALUES ('14', 'W33-3', 'Ada', '2017-07-17 11:05:05', 'gas', 'W33-3_2', null, '0', '2', '0.6', '1');
+INSERT INTO `sources` VALUES ('15', 'W33-3', 'Ada', '2017-07-17 11:07:41', 'gas', 'W33-3_1', null, '2', '3', '0.3', '1');
+INSERT INTO `sources` VALUES ('16', 'W33-3', 'Ada', '2017-07-17 11:07:41', 'gas', 'W33-3_2', null, '2', '3', '0.3', '1');
+INSERT INTO `sources` VALUES ('17', 'W33-3', 'Ada', '2017-07-17 12:05:18', 'gas', 'W33-3_1', null, '3', '4', '0.3', '1');
+INSERT INTO `sources` VALUES ('18', 'W33-3', 'Ada', '2017-07-17 12:05:18', 'gas', 'W33-3_2', null, '3', '4', '0.3', '1');
+INSERT INTO `sources` VALUES ('19', 'W33-3', 'Ada', '2017-07-17 12:05:27', 'gas', 'W33-3_1', null, '3', '5', '0.6', '1');
+INSERT INTO `sources` VALUES ('20', 'W33-3', 'Ada', '2017-07-17 12:05:27', 'gas', 'W33-3_2', null, '3', '5', '0.6', '1');
 
 -- ----------------------------
 -- Table structure for `staff`
@@ -2687,8 +2734,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '1835008', '2016-10-08', '2017-06-28', '1', '1');
-INSERT INTO `user` VALUES ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '4', '262143', '2016-10-08', '2017-06-28', '1', '1');
+INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '1835008', '2016-10-08', '2017-07-20', '1', '1');
+INSERT INTO `user` VALUES ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '4', '786431', '2016-10-08', '2017-07-20', '1', '1');
 INSERT INTO `user` VALUES ('10', '王二', 'e10adc3949ba59abbe56e057f20f883e', '王二', '王二', '财务部', '4', '262143', '2017-03-17', '2017-06-16', '1', '1');
 INSERT INTO `user` VALUES ('11', 'test8', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '4', '262143', '2017-03-28', '2017-06-19', '1', '0');
 INSERT INTO `user` VALUES ('12', 'testr345', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '1835008', '2017-03-29', '2017-03-29', '1', '0');
