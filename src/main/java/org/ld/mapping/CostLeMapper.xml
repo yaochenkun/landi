@@ -179,6 +179,6 @@
     select
     <include refid="Base_Column_List" />
     from cost_le
-    where STATE = 1 AND  TYPE = #{TYPE}
+    where STATE = 1 AND  TYPE = #{TYPE} AND ROOM_NUM like concat('%', #{Room_Number},'%')
   </select>
 </mapper>

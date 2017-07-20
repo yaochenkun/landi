@@ -12,8 +12,8 @@
 
 .btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px;}
 .btnRight{margin-left: 198px;}
-#editLink{color: #2277da;margin-right:10px;}
-#editLink:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
+#editLink ,#exportLink{color: #2277da;margin-right:10px;}
+#editLink:hover ,#exportLink:hover{color: #2277da; border-bottom: 1px solid #2277da;cursor: pointer;}
 
 #deleteLink{color: #e45e00;}
 #deleteLink:hover{color: #e45e00; border-bottom: 1px solid #e45e00;cursor: pointer;}

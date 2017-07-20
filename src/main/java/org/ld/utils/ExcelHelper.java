@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.io.FileInputStream;
 import java.util.List;
 
 /**
@@ -100,4 +101,39 @@ public class ExcelHelper {
 
 		return workbook;
 	}
+
+	//复制excel
+	public synchronized static void  copy(String src , String des) {
+		File file1 = new File(src);
+		File file2 = new File(des);
+
+		if(!file1.exists()) return ;
+
+		try {
+			InputStream in = null;
+			OutputStream out = null;
+			try {
+				in = new BufferedInputStream(new FileInputStream(file1), 1024);
+				out = new BufferedOutputStream(new FileOutputStream(file2), 1024);
+				byte[] buffer = new byte[1024];
+				int len;
+				while ((len = in.read(buffer)) != -1) {
+					out.write(buffer, 0, len);
+				}
+			}finally {
+				if(null !=in){
+					in.close();
+				}
+				if(null !=out){
+					out.close();
+				}
+			}
+
+		}catch (Exception e){
+			e.printStackTrace();
+
+		}
+	}
+
+
 }

@@ -5,6 +5,15 @@
     margin-left: 30px;
 }
 
+.exportbtn {
+    border: 1px solid #0c71d4cc;
+    cursor:pointer;
+    float: right;
+    background-color: #0c71d4cc;
+    width:100px;
+    color: black !important;
+}
+
 .body-content {
     margin-top:40px;
     margin-left:0px !important;
@@ -83,11 +92,11 @@ header .homeMenu .span {
     line-height: 22px;
 }
 
-.nav-path a {
+.nav-page a {
     color: #2277da;
 }
 
-.nav-path a:hover {
+.nav-page a:hover {
     border-bottom: 1px solid #2277da;
 }
 

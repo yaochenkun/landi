@@ -20,8 +20,11 @@ import sun.net.www.URLConnection;
 public class DownloadController {
 	@RequestMapping(value = "/download")
 	public void downloadResource1(HttpServletResponse response, String fp) {
+		//System.out.println(fp);
+
 		File file = new File(fp);
 		System.out.println(file);
+		//System.out.println(file.exists());
 
 		if (file.exists()) {
 			String mimeType = URLConnection.guessContentTypeFromName(file.getName());

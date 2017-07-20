@@ -40,7 +40,7 @@ var searchBusPlane = function(pageNum){
 						+"<td>"+ formatDateForm(new Date(perRecord.time)) +"</td>"
 						+"<td>"+ formatDate(new Date(perRecord.import_TIME)) +"</td>"
 						+"<td>"+ formatDate(new Date(perRecord.edit_TIME)) +"</td>"
-						+"<td><a id='editLink' href='serviceBusPlaneEdit.jsp?id="+ perRecord.id +"'>编辑</a><a id='deleteLink' onclick='serviceBusPlaneDelete("+ perRecord.id +")'>删除</a></td></tr>");
+						+"<td><a id='editLink' href='serviceBusPlaneEdit.jsp?id="+ perRecord.id +"'>编辑</a><a id='exportLink' onclick='exportFormat("+ perRecord.id +")'>导出</a><a id='deleteLink' onclick='serviceBusPlaneDelete("+ perRecord.id +")'>删除</a></td></tr>");
 				}
 				// 添加车费 底部页码
 				$("#busPlaneBottom").append("<div class='bottom-page'>"+
@@ -244,9 +244,9 @@ var associateGuestName = function(element){
 
 //导出接送机列表至 excel中
 var exportList = function(){
-    // var BB = self.Blob;
-    // var fileName = "BusPlaneList_" + formatDateDot(new Date()) + ".csv";
-    // var content = ",,,,,接送机记录表\n房间号,客户姓名,接送/送机,航班,车牌,接送人（电话）,联络人（电话）,发生时间,上传时间,最后编辑时间\n";
+    var BB = self.Blob;
+    var fileName = "BusPlaneList_" + formatDateDot(new Date()) + ".csv";
+    var content = ",,,,,接送机记录表\n房间号,客户姓名,接送/送机,航班,车牌,接送人（电话）,联络人（电话）,发生时间,上传时间,最后编辑时间\n";
     
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
@@ -260,29 +260,45 @@ var exportList = function(){
 		contentType:'application/json',
 		success:function(data){
 			console.log(data);
-			if(data.State == "Valid"){
-				//window.location.href = "http://" + window.location.host + "/LD/excel/flightpicking.xlsx";
-				//window.open("/LD/excel/flightpicking.xlsx");
-				window.location.href = "http://" + window.location.host + "/LD/download.action?fp=/excel/flightpicking.xlsx";
-			}
-			// (data.dataList).map(function(record){
-            //
-			// 	content += record.room_NUMBER + "," +
-			// 			   record.guest_NAME + "," +
-			// 			   (record.type == "welcome" ? "接机":"送机") + "," +
-			// 			   record.flight_NUMBER + "," +
-			// 			   record.plate_NUMBER + "," +
-			// 			   record.picker_NAME + "（" + record.picker_TELE + "）" + "," +
-			// 			   record.contact_NAME + "（" + record.contact_TELE + "）" + "," +
-			// 			   formatDate(new Date(record.occur_TIME)) + "," +
-			// 			   formatDate(new Date(record.import_TIME)) + "," +
-			// 			   formatDate(new Date(record.edit_TIME)) + "\n";
-			// });
-            //
-			// saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+			(data.dataList).map(function(record){
+
+				content += record.room_NUMBER + "," +
+						   record.guest_NAME + "," +
+						   (record.type == "welcome" ? "接机":"送机") + "," +
+						   record.flight_NUMBER + "," +
+						   record.plate_NUMBER + "," +
+						   record.picker_NAME + "（" + record.picker_TELE + "）" + "," +
+						   record.contact_NAME + "（" + record.contact_TELE + "）" + "," +
+						   formatDate(new Date(record.occur_TIME)) + "," +
+						   formatDate(new Date(record.import_TIME)) + "," +
+						   formatDate(new Date(record.edit_TIME)) + "\n";
+			});
+
+			saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
 		}
 	});
 };
+
+var exportFormat = function(id) {
+	$.ajax({
+		type:'post',
+		url:"/LD/userRoom/exportFlightPickingById.action",
+		contentType:'application/json',
+		dataType:'json',
+		data:'{"id":"' + id + '"}',
+		success:function(data){
+            console.log(data)
+
+            if(data == 1){
+                window.location.href = "http://" + window.location.host + "/LD/download.action?fp=excel/flightpicking.xlsx";
+            }
+            else{
+				showModalBox("error","导出失败！");
+			}
+
+        }
+	})
+}
 
 //打印接送机车费
 var printList = function()  

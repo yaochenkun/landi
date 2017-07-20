@@ -124,8 +124,12 @@ var exportList = function (type) {
         success:function(data){
 
             records = data.dataList;
-
+            console.log(records)
             if(data.State == "Valid"){
+                if(type == 'welfare') {
+                    type = '福利费';
+                }else type = '安抚费';
+
                 for(var i=0;i<records.length;i++){
                     var record = records[i];
                     content += record.room_NUM + "," +
@@ -135,7 +139,7 @@ var exportList = function (type) {
                         record.operation_STAFF + "," +
                         record.reason + "," +
                         record.cost + "元," +
-                        type == 'welfare'?'福利费':'安抚费' + "\n";
+                        type + "\n";
                 }
                 saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
             }

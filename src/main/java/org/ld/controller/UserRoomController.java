@@ -2,6 +2,7 @@ package org.ld.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -1738,82 +1739,8 @@ public class UserRoomController {
 		Date date = dataJson.getDate("date");
 		List<FlightPicking> allRecord = roomService.getAllFlightPickings(roomNum, date);
 
-		List<ExcelCell> list = new ArrayList<ExcelCell>();
-        ExcelCell ec = new ExcelCell();
-        ec.setRow(3);
-        ec.setCol(2);
-        ec.setContent(allRecord.get(0).getGUEST_NAME());
-		list.add(ec);
-
-
-		ExcelCell ec1 = new ExcelCell();
-		ec1.setRow(3);
-		ec1.setCol(5);
-		ec1.setContent(allRecord.get(0).getFLIGHT_NUMBER());
-		list.add(ec1);
-
-		ExcelCell ec2 = new ExcelCell();
-		ec2.setRow(4);
-		ec2.setCol(5);
-		ec2.setContent(allRecord.get(0).getPLATE_NUMBER());
-		list.add(ec2);
-
-		ExcelCell ec3 = new ExcelCell();
-
-		ec3.setRow(5);
-		ec3.setCol(2);
-		ec3.setContent(allRecord.get(0).getPICKER_NAME());
-		list.add(ec3);
-
-		ExcelCell ec4 = new ExcelCell();
-
-		ec4.setRow(5);
-		ec4.setCol(5);
-		ec4.setContent(allRecord.get(0).getPICKER_TELE());
-		list.add(ec4);
-
-		ExcelCell ec5 = new ExcelCell();
-		ec5.setRow(6);
-		ec5.setCol(2);
-		ec5.setContent(allRecord.get(0).getCONTACT_NAME());
-		list.add(ec5);
-
-		ExcelCell ec6 = new ExcelCell();
-		ec6.setRow(6);
-		ec6.setCol(5);
-		ec6.setContent(allRecord.get(0).getCONTACT_TELE());
-		list.add(ec6);
-
-		if(allRecord.get(0).getOCCUR_TIME() != null){
-			System.out.println(allRecord.get(0).getOCCUR_TIME().toString());
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String str = format.format(allRecord.get(0).getOCCUR_TIME());
-			System.out.println(str);
-
-			ExcelCell ec7= new ExcelCell();
-			ec7.setRow(4); //出发时间
-			ec7.setCol(2);
-			ec7.setContent(str.split(" ")[1]);
-			list.add(ec7);
-
-			ExcelCell ec9 = new ExcelCell();
-			ec9.setRow(2);
-			ec9.setCol(5);
-			ec9.setContent(str.split(" ")[0].split("-")[1]);
-			list.add(ec9);
-
-			ExcelCell ec10 = new ExcelCell();
-			ec10.setRow(2);
-			ec10.setCol(7);
-			ec10.setContent(str.split(" ")[0].split("-")[2]);
-			list.add(ec10);
-		}
-
-		if(ExcelHelper.write("excel/flightpicking.xlsx",list)){
-			ans.put("State", "Valid");
-			return ans;
-		}
-		ans.put("State", "Invalid");
+		ans.put("dataList",allRecord);
+		
 		return ans;
 	}
 	
@@ -1856,6 +1783,178 @@ public class UserRoomController {
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
+	@RequestMapping("/exportFlightPickingById") //
+	@ResponseBody
+	public Integer exportFlightPickingById(HttpSession session , @RequestBody String data){ //根据数据库中ID号查询此条记录，并生成Excel
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+			return 0;
+		}
+
+		try{
+			File temp = new File("excel/flightpicking.xlsx");
+			if(temp.exists() && !(temp.delete())){
+				return 0;
+			}
+
+			ExcelHelper.copy("excel/flightpicking-model.xlsx","excel/flightpicking.xlsx");
+
+			String id = dataJson.getString("id");
+			FlightPicking fp = roomService.getFlightPickingById(Integer.parseInt(id));
+			if(fp.getTYPE().equals("welcome")){ //接机
+				System.out.println("接机-------------------------------------------");
+				List<ExcelCell> list = new ArrayList<ExcelCell>();
+				ExcelCell ec = new ExcelCell();
+				ec.setRow(3);
+				ec.setCol(11);
+				ec.setContent(fp.getGUEST_NAME());
+				list.add(ec);
+
+
+				ExcelCell ec1 = new ExcelCell();
+				ec1.setRow(3);
+				ec1.setCol(14);
+				ec1.setContent(fp.getFLIGHT_NUMBER());
+				list.add(ec1);
+
+				ExcelCell ec2 = new ExcelCell();
+				ec2.setRow(4);
+				ec2.setCol(14);
+				ec2.setContent(fp.getPLATE_NUMBER());
+				list.add(ec2);
+
+				ExcelCell ec3 = new ExcelCell();
+
+				ec3.setRow(5);
+				ec3.setCol(11);
+				ec3.setContent(fp.getPICKER_NAME());
+				list.add(ec3);
+
+				ExcelCell ec4 = new ExcelCell();
+
+				ec4.setRow(5);
+				ec4.setCol(14);
+				ec4.setContent(fp.getPICKER_TELE());
+				list.add(ec4);
+
+				ExcelCell ec5 = new ExcelCell();
+				ec5.setRow(7);
+				ec5.setCol(11);
+				ec5.setContent(fp.getCONTACT_NAME());
+				list.add(ec5);
+
+				ExcelCell ec6 = new ExcelCell();
+				ec6.setRow(7);
+				ec6.setCol(14);
+				ec6.setContent(fp.getCONTACT_TELE());
+				list.add(ec6);
+
+				if(fp.getOCCUR_TIME() != null){
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String str = format.format(fp.getOCCUR_TIME());
+
+					ExcelCell ec7= new ExcelCell();
+					ec7.setRow(4); //出发时间
+					ec7.setCol(11);
+					ec7.setContent(str.split(" ")[1]);
+					list.add(ec7);
+
+					ExcelCell ec9 = new ExcelCell();
+					ec9.setRow(2);
+					ec9.setCol(14);
+					ec9.setContent(str.split(" ")[0].split("-")[1]);
+					list.add(ec9);
+
+					ExcelCell ec10 = new ExcelCell();
+					ec10.setRow(2);
+					ec10.setCol(16);
+					ec10.setContent(str.split(" ")[0].split("-")[2]);
+					list.add(ec10);
+				}
+
+				ExcelHelper.write("excel/flightpicking.xlsx",list);
+			}else{   //送机
+				List<ExcelCell> list = new ArrayList<ExcelCell>();
+				ExcelCell ec = new ExcelCell();
+				ec.setRow(3);
+				ec.setCol(2);
+				ec.setContent(fp.getGUEST_NAME());
+				list.add(ec);
+
+
+				ExcelCell ec1 = new ExcelCell();
+				ec1.setRow(3);
+				ec1.setCol(5);
+				ec1.setContent(fp.getFLIGHT_NUMBER());
+				list.add(ec1);
+
+				ExcelCell ec2 = new ExcelCell();
+				ec2.setRow(4);
+				ec2.setCol(5);
+				ec2.setContent(fp.getPLATE_NUMBER());
+				list.add(ec2);
+
+				ExcelCell ec3 = new ExcelCell();
+
+				ec3.setRow(5);
+				ec3.setCol(2);
+				ec3.setContent(fp.getPICKER_NAME());
+				list.add(ec3);
+
+				ExcelCell ec4 = new ExcelCell();
+
+				ec4.setRow(5);
+				ec4.setCol(5);
+				ec4.setContent(fp.getPICKER_TELE());
+				list.add(ec4);
+
+				ExcelCell ec5 = new ExcelCell();
+				ec5.setRow(6);
+				ec5.setCol(2);
+				ec5.setContent(fp.getCONTACT_NAME());
+				list.add(ec5);
+
+				ExcelCell ec6 = new ExcelCell();
+				ec6.setRow(6);
+				ec6.setCol(5);
+				ec6.setContent(fp.getCONTACT_TELE());
+				list.add(ec6);
+
+				if(fp.getOCCUR_TIME() != null){
+					System.out.println(fp.getOCCUR_TIME().toString());
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String str = format.format(fp.getOCCUR_TIME());
+					System.out.println(str);
+
+					ExcelCell ec7= new ExcelCell();
+					ec7.setRow(4); //出发时间
+					ec7.setCol(2);
+					ec7.setContent(str.split(" ")[1]);
+					list.add(ec7);
+
+					ExcelCell ec9 = new ExcelCell();
+					ec9.setRow(2);
+					ec9.setCol(5);
+					ec9.setContent(str.split(" ")[0].split("-")[1]);
+					list.add(ec9);
+
+					ExcelCell ec10 = new ExcelCell();
+					ec10.setRow(2);
+					ec10.setCol(7);
+					ec10.setContent(str.split(" ")[0].split("-")[2]);
+					list.add(ec10);
+				}
+
+				ExcelHelper.write("excel/flightpicking.xlsx",list);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+		return 1;
 	}
 	
 	@RequestMapping("/updateFlightPickingById") // 更新接送机记录
@@ -3042,7 +3141,8 @@ public class UserRoomController {
 	}
 
 	@RequestMapping("/getAllStatistics") //客房费用结算 -- 统计费用
-	@ResponseBody Map<String,Object> getAllStatistics(HttpSession session,@RequestBody String data) {
+	@ResponseBody
+	public Map<String,Object> getAllStatistics(HttpSession session,@RequestBody String data) {
 		//验证权限
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<>();
@@ -3080,6 +3180,158 @@ public class UserRoomController {
 		ans.put("gasRecord",gass);
 
 		return ans;
+	}
+
+	@RequestMapping ("exportExpenseToModel")
+	@ResponseBody
+	public Integer exportExpenseToModel(HttpSession session , @RequestBody String data){
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+			return 0;
+		}
+
+		JSONObject dataJSON = JSONObject.parseObject(data);
+		String name = dataJSON.getString("guest");
+		Double water_pre = dataJSON.getDouble("water_pre");
+		Double water_cur = dataJSON.getDouble("water_cur");
+		Double water_cost = dataJSON.getDouble("water_cost");
+
+		Double elec_pre = dataJSON.getDouble("elec_pre");
+		Double elec_cur = dataJSON.getDouble("elec_cur");
+		Double elec_cost = dataJSON.getDouble("elec_cost");
+
+		Double gas_pre_1 = dataJSON.getDouble("gas_pre_1");
+		Double gas_cur_1 = dataJSON.getDouble("gas_cur_1");
+		Double gas_cost_1 = dataJSON.getDouble("gas_cost_1");
+
+		Double gas_pre_2 = dataJSON.getDouble("gas_pre_2");
+		Double gas_cur_2 = dataJSON.getDouble("gas_cur_2");
+		Double gas_cost_2 = dataJSON.getDouble("gas_cost_2");
+
+		try{
+			File file1 = new File("excel/Consumption.xlsx");
+			if(file1.exists() &&(!file1.delete())){
+				return 0;
+			}
+			ExcelHelper.copy("excel/Consumption-model.xlsx","excel/Consumption.xlsx");
+
+			List<ExcelCell> list = new ArrayList<ExcelCell>();
+			ExcelCell ec = new ExcelCell();
+			ec.setRow(6);
+			ec.setCol(2);
+			ec.setContent(name);
+			list.add(ec);
+
+			ExcelCell ec2 = new ExcelCell();
+			ec2.setRow(15);
+			ec2.setCol(3);
+			ec2.setContent(gas_pre_1.toString());
+			list.add(ec2);
+
+			ExcelCell ec3 = new ExcelCell();
+			ec3.setRow(15);
+			ec3.setCol(4);
+			ec3.setContent(gas_cur_1.toString());
+			list.add(ec3);
+
+			ExcelCell ec4 = new ExcelCell();
+			ec4.setRow(15);
+			ec4.setCol(5);
+			Double temp = gas_cur_1-gas_pre_1;
+			ec4.setContent(temp.toString());
+			list.add(ec4);
+
+			ExcelCell ec5 = new ExcelCell();
+			ec5.setRow(15);
+			ec5.setCol(7);
+			System.out.println(gas_cost_1.toString());
+			ec5.setContent(gas_cost_1.toString());
+			list.add(ec5);
+
+			ExcelCell ec6 = new ExcelCell();
+			ec6.setRow(16);
+			ec6.setCol(3);
+			ec6.setContent(gas_pre_2.toString());
+			list.add(ec6);
+
+			ExcelCell ec7 = new ExcelCell();
+			ec7.setRow(16);
+			ec7.setCol(4);
+			ec7.setContent(gas_cur_2.toString());
+			list.add(ec7);
+
+			ExcelCell ec8 = new ExcelCell();
+			ec8.setRow(16);
+			ec8.setCol(5);
+			temp = gas_cur_2-gas_pre_2;
+			ec8.setContent(temp.toString());
+			list.add(ec8);
+
+			ExcelCell ec9 = new ExcelCell();
+			ec9.setRow(16);
+			ec9.setCol(7);
+			ec9.setContent(gas_cost_2.toString());
+			list.add(ec9);
+
+			ExcelCell ec10 = new ExcelCell();
+			ec10.setRow(17);
+			ec10.setCol(3);
+			ec10.setContent(water_pre.toString());
+			list.add(ec10);
+
+			ExcelCell ec11 = new ExcelCell();
+			ec11.setRow(17);
+			ec11.setCol(4);
+			ec11.setContent(water_cur.toString());
+			list.add(ec11);
+
+			ExcelCell ec12 = new ExcelCell();
+			ec12.setRow(17);
+			ec12.setCol(5);
+			temp = water_cur - water_pre;
+			ec12.setContent(temp.toString());
+			list.add(ec12);
+
+			ExcelCell ec13 = new ExcelCell();
+			ec13.setRow(17);
+			ec13.setCol(7);
+			ec13.setContent(water_cost.toString());
+			list.add(ec13);
+			
+			ExcelCell ec14 = new ExcelCell();
+			ec14.setRow(18);
+			ec14.setCol(3);
+			ec14.setContent(elec_pre.toString());
+			list.add(ec14);
+
+			ExcelCell ec15 = new ExcelCell();
+			ec15.setRow(18);
+			ec15.setCol(4);
+			ec15.setContent(elec_cur.toString());
+			list.add(ec15);
+
+			ExcelCell ec16 = new ExcelCell();
+			ec16.setRow(18);
+			ec16.setCol(5);
+			temp = elec_cur - elec_pre;
+			ec16.setContent(temp.toString());
+			list.add(ec16);
+
+			ExcelCell ec17 = new ExcelCell();
+			ec17.setRow(18);
+			ec17.setCol(7);
+			ec17.setContent(elec_cost.toString());
+			list.add(ec17);
+
+			ExcelHelper.write("excel/Consumption.xlsx",list);
+
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+
+		return 1;
 	}
 }
 

@@ -146,6 +146,7 @@ public interface RoomService {
 	FlightPicking getFlightPickingById(Integer id);
 	int deleteFlightPickingById(Integer id);
 	int updateFlightPicking(FlightPicking fp);
+
 	
 	/**
 	 * 其它车费
