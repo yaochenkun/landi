@@ -11,9 +11,13 @@ public interface ServerService {
 
 	int getTotalSourcesRow(String rn, String type);
 
+	int getExactTotalSourcesRow(String rn, String type);//房间号精确查询
+
 	List<DailyService> searchBill(String rn, int type, int st, int eachPage);
 
 	List<Sources> searchSource(String rn, String type, int st, int eachPage);
+
+	List<Sources> searchExactSource(String rn, String type, int st, int eachPage);//房间号精切查询
 
 	int addDailyService(DailyService service);
 

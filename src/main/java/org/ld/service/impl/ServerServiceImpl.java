@@ -77,6 +77,20 @@ public class ServerServiceImpl implements ServerService {
 			return sourcesMapper.getSourcesRange(map);
 	}
 
+	@Override //房间号精确查询
+	public List<Sources> searchExactSource(String rn, String type, int st, int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("RN", rn);
+		map.put("TYPE", type);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+
+		return sourcesMapper.getExactSourcesRange(map);
+	}
+
+
 	@Override
 	public int getTotalSourcesRow(String rn, String type) {
 		// TODO Auto-generated method stub
@@ -84,6 +98,15 @@ public class ServerServiceImpl implements ServerService {
 		map.put("RN", rn);
 		map.put("TYPE", type);
 		return sourcesMapper.getTotalRow(map);
+	}
+
+	@Override
+	public int getExactTotalSourcesRow(String rn, String type) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("TYPE", type);
+		return sourcesMapper.getExactTotalRow(map);
 	}
 
 	@Override

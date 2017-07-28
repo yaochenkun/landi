@@ -75,17 +75,18 @@ var printList = function () {
             console.log(data);
 
             records = data.dataList;
-
             if(data.State == "Valid" ){
                 for(var i=0;i<records.length;i++){
                     var record = records[i];
+                    receipt = record.receipt_TIME == null? "":formatDateForm(new Date(record.receipt_TIME));
+                    refund = record.refund_TIME == null? "":formatDateForm(new Date(record.refund_TIME));
 
                     curRow = {};
                     curRow["房间号"] = record.room_NUMBER;
                     curRow["房源类型"] = record.type;
                     curRow["业主姓名"] = record.owner_NAME;
-                    curRow["接收时间"] = formatDateForm(record.receipt_TIME);
-                    curRow["退还日期"] = formatDateForm(record.refund_TIME);
+                    curRow["接收时间"] = receipt;
+                    curRow["退还日期"] = refund;
                     curRow["替换房间"]= record.replace_ROOM;
                     curRow["备注"] = record.comm;
 
@@ -123,19 +124,23 @@ var exportList = function () {
         success:function(data){
 
             records = data.dataList;
+            console.log(records)
 
             if(data.State == "Valid"){
                 for(var i=0;i<records.length;i++){
                     var record = records[i];
+
+                    receipt = record.receipt_TIME == null? "":formatDateForm(new Date(record.receipt_TIME));
+                    refund = record.refund_TIME == null? "":formatDateForm(new Date(record.refund_TIME));
                     content += record.room_NUMBER + "," +
                         record.type + "," +
                         record.owner_NAME + "," +
-                        formatDateForm(record.receipt_TIME) + "," +
-                        formatDateForm(record.refund_TIME) + "," +
+                        receipt + "," +
+                        refund + "," +
                         record.replace_ROOM + "," +
                         record.comm + "\n";
                 }
-                saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
+                 saveAs(new BB(["\ufeff" + content] , {type: "text/plain;charset=utf8"}), fileName);
             }
             else{
                 showModalBox("error","导出失败");

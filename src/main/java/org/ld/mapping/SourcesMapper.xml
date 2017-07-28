@@ -166,11 +166,24 @@
     from sources
     where ROOM_NUMBER like CONCAT('%', #{RN}, '%')  and TYPE = #{TYPE} and SYS_STATE = 1
   </select>
+  <select id="getExactTotalRow" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from sources
+    where ROOM_NUMBER = #{RN} and TYPE = #{TYPE} and SYS_STATE = 1
+  </select>
   <select id="getSourcesRange" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List" />
     from sources
     where ROOM_NUMBER like CONCAT('%', #{RN}, '%') and TYPE = #{TYPE} and SYS_STATE = 1
+    order by ID
+    limit #{ST}, #{EACH}
+  </select>
+  <select id="getExactSourcesRange" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER = #{RN}  and TYPE = #{TYPE} and SYS_STATE = 1
     order by ID
     limit #{ST}, #{EACH}
   </select>

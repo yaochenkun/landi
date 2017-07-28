@@ -21,7 +21,11 @@ public interface SourcesMapper {
 	// add
 	int getTotalRow(Map<String, Object> map);
 
+	int getExactTotalRow(Map<String, Object> map); //房间号采用精确查询
+
 	List<Sources> getSourcesRange(Map<String, Object> map);
+
+	List<Sources> getExactSourcesRange(Map<String, Object> map); //房间号采用精确查询
 
 	Sources getSources(Map<String, Object> map);
 

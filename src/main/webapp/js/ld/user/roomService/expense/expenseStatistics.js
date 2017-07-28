@@ -22,10 +22,12 @@ var searchExpense = function () {
         dataType:'json',
         data:'{"rNum":"' + num + '"}',
         success:function(data) {
+            $("tbody").html("");
             console.log(data)
             if(data.State == 'Invalid'){
-
+                $("tbody").html('<tr><td colspan="7" style="color: #ff4d4d">数据查询错误！</td></tr>');
             }else{
+
                 var waterTotal = data.waterTotal;
                 var elecTotal = data.elecTotal;
                 var gasTotal = data.gasTotal;
@@ -36,6 +38,12 @@ var searchExpense = function () {
 
                 var sum = 0.0;
                 var init;
+
+                if(waterTotal == 0 && elecTotal == 0 && gasTotal == 0){
+                    $("tbody").html('<tr><td colspan="7" style="color: #ff4d4d">无相关数据！</td></tr>');
+                    return;
+                }
+
                 //水费
                 total_cost[0] = 0.0;
                 for(var i=0;i<waterRecord.length;i++){
@@ -58,11 +66,10 @@ var searchExpense = function () {
 
                         sum += parseFloat(waterRecord[i].money);
                         total_cost[0] += parseFloat(waterRecord[i].money);
+                    }
 
-                        if(i == (waterRecord.length - 1)){
-                            currentReading[0] = waterRecord[i].cur_MONTH_VAL;
-                        }
-
+                    if(i == (waterRecord.length - 1)){
+                        currentReading[0] = waterRecord[i].cur_MONTH_VAL;
                     }
 
                 }
@@ -90,9 +97,10 @@ var searchExpense = function () {
                         sum += parseFloat(elecRecord[i].money);
                         total_cost[1] += elecRecord[i].money;
 
-                        if(i == (elecRecord.length-1)){
-                            currentReading[1] = elecRecord[i].cur_MONTH_VAL;
-                        }
+                    }
+
+                    if(i == (elecRecord.length-1)){
+                        currentReading[1] = elecRecord[i].cur_MONTH_VAL;
                     }
 
                 }
@@ -128,19 +136,16 @@ var searchExpense = function () {
                             + gasRecord[i].cur_MONTH_VAL + '</td><td class="price">' + gasRecord[i].money + '元</td><td>' + formatDateForm(new Date(gasRecord[i].cur_TIME))+ '</td></tr>');
 
                         sum += parseFloat(gasRecord[i].money);
-
-                        if(i == (gasRecord.length - 2)){
-                            currentReading[2] = gasRecord[i].cur_MONTH_VAL;
-                        }
-                        if(i == (gasRecord.length - 1)) {
-                            currentReading[3] = gasRecord[i].cur_MONTH_VAL;
                         }
 
-
-                        }
+                    if(i == (gasRecord.length - 2)){
+                        currentReading[2] = gasRecord[i].cur_MONTH_VAL;
+                    }
+                    if(i == (gasRecord.length - 1)) {
+                        currentReading[3] = gasRecord[i].cur_MONTH_VAL;
+                    }
 
                 }
-                
 
                 $("span .price").text(sum.toFixed(2));
 

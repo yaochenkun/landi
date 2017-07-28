@@ -3158,18 +3158,18 @@ public class UserRoomController {
 		String num = dataJSON.getString("rNum");
 
 		//水费
-		int waterTotal = serverService.getTotalSourcesRow(num,"water");
-		List<Sources> waters = serverService.searchSource(num,"water",0,waterTotal);
+		int waterTotal = serverService.getExactTotalSourcesRow(num,"water");
+		List<Sources> waters = serverService.searchExactSource(num,"water",0,waterTotal);
 
 		//电费
 
-		int elecTotal = serverService.getTotalSourcesRow(num,"elec");
-		List<Sources> elecs = serverService.searchSource(num,"elec",0,elecTotal);
+		int elecTotal = serverService.getExactTotalSourcesRow(num,"elec");
+		List<Sources> elecs = serverService.searchExactSource(num,"elec",0,elecTotal);
 
 		//燃气费
 
-		int gasTotal = serverService.getTotalSourcesRow(num,"gas");
-		List<Sources> gass = serverService.searchSource(num,"gas",0,gasTotal);
+		int gasTotal = serverService.getExactTotalSourcesRow(num,"gas");
+		List<Sources> gass = serverService.searchExactSource(num,"gas",0,gasTotal);
 
 		ans.put("waterTotal",waterTotal);
 		ans.put("elecTotal",elecTotal);
@@ -3214,6 +3214,7 @@ public class UserRoomController {
 			if(file1.exists() &&(!file1.delete())){
 				return 0;
 			}
+
 			ExcelHelper.copy("excel/Consumption-model.xlsx","excel/Consumption.xlsx");
 
 			List<ExcelCell> list = new ArrayList<ExcelCell>();
