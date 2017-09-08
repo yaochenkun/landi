@@ -20,7 +20,7 @@
     </resultMap>
     <sql id="Base_Column_List" >
     ID, ROOM_NUM, FAC_ID, TAG, ALLOCATE_TYPE, STATE, BORROW_DATE, RETURN_DATE, MAINTAIN_DURATION,
-    COMM
+    COMM, TYPE
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select

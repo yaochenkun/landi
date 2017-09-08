@@ -102,17 +102,17 @@ public class UserRoomController {
 		return roomPic;
 	}
 
-//	// 根据roomNumber 查询 roomID
-//	@RequestMapping(value = "/getRoomIDByNumber")
-//	@ResponseBody
-//	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
-//			throws Exception {
-//
-//		System.out.println(roomNumber);
-//		Room room = roomService.getRoomByNumber(roomNumber);
-//
-//		return room;
-//	}
+	// 根据roomNumber 查询 roomID
+	@RequestMapping(value = "/getRoomIDByNumber")
+	@ResponseBody
+	public Room getRoomIDByNumber(@RequestParam(value = "roomNumber", required = true) String roomNumber)
+			throws Exception {
+
+		System.out.println(roomNumber);
+		Room room = roomService.getRoomByNumber(roomNumber);
+
+		return room;
+	}
 
 	@RequestMapping("/getAllRoom") // 所有房间
 	@ResponseBody
