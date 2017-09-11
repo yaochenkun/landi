@@ -11,7 +11,7 @@
     <link href="${pageContext.request.contextPath}/css/ld/user/tenant/tenantPublic.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/css/ld/user/roomService/expense/expenseLE.css" rel="stylesheet" type="text/css" />
-
+    <link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
     <title>LE承担费用</title>
 </head>
 <body>
@@ -28,25 +28,36 @@
     %>
 
     <!-- 三级导航栏 start-->
-    <div class="nav-second">
-        <div class="toolbar">
-            <div class="nav-secondul">
-                <ul>
-                    <% if(type.equals("welfare")) {%>
-                    <li class="liactive"><a href="expenseLE.jsp?type=welfare">福利费</a></li>
-                    <li class="linormal"><a href="expenseLE.jsp?type=appease">安抚费</a></li>
-                    <%} else {%>
-                    <li class="linormal"><a href="expenseLE.jsp?type=welfare">福利费</a></li>
-                    <li class="liactive"><a href="expenseLE.jsp?type=appease">安抚费</a></li>
-                    <%}%>
-                </ul>
-            </div>
-        </div>
+    <%--<div class="nav-second">--%>
+        <%--<div class="toolbar">--%>
+            <%--<div class="nav-secondul">--%>
+                <%--<ul>--%>
+                    <%--<% if(type.equals("welfare")) {%>--%>
+                    <%--<li class="liactive"><a href="expenseLE.jsp?type=welfare">福利费</a></li>--%>
+                    <%--<li class="linormal"><a href="expenseLE.jsp?type=appease">安抚费</a></li>--%>
+                    <%--<%} else {%>--%>
+                    <%--<li class="linormal"><a href="expenseLE.jsp?type=welfare">福利费</a></li>--%>
+                    <%--<li class="liactive"><a href="expenseLE.jsp?type=appease">安抚费</a></li>--%>
+                    <%--<%}%>--%>
+                <%--</ul>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <div class="main">
+    <div class="main-page">
+    <div class="nav-path">
+        <a href="../../home/homeUser.jsp" title="回到首页"><i
+                class="icon-home"></i></a> <i class="icon-path"></i> <a
+            href="expenseIndex.jsp">LE承担费用</a> <i class="icon-path"></i> <a
+            href="expenseLE.jsp?type=<%=type%>"><%=convert(type)+'费'%></a>
+        <a class="btn btn-new new" href="newExpense.jsp?type=<%=type%>">新增<%=convert(type)%>费记录</a>
     </div>
+
+
     <!-- 三级导航栏 end-->
     <!-- 页面内容 start-->
-    <div class="main">
-        <a class="btn btn-new new" href="newExpense.jsp?type=<%=type%>">新增<%=convert(type)%>费记录</a>
+    <div class="main" style="margin-top: 10px;">
+
         <div class="main-title">
             <input type="text" placeholder="房间号..." id="roomNumber"/>
             <a class="btnSearch" onclick="getExpenseInfo($('#roomNumber').val(),parseInt(1),'<%=type%>');">搜索</a>
@@ -74,7 +85,8 @@
                     <div id="Bottom" class="bottom"></div>
                 </div>
             </div>
-
+        </div>
+    </div>
         </div>
     </div>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

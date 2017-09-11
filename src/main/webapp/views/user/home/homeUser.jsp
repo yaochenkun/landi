@@ -12,6 +12,8 @@
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/home.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"	rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomServiceIndex.css" rel="stylesheet" type="text/css" />
 <script>
 	//将英文月份转换成数字月份
 	function formateMonth(month) {
@@ -51,13 +53,189 @@
 				当前用户角色：<span id="roleTypeContent"></span>
 				<span id="roleTypeNum" style="display: none;">${curUser.ROLE}</span>
 			</h5>
+			<div class="btn btn-change btnchange" style="margin-right: 120px;">
+				<a onclick="showEditPasswordModal();">客房报修</a>
+			</div>
 			<div class="btn btn-change btnchange">
-				<a onclick="showEditPasswordModal();">修改密码</a>
+				<a onclick="showEditPasswordModal();">紧急事件申报</a>
 			</div>
 		</div>
 	</div>
 	<div class="content">
 		<div class="detail">
+
+
+
+
+			<%--<div class="title">--%>
+				<%--<div class="right">--%>
+					<%--<a class="span" href="service/serviceIndex.jsp">客房服务</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="maintain/maintainIndex.jsp">客房维修</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="javascript:void(0);">客房费用结算</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="affairReminder/affairReminderIndex.jsp">事务提醒</a>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+
+			<div class="detail-head">
+				<span>功能菜单</span>
+			</div>
+
+			<div class="body">
+				<!-- 客房服务 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/telephone.svg">
+								<span>客房服务</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index active content-wash">
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceWash.jsp">洗衣单收费</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceTakeaway.jsp">餐费</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceWaterBill.jsp">饮用水费</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceShoeCleaning.jsp">擦鞋费</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceShopping.jsp">代购费</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/service/serviceBus.jsp">车费</a></li>
+
+						<li><a href="${pageContext.request.contextPath}/views/user/office/shopManage.jsp">小卖铺</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/source/sourceIndex.jsp">能源费结算</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseIndex.jsp">LE承担费用</a></li>
+						<li><a href="#">月结管理</a></li>
+					</ul>
+				</div>
+				<!-- 客房服务 end -->
+
+				<!-- 客房维修 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/tools.svg">
+								<span>客房维护</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="maintain/maintainNew.jsp">报修处理</a></li>
+						<li><a href="#">检查检修</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainManage.jsp">维修管理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainStat.jsp">维修统计</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomItem/itemIndex.jsp">客房物品管理</a></li>
+					</ul>
+				</div>
+				<!-- 客房维修 end -->
+
+				<!-- 能源费结算 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/drops.svg">
+								<span>租赁管理</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<%--<li><a href="source/sourceWater.jsp">水&nbsp;费</a></li>--%>
+						<%--<li><a href="source/sourceElec.jsp">电&nbsp;费</a></li>--%>
+						<%--<li><a href="source/sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>--%>
+						<li><a href="#">租客管理</a></li>
+						<li><a href="#">新增租客</a></li>
+						<li><a href="#">租客一览表</a></li>
+						<li><a href="#">房源管理</a></li>
+						<li><a href="#">房屋退租</a></li>
+					</ul>
+				</div>
+				<!-- 能源费结算 end -->
+
+				<!-- 客房费用结算 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/calculate.svg">
+								<span>收支管理</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="#">租赁款收付管理</a></li>
+						<li><a href="#">发票管理</a></li>
+						<li><a href="#">中介费管理</a></li>
+						<li><a href="#">收支一览表</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseStatistics.jsp">客房费用统计</a></li>
+						<%--<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseLE.jsp?type=welfare">LE承担费用</a></li>--%>
+					</ul>
+				</div>
+				<!-- 客房费用结算 end -->
+
+				<!-- 事务提醒 start -->
+				<div class="index-list">
+					<div class="left-index">
+						<ul>
+							<li><img src="${pageContext.request.contextPath}/img/roomService/calendar.svg">
+								<span>办公管理</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="content-title content-title-index">
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/mailboxIndex.jsp">站内信</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/diaryOverview.jsp">备忘录</a></li>
+						<li><a href="#">物品申请</a></li>
+						<li><a href="#">紧急事件处理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/systemOverview.jsp">公告</a></li>
+
+					</ul>
+				</div>
+				<!-- 客房费用结算 end -->
+			</div>
+
+
+				<div class="detail-head">
+					<span>事务提醒</span>
+				</div>
+
+				<div style="margin:auto 50px;">
+					<div id="full-clndr" style="display:inline;">
+						<script type="text/template" id="id_clndr_template">
+							<div class="clndr-controls">
+								<div class="clndr-previous-button"><<</div>
+								<div class="clndr-next-button">>></div>
+								<div class="month"><\%= year + ' 年 ' %><\%= formateMonth(month) + ' 月'%></div>
+							</div>
+							<div class="clndr-grid">
+								<div class="days-of-the-week">
+									<\% _.each(daysOfTheWeek, function(day) { %><div class="header-day"><\%= day %></div><\% }); %>
+								</div>
+								<div class="days">
+									<\% _.each(days, function(day) { %><div class="<\%= day.classes %>" id="<\%= day.id %>"><span class="day-number"><\%= day.day %></span></div><\% }); %>
+								</div>
+							</div>
+						</script>
+					</div>
+					<div id="event">
+						<div class="event-header1"></div>
+						<div class="event-header2">本&nbsp;&nbsp;日&nbsp;&nbsp;事&nbsp;&nbsp;务</div>
+						<ul class="event-content">
+						</ul>
+					</div>
+				</div>
+
+
+
+
+
+
+
 			<div class="detail-head">
 				<span>个人信息</span>
 			</div>
@@ -94,35 +272,19 @@
 				</dl>
 			</div>
 
-			<div class="detail-head">
-				<span>事务提醒</span>
+			<div class="detail-operation" style="margin-top: 40px;">
+				<div class="btn btn-change btnchange">
+					<a onclick="showEditPasswordModal();">修改密码</a>
+				</div>
 			</div>
 
-			<div style="margin:auto 50px;">
-				<div id="full-clndr" style="display:inline;">
-					<script type="text/template" id="id_clndr_template">
-						<div class="clndr-controls">
-							<div class="clndr-previous-button"><<</div>
-							<div class="clndr-next-button">>></div>
-							<div class="month"><\%= year + ' 年 ' %><\%= formateMonth(month) + ' 月'%></div>
-						</div>
-						<div class="clndr-grid">
-							<div class="days-of-the-week">
-								<\% _.each(daysOfTheWeek, function(day) { %><div class="header-day"><\%= day %></div><\% }); %>
-							</div>
-							<div class="days">
-								<\% _.each(days, function(day) { %><div class="<\%= day.classes %>" id="<\%= day.id %>"><span class="day-number"><\%= day.day %></span></div><\% }); %>
-							</div>
-						</div>
-					</script>
-				</div>
-				<div id="event">
-					<div class="event-header1"></div>
-					<div class="event-header2">本&nbsp;&nbsp;日&nbsp;&nbsp;事&nbsp;&nbsp;务</div>
-					<ul class="event-content">
-					</ul>
+
+			<div class="detail-operation">
+				<div class="btn btn-change btnchange">
+					<a onclick="showEditPasswordModal();">退出系统</a>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<!-- 页面内容 end-->
@@ -195,6 +357,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/moment.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/clndr.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript">
 
 

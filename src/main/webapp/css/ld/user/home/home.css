@@ -120,6 +120,11 @@ header .homeMenu .span {
 	margin-bottom: 30px;
 }
 
+.detail-operation {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
 .detail-head span {
 	font-size: 20px;
 	border-bottom: 2px #4a8bee solid;

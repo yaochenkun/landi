@@ -12,6 +12,7 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/office/shopManage.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 <title>小卖部管理</title>
 </head>
 <body>
@@ -20,19 +21,27 @@
 	<jsp:include page="../_leftMenu.jsp" />
 	<jsp:include page="../_modal.jsp" />
 
-	<div class="nav-second">
-		<div class="toolbar">
-			<div class="nav-secondul">
-				<ul>
-					<li class="liactive"><a href="${pageContext.request.contextPath}/views/user/office/shopManage.jsp">小卖部管理</a></li>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/office/officeManage.jsp">办公室收支管理</a></li>
-				</ul>
+	<%--<div class="nav-second">--%>
+		<%--<div class="toolbar">--%>
+			<%--<div class="nav-secondul">--%>
+				<%--<ul>--%>
+					<%--<li class="liactive"><a href="${pageContext.request.contextPath}/views/user/office/shopManage.jsp">小卖部管理</a></li>--%>
+					<%--<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/office/officeManage.jsp">办公室收支管理</a></li>--%>
+				<%--</ul>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
+
+	<div class="main">
+		<div class="main-page">
+			<div class="nav-path">
+				<a href="../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<i class="icon-path"></i> <a href="shopManage.jsp">小卖部</a>
+				<a class="btn btn-new new" href="shopNew.jsp" style="float:right;">新增商品</a>
 			</div>
-		</div>
-	</div>
 
 	<!-- 页面内容 strat -->
-	<div class="main">
+	<div class="main" style="margin-top: -30px;">
 		<div class="main-page">
 			<div class="nav-path">
 				<div class="chooseGoodsName">
@@ -48,7 +57,6 @@
 					</div>
 				</div> -->
 			</div>
-			<a class="btn btn-new btnnew" href="shopNew.jsp">新增商品</a>
 			<div class="bill-area">
 				<div class="bill-table">
 					<!-- 费用 table start -->
@@ -76,6 +84,8 @@
 					<!-- 底部页码 end -->
 				</div>
 			</div>
+		</div>
+	</div>
 		</div>
 	</div>
 	<!-- 页面内容 end -->

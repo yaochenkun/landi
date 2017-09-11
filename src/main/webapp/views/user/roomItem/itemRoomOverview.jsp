@@ -12,29 +12,38 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemRoomOverview.css" rel="stylesheet" type="text/css" />
-<title>客房物品总览</title>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
+
+	<title>客房物品总览</title>
 </head>
 <body>
 
 	<jsp:include page="../_header.jsp" />
 	<jsp:include page="../_leftMenu.jsp" />
 
-	<div class="nav-second">
-		<div class="toolbar">
-			<div class="nav-secondul">
-				<ul>
-					<li class="liactive"><a	href="javascript:void(0);">客房物品统计</a></li>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRepoOverview.jsp">库房物品统计</a></li>
-					<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<%--<div class="nav-second">--%>
+		<%--<div class="toolbar">--%>
+			<%--<div class="nav-secondul">--%>
+				<%--<ul>--%>
+					<%--<li class="liactive"><a	href="javascript:void(0);">客房物品统计</a></li>--%>
+					<%--<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/itemRepoOverview.jsp">库房物品统计</a></li>--%>
+					<%--<li class="linormal"><a	href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">采购管理</a></li>--%>
+				<%--</ul>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
 
 	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
+
 			<div class="nav-path">
+				<a href="../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<i class="icon-path"></i> <a href="itemIndex.jsp">客房物品管理</a>
+				<i class="icon-path"></i> <a href="itemRoomOverview.jsp">客房物品统计</a>
+			</div>
+
+			<div class="nav-path" style="margin-top: -20px;">
 				<span>物品种类：</span>
 				<div class="itemType" style="display:inline-block;">
 
@@ -53,7 +62,7 @@
 
 				<span style="margin-left:30px;">房间号：</span><input id="roomNum" type="text" value="">
 				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
-				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
+				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();" style="margin-left:298px;">导出</a>
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
 

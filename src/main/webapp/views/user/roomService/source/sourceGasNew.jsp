@@ -26,7 +26,7 @@
 		<div class="main-page">
 			<!-- 面包屑导航 start -->
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i
+				<a href="../../home/homeUser.jsp" title="回到首页"><i
 					class="icon-home"></i></a> <i class="icon-path"></i> <a
 					href="sourceIndex.jsp">能源费结算</a> <i class="icon-path"></i> <a
 					id="sourceType" href="sourceGas.jsp">燃气费</a> <i class="icon-path"></i>

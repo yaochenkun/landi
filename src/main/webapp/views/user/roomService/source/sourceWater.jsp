@@ -20,7 +20,7 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i
+				<a href="../../home/homeUser.jsp" title="回到首页"><i
 					class="icon-home"></i></a> <i class="icon-path"></i> <a
 					href="sourceIndex.jsp">能源费结算</a> <i class="icon-path"></i> <a
 					href="sourceWater.jsp">水费</a>

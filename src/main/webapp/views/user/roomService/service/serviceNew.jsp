@@ -19,9 +19,9 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
-				<i class="icon-path"></i>
-				<a href="serviceIndex.jsp">客房服务</a>
+				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<%--<i class="icon-path"></i>--%>
+				<%--<a href="serviceIndex.jsp">客房服务</a>--%>
 				<% String type = request.getParameter("type"); 
 				   String contentOne = "", contentTwo = "", contentThree = "";
 				   if(type.matches("1")){

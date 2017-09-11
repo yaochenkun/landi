@@ -101,6 +101,7 @@ header .homeMenu .span {
 	width: 100%;
 	margin-top: 25px;
 	box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+	z-index:9999;
 }
 
 .itemType .itemTypeMenu li {
