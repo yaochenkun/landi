@@ -240,6 +240,26 @@
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 					</tr>
+					<tr class="shoespolishing-W">
+						<td>擦鞋费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
 				</tbody>
 			</table>
 			<!-- 其他费用 W2-18 end -->
@@ -431,6 +451,26 @@
 					</tr>
 					<tr class="barrelwater-W">
 						<td>桶装水费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
+					<tr class="shoespolishing-W">
+						<td>擦鞋费</td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
@@ -658,6 +698,26 @@
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 					</tr>
+					<tr class="shoespolishing-E">
+						<td>擦鞋费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
 				</tbody>
 			</table>
 			<!-- 其他费用 E2-18 end -->
@@ -849,6 +909,26 @@
 					</tr>
 					<tr class="barrelwater-E">
 						<td>桶装水费</td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+						<td><input type="text" value="1" /></td>
+					</tr>
+					<tr class="shoespolishing-E">
+						<td>擦鞋费</td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>
 						<td><input type="text" value="1" /></td>

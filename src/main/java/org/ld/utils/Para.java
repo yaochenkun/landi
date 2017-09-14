@@ -23,7 +23,8 @@ import java.util.Set;
  */
 
 public class Para {
-	private final static String root = Para.class.getClassLoader().getResource("env/").getPath() + "/";
+	private final static String root = Para.class.getClassLoader().getResource("env/").getPath();
+
 	
 	@SuppressWarnings("resource")
 	public static String[] ReadParas(String text, String key) {

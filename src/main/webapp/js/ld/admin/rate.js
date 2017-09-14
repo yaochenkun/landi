@@ -260,6 +260,10 @@ var requestAjaxCharge = function(){
 	    		$(this).find('.barrelwater-'+ WorE[tableIndex] +' td:not(:first-child) input').each(function(tdIndex){
 	    			$(this).val(data['桶装水费_'+ WorE[tableIndex] + '-' + (beginPos[tableIndex] + tdIndex)]);
 	    		});
+
+                $(this).find('.shoespolishing-'+ WorE[tableIndex] +' td:not(:first-child) input').each(function(tdIndex){
+                    $(this).val(data['擦鞋费_'+ WorE[tableIndex] + '-' + (beginPos[tableIndex] + tdIndex)]);
+                });
 	    	});
 	    }
 	});
@@ -313,6 +317,10 @@ var setCharge = function(){
 		$(this).find('.barrelwater-'+ WorE[tableIndex] +' td:not(:first-child) input').each(function(tdIndex){
 			jsondata['桶装水费_'+ WorE[tableIndex] + '-' + (beginPos[tableIndex] + tdIndex)] = $(this).val();
 		});
+
+        $(this).find('.shoespolishing-'+ WorE[tableIndex] +' td:not(:first-child) input').each(function(tdIndex){
+            jsondata['擦鞋费_'+ WorE[tableIndex] + '-' + (beginPos[tableIndex] + tdIndex)] = $(this).val();
+        });
 	});
 	
 	$.ajax({

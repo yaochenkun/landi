@@ -260,7 +260,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>7.1.6.v20100715</version>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds><!-- 多少秒进行一次热部署 -->
+					<!--<scanIntervalSeconds>10</scanIntervalSeconds>&lt;!&ndash; 多少秒进行一次热部署 &ndash;&gt;-->
 					<webAppConfig>
 						<contextPath>/LD</contextPath>
 					</webAppConfig>
@@ -273,6 +273,28 @@
 					<stopPort>9999</stopPort>
 				</configuration>
 			</plugin>
+
+			<!-- 配置插件 -->
+			<!--<plugin>-->
+				<!--<groupId>org.apache.tomcat.maven</groupId>-->
+				<!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+				<!--<version>2.2</version>-->
+				<!--<configuration>-->
+					<!--<port>8080</port>-->
+					<!--<path>/LD</path>-->
+
+					<!--&lt;!&ndash; 系统热部署配置 118.89.227.189 &ndash;&gt;-->
+					<!--&lt;!&ndash;<url>http://10.109.247.127:8080/manager/text</url>&ndash;&gt;-->
+					<!--&lt;!&ndash;&lt;!&ndash;<url>http://47.92.91.99:8080/manager/text</url>&ndash;&gt;&ndash;&gt;-->
+					<!--&lt;!&ndash;<username>tomcat</username>&ndash;&gt;-->
+					<!--&lt;!&ndash;<password>tomcat</password>&ndash;&gt;-->
+
+				<!--</configuration>-->
+			<!--</plugin>-->
+
+
+
+
 		</plugins>
 	</build>
 </project>
