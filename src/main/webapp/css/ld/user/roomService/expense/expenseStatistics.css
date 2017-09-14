@@ -92,11 +92,11 @@ header .homeMenu .span {
     line-height: 22px;
 }
 
-.nav-page a {
+.nav-path a {
     color: #2277da;
 }
 
-.nav-page a:hover {
+.nav-path a:hover {
     border-bottom: 1px solid #2277da;
 }
 

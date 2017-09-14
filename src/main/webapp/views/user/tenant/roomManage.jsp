@@ -18,22 +18,29 @@
         <jsp:include page="../_leftMenu.jsp" />
 
         <!-- 三级导航栏 start-->
-        <div class="nav-second">
-            <div class="toolbar">
-                <div class="nav-secondul">
-                    <ul>
-                        <li class="linormal"><a href="generalMap.jsp">租客一览图</a></li>
-                        <li class="linormal"><a href="guestList.jsp">租客一览表</a></li>
-                        <li class="linormal"><a href="newGuest.jsp">新增租客</a></li>
-                        <li class="liactive"><a href="javascript:void(0);">房源管理</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <%--<div class="nav-second">--%>
+            <%--<div class="toolbar">--%>
+                <%--<div class="nav-secondul">--%>
+                    <%--<ul>--%>
+                        <%--<li class="linormal"><a href="generalMap.jsp">租客一览图</a></li>--%>
+                        <%--<li class="linormal"><a href="guestList.jsp">租客一览表</a></li>--%>
+                        <%--<li class="linormal"><a href="newGuest.jsp">新增租客</a></li>--%>
+                        <%--<li class="liactive"><a href="javascript:void(0);">房源管理</a></li>--%>
+                    <%--</ul>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <!-- 三级导航栏 end-->
+        <div class="main">
+            <div class="main-page">
+
+                <div class="nav-path">
+                    <a href="../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+                    <i class="icon-path"></i> <a href="roomManage.jsp">房源管理</a>
+                </div>
 
         <!-- 页面内容 start-->
-        <div class="main">
+        <div class="main" style="margin-top:-20px;">
             <div class="main-title">
                 <input type="text" placeholder="房间号..." id="roomNumber"/>
                 <input type="text" placeholder="房源类型..." id="roomType"/>
@@ -64,7 +71,8 @@
 
             </div>
         </div>
-
+            </div>
+        </div>
         <!-- 页面内容 end-->
 
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

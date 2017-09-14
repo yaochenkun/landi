@@ -14,7 +14,7 @@
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/planList.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 
-	<title>采购计划管理</title>
+	<title>物品申请</title>
 </head>
 <body>
 
@@ -39,8 +39,7 @@
 
 			<div class="nav-path">
 				<a href="../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
-				<i class="icon-path"></i> <a href="itemIndex.jsp">客房物品管理</a>
-				<i class="icon-path"></i> <a href="planList.jsp">采购管理</a>
+				<i class="icon-path"></i> <a href="planList.jsp">物品申请</a>
 			</div>
 
 

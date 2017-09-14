@@ -10,7 +10,7 @@
     <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/css/ld/user/roomService/expense/expenseStatistics.css" rel="stylesheet" type="text/css"/>
 
-    <title>统计费用</title>
+    <title>客房统计费用</title>
 </head>
 <body>
     <jsp:include page="../../_header.jsp" />
@@ -18,15 +18,13 @@
 
     <div class="main">
         <div class="main-page">
-            <div class="nav-page">
-                <a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+            <div class="nav-path">
+                <a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
                 <i class="icon-path"></i>
-                <a href="../roomServiceIndex.jsp">客房费用结算</a>
-                <i class="icon-path"></i>
-                <a id="serviceType" href="javascript:void(0)">统计费用</a>
+                <a id="serviceType" href="javascript:void(0)"  style="color:#2277da;">客房统计费用</a>
             </div>
             <div class="body">
-                <div class="body-content">
+                <div class="body-content" style="margin-top:10px;">
                     <input id="roomNumber" type="text" placeholder="房间号..."/>
                     <a class="btn btnSearch" onclick="searchExpense()">搜索</a>
                     <span class="total">总额：</span><span ><span class="price">0</span>&nbsp;元</span>

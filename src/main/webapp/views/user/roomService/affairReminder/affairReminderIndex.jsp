@@ -19,9 +19,7 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
-				<i class="icon-path"></i>
-				<a href="javascript:void(0);">事务提醒</a>
+				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 			</div>
 			<div class="body">
 				<div class="content-title content-title-index">

@@ -13,7 +13,7 @@
 	<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/public.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/systemOverview.css" rel="stylesheet" type="text/css" />
-	<title>系统提醒</title>
+	<title>公告</title>
 </head>
 <body>
 
@@ -26,11 +26,9 @@
 
 
 		<div class="nav-path nav-path0">
-			<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+			<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 			<i class="icon-path"></i>
-			<a href="affairReminderIndex.jsp">事务提醒</a>
-			<i class="icon-path"></i>
-			<a href="javascript:void(0);">系统提醒</a>
+			<a href="javascript:void(0);">公告</a>
 		</div>
 
 

@@ -142,13 +142,10 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<%--<li><a href="source/sourceWater.jsp">水&nbsp;费</a></li>--%>
-						<%--<li><a href="source/sourceElec.jsp">电&nbsp;费</a></li>--%>
-						<%--<li><a href="source/sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>--%>
-						<li><a href="#">租客管理</a></li>
-						<li><a href="#">新增租客</a></li>
-						<li><a href="#">租客一览表</a></li>
-						<li><a href="#">房源管理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/tenant/generalMap.jsp">租客管理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/tenant/newGuest.jsp">新增租客</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/tenant/guestList.jsp">租客一览表</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/tenant/roomManage.jsp">房源管理</a></li>
 						<li><a href="#">房屋退租</a></li>
 					</ul>
 				</div>
@@ -190,7 +187,7 @@
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/mailboxIndex.jsp">站内信</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/diaryOverview.jsp">备忘录</a></li>
-						<li><a href="#">物品申请</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">物品申请</a></li>
 						<li><a href="#">紧急事件处理</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/systemOverview.jsp">公告</a></li>
 
@@ -281,7 +278,7 @@
 
 			<div class="detail-operation">
 				<div class="btn btn-change btnchange">
-					<a onclick="showEditPasswordModal();">退出系统</a>
+					<a href="${pageContext.request.contextPath}/logout.action">退出系统</a>
 				</div>
 			</div>
 

@@ -91,3 +91,44 @@ table .floor35 td:nth-child(8) {
 .hint-content li:nth-child(3) div {
   background-color: #5c5c5c;
 }
+
+.main {
+  width: 1100px;
+  margin: 65px auto;
+}
+
+.main-page {
+  margin: 10px 0;
+  position: relative;
+}
+
+/**** 表格上方样式  ****/
+.main-page .nav-path {
+  padding: 20px 0;
+  line-height: 22px;
+}
+
+.nav-path a {
+  color: #2277da;
+}
+
+.nav-path a:hover {
+  border-bottom: 1px solid #2277da;
+}
+
+.icon-home {
+  display: inline-block;
+  background-image: url(../../../../img/roomService/index.png);
+  width: 14px;
+  height: 13px;
+  background-position: -68px -59px;
+}
+
+.icon-path {
+  margin: 0 5px;
+  display: inline-block;
+  background-image: url(../../../../img/roomService/index.png);
+  width: 8px;
+  height: 11px;
+  background-position: -84px -59px;
+}

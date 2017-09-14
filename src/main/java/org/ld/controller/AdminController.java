@@ -40,7 +40,6 @@ public class AdminController {
 	@RequestMapping("/searchUserList/{pageNumber}")
 	public @ResponseBody Map<String, Object> showUserInfo(HttpSession session, @PathVariable int pageNumber) {
 
-
 		User curUser = (User) session.getAttribute("curUser");
 		Map<String, Object> ans = new HashMap<String, Object>();
 		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRole"))) == 0) {

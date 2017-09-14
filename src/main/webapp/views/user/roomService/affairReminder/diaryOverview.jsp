@@ -13,7 +13,7 @@
 <link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/public.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/affairReminder/diaryOverview.css" rel="stylesheet" type="text/css" />
-<title>个人日志</title>
+<title>备忘录</title>
 </head>
 <body>
 
@@ -26,11 +26,9 @@
 		<div class="main-page">
 			<span id="uid" uid="${curUser.ID}"/>
 			<div class="nav-path nav-path0">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
-				<a href="affairReminderIndex.jsp">事务提醒</a>
-				<i class="icon-path"></i>
-				<a href="javascript:void(0);">个人日志</a>
+				<a href="javascript:void(0);">备忘录</a>
 			</div>
 			<a class="btn btn-new btnnew" href="writeDiary.jsp">写日志</a>
 

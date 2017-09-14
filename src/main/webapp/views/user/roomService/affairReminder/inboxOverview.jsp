@@ -25,9 +25,7 @@
 		<div class="main-page">
 			<span id="rid" rid="${curUser.ID}"/>
 			<div class="nav-path nav-path0">
-				<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
-				<i class="icon-path"></i>
-				<a href="affairReminderIndex.jsp">事务提醒</a>
+				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<i class="icon-path"></i>
 				<a href="mailboxIndex.jsp;">站内信</a>
 				<i class="icon-path"></i>

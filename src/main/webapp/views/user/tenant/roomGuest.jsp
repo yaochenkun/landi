@@ -46,7 +46,7 @@
 			<span><span class="roomNumber"><%=rNum%></span>&nbsp;&nbsp;房间</span>
 		</div>
 		<a class="btn btn-man"  onclick="roomManage('<%=rNum%>');">房源管理</a>
-		<a class="btn btngoback" href="generalMap.jsp">返回租客一览图</a>
+		<a class="btn btngoback" href="generalMap.jsp">返回</a>
 
 		<!-- 房间信息 start -->
 		<div class="tab-content">

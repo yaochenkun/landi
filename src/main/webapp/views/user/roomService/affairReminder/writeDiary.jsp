@@ -21,11 +21,9 @@
 <div class="main">
 	<div class="main-page">
 		<div class="nav-path nav-path0">
-			<a href="../roomServiceIndex.jsp" title="回到首页"><i class="icon-home"></i></a>
+			<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 			<i class="icon-path"></i>
-			<a href="affairReminderIndex.jsp">事务提醒</a>
-			<i class="icon-path"></i>
-			<a href="diaryOverview.jsp;">个人日志</a>
+			<a href="diaryOverview.jsp;">备忘录</a>
 			<i class="icon-path"></i>
 			<a href="javascript:void(0);">写日志</a>
 		</div>
