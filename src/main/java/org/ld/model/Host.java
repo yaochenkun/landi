@@ -31,6 +31,12 @@ public class Host {
 
     private Double ACTUAL_CHARGE;
 
+    private String SPC_RECOVER;
+
+    private String HEATING_RECOVER;
+
+    private String ACCOUNT_COMMENT;
+
     public Integer getID() {
         return ID;
     }
@@ -149,5 +155,29 @@ public class Host {
 
     public void setACTUAL_CHARGE(Double ACTUAL_CHARGE) {
         this.ACTUAL_CHARGE = ACTUAL_CHARGE;
+    }
+
+    public String getSPC_RECOVER() {
+        return SPC_RECOVER;
+    }
+
+    public void setSPC_RECOVER(String SPC_RECOVER) {
+        this.SPC_RECOVER = SPC_RECOVER == null ? null : SPC_RECOVER.trim();
+    }
+
+    public String getHEATING_RECOVER() {
+        return HEATING_RECOVER;
+    }
+
+    public void setHEATING_RECOVER(String HEATING_RECOVER) {
+        this.HEATING_RECOVER = HEATING_RECOVER == null ? null : HEATING_RECOVER.trim();
+    }
+
+    public String getACCOUNT_COMMENT() {
+        return ACCOUNT_COMMENT;
+    }
+
+    public void setACCOUNT_COMMENT(String ACCOUNT_COMMENT) {
+        this.ACCOUNT_COMMENT = ACCOUNT_COMMENT == null ? null : ACCOUNT_COMMENT.trim();
     }
 }

@@ -9,21 +9,13 @@ public class GuestBalance {
 
     private String ROOM_NUMBER;
 
-    private Date CHARGE_DAY;
-
     private Integer CHARGE_TURN;
 
     private String CHARGE_WAY;
 
-    private Date RETURN_DAY;
-
     private Integer RETURN_TURN;
 
-    private Date INVOICE_DAY;
-
     private Integer INVOICE_TURN;
-
-    private Integer INVOICE_AHEAD;
 
     private Date BEGIN_DAY;
 
@@ -55,14 +47,6 @@ public class GuestBalance {
         this.ROOM_NUMBER = ROOM_NUMBER == null ? null : ROOM_NUMBER.trim();
     }
 
-    public Date getCHARGE_DAY() {
-        return CHARGE_DAY;
-    }
-
-    public void setCHARGE_DAY(Date CHARGE_DAY) {
-        this.CHARGE_DAY = CHARGE_DAY;
-    }
-
     public Integer getCHARGE_TURN() {
         return CHARGE_TURN;
     }
@@ -79,14 +63,6 @@ public class GuestBalance {
         this.CHARGE_WAY = CHARGE_WAY == null ? null : CHARGE_WAY.trim();
     }
 
-    public Date getRETURN_DAY() {
-        return RETURN_DAY;
-    }
-
-    public void setRETURN_DAY(Date RETURN_DAY) {
-        this.RETURN_DAY = RETURN_DAY;
-    }
-
     public Integer getRETURN_TURN() {
         return RETURN_TURN;
     }
@@ -95,28 +71,12 @@ public class GuestBalance {
         this.RETURN_TURN = RETURN_TURN;
     }
 
-    public Date getINVOICE_DAY() {
-        return INVOICE_DAY;
-    }
-
-    public void setINVOICE_DAY(Date INVOICE_DAY) {
-        this.INVOICE_DAY = INVOICE_DAY;
-    }
-
     public Integer getINVOICE_TURN() {
         return INVOICE_TURN;
     }
 
     public void setINVOICE_TURN(Integer INVOICE_TURN) {
         this.INVOICE_TURN = INVOICE_TURN;
-    }
-
-    public Integer getINVOICE_AHEAD() {
-        return INVOICE_AHEAD;
-    }
-
-    public void setINVOICE_AHEAD(Integer INVOICE_AHEAD) {
-        this.INVOICE_AHEAD = INVOICE_AHEAD;
     }
 
     public Date getBEGIN_DAY() {

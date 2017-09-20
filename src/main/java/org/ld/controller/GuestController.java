@@ -152,8 +152,6 @@ public class GuestController {
 					Date birthday = obj.getDate("STR_Birthday");
 
 
-
-
 					Calendar timeIn = Calendar.getInstance();
 					Calendar timeOut = Calendar.getInstance();
 					Calendar birth = Calendar.getInstance();
@@ -237,6 +235,10 @@ public class GuestController {
 			newHost.setHEATING_CHARGE(obj.getDouble("DOU_Heating"));
 			newHost.setACTUAL_CHARGE(obj.getDouble("DOU_ActualReturn"));
 
+			newHost.setSPC_RECOVER(obj.getString("STR_SPCRecover"));
+			newHost.setACCOUNT_COMMENT(obj.getString("STR_AccountComment"));
+			newHost.setHEATING_RECOVER(obj.getString("STR_HeatingRecover"));
+
 			newHost.setSYS_STATE(0);
 
 			if (guestMissionService.addHost(newHost) == 1) {
@@ -290,14 +292,14 @@ public class GuestController {
 		try {
 			newBalance.setGUEST_ID(newGuest.getID());
 			newBalance.setROOM_NUMBER(newGuest.getROOM_NUMBER());
-			newBalance.setCHARGE_DAY(obj.getDate("STR_RentNumber"));
+//			newBalance.setCHARGE_DAY(obj.getDate("STR_RentNumber"));
 			newBalance.setCHARGE_TURN(obj.getInteger("INT_RentCycle"));
 			newBalance.setCHARGE_WAY(obj.getString("STR_RentWay"));
-			newBalance.setRETURN_DAY(obj.getDate("STR_ReturnNumber"));
+//			newBalance.setRETURN_DAY(obj.getDate("STR_ReturnNumber"));
 			newBalance.setRETURN_TURN(obj.getInteger("INT_ReturnCycle"));
-			newBalance.setINVOICE_DAY(obj.getDate("STR_BillNumber"));
+//			newBalance.setINVOICE_DAY(obj.getDate("STR_BillNumber"));
 			newBalance.setINVOICE_TURN(obj.getInteger("INT_BillCycle"));
-			newBalance.setINVOICE_AHEAD(obj.getInteger("INT_BillTime"));
+//			newBalance.setINVOICE_AHEAD(obj.getInteger("INT_BillTime"));
 			newBalance.setBEGIN_DAY(obj.getDate("STR_BeginDate"));
 			newBalance.setEND_DAY(obj.getDate("STR_EndDate"));
 			newBalance.setSYS_STATE(0);

@@ -21,6 +21,7 @@ import org.ld.service.GuestMissionService;
 import org.ld.service.ItemService;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
+import org.ld.utils.Para;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -829,6 +830,12 @@ public class UserItemController {
 		
 		int facId = dataJson.getIntValue("facID");
 		String rn = dataJson.getString("rNum");
+		String tag = dataJson.getString("tag");
+
+		if(itemService.isRoomItemExist(tag)) {
+			return -1;
+		}
+
 		
 		FacSta fs = itemService.getFac(facId);
 		if(fs.getFREE() <= 0)
@@ -841,7 +848,7 @@ public class UserItemController {
 			itemService.updateFac(fs);
 			RoomItem newRi = new RoomItem();
 			newRi.setCOMM(dataJson.getString("comment"));
-			newRi.setTAG(dataJson.getString("tag"));
+			newRi.setTAG(tag);
 			newRi.setFAC_ID(facId);
 			newRi.setROOM_NUM(rn);
 			newRi.setALLOCATE_TYPE("分配");
@@ -865,6 +872,12 @@ public class UserItemController {
 
 		int facId = dataJson.getIntValue("facID");
 		String rn = dataJson.getString("rNum");
+		String tag = dataJson.getString("tag");
+
+		if(itemService.isRoomItemExist(tag)) {
+			return -1;
+		}
+
 
 		FacSta fs = itemService.getFac(facId);
 		if(fs.getFREE() <= 0)
@@ -877,7 +890,7 @@ public class UserItemController {
 			itemService.updateFac(fs);
 			RoomItem newRi = new RoomItem();
 			newRi.setCOMM(dataJson.getString("comment"));
-			newRi.setTAG(dataJson.getString("tag"));
+			newRi.setTAG(tag);
 			newRi.setFAC_ID(facId);
 			newRi.setROOM_NUM(rn);
 			newRi.setALLOCATE_TYPE("借用");
@@ -1205,4 +1218,99 @@ public class UserItemController {
 			return 0;
 		}
 	}
+
+
+	/**
+	 * 添加物品种类
+	 */
+	@RequestMapping("/addItemType")
+	public @ResponseBody Integer addItemType(HttpSession session, @RequestBody Map<String, String>  params) {
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+//			return 0;
+//		}
+
+		//添加
+		Config.getItem_type().add(params.get("name"));
+
+		if (Para.setPair("item_type", Config.getItem_type()) == 1) {
+
+			return 1;
+		} else {
+
+			return 0;
+		}
+	}
+
+	/**
+	 * 添加物品子类
+	 */
+	@RequestMapping("/addItemSubType")
+	public @ResponseBody Integer addItemSubType(HttpSession session, @RequestBody Map<String, String>  params) {
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+//			return 0;
+//		}
+
+		String type = params.get("typeName");
+		String name = params.get("name");
+
+		//添加
+		Map<String, String> subTypeMap = Para.getParaPair("item_cat", 0, 1);
+
+		if(subTypeMap.containsKey(type)) {
+
+			subTypeMap.put(type, subTypeMap.get(type) + "," + name);
+
+		} else {
+
+			subTypeMap.put(type, name);
+		}
+
+
+		if (Para.setPair("item_cat", subTypeMap) == 1) {
+
+			return 1;
+		} else {
+
+			return 0;
+		}
+	}
+
+	/**
+	 * 添加物品品牌
+	 */
+	@RequestMapping("/addItemBrand")
+	public @ResponseBody Integer addItemBrand(HttpSession session, @RequestBody Map<String, String>  params) {
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rwRate"))) == 0) {
+//			return 0;
+//		}
+
+		String type = params.get("typeName");
+		String name = params.get("name");
+
+		//添加
+		Map<String, String> brandMap = Para.getParaPair("item_com", 0, 1);
+
+		if(brandMap.containsKey(type)) {
+
+			brandMap.put(type, brandMap.get(type) + "," + name);
+
+		} else {
+
+			brandMap.put(type, name);
+		}
+
+
+		if (Para.setPair("item_com", brandMap) == 1) {
+
+			return 1;
+		} else {
+
+			return 0;
+		}
+	}
+
+
 }

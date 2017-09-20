@@ -227,7 +227,10 @@ public class Para {
 				Config.readCharge();
 			else if("rate".equals(text))
 				Config.readRates();
-			//else
+			else if("item_cat".equals(text))
+				Config.readItem_cat();
+			else if("item_com".equals(text))
+				Config.readItem_com();
 			
 			
 			return 1;
@@ -237,4 +240,33 @@ public class Para {
 
 		return 0;
 	}
+
+	//写入 集合形式
+	public static Integer setPair(String text, Set<String> set) {
+		String fname = root + text + ".env";
+
+		BufferedWriter writer = null;
+
+		try {
+			writer = new BufferedWriter(new FileWriter(fname));
+
+			for(String str : set) {
+				writer.write(str + "\n");
+			}
+
+			writer.close();
+
+//			//更新内存中的配置数据,保持一致性
+//			if("item_type".equals(text))
+//				Config.readItem_type();
+
+
+			return 1;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
 }

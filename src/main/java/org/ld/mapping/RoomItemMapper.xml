@@ -20,7 +20,7 @@
     </resultMap>
     <sql id="Base_Column_List" >
     ID, ROOM_NUM, FAC_ID, TAG, ALLOCATE_TYPE, STATE, BORROW_DATE, RETURN_DATE, MAINTAIN_DURATION,
-    COMM, TYPE
+    COMM
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
@@ -205,6 +205,12 @@
   	select count(*) from room_item where FAC_ID = #{FAC_ID,jdbcType=INTEGER}
     ]]>
 	</select>
+
+    <select id="selectByTag" resultMap="BaseResultMap" parameterType="java.lang.String">
+        <![CDATA[
+  	select * from room_item where TAG = #{TAG,jdbcType=VARCHAR}
+    ]]>
+    </select>
 
 
     <select id="selectTotalItemsByRoomNum_Type" resultType="java.lang.Integer" parameterType="map">
