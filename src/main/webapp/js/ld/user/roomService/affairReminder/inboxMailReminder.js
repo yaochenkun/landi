@@ -42,6 +42,7 @@ var searchInboxMailRemindersByPage = function(pageNum){
                         + "<td>" + formatDateForm(new Date(perRecord.remind_DATE)) + "</td>"
                         + "<td>" + formatDateForm(new Date(perRecord.edit_TIME)) + "</td>"
                         + "<td>" + perRecord.state + "</td>"
+                        + "<td>" + perRecord.receive_STATE + "</td>"
                         + "<td><a class='detail' href='detailMail.jsp?id="+ perRecord.id +"'>详情</a></td></tr>");
 				}
 				// 添加车费 底部页码
@@ -89,9 +90,11 @@ var searchInboxMailReminderDetail = function(id){
 				if(data.record != null){
 					record = data.record;
 
+                    $("#receiveState").text(record.receive_STATE);
                     $("#dropDownInput").val(record.sender_NAME);
                     $("#reminderTitle").val(record.title);
                     $("#reminderContent").val(record.content);
+                    $("#reminderReply").val(record.reply);
                     $(".pack_maintain").val(formatDateForm(new Date(record.remind_DATE)));
 				}
 			} else {
@@ -99,4 +102,52 @@ var searchInboxMailReminderDetail = function(id){
 			}
 		}
 	});
+}
+
+//接受信件
+var acceptMail = function(id) {
+
+	console.log("接受"+ id + "号信件");
+    $.ajax({
+        url:'/LD/reminder/acceptMailById.action',
+        type:'post',
+        contentType:'application/json',
+        dataType:'json',
+        data:JSON.stringify({"id":id}),
+        success:function(data){
+            console.log(data);
+            if(data !== 0){
+
+                $("#receiveState").text("已接受");
+                showModalBox("success","接受成功");
+            } else {
+                showModalBox("error","无操作权限");
+            }
+        }
+    });
+
+}
+
+//回复信件
+var replyMail = function(id) {
+
+    console.log("回复"+ id + "号信件");
+    $.ajax({
+        url:'/LD/reminder/replyMailById.action',
+        type:'post',
+        contentType:'application/json',
+        dataType:'json',
+        data:JSON.stringify({"id":id, "reply": $("#reminderReply").val()}),
+        success:function(data){
+            console.log(data);
+            if(data !== 0){
+
+                $("#receiveState").text("已回复");
+                showModalBox("success","回复成功");
+            } else {
+                showModalBox("error","无操作权限");
+            }
+        }
+    });
+
 }

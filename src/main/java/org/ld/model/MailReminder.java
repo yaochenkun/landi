@@ -23,6 +23,10 @@ public class MailReminder {
 
     private String STATE;
 
+    private String RECEIVE_STATE;
+
+    private String REPLY;
+
     public Integer getID() {
         return ID;
     }
@@ -101,5 +105,21 @@ public class MailReminder {
 
     public void setSTATE(String STATE) {
         this.STATE = STATE == null ? null : STATE.trim();
+    }
+
+    public String getRECEIVE_STATE() {
+        return RECEIVE_STATE;
+    }
+
+    public void setRECEIVE_STATE(String RECEIVE_STATE) {
+        this.RECEIVE_STATE = RECEIVE_STATE == null ? null : RECEIVE_STATE.trim();
+    }
+
+    public String getREPLY() {
+        return REPLY;
+    }
+
+    public void setREPLY(String REPLY) {
+        this.REPLY = REPLY == null ? null : REPLY.trim();
     }
 }

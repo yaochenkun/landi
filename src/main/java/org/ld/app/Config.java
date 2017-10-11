@@ -23,6 +23,10 @@ public class Config {
 	public static Map<String, Integer> restaurant;
 	public static Map<String, Map<String, Integer>> laundry_price;
 
+
+	public static Set<String> prob_type;
+	public static Map<String, Set<String>> prob_subtype;
+
 	//初始化配置文件只常量中
 	static{
 		
@@ -36,6 +40,9 @@ public class Config {
 		charge = readCharge();
 		restaurant = readRestaurant();
 		laundry_price = readLaundry_price();
+
+		prob_type = readProb_type();
+		prob_subtype = readProb_subtype();
 	}
 
 	/**
@@ -187,8 +194,41 @@ public class Config {
 		rates = Para.getParaPairDouble("rate", 0, 1);		
 		return rates;
 	};
-	
-	
-	
+
+
+	public static synchronized Set<String> getProb_type() {
+		return prob_type;
+	}
+
+	public static synchronized Set<String> readProb_type() {
+
+		prob_type = Para.getPara("prob_type");
+		return prob_type;
+	}
+
+	public static synchronized Map<String, Set<String>> getProb_subtype() {
+		return prob_subtype;
+	}
+
+	public static synchronized Map<String, Set<String>> readProb_subtype() {
+
+		prob_subtype = new HashMap<String, Set<String>>();
+		Map<String, String> temp = Para.getParaPair("prob_subtype", 0, 1);
+
+		for (String key : temp.keySet()) {
+			String list = temp.get(key);
+
+			String[] ans = list.split("[,]");
+			Set<String> news = new HashSet<String>();
+
+			for (int i = 0; i < ans.length; i++) {
+				news.add(ans[i]);
+			}
+
+			prob_subtype.put(key, news);
+		}
+
+		return prob_subtype;
+	}
 	
 }

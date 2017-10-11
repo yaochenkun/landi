@@ -2013,10 +2013,15 @@ public class UserRoomController {
 		String roomNum = dataJson.getString("roomNum");
 			
 		Guest guest = guestService.getGuestByRoomNumber(roomNum);
-		if(guest == null) 
+		RoomState roomState = roomService.getCertainRSbyRoomNumber(roomNum);
+		if(guest == null) {
 			ans.put("guest_NAME", null);
-		else
+			ans.put("room_STATE", null);
+		}
+		else {
 			ans.put("guest_NAME", guest.getGUEST_NAME());
+			ans.put("room_STATE", roomState.getSTATE() == 0 ? "未入住" : "已入住");
+		}
 		
 		return ans;
 	}
