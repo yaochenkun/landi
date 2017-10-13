@@ -231,6 +231,8 @@ public class Para {
 				Config.readItem_cat();
 			else if("item_com".equals(text))
 				Config.readItem_com();
+			else if("prob_subtype".equals(text))
+				Config.readProb_subtype();
 			
 			
 			return 1;

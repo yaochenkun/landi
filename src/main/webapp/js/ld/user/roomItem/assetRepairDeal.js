@@ -738,8 +738,18 @@
 //     });
 // }
 
-
+var types=[];
 (function(){
+
+
+    //上传文件确定后触发
+    $("#addPictureBtn").change(function(){
+        var files = document.getElementById('addPictureBtn').files;
+        fileName = files[0].name;
+    });
+
+
+
 
     $("#serviceRoomNumber").focus(function(){
         $(this).removeClass("border-red");
@@ -758,9 +768,6 @@
 	 * 问题分类
      */
 
-    //拉取分类
-    
-
     // 显示问题分类下拉菜单
     $("#problemTypeDropDownInput").click(function(e){
         $("#problemTypeDropDownList .dropDownMenu").css("display","block");
@@ -768,22 +775,6 @@
         // 阻止事件冒泡
         e.stopPropagation();
     });
-
-
-    // 选择问题分类
-    $("#problemTypeDropDownList .dropDownMenu li").click(function(){
-
-        var waterType = $(this).text();
-        $("#problemTypeDropDownInput").val(waterType);
-
-    });
-
-
-    /**
-	 * 问题子类
-     */
-
-    //拉取子类
 
     // 显示问题分类下拉菜单
     $("#problemSubypeDropDownInput").click(function(e){
@@ -793,14 +784,85 @@
         e.stopPropagation();
     });
 
+    //拉取分类
+    $.ajax({
+        url: '/LD/problem/getProbType.action',
+        type:'get',
+        dataType:'json',
+        success: function(data) {
 
-    // 选择问题分类
-    $("#problemSubTypeDropDownList .dropDownMenu li").click(function(){
+            console.log(data);
+            types = data;
 
-        var waterType = $(this).text();
-        $("#problemSubypeDropDownInput").val(waterType);
+            // 添加问题分类选项
+            $("#problemTypeDropDownList .dropDownMenu ul").empty();
+            for(var i = 0; i < data.length; i++){
+
+                $("#problemTypeDropDownList .dropDownMenu ul").append('<li>' + data[i] +'</li>');
+            }
+
+            // 选择问题分类
+            $("#problemTypeDropDownList .dropDownMenu li").click(function(){
+
+                var waterType = $(this).text();
+                $("#problemTypeDropDownInput").val(waterType);
+
+
+                //拉取子类
+                $.ajax({
+                    url: '/LD/problem/getProbSubtype.action',
+                    type:'post',
+                    dataType:'json',
+                    contentType:'application/json',
+                    data:'{"type":"'+ waterType +'"}',
+                    success: function(data) {
+
+                        console.log(data);
+
+                        if(data === null) {
+                            $("#problemSubTypeDropDownList .dropDownMenu ul").empty();
+                            $("#problemSubypeDropDownInput").val("");
+                            return;
+                        }
+
+                        // 添加问题分类选项
+                        $("#problemSubTypeDropDownList .dropDownMenu ul").empty();
+                        for(var i = 0; i < data.length; i++){
+
+                            $("#problemSubTypeDropDownList .dropDownMenu ul").append('<li>' + data[i] +'</li>');
+                        }
+
+                        // 选择问题分类
+                        $("#problemSubTypeDropDownList .dropDownMenu li").click(function(){
+
+                            var waterType = $(this).text();
+                            $("#problemSubypeDropDownInput").val(waterType);
+
+                        });
+
+                        //默认选中第一项
+                        $("#problemSubTypeDropDownList .dropDownMenu li").eq(0).trigger('click');
+
+                    }
+
+                });
+
+            });
+
+        }
 
     });
+
+
+
+    /**
+	 * 问题子类
+     */
+
+
+
+
+
 
 
     /**
@@ -869,5 +931,337 @@ var associateGuestName = function(element){
             }
         }
     });
-
 };
+
+
+var showNewProbTypeModal = function(){
+
+    $(".shadow").css("display","block");
+    $('#newProbTypeMenu').css("display","block");
+
+    setTimeout(function(){$('#newProbTypeMenu').addClass('showMenuModal');},50);
+    $("#newProbTypeMenu").addClass("effect-fade");
+};
+// 关闭新分配物品弹出框
+var closeNewProbTypeDiv = function(){
+
+    $(".shadow").css("display","none");
+    $("#newProbTypeMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newProbTypeMenu").css("display","none");},200);
+};
+
+
+//确定新增
+var requestNewProbType = function() {
+
+    //获取名称
+    var name = $("#prob-type-name input").val();
+    if(name == "") {
+        showModalBox("error","名称不能为空！");
+        return;
+    }
+
+    //请求添加种类
+    $.ajax({
+        url:'/LD/problem/addProbType.action',
+        type:'post',
+        data: JSON.stringify({name: name}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(data){
+
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","添加成功！");
+
+                requestProbTypes();
+
+                //关闭对话框
+                closeNewProbTypeDiv();
+            }
+            else if(data == 0){
+                showModalBox("error","添加失败！");
+            }
+        }
+    });
+}
+
+
+
+
+
+var showNewProbSubTypeModal = function(){
+
+    $(".shadow").css("display","block");
+    $('#newProbSubTypeMenu').css("display","block");
+
+    setTimeout(function(){$('#newProbSubTypeMenu').addClass('showMenuModal');},50);
+    $("#newProbSubTypeMenu").addClass("effect-fade");
+};
+// 关闭新分配物品弹出框
+var closeNewProbSubTypeDiv = function(){
+
+    $(".shadow").css("display","none");
+    $("#newProbSubTypeMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newProbSubTypeMenu").css("display","none");},200);
+};
+
+var requestNewProbSubType = function() {
+
+    //获取名称
+    var name = $("#prob-subtype-name input").val();
+    if(name == "") {
+        showModalBox("error","名称不能为空！");
+        return;
+    }
+
+    //获取物品大类
+    var typeName = $("#problemTypeDropDownInput").val();
+
+
+    //请求添加种类
+    $.ajax({
+        url:'/LD/problem/addProbSubType.action',
+        type:'post',
+        data: JSON.stringify({typeName: typeName, name: name}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","添加成功！");
+
+
+                requestProbTypes();
+
+                //关闭对话框
+                closeNewProbSubTypeDiv();
+            }
+            else if(data == 0){
+                showModalBox("error","添加失败！");
+            }
+        }
+    });
+}
+
+
+var requestProbTypes = function() {
+
+    //重新查一遍
+    $.ajax({
+        url: '/LD/problem/getProbType.action',
+        type:'get',
+        dataType:'json',
+        success: function(data) {
+
+            console.log(data);
+
+
+            // 添加问题分类选项
+            $("#problemTypeDropDownList .dropDownMenu ul").empty();
+            for(var i = 0; i < data.length; i++){
+
+                $("#problemTypeDropDownList .dropDownMenu ul").append('<li>' + data[i] +'</li>');
+            }
+
+            // 选择问题分类
+            $("#problemTypeDropDownList .dropDownMenu li").click(function(){
+
+                var waterType = $(this).text();
+                $("#problemTypeDropDownInput").val(waterType);
+
+
+                //拉取子类
+                $.ajax({
+                    url: '/LD/problem/getProbSubtype.action',
+                    type:'post',
+                    dataType:'json',
+                    contentType:'application/json',
+                    data:'{"type":"'+ waterType +'"}',
+                    success: function(data) {
+
+                        console.log(data);
+                        if(data === null) {
+
+                            $("#problemSubTypeDropDownList .dropDownMenu ul").empty();
+                            $("#problemSubypeDropDownInput").val("");
+                            return;
+                        }
+
+                        // 添加问题分类选项
+                        $("#problemSubTypeDropDownList .dropDownMenu ul").empty();
+                        for(var i = 0; i < data.length; i++){
+
+                            $("#problemSubTypeDropDownList .dropDownMenu ul").append('<li>' + data[i] +'</li>');
+                        }
+
+                        // 选择问题分类
+                        $("#problemSubTypeDropDownList .dropDownMenu li").click(function(){
+
+                            var waterType = $(this).text();
+                            $("#problemSubypeDropDownInput").val(waterType);
+
+                        });
+
+                        //默认选中第一项
+                        $("#problemSubTypeDropDownList .dropDownMenu li").eq(0).trigger('click');
+
+                    }
+
+                });
+
+            });
+
+            //默认选中第一项
+            if(data.length > 0) {
+
+                $("#problemTypeDropDownList .dropDownMenu li").eq(0).trigger('click');
+            }
+
+        }
+
+    });
+
+}
+
+var fileName = "";
+var dealProblem = function(id) {
+
+
+    //获取输入
+    var type = $("#problemTypeDropDownInput").val();
+    var subType = $("#problemSubypeDropDownInput").val();
+    var isLEManage = $("#isLEManage").is(':checked') ? 1 : 0;
+    var description = $("#extraDescription").val();
+    var level = $("#dropDownInput").val();
+    var solveDate = $("#solveDate").val();
+    var repairerComment = $("#repairerComment").val();
+
+
+    if(isLEManage == 1 && fileName === "") {
+
+        //检查图片是否上传
+        alert('请上传图片！');
+        return;
+    }
+
+
+    //添加问题
+    $.ajax({
+        url: '/LD/problem/dealProblem.action',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            id: id,
+            type: type,
+            subType: subType,
+            isLEManage: isLEManage,
+            description: description,
+            level: level,
+            solveDate: solveDate,
+            repairerComment: repairerComment
+        }),
+        success: function (data) {
+
+            console.log(data);
+            if(data == 0) {
+
+                alert('处理失败！');
+            } else {
+
+
+                $("#problemId").val(id);
+
+                alert('处理成功！');
+
+                if(isLEManage == 1) {
+
+                    //触发上传提交图片
+                    $("#requestUploadBtn").trigger("click");
+                }
+            }
+        }
+    });
+}
+
+
+//获取某条问题记录的信息
+var searchProblemInfo = function(id) {
+
+    $.ajax({
+
+        url:'/LD/problem/searchProblemById.action',
+        type:'post',
+        dataType:'json',
+        contentType:'application/json',
+        data:JSON.stringify({id: id}),
+        success:function(data){
+
+            console.log(data);
+
+            if(data.State === 'Valid') {
+
+                //填充
+                var problem = data.record;
+                if(problem === undefined || problem === null) {
+                    return;
+                }
+
+                $("#roomNum").val(problem.room_NUM);
+                $("#roomState").val(problem.room_STATE);
+                $("#guestName").val(problem.guest_NAME);
+                $("#reflectDate").val(formatDateForm(new Date(problem.reflect_DATE)));
+
+
+                $("#description").val(problem.description);
+                $("#outsiderReason").val(problem.outsider_REASON);
+                $("#outsiderComment").val(problem.outsider_COMMENT);
+
+                //问题分类、子类
+                //选中分类
+
+                //获取分类所在下标
+                $("#problemTypeDropDownInput").val("");
+                $("#problemSubypeDropDownInput").val("");
+                if(types.length > 0) {
+
+                    var index = 0;
+                    for(var i = 0; i < types.length; i++) {
+
+                        if(types[i] == problem.type) {
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    $("#problemTypeDropDownList .dropDownMenu li").eq(index).trigger('click');
+                    $("#problemTypeDropDownInput").val(problem.type);
+                    $("#problemSubypeDropDownInput").val(problem.subtype);
+                }
+
+
+
+                //LE管理
+                $("#dropDownInput").val(problem.level);
+                $("#extraDescription").val(problem.description);
+
+
+                if(problem.is_LEMANAGE == 1){
+
+                    $("#isLEManage").prop('checked', true);
+                    $("#le-manage-asset").show();
+
+                } else {
+
+                    $("#isLEManage").prop('checked', false);
+                    $("#le-manage-asset").hide();
+                }
+
+                $("#solveDate").val(formatDateForm(new Date(problem.solve_DATE)));
+                $("#repairerComment").val(problem.repairer_COMMENT);
+
+            }
+        }
+    });
+}

@@ -17,7 +17,7 @@
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNewWaterBill.css" rel="stylesheet" type="text/css" />
 
-	<title>新增报修</title>
+	<title>客房报修</title>
 </head>
 <body>
 
@@ -40,8 +40,8 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="planTitle">
-				<h4>新增报修</h4>
-				<a class="btn btn-goback goback" href="assetRepairOverview.jsp">返&nbsp;&nbsp;&nbsp;回</a>
+				<h4>客房报修</h4>
+				<a class="btn btn-goback goback" href="${pageContext.request.contextPath}/views/user/home/homeUser.jsp">返&nbsp;&nbsp;&nbsp;回</a>
 				<ul class="ul">
 				</ul>
 			</div>
@@ -58,82 +58,26 @@
 						<li><span class="span">租客姓名：</span><input type="text" value="" disabled="disabled" id="guestName"/></li>
 
 						<li><span class="span">申报日期：</span><input type="text" class="pack_maintain" id="reflectDate"></li>
+						<li><span class="span">申报人：</span><input type="text" value="${curUser.NAME}" disabled="disabled" /></li>
 
-
-						<li id="problemTypeDropDownList">
-							<span class="span">问题分类：</span>
-							<input type="text" id="problemTypeDropDownInput" value="" readonly/>
-							<a href="javascript:void(0);" onclick="showNewProbTypeModal();" style="color:#2277da; margin-left: 20px;" >新增分类</a>
-							<div class="dropDownMenu">
-								<ul>
-								</ul>
-							</div>
-						</li>
-
-
-
-						<li id="problemSubTypeDropDownList">
-							<span class="span">问题子类：</span>
-							<input type="text" id="problemSubypeDropDownInput" value="" readonly/>
-							<a href="javascript:void(0);" onclick="showNewProbSubTypeModal();" style="color:#2277da; margin-left: 20px;" >新增子类</a>
-							<div class="dropDownMenu">
-								<ul>
-								</ul>
-							</div>
-						</li>
-
-
-						<li><span class="span">LE管理资产：</span><input type="checkbox" onclick="changeLEManageAsset();" id="isLEManage" checked/></li>
-
-						<div id="le-manage-asset">
-							<hr style="margin-top: 0px;">
-
+						<li><span class="span" style="width: 11em;">需求解决时间：</span><input type="text" class="pack_maintain" id="solveDate"></li>
 
 							<li><span class="span" style="width: 18em;">报修位置及问题描述：</span></li>
 							<textarea rows="5" cols="100" style="margin-top:-20px;" id="description"></textarea>
 
 
-
-							<li id="dropDownList" style="margin-top: 20px;">
-								<span class="span">问题等级：</span>
-								<input type="text" id="dropDownInput" value="一级" readonly/>
-								<div class="dropDownMenu">
-									<ul>
-										<li>一级</li>
-										<li>二级</li>
-										<li>三级</li>
-										<li>四级</li>
-									</ul>
-								</div>
-							</li>
+							<li style="margin-top: 20px;"><span class="span" style="width: 18em;">初步分析问题原因描述：</span></li>
+							<textarea rows="5" cols="100" style="margin-top:-20px;" id="outsiderReason"></textarea>
 
 
-							<li><span class="span" style="width: 11em;">需求解决时间：</span><input type="text" class="pack_maintain" id="solveDate"></li>
-
-							<li><span class="span" style="width: 18em;">备注：</span></li>
-							<textarea rows="5" cols="100" style="margin-top:-20px;" id="repairer_comment"></textarea>
-
-							<li style="margin-top:20px;">
-								<form method="post"
-									  enctype="multipart/form-data"
-									  action="${pageContext.request.contextPath}/problem/uploadProblemPicture.action">
-									<span class="span">上传照片：</span>
-									<input id="addPictureBtn" name="file" type="file" style="display: inline; margin-left: -15px;"/>
-
-									<input type="submit" id = "requestUploadBtn" style="display:none;" value="" />
-									<input id="problemId" name="problemId" value="-1" style="display:none;">
-								</form>
-							</li>
+						<li style="margin-top: 20px;"><span class="span" style="width: 18em;">备注：</span></li>
+						<textarea rows="5" cols="100" style="margin-top:-20px;" id="outsiderComment"></textarea>
 
 
 
-
-
-
-
-							<hr style="margin-top: 0px;">
-						</div>
-							<li style="margin-top:-20px;"><span class="span"></span><a onclick="addProblem();" class="btn btn-goback goback" style="float:left;">确认添加</a></li>
+						<li style="margin-top: 20px;"><span class="span" style="width: 49em;">注明：当日报修及维修需截止每日15:00，之后发生的报修项目需次日对应。影响客人人身财产安全，正常生活居住的问题需紧急对应。</span></li>
+						<li style="margin-top: 20px;"><span class="span" style="width: 49em;">Note: Any repairs reported after 15:00 may only be handled the following day. Issues that affect the health or  safety of tenants or severly impact their comfort will be dealt with sooner.</span></li>
+						<li style="margin-top:10px;"><span class="span"></span><a onclick="addProblemByOutsider();" class="btn btn-goback goback" style="float: left;">确认添加</a></li>
 
 					</ul>
 				</div>

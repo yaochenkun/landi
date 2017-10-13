@@ -10,7 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css"	rel="stylesheet" type="text/css" />
+
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/roomItem/itemRoomOverview.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
 
@@ -47,8 +49,8 @@
 
 			<div class="nav-path" style="margin-top: -20px;">
 				<span>房间号：</span><input id="roomNum" type="text" value="">
-				<span style="margin-left: 30px;">申报时间：</span><input id="reflectDate" type="text" value="">
-				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="requestItemByItemType(1);">搜索</a>
+				<span style="margin-left: 30px;">申报时间：</span><input type="text" class="pack_maintain" id="reflectDate" />
+				<a class="btn btn-edit btnEdit" style="margin-left:30px;" onclick="searchProblemsByPage(1);">搜索</a>
 				<a class="btn btn-edit btnEdit btnRight" onclick="exportList();" style="margin-left:285px;">导出</a>
 				<a class="btn btn-edit btnEdit" onclick="printList();">打印</a>
 			</div>
@@ -66,16 +68,18 @@
 								<th style="width: 5%;"><span>租客姓名</span></th>
 								<th style="width: 5%;"><span>需要解决时间</span></th>
 								<th style="width: 5%;"><span>申报人</span></th>
-								<th style="width: 5%;"><span>处理</span></th>
 								<th style="width: 30%;"><span>报修位置及问题描述</span></th>
+								<th style="width: 5%;"><span>操作</span></th>
 							</tr>
 						</thead>
-						<tbody id="itemOverviewTbody"></tbody>
+						<tbody id="reminderOverviewTbody">
+
+						</tbody>
 					</table>
 					<!-- 费用 table end -->
 
 					<!-- 底部页面 start -->
-					<div id="itemOverviewBottom" class="bottom"></div>
+					<div id="reminderOverviewBottom" class="bottom"></div>
 					<!-- 底部页码 end -->
 				</div>
 			</div>
@@ -88,16 +92,28 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/roomItem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomItem/itemRoomOverview.js"></script>
-
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<!-- 导出插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/Blob.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/exportCsv/FileSaver.js"></script>
 
 	<!-- 打印插件 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
+
+	<script type="text/javascript"
+			src="${pageContext.request.contextPath }/js/ld/user/roomItem/assetRepair.js"></script>
+
 	<script>
+
+        // 初始化时间
+        var nowDate = new Date();
+        $(".pack_maintain").val(formatDateForm(nowDate));
+        $('.pack_maintain').date_input();
+
+
 	    // 请求第一页客房物品信息
-        requestItemByItemType(1);
+        searchProblemsByPage(1);
 	</script>
 </body>
 </html>

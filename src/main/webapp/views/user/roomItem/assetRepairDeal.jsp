@@ -17,7 +17,7 @@
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNew.css" rel="stylesheet" type="text/css" />
 	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceNewWaterBill.css" rel="stylesheet" type="text/css" />
 
-	<title>新增报修</title>
+	<title>报修处理</title>
 </head>
 <body>
 
@@ -40,7 +40,7 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="planTitle">
-				<h4>新增报修</h4>
+				<h4>报修处理</h4>
 				<a class="btn btn-goback goback" href="assetRepairOverview.jsp">返&nbsp;&nbsp;&nbsp;回</a>
 				<ul class="ul">
 				</ul>
@@ -51,16 +51,30 @@
 					<ul>
 
 						<li><span class="span">房间号：</span>
-							<input id="roomNum" type="text" value="" onblur="associateGuestName(this)"/>
+							<input id="roomNum" type="text" value="" onblur="associateGuestName(this)" disabled/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">入住状态：</span><input type="text" value="" disabled="disabled" id="roomState"/></li>
 						<li><span class="span">租客姓名：</span><input type="text" value="" disabled="disabled" id="guestName"/></li>
 
-						<li><span class="span">申报日期：</span><input type="text" class="pack_maintain" id="reflectDate"></li>
+						<li><span class="span">申报日期：</span><input type="text" class="pack_maintain" id="reflectDate" disabled></li>
+						<li><span class="span">申报人：</span><input type="text" value="${curUser.NAME}" disabled="disabled" /></li>
 
 
-						<li id="problemTypeDropDownList">
+						<li><span class="span" style="width: 18em;">报修位置及问题描述：</span></li>
+						<textarea rows="5" cols="100" style="margin-top:-20px;" id="description" disabled></textarea>
+
+						<li style="margin-top:10px;"><span class="span" style="width: 18em;">初步分析问题原因描述：</span></li>
+						<textarea rows="5" cols="100" style="margin-top:-20px;" id="outsiderReason" disabled></textarea>
+
+						<li style="margin-top:10px;"><span class="span" style="width: 18em;">备注：</span></li>
+						<textarea rows="5" cols="100" style="margin-top:-20px;" id="outsiderComment" disabled></textarea>
+
+
+
+
+
+						<li id="problemTypeDropDownList" style="margin-top:10px;">
 							<span class="span">问题分类：</span>
 							<input type="text" id="problemTypeDropDownInput" value="" readonly/>
 							<a href="javascript:void(0);" onclick="showNewProbTypeModal();" style="color:#2277da; margin-left: 20px;" >新增分类</a>
@@ -88,12 +102,6 @@
 						<div id="le-manage-asset">
 							<hr style="margin-top: 0px;">
 
-
-							<li><span class="span" style="width: 18em;">报修位置及问题描述：</span></li>
-							<textarea rows="5" cols="100" style="margin-top:-20px;" id="description"></textarea>
-
-
-
 							<li id="dropDownList" style="margin-top: 20px;">
 								<span class="span">问题等级：</span>
 								<input type="text" id="dropDownInput" value="一级" readonly/>
@@ -107,16 +115,21 @@
 								</div>
 							</li>
 
+							<li><span class="span" style="width: 18em;">更新/补充问题描述：</span></li>
+							<textarea rows="5" cols="100" style="margin-top:-20px;" id="extraDescription"></textarea>
 
-							<li><span class="span" style="width: 11em;">需求解决时间：</span><input type="text" class="pack_maintain" id="solveDate"></li>
+
+
+
+							<li style="margin-top:10px;"><span class="span" style="width: 11em;">需求解决时间：</span><input type="text" class="pack_maintain" id="solveDate"></li>
 
 							<li><span class="span" style="width: 18em;">备注：</span></li>
-							<textarea rows="5" cols="100" style="margin-top:-20px;" id="repairer_comment"></textarea>
+							<textarea rows="5" cols="100" style="margin-top:-20px;" id="repairerComment"></textarea>
 
 							<li style="margin-top:20px;">
 								<form method="post"
 									  enctype="multipart/form-data"
-									  action="${pageContext.request.contextPath}/problem/uploadProblemPicture.action">
+									  action="${pageContext.request.contextPath}/problem/uploadProblemPictureByDeal.action">
 									<span class="span">上传照片：</span>
 									<input id="addPictureBtn" name="file" type="file" style="display: inline; margin-left: -15px;"/>
 
@@ -133,7 +146,7 @@
 
 							<hr style="margin-top: 0px;">
 						</div>
-							<li style="margin-top:-20px;"><span class="span"></span><a onclick="addProblem();" class="btn btn-goback goback" style="float:left;">确认添加</a></li>
+							<li style="margin-top:-20px;"><span class="span"></span><a onclick="dealProblem(${param.id});" class="btn btn-goback goback" style="float:left;">确认处理</a></li>
 
 					</ul>
 				</div>
@@ -199,7 +212,7 @@
 		src="${pageContext.request.contextPath }/js/ld/user/roomItem/planNew.js"></script>
 
 	<script type="text/javascript"
-			src="${pageContext.request.contextPath }/js/ld/user/roomItem/assetRepair.js"></script>
+			src="${pageContext.request.contextPath }/js/ld/user/roomItem/assetRepairDeal.js"></script>
 
 
 
@@ -209,6 +222,10 @@
 			var nowDate = new Date();
 			$(".pack_maintain").val(formatDateForm(nowDate));
 			$('.pack_maintain').date_input();
+
+
+			//获取该条记录的信息
+            searchProblemInfo(${param.id});
 
 		</script>
 </body>

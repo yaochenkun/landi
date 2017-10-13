@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.ProblemMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.Problem" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="ROOM_STATE" property="ROOM_STATE" jdbcType="VARCHAR" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="REFLECT_DATE" property="REFLECT_DATE" jdbcType="DATE" />
+    <result column="SOLVE_DATE" property="SOLVE_DATE" jdbcType="DATE" />
+    <result column="REFLECTER_ID" property="REFLECTER_ID" jdbcType="INTEGER" />
+    <result column="REFLECTER_NAME" property="REFLECTER_NAME" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="DESCRIPTION" jdbcType="VARCHAR" />
+    <result column="OUTSIDER_REASON" property="OUTSIDER_REASON" jdbcType="VARCHAR" />
+    <result column="OUTSIDER_COMMENT" property="OUTSIDER_COMMENT" jdbcType="VARCHAR" />
+    <result column="IS_LEMANAGE" property="IS_LEMANAGE" jdbcType="INTEGER" />
+    <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
+    <result column="SUBTYPE" property="SUBTYPE" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="LEVEL" jdbcType="VARCHAR" />
+    <result column="REPAIRER_REASON" property="REPAIRER_REASON" jdbcType="VARCHAR" />
+    <result column="REPAIRER_COMMENT" property="REPAIRER_COMMENT" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, ROOM_STATE, GUEST_NAME, REFLECT_DATE, SOLVE_DATE, REFLECTER_ID, REFLECTER_NAME, 
+    DESCRIPTION, OUTSIDER_REASON, OUTSIDER_COMMENT, IS_LEMANAGE, TYPE, SUBTYPE, LEVEL, 
+    REPAIRER_REASON, REPAIRER_COMMENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from problem
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from problem
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.Problem" useGeneratedKeys="true" keyProperty="ID">
+    insert into problem (ID, ROOM_NUM, ROOM_STATE, 
+      GUEST_NAME, REFLECT_DATE, SOLVE_DATE, 
+      REFLECTER_ID, REFLECTER_NAME, DESCRIPTION, 
+      OUTSIDER_REASON, OUTSIDER_COMMENT, IS_LEMANAGE, 
+      TYPE, SUBTYPE, LEVEL, 
+      REPAIRER_REASON, REPAIRER_COMMENT)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{ROOM_STATE,jdbcType=VARCHAR}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{REFLECT_DATE,jdbcType=DATE}, #{SOLVE_DATE,jdbcType=DATE}, 
+      #{REFLECTER_ID,jdbcType=INTEGER}, #{REFLECTER_NAME,jdbcType=VARCHAR}, #{DESCRIPTION,jdbcType=VARCHAR}, 
+      #{OUTSIDER_REASON,jdbcType=VARCHAR}, #{OUTSIDER_COMMENT,jdbcType=VARCHAR}, #{IS_LEMANAGE,jdbcType=INTEGER}, 
+      #{TYPE,jdbcType=VARCHAR}, #{SUBTYPE,jdbcType=VARCHAR}, #{LEVEL,jdbcType=VARCHAR}, 
+      #{REPAIRER_REASON,jdbcType=VARCHAR}, #{REPAIRER_COMMENT,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.Problem" >
+    insert into problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="ROOM_STATE != null" >
+        ROOM_STATE,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="REFLECT_DATE != null" >
+        REFLECT_DATE,
+      </if>
+      <if test="SOLVE_DATE != null" >
+        SOLVE_DATE,
+      </if>
+      <if test="REFLECTER_ID != null" >
+        REFLECTER_ID,
+      </if>
+      <if test="REFLECTER_NAME != null" >
+        REFLECTER_NAME,
+      </if>
+      <if test="DESCRIPTION != null" >
+        DESCRIPTION,
+      </if>
+      <if test="OUTSIDER_REASON != null" >
+        OUTSIDER_REASON,
+      </if>
+      <if test="OUTSIDER_COMMENT != null" >
+        OUTSIDER_COMMENT,
+      </if>
+      <if test="IS_LEMANAGE != null" >
+        IS_LEMANAGE,
+      </if>
+      <if test="TYPE != null" >
+        TYPE,
+      </if>
+      <if test="SUBTYPE != null" >
+        SUBTYPE,
+      </if>
+      <if test="LEVEL != null" >
+        LEVEL,
+      </if>
+      <if test="REPAIRER_REASON != null" >
+        REPAIRER_REASON,
+      </if>
+      <if test="REPAIRER_COMMENT != null" >
+        REPAIRER_COMMENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_STATE != null" >
+        #{ROOM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="REFLECT_DATE != null" >
+        #{REFLECT_DATE,jdbcType=DATE},
+      </if>
+      <if test="SOLVE_DATE != null" >
+        #{SOLVE_DATE,jdbcType=DATE},
+      </if>
+      <if test="REFLECTER_ID != null" >
+        #{REFLECTER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REFLECTER_NAME != null" >
+        #{REFLECTER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DESCRIPTION != null" >
+        #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="OUTSIDER_REASON != null" >
+        #{OUTSIDER_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="OUTSIDER_COMMENT != null" >
+        #{OUTSIDER_COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="IS_LEMANAGE != null" >
+        #{IS_LEMANAGE,jdbcType=INTEGER},
+      </if>
+      <if test="TYPE != null" >
+        #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="SUBTYPE != null" >
+        #{SUBTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="LEVEL != null" >
+        #{LEVEL,jdbcType=VARCHAR},
+      </if>
+      <if test="REPAIRER_REASON != null" >
+        #{REPAIRER_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="REPAIRER_COMMENT != null" >
+        #{REPAIRER_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.Problem" >
+    update problem
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_STATE != null" >
+        ROOM_STATE = #{ROOM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="REFLECT_DATE != null" >
+        REFLECT_DATE = #{REFLECT_DATE,jdbcType=DATE},
+      </if>
+      <if test="SOLVE_DATE != null" >
+        SOLVE_DATE = #{SOLVE_DATE,jdbcType=DATE},
+      </if>
+      <if test="REFLECTER_ID != null" >
+        REFLECTER_ID = #{REFLECTER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="REFLECTER_NAME != null" >
+        REFLECTER_NAME = #{REFLECTER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DESCRIPTION != null" >
+        DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="OUTSIDER_REASON != null" >
+        OUTSIDER_REASON = #{OUTSIDER_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="OUTSIDER_COMMENT != null" >
+        OUTSIDER_COMMENT = #{OUTSIDER_COMMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="IS_LEMANAGE != null" >
+        IS_LEMANAGE = #{IS_LEMANAGE,jdbcType=INTEGER},
+      </if>
+      <if test="TYPE != null" >
+        TYPE = #{TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="SUBTYPE != null" >
+        SUBTYPE = #{SUBTYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="LEVEL != null" >
+        LEVEL = #{LEVEL,jdbcType=VARCHAR},
+      </if>
+      <if test="REPAIRER_REASON != null" >
+        REPAIRER_REASON = #{REPAIRER_REASON,jdbcType=VARCHAR},
+      </if>
+      <if test="REPAIRER_COMMENT != null" >
+        REPAIRER_COMMENT = #{REPAIRER_COMMENT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.Problem" >
+    update problem
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      ROOM_STATE = #{ROOM_STATE,jdbcType=VARCHAR},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      REFLECT_DATE = #{REFLECT_DATE,jdbcType=DATE},
+      SOLVE_DATE = #{SOLVE_DATE,jdbcType=DATE},
+      REFLECTER_ID = #{REFLECTER_ID,jdbcType=INTEGER},
+      REFLECTER_NAME = #{REFLECTER_NAME,jdbcType=VARCHAR},
+      DESCRIPTION = #{DESCRIPTION,jdbcType=VARCHAR},
+      OUTSIDER_REASON = #{OUTSIDER_REASON,jdbcType=VARCHAR},
+      OUTSIDER_COMMENT = #{OUTSIDER_COMMENT,jdbcType=VARCHAR},
+      IS_LEMANAGE = #{IS_LEMANAGE,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
+      SUBTYPE = #{SUBTYPE,jdbcType=VARCHAR},
+      LEVEL = #{LEVEL,jdbcType=VARCHAR},
+      REPAIRER_REASON = #{REPAIRER_REASON,jdbcType=VARCHAR},
+      REPAIRER_COMMENT = #{REPAIRER_COMMENT,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectTotal" resultType="java.lang.Integer" parameterType="map">
+    select count(*) from problem
+    where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') and REFLECT_DATE = #{REFLECT_DATE}
+  </select>
+
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="map">
+    select * from problem
+    where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') and REFLECT_DATE = #{REFLECT_DATE}
+    order by REFLECT_DATE DESC
+    limit #{START_PAGE}, #{EACH_PAGE}
+  </select>
+
+
+</mapper>

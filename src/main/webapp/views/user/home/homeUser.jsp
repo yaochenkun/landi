@@ -54,7 +54,7 @@
 				<span id="roleTypeNum" style="display: none;">${curUser.ROLE}</span>
 			</h5>
 			<div class="btn btn-change btnchange" style="margin-right: 120px;">
-				<a onclick="showEditPasswordModal();">客房报修</a>
+				<a href="${pageContext.request.contextPath}/views/user/roomItem/assetRepairNewByOutsider.jsp">客房报修</a>
 			</div>
 			<div class="btn btn-change btnchange">
 				<a onclick="showEditPasswordModal();">紧急事件申报</a>
