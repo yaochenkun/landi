@@ -2,59 +2,59 @@
 	top: 80px;
 }
 
-.search-wrap .search-btn {
-	right: 110px;
-}
+/*.search-wrap .search-btn {*/
+	/*right: 110px;*/
+/*}*/
 
-.bill-table thead tr:nth-child(1) {
-	height: 40px;
-}
+/*.bill-table thead tr:nth-child(1) {*/
+	/*height: 40px;*/
+/*}*/
 
-.bill-table thead tr:nth-child(2) {
-	height: 40px;
-}
+/*.bill-table thead tr:nth-child(2) {*/
+	/*height: 40px;*/
+/*}*/
 
-.bill-table thead tr th span {
-	padding: 0;
-}
+/*.bill-table thead tr th span {*/
+	/*padding: 0;*/
+/*}*/
 
-.bill-table thead tr:nth-child(1) th:nth-child(1) {
-	width: 5%;
-}
+/*.bill-table thead tr:nth-child(1) th:nth-child(1) {*/
+	/*width: 5%;*/
+/*}*/
 
-.bill-table thead tr:nth-child(1) th:nth-child(2) {
-	width: 6%;
-}
+/*.bill-table thead tr:nth-child(1) th:nth-child(2) {*/
+	/*width: 6%;*/
+/*}*/
 
 /* 抄表日期 宽度 */
-.bill-table thead tr:nth-child(1) th:nth-child(5) {
-	width: 8%;
-}
+/*.bill-table thead tr:nth-child(1) th:nth-child(5) {*/
+	/*width: 8%;*/
+/*}*/
 
-.bill-table thead .gasOne {
-	color: rgba(0, 0, 0, .5);
-}
+/*.bill-table thead .gasOne {*/
+	/*color: rgba(0, 0, 0, .5);*/
+/*}*/
 
-.bill-table thead .gasTwo {
-	color: rgba(0, 0, 0, .5);
-}
+/*.bill-table thead .gasTwo {*/
+	/*color: rgba(0, 0, 0, .5);*/
+/*}*/
 
-#trTwo th {
-	width: 5%;
-	font-size: 14px;
-}
+/*#trTwo th {*/
+	/*width: 5%;*/
+	/*font-size: 14px;*/
+/*}*/
 
 
 
 /* 燃气表 表格样式  start */
-tbody td:nth-child(3), tbody td:nth-child(4),
-tbody td:nth-child(6), tbody td:nth-child(7),
-tbody td:nth-child(8), tbody td:nth-child(10)
-{
-	color: #01458c;
-}
+/*tbody td:nth-child(3), tbody td:nth-child(4),*/
+/*tbody td:nth-child(6), tbody td:nth-child(7),*/
+/*tbody td:nth-child(8), tbody td:nth-child(10)*/
+/*{*/
+	/*color: #01458c;*/
+/*}*/
 
-tbody td:nth-child(5), tbody td:nth-child(9){ color: #f1551a;}
+/*tbody td:nth-child(5), tbody td:nth-child(9){ color: #f1551a;}*/
 
 /* 燃气表 表格样式  start */
 
@@ -65,4 +65,37 @@ tbody td:nth-child(5), tbody td:nth-child(9){ color: #f1551a;}
 	margin-left: 30px;
 }
 
-.bill-table td:nth-child(9){color: #ff5722; font-weight: bold;}
+/*.bill-table td:nth-child(9){color: #ff5722; font-weight: bold;}*/
+
+.btnSearch {
+	border: 1px solid black;
+	padding: 2px 12px;
+	cursor:pointer;
+	margin-left: 30px;
+}
+
+.btn-green {
+	border: 2px solid #245269;
+	padding: 2px 12px;
+	cursor:pointer;
+	background-color: #3a930d;
+	color: whitesmoke !important;
+}
+
+.btn-blue {
+	border: 2px solid #245269;
+	padding: 2px 12px;
+	cursor:pointer;
+	background-color: #1b6d85;
+	color: whitesmoke !important;
+}
+
+/*表格固定*/
+.fixedBottom {
+	position: fixed;
+	bottom: 0px;
+	right: 100px;
+	width: 100%;
+	background-color: white;
+	margin-bottom: -10px;
+}

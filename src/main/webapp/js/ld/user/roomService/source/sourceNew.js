@@ -1,7 +1,7 @@
-var count = new Array()
-var rate = new Array()
-var EXIST_GUEST = 0
-var CORRECT_SUM = 0
+// var count = new Array()
+// var rate = new Array()
+// var EXIST_GUEST = 0
+// var CORRECT_SUM = 0
 // (function(){
 // 	$("#sourceRoomNumber").on({
 // 		focus: function(){
@@ -68,124 +68,156 @@ var CORRECT_SUM = 0
 // 	});
 // })();
 
-var differentialPrice = function(element) {
-	if($(element).val().charAt($(element).val().length -1) == '.' && $(element).val().length > 1) return;
-
-	if(isNaN(parseFloat($(element).val()))) { //判断输入是否不是数字
-        $(element).val("")
-        $("#error").html("*&nbsp;数据错误");
-        CORRECT_SUM = 0
-    }else{
-        $(element).val(parseFloat($(element).val()))
-
-		if(parseFloat($(element).val()) < parseFloat($("#lastVal").val())){  // 输入数据小于上月数据，判断为错
-            $("#error").html("*&nbsp;数据错误");
-            CORRECT_SUM = 0
-		}else{
-            $("#error").html("");
-            var total = parseFloat($(element).val()) - parseFloat($("#lastVal").val())
-            var temp =new Array();
-            if(total<=count[0]){
-                temp[0] = total;
-                temp[1] = 0;
-                temp[2] = 0;
-                temp[3] = 0;
-            }else if(total > parseFloat(count[0]) && total <= (parseFloat(count[0]) + parseFloat(count[1]))){
-                console.log(count[0] + count[1])
-                temp[0] = count[0];
-                temp[1] = total - parseFloat(count[0]);
-                temp[2] = 0;
-                temp[3] = 0;
-            }else if(total > (parseFloat(count[0]) + parseFloat(count[1])) && total < (parseFloat(count[0]) + parseInt(count[1]) + parseInt(count[2]))){
-                temp[0] = count[0];
-                temp[1] = count[1];
-                temp[2] = total - parseFloat(count[0]) - parseFloat(count[1]);
-                temp[3] = 0;
-            }else{
-                temp[0] = count[0];
-                temp[1] = count[1];
-                temp[2] = count[2];
-                temp[3] = total - parseFloat(count[0]) - parseFloat(count[1]) - parseFloat(count[2]);
-            }
-
-            var cost = temp[0] * rate[0] + temp[1] * rate[1] + temp[2] * rate[2] + temp[3] * rate[3];
-
-            $("#first").val(temp[0] + "x" + rate[0] + "元/立方米" )
-            $("#second").val(temp[1] + "x" + rate[1] + "元/立方米" )
-            $("#third").val(temp[2] + "x" + rate[2] + "元/立方米" )
-            $("#forth").val(temp[3] + "x" + rate[3] + "元/立方米" )
-
-            $("#cost").val(parseFloat(cost).toFixed(2) + "元");//只保留小数点两位
-            CORRECT_SUM = 1
-		}
-
-    }
-
-}
+// var differentialPrice = function(element) {
+// 	if($(element).val().charAt($(element).val().length -1) == '.' && $(element).val().length > 1) return;
+//
+// 	if(isNaN(parseFloat($(element).val()))) { //判断输入是否不是数字
+//         $(element).val("")
+//         $("#error").html("*&nbsp;数据错误");
+//         CORRECT_SUM = 0
+//     }else{
+//         $(element).val(parseFloat($(element).val()))
+//
+// 		if(parseFloat($(element).val()) < parseFloat($("#lastVal").val())){  // 输入数据小于上月数据，判断为错
+//             $("#error").html("*&nbsp;数据错误");
+//             CORRECT_SUM = 0
+// 		}else{
+//             $("#error").html("");
+//             var total = parseFloat($(element).val()) - parseFloat($("#lastVal").val())
+//             var temp =new Array();
+//             if(total<=count[0]){
+//                 temp[0] = total;
+//                 temp[1] = 0;
+//                 temp[2] = 0;
+//                 temp[3] = 0;
+//             }else if(total > parseFloat(count[0]) && total <= (parseFloat(count[0]) + parseFloat(count[1]))){
+//                 console.log(count[0] + count[1])
+//                 temp[0] = count[0];
+//                 temp[1] = total - parseFloat(count[0]);
+//                 temp[2] = 0;
+//                 temp[3] = 0;
+//             }else if(total > (parseFloat(count[0]) + parseFloat(count[1])) && total < (parseFloat(count[0]) + parseInt(count[1]) + parseInt(count[2]))){
+//                 temp[0] = count[0];
+//                 temp[1] = count[1];
+//                 temp[2] = total - parseFloat(count[0]) - parseFloat(count[1]);
+//                 temp[3] = 0;
+//             }else{
+//                 temp[0] = count[0];
+//                 temp[1] = count[1];
+//                 temp[2] = count[2];
+//                 temp[3] = total - parseFloat(count[0]) - parseFloat(count[1]) - parseFloat(count[2]);
+//             }
+//
+//             var cost = temp[0] * rate[0] + temp[1] * rate[1] + temp[2] * rate[2] + temp[3] * rate[3];
+//
+//             $("#first").val(temp[0] + "x" + rate[0] + "元/立方米" )
+//             $("#second").val(temp[1] + "x" + rate[1] + "元/立方米" )
+//             $("#third").val(temp[2] + "x" + rate[2] + "元/立方米" )
+//             $("#forth").val(temp[3] + "x" + rate[3] + "元/立方米" )
+//
+//             $("#cost").val(parseFloat(cost).toFixed(2) + "元");//只保留小数点两位
+//             CORRECT_SUM = 1
+// 		}
+//
+//     }
+//
+// }
 // 添加能源费分类 
-var addsource = function(type){
+var addsource = function(num,type,guest,meterNum){
 
     // 判断房间号是否为空
-	if($("#sourceRoomNumber").val() == ""){
-		$("#roomIdWarning").css("display","block");
-		$("#sourceRoomNumber").addClass("border-red");
+	if($("#curVal").val() == ""){
+		$("#error").css("display","block");
+		$("#error").addClass("border-red");
 		console.log("房间号为空！");
 		return;
 	}
-    if(EXIST_GUEST == 0 || CORRECT_SUM == 0) {
-		return;
+
+
+	var meter = $("#curVal").val()
+	var readTime = $("#readtime").val()
+	var month = $("#month").val()
+	var readDate = $("#pack_maintain").val()
+
+	// console.log('{"type":"' + type + '","rNum":"' + num +  '","meter":'
+     //    + meter + ',"readTime":"' + readTime + '","month":' + month + ',"readDate":"' + readDate + '","guest":"' + guest + '"}')
+
+	if(type != "gas"){
+        $.ajax({
+            type:'post',
+            url:'/LD/userRoom/addSource.action',
+            contentType:'application/json',
+            dataType:'json',
+            data:'{"type":"' + type + '","rNum":"' + num +  '","meter":'
+            + meter + ',"readTime":"' + readTime + '","month":' + month + ',"readDate":"' + readDate + '","guest":"' + guest + '"}',
+            success:function(data){
+                if(data == 1){
+                    showModalBox("success","添加成功！")
+                }else{
+                    showModalBox("error","添加失败！")
+                }
+            }
+        })
+
 	}else{
-
-		var num = $("#sourceRoomNumber").val()
-		var name = $("#guestName").val()
-		var meter = $("#meter").val()
-		var last = $("#lastVal").val()
-		var cur = $("#curVal").val()
-		var money = $("#cost").val().split("元")[0]
-
-
-		$.ajax({
-			type:'post',
-			url:'/LD/userRoom/addSource.action',
-			contentType:'application/json',
-			dataType:'json',
-			data:'{"type":"' + type + '","rNum":"' + num + '","name":"' + name + '","meter":"'
-			+ meter + '","last":' + last + ',"cur":' + cur + ',"cost":' + money + '}',
-			success:function(data){
-				if(data == 1){
-					showModalBox("success","添加成功！")
-				}else{
-					showModalBox("error","添加失败！")
-				}
-			}
-		})
+	    console.log(type)
+        $.ajax({
+            type:'post',
+            url:'/LD/userRoom/addSourceGas.action',
+            contentType:'application/json',
+            dataType:'json',
+            data:'{"type":"' + type + '","rNum":"' + num +  '","meter":'
+            + meter + ',"readTime":"' + readTime + '","month":' + month + ',"readDate":"' + readDate + '","guest":"' + guest + '","meterNum":"' + meterNum +'"}',
+            success:function(data){
+                if(data == 1){
+                    showModalBox("success","添加成功！")
+                }else{
+                    showModalBox("error","添加失败！")
+                }
+            }
+        })
 	}
+
+
 }
 
 
-var associateSource = function (element,type){
-	//获得 上月表数
-	var num = $(element).val();
+var associateSource = function (type,num,meterNum){
 
 	$.ajax({
 		type:'post',
 		url:'/LD/userRoom/getSourceInfo.action',
 		contentType:'application/json',
 		dataType:'json',
-		data:'{"rNum":"' + num + '","type":"' + type + '"}',
+		data:'{"rNum":"' + num + '","type":"' + type + '","meterNum":"' + meterNum + '"}',
 		success:function(data){
 			console.log(data)
 			if(data.State == 'Invalid'){
 				$("#lastVal").val("获取信息错误！");
-                EXIST_GUEST = 0;
             }else{
 				if(data.Source == null){
-                    $("#lastVal").val(0);   //当source里没有第一次增加该房间信息时，上月表数设为0
+                    $("#curVal").val(0);   //当source里没有第一次增加该房间信息时，上月表数设为0
+					var month = formatDateForm(new Date()).split("-")[1];
+					var pre = prevMonth(month);
+
+					$("#month").val(pre)
+
+                    var nowDate = new Date();
+                    $(".pack_maintain").val(formatDateForm(nowDate));
+                    $('.pack_maintain').date_input();
+                    $("#pack_maintain").val(formatDateForm(nowDate));
 
                 }else{
-					$("#lastVal").val(data.Source.cur_MONTH_VAL);
+					$("#curVal").val(data.Source.cur_MONTH_VAL);
+                    $("#month").val(data.Source.month)
+
+                    $("#readtime").val(formatDateForm(new Date(data.Source.reading_TIME)));
+                    $('#readtime').date_input();
+
+                    var nowDate = new Date();
+                    $("#pack_maintain").val(formatDateForm(nowDate));
+
 				}
-                EXIST_GUEST = 1;
 			}
 		}
 
@@ -193,65 +225,3 @@ var associateSource = function (element,type){
 }
 
 
-    //客户姓名联动
-var associateGuestName = function(element,type){
-
-    var roomNum = $(element).val(); //这里是需要根据页面元素变的
-    $.ajax({
-        url:'/LD/userRoom/searchGuestName.action',
-        type:'post',
-        dataType:'json',
-        data:'{"roomNum":"'+ roomNum +'"}',
-        contentType:'application/json',
-        success:function(data){
-            console.log(data);
-
-            if(data.State == "Valid") {
-                if(data.guest_NAME != null) {
-                    $("#guestName").val(data.guest_NAME);
-                    $("#meter").val(roomNum);
-                    //获取表信息
-                    associateSource(element,type);
-                } else {
-                    $("#guestName").val("尚无客户，请重新填写房间号");
-                    EXIST_GUEST = 0;
-                }
-            } else {
-                $("#guestName").val("数据库异常");
-                EXIST_GUEST = 0;
-            }
-        }
-    });
-
-};
-
-// 获取一阶、二阶 信息
-var requestAjaxRate = function(type){
-    var key
-    if(type == "water") key = "w"
-    if(type == "elec") key = "p"
-    console.log("request ajax rate");
-    $.ajax({
-        type:"post",
-        url:"/LD/userRoom/getRate.action",
-        success:function(data){
-            console.log(data);
-            // 显示水费标准
-            $("#first").val("0 x" + data[key + "p1"] + "元/立方米");
-            $("#second").val("0 x" + data[key + "p2"] + "元/立方米");
-            $("#third").val("0 x" + data[key + "p3"] + "元/立方米");
-            $("#forth").val("0 x" + data[key + "p4"] + "元/立方米");
-
-            count[0] = data[key + 'c1']
-            count[1] = data[key + 'c2']
-            count[2] = data[key + 'c3']
-            count[3] = data[key + 'c4']
-
-            rate[0] = data[key + "p1"]
-            rate[1] = data[key + "p2"]
-            rate[2] = data[key + "p3"]
-            rate[3] = data[key + "p4"]
-
-        }
-    });
-}

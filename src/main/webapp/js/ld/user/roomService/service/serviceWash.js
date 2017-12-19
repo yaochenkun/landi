@@ -83,6 +83,28 @@
 		$(e.target).css("display", "none");
 		$(e.target).next().text("");
 	});
+
+
+
+	//表头固定 lyd
+	var tableH = $("table thead tr").offset().top;
+	console.log(tableH)
+	$(window).scroll(function(){
+		var scroH = $(this).scrollTop();
+
+		if(scroH >= tableH){
+			$("table thead").addClass("fixedThead");
+			$("table thead tr th").css("width","243px");
+			for(var i = 0; i<11;i++){
+				$("table tbody tr:eq(0) td:eq(" + i +")").css("width",$("table thead tr th:eq(" + i +")").width());
+			}
+
+
+		}else if(scroH < tableH){
+			$("table thead").removeClass("fixedThead");
+		}
+	})
+
 })();
 
 //查询所有衣服的水洗、干洗、单熨的单价
@@ -121,8 +143,8 @@ var requestUnitPrice = function(){
 var requestWash = function(pageNum){
 
 	var roomNum = $("#searchWashButton").val();
-	var date = $(".pack_maintain").val();
-	console.log("请求 房间："+ roomNum + " 第" +  pageNum + "页洗衣单收费信息");
+	var date = $("#date_demo3").val();
+	console.log("请求 房间："+ roomNum + " 第" +  pageNum + "页洗衣单收费信息" + date);
 	$.ajax({
 		url:'/LD/userRoom/searchWash.action',
 		type:'post',
@@ -140,6 +162,10 @@ var requestWash = function(pageNum){
 				$("#washTable").append("<tr><td class='emptyData' colspan='9'>没有相关信息！</td></tr>")
 				return;
 			}
+
+			//add sum
+			var sum = data.totalPrice;
+			$("#total").html(sum);
 
 			var fragment = document.createDocumentFragment();
 			for(var i = 0; i < data.pageList.length; i++){
@@ -173,6 +199,8 @@ var requestWash = function(pageNum){
 		        	"<span id='wash_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextWash();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recorTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+			$("#serviceWashBottom").wrap("<div class='fixedBottom'></div>")
 		}
 	});
 };
@@ -669,7 +697,7 @@ var exportList = function(){
 
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchWashButton").val();
-	var date = $(".pack_maintain").val();
+    var date = $("#date_demo3").val();
 	console.log("请求 房间："+ roomNum + " 所有洗衣单收费信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllWashes.action',
@@ -744,7 +772,7 @@ var printList = function()
 
 	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchWashButton").val();
-	var date = $(".pack_maintain").val();
+    var date = $("#date_demo3").val();
 	console.log("请求 房间："+ roomNum + " 所有洗衣单收费信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllWashes.action',

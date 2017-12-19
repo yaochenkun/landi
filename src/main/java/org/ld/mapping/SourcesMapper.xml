@@ -5,18 +5,19 @@
     <id column="ID" property="ID" jdbcType="INTEGER" />
     <result column="ROOM_NUMBER" property="ROOM_NUMBER" jdbcType="VARCHAR" />
     <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
-    <result column="CUR_TIME" property="CUR_TIME" jdbcType="TIMESTAMP" />
     <result column="TYPE" property="TYPE" jdbcType="VARCHAR" />
     <result column="METER" property="METER" jdbcType="VARCHAR" />
-    <result column="YEAR_INIT_VAL" property="YEAR_INIT_VAL" jdbcType="DOUBLE" />
-    <result column="LAST_MONTH_VAL" property="LAST_MONTH_VAL" jdbcType="DOUBLE" />
     <result column="CUR_MONTH_VAL" property="CUR_MONTH_VAL" jdbcType="DOUBLE" />
     <result column="MONEY" property="MONEY" jdbcType="DOUBLE" />
+    <result column="UPDATE_TIME" property="UPDATE_TIME" jdbcType="TIMESTAMP" />
+    <result column="READING_TIME" property="READING_TIME" jdbcType="TIMESTAMP" />
+    <result column="MONTH" property="MONTH" jdbcType="INTEGER" />
     <result column="SYS_STATE" property="SYS_STATE" jdbcType="INTEGER" />
+    <result column="LOG" property="LOG" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ROOM_NUMBER, GUEST_NAME, CUR_TIME, TYPE, METER, YEAR_INIT_VAL, LAST_MONTH_VAL,
-    CUR_MONTH_VAL, MONEY, SYS_STATE
+    ID, ROOM_NUMBER, GUEST_NAME, TYPE, METER, CUR_MONTH_VAL, MONEY, UPDATE_TIME, READING_TIME,
+    MONTH, SYS_STATE, LOG
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -30,13 +31,15 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.Sources" >
     insert into sources (ID, ROOM_NUMBER, GUEST_NAME,
-    CUR_TIME, TYPE, METER,
-    YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_MONTH_VAL,
-    MONEY, SYS_STATE)
+    TYPE, METER, CUR_MONTH_VAL,
+    MONEY, UPDATE_TIME, READING_TIME,
+    MONTH, SYS_STATE, LOG
+    )
     values (#{ID,jdbcType=INTEGER}, #{ROOM_NUMBER,jdbcType=VARCHAR}, #{GUEST_NAME,jdbcType=VARCHAR},
-    #{CUR_TIME,jdbcType=TIMESTAMP}, #{TYPE,jdbcType=VARCHAR}, #{METER,jdbcType=VARCHAR},
-    #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE}, #{CUR_MONTH_VAL,jdbcType=DOUBLE},
-    #{MONEY,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER})
+    #{TYPE,jdbcType=VARCHAR}, #{METER,jdbcType=VARCHAR}, #{CUR_MONTH_VAL,jdbcType=DOUBLE},
+    #{MONEY,jdbcType=DOUBLE}, #{UPDATE_TIME,jdbcType=TIMESTAMP}, #{READING_TIME,jdbcType=TIMESTAMP},
+    #{MONTH,jdbcType=INTEGER}, #{SYS_STATE,jdbcType=INTEGER}, #{LOG,jdbcType=VARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Sources" >
     insert into sources
@@ -50,20 +53,11 @@
       <if test="GUEST_NAME != null" >
         GUEST_NAME,
       </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME,
-      </if>
       <if test="TYPE != null" >
         TYPE,
       </if>
       <if test="METER != null" >
         METER,
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        YEAR_INIT_VAL,
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        LAST_MONTH_VAL,
       </if>
       <if test="CUR_MONTH_VAL != null" >
         CUR_MONTH_VAL,
@@ -71,8 +65,20 @@
       <if test="MONEY != null" >
         MONEY,
       </if>
+      <if test="UPDATE_TIME != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="READING_TIME != null" >
+        READING_TIME,
+      </if>
+      <if test="MONTH != null" >
+        MONTH,
+      </if>
       <if test="SYS_STATE != null" >
         SYS_STATE,
+      </if>
+      <if test="LOG != null" >
+        LOG,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -85,20 +91,11 @@
       <if test="GUEST_NAME != null" >
         #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="CUR_TIME != null" >
-        #{CUR_TIME,jdbcType=TIMESTAMP},
-      </if>
       <if test="TYPE != null" >
         #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="METER != null" >
         #{METER,jdbcType=VARCHAR},
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
       <if test="CUR_MONTH_VAL != null" >
         #{CUR_MONTH_VAL,jdbcType=DOUBLE},
@@ -106,8 +103,20 @@
       <if test="MONEY != null" >
         #{MONEY,jdbcType=DOUBLE},
       </if>
+      <if test="UPDATE_TIME != null" >
+        #{UPDATE_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="READING_TIME != null" >
+        #{READING_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="MONTH != null" >
+        #{MONTH,jdbcType=INTEGER},
+      </if>
       <if test="SYS_STATE != null" >
         #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="LOG != null" >
+        #{LOG,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -120,20 +129,11 @@
       <if test="GUEST_NAME != null" >
         GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
       </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME = #{CUR_TIME,jdbcType=TIMESTAMP},
-      </if>
       <if test="TYPE != null" >
         TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
       <if test="METER != null" >
         METER = #{METER,jdbcType=VARCHAR},
-      </if>
-      <if test="YEAR_INIT_VAL != null" >
-        YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      </if>
-      <if test="LAST_MONTH_VAL != null" >
-        LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
       <if test="CUR_MONTH_VAL != null" >
         CUR_MONTH_VAL = #{CUR_MONTH_VAL,jdbcType=DOUBLE},
@@ -141,8 +141,20 @@
       <if test="MONEY != null" >
         MONEY = #{MONEY,jdbcType=DOUBLE},
       </if>
+      <if test="UPDATE_TIME != null" >
+        UPDATE_TIME = #{UPDATE_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="READING_TIME != null" >
+        READING_TIME = #{READING_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="MONTH != null" >
+        MONTH = #{MONTH,jdbcType=INTEGER},
+      </if>
       <if test="SYS_STATE != null" >
         SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      </if>
+      <if test="LOG != null" >
+        LOG = #{LOG,jdbcType=VARCHAR},
       </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
@@ -151,14 +163,15 @@
     update sources
     set ROOM_NUMBER = #{ROOM_NUMBER,jdbcType=VARCHAR},
       GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
-      CUR_TIME = #{CUR_TIME,jdbcType=TIMESTAMP},
       TYPE = #{TYPE,jdbcType=VARCHAR},
       METER = #{METER,jdbcType=VARCHAR},
-      YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
-      LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       CUR_MONTH_VAL = #{CUR_MONTH_VAL,jdbcType=DOUBLE},
       MONEY = #{MONEY,jdbcType=DOUBLE},
-      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER}
+      UPDATE_TIME = #{UPDATE_TIME,jdbcType=TIMESTAMP},
+      READING_TIME = #{READING_TIME,jdbcType=TIMESTAMP},
+      MONTH = #{MONTH,jdbcType=INTEGER},
+      SYS_STATE = #{SYS_STATE,jdbcType=INTEGER},
+      LOG = #{LOG,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
@@ -195,6 +208,14 @@
     order by ID desc
     limit 0, 1
   </select>
+  <select id="getGasSources" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER = #{ROOM_NUMBER} and TYPE = #{TYPE,jdbcType=VARCHAR} and SYS_STATE = 1 and METER = #{METER}
+    order by ID desc
+    limit 0, 1
+  </select>
   <select id="getSingleSources" resultMap="BaseResultMap" parameterType="map">
     select
     <include refid="Base_Column_List" />
@@ -202,5 +223,14 @@
     where ROOM_NUMBER = #{ROOM_NUMBER} and METER = #{METER,jdbcType=VARCHAR} and SYS_STATE = 1
     order by ID desc
     limit 0, 1
+  </select>
+  <select id="getLookupSource" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from sources
+    where ROOM_NUMBER = #{ROOM_NUMBER}  and TYPE = #{TYPE}
+    <if test="GUEST != null">
+      and SYS_STATE = 1 and GUEST_NAME = #{GUEST}
+    </if>
   </select>
 </mapper>

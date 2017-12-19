@@ -7,7 +7,7 @@ public class RoomMeter {
 
 	private Integer ROOM_ID;
 
-	private Integer TYPE;
+	private String TYPE;
 
 	private String METER_NUMBER;
 
@@ -17,7 +17,11 @@ public class RoomMeter {
 
 	private Double CUR_VAL;
 
-	private Date CUR_TIME;
+	private Integer MONTH;
+
+	private Integer STEP;
+
+	private Double MONEY;
 
 	public Integer getID() {
 		return ID;
@@ -35,12 +39,12 @@ public class RoomMeter {
 		this.ROOM_ID = ROOM_ID;
 	}
 
-	public Integer getTYPE() {
+	public String getTYPE() {
 		return TYPE;
 	}
 
-	public void setTYPE(Integer TYPE) {
-		this.TYPE = TYPE;
+	public void setTYPE(String TYPE) {
+		this.TYPE = TYPE == null ? null : TYPE.trim();
 	}
 
 	public String getMETER_NUMBER() {
@@ -75,11 +79,27 @@ public class RoomMeter {
 		this.CUR_VAL = CUR_VAL;
 	}
 
-	public Date getCUR_TIME() {
-		return CUR_TIME;
+	public Integer getMONTH() {
+		return MONTH;
 	}
 
-	public void setCUR_TIME(Date CUR_TIME) {
-		this.CUR_TIME = CUR_TIME;
+	public void setMONTH(Integer MONTH) {
+		this.MONTH = MONTH;
+	}
+
+	public Integer getSTEP() {
+		return STEP;
+	}
+
+	public void setSTEP(Integer STEP) {
+		this.STEP = STEP;
+	}
+
+	public Double getMONEY() {
+		return MONEY;
+	}
+
+	public void setMONEY(Double MONEY) {
+		this.MONEY = MONEY;
 	}
 }

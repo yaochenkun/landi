@@ -6,6 +6,30 @@
 //         }
 //     })
 // })
+(function(){
+
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            $("table thead").addClass("fixedThead");
+            $("table thead tr th").css("width","158px");
+            for(var i = 0; i<11;i++){
+                $("table tbody tr:eq(0) td:eq(" + i +")").css("width",$("table thead tr th:eq(" + i +")").width());
+            }
+
+
+        }else if(scroH < tableH){
+            $("table thead").removeClass("fixedThead");
+        }
+    })
+
+
+})();
+
 
 var getExpenseInfo = function(number , pageNow , type) {
 
@@ -47,6 +71,9 @@ var getExpenseInfo = function(number , pageNow , type) {
                         "<span id='shoppinglist_totalpage'>"+ pageTotal +"</span>"+
                         "<span class='page-next' onclick='requestBeforeAndAfter(\"" + number + "\",\"" + type + "\"," + pageNow + "+1);'>&nbsp;&nbsp;下一页</span>" +
                         "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
+
+                    $(".bottom").wrap("<div class='fixedBottom'></div>");
+
 
                 }
             }

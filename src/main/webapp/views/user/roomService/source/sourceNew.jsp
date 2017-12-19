@@ -6,23 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link
-	href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/home/public.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceNew.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"  rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/home/public.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/css/plugin/simpleCalendar/date_pack.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/ld/user/roomService/source/sourceNew.css" rel="stylesheet" type="text/css" />
 <title>添加能源费结算</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -41,7 +33,16 @@
 				   		contentThree = "sourceWater.jsp";}
 				   else if(type.matches("elec")){
 				        contentOne = "电费"; contentTwo = "新增电费记录"; 
-				        contentThree = "sourceElec.jsp";} 
+				        contentThree = "sourceElec.jsp";}
+				   else if(type.matches("gas")){
+					   contentOne = "燃气费"; contentTwo = "新增燃气费记录";
+					   contentThree = "sourceElec.jsp";}
+
+					String rnum = request.getParameter("number");
+				    String guest = request.getParameter("guest");
+				    String meter = "";
+				    meter = request.getParameter("meter");
+				    System.out.println(meter);
 				%>
 				<i class="icon-path"></i> 
 				<a id="sourceType" href="<%=contentThree %>"><%=contentOne %></a> 
@@ -55,23 +56,18 @@
 				<div class="body-content">
 					<ul>
 						<li><span class="span" >房间号：</span>
-							<input id="sourceRoomNumber" type="text" value="W33-3" onblur="associateGuestName(this,'<%=type%>');"/>
+							<input id="sourceRoomNumber" type="text" value="<%=rnum%>" disabled="disabled"/>
 							<span class="red red-right">*&nbsp;必填</span>
 						</li>
-						<li><span class="span">租客：</span><input id="guestName" type="text" value="" disabled="disabled"/></li>
-						<li><span class="span">表号：</span><input id="meter" type="text" value="" disabled="disabled"/></li>
-						<li><span class="span">上月表数：</span><input id="lastVal" type="text" value="" disabled="disabled"/></li>
-						<li><span class="span">抄表：</span>
-							<input id="curVal" type="text" value="0"  oninput="differentialPrice(this)"/>
+						<li><span class="span">表数：</span>
+							<input id="curVal" type="text" value="0"/>
 							<span class="red red-right" id="error"></span>
 						</li>
-						<li class="waterfare"><span class="span">一阶：</span><input id="first" type="text" value="" disabled="disabled"/></li>
-						<li class="waterfare"><span class="span">二阶：</span><input id="second" type="text" value="" disabled="disabled"/></li>
-						<li class="waterfare"><span class="span">三阶：</span><input id="third" type="text" value="" disabled="disabled"/></li>
-						<li class="waterfare"><span class="span">四阶：</span><input id="forth" type="text" value="" disabled="disabled"/></li>
-						<li><span class="span">总费用：</span><input id="cost" type="text" value="0" /></li>
+						<li><span class="span">更新时间:</span><input type="text" id = 'readtime' class="pack_maintain" id="change_time"/></li>
+						<li><span class="span">计费月份:</span><input type="text" id = 'month' placeholder='请按照"1月"输入...'></li>
+						<li><span class="span">更新日期:</span><input type="text"  id="pack_maintain" disabled="disabled"/></li>
 						<li><span class="span"></span>
-							<a onclick="addsource('<%=type%>');" class="btn btn-goback goback">确认添加</a>
+							<a onclick="addsource('<%=rnum%>','<%=type%>','<%=guest%>','<%=meter%>');" class="btn btn-goback goback">确认添加</a>
 						</li>
 					</ul>
 				</div>
@@ -84,12 +80,13 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/simpleCalendar/date_pack.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceNew.js"></script>
 	<script type="text/javascript">
-        associateGuestName(document.getElementById("sourceRoomNumber"),'<%=type%>');
-        requestAjaxRate('<%=type%>');
+        associateSource('<%=type%>','<%=rnum%>','<%=meter%>')
 	</script>
 </body>
 </html>

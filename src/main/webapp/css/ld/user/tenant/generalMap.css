@@ -11,7 +11,6 @@ table tbody tr {
   height: 30px;
 }
 table tbody tr td {
-  padding: 10px 5px;
   border: 2px solid #555;
   text-align: center;
   min-width: 30px;
@@ -20,8 +19,15 @@ table tbody tr td {
 table tbody tr .userName {
   margin: 10px 0 0 0;
   min-height: 20px;
-  color: #0076ff;
+  color: black;
+  font-weight: bold;
 }
+
+table tbody tr a {
+  color: black !important;
+  font-weight: bold;
+}
+
 table .floor35 td:nth-child(1),
 table .floor35 td:nth-child(2),
 table .floor35 td:nth-child(5),
@@ -29,29 +35,50 @@ table .floor35 td:nth-child(8) {
   border: none;
 }
 
-.SPC , .owner {
-  color:#5c5c5c !important;
-  font-weight: bold;
+table tbody tr td div:nth-child(1) {
+  /*background-color: #0D70A6;*/
+  min-height: 10px;
+  height:auto !important;
 }
 
+table tbody tr td div:nth-child(2) {
+  /*background-color:yellow;*/
 
-.LE_in {
-  color:#00DD77 !important;
-  font-weight: bold;
 }
 
-.LE_out {
-  color:#228B22 !important;
-  font-weight: bold;
+.SPC {
+  background-color: #b62727;
 }
+
+.owner {
+  background-color:#105293;
+
+}
+
+.rented {
+  background-color: #55bd55;
+}
+
+.unrented {
+  background-color: #fefe1366;;
+}
+
+.unmanage {
+  background-color: gray;
+}
+
+.other {
+  background-color: red;
+}
+
 
 .null {}
 
 .hint {
   position: fixed;
-  height:85px;
+  height:128px;
   width:120px;
-  top:120px;
+  top:80px;
   right:0%;
   background-color: #fafafa;
   border:1px solid #EEEEEE;
@@ -83,13 +110,22 @@ table .floor35 td:nth-child(8) {
 
 
 .hint-content li:nth-child(1) div {
-  background-color: #228B22;
+  background-color: #b62727;
 }
 .hint-content li:nth-child(2) div {
-  background-color: #00DD77;
+  background-color: #105293;
 }
 .hint-content li:nth-child(3) div {
-  background-color: #5c5c5c;
+  background-color: #ecf215;
+}
+.hint-content li:nth-child(4) div {
+  background-color: #55bd55;
+}
+.hint-content li:nth-child(5) div {
+  background-color: red;
+}
+.hint-content li:nth-child(6) div {
+  background-color: gray;
 }
 
 .main {

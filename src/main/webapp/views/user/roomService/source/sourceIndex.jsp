@@ -13,7 +13,6 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -32,6 +31,8 @@
 							<a href="sourceElec.jsp">电&nbsp;费</a></li>
 						<li><div class="icon"></div>
 							<a href="sourceGas.jsp">燃&nbsp;气&nbsp;费</a></li>
+						<li><div class="icon"></div>
+							<a href="sourceTotal.jsp">能&nbsp;源&nbsp;费&nbsp;总&nbsp;表</a></li>
 					</ul>
 				</div>
 			</div>

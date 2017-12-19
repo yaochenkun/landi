@@ -13,6 +13,7 @@
 #shopListTbody .buy{color: #2277da;}
 #shopListTbody .sale{color: green;}
 #shopListTbody .use{color: #004ca5;}
+#shopListTbody .delete{color: red;}
 #shopListTbody .annualSale{color: #999;}
 #shopListTbody span{margin-left: 1em; cursor: pointer;}
 #shopListTbody span:hover, #shopListTbody a:hover{border-bottom-width: 1px; border-bottom-style: solid;}
@@ -49,4 +50,8 @@
 	margin-top: -25px;
 	margin-left: 25px;
 	font-size: 12px;
+}
+
+.bottom-page {
+	margin:1em 2em 0.5em !important;
 }

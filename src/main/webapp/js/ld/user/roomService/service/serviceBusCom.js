@@ -37,14 +37,20 @@ var searchFareByDate = function(pageNum, date){
 		contentType:'application/json',
 		success:function(data){
 			console.log(data);
-			
+
 			// 清空表格和页码
 			$("#busTable").html("");
 			$("#serviceBusBottom").html("");
 
 			if (data.recordTotal == 0) {
 				$("#busTable").append("<tr><td colspan='9' class='emptyText'>没有相关信息！</td></tr>");
+
+                $("#total").html("0");
 			} else {
+
+				//总计
+				var sum = data.totalPrice;
+				$("#total").html(sum);
 
 				for(var i = 0; i < data.dataList.length; i++){
 					var perRecord = data.dataList[i];
@@ -66,6 +72,8 @@ var searchFareByDate = function(pageNum, date){
 		        	"<span id='fare_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextFareByDate();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+                $(".bottom").wrap("<div class='fixedBottom'></div>");
 			}
 		}
 	});

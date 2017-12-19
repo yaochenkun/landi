@@ -176,15 +176,15 @@
   </update>
   <select id="totalRec" resultType="java.lang.Integer" parameterType="map">
     select count(*) from laundry 
-	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE >= #{STARTDATE} and DATE &lt;= #{ENDDATE}
   </select>
   <select id="getAll" resultMap="BaseResultMap" parameterType="map">
     select * from laundry 
-	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+	where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE >= #{STARTDATE} and DATE &lt;= #{ENDDATE}
   </select>
   <select id="getRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry  
-    where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE = #{DATE}
+    where ROOM_NUM like CONCAT('%', #{RN}, '%') and DATE >= #{STARTDATE} and DATE &lt;= #{ENDDATE}
     order by DATE DESC
     limit #{ST}, #{EACH}
   </select>

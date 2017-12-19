@@ -188,15 +188,15 @@
   
   <select id="getTotal" parameterType="map" resultType="java.lang.Integer">
   	select count(*) from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%')
-  	<if test = "OCCUR_TIME != null">
-  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	<if test = "START_OCCUR_TIME != null">
+  	and OCCUR_TIME >= #{START_OCCUR_TIME} and OCCUR_TIME &lt;= #{END_OCCUR_TIME}
   	</if>
   </select>
   
   <select id="getByPage" parameterType="map" resultMap="BaseResultMap">
   	select * from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%') 
-  	<if test = "OCCUR_TIME != null">
-  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	<if test = "START_OCCUR_TIME != null">
+  	and OCCUR_TIME >= #{START_OCCUR_TIME} and OCCUR_TIME &lt;= #{END_OCCUR_TIME}
   	</if>
   	order by ID
   	limit #{START_PAGE}, #{EACH_PAGE}
@@ -204,8 +204,8 @@
   
   <select id="getAll" parameterType="map" resultMap="BaseResultMap">
   	select * from other_fare where ROOM_NUM like CONCAT('%', #{ROOM_NUM}, '%')
-  	<if test = "OCCUR_TIME != null">
-  	and OCCUR_TIME = #{OCCUR_TIME} 
+  	<if test = "START_OCCUR_TIME != null">
+  	and OCCUR_TIME >= #{START_OCCUR_TIME} and  OCCUR_TIME &lt;= #{END_OCCUR_TIME}
   	</if>
   </select>
   

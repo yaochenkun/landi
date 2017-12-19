@@ -25,16 +25,25 @@ public interface ServerService {
 
 	Sources getSource(String num, String type);
 
+	Sources getGasSource(String num, String type ,String meter);
+
+
+
 	List<Sources> getPairSource(String num);
-	
+
+	//lyd
+	List<Sources> getLookupSource(String rn, String type,String guest);
+	List<Sources> getHistoryLookupSource(String rn, String type);
+
+
 	//by lyd
 	List<Staff> searchStaff(String DUTY);
 
 	int addTakeaway(Meal meal);
 	
-	int getTotalMealRow(String rn , Date date);
+	int getTotalMealRow(String rn , String date);  //liyidan
 	
-	List<Meal> searchMeal(String rn, Date date ,int st, int eachPage);
+	List<Meal> searchMeal(String rn, String date ,int st, int eachPage); //liyidan
 	
 	int deleteMeal(Integer id);
 	
@@ -44,9 +53,9 @@ public interface ServerService {
 	
 	int addShoeCleaning(ShoesPolishing shoe);
 	
-	int getTotalShoeCleaningRow(String rn , Date date);
+	int getTotalShoeCleaningRow(String rn , String date);//lyd
 	
-	List<ShoesPolishing> searchShoeCleaning(String rn, Date date , int st, int eachPage);
+	List<ShoesPolishing> searchShoeCleaning(String rn, String date , int st, int eachPage);//lyd
 	
 	int deleteShoesPolishing(Integer id);
 	
@@ -56,9 +65,9 @@ public interface ServerService {
 	
 	int addAgentPurchase(AgentPurchase agent);
 	
-	int getTotalAgentPurchaseRow(String rn , Date date);
+	int getTotalAgentPurchaseRow(String rn , String date);//lyd
 	
-	List<AgentPurchase> searchAgentPurchase(String rn,Date date, int st, int eachPage);
+	List<AgentPurchase> searchAgentPurchase(String rn,String date, int st, int eachPage);//lyd
 	
 	int deleteAgentPurchase(Integer id);
 	
@@ -66,11 +75,11 @@ public interface ServerService {
 	
 	int updateAgentPurchase(AgentPurchase agent);
 	
-	List<AgentPurchase> getAllAgentPurchase(String rn , Date date);
+	List<AgentPurchase> getAllAgentPurchase(String rn , String date);//lyd
 	
-	List<ShoesPolishing> getAllShoesPolishing(String rn , Date date);
+	List<ShoesPolishing> getAllShoesPolishing(String rn , String date);//lyd
 	
-	List<Meal> getAllMeal(String rn , Date date);
+	List<Meal> getAllMeal(String rn , String date);//by liyidan
 
 	int addExpenseOfLE(CostLe cost);
 }

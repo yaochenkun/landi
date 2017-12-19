@@ -29,6 +29,11 @@ public interface SourcesMapper {
 
 	Sources getSources(Map<String, Object> map);
 
+	Sources getGasSources(Map<String, Object> map);
+
 	Sources getSingleSources(Map<String, Object> map);
+
+	//lyd
+	List<Sources> getLookupSource(Map<String, Object> map);
 
 }

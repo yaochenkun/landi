@@ -9,21 +9,23 @@ public class Sources {
 
     private String GUEST_NAME;
 
-    private Date CUR_TIME;
-
     private String TYPE;
 
     private String METER;
-
-    private Double YEAR_INIT_VAL;
-
-    private Double LAST_MONTH_VAL;
 
     private Double CUR_MONTH_VAL;
 
     private Double MONEY;
 
+    private Date UPDATE_TIME;
+
+    private Date READING_TIME;
+
+    private Integer MONTH;
+
     private Integer SYS_STATE;
+
+    private String LOG;
 
     public Integer getID() {
         return ID;
@@ -49,14 +51,6 @@ public class Sources {
         this.GUEST_NAME = GUEST_NAME == null ? null : GUEST_NAME.trim();
     }
 
-    public Date getCUR_TIME() {
-        return CUR_TIME;
-    }
-
-    public void setCUR_TIME(Date CUR_TIME) {
-        this.CUR_TIME = CUR_TIME;
-    }
-
     public String getTYPE() {
         return TYPE;
     }
@@ -71,22 +65,6 @@ public class Sources {
 
     public void setMETER(String METER) {
         this.METER = METER == null ? null : METER.trim();
-    }
-
-    public Double getYEAR_INIT_VAL() {
-        return YEAR_INIT_VAL;
-    }
-
-    public void setYEAR_INIT_VAL(Double YEAR_INIT_VAL) {
-        this.YEAR_INIT_VAL = YEAR_INIT_VAL;
-    }
-
-    public Double getLAST_MONTH_VAL() {
-        return LAST_MONTH_VAL;
-    }
-
-    public void setLAST_MONTH_VAL(Double LAST_MONTH_VAL) {
-        this.LAST_MONTH_VAL = LAST_MONTH_VAL;
     }
 
     public Double getCUR_MONTH_VAL() {
@@ -105,11 +83,43 @@ public class Sources {
         this.MONEY = MONEY;
     }
 
+    public Date getUPDATE_TIME() {
+        return UPDATE_TIME;
+    }
+
+    public void setUPDATE_TIME(Date UPDATE_TIME) {
+        this.UPDATE_TIME = UPDATE_TIME;
+    }
+
+    public Date getREADING_TIME() {
+        return READING_TIME;
+    }
+
+    public void setREADING_TIME(Date READING_TIME) {
+        this.READING_TIME = READING_TIME;
+    }
+
+    public Integer getMONTH() {
+        return MONTH;
+    }
+
+    public void setMONTH(Integer MONTH) {
+        this.MONTH = MONTH;
+    }
+
     public Integer getSYS_STATE() {
         return SYS_STATE;
     }
 
     public void setSYS_STATE(Integer SYS_STATE) {
         this.SYS_STATE = SYS_STATE;
+    }
+
+    public String getLOG() {
+        return LOG;
+    }
+
+    public void setLOG(String LOG) {
+        this.LOG = LOG == null ? null : LOG.trim();
     }
 }

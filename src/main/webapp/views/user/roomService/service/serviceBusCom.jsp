@@ -10,19 +10,19 @@
 <link href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/plugin/calendar/dateCustom.css" rel="stylesheet" type="text/css"/>
-<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusCom.css" rel="stylesheet" type="text/css" />
+	<%--<link href="${pageContext.request.contextPath}/css/ld/user/roomService/roomService.css" rel="stylesheet" type="text/css"/>--%>
+	<link href="${pageContext.request.contextPath}/css/ld/user/roomService/service/serviceBusCom.css" rel="stylesheet" type="text/css" />
 <title>通勤车</title>
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../../home/opeMenu.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<%--<i class="icon-path"></i> --%>
 				<%--<a href="serviceIndex.jsp">客房服务</a>--%>
 				<i class="icon-path"></i> 
@@ -34,18 +34,21 @@
 			<div class="bill-area">
 				<div class="search">
 					<span>房间号：</span><input id="searchRoomNum" type="text" value="">
-				</div>
-				<div class="calendarPart">
-					<span class="span">日期：</span>
-					<div class="tool_date cf">
-						<div class="ta_date" id="div_month_picker">
-							<span class="date_title" id="month_picker"></span>
+					<div class="calendarPart">
+						<span class="span">日期：</span>
+						<div class="tool_date cf">
+							<div class="ta_date" id="div_month_picker">
+								<span class="date_title" id="month_picker"></span>
+							</div>
 						</div>
+
+						<span style="color: red;padding-left: 10px;">总计：</span><span id="total">0</span><span style="color: red;padding-left: 10px;">元</span>
+						<a class="btn btn-edit btnEdit" onclick="searchFareByDate(1);">搜索</a>
+						<a class="btn btn-edit btnEdit " onclick="exportList();">导出</a>
+						<a class="btn btn-edit btnEdit" style="margin-left: 0em;" onclick="printList();">打印</a>
 					</div>
-					<a class="btn btn-edit btnEdit" onclick="searchFareByDate(1);">搜索</a>
-					<a class="btn btn-edit btnEdit btnRight" onclick="exportList();">导出</a>
-					<a class="btn btn-edit btnEdit" style="margin-left: 0em;" onclick="printList();">打印</a>
 				</div>
+
 				
 
 				<div class="bill-table">

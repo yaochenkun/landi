@@ -19,7 +19,6 @@
 <body>
 
 	<jsp:include page="../_header.jsp" />
-	<jsp:include page="../_leftMenu.jsp" />
 
 	<%--<div class="nav-second">--%>
 		<%--<div class="toolbar">--%>

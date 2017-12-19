@@ -16,7 +16,6 @@
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
-	<jsp:include page="../_leftMenu.jsp"></jsp:include>
 
 	<!-- 三级导航栏 start-->
 	<%--<div class="nav-second">--%>
@@ -52,10 +51,13 @@
 	<div class="hint">
 		<div class="hint-content">
 			<ul>
-				<li><div class="hint-circle"></div><span class="span">LE 未入住</span></li>
-				<li><div class="hint-circle"></div><span class="span">LE 已入住</span></li>
-				<li><div class="hint-circle"></div><span class="span">SPC 小业主</span></li>
-				<li><div class="hint-circle"></div><span class="span">未设置</span></li>
+				<li><div class="hint-circle"></div><span class="span">SPC</span></li>
+				<li><div class="hint-circle"></div><span class="span">小业主</span></li>
+				<li><div class="hint-circle"></div><span class="span">待租</span></li>
+				<li><div class="hint-circle"></div><span class="span">已租</span></li>
+				<li><div class="hint-circle"></div><span class="span">其他使用</span></li>
+				<li><div class="hint-circle"></div><span class="span">非管理</span></li>
+
 			</ul>
 		</div>
 	</div>

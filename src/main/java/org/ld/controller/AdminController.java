@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.spi.LoggerFactory;
 import org.ld.model.User;
 
 import org.ld.service.UserService;

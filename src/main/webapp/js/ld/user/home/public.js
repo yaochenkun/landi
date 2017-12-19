@@ -183,3 +183,16 @@ var validateDate = function(maintainTime){
 		return false;
 	}
 };
+
+//获取前一个月
+var prevMonth = function(month){
+    var m = month;
+    if(month == "01"){
+        m = "12";
+    }else if(month == "10"){
+        m = "09";
+    }else {
+        m = month.charAt(0) + (month.charAt(1)-1);
+    }
+    return m;
+}

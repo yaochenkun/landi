@@ -14,21 +14,42 @@ thead th:nth-child(3) {
 	width: 8%;
 }
 
-tbody td:nth-child(3),tbody td:nth-child(4) {
-	color: #19007c;
-}
 
 tbody td:nth-child(5) {
-	color: #0099d6;
+	color: #333 !important;
+	font-weight: normal !important;
 }
 
-tbody td:nth-child(6) {
-	color: #f1551a;
-}
 
 .btnSearch {
 	border: 1px solid #aaa;
 	padding: 2px 12px;
 	cursor:pointer;
 	margin-left: 30px;
+}
+
+.btn-green {
+	border: 2px solid #245269;
+	padding: 2px 12px;
+	cursor:pointer;
+	background-color: #3a930d;
+	color: whitesmoke !important;
+}
+
+.btn-blue {
+	border: 2px solid #245269;
+	padding: 2px 12px;
+	cursor:pointer;
+	background-color: #1b6d85;
+	color: whitesmoke !important;
+}
+
+/*表格固定*/
+.fixedBottom {
+	position: fixed;
+	bottom: 0px;
+	right: 100px;
+	width: 100%;
+	background-color: white;
+	margin-bottom: -10px;
 }

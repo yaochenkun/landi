@@ -9,6 +9,29 @@ $(function(){
 			return false;
 		}
 	})
+
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            //$("table thead ").css({"position":"fixed","top":0});
+            $("table thead tr").addClass("fixedThead");
+            $("table thead tr th,table td").css({"width":"90px","height":"56px"});
+            $("table thead tr th:nth-child(3),table td:nth-child(3)").css({"width":"103px"});
+            $("table thead tr th:nth-child(7),table td:nth-child(7)").css({"width":"105px"});
+            $("table thead tr th:nth-child(8),table td:nth-child(8)").css({"width":"134px"});
+            $("table thead tr th:nth-child(9),table td:nth-child(9)").css({"width":"134px"});
+            $("table thead tr th:nth-child(10),table td:nth-child(10)").css({"width":"134px"});
+
+
+        }else if(scroH < tableH){
+            $("table thead tr").removeClass("fixedThead");
+        }
+    })
+
 });
 
 
@@ -35,8 +58,8 @@ var requestNextShopping = function(){
 // 查询系统代购费信息
 var requestAjaxShopping = function(pageNum){
 	console.log("请求第"+ pageNum + "页代购费信息");
-    var date = formatDateForm(new Date($(".pack_maintain").val()));	
-	console.log('{"pageNum":'+ pageNum + ',"date":"' + date + '"}');
+    var date = $("#date_demo3").val();
+    console.log('{"pageNum":'+ pageNum + ',"date":"' + date + '"}');
 	
 	$.ajax({
 		url:'/LD/userRoom/roomSearchAgentPurchase.action',
@@ -64,7 +87,11 @@ var requestAjaxShopping = function(pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
+				//总计
+                var sum = data.totalPrice;
+                $("#total").html(sum);
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 					console.log(perRecord);
@@ -85,6 +112,8 @@ var requestAjaxShopping = function(pageNum){
 			        	"<span id='shoppinglist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextShopping();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recorTotal'>&nbsp;" + recordTotal +"&nbsp;</span>条记录</div>");
+
+                $(".bottom").wrap("<div class='fixedBottom'></div>")
 			}
 		}
 	});
@@ -93,7 +122,7 @@ var requestAjaxShopping = function(pageNum){
 ////////////////////////////////////////////////////////////////条件查询 代购费信息 start
 //根据房间号 拉取第一页 代购费信息
 var requestFirstShoppingByRoomNum = function(element){
-	var roomNum = $(element).parent().children("input").val();	
+	var roomNum = $("#search-input").val();
 	requestAjaxShoppingByRoomNum(roomNum,parseInt(1));    
 }
 
@@ -122,8 +151,8 @@ var requestNextShoppingByRoomNum = function(){
 // 根据房间号查询系统代购费信息
 var requestAjaxShoppingByRoomNum = function(roomNum,pageNum){
 	console.log("请求房间："+ roomNum +"  第" + pageNum + "页的代购费信息");
-	var date = formatDateForm(new Date($(".pack_maintain").val()));	
-	console.log('{"pageNum":"'+ pageNum +'","rNum":"'+ roomNum + '","date":"'+ date +'"}');
+    var date = $("#date_demo3").val();
+    console.log('{"pageNum":"'+ pageNum +'","rNum":"'+ roomNum + '","date":"'+ date +'"}');
 	
 	$.ajax({
 		url:'/LD/userRoom/roomSearchAgentPurchase.action',
@@ -149,7 +178,11 @@ var requestAjaxShoppingByRoomNum = function(roomNum,pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
+                //总计
+                var sum = data.totalPrice;
+                $("#total").html(sum);
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 
@@ -170,6 +203,8 @@ var requestAjaxShoppingByRoomNum = function(roomNum,pageNum){
 			        	"<span id='shoppinglist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextShoppingByRoomNum();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
+
+                $(".bottom").wrap("<div class='fixedBottom'></div>")
 			}
 		}
 	});
@@ -204,9 +239,10 @@ var exportList = function(){
     
     //根据当前房间号查询内容，请求所有记录（不分页）
 	var roomNum = $("#search-input").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	
-	$.ajax({
+    var date = $("#date_demo3").val();
+
+
+    $.ajax({
 		url:'/LD/userRoom/searchAllShopping.action',
 		type:'post',
 		dataType:'json',
@@ -243,8 +279,9 @@ var exportList = function(){
 var printList = function(){
 	printData = [];
 	var roomNum = $("#search-input").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	console.log('{"date":"'+ date +'","roomNum":"'+ roomNum +'"}');	
+    var date = $("#date_demo3").val();
+
+    console.log('{"date":"'+ date +'","roomNum":"'+ roomNum +'"}');
 	
 	$.ajax({
 		url:'/LD/userRoom/searchAllShopping.action',

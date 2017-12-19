@@ -1,138 +1,195 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.ld.dao.RoomMeterMapper" >
-  <resultMap id="BaseResultMap" type="org.ld.model.RoomMeter" >
-    <id column="ID" property="ID" jdbcType="INTEGER" />
-    <result column="ROOM_ID" property="ROOM_ID" jdbcType="INTEGER" />
-    <result column="TYPE" property="TYPE" jdbcType="INTEGER" />
-    <result column="METER_NUMBER" property="METER_NUMBER" jdbcType="VARCHAR" />
-    <result column="YEAR_INIT_VAL" property="YEAR_INIT_VAL" jdbcType="DOUBLE" />
-    <result column="LAST_MONTH_VAL" property="LAST_MONTH_VAL" jdbcType="DOUBLE" />
-    <result column="CUR_VAL" property="CUR_VAL" jdbcType="DOUBLE" />
-    <result column="CUR_TIME" property="CUR_TIME" jdbcType="DATE" />
+<mapper namespace="org.ld.dao.RoomMeterMapper">
+  <resultMap id="BaseResultMap" type="org.ld.model.RoomMeter">
+    <id column="ID" jdbcType="INTEGER" property="ID" />
+    <result column="ROOM_ID" jdbcType="INTEGER" property="ROOM_ID" />
+    <result column="TYPE" jdbcType="VARCHAR" property="TYPE" />
+    <result column="METER_NUMBER" jdbcType="VARCHAR" property="METER_NUMBER" />
+    <result column="YEAR_INIT_VAL" jdbcType="DOUBLE" property="YEAR_INIT_VAL" />
+    <result column="LAST_MONTH_VAL" jdbcType="DOUBLE" property="LAST_MONTH_VAL" />
+    <result column="CUR_VAL" jdbcType="DOUBLE" property="CUR_VAL" />
+    <result column="MONTH" jdbcType="INTEGER" property="MONTH" />
+    <result column="STEP" jdbcType="INTEGER" property="STEP" />
+    <result column="MONEY" jdbcType="DOUBLE" property="MONEY" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ROOM_ID, TYPE, METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_VAL, CUR_TIME
+  <sql id="Base_Column_List">
+    ID, ROOM_ID, TYPE, METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, CUR_VAL, MONTH, STEP,
+    MONEY
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from room_meter
     where ID = #{ID,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room_meter
     where ID = #{ID,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="org.ld.model.RoomMeter" >
-    insert into room_meter (ID, ROOM_ID, TYPE, 
-      METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL, 
-      CUR_VAL, CUR_TIME)
-    values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{TYPE,jdbcType=INTEGER}, 
-      #{METER_NUMBER,jdbcType=VARCHAR}, #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE}, 
-      #{CUR_VAL,jdbcType=DOUBLE}, #{CUR_TIME,jdbcType=DATE})
+  <insert id="insert" parameterType="org.ld.model.RoomMeter">
+    insert into room_meter (ID, ROOM_ID, TYPE,
+    METER_NUMBER, YEAR_INIT_VAL, LAST_MONTH_VAL,
+    CUR_VAL, MONTH, STEP,
+    MONEY)
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_ID,jdbcType=INTEGER}, #{TYPE,jdbcType=VARCHAR},
+    #{METER_NUMBER,jdbcType=VARCHAR}, #{YEAR_INIT_VAL,jdbcType=DOUBLE}, #{LAST_MONTH_VAL,jdbcType=DOUBLE},
+    #{CUR_VAL,jdbcType=DOUBLE}, #{MONTH,jdbcType=INTEGER}, #{STEP,jdbcType=INTEGER},
+    #{MONEY,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="org.ld.model.RoomMeter" >
+  <insert id="insertSelective" parameterType="org.ld.model.RoomMeter">
     insert into room_meter
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
         ID,
       </if>
-      <if test="ROOM_ID != null" >
+      <if test="ROOM_ID != null">
         ROOM_ID,
       </if>
-      <if test="TYPE != null" >
+      <if test="TYPE != null">
         TYPE,
       </if>
-      <if test="METER_NUMBER != null" >
+      <if test="METER_NUMBER != null">
         METER_NUMBER,
       </if>
-      <if test="YEAR_INIT_VAL != null" >
+      <if test="YEAR_INIT_VAL != null">
         YEAR_INIT_VAL,
       </if>
-      <if test="LAST_MONTH_VAL != null" >
+      <if test="LAST_MONTH_VAL != null">
         LAST_MONTH_VAL,
       </if>
-      <if test="CUR_VAL != null" >
+      <if test="CUR_VAL != null">
         CUR_VAL,
       </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME,
+      <if test="MONTH != null">
+        MONTH,
+      </if>
+      <if test="STEP != null">
+        STEP,
+      </if>
+      <if test="MONEY != null">
+        MONEY,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ID != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
         #{ID,jdbcType=INTEGER},
       </if>
-      <if test="ROOM_ID != null" >
+      <if test="ROOM_ID != null">
         #{ROOM_ID,jdbcType=INTEGER},
       </if>
-      <if test="TYPE != null" >
-        #{TYPE,jdbcType=INTEGER},
+      <if test="TYPE != null">
+        #{TYPE,jdbcType=VARCHAR},
       </if>
-      <if test="METER_NUMBER != null" >
+      <if test="METER_NUMBER != null">
         #{METER_NUMBER,jdbcType=VARCHAR},
       </if>
-      <if test="YEAR_INIT_VAL != null" >
+      <if test="YEAR_INIT_VAL != null">
         #{YEAR_INIT_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="LAST_MONTH_VAL != null" >
+      <if test="LAST_MONTH_VAL != null">
         #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CUR_VAL != null" >
+      <if test="CUR_VAL != null">
         #{CUR_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CUR_TIME != null" >
-        #{CUR_TIME,jdbcType=DATE},
+      <if test="MONTH != null">
+        #{MONTH,jdbcType=INTEGER},
+      </if>
+      <if test="STEP != null">
+        #{STEP,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null">
+        #{MONEY,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomMeter" >
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.RoomMeter">
     update room_meter
-    <set >
-      <if test="ROOM_ID != null" >
+    <set>
+      <if test="ROOM_ID != null">
         ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
       </if>
-      <if test="TYPE != null" >
-        TYPE = #{TYPE,jdbcType=INTEGER},
+      <if test="TYPE != null">
+        TYPE = #{TYPE,jdbcType=VARCHAR},
       </if>
-      <if test="METER_NUMBER != null" >
+      <if test="METER_NUMBER != null">
         METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
       </if>
-      <if test="YEAR_INIT_VAL != null" >
+      <if test="YEAR_INIT_VAL != null">
         YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="LAST_MONTH_VAL != null" >
+      <if test="LAST_MONTH_VAL != null">
         LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CUR_VAL != null" >
+      <if test="CUR_VAL != null">
         CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
       </if>
-      <if test="CUR_TIME != null" >
-        CUR_TIME = #{CUR_TIME,jdbcType=DATE},
+      <if test="MONTH != null">
+        MONTH = #{MONTH,jdbcType=INTEGER},
+      </if>
+      <if test="STEP != null">
+        STEP = #{STEP,jdbcType=INTEGER},
+      </if>
+      <if test="MONEY != null">
+        MONEY = #{MONEY,jdbcType=DOUBLE},
       </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.ld.model.RoomMeter" >
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.RoomMeter">
     update room_meter
     set ROOM_ID = #{ROOM_ID,jdbcType=INTEGER},
-      TYPE = #{TYPE,jdbcType=INTEGER},
+      TYPE = #{TYPE,jdbcType=VARCHAR},
       METER_NUMBER = #{METER_NUMBER,jdbcType=VARCHAR},
       YEAR_INIT_VAL = #{YEAR_INIT_VAL,jdbcType=DOUBLE},
       LAST_MONTH_VAL = #{LAST_MONTH_VAL,jdbcType=DOUBLE},
       CUR_VAL = #{CUR_VAL,jdbcType=DOUBLE},
-      CUR_TIME = #{CUR_TIME,jdbcType=DATE}
+      MONTH = #{MONTH,jdbcType=INTEGER},
+      STEP = #{STEP,jdbcType=INTEGER},
+      MONEY = #{MONEY,jdbcType=DOUBLE}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <select id="getMeters" resultMap="BaseResultMap" parameterType="map">
-  	<![CDATA[
-  	select * from room_meter where ROOM_ID = #{ROOM_ID} and TYPE = #{TYPE}
+
+  	select * from room_meter
+  	<if test="ID != 0">
+  	where ROOM_ID = #{ID} and TYPE = #{TYPE}
+  	</if>
+  	<if test="ID == 0">
+    where  TYPE = #{TYPE}
+    </if>
+  	order by ID
+    limit #{ST}, #{EACH}
+
+  </select>
+
+  <select id="getMeter" resultMap="BaseResultMap" parameterType="map">
+  	select * from room_meter where ROOM_ID = #{ID,jdbcType=INTEGER} and TYPE = #{TYPE}
+  </select>
+
+  <select id="getMeterById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from room_meter where ROOM_ID = #{ID,jdbcType=INTEGER}
+  </select>
+
+  <select id="getOneGasMeter" resultMap="BaseResultMap" parameterType="map">
+    select * from room_meter
+    where ROOM_ID = #{ID,jdbcType=INTEGER} and TYPE = #{TYPE} and METER_NUMBER = #{METER}
+  </select>
+
+  <select id="getMetersByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <![CDATA[
+  	select * from room_meter where ROOM_ID = #{ROOM_ID,jdbcType=INTEGER}
     ]]>
   </select>
-  <select id="getMeter" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	<![CDATA[
-  	select * from room_meter where METER_NUMBER = #{MN,jdbcType=VARCHAR}
-    ]]>
+  <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from room_meter
+    <if test="ID != 0">
+    where ROOM_ID =#{ID}  and TYPE = #{TYPE}
+    </if>
+    <if test="ID == 0">
+    where  TYPE = #{TYPE}
+    </if>
   </select>
 </mapper>

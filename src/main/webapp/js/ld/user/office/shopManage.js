@@ -5,6 +5,34 @@
 			requestShopListByName(1);
 		}
 	});
+
+    //表头固定 lyd
+    (function(){
+
+        //表头固定 lyd
+        var tableH = $("table thead tr").offset().top;
+        console.log(tableH)
+        $(window).scroll(function(){
+            var scroH = $(this).scrollTop();
+
+            if(scroH >= tableH){
+                $("table thead").addClass("fixedThead");
+                $("table thead tr th").css("width","107px");
+                for(var i = 0; i<11;i++){
+                    $("table tbody tr:eq(0) td:eq(" + i +")").css("width",$("table thead tr th:eq(" + i +")").width());
+                }
+
+
+            }else if(scroH < tableH){
+                $("table thead").removeClass("fixedThead");
+            }
+        })
+
+
+    })();
+
+
+
 })();
 
 // 查询商品信息
@@ -34,6 +62,8 @@ var requestShopList = function(pageNum){
 	        	"<span id='shop_totalpage'>"+ data.pageTotal +"</span>"+
 	            "<span class='page-next' onclick='requestNextShop();'>&nbsp;&nbsp;下一页</span>" +
 	            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+            $(".bottom").wrap("<div class='fixedBottom'></div>");
 		}
 	});
 };
@@ -113,7 +143,8 @@ var addPerGoods = function(perRecord){
 		"<td><span class='buy' onclick='showBuyGoodsDiv(this);'>买</span>"+
 		"<span class='sale' onclick='showSaleGoodsDiv(this);'>卖</span>"+
 		"<span class='use' onclick='showUseGoodsDiv(this);'>废弃</span>"+
-		"<span id='goods_id' style='display:none;'>"+ perRecord.id +"</span></td>"+
+        "<span class='delete' onclick='deleteGoods(this);'>删除</span>"+
+        "<span id='goods_id' style='display:none;'>"+ perRecord.id +"</span></td>"+
 		"<td><a href='shopDetail.jsp?goodId="+ perRecord.id +"' class='annualSale'>查看记录</a></td></tr>");
 };
 
@@ -137,7 +168,9 @@ var requestBuyGoods = function(){
 
 	// 买入商品时间为当前时间
 	var date = new Date();
-	var per = $("#buyMoney").text();
+    console.log(date)
+
+    var per = $("#buyMoney").text();
 	var total = per * count;
 	$.ajax({
 		url:'/LD/userItem/buyGoods.action',
@@ -149,7 +182,8 @@ var requestBuyGoods = function(){
 		success:function(data){
 			console.log(data);
 			if(data == 1){
-				showModalBox("success","买入成功！");
+                window.location.href = "shopManage.jsp";
+                showModalBox("success","买入成功！");
 			}else if(data == 0){
 				showModalBox("error","买入失败！");
 			}
@@ -175,7 +209,9 @@ var requestSaleGoods = function(){
 	closeSaleGoodsDiv();
 
 	var date = formatDate(new Date());
-	var per = $("#saleMoney").text();
+    console.log(date)
+
+    var per = $("#saleMoney").text();
 	var total = per * count;
 	$.ajax({
 		url:'/LD/userItem/sellGoods.action',
@@ -187,7 +223,8 @@ var requestSaleGoods = function(){
 		success:function(data){
 			console.log(data);
 			if(data == 1){
-				showModalBox("success","卖出成功！");
+                window.location.href = "shopManage.jsp";
+                showModalBox("success","卖出成功！");
 			}else if(data == 0){
 				showModalBox("error","卖出失败！");
 			}
@@ -206,13 +243,14 @@ var showUseGoodsDiv = function(element){
 var closeUseGoodsDiv = function(){
 	closePopMenu("useGoodsMenu");
 };
-// 请求自用商品
+// 请求自用/废弃商品
 var requestUseGoods = function(){
 	var count = Number($("#useGoodsMenu input").val());
 	console.log("自用商品数量" + count);
 	closeUseGoodsDiv();
 
 	var date = formatDate(new Date());
+	console.log(date)
 	var per = $("#useMoney").text();
 	var total = per * count;
 	$.ajax({
@@ -225,7 +263,8 @@ var requestUseGoods = function(){
 		success:function(data){
 			console.log(data);
 			if(data == 1){
-				showModalBox("success","废弃成功！");
+                window.location.href = "shopManage.jsp";
+                showModalBox("success","废弃成功！");
 			}else if(data == 0){
 				showModalBox("error","废弃失败！");
 			}
@@ -233,4 +272,24 @@ var requestUseGoods = function(){
 	});
 };
 
+//请求删除商品
+var deleteGoods = function(element) {
+	var id = $(element).parent().children('#goods_id').text();
+
+	$.ajax({
+		url:'/LD/userItem/deleteGoods.action',
+		type:'post',
+		contentType:'application/json',
+		dataType:'json',
+        data:'{"ID":' + id + '}',
+		success:function(data){
+            if(data == 1){
+                window.location.href = "shopManage.jsp";
+                showModalBox("success","删除成功！");
+            }else if(data == 0){
+                showModalBox("error","删除失败！");
+            }
+		}
+	});
+}
 ///////////////////////////////////////////////////////////////////////

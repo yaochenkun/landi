@@ -418,6 +418,15 @@ public class ItemServiceImpl implements ItemService {
 		return groceryRunningMapper.totalRec(map);
 	}
 
+	@Override
+	public int deleteGrocery(int id){
+		try{
+			return groceryItemMapper.deleteByPrimaryKey(id);
+		}catch(Exception e ){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
 	/*
 	 * 库房物品
 	 */

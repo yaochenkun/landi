@@ -14,14 +14,13 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 	
 	<!-- 页面内容 start -->
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../../home/opeMenu.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<%--<i class="icon-path"></i>--%>
 				<%--<a href="serviceIndex.jsp">客房服务</a>--%>
 				<i class="icon-path"></i>
@@ -33,12 +32,12 @@
 				<div class="body-content">
 					<ul>
 						<li><span class="span">房间号：</span>
-							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this);"/>
+							<input id="serviceRoomNumber" type="text" value="" onblur="associateGuestName(this);associateCleaningShoesSum();"/>
 							<span class="red red-right">*&nbsp;必填</span></li>
 						<li id="roomIdWarning"><span class="span"></span><span class="red">不能为空！</span></li>
 						<li><span class="span">客户姓名：</span><input type="text" id="guestName" disabled="disabled" /></li>
-						<li><span class="span">数量：</span><input type="text" id="count" value="0" onblur="auto_sum();"/>双</li>
-						<li><span class="span">金额：</span><input type="text" id="sum" value="0" />元</li>
+						<li><span class="span">数量：</span><input type="text" id="count" value="0" oninput="associateCleaningShoesSum();"/>双</li>
+						<li><span class="span">金额：</span><input type="text" id="sum" value="0" disabled="disabled"/>元</li>
 						<li><span class="span"></span>
 						    <input type="radio" value="0" name="pay" checked="checked"/>现金
 						    <input type="radio" value="1" name="pay"/>月结</li>

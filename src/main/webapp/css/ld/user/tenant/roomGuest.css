@@ -35,7 +35,7 @@
   height: 28px;
   color: #222;
   border-color: #222;
-  float: right;
+ /* float: right; */
   margin-top: -30px;
   line-height: 14px;
 }

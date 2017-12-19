@@ -17,7 +17,6 @@
 <body>
 
 	<jsp:include page="../../_header.jsp" />
-	<jsp:include page="../../_leftMenu.jsp" />
 
 	<% String roomNum = request.getParameter("roomNum"); %>
 

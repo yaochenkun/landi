@@ -412,22 +412,17 @@ var changeSelection = function(element) {
 //房源管理选择操作类型 弹窗布局
 var initChoiceManageDiv = function (type , state) {
     $(".item:eq(0)").show();
-    if(state == null ) {
+    if(state == null ) { //添加房源
     	$("#addroom").show();
     	$("#replaceroom").hide();
     	$("#deleteroom").hide();
 	}
-	else if(type == "LE" || type == "小业主") {
+	else {
 		$("#deleteroom").show();
-		$("#replaceroom").hide();
-		$("#addroom").hide();
-	}
-	else if(type == "SPC") {
 		$("#replaceroom").show();
-		$("#deleteroom").show();
 		$("#addroom").hide();
-
 	}
+
 	$(".item:gt(0)").hide();
 	$("#man-foot-content").hide();
 }
@@ -436,9 +431,9 @@ var initChoiceManageDiv = function (type , state) {
 var addRoomDiv = function() {
 	$("#room-type").show();
 	$(".item:gt(1)").hide();
-    $("#man-foot-content").show();
+    $("#man-foot-content").hide();
 }
-var addRoomDivForLEAndSPC = function () {
+var addRoomDivForSPC = function () {
 	$("#room-name").hide();
 	$("#room-replace").hide();
 	$("#man-date").show();
@@ -448,7 +443,7 @@ var addRoomDivForLEAndSPC = function () {
 }
 
 var addRoomDivForOwner = function () {
-	addRoomDivForLEAndSPC();
+	addRoomDivForSPC();
 	$("#room-name").show();
 }
 //替换房源 弹窗布局
@@ -468,34 +463,39 @@ var deleteRoomDiv = function () {
 	$("#man-date .span").text("退还日期");
 }
 
+//添加房源操作
 var addChange = function (element) {
 	manage_type = "添加房源";
     changeSelection(element);
     addRoomDiv();
+    //默认为SPC
+	$("#SPC").trigger("click");
 }
 
+//替换房源操作
 var replaceChange = function (element) {
 	manage_type = "替换房源";
 	changeSelection(element);
 	replaceRoomDiv();
 }
 
+//退还房源操作
 var delChange = function (element) {
 	manage_type = "退还房源";
  	changeSelection(element);
  	deleteRoomDiv();
 }
 
-var addForLE = function (element) {
-	room_type = "LE";
-	changeSelection(element);
-	addRoomDivForLEAndSPC();
-}
+// var addForLE = function (element) {
+// 	room_type = "LE";
+// 	changeSelection(element);
+// 	addRoomDivForLEAndSPC();
+// }
 
 var addForSPC = function (element) {
 	room_type = "SPC";
 	changeSelection(element);
-	addRoomDivForLEAndSPC();
+	addRoomDivForSPC();
 }
 var addForOwner = function (element) {
 	room_type = "小业主";
@@ -503,7 +503,7 @@ var addForOwner = function (element) {
 	addRoomDivForOwner();
 }
 
-
+//房源管理
 var roomManage = function(rNum) {
     $(".shadow").css("display","block");
     $(".manage").css("display","block");

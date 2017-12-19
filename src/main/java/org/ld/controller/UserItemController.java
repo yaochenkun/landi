@@ -3,11 +3,7 @@ package org.ld.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -1016,8 +1012,12 @@ public class UserItemController {
 			int count = dataJson.getIntValue("count");
 			double per = dataJson.getDoubleValue("per");
 			double total = dataJson.getDoubleValue("total"); // money
-			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
-			
+			String d = dataJson.getString("date"); // YYYY-MM-DD HH-MM-SS
+//			System.out.println(d);
+
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+//			System.out.println(date);
+
 			GroceryItem gi = itemService.getCertainGrocery(ID);
 			GroceryRunning gr = new GroceryRunning();
 			gr.setALL_MONEY(total);
@@ -1058,9 +1058,13 @@ public class UserItemController {
 			int count = dataJson.getIntValue("count");
 			double per = dataJson.getDoubleValue("per");
 			double total = dataJson.getDoubleValue("total"); // money
-			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
-			
+			String d = dataJson.getString("date"); // YYYY-MM-DD HH-MM-SS
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+
 			GroceryItem gi = itemService.getCertainGrocery(ID);
+
+			if(count > gi.getAVALIABLE()) return 0;
+
 			GroceryRunning gr = new GroceryRunning();
 			gr.setALL_MONEY(total);
 			gr.setCTIME(date);
@@ -1101,9 +1105,14 @@ public class UserItemController {
 			int count = dataJson.getIntValue("count");
 			double per = dataJson.getDoubleValue("per");
 			double total = dataJson.getDoubleValue("total"); // money
-			Date date = dataJson.getDate("date"); // YYYY-MM-DD HH-MM-SS
-			
+			String d = dataJson.getString("date"); // YYYY-MM-DD HH-MM-SS
+			Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d);
+
 			GroceryItem gi = itemService.getCertainGrocery(ID);
+
+			if(count > gi.getAVALIABLE()) return 0;
+
+
 			GroceryRunning gr = new GroceryRunning();
 			gr.setALL_MONEY(total);
 			gr.setCTIME(date);
@@ -1116,7 +1125,7 @@ public class UserItemController {
 			{
 				gi.setAVALIABLE(gi.getAVALIABLE() - count);
 				gi.setTOTAL_BENIFIT(gi.getTOTAL_BENIFIT() - count * gi.getBUY_MONEY());
-				
+				gi.setTOTAL_LOSS(gi.getTOTAL_LOSS() + count);
 				return itemService.updateGrocery(gi);
 			}
 			else return 0;
@@ -1127,6 +1136,30 @@ public class UserItemController {
 			return 0;
 		}
 	}
+
+	@RequestMapping("/deleteGoods")
+	@ResponseBody
+	public Integer deleteGoods(HttpSession session, @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+
+		User curUser = (User) session.getAttribute("curUser");
+
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wGrocery"))) == 0) {
+			return 0;
+		}
+
+
+		int ID = dataJson.getIntValue("ID");
+
+		if(itemService.deleteGrocery(ID) != 0)
+		{
+			return 1;
+		}
+		else return 0;
+
+	}
+
+
 	
 	@RequestMapping("/searchAnnualSale") // id为null时，查询所有记录(只有当前的统计，没有历史统计记录)
 	@ResponseBody
@@ -1145,28 +1178,42 @@ public class UserItemController {
 
 		int pageNumber = dataJson.getIntValue("pageNum");
 		int id = dataJson.getIntValue("id");
-		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
-		Date to = dataJson.getDate("to");
-		int eachPage = Config.settingsInt.get("list_size");
-		int recordTotal = itemService.totalGroceryRunning(id, from, to);
-		
-		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+		String s_from = dataJson.getString("from"); // YYYY-MM-DD HH-MM-SS
+		String s_to = dataJson.getString("to");
+		try{
+			Date from = new SimpleDateFormat("yyyy-MM-dd").parse(s_from);
+			Date to = new SimpleDateFormat("yyyy-MM-dd").parse(s_to);
 
-		if (recordTotal != 0) {
-			if (pageNumber > pageTotal)
-				pageNumber = pageTotal;
+			//数据库中时间为 yyyy-MM-dd HH:mm:ss 为了实现比较，将to 时间加一
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(to);
+			calendar.add(Calendar.DATE,1);
+			to = calendar.getTime();
 
-			int st = (pageNumber - 1) * eachPage;
-			List<GroceryRunning> record = itemService.getGroceryRunning(id, st, eachPage, from, to);
+			int eachPage = Config.settingsInt.get("list_size");
+			int recordTotal = itemService.totalGroceryRunning(id, from, to);
 
-			ans.put("dataList", record);
+			int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+
+			if (recordTotal != 0) {
+				if (pageNumber > pageTotal)
+					pageNumber = pageTotal;
+
+				int st = (pageNumber - 1) * eachPage;
+				List<GroceryRunning> record = itemService.getGroceryRunning(id, st, eachPage, from, to);
+
+				ans.put("dataList", record);
+			}
+
+			ans.put("pageNow", pageNumber);
+			ans.put("pageTotal", pageTotal);
+			ans.put("recordTotal", recordTotal);
+			return ans;
+
+		} catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
-
-		ans.put("pageNow", pageNumber);
-		ans.put("pageTotal", pageTotal);
-		ans.put("recordTotal", recordTotal);
-
-		return ans;
 	}
 	
 	@RequestMapping("/addGoods") // 新增小卖部物品
@@ -1196,7 +1243,10 @@ public class UserItemController {
 			gi.setSELL_MONEY(sellMoney);
 			gi.setTOTAL(total);
 			gi.setTYPE(type);
-			
+			gi.setTOTAL_SOLD(0);
+			gi.setTOTAL_LOSS(0);
+			gi.setTOTAL_BENIFIT(0.0);
+
 			return itemService.addGrocery(gi);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

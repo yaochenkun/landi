@@ -19,7 +19,6 @@
 <body>
 
 	<jsp:include page="../_header.jsp" />
-	<jsp:include page="../_leftMenu.jsp" />
 	<jsp:include page="../_modal.jsp" />
 
 	<% String itemID = request.getParameter("itemID"); %>

@@ -35,7 +35,7 @@ var requestNextShoeCleaning = function(){
 // 查询系统擦鞋费信息
 var requestAjaxShoeCleaning = function(pageNum){
 	console.log("请求第"+ pageNum + "页擦鞋费信息");
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
 	
 	console.log('{"pageNum":'+ pageNum + ',"date":"' + date + '"}');
 	
@@ -65,10 +65,14 @@ var requestAjaxShoeCleaning = function(pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
+				//总计
+				var sum = data.total;
+				$("#total").html(sum);
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];	
-					console.log(perRecord);
+					// console.log(perRecord);
 
 					$("#shoeCleaningTbody").append("<tr><td>"+ perRecord.room_NUM +"</td>"+
 						"<td>"+ perRecord.guest_NAME +"</td><td>"+ perRecord.count +"双</td>"+
@@ -84,6 +88,8 @@ var requestAjaxShoeCleaning = function(pageNum){
 			        	"<span id='shoeCleaninglist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextShoeCleaning();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
+
+				$(".bottom").wrap("<div class='fixedBottom'></div>");
 			}
 		}
 	});
@@ -92,7 +98,7 @@ var requestAjaxShoeCleaning = function(pageNum){
 ////////////////////////////////////////////////////////////////条件查询 擦鞋费信息 start
 //根据房间号 拉取第一页 擦鞋费信息
 var requestFirstShoeCleaningByRoomNum = function(element){
-	var roomNum = $(element).parent().children("input").val();	
+	var roomNum = $("#search-input").val();
 	requestAjaxShoeCleaningByRoomNum(roomNum,parseInt(1));    
 }
 
@@ -119,7 +125,7 @@ var requestNextShoeCleaningByRoomNum = function(){
 // 根据房间号查询系统擦鞋费信息
 var requestAjaxShoeCleaningByRoomNum = function(roomNum,pageNum){
 	console.log("请求房间："+ roomNum +"  第" + pageNum + "页的擦鞋费信息");
-	var date = formatDateForm(new Date($(".pack_maintain").val()));	
+	var date = $("#date_demo3").val();
 	console.log('{"pageNum":"'+ pageNum +'","rNum":"'+ roomNum + '","date":"'+ date +'"}');
 	
 	$.ajax({
@@ -146,7 +152,11 @@ var requestAjaxShoeCleaningByRoomNum = function(roomNum,pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
+                //总计
+                var sum = data.total;
+                $("#total").html(sum);
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];					
 
@@ -200,7 +210,7 @@ var exportList = function(){
     
     //根据当前房间号查询内容，请求所有记录（不分页）
 	var roomNum = $("#search-input").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
 	console.log('{"date":"'+ date +'","roomNum":"'+ roomNum +'"}');	
 	
 	$.ajax({
@@ -238,7 +248,8 @@ var exportList = function(){
 var printList = function(){
 	printData = [];
 	var roomNum = $("#search-input").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
+
 	console.log('{"date":"'+ date +'","roomNum":"'+ roomNum +'"}');	
 	
 	$.ajax({

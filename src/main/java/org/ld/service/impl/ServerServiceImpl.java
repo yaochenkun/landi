@@ -1,9 +1,7 @@
 package org.ld.service.impl;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import org.apache.log4j.Logger;
 import org.ld.dao.*;
@@ -74,7 +72,7 @@ public class ServerServiceImpl implements ServerService {
 		map.put("ST", st);
 		map.put("EACH", eachPage);
 
-			return sourcesMapper.getSourcesRange(map);
+		return sourcesMapper.getSourcesRange(map);
 	}
 
 	@Override //房间号精确查询
@@ -140,7 +138,17 @@ public class ServerServiceImpl implements ServerService {
 		map.put("TYPE",type);
 
         return sourcesMapper.getSources(map);
-		//return map;
+	}
+
+	@Override
+	public Sources getGasSource(String num, String type , String meter){
+		HashMap<String,Object>  map = new HashMap<String,Object>();
+		map.put("ROOM_NUMBER",num);
+		map.put("TYPE",type);
+		System.out.println(meter);
+		map.put("METER",meter);
+
+		return sourcesMapper.getGasSources(map);
 	}
 
 	@Override
@@ -157,7 +165,28 @@ public class ServerServiceImpl implements ServerService {
 		ans.add(sourcesMapper.getSingleSources(map));
 		ans.add(sourcesMapper.getSingleSources(map2));
 
+
 		return ans;
+	}
+
+	@Override
+	public List<Sources> getLookupSource(String rn, String type, String guest) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("ROOM_NUMBER",rn);
+		map.put("TYPE",type);
+		map.put("GUEST",guest);
+
+		return sourcesMapper.getLookupSource(map);
+	}
+
+	@Override
+	public List<Sources> getHistoryLookupSource(String rn, String type) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("ROOM_NUMBER",rn);
+		map.put("TYPE",type);
+		map.put("GUEST",null);
+		return sourcesMapper.getLookupSource(map);
+
 	}
 
 	@Override
@@ -183,24 +212,46 @@ public class ServerServiceImpl implements ServerService {
 	}
 	
 	@Override
-	public int getTotalMealRow(String rn , Date date){
+	public int getTotalMealRow(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		return mealMapper.getTotalRow(map);
+		String startDate = date.split(" ")[0];
+		String endDate = date.split(" ")[2];
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			return mealMapper.getTotalRow(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 	
 	@Override
-	public List<Meal> searchMeal(String rn, Date date,int st, int eachPage){
+	public List<Meal> searchMeal(String rn, String date,int st, int eachPage){
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		String startDate = date.split(" ")[0];
+		String endDate = date.split(" ")[2];
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			map.put("ST", st);
+			map.put("EACH", eachPage);
+			return mealMapper.getMealRange(map);
 
-		map.put("RN", rn);
-		map.put("DATE", date);
-		map.put("ST", st);
-		map.put("EACH", eachPage);
-
-		return mealMapper.getMealRange(map);
+		} catch (Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
 	}
+
 	@Override
 	public int deleteMeal(Integer id) { 
 	
@@ -243,23 +294,44 @@ public class ServerServiceImpl implements ServerService {
 	}
 	
 	@Override
-	public List<ShoesPolishing> searchShoeCleaning(String rn, Date date , int st, int eachPage){
+	public List<ShoesPolishing> searchShoeCleaning(String rn, String date , int st, int eachPage){
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN", rn);
+			map.put("ST", st);
+			map.put("START_DATE", startDate);
+			map.put("END_DATE",endDate);
+			map.put("EACH", eachPage);
+			return shoesPolishingMapper.getShoesPolishingRange(map);
+		}catch(Exception e ){
+			logger.error(e.getCause());
+			return null;
+		}
 
-		map.put("RN", rn);
-		map.put("ST", st);
-		map.put("DATE", date);
-		map.put("EACH", eachPage);
-
-		return shoesPolishingMapper.getShoesPolishingRange(map);
 	}
 	
 	@Override
-	public int getTotalShoeCleaningRow(String rn , Date date){
+	public int getTotalShoeCleaningRow(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("OCCUR_TIME", date);
-		return shoesPolishingMapper.getTotalRow(map);
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN", rn);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			System.out.println(shoesPolishingMapper.getTotalRow(map));
+			return shoesPolishingMapper.getTotalRow(map);
+		}catch(Exception e ){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 	
 	@Override
@@ -280,11 +352,22 @@ public class ServerServiceImpl implements ServerService {
 	}
 	
 	@Override
-	public List<ShoesPolishing> getAllShoesPolishing(String rn , Date date){
+	public List<ShoesPolishing> getAllShoesPolishing(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("OCCUR_TIME", date);
-		return shoesPolishingMapper.getAll(map);
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN",rn);
+			map.put("START_OCCUR_TIME",startDate);
+			map.put("END_OCCUR_TIME",endDate);
+			return shoesPolishingMapper.getAll(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 	
 	@Override
@@ -311,23 +394,45 @@ public class ServerServiceImpl implements ServerService {
 	}
 	
 	@Override
-	public int getTotalAgentPurchaseRow(String rn , Date date){
+	public int getTotalAgentPurchaseRow(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		return agentPurchaseMapper.getTotalRow(map);
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN",rn);
+			map.put("START_DATE",startDate);
+			map.put("END_DATE",endDate);
+			return agentPurchaseMapper.getTotalRow(map);
+
+		}catch (Exception e ){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 	
 	@Override
-	public List<AgentPurchase> searchAgentPurchase(String rn,Date date, int st, int eachPage){
+	public List<AgentPurchase> searchAgentPurchase(String rn,String date, int st, int eachPage){
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN", rn);
+			map.put("ST", st);
+			map.put("START_DATE", startDate);
+			map.put("END_DATE",endDate);
+			map.put("EACH", eachPage);
 
-		map.put("RN", rn);
-		map.put("ST", st);
-		map.put("DATE", date);
-		map.put("EACH", eachPage);
+			return agentPurchaseMapper.getAgentPurchaseRange(map);
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+			return null;
+		}
 
-		return agentPurchaseMapper.getAgentPurchaseRange(map);
 
 	}
 	
@@ -361,19 +466,43 @@ public class ServerServiceImpl implements ServerService {
 	}
 	
 	@Override
-	public List<AgentPurchase> getAllAgentPurchase(String rn , Date date){
+	public List<AgentPurchase> getAllAgentPurchase(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		return agentPurchaseMapper.getAll(map);
+		try{
+			String start = date.split(" ")[0];
+			String end = date.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("RN", rn);
+			map.put("START_DATE", startDate);
+			map.put("END_DATE",endDate);
+
+			return agentPurchaseMapper.getAll(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 	
 	@Override
-	public List<Meal> getAllMeal(String rn , Date date){
+	public List<Meal> getAllMeal(String rn , String date){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("OCCUR_TIME", date);
-		return mealMapper.getAll(map);
+		String startDate = date.split(" ")[0];
+		String endDate = date.split(" ")[2];
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			return mealMapper.getAll(map);
+
+		} catch (Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
 	}
 
 	@Override

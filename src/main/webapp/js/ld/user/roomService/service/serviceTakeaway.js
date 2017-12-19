@@ -8,7 +8,30 @@ $(function(){
 			requestFirstTakeawayByRoomNum(this);
 			return false;
 		}
-	})
+	});
+
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    // console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            $("table thead").addClass("fixedThead");
+            $("table thead tr th").css("width","156px");
+            for(var i = 0; i<9;i++){
+            	console.log($("table tbody tr:eq(0) td:eq(" + i +")").width())
+				console.log($("table thead tr th:eq(" + i +")").width())
+                $("table tbody tr:eq(0) td:eq(" + i +")").css("width",$("table thead tr th:eq(" + i +")").width());
+            }
+
+
+        }else if(scroH < tableH){
+            $("table thead").removeClass("fixedThead");
+        }
+    })
+
+
 });
 
 
@@ -34,9 +57,9 @@ var requestNextTakeaway = function(){
 
 // 查询系统餐费信息( rNum不传递，为null)
 var requestAjaxTakeaway = function(pageNum){
-	
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	console.log(date);
+
+    var date = $("#date_demo3").val();
+    console.log(date);
 	console.log("请求第"+ pageNum + "页餐费信息");
 	console.log('{"pageNum":'+ pageNum + ',"date":"' + date + '"}');
 	
@@ -66,7 +89,10 @@ var requestAjaxTakeaway = function(pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
-				
+
+				var sum = data.totalPrice;
+				$("#total").html(sum);
+
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
 
@@ -86,6 +112,7 @@ var requestAjaxTakeaway = function(pageNum){
 			        	"<span id='takeawaylist_totalpage'>"+ pageTotal +"</span>"+
 			            "<span class='page-next' onclick='requestNextTakeaway();'>&nbsp;&nbsp;下一页</span>" +
 			            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ recordTotal +"&nbsp;</span>条记录</div>");
+                $(".bottom").wrap("<div class='fixedBottom'></div>")
 			}
 		}
 	});
@@ -124,9 +151,10 @@ var requestNextTakeawayByRoomNum = function(){
 // 根据房间号查询系统餐费信息
 var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 	console.log("请求房间："+ roomNum +"  第" + pageNum + "页的餐费信息");
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	
-	console.log('{"pageNum":"'+ pageNum +'","rNum":"'+ roomNum + '","date":"'+ date +'"}');
+    var date = $("#date_demo3").val();
+
+
+    console.log('{"pageNum":"'+ pageNum +'","rNum":"'+ roomNum + '","date":"'+ date +'"}');
 	$.ajax({
 		url:'/LD/userRoom/roomSearchMeal.action',
 		type:'post',
@@ -151,6 +179,9 @@ var requestAjaxTakeawayByRoomNum = function(roomNum,pageNum){
 						"没有相关数据！</td></tr>");
 					return;
 				}
+
+				var sum = data.totalPrice;
+				$("#total").html(sum);
 
 				for(var i=0; i<data.pageList.length; i++){
 					var perRecord = data.pageList[i];
@@ -207,9 +238,9 @@ var exportList = function(){
     
     //根据当前房间号查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNumber").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
-	
-	$.ajax({
+    var date = $("#date_demo3").val();
+
+    $.ajax({
 		url:'/LD/userRoom/searchAllMeal.action',
 		type:'post',
 		dataType:'json',

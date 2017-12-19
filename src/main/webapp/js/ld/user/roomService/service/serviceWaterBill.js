@@ -31,6 +31,27 @@
 			$("#unitPrice").hide();
 	});
 
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            //$("table thead ").css({"position":"fixed","top":0});
+            $("table thead tr").addClass("fixedThead");
+            // $("table thead tr th,table td").css({"width":"110px","height":"56px"});
+            // $("table thead tr th:nth-child(3),table td:nth-child(3)").css({"width":"160px"});
+            // $("table thead tr th:nth-child(7),table td:nth-child(7)").css({"width":"134px"});
+            // $("table thead tr th:nth-child(8),table td:nth-child(8)").css({"width":"172px"});
+            // $("table thead tr th:nth-child(9),table td:nth-child(9)").css({"width":"84px"});
+
+
+        }else if(scroH < tableH){
+            $("table thead tr").removeClass("fixedThead");
+        }
+    })
+
 })();
 
 
@@ -40,7 +61,7 @@
 // 按房间号和日期查询饮用水费信息
 var searchWaterBill = function(pageNum){
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+    var date = $("#date_demo3").val();
 
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的饮用水费信息");
 
@@ -88,6 +109,8 @@ var searchWaterBill = function(pageNum){
 		        	"<span id='fare_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextWaterBill();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+                $(".bottom").wrap("<div class='fixedBottom'></div>");
 			}
 		}
 	});
@@ -289,7 +312,7 @@ var exportList = function(){
     
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+    var date = $("#date_demo3").val();
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有饮用水费信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllWaterBills.action',
@@ -326,7 +349,7 @@ var printList = function()
 
 	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+    var date = $("#date_demo3").val();
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有饮用水费信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllWaterBills.action',

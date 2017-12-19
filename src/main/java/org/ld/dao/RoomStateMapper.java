@@ -21,6 +21,8 @@ public interface RoomStateMapper {
 	// add
 
 	List<RoomState> getAllRoomState();
+
+	List<RoomState> getTotalRoomState();
 	
 	RoomState getCertainRoomStateByID(Integer RID);
 	

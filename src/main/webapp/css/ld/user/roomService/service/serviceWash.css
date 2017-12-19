@@ -4,6 +4,20 @@
 .bill-table td:nth-child(5){color: #ff5722; font-weight: bold;}
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px;}
+/*表固定样式*/
+/*.bill-table tbody{
+	display: block;
+	max-height:250px;
+	overflow-y:scroll;
+}
+
+.bill-table thead,.bill-table tbody tr {
+	display: table;
+	width:100%;
+	table-layout: fixed;
+}*/
+
+
 .search input{padding: 0 5px; margin-left: 10px; margin-right: 30px;}
 .btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-top: -4px;}
 /*.btnRight{margin-left: 100px;}换到远程浏览时，按钮位置发生变化*/

@@ -18,7 +18,6 @@
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
-	<jsp:include page="../_leftMenu.jsp"></jsp:include>
 	<jsp:include page="../_modal.jsp"></jsp:include>
 
 	<% String rid = request.getParameter("rid"); %>
@@ -46,7 +45,11 @@
 			<span><span class="roomNumber"><%=rNum%></span>&nbsp;&nbsp;房间</span>
 		</div>
 		<a class="btn btn-man"  onclick="roomManage('<%=rNum%>');">房源管理</a>
-		<a class="btn btngoback" href="generalMap.jsp">返回</a>
+		<div style="float: right;">
+			<a class="btn btngoback" href="generalMap.jsp">返回一览图</a>
+			<a class="btn btngoback" href="guestList.jsp">返回一览表</a>
+		</div>
+		
 
 		<!-- 房间信息 start -->
 		<div class="tab-content">
@@ -233,8 +236,7 @@
 				<div id="room-type" class="item" >
 					<span class="span">房源类型:</span>
 					<div class="item-content">
-						<a class="btn btn-item" onclick="addForLE(this);">LE</a>
-						<a class="btn btn-item" onclick="addForSPC(this);">SPC</a>
+						<a class="btn btn-item" onclick="addForSPC(this);" id="SPC">SPC</a>
 						<a class="btn btn-item" onclick="addForOwner(this);">小业主</a>
 					</div>
 				</div>

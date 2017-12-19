@@ -211,22 +211,22 @@
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
     select count(*) from agent_purchase where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "DATE != null">
-      and OCCUR_TIME = #{DATE}
+    <if test = "START_DATE != null">
+      and OCCUR_TIME >= #{START_DATE} and OCCUR_TIME &lt;= #{END_DATE}
     </if>
   </select>
   <select id="getAgentPurchaseRange" resultMap="BaseResultMap" parameterType="map">
     select * from agent_purchase where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "DATE != null">
-      and OCCUR_TIME = #{DATE}
+    <if test = "START_DATE != null">
+      and OCCUR_TIME >= #{START_DATE} and OCCUR_TIME &lt;= #{END_DATE}
     </if>
     order by ID
     limit #{ST}, #{EACH}
   </select>
   <select id="getAll" parameterType="map" resultMap="BaseResultMap">
     select * from agent_purchase where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "DATE != null">
-      and OCCUR_TIME = #{DATE}
+    <if test = "START_DATE != null">
+      and OCCUR_TIME >= #{START_DATE} and OCCUR_TIME &lt;= #{END_DATE}
     </if>
   </select>
 </mapper>

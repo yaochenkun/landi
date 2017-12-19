@@ -83,6 +83,8 @@ public interface ItemService {
 	
 	int totalGroceryRunning(int id, Date from, Date to);
 
+	int deleteGrocery(int id);
+
 
 
 	//库房物品

@@ -1,7 +1,7 @@
 .bill-table thead tr{height: 4em; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
 .bill-table th{background-color: #2277da; color: #fff; text-align: center;}
 .bill-table td{line-height: 26px; padding: 8px 0; text-align: center; font-size: 14px; border-bottom: 1px solid #ccc;white-space:nowrap;overflow:hidden;}
-.bill-table td:nth-child(5){color: #ff5722; font-weight: bold;}
+/*.bill-table td:nth-child(5){color: #ff5722; font-weight: bold;}*/
 
 .bill-area .search{margin-top: 2em; margin-bottom: 2em; font-size: 15px;}
 .search input{padding: 0 5px; margin-left: 10px; margin-right: 30px;}
@@ -321,6 +321,15 @@ transform:translateY(3px);
 	width: 100%;
 }
 
+/*table thead 固定*/
+.fixedThead {
+	position: fixed;
+	top:50px;
+	height:56px;
+	width: 1100px;
+
+}
+
 thead tr {
 	height: 20px;
 	line-height: 20px;
@@ -466,8 +475,19 @@ tbody tr:hover {
 /*.bill-table tbody tr td:nth-child(1) span{display: inline-block; background: #ffb987; border-radius: 50%; color: #333; padding: 4px; width: 25px; height: 22px; line-height: 15px;}*/
 
 /**** 页码 样式 ****/
+.fixedBottom {
+	position: fixed;
+	bottom: 0px;
+	right: 100px;
+	width: 100%;
+	background-color: white;
+	margin-bottom: -10px;
+}
+
+
 .bottom-page {
-	margin: 3em 2em 5em;
+	/*margin: 3em 2em 5em;*/
+	margin: 1em 2em 0.5em;
 }
 
 .page-bottom {
@@ -547,3 +567,29 @@ tbody tr:hover {
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .fac-foot .btn-submit:hover{background: #ccc;}
+
+/*********************双日历样式********************************/
+/* 搜索日历样式 */
+.calendarPart{float:left;font-size: 14px; margin-left: 3em;}
+.calendarPart .span{float: left;}
+.ta_date{height: 26px; box-shadow: none; background: #fff; border-radius: 0; border-color: #aaa; margin-top: -2px;}
+.ta_date .date_title{font-size: 15px;}
+
+/*.search{float: left; font-size: 14px;}*/
+/*#searchRoomNum{margin-left: 1em; height: 24px; padding: 0 6px; width: 140px;}*/
+/*btnEdit{width: 100px; height: 26px; line-height: 12px; border-color: #999; margin-left: 4em; float: left; margin-top: -2px;}*/
+
+/* 双日历样式 */
+.calendarPart:before,.calendarPart:after {content:""; display:table;}
+.calendarPart:after{clear:both;}
+.calendarPart{zoom: 1;}
+.calendarPart .date{font-size: 14px; float: left; margin-right: 1em;}
+#date_demo3{border-right: none;}
+.ta_calendar_footer {height: 46px;}
+.ta_calendar table caption{line-height: 20px;}
+
+/*房间号输入框浮动样式*/
+.roomNumFloat {
+	float: left;
+}
+

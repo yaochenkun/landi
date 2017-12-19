@@ -3,12 +3,38 @@
 		$(this).removeClass("border-red");
 		$("#roomIdWarning").css("display","none");
 	});
+
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            //$("table thead ").css({"position":"fixed","top":0});
+            $("table thead tr").addClass("fixedThead");
+            $("table thead tr th,table td").css({"width":"56px","height":"56px"});
+            $("table thead tr th:nth-child(2),table td:nth-child(2)").css({"width":"87px"});
+            $("table thead tr th:nth-child(4),table td:nth-child(4)").css({"width":"72px"});
+            $("table thead tr th:nth-child(5),table td:nth-child(5)").css({"width":"72px"});
+            $("table thead tr th:nth-child(6),table td:nth-child(6)").css({"width":"146px"});
+            $("table thead tr th:nth-child(7),table td:nth-child(7)").css({"width":"146px"});
+            $("table thead tr th:nth-child(8),table td:nth-child(8)").css({"width":"93px"});
+            $("table thead tr th:nth-child(9),table td:nth-child(9)").css({"width":"134px"});
+            $("table thead tr th:nth-child(10),table td:nth-child(10)").css({"width":"134px"});
+            $("table thead tr th:nth-child(11),table td:nth-child(11)").css({"width":"104px"});
+
+        }else if(scroH < tableH){
+            $("table thead tr").removeClass("fixedThead");
+        }
+    })
+
 })();
 
 // 按房间号和日期查询接送机信息
 var searchBusPlane = function(pageNum){
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
 
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的车费信息");
 
@@ -29,6 +55,7 @@ var searchBusPlane = function(pageNum){
 				$("#busPlaneTbody").append("<tr><td colspan='11' style='color: #ff4d4d;'>没有相关信息！</td></tr>");
 				return;
 			} else {
+
 				for (var i = 0; i < data.pageList.length; i++) {
 					var perRecord = data.pageList[i];
 					var eventType = perRecord.type == "welcome" ? "接机" : "送机";
@@ -50,7 +77,10 @@ var searchBusPlane = function(pageNum){
 		        	"<span id='fare_totalpage'>"+ data.pageTotal +"</span>"+
 		            "<span class='page-next' onclick='requestNextBusPlane();'>&nbsp;&nbsp;下一页</span>" +
 		            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
-			}
+
+                $(".bottom").wrap("<div class='fixedBottom'></div>")
+
+            }
 		}
 	});
 };
@@ -250,7 +280,7 @@ var exportList = function(){
     
     //根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有接送机信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllFlightPickings.action',
@@ -307,7 +337,7 @@ var printList = function()
 
 	//根据当前房间号与日期编辑框的查询内容，请求所有记录（不分页）
 	var roomNum = $("#searchRoomNum").val();
-	var date = formatDateForm(new Date($(".pack_maintain").val()));
+	var date = $("#date_demo3").val();
 	console.log("查询房间号：" + roomNum + " 日期：" + date + "的所有接送机信息");
 	$.ajax({
 		url:'/LD/userRoom/searchAllFlightPickings.action',

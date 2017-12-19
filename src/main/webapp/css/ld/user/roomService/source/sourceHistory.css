@@ -1,0 +1,35 @@
+
+.bill-table th {
+    background-color: #2277da;
+    color: #fff;
+    text-align: center;
+    width:8.3% !important;
+}
+
+.label1 , .label2 {
+    margin-top: 20px;
+
+}
+
+.label2 {
+    margin-left:120px;
+}
+.key {
+    margin-left: 120px;
+}
+
+.value{
+    margin-left: 30px;
+}
+
+.label1:nth-child(1){
+    margin-left:120px;
+}
+
+.label2:nth-child(1){
+    margin-left:120px;
+}
+
+.label2 span:nth-child(3){
+    margin-left: 135px;
+}

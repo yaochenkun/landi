@@ -15,7 +15,6 @@
 </head>
 <body>
 	<jsp:include page="../_header.jsp"></jsp:include>
-	<jsp:include page="../_leftMenu.jsp" />
 	<jsp:include page="../_modal.jsp" />
 
 	<% String goodId = request.getParameter("goodId");%>
@@ -67,10 +66,16 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/office/shopDetail.js"></script>
 	<script type="text/javascript">
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        month = (month<10)?'0'+month:month;
+        var day = date.getDate();
+
 	    var dateRange = new pickerDateRange('date_demo3', {
 			isTodayValid : true,
-			startDate : '2017-01-01',
-			endDate : '2017-01-31',
+			startDate : year + '-' + month + '-' +'01',
+			endDate : year + '-' + month + '-' + day,
 			defaultText : ' 至 ',
 			theme : 'ta',
 			success : function(obj) {

@@ -1,5 +1,6 @@
 package org.ld.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +44,8 @@ public class RoomServiceImpl implements RoomService {
 	private DrinkingWaterMapper drinkingWaterMapper;
 	@Autowired
 	private CostLeMapper costLeMapper;
+	@Autowired
+	private SourcesMapper sourcesMapper;
 
 	@Override
 	public Room getRoomById(int id) {
@@ -131,7 +134,14 @@ public class RoomServiceImpl implements RoomService {
 	@Override
 	public List<RoomState> getAllRoomState() {
 		// TODO Auto-generated method stub
+		//只取roomState为1 的
 		return roomStateMapper.getAllRoomState();
+	}
+
+	@Override
+	public List<RoomState> getTotalRoomState() {
+
+		return roomStateMapper.getTotalRoomState();
 	}
 
 	@Override
@@ -227,14 +237,17 @@ public class RoomServiceImpl implements RoomService {
 		return roomPicMapper.insertSelective(roomPic);
 	}
 
-//	@Override
-//	public List<RoomMeter> getMeters(Integer rid, Integer type) {
-//		// TODO Auto-generated method stub
-//		HashMap<String, Integer> map = new HashMap<String, Integer>();
-//		map.put("ROOM_ID", rid);
-//		map.put("TYPE", type);
-//		return roomMeterMapper.getMeters(map);
-//	}
+	@Override
+	public List<RoomMeter> getMeters(Integer rid, String type ,int st,int eachPage) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ID", rid);
+		map.put("TYPE", type);
+		map.put("ST",st);
+		map.put("EACH",eachPage);
+
+		return roomMeterMapper.getMeters(map);
+	}
 //
 //	@Override
 //	public RoomMeter getMeter(String mn) {
@@ -287,35 +300,75 @@ public class RoomServiceImpl implements RoomService {
 			return 0;
 		}
 	}
-	
+
+	/*
+	洗衣费查询  liyidan
+	 */
 	@Override
-	public int totalLaundry(String rn, Date date) {
+	public int totalLaundry(String rn, String date) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		return laundryMapper.totalRec(map);
+		String startDate = date.split(" ")[0];
+		String endDate = date.split(" ")[2];
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			return laundryMapper.totalRec(map);
+
+		} catch (Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 
 	@Override
-	public List<Laundry> getLaundry(String rn, Date date, Integer st, Integer eachPage) {
+	public List<Laundry> getLaundry(String rn, String date, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		map.put("ST", st);
-		map.put("EACH", eachPage);
-		
-		return laundryMapper.getRec(map);
+		try{
+			String startDate = date.split(" ")[0];
+			String endDate = date.split(" ")[2];
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			map.put("ST", st);
+			map.put("EACH", eachPage);
+
+			return laundryMapper.getRec(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 	
 	@Override
-	public List<Laundry> getAllWashes(String rn, Date date) {
+	public List<Laundry> getAllWashes(String rn, String date) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("RN", rn);
-		map.put("DATE", date);
-		return laundryMapper.getAll(map);
+		try{
+			String startDate = date.split(" ")[0];
+			String endDate  = date.split(" ")[2];
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+
+			map.put("RN", rn);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE",end);
+			return laundryMapper.getAll(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	@Override
@@ -573,23 +626,48 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int getTotalFlightPickingByRoomNumber_Time(String roomNumber, Date time) {
+	public int getTotalFlightPickingByRoomNumber_Time(String roomNumber, String time) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("ROOM_NUMBER", roomNumber);
-		map.put("TIME", time);
-		return flightPickingMapper.getTotalByRoomNumber_Time(map);
+		try{
+			String start = time.split(" ")[0];
+			String end = time.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUMBER", roomNumber);
+			map.put("START_TIME", startDate);
+			map.put("END_TIME", endDate);
+
+			return flightPickingMapper.getTotalByRoomNumber_Time(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 
 	@Override
-	public List<FlightPicking> getFlightPickingByRoomNumber_Time(String roomNumber, Date time, int startPage, int eachPage) {
+	public List<FlightPicking> getFlightPickingByRoomNumber_Time(String roomNumber, String time, int startPage, int eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("ROOM_NUMBER", roomNumber);
-		map.put("TIME", time);
-		map.put("START_PAGE", startPage);
-		map.put("EACH_PAGE", eachPage);
-		return flightPickingMapper.selectByRoomNumber_Time(map);
+		try{
+			String start = time.split(" ")[0];
+			String end = time.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("ROOM_NUMBER", roomNumber);
+			map.put("START_TIME", startDate);
+			map.put("END_TIME", endDate);
+			map.put("START_PAGE", startPage);
+			map.put("EACH_PAGE", eachPage);
+			return flightPickingMapper.selectByRoomNumber_Time(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	@Override
@@ -620,11 +698,23 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<FlightPicking> getAllFlightPickings(String roomNumber, Date time) {
+	public List<FlightPicking> getAllFlightPickings(String roomNumber, String time) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("ROOM_NUMBER", roomNumber);
-		map.put("TIME", time);
-		return flightPickingMapper.getAll(map);
+		try{
+			String start = time.split(" ")[0];
+			String end = time.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUMBER", roomNumber);
+			map.put("START_TIME", startDate);
+			map.put("END_TIME", endDate);
+			return flightPickingMapper.getAll(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	
@@ -644,33 +734,71 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public int getTotalOtherFares(String roomNum, Date occurTime) {
+	public int getTotalOtherFares(String roomNum, String occurTime) {
 		// TODO Auto-generated method stub
-		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
-		return otherFareMapper.getTotal(map);
+		Map<String,Object> map = new HashMap<>();
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			return otherFareMapper.getTotal(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+
+
 	}
 
 	@Override
-	public List<OtherFare> getOtherFaresByPage(String roomNum, Date occurTime, int startPage, int eachPage) {
+	public List<OtherFare> getOtherFaresByPage(String roomNum, String occurTime, int startPage, int eachPage) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
-		map.put("START_PAGE", startPage);
-		map.put("EACH_PAGE", eachPage);
-		return otherFareMapper.getByPage(map);
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			map.put("START_PAGE", startPage);
+			map.put("EACH_PAGE", eachPage);
+			return otherFareMapper.getByPage(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
 	}
 	
 	@Override
-	public List<OtherFare> getAllOtherFares(String roomNum, Date occurTime) {
+	public List<OtherFare> getAllOtherFares(String roomNum, String occurTime) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
 
-		return otherFareMapper.getAll(map);
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			return otherFareMapper.getAll(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	@Override
@@ -728,35 +856,71 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<DrinkingWater> getDrinkingWatersByPage(String roomNum, Date occurTime, int startPage, int eachPage) {
+	public List<DrinkingWater> getDrinkingWatersByPage(String roomNum, String occurTime, int startPage, int eachPage) {
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
-		map.put("START_PAGE", startPage);
-		map.put("EACH_PAGE", eachPage);
-		
-		return drinkingWaterMapper.selectByPage(map);
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			map.put("START_PAGE", startPage);
+			map.put("EACH_PAGE", eachPage);
+
+			return drinkingWaterMapper.selectByPage(map);
+
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	@Override
-	public int getTotalDrinkingWaters(String roomNum, Date occurTime) {
+	public int getTotalDrinkingWaters(String roomNum, String occurTime) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
-		
-		return drinkingWaterMapper.selectTotal(map);
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			return drinkingWaterMapper.selectTotal(map);
+
+		}catch(Exception e ){
+			logger.error(e.getCause());
+			return 0;
+		}
+
 	}
 
 	@Override
-	public List<DrinkingWater> getAllDrinkingWaters(String roomNum, Date occurTime) {
+	public List<DrinkingWater> getAllDrinkingWaters(String roomNum, String occurTime) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<>();
-		map.put("ROOM_NUM", roomNum);
-		map.put("OCCUR_TIME", occurTime);
-		
-		return drinkingWaterMapper.selectAll(map);
+		try{
+			String start = occurTime.split(" ")[0];
+			String end = occurTime.split(" ")[2];
+			Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
+			Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
+
+			map.put("ROOM_NUM", roomNum);
+			map.put("START_OCCUR_TIME", startDate);
+			map.put("END_OCCUR_TIME", endDate);
+			return drinkingWaterMapper.selectAll(map);
+
+		}catch(Exception e ){
+			logger.error(e.getCause());
+			return null;
+		}
+
 	}
 
 	@Override
@@ -815,7 +979,75 @@ public class RoomServiceImpl implements RoomService {
 		
 		return 1;
 	}
-	
-	
-	
+
+	@Override
+	public List<RoomMeter> getRoomMeterByNumber(Integer roomId) {
+		return roomMeterMapper.getMetersByID(roomId);
+	}
+
+	@Override
+	public int updateRoomMeter(RoomMeter roomMeter) {
+		try {
+			return roomMeterMapper.updateByPrimaryKey(roomMeter);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+	@Override
+	public int getRoomMeterRow(Integer rn, String type) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ID", rn);
+		map.put("TYPE", type);
+		return roomMeterMapper.getTotalRow(map);
+	}
+
+	@Override
+	public List<RoomMeter> searchRoomMeter(String rn, String type, int st, int eachPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("ID", rn);
+		map.put("TYPE", type);
+		map.put("ST", st);
+		map.put("EACH", eachPage);
+
+		return roomMeterMapper.getMeters(map);
+	}
+
+	@Override
+	public RoomMeter getMeter(Integer ID, String type) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("ID",ID);
+		map.put("TYPE",type);
+
+		return roomMeterMapper.getMeter(map);
+	}
+
+	@Override
+	public List<RoomMeter> getMeterById(Integer id) {
+		return roomMeterMapper.getMeterById(id);
+	}
+
+	@Override
+	public RoomMeter getGasMeter(Integer ID, String type ,String meterNum) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("ID",ID);
+		map.put("TYPE",type);
+		map.put("METER",meterNum);
+
+		return roomMeterMapper.getOneGasMeter(map);
+	}
+
+	@Override
+	public int addSources(Sources s) {
+		try {
+			return sourcesMapper.insertSelective(s);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return 0;
+		}
+	}
+
+
 }

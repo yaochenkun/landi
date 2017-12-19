@@ -16,7 +16,6 @@
 </head>
 <body>
     <jsp:include page="../../_header.jsp" />
-    <jsp:include page="../../_leftMenu.jsp" />
 
     <% String type = request.getParameter("type");%>
     <%!
@@ -98,6 +97,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/plugin/printer/print.min.js"></script>
 
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>--%>
     <script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/expense/expenseLE.js"></script>
 
     <script type="text/javascript">

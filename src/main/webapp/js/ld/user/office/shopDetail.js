@@ -1,6 +1,22 @@
 // type 类型对应关系
 var map = {1:"买入",2:"卖出",3:"废弃"};
 
+(function(){
+	//表头固定
+		var tableH = $("table thead tr").offset().top;
+		$(window).scroll(function(){
+			var scrollH = $(this).scrollTop();
+			if(scrollH >= tableH){
+				$("table thead  tr").addClass("fixedThead");
+                $("table thead tr th,table td").css({"width":"206px","height":"51px"});
+                $("table thead tr th:nth-child(1),table td:nth-child(1)").css({"width":"275px"});
+			}else if(scrollH < tableH){
+				$("table thead tr").removeClass("fixedThead");
+			}
+		})
+	}
+  )();
+
 // 请求某商品销售记录
 var requestGoodDetail = function(pageNum){
 	var date = $("#date_demo3").text();
@@ -41,6 +57,8 @@ var requestGoodDetail = function(pageNum){
 	        	"<span id='shopDetail_totalpage'>"+ data.pageTotal +"</span>"+
 	            "<span class='page-next' onclick='requestNextGoodDetail();'>&nbsp;&nbsp;下一页</span>" +
 	            "&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+			$(".bottom").wrap("<div class='fixedBottom'></div>");
 		}
 	});
 };

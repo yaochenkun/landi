@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSON;
+//import com.sun.org.apache.xpath.internal.operations.String;
 import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 import org.ld.app.Config;
@@ -18,6 +19,7 @@ import org.ld.service.GuestMissionService;
 import org.ld.service.ReminderService;
 import org.ld.service.RoomService;
 import org.ld.service.UserService;
+import org.ld.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -95,11 +97,18 @@ public class GuestController {
 		JSONObject obj = objs.getJSONObject("guest");
 		try {
 
+			//检查该房间号是否输入正确
+			Room room = roomService.getRoomByNumber(obj.getString("STR_RommID"));
+			if(room == null){
+				ans.put("State","No-room");
+				return ans;
+			}
+
 			//先检查roomNumber房间是否已经有人入住 即free字段为1则不能添加
 			Integer state = roomService.getCertainRSbyRoomNumber(obj.getString("STR_RommID")).getSTATE();
 			if(state == 1) //已有人入住
 			{
-				ans.put("State", "该房间已有人入住");
+				ans.put("State", "Unaccessible");
 				return ans;
 			}
 
@@ -137,6 +146,7 @@ public class GuestController {
 			newGuest.setCOMPANY_PAYMODE(obj.getString("STR_CompanyPayMode"));
 
 
+			//guest 表添加
 			if (guestMissionService.addGuest(newGuest) == 1) {
 				newGuest = guestMissionService.getGuestByContract(obj.getString("STR_ContractID"));
 				System.out.println("Finish Guest");
@@ -428,6 +438,8 @@ public class GuestController {
 			}
 		}
 
+
+        //同步roomState 表
 		try{
 			Integer rid = roomService.getRoomByNumber(newGuest.getROOM_NUMBER()).getID();
 			RoomState rs = new RoomState();
@@ -443,7 +455,68 @@ public class GuestController {
 			guestMissionService.delGuest(newGuest.getID());
 			return ans;
 		}
-		
+
+		//同步room_meter 表,
+		List<RoomMeter> roomMeters;
+		try{
+			roomMeters = roomService.getRoomMeterByNumber(roomService.getRoomByNumber(newGuest.getROOM_NUMBER()).getID());
+			if(roomMeters.size() != 4){
+				ans.remove("State");
+				ans.put("State","Invalid:roomMeter error");
+			}else{
+				for(RoomMeter r : roomMeters){
+					if(r.getCUR_VAL() == null) r.setCUR_VAL(0.0);
+					r.setYEAR_INIT_VAL(r.getCUR_VAL());
+					r.setLAST_MONTH_VAL(r.getCUR_VAL());
+					String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+					String month = date.split("-")[1];
+					String pre = Util.preMonth(month);
+					r.setMONTH(Integer.parseInt(pre));
+					r.setSTEP(1);
+					r.setMONEY(0.0);
+					roomService.updateRoomMeter(r);
+				}
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			ans.remove("State");
+			ans.put("State", "Invalid: roomMeter Error");
+//			guestMissionService.delGuest(newGuest.getID());
+			return ans;
+		}
+
+		//同步source,为新入住用户自动添加上月结算记录（其实费用都是0）
+		try{
+			Sources s = new Sources();
+			s.setROOM_NUMBER(newGuest.getROOM_NUMBER());
+			s.setGUEST_NAME(newGuest.getGUEST_NAME());
+
+			for(RoomMeter r :roomMeters){
+				s.setTYPE(r.getTYPE());
+				s.setMETER(r.getMETER_NUMBER());
+				s.setCUR_MONTH_VAL(r.getCUR_VAL());
+				s.setMONEY(0.0);
+				s.setUPDATE_TIME(new Date());
+				s.setREADING_TIME(new Date());
+				Calendar c = Calendar.getInstance();
+				c.setTime(new Date());
+				c.add(Calendar.DAY_OF_MONTH,-1);
+
+				s.setMONTH(c.get(Calendar.MONTH)+1);
+				s.setSYS_STATE(1);
+				s.setUPDATE_TIME(new Date());
+				s.setREADING_TIME(new Date());
+				s.setLOG("入住");
+				roomService.addSources(s);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			ans.remove("State");
+			ans.put("State", "Invalid: sources Error");
+//			guestMissionService.delGuest(newGuest.getID());
+			return ans;
+		}
+
 		logger.info(curUser.getNAME() + " add new guest " + newGuest.getGUEST_NAME() + " in " + newGuest.getROOM_NUMBER());
 
 		//返回guestId作为之后上传3个扫描件文件命名使用 guestId_XX_MMMM
@@ -477,8 +550,21 @@ public class GuestController {
 			
 			int st = (pageNumber - 1) * eachPage;
 			List<Guest> record = guestMissionService.getGuestList(st, eachPage);
-
 			ans.put("pageList", record);
+
+			//为了向前端发 room_id
+			List<RoomState> rooms = roomService.getTotalRoomState();
+			Map<Object,Object> state = new HashMap<>();
+			Map<Object,Object> recordState = new HashMap<>();
+
+			for(RoomState r : rooms) {
+				state.put(r.getROOM_NUMBER(),r.getROOM_ID());
+			}
+
+			for(Guest g : record) {
+				recordState.put(g.getROOM_NUMBER(),state.get(g.getROOM_NUMBER()));
+			}
+			ans.put("roomState",recordState);
 		}
 
 		ans.put("pageNow", pageNumber);
@@ -520,6 +606,20 @@ public class GuestController {
 			int st = (pageNumber - 1) * eachPage;
 			List<Guest> record = guestMissionService.getGuestByName_RoomNumber(name, roomNumber, st, eachPage);
 			ans.put("pageList", record);
+
+			//为了向前端发 room_id
+			List<RoomState> rooms = roomService.getTotalRoomState();
+			Map<Object,Object> state = new HashMap<>();
+			Map<Object,Object> recordState = new HashMap<>();
+
+			for(RoomState r : rooms) {
+				state.put(r.getROOM_NUMBER(),r.getROOM_ID());
+			}
+
+			for(Guest g : record) {
+				recordState.put(g.getROOM_NUMBER(),state.get(g.getROOM_NUMBER()));
+			}
+			ans.put("roomState",recordState);
 		}
 		
 		ans.put("pageNow", pageNumber);

@@ -242,9 +242,6 @@ var addGuest = function(){
     }
 
 
-
-
-
 	// 获取租客信息
 	var name = $(".tab-content-guest .item-name input").eq(0).val(),
         guestType = $(".tab-content-guest .item-name input[type='radio']:checked").val(),
@@ -277,6 +274,8 @@ var addGuest = function(){
 		$(window).scrollTop(0);
 		return;
 	}
+
+
 
 	var company = $(".tab-content-guest .item-company input").eq(0).val(),
 		position = $(".tab-content-guest .item-company input").eq(1).val(),
@@ -635,9 +634,15 @@ var addGuest = function(){
 
                 showModalBox("success","添加成功！");
 
-        	} else{
+        	} else if(data.State == "No-room") {
+                showModalBox("error","房间号不存在！");
+
+            } else if(data.State == "Unaccessible") {
+                showModalBox("error", "房间正在使用！");
+            }
+            else
         		showModalBox("error","添加失败！");
-        	}
+
         }
 	});
 }

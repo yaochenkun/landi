@@ -108,6 +108,11 @@
   	select * from room_state where STATE != 0
   	]]>
   </select>
+  <select id="getTotalRoomState" resultMap="BaseResultMap">
+    <![CDATA[
+  	select * from room_state
+  	]]>
+  </select>
   <select id="getCertainRoomStateByID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     <![CDATA[
   	select * from room_state where STATE != 0 and ROOM_ID = #{RID,jdbcType=INTEGER}

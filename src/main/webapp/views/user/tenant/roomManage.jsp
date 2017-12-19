@@ -15,7 +15,6 @@
 </head>
 <body>
         <jsp:include page="../_header.jsp" />
-        <jsp:include page="../_leftMenu.jsp" />
 
         <!-- 三级导航栏 start-->
         <%--<div class="nav-second">--%>

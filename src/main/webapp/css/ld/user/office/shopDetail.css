@@ -100,3 +100,26 @@ header .homeMenu .span {
 .main-nav .menuOne i:nth-child(2), .main-nav .menuOne i:nth-child(3) {
 	margin-left: -5px;
 }
+
+/*表格固定*/
+.fixedBottom {
+	position: fixed;
+	bottom: 0px;
+	right: 100px;
+	width: 100%;
+	background-color: white;
+	margin-bottom: -10px;
+}
+
+.bottom-page {
+	margin:1em 2em 0.5em !important;
+}
+
+/*table thead 固定*/
+.fixedThead {
+	position: fixed;
+	top:50px;
+	height:56px;
+	width: 1100px;
+
+}

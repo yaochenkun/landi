@@ -187,22 +187,22 @@
   </update>
   <select id="getTotalRow" resultType="java.lang.Integer" parameterType="map">
     select count(*) from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "OCCUR_TIME != null">
-      and OCCUR_TIME = #{OCCUR_TIME}
+    <if test = "START_OCCUR_TIME != null">
+      and OCCUR_TIME >= #{START_OCCUR_TIME} and OCCUR_TIME &lt;= #{END_OCCUR_TIME}
     </if>
   </select>
   <select id="getShoesPolishingRange" resultMap="BaseResultMap" parameterType="map">
     select * from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "DATE != null">
-      and OCCUR_TIME = #{DATE}
+    <if test = "START_DATE != null">
+      and OCCUR_TIME >= #{START_DATE} and OCCUR_TIME &lt;= #{END_DATE}
     </if>
     order by ID
     limit #{ST}, #{EACH}
   </select>
   <select id="getAll" parameterType="map" resultMap="BaseResultMap">
     select * from shoes_polishing where ROOM_NUM like CONCAT('%', #{RN}, '%')
-    <if test = "OCCUR_TIME != null">
-      and OCCUR_TIME = #{OCCUR_TIME}
+    <if test = "START_OCCUR_TIME != null">
+      and OCCUR_TIME >= #{START_OCCUR_TIME} and OCCUR_TIME &lt;= #{END_OCCUR_TIME}
     </if>
   </select>
 </mapper>

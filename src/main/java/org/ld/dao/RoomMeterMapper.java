@@ -2,7 +2,9 @@ package org.ld.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.ld.model.Room;
 import org.ld.model.RoomMeter;
 
 public interface RoomMeterMapper {
@@ -19,7 +21,16 @@ public interface RoomMeterMapper {
 	int updateByPrimaryKey(RoomMeter record);
 
 	// add
-	List<RoomMeter> getMeters(HashMap<String, Integer> map);
+	List<RoomMeter> getMeters(HashMap<String, Object> map);
 
-	RoomMeter getMeter(String MN);
+	RoomMeter getMeter(Map<String,Object> map);
+
+	RoomMeter getOneGasMeter(Map<String,Object> map);
+
+	List<RoomMeter> getMetersByID(Integer ROOM_ID);
+
+	int getTotalRow(Map<String, Object> map);
+
+//	List<RoomMeter> getRoomMeterRange(Map<String, Object> map);
+	List<RoomMeter> getMeterById(Integer ID);
 }

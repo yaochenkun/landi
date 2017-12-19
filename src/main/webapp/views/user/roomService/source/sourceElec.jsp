@@ -14,8 +14,6 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
-	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 start -->
 	<div class="main">
@@ -26,7 +24,7 @@
 					href="sourceIndex.jsp">能源费结算</a> <i class="icon-path"></i> <a
 					href="sourceElec.jsp">电费</a>
 			</div>
-			<a class="btn btn-new btnnew" href="sourceNew.jsp?type=elec">新增电费记录</a>
+			<%--<a class="btn btn-new btnnew" href="sourceNew.jsp?type=elec">新增电费记录</a>--%>
 			<div class="bill-area">
 				<input type="text" class="search-input" id="roomNumber" placeholder="房间号..." />
 				<a class="btn btn-edit btnSearch" onclick="requestElec($('#roomNumber').val(),parseInt(1))">搜索</a>
@@ -36,12 +34,16 @@
 						<thead>
 							<tr>
 								<th><span>房间号</span></th>
-								<th><span>客户姓名</span></th>
+								<th><span>租客姓名</span></th>
 								<th><span>表号</span></th>
-								<th><span>上月表数</span></th>
-								<th><span>抄表</span></th>
+								<th><span>初始表数</span></th>
+								<th><span>上次表数</span></th>
+								<th><span>月份</span></th>
 								<th><span>费用</span></th>
-								<th><span>抄表日期</span></th>
+								<th><span>当前阶数</span></th>
+								<th><span>抄表</span></th>
+								<th><span>费用查看</span></th>
+								<th><span>历史查看</span></th>
 							</tr>
 						</thead>
 						<tbody id="elecTbody"></tbody>
@@ -60,7 +62,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/public.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
+	<%--<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>--%>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/source/sourceElec.js"></script>
 	<script type="text/javascript">
 	    // 拉取第一页电费信息

@@ -245,11 +245,11 @@ var updateServiceTakeawayEdit = function(id){
 	});
 };
 /****************************擦鞋********************************/
-var auto_sum = function(){
-	var count = $("#count").val();
-	var sum = parseInt(count)*10;     //默认一双鞋10元   ???
-	$("#sum").val(sum);
-}
+// var auto_sum = function(){
+// 	var count = $("#count").val();
+// 	var sum = parseInt(count)*10;     //默认一双鞋10元   ???
+// 	$("#sum").val(sum);
+// }
 
 var addservice_ShoeCleaning = function(){
     // 判断房间号是否为空
@@ -486,4 +486,35 @@ var updateServiceShoppingEdit = function(id){
 			}
 		}
 	});
+}
+
+
+/*********************擦鞋费金额*********************************/
+var associateCleaningShoesSum = function() {
+	var count = $("#count").val();
+	var end = isNaN(parseInt(count))? 0:parseInt(count);
+	$("#count").val(end);
+
+
+	var room = $("#serviceRoomNumber").val();
+
+	if(room != "" && end != 0){
+		$.ajax({
+			url:'/LD/userRoom/searchShoeCleaningPrice.action',
+			type:'post',
+			contentType:"application/json",
+			dataType:'json',
+			data:'{"roomNum":"' + room + '"}',
+			success:function(data){
+				console.log(data)
+				if(data == 0 ){
+					//console.log("arrive 1")
+				}else{
+					var sum = data * $("#count").val();
+					$("#sum").val(sum);
+				}
+			}
+
+		});
+	}
 }

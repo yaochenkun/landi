@@ -1,3 +1,23 @@
+(function(){
+    //表头固定 lyd
+    var tableH = $("table thead tr").offset().top;
+    console.log(tableH)
+    $(window).scroll(function(){
+        var scroH = $(this).scrollTop();
+
+        if(scroH >= tableH){
+            //$("table thead ").css({"position":"fixed","top":0});
+            $("table thead tr").addClass("fixedThead");
+            $("table thead tr th,table td").css({"width":"84px","height":"51px"});
+            $("table thead tr th:nth-child(5),table td:nth-child(5)").css({"width":"108px"});
+            $("table thead tr th:nth-child(9),table td:nth-child(9)").css({"width":"144px"});
+
+        }else if(scroH < tableH){
+            $("table thead tr").removeClass("fixedThead");
+        }
+    })
+})();
+
 // 请求租客列表
 var requestGuestList = function (pageNum) {
 	console.log("请求第" + pageNum + "页租客信息");
@@ -10,7 +30,7 @@ var requestGuestList = function (pageNum) {
 		success:function(data){
 			console.log(data);
 			// 将租客信息添加到表格中
-			addGuestTable(data.recordTotal, data.pageList);
+			addGuestTable(data.recordTotal, data.pageList,data.roomState);
 
 			// 添加租客列表 底部页码
 			$("#guestListBottom").append("<div class='bottom-page'>"+
@@ -20,6 +40,8 @@ var requestGuestList = function (pageNum) {
         		"<span id='guestList_totalpage'>"+ data.pageTotal +"</span>"+
             	"<span class='page-next' onclick='requestNextGuestList();'>&nbsp;&nbsp;下一页</span>" +
             	"&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+            $(".bottom").wrap("<div class='fixedBottom'></div>");
 		}
 	});
 };
@@ -169,7 +191,7 @@ var searchGuestByName = function(roomId, guestName, pageNum){
 		success:function(data){
 			console.log(data);
 			// 添加租客信息至页面中
-			addGuestTable(data.recordTotal, data.pageList);
+			addGuestTable(data.recordTotal, data.pageList,data.roomState);
 
 			$("#guestListBottom").append("<div class='bottom-page'>"+
         		"<span class='page-before' onclick='searchBeforeGuestByName();'>上一页&nbsp;&nbsp;</span>"+
@@ -178,6 +200,8 @@ var searchGuestByName = function(roomId, guestName, pageNum){
         		"<span id='guestList_totalpage'>"+ data.pageTotal +"</span>"+
             	"<span class='page-next' onclick='searchNextGuestByName();'>&nbsp;&nbsp;下一页</span>" +
             	"&nbsp;&nbsp;&nbsp;&nbsp;共<span class='recordTotal'>&nbsp;"+ data.recordTotal +"&nbsp;</span>条记录</div>");
+
+			$(".bottom").wrap("<div class='fixedBottom'></div>");
 		}
 	});
 }
@@ -197,7 +221,7 @@ var searchNextGuestByName = function(){
 
 
 // 向页面中添加租客信息
-var addGuestTable = function(recordTotal, pageList){
+var addGuestTable = function(recordTotal, pageList, state){
 	// 清空列表和页码
 	$("#guestListTbody").html("");
 	$("#guestListBottom").html("");	
@@ -220,6 +244,7 @@ var addGuestTable = function(recordTotal, pageList){
 			"<td>"+ perRecord.persons + "</td><td>"+ perRecord.parking +"</td>"+
 			"<td>"+ perRecord.charge + "&nbsp;元</td><td>"+ checkIn +"</td>"+  
 			"<td>"+ checkOut + "</td><td>"+ perRecord.comment +"</td>"+
-			"<td><span class='detail'>详情</span></td></tr>");
+			"<td><span><a class='detail' href='roomGuest.jsp?rid=" + state[perRecord.room_NUMBER] + "&rNum=" + perRecord.room_NUMBER +
+			"'>详情</a></span></td></tr>");
 	}	
 }
