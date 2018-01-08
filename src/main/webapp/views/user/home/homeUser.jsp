@@ -53,17 +53,30 @@
 				<span id="roleTypeNum" style="display: none;">${curUser.ROLE}</span>
 			</h5>
 			<div class="btn btn-change btnchange" style="margin-right: 120px;">
-				<a onclick="showEditPasswordModal();">客房报修</a>
+				<a href="${pageContext.request.contextPath}/views/user/roomItem/assetRepairNewByOutsider.jsp">客房报修</a>
 			</div>
 			<div class="btn btn-change btnchange">
-				<a onclick="showEditPasswordModal();">紧急事件申报</a>
+				<a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainEmergencyNew.jsp">紧急事件申报</a>
 			</div>
 		</div>
 	</div>
 	<div class="content">
 		<div class="detail">
 
-			<%--<div class="detail-head">
+
+
+
+			<%--<div class="title">--%>
+				<%--<div class="right">--%>
+					<%--<a class="span" href="service/serviceIndex.jsp">客房服务</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="maintain/maintainIndex.jsp">客房维修</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="source/sourceIndex.jsp">能源费结算</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="javascript:void(0);">客房费用结算</a>&nbsp;|&nbsp;--%>
+					<%--<a class="span" href="affairReminder/affairReminderIndex.jsp">事务提醒</a>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+
+			<div class="detail-head">
 				<span>功能菜单</span>
 			</div>
 
@@ -107,8 +120,8 @@
 				</div>
 				<div class="content-title content-title-index">
 					<ul>
-						<li><a href="maintain/maintainNew.jsp">报修处理</a></li>
-						<li><a href="#">检查检修</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomItem/assetRepairOverview.jsp">报修处理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainCheck.jsp">检查检修</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainManage.jsp">维修管理</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainStat.jsp">维修统计</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomItem/itemIndex.jsp">客房物品管理</a></li>
@@ -155,7 +168,7 @@
 						<li><a href="#">收支一览表</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseStatistics.jsp">客房费用统计</a></li>
 						<%--<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseLE.jsp?type=welfare">LE承担费用</a></li>--%>
-	<%--				</ul>
+					</ul>
 				</div>
 				<!-- 客房费用结算 end -->
 
@@ -174,49 +187,14 @@
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/mailboxIndex.jsp">站内信</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/diaryOverview.jsp">备忘录</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomItem/planList.jsp">物品申请</a></li>
-						<li><a href="#">紧急事件处理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/maintain/maintainEmergencyDealing.jsp">紧急事件处理</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/affairReminder/systemOverview.jsp">公告</a></li>
 
 					</ul>
 				</div>
 				<!-- 客房费用结算 end -->
-			</div>--%>
+			</div>
 
-				<div class="detail-head">
-					<span>个人信息</span>
-				</div>
-				<div class="detail-body">
-					<dl>
-						<dt>用户名</dt>
-						<dd>${curUser.USERNAME}</dd>
-						<dt>姓名</dt>
-						<dd>${curUser.NAME}</dd>
-						<dt>工号</dt>
-						<dd>${curUser.NUM}</dd>
-						<dt>部门</dt>
-						<dd>${curUser.DEPART}</dd>
-						<%
-							User curUser = (User)session.getAttribute("curUser");
-							Date ctime = curUser.getCTIME();
-							Date ltime = curUser.getLTIME();
-
-							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-							String createLocalDate = sdf.format(ctime);
-							String loginLocalDate = sdf.format(ltime);
-
-							String stateString = "";
-							int state = curUser.getSTATE();
-							if(state==1)  stateString = "正常";
-							else if(state == 10) stateString = "禁用";
-						%>
-						<dt>创建用户时间</dt>
-						<dd><%= createLocalDate %></dd>
-						<dt>最近登录时间</dt>
-						<dd><%= loginLocalDate %></dd>
-						<dt>状态</dt>
-						<dd><%= stateString %></dd>
-					</dl>
-				</div>
 
 				<div class="detail-head">
 					<span>事务提醒</span>
@@ -248,6 +226,47 @@
 				</div>
 
 
+
+
+
+
+
+			<div class="detail-head">
+				<span>个人信息</span>
+			</div>
+			<div class="detail-body">
+				<dl>
+					<dt>用户名</dt>
+					<dd>${curUser.USERNAME}</dd>
+					<dt>姓名</dt>
+					<dd>${curUser.NAME}</dd>
+					<dt>工号</dt>
+					<dd>${curUser.NUM}</dd>
+					<dt>部门</dt>
+					<dd>${curUser.DEPART}</dd>
+					<% 
+						User curUser = (User)session.getAttribute("curUser");
+                    	Date ctime = curUser.getCTIME();
+                    	Date ltime = curUser.getLTIME();
+                       
+                       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                       String createLocalDate = sdf.format(ctime);
+                       String loginLocalDate = sdf.format(ltime);
+                       
+                       String stateString = "";
+                       int state = curUser.getSTATE();
+                       if(state==1)  stateString = "正常";
+                       else if(state == 10) stateString = "禁用";
+                       %>
+					<dt>创建用户时间</dt>
+					<dd><%= createLocalDate %></dd>
+					<dt>最近登录时间</dt>
+					<dd><%= loginLocalDate %></dd>
+					<dt>状态</dt>
+					<dd><%= stateString %></dd>
+				</dl>
+			</div>
+
 			<div class="detail-operation" style="margin-top: 40px;">
 				<div class="btn btn-change btnchange">
 					<a onclick="showEditPasswordModal();">修改密码</a>
@@ -258,12 +277,6 @@
 			<div class="detail-operation">
 				<div class="btn btn-change btnchange">
 					<a href="${pageContext.request.contextPath}/logout.action">退出系统</a>
-				</div>
-			</div>
-				<!-- temp-->
-			<div class="detail-operation" style="margin-top: 40px;">
-				<div class="btn btn-change btnchange">
-					<a href="${pageContext.request.contextPath}/views/user/home/opeMenu.jsp">进入</a>
 				</div>
 			</div>
 
@@ -339,6 +352,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/moment.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/plugin/clndr/clndr.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/home/home.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/ld/user/roomService/roomService.js"></script>
 	<script type="text/javascript">
 
 

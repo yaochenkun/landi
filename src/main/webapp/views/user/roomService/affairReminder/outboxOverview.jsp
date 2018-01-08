@@ -18,7 +18,7 @@
 <body>
 
 	<jsp:include page="../../_header.jsp" />
-	<jsp:include page="../../_leftMenu.jsp" />
+
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -51,6 +51,7 @@
 								<th><span>提醒时间</span></th>
 								<th><span>发件时间</span></th>
 								<th><span>完成情况</span></th>
+								<th><span>信件状态</span></th>
 								<th><span>操作</span></th>
 							</tr>
 						</thead>

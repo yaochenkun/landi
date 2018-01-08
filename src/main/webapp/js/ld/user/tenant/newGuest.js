@@ -229,17 +229,17 @@ var changeTabContent = function(index){
 // 添加租客
 var addGuest = function(){
 
-	//检查扫描件是否上传了
-	if($(".item-LE .fileName").text().trim() == ""){
-        showModalBox("error","请上传LE条件书！");
-        return;
-	} else if($(".item-SPC .fileName").text().trim() == ""){
-        showModalBox("error","请上传SPC条件书！");
-        return;
-    } else if($(".item-guestID .fileName").text().trim() == ""){
-        showModalBox("error","请上传客人证件！");
-        return;
-    }
+    // //检查扫描件是否上传了
+    // if($(".item-LE .fileName").text().trim() == ""){
+    //     showModalBox("error","请上传LE条件书！");
+    //     return;
+    // } else if($(".item-SPC .fileName").text().trim() == ""){
+    //     showModalBox("error","请上传SPC条件书！");
+    //     return;
+    // } else if($(".item-guestID .fileName").text().trim() == ""){
+    //     showModalBox("error","请上传客人证件！");
+    //     return;
+    // }
 
 
 	// 获取租客信息
@@ -300,7 +300,7 @@ var addGuest = function(){
         companyInvoice = $(".tab-content-guest .item-companyaccount input").eq(1).val(),
         companyPayMode = $(".tab-content-guest .item-companypay input[type='radio']:checked").val();
 
-	let guestData = '"guest":{"STR_Name":"'+ name +'","BOOL_Checkin":'+ checkin +',"STR_RommID":"'+ roomID +'","STR_Type":"'+ type +'",'
+	var guestData = '"guest":{"STR_Name":"'+ name +'","BOOL_Checkin":'+ checkin +',"STR_RommID":"'+ roomID +'","STR_Type":"'+ type +'",'
 		    +'"STR_ContractID":"'+ contractID +'","STR_Tel":"'+ tel +'","STR_Company":"'+ company +'",'
 		    +'"STR_Position":"'+ position +'","INT_GuestNumber":'+ guestNumber +','
 		    +'"STR_TimeIn":"'+ timeIn +'","STR_TimeOut":"'+ timeOut +'","DOU_Rent":'+ rent +',"STR_Carport":"'+ carport +'",'
@@ -328,13 +328,21 @@ var addGuest = function(){
 		heating = $(".tab-content-owner .item-spc input").eq(1).val(),
 		otherMoney = $(".tab-content-owner .item-othermoney input").eq(0).val(),
 		actualReturn = $(".tab-content-owner .item-othermoney input").eq(1).val(),
-        account = $(".tab-content-owner .item-account input").eq(0).val();
+        account = $(".tab-content-owner .item-account input").eq(0).val(),
 
-	let hostData = '"host":{"STR_Name":"'+ Name +'","DOU_Rent":'+ Rent +',"DOU_Service":'+ Service +','
+		spc_recover = $(".tab-content-owner .item-heating-spc-recover input[name='spcRecover']:checked").val(),
+        heating_recover = $(".tab-content-owner .item-heating-spc-recover input[name='heatingRecover']:checked").val(),
+		account_comment = $(".tab-content-owner .item-account input").eq(1).val();
+
+
+	var hostData = '"host":{"STR_Name":"'+ Name +'","DOU_Rent":'+ Rent +',"DOU_Service":'+ Service +','
         	+'"DOU_SignReturn":'+ signReturn +',"DOU_Taxes":'+ taxes +','
         	+'"DOU_SPC":'+ spc +',"DOU_Heating":'+ heating +','
         	+'"STR_Account":"'+ account +'","STR_IDNumber":"'+ IDNumber +'",'
         	+'"STR_Type":"'+ Type +'",'
+        	+'"STR_SPCRecover":"'+ spc_recover +'",'
+        	+'"STR_HeatingRecover":"'+ heating_recover +'",'
+        	+'"STR_AccountComment":"'+ account_comment +'",'
 		    +'"DOU_ActualReturn":'+ actualReturn +',"DOU_OtherMoney":'+ otherMoney +'},';
     console.log(hostData);
 
@@ -349,29 +357,24 @@ var addGuest = function(){
 		LEThird = Number($(".tab-content-agency .item-third input").eq(1).val()),
 		LEFourth = Number($(".tab-content-agency .item-fourth input").eq(1).val());
 
-	let internData = '"intern":{"STR_Company":"'+ agentCompany +'","DOU_AgentFirst":'+ agentFirst +',"DOU_AgentSecond":'+ agentSecond +','
+	var internData = '"intern":{"STR_Company":"'+ agentCompany +'","DOU_AgentFirst":'+ agentFirst +',"DOU_AgentSecond":'+ agentSecond +','
 		    +'"DOU_AgentThird":'+ agentThird +',"DOU_AgentFourth":'+ agentFourth +',"DOU_LEFirst":'+ LEFirst +','
 		    +'"DOU_LESecond":'+ LESecond +',"DOU_LEThird":'+ LEThird +',"DOU_LEFourth":'+ LEFourth +'},';
 
 
 	// 获取房款收付信息
-	var RentNumber = formatDateForm(new Date($(".tab-content-housepay .item-rent .item-date input").eq(0).val())),
-		RentCycle = Number($(".tab-content-housepay .item-rent .item-cycle input").eq(0).val()),
-		RentWay = $(".tab-content-housepay .item-rent .item-cycle input").eq(1).val(),
-		ReturnNumber = formatDateForm(new Date($(".tab-content-housepay .item-return .item-date input").eq(0).val())),
-		ReturnCycle = Number($(".tab-content-housepay .item-return .item-cycle input").eq(0).val()),
-		BillNumber = formatDateForm(new Date($(".tab-content-housepay .item-bill .item-date input").eq(0).val())),
-		BillCycle = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(0).val()),
-		BillTime = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(1).val()),
+
+	var RentCycle = Number($(".tab-content-housepay .item-rent .item-cycle input").eq(0).val()) * 12 + Number($(".tab-content-housepay .item-rent .item-cycle input").eq(1).val()),
+		RentWay = $(".tab-content-housepay .item-rent .item-paymode input").eq(0).val(),
+		ReturnCycle = Number($(".tab-content-housepay .item-return .item-cycle input").eq(0).val()) * 12 + Number($(".tab-content-housepay .item-return .item-cycle input").eq(1).val()),
+        BillCycle = Number($(".tab-content-housepay .item-bill .item-cycle input").eq(0).val()) * 12 + Number($(".tab-content-housepay .item-bill .item-cycle input").eq(1).val()),
 		BeginDate = formatDateForm(new Date($(".tab-content-housepay .item-beginenddate .item-begindate input").val())),
 		EndDate = formatDateForm(new Date($(".tab-content-housepay .item-beginenddate .item-enddate input").val()));
 
-
-
-	let rentData = '"balance":{"STR_RentNumber":"'+ RentNumber +'","INT_RentCycle":'+ RentCycle +',"STR_RentWay":"'+ RentWay +'",'
-            +'"STR_ReturnNumber":"'+ ReturnNumber +'","INT_ReturnCycle":'+ ReturnCycle +','
+	var rentData = '"balance":{"INT_RentCycle":'+ RentCycle +',"STR_RentWay":"'+ RentWay +'",'
+            +'"INT_ReturnCycle":'+ ReturnCycle +','
         	+'"STR_BeginDate":"'+ BeginDate +'","STR_EndDate":"'+ EndDate +'",'
-		    +'"STR_BillNumber":"'+ BillNumber +'","INT_BillCycle":'+ BillCycle +',"INT_BillTime":'+ BillTime +'},';
+		    +'"INT_BillCycle":'+ BillCycle + '},';
 
 		console.log(rentData);
 
@@ -388,7 +391,7 @@ var addGuest = function(){
 		IntGiveMoney = Number($(".tab-content-service .col-Int input[type='checkbox']").attr('giveMoney')),
 		IntGiveComment = $(".tab-content-service .col-Int input[type='checkbox']").attr('giveComment');
 
-	let IntData = '"DOU_LECharge":'+ IntLECharge +',"INT_LECount":'+ IntLECount +','
+	var IntData = '"DOU_LECharge":'+ IntLECharge +',"INT_LECount":'+ IntLECount +','
 		    +'"DOU_SPCCharge":'+ IntSPCCharge +',"INT_SPCCount":'+ IntSPCCount+','
 		    +'"INT_Cycle":'+ IntCycle +',"STR_Note":"'+ IntNote +'","BOOL_Give":'+ IntGive + ',"DOU_GiveMoney":'+ IntGiveMoney+ ',"STR_GiveComment":"'+ IntGiveComment +'"';
 
@@ -407,7 +410,7 @@ var addGuest = function(){
         resourceGiveComment = serviceResourceInput.eq(7).attr('giveComment');
 
 
-	let resourceData = '"BOOL_Selfpay":'+ resourceSelfpay+','
+	var resourceData = '"BOOL_Selfpay":'+ resourceSelfpay+','
 			+'"DOU_LECharge":'+ resourceLECharge +',"INT_LECount":'+ resourceLECount +','
 		    +'"DOU_SPCCharge":'+ resourceSPCCharge +',"INT_SPCCount":'+ resourceSPCCount+','
 		    +'"INT_Cycle":'+ resourceCycle +',"STR_Note":"'+ resourceNote +'","BOOL_Give":'+ resourceGive + ',"DOU_GiveMoney":'+ resourceGiveMoney+ ',"STR_GiveComment":"'+ resourceGiveComment +'"';
@@ -424,7 +427,7 @@ var addGuest = function(){
 		breakfastGiveMoney = Number($(".tab-content-service .col-breakfast input[type='checkbox']").attr('giveMoney')),
 		breakfastGiveComment = $(".tab-content-service .col-breakfast input[type='checkbox']").attr('giveComment');
 
-	let breakfastData = '"DOU_LECharge":'+ breakfastLECharge +',"INT_LECount":'+ breakfastLECount +','
+	var breakfastData = '"DOU_LECharge":'+ breakfastLECharge +',"INT_LECount":'+ breakfastLECount +','
 		    +'"DOU_SPCCharge":'+ breakfastSPCCharge +',"INT_SPCCount":'+ breakfastSPCCount+','
 		    +'"INT_Cycle":'+ breakfastCycle +',"STR_Note":"'+ breakfastNote +'","BOOL_Give":'+ breakfastGive + ',"DOU_GiveMoney":'+ breakfastGiveMoney+ ',"STR_GiveComment":"'+ breakfastGiveComment +'"';
 
@@ -440,7 +443,7 @@ var addGuest = function(){
 		parkGiveMoney = Number($(".tab-content-service .col-park input[type='checkbox']").attr('giveMoney')),
 		parkGiveComment = $(".tab-content-service .col-park input[type='checkbox']").attr('giveComment');
 
-	let parkData = '"DOU_LECharge":'+ parkLECharge +',"INT_LECount":'+ parkLECount +','
+	var parkData = '"DOU_LECharge":'+ parkLECharge +',"INT_LECount":'+ parkLECount +','
 		    +'"DOU_SPCCharge":'+ parkSPCCharge +',"INT_SPCCount":'+ parkSPCCount+','
 		    +'"INT_Cycle":'+ parkCycle +',"STR_Note":"'+ parkNote +'","BOOL_Give":'+ parkGive + ',"DOU_GiveMoney":'+ parkGiveMoney+ ',"STR_GiveComment":"'+ parkGiveComment +'"';
 
@@ -456,7 +459,7 @@ var addGuest = function(){
 		tvGiveMoney = Number($(".tab-content-service .col-tv input[type='checkbox']").attr('giveMoney')),
 		tvGiveComment = $(".tab-content-service .col-tv input[type='checkbox']").attr('giveComment');
 
-	let tvData = '"DOU_LECharge":'+ tvLECharge +',"INT_LECount":'+ tvLECount +','
+	var tvData = '"DOU_LECharge":'+ tvLECharge +',"INT_LECount":'+ tvLECount +','
 		    +'"DOU_SPCCharge":'+ tvSPCCharge +',"INT_SPCCount":'+ tvSPCCount+','
 		    +'"INT_Cycle":'+ tvCycle +',"STR_Note":"'+ tvNote +'","BOOL_Give":'+ tvGive + ',"DOU_GiveMoney":'+ tvGiveMoney+ ',"STR_GiveComment":"'+ tvGiveComment +'"';
 
@@ -474,7 +477,7 @@ var addGuest = function(){
 
 
 
-	let newspaperData = '"DOU_LECharge":'+ newspaperLECharge +',"INT_LECount":'+ newspaperLECount +','
+	var newspaperData = '"DOU_LECharge":'+ newspaperLECharge +',"INT_LECount":'+ newspaperLECount +','
 		    +'"DOU_SPCCharge":'+ newspaperSPCCharge +',"INT_SPCCount":'+ newspaperSPCCount+','
 		    +'"INT_Cycle":'+ newspaperCycle +',"STR_Note":"'+ newspaperNote +'","BOOL_Give":'+ newspaperGive + ',"DOU_GiveMoney":'+ newspaperGiveMoney+ ',"STR_GiveComment":"'+ newspaperGiveComment +'"';
 
@@ -489,7 +492,7 @@ var addGuest = function(){
         clothGiveMoney = Number($(".tab-content-service .col-cloth input[type='checkbox']").attr('giveMoney')),
         clothGiveComment = $(".tab-content-service .col-cloth input[type='checkbox']").attr('giveComment');
 
-	let clothData = '"DOU_LECharge":'+ clothLECharge +',"INT_LECount":'+ clothLECount +','
+	var clothData = '"DOU_LECharge":'+ clothLECharge +',"INT_LECount":'+ clothLECount +','
 		    +'"DOU_SPCCharge":'+ clothSPCCharge +',"INT_SPCCount":'+ clothSPCCount+','
 		    +'"INT_Cycle":'+ clothCycle +',"STR_Note":"'+ clothNote +'","BOOL_Give":'+ clothGive + ',"DOU_GiveMoney":'+ clothGiveMoney+ ',"STR_GiveComment":"'+ clothGiveComment +'"';
 
@@ -566,7 +569,7 @@ var addGuest = function(){
 
 
 	// 新增加的项目
-	let addData = "";
+	var addData = "";
     if((".col-add").length!=0){
     	for(var i=1; i<=$(".col-add").length; i++){
     		var A = $(".col-add").eq(i-1).children("td").children("input");
@@ -629,10 +632,12 @@ var addGuest = function(){
 				//将guesteId放置于input中
 				$("#guestId").val(guestId);
 
+                alert("添加成功！");
+
 				//触发上传提交图片
 				$("#requestUploadBtn").trigger("click");
 
-                showModalBox("success","添加成功！");
+
 
         	} else if(data.State == "No-room") {
                 showModalBox("error","房间号不存在！");
@@ -670,10 +675,12 @@ var calActualReturn = function() {
 
 var clickXiaoYeZhu = function() {
 	$("#xiaoyezhuName").show();
+    $(".item-heating-spc-recover").show();
 }
 
 var clickSPC = function() {
     $("#xiaoyezhuName").hide();
+    $(".item-heating-spc-recover").hide();
 }
 
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2017-07-20 21:33:16
+Date: 2017-12-25 11:54:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `agent_purchase` (
   `IMPORT_TIME` datetime DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of agent_purchase
@@ -48,6 +48,8 @@ INSERT INTO `agent_purchase` VALUES ('5', 'W11-1', '49', 'Ada5', '无', '0', '0'
 INSERT INTO `agent_purchase` VALUES ('6', 'W7-3', '50', '测', '无', '0', '0', '0', '0', '无', '0', '请选择', '2017-06-12 00:00:00', '2017-06-12 21:54:28', '2017-06-12 21:54:28');
 INSERT INTO `agent_purchase` VALUES ('7', 'W33-2', '54', 'Ada', '无', '0', '0', '0', '0', '无', '0', '请选择', '2017-06-11 00:00:00', '2017-06-12 21:57:32', '2017-06-12 21:57:32');
 INSERT INTO `agent_purchase` VALUES ('8', 'W11-1', '49', 'Ada5', '无', '0', '0', '0', '0', '无', '11', 'test', '2017-06-14 00:00:00', '2017-06-14 12:08:51', '2017-06-14 12:09:01');
+INSERT INTO `agent_purchase` VALUES ('9', 'W33-3', '105', 'Ada', '无', '0', '0', '0', '0', '无', '0', '请选择', '2017-10-29 00:00:00', '2017-10-29 19:39:46', '2017-10-29 19:39:46');
+INSERT INTO `agent_purchase` VALUES ('10', 'W33-3', '105', 'Ada', '无', '0', '0', '0', '0', '无', '0', '请选择', '2017-10-29 00:00:00', '2017-10-29 19:39:48', '2017-10-29 19:39:48');
 
 -- ----------------------------
 -- Table structure for `contract_income`
@@ -84,7 +86,7 @@ CREATE TABLE `cost_le` (
   `TYPE` varchar(64) DEFAULT NULL COMMENT '表示福利费，还是安抚费 ',
   `STATE` int(3) DEFAULT NULL COMMENT '1 表示数据有效，0 表示数据无效',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cost_le
@@ -94,6 +96,16 @@ INSERT INTO `cost_le` VALUES ('13', 'W33-3', 'Ada', '', '', '', '', '2017-07-12 
 INSERT INTO `cost_le` VALUES ('14', 'W33-3', 'Ada', '', '', '', '', '2017-07-17 10:34:52', '0', 'welfare', '1');
 INSERT INTO `cost_le` VALUES ('15', 'W33-2', 'Ada', '', '', '', '', '2017-07-17 10:35:08', '0', 'welfare', '1');
 INSERT INTO `cost_le` VALUES ('16', 'W24-1', 'Ada', '', '', '', '', '2017-07-17 10:35:45', '0', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('17', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:03', '2', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('18', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:08', '3', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('19', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:14', '4', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('20', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:19', '3', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('21', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:29', '34', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('22', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:34', '34', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('23', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:38', '23', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('24', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:55', '3', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('25', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:06:59', '3', 'welfare', '1');
+INSERT INTO `cost_le` VALUES ('26', 'W33-2', 'Ada', '', '', '', '', '2017-12-18 21:07:03', '34', 'welfare', '1');
 
 -- ----------------------------
 -- Table structure for `daily_service`
@@ -179,7 +191,7 @@ CREATE TABLE `drinking_water` (
   `IMPORT_TIME` datetime DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of drinking_water
@@ -188,6 +200,38 @@ INSERT INTO `drinking_water` VALUES ('1', 'W11-1', '49', 'Ada5', '0', '0', '0', 
 INSERT INTO `drinking_water` VALUES ('2', 'W33-3', '1', 'Ada', '0', '0', '0', '10', '2', '-2', '0', '32', '64', '0', 'haha', null, null, '2017-05-27 00:00:00', '2017-05-27 11:00:14', '2017-05-27 11:00:14');
 INSERT INTO `drinking_water` VALUES ('3', 'W11-1', '49', 'Ada5', '4', '-4', '0', '10', '0', '-3', '0', '0', '46', '0', '', null, null, '2017-05-27 00:00:00', '2017-05-27 11:00:43', '2017-05-27 11:00:43');
 INSERT INTO `drinking_water` VALUES ('4', 'W33-3', '1', 'Ada', '123', '-123', '0', '10', '0', '-2', '0', '0', '1294', '0', '', null, null, '2017-06-12 00:00:00', '2017-06-12 22:17:45', '2017-06-12 22:17:45');
+INSERT INTO `drinking_water` VALUES ('5', 'W33-3', '105', 'Ada', '1', '0', '1', '10', '0', '1', '1', '0', '0', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:25', '2017-10-24 10:24:25');
+INSERT INTO `drinking_water` VALUES ('6', 'W33-3', '105', 'Ada', '1', '-1', '1', '10', '0', '1', '1', '0', '10', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:28', '2017-10-24 10:24:28');
+INSERT INTO `drinking_water` VALUES ('7', 'W33-3', '105', 'Ada', '1', '-2', '1', '10', '0', '1', '1', '0', '20', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:30', '2017-10-24 10:24:30');
+INSERT INTO `drinking_water` VALUES ('8', 'W33-3', '105', 'Ada', '1', '-3', '1', '10', '0', '1', '1', '0', '30', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:33', '2017-10-24 10:24:33');
+INSERT INTO `drinking_water` VALUES ('9', 'W33-3', '105', 'Ada', '1', '-4', '1', '10', '0', '1', '1', '0', '40', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:36', '2017-10-24 10:24:36');
+INSERT INTO `drinking_water` VALUES ('10', 'W33-3', '105', 'Ada', '1', '-5', '1', '10', '0', '1', '1', '0', '50', '0', '2', null, null, '2017-10-24 00:00:00', '2017-10-24 10:24:39', '2017-10-24 10:24:39');
+
+-- ----------------------------
+-- Table structure for `emergency_problem`
+-- ----------------------------
+DROP TABLE IF EXISTS `emergency_problem`;
+CREATE TABLE `emergency_problem` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ROOM_NUM` varchar(255) DEFAULT NULL,
+  `ROOM_STATE` varchar(255) DEFAULT NULL,
+  `GUEST_NAME` varchar(255) DEFAULT NULL,
+  `OCCUR_TIME` datetime DEFAULT NULL,
+  `ATTENDANCE_TIME` datetime DEFAULT NULL,
+  `DECLARANT` varchar(15) DEFAULT NULL COMMENT '申请人',
+  `DEALING` varchar(15) DEFAULT NULL COMMENT '处理人',
+  `DAMAGE_DETAIL` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of emergency_problem
+-- ----------------------------
+INSERT INTO `emergency_problem` VALUES ('1', 'W2-1', '已入住', 'Tom', '2017-12-19 21:07:00', '2017-12-19 21:07:00', '', '张三', ',,,目击人:false,备注:sdf');
+INSERT INTO `emergency_problem` VALUES ('2', 'W2-1', '已入住', 'Tom', '2017-12-19 21:07:00', '2017-12-19 21:07:00', '', '张三', '报修:报修;true;,,,目击人:false,备注:备注');
+INSERT INTO `emergency_problem` VALUES ('3', 'W2-1', '已入住', 'Tom', '2017-12-19 21:07:00', '2017-12-19 21:07:00', '', '张三', ',人员:false;,,目击人:false,备注:备注');
+INSERT INTO `emergency_problem` VALUES ('4', 'W2-1', '已入住', 'Tom', '2017-01-01 01:01:00', '2017-01-01 01:01:00', '', 'zhangg', '报修:qwe;true;q2we,人员:true;qw;qw;ew;wq;true;qwe,,,备注:');
+INSERT INTO `emergency_problem` VALUES ('5', 'W2-1', '已入住', 'Tom', '2017-12-19 21:07:00', '2017-12-19 21:07:00', 'test', 'zhangdan', '报修:wer;true;werw,,,,备注:er');
 
 -- ----------------------------
 -- Table structure for `fac_sta`
@@ -328,12 +372,21 @@ CREATE TABLE `grocery_item` (
   `SELL_MONEY` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME` (`NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of grocery_item
 -- ----------------------------
-INSERT INTO `grocery_item` VALUES ('10', '????2', '??', '??', '52', null, null, null, '52', '10', '12');
+INSERT INTO `grocery_item` VALUES ('12', '汇源果汁2', '饮料', '果汁', '62', '4', '27', '14', '31', '10', '12');
+INSERT INTO `grocery_item` VALUES ('13', '汇源果汁', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('15', '农夫山泉', '饮料', '纯净水', '52', '2', '2', '-16', '48', '10', '12');
+INSERT INTO `grocery_item` VALUES ('16', '怡宝', '饮料', '纯净水', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('17', '可乐', '饮料', '饮料', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('18', '1', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('19', '2', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('20', '3', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('21', '4', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
+INSERT INTO `grocery_item` VALUES ('22', '5', '饮料', '果汁', '50', '0', '0', '0', '50', '10', '12');
 
 -- ----------------------------
 -- Table structure for `grocery_running`
@@ -346,11 +399,11 @@ CREATE TABLE `grocery_running` (
   `TOTAL` int(11) DEFAULT NULL,
   `PER_MONEY` double DEFAULT NULL,
   `ALL_MONEY` double DEFAULT NULL,
-  `TYPE` int(11) DEFAULT NULL,
+  `TYPE` int(11) DEFAULT NULL COMMENT '1 buy, 2 sell, 3 use',
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`),
   KEY `ITEM_ID` (`ITEM_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of grocery_running
@@ -365,6 +418,23 @@ INSERT INTO `grocery_running` VALUES ('7', '2017-03-16 21:22:16', '1', '2', '12'
 INSERT INTO `grocery_running` VALUES ('8', '2017-04-27 13:36:29', '10', '2', '12', '24', '2', null);
 INSERT INTO `grocery_running` VALUES ('9', '2017-04-27 13:36:33', '10', '2', '10', '20', '1', null);
 INSERT INTO `grocery_running` VALUES ('10', '2017-04-27 13:36:48', '10', '2', '10', '20', '3', null);
+INSERT INTO `grocery_running` VALUES ('11', '2017-11-01 11:16:24', '11', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('12', '2017-11-01 11:16:48', '11', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('13', '2017-11-02 10:16:08', '10', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('14', '2017-11-02 11:14:45', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('15', '2017-11-02 11:14:55', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('16', '2017-11-02 11:15:01', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('17', '2017-11-02 11:15:08', '12', '23', '12', '276', '2', null);
+INSERT INTO `grocery_running` VALUES ('18', '2017-11-02 11:16:31', '12', '2', '10', '20', '3', null);
+INSERT INTO `grocery_running` VALUES ('19', '2017-11-06 09:48:39', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('20', '2017-11-06 09:48:41', '12', '2', '12', '24', '2', null);
+INSERT INTO `grocery_running` VALUES ('21', '2017-11-06 09:48:44', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('22', '2017-11-06 09:48:47', '12', '2', '12', '24', '2', null);
+INSERT INTO `grocery_running` VALUES ('23', '2017-11-06 09:49:51', '12', '2', '10', '20', '1', null);
+INSERT INTO `grocery_running` VALUES ('24', '2017-11-06 10:32:59', '12', '2', '10', '20', '3', null);
+INSERT INTO `grocery_running` VALUES ('25', '2017-11-07 11:16:42', '15', '2', '10', '20', '3', null);
+INSERT INTO `grocery_running` VALUES ('26', '2017-11-07 11:16:52', '15', '2', '12', '24', '2', null);
+INSERT INTO `grocery_running` VALUES ('27', '2017-11-07 11:16:58', '15', '2', '10', '20', '1', null);
 
 -- ----------------------------
 -- Table structure for `guest`
@@ -401,7 +471,7 @@ CREATE TABLE `guest` (
   UNIQUE KEY `CONTRACT_NUMBER` (`CONTRACT_NUMBER`),
   KEY `GUEST_NAME` (`GUEST_NAME`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guest
@@ -467,6 +537,7 @@ INSERT INTO `guest` VALUES ('118', 'Ada', 'W14-2', null, 'S13198789', '135818181
 INSERT INTO `guest` VALUES ('119', 'Ada', 'W15-2', null, 'S131888888', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2017-06-22 00:00:00', '2017-06-22 00:00:00', '0', '张三,李四,王五', '欧美', '2017-06-22', 'on', '无', '无', '无', '无', '现金');
 INSERT INTO `guest` VALUES ('120', 'Ada', 'W19-1', null, 'S131sdfsdfaweqwwe', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2017-06-22 00:00:00', '2017-06-22 00:00:00', '0', '张三,李四,王五', '欧美', '2017-06-22', 'on', '无', '无', '无', '无', '现金');
 INSERT INTO `guest` VALUES ('121', 'Ada', 'W24-1', null, 'S1315686796796', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2017-06-22 00:00:00', '2017-06-22 00:00:00', '0', '张三,李四,王五', '欧美', '2017-06-22', 'on', '无', '无', '无', '无', '现金');
+INSERT INTO `guest` VALUES ('124', 'Ada', 'W2-2', null, 'S133', '13581818113', 'Amazon', '经理', '2', '0', 'T3', null, '无', '15000.5', '2017-10-09 00:00:00', '2017-10-09 00:00:00', '0', '张三,李四,王五', '欧美', '2017-10-09', 'on', '无', '无', '无', '无', '现金');
 
 -- ----------------------------
 -- Table structure for `guest_balance`
@@ -476,14 +547,10 @@ CREATE TABLE `guest_balance` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `GUEST_ID` int(10) unsigned DEFAULT NULL,
   `ROOM_NUMBER` varchar(64) DEFAULT NULL,
-  `CHARGE_DAY` date DEFAULT NULL,
   `CHARGE_TURN` int(11) DEFAULT NULL,
   `CHARGE_WAY` varchar(64) DEFAULT NULL,
-  `RETURN_DAY` date DEFAULT NULL,
   `RETURN_TURN` int(11) DEFAULT NULL,
-  `INVOICE_DAY` date DEFAULT NULL,
   `INVOICE_TURN` int(11) DEFAULT NULL,
-  `INVOICE_AHEAD` int(11) DEFAULT NULL,
   `BEGIN_DAY` date DEFAULT NULL,
   `END_DAY` date DEFAULT NULL,
   `SYS_STATE` int(11) DEFAULT '1',
@@ -491,68 +558,74 @@ CREATE TABLE `guest_balance` (
   KEY `GUEST_ID` (`GUEST_ID`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`),
   CONSTRAINT `guest_balance_ibfk_1` FOREIGN KEY (`GUEST_ID`) REFERENCES `guest` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guest_balance
 -- ----------------------------
-INSERT INTO `guest_balance` VALUES ('1', '1', 'W33-3', '2017-06-22', '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('2', '2', 'W32-1', '2017-06-09', '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('3', '3', 'W2-1', '2017-06-16', '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('28', '47', 'W33-3', '2017-06-15', '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('29', '49', 'W33-3', null, '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('30', '50', 'W33-3', null, '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('31', '54', 'W33-2', null, '30', '现金', null, '30', null, '30', '30', null, null, '0');
-INSERT INTO `guest_balance` VALUES ('32', '62', 'W33-3', '2017-06-20', '30', '现金', '2017-06-20', '30', '2017-06-20', '30', '30', '2017-06-20', '2017-06-20', '0');
-INSERT INTO `guest_balance` VALUES ('33', '63', 'W33-3', '2017-06-20', '30', '现金', '2017-06-17', '30', '2017-06-20', '30', '30', '2017-06-20', '2017-06-20', '0');
-INSERT INTO `guest_balance` VALUES ('34', '64', 'W33-3', '2017-06-20', '30', '现金', '2017-06-20', '30', '2017-06-20', '30', '30', '2017-06-20', '2017-06-20', '0');
-INSERT INTO `guest_balance` VALUES ('35', '66', 'W33-3', '2017-06-20', '30', '现金', '2017-06-20', '30', '2017-06-20', '30', '30', '2017-06-20', '2017-06-20', '0');
-INSERT INTO `guest_balance` VALUES ('36', '67', 'W33-3', '2017-06-21', '30', '现金', '2017-06-21', '30', '2017-06-21', '30', '30', '2017-06-21', '2017-06-21', '0');
-INSERT INTO `guest_balance` VALUES ('37', '69', 'W33-3', '2017-06-21', '30', '现金', '2017-06-21', '30', '2017-06-21', '30', '30', '2017-06-21', '2017-06-21', '0');
-INSERT INTO `guest_balance` VALUES ('38', '72', 'W33-3', '2017-06-21', '30', '现金', '2017-06-21', '30', '2017-06-21', '30', '30', '2017-06-21', '2017-06-21', '0');
-INSERT INTO `guest_balance` VALUES ('39', '73', 'W33-3', '2017-06-21', '30', '现金', '2017-06-21', '30', '2017-06-21', '30', '30', '2017-06-21', '2017-06-21', '0');
-INSERT INTO `guest_balance` VALUES ('40', '74', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('41', '75', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('42', '77', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('43', '78', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('44', '80', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('45', '81', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('46', '83', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('47', '84', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('48', '85', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('49', '87', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('50', '88', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('51', '89', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('52', '90', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('53', '91', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('54', '92', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('55', '93', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('56', '94', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('57', '95', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('58', '97', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('59', '98', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('60', '100', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('61', '101', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('62', '102', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('63', '103', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('64', '104', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('65', '105', 'W33-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('66', '106', 'W32-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('67', '107', 'W30-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('68', '108', 'W29-1', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('69', '109', 'W29-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('70', '110', 'W27-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('71', '111', 'W18-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('72', '112', 'W11-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('73', '113', 'W7-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('74', '114', 'W8-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('75', '115', 'W12-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('76', '116', 'W16-3', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('77', '117', 'W16-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('78', '118', 'W14-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('79', '119', 'W15-2', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('80', '120', 'W19-1', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
-INSERT INTO `guest_balance` VALUES ('81', '121', 'W24-1', '2017-06-22', '30', '现金', '2017-06-22', '30', '2017-06-22', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('1', '1', 'W33-3', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('2', '2', 'W32-1', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('3', '3', 'W2-1', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('28', '47', 'W33-3', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('29', '49', 'W33-3', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('30', '50', 'W33-3', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('31', '54', 'W33-2', '30', '现金', '30', '30', null, null, '0');
+INSERT INTO `guest_balance` VALUES ('32', '62', 'W33-3', '30', '现金', '30', '30', '2017-06-20', '2017-06-20', '0');
+INSERT INTO `guest_balance` VALUES ('33', '63', 'W33-3', '30', '现金', '30', '30', '2017-06-20', '2017-06-20', '0');
+INSERT INTO `guest_balance` VALUES ('34', '64', 'W33-3', '30', '现金', '30', '30', '2017-06-20', '2017-06-20', '0');
+INSERT INTO `guest_balance` VALUES ('35', '66', 'W33-3', '30', '现金', '30', '30', '2017-06-20', '2017-06-20', '0');
+INSERT INTO `guest_balance` VALUES ('36', '67', 'W33-3', '30', '现金', '30', '30', '2017-06-21', '2017-06-21', '0');
+INSERT INTO `guest_balance` VALUES ('37', '69', 'W33-3', '30', '现金', '30', '30', '2017-06-21', '2017-06-21', '0');
+INSERT INTO `guest_balance` VALUES ('38', '72', 'W33-3', '30', '现金', '30', '30', '2017-06-21', '2017-06-21', '0');
+INSERT INTO `guest_balance` VALUES ('39', '73', 'W33-3', '30', '现金', '30', '30', '2017-06-21', '2017-06-21', '0');
+INSERT INTO `guest_balance` VALUES ('40', '74', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('41', '75', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('42', '77', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('43', '78', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('44', '80', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('45', '81', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('46', '83', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('47', '84', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('48', '85', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('49', '87', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('50', '88', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('51', '89', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('52', '90', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('53', '91', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('54', '92', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('55', '93', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('56', '94', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('57', '95', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('58', '97', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('59', '98', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('60', '100', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('61', '101', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('62', '102', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('63', '103', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('64', '104', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('65', '105', 'W33-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('66', '106', 'W32-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('67', '107', 'W30-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('68', '108', 'W29-1', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('69', '109', 'W29-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('70', '110', 'W27-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('71', '111', 'W18-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('72', '112', 'W11-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('73', '113', 'W7-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('74', '114', 'W8-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('75', '115', 'W12-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('76', '116', 'W16-3', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('77', '117', 'W16-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('78', '118', 'W14-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('79', '119', 'W15-2', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('80', '120', 'W19-1', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('81', '121', 'W24-1', '30', '现金', '30', '30', '2017-06-22', '2017-06-22', '0');
+INSERT INTO `guest_balance` VALUES ('82', '122', 'W22-2', '1', '现金', '1', '1', '2017-09-20', '2017-09-20', '0');
+INSERT INTO `guest_balance` VALUES ('83', '124', 'W22-1', '1', '现金', '1', '1', '2017-09-20', '2017-09-20', '0');
+INSERT INTO `guest_balance` VALUES ('84', '125', 'W15-3', '1', '现金', '1', '1', '2017-09-20', '2017-09-20', '0');
+INSERT INTO `guest_balance` VALUES ('85', '126', 'W17-3', '1', '现金', '1', '1', '2017-09-20', '2017-09-20', '0');
+INSERT INTO `guest_balance` VALUES ('86', '128', 'W7-1', '1', '现金', '1', '1', '2017-09-20', '2017-09-20', '0');
+INSERT INTO `guest_balance` VALUES ('87', '129', 'W18-2', '1', '现金', '1', '1', '2017-10-12', '2017-10-12', '0');
 
 -- ----------------------------
 -- Table structure for `guest_service`
@@ -577,7 +650,7 @@ CREATE TABLE `guest_service` (
   KEY `GUEST_ID` (`GUEST_ID`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`),
   CONSTRAINT `guest_service_ibfk_1` FOREIGN KEY (`GUEST_ID`) REFERENCES `guest` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=973 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=985 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guest_service
@@ -1279,6 +1352,18 @@ INSERT INTO `guest_service` VALUES ('969', '121', 'W24-1', 'shopping', '1000', '
 INSERT INTO `guest_service` VALUES ('970', '121', 'W24-1', 'Int', '1000.5', '1', '1000', '1', '1', '无', '0', '9', '0', '');
 INSERT INTO `guest_service` VALUES ('971', '121', 'W24-1', 'daily', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
 INSERT INTO `guest_service` VALUES ('972', '121', 'W24-1', 'newspaper', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('973', '124', 'W2-2', 'break', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('974', '124', 'W2-2', 'cloth', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('975', '124', 'W2-2', 'park', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('976', '124', 'W2-2', 'breakfast', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('977', '124', 'W2-2', 'bottlewater', '1000', '1', '1000', null, '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('978', '124', 'W2-2', 'tv', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('979', '124', 'W2-2', 'resource', '1000.5', '1', '1000.2', '1', '1', '无', '0', '7', '0', '');
+INSERT INTO `guest_service` VALUES ('980', '124', 'W2-2', 'barrelwater', '1000', '1', '1000', null, '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('981', '124', 'W2-2', 'shopping', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('982', '124', 'W2-2', 'Int', '1000.5', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('983', '124', 'W2-2', 'daily', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
+INSERT INTO `guest_service` VALUES ('984', '124', 'W2-2', 'newspaper', '1000', '1', '1000', '1', '1', '无', '0', '9', '0', '');
 
 -- ----------------------------
 -- Table structure for `host`
@@ -1300,71 +1385,80 @@ CREATE TABLE `host` (
   `TENET_CHARGE` double DEFAULT NULL COMMENT '物业管理费',
   `HEATING_CHARGE` double DEFAULT NULL,
   `ACTUAL_CHARGE` double DEFAULT NULL,
+  `SPC_RECOVER` varchar(255) DEFAULT NULL COMMENT '是否追缴物业费（追缴/不追缴）',
+  `HEATING_RECOVER` varchar(255) DEFAULT NULL COMMENT '是否追缴采暖费（追缴/不追缴）',
+  `ACCOUNT_COMMENT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `GUEST_ID` (`GUEST_ID`),
   CONSTRAINT `host_ibfk_1` FOREIGN KEY (`GUEST_ID`) REFERENCES `guest` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of host
 -- ----------------------------
-INSERT INTO `host` VALUES ('1', '1', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('2', '2', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('3', '3', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('15', '47', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('16', '49', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('17', '50', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('18', '54', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null);
-INSERT INTO `host` VALUES ('19', '62', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('20', '63', '张琴', '20000.5', '10000.5', '5000', '66', '0', '小业主', '09478093845093840593845', '983201928301922', '33.2', '21', '44.8', '4835');
-INSERT INTO `host` VALUES ('21', '64', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('22', '66', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('23', '67', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('24', '69', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('25', '72', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('26', '73', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('27', '74', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('28', '75', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('29', '77', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('30', '78', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('31', '80', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('32', '81', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('33', '83', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('34', '84', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('35', '85', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('36', '87', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('37', '88', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('38', '89', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('39', '90', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('40', '91', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('41', '92', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('42', '93', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('43', '94', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('44', '95', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('45', '97', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('46', '98', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('47', '100', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('48', '101', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('49', '102', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('50', '103', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('51', '104', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('52', '105', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('53', '106', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('54', '107', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('55', '108', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('56', '109', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('57', '110', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('58', '111', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('59', '112', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('60', '113', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('61', '114', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('62', '115', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('63', '116', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('64', '117', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('65', '118', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('66', '119', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('67', '120', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
-INSERT INTO `host` VALUES ('68', '121', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0');
+INSERT INTO `host` VALUES ('1', '1', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('2', '2', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('3', '3', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('15', '47', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('16', '49', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('17', '50', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('18', '54', 'bob', '20000.5', '10000.5', '5000.5', null, '0', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `host` VALUES ('19', '62', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('20', '63', '张琴', '20000.5', '10000.5', '5000', '66', '0', '小业主', '09478093845093840593845', '983201928301922', '33.2', '21', '44.8', '4835', null, null, null);
+INSERT INTO `host` VALUES ('21', '64', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('22', '66', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('23', '67', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('24', '69', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('25', '72', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('26', '73', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('27', '74', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('28', '75', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('29', '77', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('30', '78', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('31', '80', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('32', '81', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('33', '83', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('34', '84', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('35', '85', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('36', '87', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('37', '88', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('38', '89', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('39', '90', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('40', '91', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('41', '92', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('42', '93', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('43', '94', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('44', '95', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('45', '97', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('46', '98', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('47', '100', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('48', '101', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('49', '102', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('50', '103', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('51', '104', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('52', '105', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('53', '106', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('54', '107', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('55', '108', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('56', '109', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('57', '110', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('58', '111', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('59', '112', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('60', '113', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('61', '114', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('62', '115', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('63', '116', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('64', '117', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('65', '118', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('66', '119', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('67', '120', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('68', '121', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', null, null, null);
+INSERT INTO `host` VALUES ('69', '122', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
+INSERT INTO `host` VALUES ('70', '124', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
+INSERT INTO `host` VALUES ('71', '125', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
+INSERT INTO `host` VALUES ('72', '126', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
+INSERT INTO `host` VALUES ('73', '128', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
+INSERT INTO `host` VALUES ('74', '129', 'SPC', '20000.5', '10000.5', '0', '0', '0', 'SPC', '09478093845093840593845', '98320192830192', '0', '0', '0', '0', '不追缴', '不追缴', '中国农业银行北洋支行');
 
 -- ----------------------------
 -- Table structure for `income`
@@ -1413,7 +1507,7 @@ CREATE TABLE `intern` (
   PRIMARY KEY (`ID`),
   KEY `GUEST_ID` (`GUEST_ID`),
   CONSTRAINT `intern_ibfk_1` FOREIGN KEY (`GUEST_ID`) REFERENCES `guest` (`ID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of intern
@@ -1475,6 +1569,7 @@ INSERT INTO `intern` VALUES ('65', '118', '0.3', '0.26', '0.16', '26000.2', '0.3
 INSERT INTO `intern` VALUES ('66', '119', '0.3', '0.26', '0.16', '26000.2', '0.36', '0.26', '0.16', '36000.2', '0', '链家');
 INSERT INTO `intern` VALUES ('67', '120', '0.3', '0.26', '0.16', '26000.2', '0.36', '0.26', '0.16', '36000.2', '0', '链家');
 INSERT INTO `intern` VALUES ('68', '121', '0.3', '0.26', '0.16', '26000.2', '0.36', '0.26', '0.16', '36000.2', '0', '链家');
+INSERT INTO `intern` VALUES ('69', '124', '0.3', '0.26', '0.16', '26000.2', '0.36', '0.26', '0.16', '36000.2', '0', '链家');
 
 -- ----------------------------
 -- Table structure for `invoice`
@@ -1579,29 +1674,55 @@ CREATE TABLE `mail_reminder` (
   `REMIND_DATE` date DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   `STATE` varchar(10) DEFAULT NULL COMMENT '完成、未完成',
+  `RECEIVE_STATE` varchar(255) DEFAULT '',
+  `REPLY` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mail_reminder
 -- ----------------------------
-INSERT INTO `mail_reminder` VALUES ('2', '2', 'test', '10', '王二', 'heheh1', 'lkjsldkfjsd\ns\ndf\'asdf', '2017-06-11', '2017-06-12 17:05:57', '未完成');
-INSERT INTO `mail_reminder` VALUES ('3', '2', 'test', '12', 'testr345', 'sdf', 'asdf', '2017-06-12', '2017-06-12 16:33:34', '未完成');
-INSERT INTO `mail_reminder` VALUES ('6', '11', 'test8', '2', 'test', 'hahah', '今天好玩吗', '2017-06-14', '2017-06-14 14:54:51', '未完成');
-INSERT INTO `mail_reminder` VALUES ('7', '11', 'test8', '2', 'test', '嘿嘿', '在吗啊', '2017-06-14', '2017-06-14 14:55:02', '未完成');
-INSERT INTO `mail_reminder` VALUES ('8', '10', '王二', '2', 'test', '记得叫水哦', '立刻就死定了开发建设劳动法', '2017-06-09', '2017-06-14 14:58:41', '未完成');
-INSERT INTO `mail_reminder` VALUES ('9', '10', '王二', '2', 'test', '记得叫水哦1112', '立刻就死定了开发建设劳动法2', '2017-06-09', '2017-06-14 14:58:47', '未完成');
-INSERT INTO `mail_reminder` VALUES ('10', '10', '王二', '2', 'test', '你好', '今天：\n 记得把东西还给客人\n    姚陈堃', '2017-06-14', '2017-06-15 16:50:30', '完成');
-INSERT INTO `mail_reminder` VALUES ('11', '2', 'test', '10', '王二', '1', '2', '2017-06-14', '2017-06-14 15:00:47', '完成');
-INSERT INTO `mail_reminder` VALUES ('12', '2', 'test', '10', '王二', '3', '4', '2017-06-14', '2017-06-14 15:00:58', '未完成');
-INSERT INTO `mail_reminder` VALUES ('13', '2', 'test', '10', '王二', '5', '46', '2017-06-14', '2017-06-14 15:01:03', '未完成');
-INSERT INTO `mail_reminder` VALUES ('14', '2', 'test', '10', '王二', '57', '7', '2017-06-14', '2017-06-14 15:01:07', '未完成');
-INSERT INTO `mail_reminder` VALUES ('15', '2', 'test', '10', '王二', '578', '78', '2017-06-14', '2017-06-14 15:01:10', '未完成');
-INSERT INTO `mail_reminder` VALUES ('16', '10', '王二', '2', 'test', '今天天好蓝1', '', '2017-06-15', '2017-06-15 16:47:31', '完成');
-INSERT INTO `mail_reminder` VALUES ('17', '10', '王二', '2', 'test', '远方的朋友还好吗', '', '2017-06-15', '2017-06-15 16:47:29', '完成');
-INSERT INTO `mail_reminder` VALUES ('18', '14', 'test12312', '2', 'test', 'haha', 'sdfsdfasdf', '2017-06-15', '2017-06-15 16:47:00', '完成');
-INSERT INTO `mail_reminder` VALUES ('19', '14', 'test12312', '2', 'test', 'W33-2的客人需要水', 'sdfsdfasdf', '2017-06-15', '2017-06-16 15:12:24', '完成');
-INSERT INTO `mail_reminder` VALUES ('20', '10', '王二', '2', 'test', '`12123123sss', 'sdfsdfasdfa', '2017-07-13', '2017-06-16 17:05:42', '未完成');
+INSERT INTO `mail_reminder` VALUES ('2', '2', 'test', '10', '王二', 'heheh1', 'lkjsldkfjsd\ns\ndf\'asdf', '2017-06-11', '2017-06-12 17:05:57', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('3', '2', 'test', '12', 'testr345', 'sdf', 'asdf', '2017-06-12', '2017-06-12 16:33:34', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('6', '11', 'test8', '2', 'test', 'hahah', '今天好玩吗', '2017-06-14', '2017-06-14 14:54:51', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('7', '11', 'test8', '2', 'test', '嘿嘿', '在吗啊', '2017-06-14', '2017-06-14 14:55:02', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('8', '10', '王二', '2', 'test', '记得叫水哦', '立刻就死定了开发建设劳动法', '2017-06-09', '2017-06-14 14:58:41', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('9', '10', '王二', '2', 'test', '记得叫水哦1112', '立刻就死定了开发建设劳动法2', '2017-06-09', '2017-06-14 14:58:47', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('10', '10', '王二', '2', 'test', '你好', '今天：\n 记得把东西还给客人\n    姚陈堃', '2017-06-14', '2017-06-15 16:50:30', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('11', '2', 'test', '10', '王二', '1', '2', '2017-06-14', '2017-06-14 15:00:47', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('12', '2', 'test', '10', '王二', '3', '4', '2017-06-14', '2017-06-14 15:00:58', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('13', '2', 'test', '10', '王二', '5', '46', '2017-06-14', '2017-06-14 15:01:03', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('14', '2', 'test', '10', '王二', '57', '7', '2017-06-14', '2017-06-14 15:01:07', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('15', '2', 'test', '10', '王二', '578', '78', '2017-06-14', '2017-06-14 15:01:10', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('16', '10', '王二', '2', 'test', '今天天好蓝1', '', '2017-06-15', '2017-06-15 16:47:31', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('17', '10', '王二', '2', 'test', '远方的朋友还好吗', '', '2017-06-15', '2017-06-15 16:47:29', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('18', '14', 'test12312', '2', 'test', 'haha', 'sdfsdfasdf', '2017-06-15', '2017-06-15 16:47:00', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('19', '14', 'test12312', '2', 'test', 'W33-2的客人需要水', 'sdfsdfasdf', '2017-06-15', '2017-06-16 15:12:24', '完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('20', '10', '王二', '2', 'test', '`12123123sss', 'sdfsdfasdfa', '2017-07-13', '2017-06-16 17:05:42', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('21', '2', 'test', '10', '王二', '111', 'dsdf', '2017-09-14', '2017-09-14 16:40:45', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('23', '2', 'test', '2', 'test', 'xxxx', 'sdfsdfsdf', '2017-09-14', '2017-09-14 16:41:30', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('24', '2', 'test', '10', '王二', '22', '332', '2017-10-09', '2017-10-09 10:57:31', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('25', '2', 'test', '14', 'testr345', '12', 'sssss', '2017-10-09', '2017-10-09 11:29:40', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('26', '2', 'test', '12', 'yaochenkun', '12', 'sssss', '2017-10-09', '2017-10-09 11:29:40', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('27', '2', 'test', '14', 'test12312', 'hello', 'hello1', '2017-10-09', '2017-10-09 11:31:10', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('28', '2', 'test', '11', 'test8', 'hello', 'hello1', '2017-10-09', '2017-10-09 11:31:10', '未完成', '待接受', null);
+INSERT INTO `mail_reminder` VALUES ('29', '2', 'test', '2', 'test', 'hello呼呼呼呼1', 'hello1222222222\nalskdjflaksdfasf', '2017-10-09', '2017-10-09 15:57:01', '未完成', '已接受', 'dsdfsdfsdfddddd111');
+INSERT INTO `mail_reminder` VALUES ('30', '2', 'test', '1', 'BUPTADMIN', 'xixixixi', 'lkjlsdkjfsdfsdf', '2017-10-09', '2017-10-09 15:06:07', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('31', '2', 'test', '20', 'yaochenkun', 'xixixixi', 'lkjlsdkjfsdfsdf', '2017-10-09', '2017-10-09 15:06:07', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('32', '2', 'test', '11', 'test8', '呼呼呼呼', '山东师范是', '2017-10-09', '2017-10-09 15:57:28', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('33', '2', 'test', '2', 'test', '呼呼呼呼', '山东师范是', '2017-10-09', '2017-10-09 15:58:02', '未完成', '已回复', '收到啦~~');
+INSERT INTO `mail_reminder` VALUES ('34', '2', 'test', '20', 'yaochenkun', '1', '22', '2017-10-17', '2017-10-17 10:26:24', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('35', '2', 'test', '20', 'yaochenkun', '1', '22', '2017-10-17', '2017-10-17 10:26:24', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('36', '2', 'test', '2', 'test', '1', '22', '2017-10-17', '2017-10-17 10:27:12', '未完成', '已回复', '223123123');
+INSERT INTO `mail_reminder` VALUES ('37', '0', 'ADMIN', '1', 'BUPTADMIN', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('38', '0', 'ADMIN', '2', 'test', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('39', '0', 'ADMIN', '10', '王二', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('40', '0', 'ADMIN', '11', 'test', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('41', '0', 'ADMIN', '12', 'test', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('42', '0', 'ADMIN', '14', 'test', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('43', '0', 'ADMIN', '20', '姚陈堃', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('44', '0', 'ADMIN', '21', 'lkjdlfsldf', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
+INSERT INTO `mail_reminder` VALUES ('45', '0', 'ADMIN', '22', 'test', '紧急事件处理', '您有一个紧急事件亟待处理!', '2017-12-19', '2017-12-25 09:45:27', '未完成', '待接受', '');
 
 -- ----------------------------
 -- Table structure for `maintain`
@@ -1629,11 +1750,12 @@ CREATE TABLE `maintain` (
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of maintain
 -- ----------------------------
+INSERT INTO `maintain` VALUES ('1', 'W33-3', null, '2017-09-11 00:00:00', null, '2017-09-12 00:00:00', null, '空调故障', '', '', '1', null, '12', '1', '12', '', '1', '0', '1');
 
 -- ----------------------------
 -- Table structure for `meal`
@@ -1654,7 +1776,7 @@ CREATE TABLE `meal` (
   `IMPORT_TIME` datetime DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of meal
@@ -1668,6 +1790,11 @@ INSERT INTO `meal` VALUES ('7', 'W33-2', '54', 'Ada', '其他', '0', '0', '无',
 INSERT INTO `meal` VALUES ('8', 'W7-3', '50', '测', '其他', '0', '0', '无', '0', '请选择', '2017-06-12 00:00:00', '2017-06-12 22:05:00', '2017-06-12 22:05:00');
 INSERT INTO `meal` VALUES ('9', 'W11-1', '49', 'Ada5', '亚当饼王', '0', '1', '无', '2', 'test', '2017-06-14 00:00:00', '2017-06-14 12:05:45', '2017-06-14 12:06:00');
 INSERT INTO `meal` VALUES ('10', 'W11-1', '49', 'Ada5', '元气寿司', '0', '0', '无', '0', '请选择', '2017-06-14 00:00:00', '2017-06-14 12:34:02', '2017-06-14 12:34:41');
+INSERT INTO `meal` VALUES ('11', 'W33-3', '105', 'Ada', '大宅门', '30', '0', '无', '2', 'test', '2017-10-18 00:00:00', '2017-10-18 16:49:27', '2017-10-18 16:49:27');
+INSERT INTO `meal` VALUES ('12', 'W33-3', '105', 'Ada', '海底捞', '22', '0', '无', '2', 'test', '2017-10-18 00:00:00', '2017-10-18 16:53:21', '2017-10-18 16:53:21');
+INSERT INTO `meal` VALUES ('13', 'W33-3', '105', 'Ada', '海底捞', '22', '0', '无', '2', 'test', '2017-10-18 00:00:00', '2017-10-18 16:53:31', '2017-10-18 16:53:31');
+INSERT INTO `meal` VALUES ('14', 'W33-2', '54', 'Ada', '其他', '0', '0', '无', '0', '请选择', '2017-10-24 00:00:00', '2017-10-24 09:34:25', '2017-10-24 09:34:25');
+INSERT INTO `meal` VALUES ('15', 'W33-2', '54', 'Ada', '其他', '0', '0', '无', '0', '请选择', '2017-10-24 00:00:00', '2017-10-24 09:34:28', '2017-10-24 09:34:28');
 
 -- ----------------------------
 -- Table structure for `message`
@@ -1708,13 +1835,21 @@ CREATE TABLE `other_fare` (
   `IMPORT_TIME` datetime DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of other_fare
 -- ----------------------------
 INSERT INTO `other_fare` VALUES ('1', 'W33-3', '1', 'Ada', '租车', '1', '无', '23.8', null, '姚陈坤', '2017-05-25 00:00:00', '2017-05-25 15:31:16', '2017-05-25 15:32:13');
 INSERT INTO `other_fare` VALUES ('2', 'W11-1', '49', 'Ada5', '出租车', '1', '租了一辆车', '200.72', null, '小明', '2017-05-25 00:00:00', '2017-05-25 15:32:48', '2017-05-25 15:32:48');
+INSERT INTO `other_fare` VALUES ('3', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:55:51', '2017-11-01 10:55:51');
+INSERT INTO `other_fare` VALUES ('4', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:55:53', '2017-11-01 10:55:53');
+INSERT INTO `other_fare` VALUES ('5', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:55:56', '2017-11-01 10:55:56');
+INSERT INTO `other_fare` VALUES ('6', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:55:59', '2017-11-01 10:55:59');
+INSERT INTO `other_fare` VALUES ('7', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:56:01', '2017-11-01 10:56:01');
+INSERT INTO `other_fare` VALUES ('8', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:56:03', '2017-11-01 10:56:03');
+INSERT INTO `other_fare` VALUES ('9', 'W33-3', '105', 'Ada', '租车', '0', '4', '4', null, '4', '2017-11-01 00:00:00', '2017-11-01 10:56:06', '2017-11-01 10:56:06');
+INSERT INTO `other_fare` VALUES ('10', 'W33-3', '105', 'Ada', '租车', '0', '这是一个长字符串长字符串长字符串', '4343434343', null, '34', '2017-11-01 00:00:00', '2017-11-01 11:02:00', '2017-11-01 11:02:00');
 
 -- ----------------------------
 -- Table structure for `plan`
@@ -1729,7 +1864,7 @@ CREATE TABLE `plan` (
   `COMMENT` varchar(64) DEFAULT NULL,
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of plan
@@ -1741,6 +1876,7 @@ INSERT INTO `plan` VALUES ('93', '2017-06-02采购冰箱', '2017-06-02 14:10:15'
 INSERT INTO `plan` VALUES ('94', '2017-06-02采购冰箱', '2017-06-02 16:18:47', '100', 'Alice', '无', null);
 INSERT INTO `plan` VALUES ('95', '2017-06-02采购冰箱', '2017-06-02 16:22:36', '100', 'Alice', '无', null);
 INSERT INTO `plan` VALUES ('96', '2017-06-02采购冰箱', '2017-06-02 16:44:23', '100', 'Alice', '无', null);
+INSERT INTO `plan` VALUES ('97', '2017-11-07采购冰箱', '2017-11-07 11:15:33', '0', 'Alice', '无', null);
 
 -- ----------------------------
 -- Table structure for `plan_detail`
@@ -1794,7 +1930,7 @@ CREATE TABLE `plan_progress` (
   `SYS_STATE` int(11) DEFAULT '1',
   PRIMARY KEY (`ID`),
   KEY `PLAN_ID` (`PLAN_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of plan_progress
@@ -1808,6 +1944,85 @@ INSERT INTO `plan_progress` VALUES ('56', '2017-06-02 16:19:08', '94', '89', '�
 INSERT INTO `plan_progress` VALUES ('57', '2017-06-02 16:19:18', '94', '89', '采购', '6', 'Alice', '60', '无', null);
 INSERT INTO `plan_progress` VALUES ('58', '2017-06-02 16:23:08', '95', '90', '采购', '7', 'Alice', '70', '无', null);
 INSERT INTO `plan_progress` VALUES ('59', '2017-06-02 16:44:35', '96', '91', '采购', '10', 'Alice', '100', '无', null);
+INSERT INTO `plan_progress` VALUES ('60', '2017-09-08 15:54:17', '91', '79', '采购', '1', 'Alice', '10', '无', null);
+INSERT INTO `plan_progress` VALUES ('61', '2017-09-18 19:07:39', '91', '79', '采购', '2', 'Alice', '20', '无', null);
+INSERT INTO `plan_progress` VALUES ('62', '2017-09-18 19:09:22', '91', '79', '采购', '5', 'ZhangSan', '50', '无', null);
+INSERT INTO `plan_progress` VALUES ('63', '2017-09-20 15:19:23', '91', '79', '采购', '1', 'Alice', '10', '无', null);
+INSERT INTO `plan_progress` VALUES ('64', '2017-09-20 15:19:28', '91', '79', '采购', '1', 'Alice', '10', '无', null);
+INSERT INTO `plan_progress` VALUES ('65', '2017-09-20 15:22:03', '93', '86', '采购', '1', 'Alice', '10', '无', null);
+INSERT INTO `plan_progress` VALUES ('66', '2017-09-20 15:22:54', '93', '87', '采购', '1', 'Alice', '10', '无', null);
+INSERT INTO `plan_progress` VALUES ('67', '2017-09-20 18:16:18', '104', '92', '采购', '1', 'Alice', '10', '无', null);
+
+-- ----------------------------
+-- Table structure for `problem`
+-- ----------------------------
+DROP TABLE IF EXISTS `problem`;
+CREATE TABLE `problem` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ROOM_NUM` varchar(255) DEFAULT NULL,
+  `ROOM_STATE` varchar(255) DEFAULT NULL,
+  `GUEST_NAME` varchar(255) DEFAULT NULL,
+  `REFLECT_DATE` date DEFAULT NULL COMMENT '报修时间',
+  `SOLVE_DATE` date DEFAULT NULL COMMENT '需要解决时间',
+  `REFLECTER_ID` int(11) DEFAULT NULL COMMENT '申报人',
+  `REFLECTER_NAME` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL COMMENT '问题描述',
+  `OUTSIDER_REASON` varchar(255) DEFAULT NULL,
+  `OUTSIDER_COMMENT` varchar(255) DEFAULT NULL COMMENT '备注',
+  `IS_LEMANAGE` int(11) DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  `SUBTYPE` varchar(255) DEFAULT NULL,
+  `LEVEL` varchar(255) DEFAULT NULL,
+  `REPAIRER_REASON` varchar(255) DEFAULT NULL,
+  `REPAIRER_COMMENT` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of problem
+-- ----------------------------
+INSERT INTO `problem` VALUES ('3', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'xxxx', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'ssss');
+INSERT INTO `problem` VALUES ('4', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'd', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'd');
+INSERT INTO `problem` VALUES ('5', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'c', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'ddd');
+INSERT INTO `problem` VALUES ('6', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'xxx', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'ff');
+INSERT INTO `problem` VALUES ('7', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'xx', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'xx');
+INSERT INTO `problem` VALUES ('8', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', 'xx', null, null, '1', '房屋问题', '地板损坏', '一级', null, 'xx');
+INSERT INTO `problem` VALUES ('9', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', '1', null, null, '1', '房屋问题', '地板损坏', '一级', null, '2');
+INSERT INTO `problem` VALUES ('11', 'W33-2', '已入住', 'Ada', '2017-10-12', '2017-10-12', '2', 'test', '1', null, null, '1', '房屋问题', '地板损坏', '一级', null, '1');
+INSERT INTO `problem` VALUES ('13', 'W17-3', '已入住', 'Ada', '2017-10-13', '2017-10-19', '2', 'test', 'aa11133333333', null, null, '1', '消耗品问题', '没有洗漱用具', '三级', null, '222');
+INSERT INTO `problem` VALUES ('14', 'W17-3', '已入住', 'Ada', '2017-10-13', '2017-10-13', '2', 'test', 'xxxx', 'yyyy', 'zzzz', '0', '能源问题', '用电问题', '', null, '');
+INSERT INTO `problem` VALUES ('15', 'W33-2', '已入住', 'Ada', '2017-10-13', '2017-10-21', '2', 'test', '11111133333', null, null, '1', '消耗品问题', '没有洗漱用具', '四级', null, '2222222244444');
+INSERT INTO `problem` VALUES ('16', 'W33-2', '已入住', 'Ada', '2017-10-13', '2017-10-13', '2', 'test', '', null, null, '0', '房屋问题', '地板损坏', '一级', null, '');
+INSERT INTO `problem` VALUES ('17', 'W33-2', '已入住', 'Ada', '2017-10-13', '2017-10-13', '2', 'test', '222', null, null, '1', '房屋问题', '地板损坏', '三级', null, 'sss');
+INSERT INTO `problem` VALUES ('18', 'W33-3', '已入住', 'Ada', '2017-10-13', '2017-10-13', '2', 'test', '7878787878787878', null, null, '1', '消耗品问题', '没有洗漱用具', '三级', null, '89898989898989');
+INSERT INTO `problem` VALUES ('19', 'W33-2', '已入住', 'Ada', '2017-10-13', '2017-10-22', '2', 'test', '111', null, null, '1', '房屋问题', '地板损坏', '一级', null, '22');
+INSERT INTO `problem` VALUES ('20', 'W33-2', '已入住', 'Ada', '2017-10-13', '2017-10-22', '2', 'test', 'sdfsdf', null, null, '1', '房屋问题', '地板损坏', '四级', null, '11');
+INSERT INTO `problem` VALUES ('21', 'W33-3', '已入住', 'Ada', '2017-10-13', '2017-10-13', '2', 'test', '1', null, null, '1', '房屋问题', '地板损坏', '一级', null, '2');
+INSERT INTO `problem` VALUES ('23', 'W2-1', '已入住', 'Tom', '2017-12-19', '2017-12-19', '2', 'test', 'qwe', '', '', '0', null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `problem_reply`
+-- ----------------------------
+DROP TABLE IF EXISTS `problem_reply`;
+CREATE TABLE `problem_reply` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `PROBLEM_ID` int(11) DEFAULT NULL,
+  `LAST_REPLAY_DATE` date DEFAULT NULL,
+  `LAST_REPLAY_DESCRIPTION` varchar(255) DEFAULT NULL,
+  `DEPARTMENT` varchar(100) DEFAULT NULL COMMENT '分配部门',
+  `INFO_SOURCE` varchar(25) DEFAULT NULL COMMENT '信息来源',
+  `FARE` double DEFAULT NULL,
+  `PROBLEM_STATE` varchar(15) DEFAULT NULL COMMENT '问题状态：跟踪中 搁置处理 确认完成',
+  `FARE_DETAIL` varchar(255) DEFAULT NULL COMMENT '费用明细',
+  `FARE_PAY` varchar(25) DEFAULT NULL COMMENT 'LE承担 租客承担 SPC承担 其他承担',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of problem_reply
+-- ----------------------------
+INSERT INTO `problem_reply` VALUES ('1', '11', '2017-12-24', null, null, null, null, '搁置处理', null, null);
+INSERT INTO `problem_reply` VALUES ('4', '23', '2017-12-24', 'were', null, '第一太平', '0', '跟踪中', '', '');
 
 -- ----------------------------
 -- Table structure for `repository`
@@ -1963,7 +2178,7 @@ INSERT INTO `room` VALUES ('101', 'W28-1', null, null, null, null, null, null, n
 INSERT INTO `room` VALUES ('102', 'W28-2', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('103', 'W28-3', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('104', 'W29-1', null, null, null, null, null, null, null, null, '');
-INSERT INTO `room` VALUES ('105', 'W29-2', null, null, null, null, null, null, null, null, '');
+INSERT INTO `room` VALUES ('105', 'W29-2', 'SPC', null, null, '1', '无', null, '2017-09-26 00:00:00', null, null);
 INSERT INTO `room` VALUES ('106', 'W29-3', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('107', 'W30-1', null, null, null, null, null, null, null, null, '');
 INSERT INTO `room` VALUES ('108', 'W30-2', null, null, null, null, null, null, null, null, '');
@@ -2190,20 +2405,1118 @@ DROP TABLE IF EXISTS `room_meter`;
 CREATE TABLE `room_meter` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ROOM_ID` int(11) DEFAULT NULL,
-  `TYPE` int(10) unsigned DEFAULT NULL,
+  `TYPE` varchar(11) DEFAULT NULL COMMENT 'water gas elec',
   `METER_NUMBER` varchar(64) DEFAULT NULL,
   `YEAR_INIT_VAL` double DEFAULT NULL,
   `LAST_MONTH_VAL` double DEFAULT NULL,
   `CUR_VAL` double DEFAULT NULL,
-  `CUR_TIME` date DEFAULT NULL,
+  `MONTH` int(10) DEFAULT NULL COMMENT '计费月份',
+  `STEP` int(5) DEFAULT NULL COMMENT '阶梯计价',
+  `MONEY` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `METER_NUMBER` (`METER_NUMBER`),
   KEY `ROOM_ID` (`ROOM_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1097 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of room_meter
 -- ----------------------------
+INSERT INTO `room_meter` VALUES ('1', '1', 'water', null, null, '49', '56', '9', '1', '4.4');
+INSERT INTO `room_meter` VALUES ('2', '2', 'water', null, null, '23', '24', '11', '1', '9.600000000000001');
+INSERT INTO `room_meter` VALUES ('3', '3', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('4', '4', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('5', '5', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('6', '6', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('7', '7', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('8', '8', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('9', '9', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('10', '10', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('11', '11', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('12', '12', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('13', '13', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('14', '14', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('15', '15', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('16', '16', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('17', '17', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('18', '18', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('19', '19', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('20', '20', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('21', '21', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('22', '22', 'water', null, null, null, '45', '11', '1', '18');
+INSERT INTO `room_meter` VALUES ('23', '23', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('24', '24', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('25', '25', 'water', null, null, '2', '3', '11', '1', '1.2000000000000002');
+INSERT INTO `room_meter` VALUES ('26', '26', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('27', '27', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('28', '28', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('29', '29', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('30', '30', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('31', '31', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('32', '32', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('33', '33', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('34', '34', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('35', '35', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('36', '36', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('37', '37', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('38', '38', 'water', null, null, null, '2', '11', '1', '0.8');
+INSERT INTO `room_meter` VALUES ('39', '39', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('40', '40', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('41', '41', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('42', '42', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('43', '43', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('44', '44', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('45', '45', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('46', '46', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('47', '47', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('48', '48', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('49', '49', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('50', '50', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('51', '51', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('52', '52', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('53', '53', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('54', '54', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('55', '55', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('56', '56', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('57', '57', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('58', '58', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('59', '59', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('60', '60', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('61', '61', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('62', '62', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('63', '63', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('64', '64', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('65', '65', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('66', '66', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('67', '67', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('68', '68', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('69', '69', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('70', '70', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('71', '71', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('72', '72', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('73', '73', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('74', '74', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('75', '75', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('76', '76', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('77', '77', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('78', '78', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('79', '79', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('80', '80', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('81', '81', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('82', '82', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('83', '83', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('84', '84', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('85', '85', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('86', '86', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('87', '87', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('88', '88', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('89', '89', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('90', '90', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('91', '91', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('92', '92', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('93', '93', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('94', '94', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('95', '95', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('96', '96', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('97', '97', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('98', '98', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('99', '99', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('100', '100', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('101', '101', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('102', '102', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('103', '103', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('104', '104', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('105', '105', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('106', '106', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('107', '107', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('108', '108', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('109', '109', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('110', '110', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('111', '111', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('112', '112', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('113', '113', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('114', '114', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('115', '115', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('116', '116', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('117', '117', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('118', '118', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('119', '119', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('120', '120', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('121', '121', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('122', '122', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('123', '123', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('124', '124', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('125', '125', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('126', '126', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('127', '127', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('128', '128', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('129', '129', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('130', '130', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('131', '131', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('132', '132', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('133', '133', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('134', '134', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('135', '135', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('136', '136', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('137', '137', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('138', '138', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('139', '139', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('140', '140', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('141', '141', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('142', '142', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('143', '143', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('144', '144', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('145', '145', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('146', '146', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('147', '147', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('148', '148', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('149', '149', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('150', '150', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('151', '151', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('152', '152', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('153', '153', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('154', '154', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('155', '155', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('156', '156', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('157', '157', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('158', '158', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('159', '159', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('160', '160', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('161', '161', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('162', '162', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('163', '163', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('164', '164', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('165', '165', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('166', '166', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('167', '167', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('168', '168', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('169', '169', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('170', '170', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('171', '171', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('172', '172', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('173', '173', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('174', '174', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('175', '175', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('176', '176', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('177', '177', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('178', '178', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('179', '179', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('180', '180', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('181', '181', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('182', '182', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('183', '183', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('184', '184', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('185', '185', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('186', '186', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('187', '187', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('188', '188', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('189', '189', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('190', '190', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('191', '191', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('192', '192', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('193', '193', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('194', '194', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('195', '195', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('196', '196', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('197', '197', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('198', '198', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('199', '199', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('200', '200', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('201', '201', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('202', '202', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('203', '203', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('204', '204', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('205', '205', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('206', '206', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('207', '207', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('208', '208', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('209', '209', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('210', '210', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('211', '211', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('212', '212', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('213', '213', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('214', '214', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('215', '215', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('216', '216', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('217', '217', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('218', '218', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('219', '219', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('220', '220', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('221', '221', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('222', '222', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('223', '223', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('224', '224', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('225', '225', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('226', '226', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('227', '227', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('228', '228', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('229', '229', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('230', '230', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('231', '231', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('232', '232', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('233', '233', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('234', '234', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('235', '235', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('236', '236', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('237', '237', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('238', '238', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('239', '239', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('240', '240', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('241', '241', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('242', '242', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('243', '243', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('244', '244', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('245', '245', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('246', '246', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('247', '247', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('248', '248', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('249', '249', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('250', '250', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('251', '251', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('252', '252', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('253', '253', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('254', '254', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('255', '255', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('256', '256', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('257', '257', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('258', '258', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('259', '259', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('260', '260', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('261', '261', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('262', '262', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('263', '263', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('264', '264', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('265', '265', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('266', '266', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('267', '267', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('268', '268', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('269', '269', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('270', '270', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('271', '271', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('272', '272', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('273', '273', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('274', '274', 'water', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('275', '1', 'elec', null, null, '14', '14', '11', '1', '5.6000000000000005');
+INSERT INTO `room_meter` VALUES ('276', '2', 'elec', null, null, '2', '3', '11', '1', '1.2000000000000002');
+INSERT INTO `room_meter` VALUES ('277', '3', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('278', '4', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('279', '5', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('280', '6', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('281', '7', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('282', '8', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('283', '9', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('284', '10', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('285', '11', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('286', '12', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('287', '13', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('288', '14', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('289', '15', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('290', '16', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('291', '17', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('292', '18', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('293', '19', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('294', '20', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('295', '21', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('296', '22', 'elec', null, null, null, '10', '11', '1', '4');
+INSERT INTO `room_meter` VALUES ('297', '23', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('298', '24', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('299', '25', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('300', '26', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('301', '27', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('302', '28', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('303', '29', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('304', '30', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('305', '31', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('306', '32', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('307', '33', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('308', '34', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('309', '35', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('310', '36', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('311', '37', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('312', '38', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('313', '39', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('314', '40', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('315', '41', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('316', '42', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('317', '43', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('318', '44', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('319', '45', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('320', '46', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('321', '47', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('322', '48', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('323', '49', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('324', '50', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('325', '51', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('326', '52', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('327', '53', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('328', '54', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('329', '55', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('330', '56', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('331', '57', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('332', '58', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('333', '59', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('334', '60', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('335', '61', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('336', '62', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('337', '63', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('338', '64', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('339', '65', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('340', '66', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('341', '67', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('342', '68', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('343', '69', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('344', '70', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('345', '71', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('346', '72', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('347', '73', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('348', '74', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('349', '75', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('350', '76', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('351', '77', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('352', '78', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('353', '79', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('354', '80', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('355', '81', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('356', '82', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('357', '83', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('358', '84', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('359', '85', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('360', '86', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('361', '87', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('362', '88', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('363', '89', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('364', '90', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('365', '91', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('366', '92', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('367', '93', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('368', '94', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('369', '95', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('370', '96', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('371', '97', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('372', '98', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('373', '99', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('374', '100', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('375', '101', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('376', '102', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('377', '103', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('378', '104', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('379', '105', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('380', '106', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('381', '107', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('382', '108', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('383', '109', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('384', '110', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('385', '111', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('386', '112', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('387', '113', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('388', '114', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('389', '115', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('390', '116', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('391', '117', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('392', '118', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('393', '119', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('394', '120', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('395', '121', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('396', '122', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('397', '123', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('398', '124', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('399', '125', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('400', '126', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('401', '127', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('402', '128', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('403', '129', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('404', '130', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('405', '131', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('406', '132', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('407', '133', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('408', '134', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('409', '135', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('410', '136', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('411', '137', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('412', '138', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('413', '139', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('414', '140', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('415', '141', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('416', '142', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('417', '143', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('418', '144', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('419', '145', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('420', '146', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('421', '147', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('422', '148', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('423', '149', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('424', '150', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('425', '151', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('426', '152', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('427', '153', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('428', '154', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('429', '155', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('430', '156', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('431', '157', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('432', '158', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('433', '159', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('434', '160', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('435', '161', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('436', '162', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('437', '163', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('438', '164', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('439', '165', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('440', '166', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('441', '167', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('442', '168', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('443', '169', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('444', '170', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('445', '171', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('446', '172', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('447', '173', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('448', '174', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('449', '175', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('450', '176', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('451', '177', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('452', '178', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('453', '179', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('454', '180', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('455', '181', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('456', '182', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('457', '183', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('458', '184', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('459', '185', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('460', '186', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('461', '187', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('462', '188', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('463', '189', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('464', '190', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('465', '191', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('466', '192', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('467', '193', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('468', '194', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('469', '195', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('470', '196', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('471', '197', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('472', '198', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('473', '199', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('474', '200', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('475', '201', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('476', '202', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('477', '203', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('478', '204', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('479', '205', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('480', '206', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('481', '207', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('482', '208', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('483', '209', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('484', '210', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('485', '211', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('486', '212', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('487', '213', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('488', '214', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('489', '215', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('490', '216', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('491', '217', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('492', '218', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('493', '219', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('494', '220', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('495', '221', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('496', '222', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('497', '223', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('498', '224', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('499', '225', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('500', '226', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('501', '227', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('502', '228', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('503', '229', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('504', '230', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('505', '231', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('506', '232', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('507', '233', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('508', '234', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('509', '235', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('510', '236', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('511', '237', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('512', '238', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('513', '239', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('514', '240', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('515', '241', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('516', '242', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('517', '243', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('518', '244', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('519', '245', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('520', '246', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('521', '247', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('522', '248', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('523', '249', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('524', '250', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('525', '251', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('526', '252', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('527', '253', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('528', '254', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('529', '255', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('530', '256', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('531', '257', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('532', '258', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('533', '259', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('534', '260', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('535', '261', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('536', '262', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('537', '263', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('538', '264', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('539', '265', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('540', '266', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('541', '267', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('542', '268', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('543', '269', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('544', '270', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('545', '271', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('546', '272', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('547', '273', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('548', '274', 'elec', null, null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('549', '1', 'gas', '1', null, '4', '5', '11', '1', '1.5');
+INSERT INTO `room_meter` VALUES ('550', '2', 'gas', '2', null, null, '2', '11', '1', '0.6');
+INSERT INTO `room_meter` VALUES ('551', '3', 'gas', '3', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('552', '4', 'gas', '4', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('553', '5', 'gas', '5', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('554', '6', 'gas', '6', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('555', '7', 'gas', '7', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('556', '8', 'gas', '8', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('557', '9', 'gas', '9', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('558', '10', 'gas', '10', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('559', '11', 'gas', '11', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('560', '12', 'gas', '12', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('561', '13', 'gas', '13', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('562', '14', 'gas', '14', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('563', '15', 'gas', '15', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('564', '16', 'gas', '16', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('565', '17', 'gas', '17', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('566', '18', 'gas', '18', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('567', '19', 'gas', '19', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('568', '20', 'gas', '20', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('569', '21', 'gas', '21', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('570', '22', 'gas', '22', null, null, '2', '11', '1', '0.6');
+INSERT INTO `room_meter` VALUES ('571', '23', 'gas', '23', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('572', '24', 'gas', '24', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('573', '25', 'gas', '25', null, null, '2', '11', '1', '0.6');
+INSERT INTO `room_meter` VALUES ('574', '26', 'gas', '26', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('575', '27', 'gas', '27', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('576', '28', 'gas', '28', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('577', '29', 'gas', '29', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('578', '30', 'gas', '30', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('579', '31', 'gas', '31', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('580', '32', 'gas', '32', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('581', '33', 'gas', '33', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('582', '34', 'gas', '34', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('583', '35', 'gas', '35', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('584', '36', 'gas', '36', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('585', '37', 'gas', '37', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('586', '38', 'gas', '38', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('587', '39', 'gas', '39', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('588', '40', 'gas', '40', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('589', '41', 'gas', '41', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('590', '42', 'gas', '42', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('591', '43', 'gas', '43', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('592', '44', 'gas', '44', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('593', '45', 'gas', '45', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('594', '46', 'gas', '46', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('595', '47', 'gas', '47', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('596', '48', 'gas', '48', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('597', '49', 'gas', '49', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('598', '50', 'gas', '50', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('599', '51', 'gas', '51', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('600', '52', 'gas', '52', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('601', '53', 'gas', '53', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('602', '54', 'gas', '54', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('603', '55', 'gas', '55', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('604', '56', 'gas', '56', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('605', '57', 'gas', '57', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('606', '58', 'gas', '58', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('607', '59', 'gas', '59', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('608', '60', 'gas', '60', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('609', '61', 'gas', '61', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('610', '62', 'gas', '62', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('611', '63', 'gas', '63', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('612', '64', 'gas', '64', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('613', '65', 'gas', '65', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('614', '66', 'gas', '66', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('615', '67', 'gas', '67', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('616', '68', 'gas', '68', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('617', '69', 'gas', '69', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('618', '70', 'gas', '70', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('619', '71', 'gas', '71', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('620', '72', 'gas', '72', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('621', '73', 'gas', '73', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('622', '74', 'gas', '74', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('623', '75', 'gas', '75', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('624', '76', 'gas', '76', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('625', '77', 'gas', '77', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('626', '78', 'gas', '78', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('627', '79', 'gas', '79', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('628', '80', 'gas', '80', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('629', '81', 'gas', '81', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('630', '82', 'gas', '82', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('631', '83', 'gas', '83', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('632', '84', 'gas', '84', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('633', '85', 'gas', '85', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('634', '86', 'gas', '86', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('635', '87', 'gas', '87', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('636', '88', 'gas', '88', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('637', '89', 'gas', '89', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('638', '90', 'gas', '90', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('639', '91', 'gas', '91', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('640', '92', 'gas', '92', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('641', '93', 'gas', '93', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('642', '94', 'gas', '94', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('643', '95', 'gas', '95', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('644', '96', 'gas', '96', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('645', '97', 'gas', '97', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('646', '98', 'gas', '98', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('647', '99', 'gas', '99', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('648', '100', 'gas', '100', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('649', '101', 'gas', '101', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('650', '102', 'gas', '102', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('651', '103', 'gas', '103', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('652', '104', 'gas', '104', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('653', '105', 'gas', '105', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('654', '106', 'gas', '106', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('655', '107', 'gas', '107', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('656', '108', 'gas', '108', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('657', '109', 'gas', '109', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('658', '110', 'gas', '110', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('659', '111', 'gas', '111', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('660', '112', 'gas', '112', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('661', '113', 'gas', '113', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('662', '114', 'gas', '114', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('663', '115', 'gas', '115', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('664', '116', 'gas', '116', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('665', '117', 'gas', '117', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('666', '118', 'gas', '118', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('667', '119', 'gas', '119', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('668', '120', 'gas', '120', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('669', '121', 'gas', '121', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('670', '122', 'gas', '122', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('671', '123', 'gas', '123', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('672', '124', 'gas', '124', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('673', '125', 'gas', '125', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('674', '126', 'gas', '126', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('675', '127', 'gas', '127', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('676', '128', 'gas', '128', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('677', '129', 'gas', '129', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('678', '130', 'gas', '130', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('679', '131', 'gas', '131', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('680', '132', 'gas', '132', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('681', '133', 'gas', '133', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('682', '134', 'gas', '134', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('683', '135', 'gas', '135', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('684', '136', 'gas', '136', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('685', '137', 'gas', '137', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('686', '138', 'gas', '138', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('687', '139', 'gas', '139', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('688', '140', 'gas', '140', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('689', '141', 'gas', '141', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('690', '142', 'gas', '142', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('691', '143', 'gas', '143', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('692', '144', 'gas', '144', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('693', '145', 'gas', '145', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('694', '146', 'gas', '146', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('695', '147', 'gas', '147', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('696', '148', 'gas', '148', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('697', '149', 'gas', '149', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('698', '150', 'gas', '150', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('699', '151', 'gas', '151', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('700', '152', 'gas', '152', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('701', '153', 'gas', '153', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('702', '154', 'gas', '154', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('703', '155', 'gas', '155', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('704', '156', 'gas', '156', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('705', '157', 'gas', '157', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('706', '158', 'gas', '158', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('707', '159', 'gas', '159', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('708', '160', 'gas', '160', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('709', '161', 'gas', '161', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('710', '162', 'gas', '162', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('711', '163', 'gas', '163', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('712', '164', 'gas', '164', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('713', '165', 'gas', '165', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('714', '166', 'gas', '166', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('715', '167', 'gas', '167', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('716', '168', 'gas', '168', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('717', '169', 'gas', '169', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('718', '170', 'gas', '170', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('719', '171', 'gas', '171', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('720', '172', 'gas', '172', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('721', '173', 'gas', '173', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('722', '174', 'gas', '174', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('723', '175', 'gas', '175', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('724', '176', 'gas', '176', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('725', '177', 'gas', '177', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('726', '178', 'gas', '178', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('727', '179', 'gas', '179', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('728', '180', 'gas', '180', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('729', '181', 'gas', '181', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('730', '182', 'gas', '182', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('731', '183', 'gas', '183', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('732', '184', 'gas', '184', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('733', '185', 'gas', '185', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('734', '186', 'gas', '186', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('735', '187', 'gas', '187', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('736', '188', 'gas', '188', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('737', '189', 'gas', '189', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('738', '190', 'gas', '190', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('739', '191', 'gas', '191', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('740', '192', 'gas', '192', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('741', '193', 'gas', '193', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('742', '194', 'gas', '194', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('743', '195', 'gas', '195', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('744', '196', 'gas', '196', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('745', '197', 'gas', '197', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('746', '198', 'gas', '198', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('747', '199', 'gas', '199', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('748', '200', 'gas', '200', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('749', '201', 'gas', '201', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('750', '202', 'gas', '202', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('751', '203', 'gas', '203', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('752', '204', 'gas', '204', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('753', '205', 'gas', '205', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('754', '206', 'gas', '206', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('755', '207', 'gas', '207', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('756', '208', 'gas', '208', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('757', '209', 'gas', '209', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('758', '210', 'gas', '210', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('759', '211', 'gas', '211', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('760', '212', 'gas', '212', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('761', '213', 'gas', '213', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('762', '214', 'gas', '214', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('763', '215', 'gas', '215', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('764', '216', 'gas', '216', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('765', '217', 'gas', '217', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('766', '218', 'gas', '218', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('767', '219', 'gas', '219', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('768', '220', 'gas', '220', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('769', '221', 'gas', '221', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('770', '222', 'gas', '222', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('771', '223', 'gas', '223', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('772', '224', 'gas', '224', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('773', '225', 'gas', '225', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('774', '226', 'gas', '226', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('775', '227', 'gas', '227', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('776', '228', 'gas', '228', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('777', '229', 'gas', '229', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('778', '230', 'gas', '230', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('779', '231', 'gas', '231', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('780', '232', 'gas', '232', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('781', '233', 'gas', '233', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('782', '234', 'gas', '234', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('783', '235', 'gas', '235', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('784', '236', 'gas', '236', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('785', '237', 'gas', '237', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('786', '238', 'gas', '238', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('787', '239', 'gas', '239', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('788', '240', 'gas', '240', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('789', '241', 'gas', '241', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('790', '242', 'gas', '242', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('791', '243', 'gas', '243', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('792', '244', 'gas', '244', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('793', '245', 'gas', '245', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('794', '246', 'gas', '246', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('795', '247', 'gas', '247', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('796', '248', 'gas', '248', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('797', '249', 'gas', '249', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('798', '250', 'gas', '250', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('799', '251', 'gas', '251', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('800', '252', 'gas', '252', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('801', '253', 'gas', '253', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('802', '254', 'gas', '254', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('803', '255', 'gas', '255', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('804', '256', 'gas', '256', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('805', '257', 'gas', '257', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('806', '258', 'gas', '258', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('807', '259', 'gas', '259', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('808', '260', 'gas', '260', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('809', '261', 'gas', '261', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('810', '262', 'gas', '262', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('811', '263', 'gas', '263', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('812', '264', 'gas', '264', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('813', '265', 'gas', '265', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('814', '266', 'gas', '266', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('815', '267', 'gas', '267', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('816', '268', 'gas', '268', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('817', '269', 'gas', '269', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('818', '270', 'gas', '270', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('819', '271', 'gas', '271', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('820', '272', 'gas', '272', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('821', '273', 'gas', '273', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('822', '274', 'gas', '274', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('823', '1', 'gas', '275', null, null, '2', '11', '1', '0.6');
+INSERT INTO `room_meter` VALUES ('824', '2', 'gas', '276', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('825', '3', 'gas', '277', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('826', '4', 'gas', '278', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('827', '5', 'gas', '279', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('828', '6', 'gas', '280', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('829', '7', 'gas', '281', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('830', '8', 'gas', '282', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('831', '9', 'gas', '283', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('832', '10', 'gas', '284', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('833', '11', 'gas', '285', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('834', '12', 'gas', '286', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('835', '13', 'gas', '287', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('836', '14', 'gas', '288', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('837', '15', 'gas', '289', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('838', '16', 'gas', '290', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('839', '17', 'gas', '291', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('840', '18', 'gas', '292', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('841', '19', 'gas', '293', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('842', '20', 'gas', '294', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('843', '21', 'gas', '295', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('844', '22', 'gas', '296', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('845', '23', 'gas', '297', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('846', '24', 'gas', '298', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('847', '25', 'gas', '299', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('848', '26', 'gas', '300', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('849', '27', 'gas', '301', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('850', '28', 'gas', '302', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('851', '29', 'gas', '303', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('852', '30', 'gas', '304', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('853', '31', 'gas', '305', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('854', '32', 'gas', '306', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('855', '33', 'gas', '307', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('856', '34', 'gas', '308', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('857', '35', 'gas', '309', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('858', '36', 'gas', '310', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('859', '37', 'gas', '311', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('860', '38', 'gas', '312', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('861', '39', 'gas', '313', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('862', '40', 'gas', '314', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('863', '41', 'gas', '315', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('864', '42', 'gas', '316', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('865', '43', 'gas', '317', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('866', '44', 'gas', '318', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('867', '45', 'gas', '319', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('868', '46', 'gas', '320', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('869', '47', 'gas', '321', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('870', '48', 'gas', '322', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('871', '49', 'gas', '323', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('872', '50', 'gas', '324', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('873', '51', 'gas', '325', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('874', '52', 'gas', '326', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('875', '53', 'gas', '327', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('876', '54', 'gas', '328', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('877', '55', 'gas', '329', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('878', '56', 'gas', '330', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('879', '57', 'gas', '331', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('880', '58', 'gas', '332', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('881', '59', 'gas', '333', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('882', '60', 'gas', '334', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('883', '61', 'gas', '335', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('884', '62', 'gas', '336', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('885', '63', 'gas', '337', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('886', '64', 'gas', '338', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('887', '65', 'gas', '339', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('888', '66', 'gas', '340', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('889', '67', 'gas', '341', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('890', '68', 'gas', '342', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('891', '69', 'gas', '343', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('892', '70', 'gas', '344', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('893', '71', 'gas', '345', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('894', '72', 'gas', '346', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('895', '73', 'gas', '347', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('896', '74', 'gas', '348', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('897', '75', 'gas', '349', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('898', '76', 'gas', '350', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('899', '77', 'gas', '351', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('900', '78', 'gas', '352', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('901', '79', 'gas', '353', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('902', '80', 'gas', '354', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('903', '81', 'gas', '355', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('904', '82', 'gas', '356', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('905', '83', 'gas', '357', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('906', '84', 'gas', '358', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('907', '85', 'gas', '359', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('908', '86', 'gas', '360', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('909', '87', 'gas', '361', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('910', '88', 'gas', '362', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('911', '89', 'gas', '363', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('912', '90', 'gas', '364', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('913', '91', 'gas', '365', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('914', '92', 'gas', '366', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('915', '93', 'gas', '367', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('916', '94', 'gas', '368', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('917', '95', 'gas', '369', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('918', '96', 'gas', '370', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('919', '97', 'gas', '371', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('920', '98', 'gas', '372', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('921', '99', 'gas', '373', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('922', '100', 'gas', '374', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('923', '101', 'gas', '375', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('924', '102', 'gas', '376', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('925', '103', 'gas', '377', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('926', '104', 'gas', '378', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('927', '105', 'gas', '379', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('928', '106', 'gas', '380', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('929', '107', 'gas', '381', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('930', '108', 'gas', '382', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('931', '109', 'gas', '383', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('932', '110', 'gas', '384', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('933', '111', 'gas', '385', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('934', '112', 'gas', '386', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('935', '113', 'gas', '387', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('936', '114', 'gas', '388', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('937', '115', 'gas', '389', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('938', '116', 'gas', '390', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('939', '117', 'gas', '391', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('940', '118', 'gas', '392', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('941', '119', 'gas', '393', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('942', '120', 'gas', '394', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('943', '121', 'gas', '395', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('944', '122', 'gas', '396', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('945', '123', 'gas', '397', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('946', '124', 'gas', '398', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('947', '125', 'gas', '399', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('948', '126', 'gas', '400', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('949', '127', 'gas', '401', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('950', '128', 'gas', '402', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('951', '129', 'gas', '403', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('952', '130', 'gas', '404', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('953', '131', 'gas', '405', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('954', '132', 'gas', '406', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('955', '133', 'gas', '407', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('956', '134', 'gas', '408', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('957', '135', 'gas', '409', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('958', '136', 'gas', '410', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('959', '137', 'gas', '411', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('960', '138', 'gas', '412', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('961', '139', 'gas', '413', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('962', '140', 'gas', '414', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('963', '141', 'gas', '415', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('964', '142', 'gas', '416', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('965', '143', 'gas', '417', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('966', '144', 'gas', '418', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('967', '145', 'gas', '419', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('968', '146', 'gas', '420', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('969', '147', 'gas', '421', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('970', '148', 'gas', '422', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('971', '149', 'gas', '423', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('972', '150', 'gas', '424', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('973', '151', 'gas', '425', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('974', '152', 'gas', '426', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('975', '153', 'gas', '427', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('976', '154', 'gas', '428', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('977', '155', 'gas', '429', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('978', '156', 'gas', '430', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('979', '157', 'gas', '431', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('980', '158', 'gas', '432', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('981', '159', 'gas', '433', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('982', '160', 'gas', '434', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('983', '161', 'gas', '435', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('984', '162', 'gas', '436', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('985', '163', 'gas', '437', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('986', '164', 'gas', '438', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('987', '165', 'gas', '439', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('988', '166', 'gas', '440', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('989', '167', 'gas', '441', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('990', '168', 'gas', '442', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('991', '169', 'gas', '443', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('992', '170', 'gas', '444', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('993', '171', 'gas', '445', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('994', '172', 'gas', '446', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('995', '173', 'gas', '447', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('996', '174', 'gas', '448', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('997', '175', 'gas', '449', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('998', '176', 'gas', '450', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('999', '177', 'gas', '451', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1000', '178', 'gas', '452', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1001', '179', 'gas', '453', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1002', '180', 'gas', '454', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1003', '181', 'gas', '455', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1004', '182', 'gas', '456', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1005', '183', 'gas', '457', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1006', '184', 'gas', '458', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1007', '185', 'gas', '459', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1008', '186', 'gas', '460', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1009', '187', 'gas', '461', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1010', '188', 'gas', '462', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1011', '189', 'gas', '463', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1012', '190', 'gas', '464', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1013', '191', 'gas', '465', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1014', '192', 'gas', '466', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1015', '193', 'gas', '467', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1016', '194', 'gas', '468', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1017', '195', 'gas', '469', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1018', '196', 'gas', '470', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1019', '197', 'gas', '471', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1020', '198', 'gas', '472', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1021', '199', 'gas', '473', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1022', '200', 'gas', '474', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1023', '201', 'gas', '475', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1024', '202', 'gas', '476', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1025', '203', 'gas', '477', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1026', '204', 'gas', '478', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1027', '205', 'gas', '479', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1028', '206', 'gas', '480', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1029', '207', 'gas', '481', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1030', '208', 'gas', '482', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1031', '209', 'gas', '483', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1032', '210', 'gas', '484', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1033', '211', 'gas', '485', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1034', '212', 'gas', '486', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1035', '213', 'gas', '487', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1036', '214', 'gas', '488', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1037', '215', 'gas', '489', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1038', '216', 'gas', '490', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1039', '217', 'gas', '491', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1040', '218', 'gas', '492', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1041', '219', 'gas', '493', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1042', '220', 'gas', '494', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1043', '221', 'gas', '495', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1044', '222', 'gas', '496', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1045', '223', 'gas', '497', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1046', '224', 'gas', '498', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1047', '225', 'gas', '499', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1048', '226', 'gas', '500', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1049', '227', 'gas', '501', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1050', '228', 'gas', '502', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1051', '229', 'gas', '503', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1052', '230', 'gas', '504', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1053', '231', 'gas', '505', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1054', '232', 'gas', '506', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1055', '233', 'gas', '507', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1056', '234', 'gas', '508', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1057', '235', 'gas', '509', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1058', '236', 'gas', '510', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1059', '237', 'gas', '511', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1060', '238', 'gas', '512', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1061', '239', 'gas', '513', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1062', '240', 'gas', '514', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1063', '241', 'gas', '515', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1064', '242', 'gas', '516', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1065', '243', 'gas', '517', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1066', '244', 'gas', '518', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1067', '245', 'gas', '519', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1068', '246', 'gas', '520', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1069', '247', 'gas', '521', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1070', '248', 'gas', '522', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1071', '249', 'gas', '523', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1072', '250', 'gas', '524', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1073', '251', 'gas', '525', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1074', '252', 'gas', '526', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1075', '253', 'gas', '527', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1076', '254', 'gas', '528', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1077', '255', 'gas', '529', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1078', '256', 'gas', '530', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1079', '257', 'gas', '531', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1080', '258', 'gas', '532', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1081', '259', 'gas', '533', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1082', '260', 'gas', '534', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1083', '261', 'gas', '535', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1084', '262', 'gas', '536', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1085', '263', 'gas', '537', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1086', '264', 'gas', '538', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1087', '265', 'gas', '539', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1088', '266', 'gas', '540', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1089', '267', 'gas', '541', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1090', '268', 'gas', '542', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1091', '269', 'gas', '543', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1092', '270', 'gas', '544', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1093', '271', 'gas', '545', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1094', '272', 'gas', '546', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1095', '273', 'gas', '547', null, null, null, null, null, null);
+INSERT INTO `room_meter` VALUES ('1096', '274', 'gas', '548', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `room_pic`
@@ -2241,7 +3554,7 @@ CREATE TABLE `room_state` (
   `ROOM_NUMBER` varchar(64) NOT NULL,
   `CUS_ID` int(11) DEFAULT NULL,
   `CUS_NAME` varchar(64) DEFAULT NULL,
-  `STATE` int(11) DEFAULT '0',
+  `STATE` int(11) DEFAULT '0' COMMENT '0表示无人入住 1表示已有人入住 2房间非管理 3 其他使用',
   `ROOM_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ROOM_NUMBER` (`ROOM_NUMBER`),
@@ -2252,7 +3565,7 @@ CREATE TABLE `room_state` (
 -- Records of room_state
 -- ----------------------------
 INSERT INTO `room_state` VALUES ('1', 'W2-1', '3', 'Tom', '1', '1');
-INSERT INTO `room_state` VALUES ('2', 'W2-2', null, null, '0', '2');
+INSERT INTO `room_state` VALUES ('2', 'W2-2', '124', 'Ada', '1', '2');
 INSERT INTO `room_state` VALUES ('3', 'W2-3', null, null, '0', '3');
 INSERT INTO `room_state` VALUES ('4', 'W3-1', null, null, '0', '4');
 INSERT INTO `room_state` VALUES ('5', 'W3-2', null, null, '0', '5');
@@ -2545,16 +3858,20 @@ CREATE TABLE `shoes_polishing` (
   `IMPORT_TIME` datetime DEFAULT NULL,
   `EDIT_TIME` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shoes_polishing
 -- ----------------------------
 INSERT INTO `shoes_polishing` VALUES ('1', 'W33-2', '54', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-06-12 00:00:00', '2017-06-12 21:55:28', '2017-06-12 21:55:28');
-INSERT INTO `shoes_polishing` VALUES ('2', 'W7-3', '50', '测', '0', '0', '0', '无', '0', 'null', '2017-06-12 00:00:00', '2017-06-12 21:55:34', '2017-06-12 21:55:34');
 INSERT INTO `shoes_polishing` VALUES ('3', 'W11-1', '49', 'Ada5', '0', '0', '0', '无', '0', 'null', '2017-06-12 00:00:00', '2017-06-12 21:55:38', '2017-06-12 21:55:38');
 INSERT INTO `shoes_polishing` VALUES ('4', 'W33-2', '54', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-06-11 00:00:00', '2017-06-12 21:56:13', '2017-06-12 21:56:13');
 INSERT INTO `shoes_polishing` VALUES ('5', 'W11-1', '49', 'Ada5', '0', '0', '0', '无', '0', 'null', '2017-06-12 00:00:00', '2017-06-12 22:06:06', '2017-06-12 22:06:06');
+INSERT INTO `shoes_polishing` VALUES ('6', 'w33-3', '105', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-10-26 00:00:00', '2017-10-26 13:24:15', '2017-10-26 13:24:15');
+INSERT INTO `shoes_polishing` VALUES ('7', 'w33-3', '105', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-10-26 00:00:00', '2017-10-26 14:09:52', '2017-10-26 14:09:52');
+INSERT INTO `shoes_polishing` VALUES ('8', 'w33-3', '105', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-10-26 00:00:00', '2017-10-26 14:09:54', '2017-10-26 14:09:54');
+INSERT INTO `shoes_polishing` VALUES ('9', 'w33-3', '105', 'Ada', '0', '0', '0', '无', '0', 'null', '2017-10-26 00:00:00', '2017-10-26 14:09:57', '2017-10-26 14:09:57');
+INSERT INTO `shoes_polishing` VALUES ('10', 'w33-3', '105', 'Ada', '0', '20', '0', '无', '0', 'null', '2017-10-26 00:00:00', '2017-10-26 14:10:00', '2017-10-26 14:17:27');
 
 -- ----------------------------
 -- Table structure for `shuttle_bus`
@@ -2607,7 +3924,7 @@ CREATE TABLE `shuttle_bus` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `YEAR` (`YEAR`,`MONTH`,`GUEST_ID`),
   KEY `ROOM_NUM` (`ROOM_NUM`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of shuttle_bus
@@ -2615,13 +3932,14 @@ CREATE TABLE `shuttle_bus` (
 INSERT INTO `shuttle_bus` VALUES ('1', '2017', '3', 'W32-1', '2', 'Alice1', '张三，李四，王五', '0', '0', '0', '0', '0', '0', '9', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '9', '2017-04-12 12:38:49', '2017-05-15 12:38:53', '2017-06-28 12:38:55');
 INSERT INTO `shuttle_bus` VALUES ('29', '2016', '12', 'W7-3', '50', '测', '李逍遥，赵灵儿，林月如', '1', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '1', '0', '1', '0', '1', '0', '0', '8', '80', '2016-12-01 12:00:00', '2017-04-25 12:39:25', '2017-05-14 14:50:32');
 INSERT INTO `shuttle_bus` VALUES ('30', '2017', '7', 'W2-1', '3', 'Tom', '林月如，阿奴', '0', '0', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', '0', '1', '1', '1', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '0', '18', '198', '2017-07-01 12:00:00', '2017-05-25 12:39:29', '2017-05-25 15:33:36');
-INSERT INTO `shuttle_bus` VALUES ('31', '2017', '5', 'W6-1', '59', 'aaa', '景天，雪见', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '2', '20', '2017-02-22 12:39:10', '2017-03-15 12:39:33', '2017-02-21 12:39:46');
-INSERT INTO `shuttle_bus` VALUES ('34', '2017', '5', 'W33-2', '54', 'Ada', '云天河，柳梦璃', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '7', '70', '2015-11-15 12:39:15', '2017-03-07 12:39:36', '2017-05-12 12:01:09');
+INSERT INTO `shuttle_bus` VALUES ('31', '2017', '5', 'W6-1', '59', 'aaa', '景天，雪见', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '2', '20', '2017-02-22 12:39:10', '2017-03-15 12:39:33', '2017-10-31 11:08:21');
+INSERT INTO `shuttle_bus` VALUES ('34', '2017', '5', 'W33-2', '54', 'Ada', '云天河，柳梦璃', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '7', '70', '2015-11-15 12:39:15', '2017-03-07 12:39:36', '2017-10-31 11:06:45');
 INSERT INTO `shuttle_bus` VALUES ('39', '2017', '5', 'W33-3', '58', 'Alice2', '陈靖仇', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '0', '1', '1', '1', '0', '0', '9', '90', '2017-05-01 00:00:00', '2017-05-12 11:58:10', '2017-05-12 12:31:02');
 INSERT INTO `shuttle_bus` VALUES ('40', '2017', '5', 'W33-3', '1', 'Ada', '张三，李四，王五', '0', '0', '0', '0', '0', '0', '1', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '0', '1', '1', '1', '1', '1', '0', '0', '9', '90', '2017-05-01 12:00:00', '2017-05-13 14:26:01', '2017-05-13 14:34:40');
 INSERT INTO `shuttle_bus` VALUES ('41', '2017', '6', 'W33-3', '1', 'Ada', '', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '2', '20', '2017-06-01 12:00:01', '2017-05-13 14:26:53', '2017-05-13 14:26:53');
 INSERT INTO `shuttle_bus` VALUES ('42', '2017', '5', 'W7-3', '50', '测', 'hahah，hahah', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '2', '20', '2017-05-01 00:00:00', '2017-05-16 10:34:49', '2017-05-16 10:34:49');
 INSERT INTO `shuttle_bus` VALUES ('44', '2017', '5', 'W11-1', '49', 'Ada5', 'Bruno Mars, Alexa Keys，aa', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '5', '50', '2017-05-01 00:00:01', '2017-05-16 11:52:51', '2017-05-16 11:53:38');
+INSERT INTO `shuttle_bus` VALUES ('45', '2017', '5', 'W33-3', '105', 'Ada', '', '0', '0', '0', '0', '0', '0', '1', '1', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '0', '7', '70', '2017-05-01 00:00:00', '2017-10-31 11:04:58', '2017-10-31 11:07:00');
 
 -- ----------------------------
 -- Table structure for `sources`
@@ -2631,41 +3949,55 @@ CREATE TABLE `sources` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ROOM_NUMBER` varchar(64) DEFAULT NULL,
   `GUEST_NAME` varchar(64) DEFAULT NULL,
-  `CUR_TIME` datetime DEFAULT NULL,
   `TYPE` varchar(11) DEFAULT NULL COMMENT '水费 电费 燃气费',
   `METER` varchar(64) DEFAULT NULL,
-  `YEAR_INIT_VAL` double DEFAULT NULL,
-  `LAST_MONTH_VAL` double DEFAULT NULL,
   `CUR_MONTH_VAL` double DEFAULT NULL,
   `MONEY` double DEFAULT NULL,
+  `UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新日期',
+  `READING_TIME` datetime DEFAULT NULL COMMENT '抄表日期',
+  `MONTH` int(10) DEFAULT NULL COMMENT '月份',
   `SYS_STATE` int(11) DEFAULT '1' COMMENT '0 表示历史记录 1表示现在记录',
+  `LOG` varchar(10) DEFAULT NULL COMMENT '入住 退租 计费',
   PRIMARY KEY (`ID`),
   KEY `ROOM_NUMBER` (`ROOM_NUMBER`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sources
 -- ----------------------------
-INSERT INTO `sources` VALUES ('1', 'W33-3', 'Ada', '2017-07-14 15:28:52', 'water', 'W33-3', null, '0', '1', '2', '1');
-INSERT INTO `sources` VALUES ('2', 'W33-3', 'Ada', '2017-07-14 15:42:39', 'water', 'W33-3', null, '1', '2', '2', '1');
-INSERT INTO `sources` VALUES ('3', 'W33-3', 'Ada', '2017-07-14 15:44:14', 'water', 'W33-3', null, '2', '12', '4', '1');
-INSERT INTO `sources` VALUES ('4', 'W33-3', 'Ada', '2017-07-14 15:48:50', 'elec', 'W33-3', null, '0', '10', '4', '1');
-INSERT INTO `sources` VALUES ('5', 'W33-3', 'Ada', '2017-07-14 15:49:02', 'elec', 'W33-3', null, '10', '20', '4', '1');
-INSERT INTO `sources` VALUES ('6', 'W33-3', 'Ada', '2017-07-14 15:49:16', 'elec', 'W33-3', null, '20', '30', '4', '1');
-INSERT INTO `sources` VALUES ('7', 'W33-3', 'Ada', '2017-07-14 16:04:48', 'water', 'W33-3', null, '12', '23', '4.4', '1');
-INSERT INTO `sources` VALUES ('8', 'W33-3', 'Ada', '2017-07-14 16:05:00', 'water', 'W33-3', null, '23', '24', '0.4', '1');
-INSERT INTO `sources` VALUES ('9', 'W33-3', 'Ada', '2017-07-14 16:29:15', 'elec', 'W33-3', null, '30', '40', '4', '1');
-INSERT INTO `sources` VALUES ('10', 'W33-3', 'Ada', '2017-07-14 16:29:30', 'elec', 'W33-3', null, '40', '50', '4', '1');
-INSERT INTO `sources` VALUES ('11', 'W33-3', 'Ada', '2017-07-17 10:18:10', 'water', 'W33-3', null, '24', '25', '0.4', '1');
-INSERT INTO `sources` VALUES ('12', 'W33-3', 'Ada', '2017-07-17 10:18:28', 'elec', 'W33-3', null, '50', '51', '0.4', '1');
-INSERT INTO `sources` VALUES ('13', 'W33-3', 'Ada', '2017-07-17 11:05:05', 'gas', 'W33-3_1', null, '0', '2', '0.6', '1');
-INSERT INTO `sources` VALUES ('14', 'W33-3', 'Ada', '2017-07-17 11:05:05', 'gas', 'W33-3_2', null, '0', '2', '0.6', '1');
-INSERT INTO `sources` VALUES ('15', 'W33-3', 'Ada', '2017-07-17 11:07:41', 'gas', 'W33-3_1', null, '2', '3', '0.3', '1');
-INSERT INTO `sources` VALUES ('16', 'W33-3', 'Ada', '2017-07-17 11:07:41', 'gas', 'W33-3_2', null, '2', '3', '0.3', '1');
-INSERT INTO `sources` VALUES ('17', 'W33-3', 'Ada', '2017-07-17 12:05:18', 'gas', 'W33-3_1', null, '3', '4', '0.3', '1');
-INSERT INTO `sources` VALUES ('18', 'W33-3', 'Ada', '2017-07-17 12:05:18', 'gas', 'W33-3_2', null, '3', '4', '0.3', '1');
-INSERT INTO `sources` VALUES ('19', 'W33-3', 'Ada', '2017-07-17 12:05:27', 'gas', 'W33-3_1', null, '3', '5', '0.6', '1');
-INSERT INTO `sources` VALUES ('20', 'W33-3', 'Ada', '2017-07-17 12:05:27', 'gas', 'W33-3_2', null, '3', '5', '0.6', '1');
+INSERT INTO `sources` VALUES ('1', 'W2-2', 'Ada', 'water', 'W2-2', '12', '4.800000000000001', '2017-12-06 00:00:00', '2017-12-06 00:00:00', '11', '1', '入住');
+INSERT INTO `sources` VALUES ('2', 'W7-3', 'Ada', 'water', 'W7-3', '45', '18', '2017-12-06 00:00:00', '2017-12-06 00:00:00', '11', '1', '入住');
+INSERT INTO `sources` VALUES ('3', 'W2-1', 'Tom', 'water', 'W2-1', '34', '13.600000000000001', '2014-12-06 00:00:00', '2014-12-06 00:00:00', '11', '1', '入住');
+INSERT INTO `sources` VALUES ('4', 'W2-1', 'Tom', 'water', 'W2-1', '34', '13.600000000000001', '2017-12-06 00:00:00', '2017-11-16 00:00:00', '10', '1', '计费');
+INSERT INTO `sources` VALUES ('5', 'W2-1', 'Tom', 'water', 'W2-1', '34', '13.600000000000001', '2017-12-06 00:00:00', '2017-10-05 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('6', 'W2-2', 'Ada', 'water', 'W2-2', '23', '9.200000000000001', '2017-12-13 00:00:00', '2017-12-06 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('7', 'W2-1', 'Tom', 'water', 'W2-1', '45', '18', '2017-12-14 00:00:00', '2017-10-05 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('8', 'W2-1', 'Tom', 'water', 'W2-1', '45', '18', '2017-12-14 00:00:00', '2015-12-11 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('9', 'W2-1', 'Tom', 'water', 'W2-1', '45', '18', '2017-12-14 00:00:00', '2016-12-08 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('10', 'W2-1', 'Tom', 'elec', 'W2-1', '12', '4.800000000000001', '2017-12-16 00:00:00', '2014-12-12 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('11', 'W2-1', 'Tom', 'elec', 'W2-1', '13', '5.2', '2017-12-16 00:00:00', '2014-12-12 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('12', 'W2-1', 'Tom', 'water', 'W2-1', '46', '0.4', '2017-12-16 00:00:00', '2016-12-08 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('13', 'W2-1', 'Tom', 'water', 'W2-1', '47', '0.4', '2017-12-16 00:00:00', '2016-12-08 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('14', 'W2-2', 'Ada', 'water', 'W2-2', '24', '0.4', '2017-12-16 00:00:00', '2017-12-06 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('15', 'W2-1', 'Tom', 'elec', 'W2-1', '14', '0.4', '2017-12-16 00:00:00', '2014-12-12 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('16', 'W2-1', 'Tom', 'elec', 'W2-1', '14', '0', '2017-12-16 00:00:00', '2014-12-12 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('17', 'W2-1', 'Tom', 'water', 'W2-1', '49', '0.8', '2017-12-16 00:00:00', '2016-12-08 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('18', 'W2-1', 'Tom', 'water', 'W2-1', '56', '2.8000000000000003', '2017-12-17 00:00:00', '2016-12-08 00:00:00', '9', '1', '计费');
+INSERT INTO `sources` VALUES ('19', 'W8-2', 'Ada', 'water', 'W8-2', '2', '0.8', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('20', 'W8-2', 'Ada', 'water', 'W8-2', '3', '0.4', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('21', 'W2-2', 'Ada', 'elec', 'W2-2', '2', '0.8', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('22', 'W2-2', 'Ada', 'elec', 'W2-2', '3', '0.4', '2017-12-17 00:00:00', '2015-12-10 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('23', 'W2-1', 'Tom', 'water', 'W2-1', '50', '0.8', '2017-12-17 13:38:29', '2017-12-17 13:38:36', '11', '1', '退租');
+INSERT INTO `sources` VALUES ('24', 'W2-1', 'Alia', 'water', 'W2-1', '0', '0', '2017-12-19 13:39:49', '2017-12-19 13:39:54', '11', '1', '入住');
+INSERT INTO `sources` VALUES ('25', 'W7-3', 'Ada', 'elec', 'W7-3', '10', '4', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('26', 'W2-1', 'Tom', 'gas', '1', '2', '0.6', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('27', 'W11-3', 'Ada', 'water', 'W11-3', '2', '0.8', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('28', 'W2-2', 'Ada', 'gas', '2', '2', '0.6', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('29', 'W2-1', 'Tom', 'gas', '1', '4', '0.6', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('30', 'W2-1', 'Tom', 'gas', '1', '5', '0.3', '2017-12-17 00:00:00', '2017-12-17 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('31', 'W7-3', 'Ada', 'gas', '22', '2', '0.6', '2017-12-18 00:00:00', '2017-12-18 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('32', 'W2-1', 'Tom', 'gas', '275', '2', '0.6', '2017-12-18 00:00:00', '2017-12-18 00:00:00', '11', '1', '计费');
+INSERT INTO `sources` VALUES ('33', 'W8-2', 'Ada', 'gas', '25', '2', '0.6', '2017-12-18 00:00:00', '2017-12-18 00:00:00', '11', '1', '计费');
 
 -- ----------------------------
 -- Table structure for `staff`
@@ -2734,8 +4066,8 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '1835008', '2016-10-08', '2017-07-20', '1', '1');
-INSERT INTO `user` VALUES ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '4', '786431', '2016-10-08', '2017-07-20', '1', '1');
+INSERT INTO `user` VALUES ('1', 'BUPTADMIN', 'e10adc3949ba59abbe56e057f20f883e', 'BUPTADMIN', 'SYS_001', '财务部', '0', '1835008', '2016-10-08', '2017-11-07', '1', '1');
+INSERT INTO `user` VALUES ('2', 'test', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_001', '客服部', '4', '786431', '2016-10-08', '2017-12-25', '1', '1');
 INSERT INTO `user` VALUES ('10', '王二', 'e10adc3949ba59abbe56e057f20f883e', '王二', '王二', '财务部', '4', '262143', '2017-03-17', '2017-06-16', '1', '1');
 INSERT INTO `user` VALUES ('11', 'test8', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '4', '262143', '2017-03-28', '2017-06-19', '1', '0');
 INSERT INTO `user` VALUES ('12', 'testr345', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'TEST_', '客房部', '0', '1835008', '2017-03-29', '2017-03-29', '1', '0');

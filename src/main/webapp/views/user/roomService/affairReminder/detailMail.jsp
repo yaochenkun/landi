@@ -32,6 +32,7 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
+						<li><span>信件状态：</span><span id="receiveState"></span></li>
 						<li id="dropDownList">
 							<span>发件人：</span>
 							<input type="text" id="dropDownInput" value="" readonly/>
@@ -40,7 +41,15 @@
 						<li><span>主题：</span><input type="text" id="reminderTitle" readonly/></li>
 						<li style="margin-bottom: -15px;"><span>内容：</span></li>
 						<textarea id="reminderContent" cols="155" rows="10" readonly></textarea>
-						<li><a href="inboxOverview.jsp" class="btn btn-goback goback">返回</a></li>
+						<li style="margin-bottom: -15px;margin-top: 15px;"><span>快捷回复：</span></li>
+						<textarea id="reminderReply" cols="155" rows="10"></textarea>
+						<li>
+							<a onclick="replyMail(${param.id});" class="btn btn-goback goback">确认回复</a>
+						</li>
+						<li>
+							<a onclick="acceptMail(${param.id});" class="btn btn-goback goback">接受信件</a>
+							<a href="inboxOverview.jsp" class="btn btn-goback goback">返回</a>
+						</li>
 					</ul>
 				</div>
 			</div>

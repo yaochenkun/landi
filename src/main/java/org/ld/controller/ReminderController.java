@@ -360,25 +360,38 @@ public class ReminderController {
 //		};
 
 		JSONObject dataJson = JSONObject.parseObject(data);
-		MailReminder mr = new MailReminder();
-		mr.setSENDER_ID(dataJson.getInteger("sid"));
-		mr.setSENDER_NAME(dataJson.getString("sname"));
-		mr.setRECEIVER_ID(dataJson.getInteger("rid"));
-		mr.setRECEIVER_NAME(dataJson.getString("rname"));
-		mr.setTITLE(dataJson.getString("title"));
-		mr.setCONTENT(dataJson.getString("content"));
-		mr.setREMIND_DATE(dataJson.getDate("remindDate"));
-		mr.setSTATE("未完成");
-		mr.setEDIT_TIME(new Date());
+		String rid = dataJson.getString("rid");
+		String rname = dataJson.getString("rname");
+		String[] rids = rid.split(",");
+		String[] rnames = rname.split(",");
+
+		int result = 1;
+		for(int i = 0; i < rids.length; i++) {
+
+			MailReminder mr = new MailReminder();
+			mr.setSENDER_ID(dataJson.getInteger("sid"));
+			mr.setSENDER_NAME(dataJson.getString("sname"));
+			mr.setRECEIVER_ID(Integer.parseInt(rids[i]));
+			mr.setRECEIVER_NAME(rnames[i]);
+			mr.setRECEIVE_STATE("待接受");
+			mr.setREPLY("");
+			mr.setTITLE(dataJson.getString("title"));
+			mr.setCONTENT(dataJson.getString("content"));
+			mr.setREMIND_DATE(dataJson.getDate("remindDate"));
+			mr.setSTATE("未完成");
+			mr.setEDIT_TIME(new Date());
 
 
-		if(reminderService.addMailReminder(mr) == 1) {
-			logger.info(curUser.getNAME() + " successfully add a mail reminder");
-			return 1;
-		} else {
-			logger.error(curUser.getNAME() + "failed to add a mail reminder");
-			return 0;
+			if(reminderService.addMailReminder(mr) == 1) {
+				logger.info(curUser.getNAME() + " successfully add a mail reminder");
+				result &= 1;
+			} else {
+				logger.error(curUser.getNAME() + "failed to add a mail reminder");
+				result &= 0;
+			}
 		}
+
+		return result;
 	}
 
 	/**
@@ -508,11 +521,13 @@ public class ReminderController {
 
 			Integer id = dataJson.getInteger("id");
 			MailReminder bean = reminderService.getMailReminderById(id);
-			bean.setRECEIVER_ID(dataJson.getIntValue("rid"));
-			bean.setRECEIVER_NAME(dataJson.getString("rname"));
+			bean.setRECEIVER_ID(bean.getRECEIVER_ID());
+			bean.setRECEIVER_NAME(bean.getRECEIVER_NAME());
 			bean.setTITLE(dataJson.getString("title"));
 			bean.setCONTENT(dataJson.getString("content"));
 			bean.setREMIND_DATE(dataJson.getDate("remindDate"));
+			bean.setRECEIVE_STATE(bean.getRECEIVE_STATE());
+			bean.setREPLY(bean.getREPLY());
 			bean.setEDIT_TIME(new Date());
 
 			return reminderService.updateMailReminder(bean);
@@ -551,8 +566,72 @@ public class ReminderController {
 	}
 
 
+	/**
+	 * 接受站内信
+	 */
+	@RequestMapping("/acceptMailById")
+	@ResponseBody
+	public Integer acceptMailById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+//			return 0;
+//		}
+
+		try{
+
+			Integer id = dataJson.getInteger("id");
+			MailReminder bean = reminderService.getMailReminderById(id);
+			bean.setRECEIVER_ID(bean.getRECEIVER_ID());
+			bean.setRECEIVER_NAME(bean.getRECEIVER_NAME());
+			bean.setTITLE(bean.getTITLE());
+			bean.setCONTENT(bean.getCONTENT());
+			bean.setREMIND_DATE(bean.getREMIND_DATE());
+			bean.setREPLY(bean.getREPLY());
+			bean.setRECEIVE_STATE("已接受");
+			bean.setEDIT_TIME(new Date());
+
+			return reminderService.updateMailReminder(bean);
+
+		}catch(Exception e){
+			System.err.println(e);
+			return 0;
+		}
+	}
 
 
+	/**
+	 * 回复站内信
+	 */
+	@RequestMapping("/replyMailById")
+	@ResponseBody
+	public Integer replyMailById(HttpSession session,  @RequestBody String data) {
+		JSONObject dataJson = JSONObject.parseObject(data);
+		User curUser = (User) session.getAttribute("curUser");
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+//			return 0;
+//		}
+
+		try{
+
+			Integer id = dataJson.getInteger("id");
+			MailReminder bean = reminderService.getMailReminderById(id);
+			bean.setRECEIVER_ID(bean.getRECEIVER_ID());
+			bean.setRECEIVER_NAME(bean.getRECEIVER_NAME());
+			bean.setTITLE(bean.getTITLE());
+			bean.setCONTENT(bean.getCONTENT());
+			bean.setREMIND_DATE(bean.getREMIND_DATE());
+			bean.setREPLY(dataJson.getString("reply"));
+			bean.setRECEIVE_STATE("已回复");
+			bean.setEDIT_TIME(new Date());
+
+			return reminderService.updateMailReminder(bean);
+
+		}catch(Exception e){
+			System.err.println(e);
+			return 0;
+		}
+	}
 
 
 

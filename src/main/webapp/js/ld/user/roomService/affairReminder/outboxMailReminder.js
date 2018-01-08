@@ -18,8 +18,13 @@ var searchAllUsers = function() {
                 $(".dropDownMenu ul li").click(function(){
 					var id = Number($(this).attr('rid'));
                     var username = $(this).text();
-                    $("#dropDownInput").val(username);
-                    $("#dropDownInput").attr("rid", id);
+
+                    var curVal = $("#dropDownInput").val().trim();
+                    var curRid = $("#dropDownInput").attr("rid").trim();
+
+
+                    $("#dropDownInput").val(curVal === '' ? username : curVal + "," + username);
+                    $("#dropDownInput").attr("rid", curRid === '' ? id : curRid + "," + id);
                 });
 
 			}
@@ -73,6 +78,7 @@ var searchMailReminderByPage = function(pageNum){
                         + "<td>" + formatDateForm(new Date(perRecord.remind_DATE)) + "</td>"
                         + "<td>" + formatDateForm(new Date(perRecord.edit_TIME)) + "</td>"
                         + "<td>" + perRecord.state + "</td>"
+                        + "<td>" + perRecord.receive_STATE + "</td>"
                         + "<td><a class='detail' href='editMail.jsp?id="+ perRecord.id +"'>详情</a><a class='delete' onclick='requestDeleteMailReminder("+ perRecord.id +")'>撤回</a></td></tr>");
 				}
 				// 添加车费 底部页码
@@ -111,8 +117,15 @@ var requestAddMailReminder = function(){
 	console.log("添加站内信记录");
 
 	// 其他字段输入结果
-	var rid = Number($("#dropDownInput").attr("rid")); //接受者id
+	var rid = $("#dropDownInput").attr("rid"); //接受者id
     var rname = $("#dropDownInput").val(); //接受者name
+
+	if(rid === '' ||  rname === '') {
+		alert("收件人不能为空！");
+		return;
+	}
+
+
 	var sid = Number($("#sid").attr("sid")); //发送者id
 	var sname = $("#sid").attr("sname"); //发送者name
 
@@ -158,9 +171,11 @@ var searchMailReminderDetail = function(id){
 				if(data.record != null){
 					record = data.record;
 
+					$("#receiveState").text(record.receive_STATE);
                     $("#dropDownInput").val(record.receiver_NAME);
                     $("#reminderTitle").val(record.title);
                     $("#reminderContent").val(record.content);
+                    $("#reminderReply").val(record.reply);
                     $(".pack_maintain").val(formatDateForm(new Date(record.remind_DATE)));
 				}
 			} else {
@@ -196,8 +211,8 @@ var updateMailReminder = function(id){
 	console.log("请求更新"+id+"号站内信记录");
 
     // 其他字段输入结果
-    var rid = Number($("#dropDownInput").attr("rid")); //接受者id
-    var rname =  $("#dropDownInput").val();//接受者name
+    // var rid = $("#dropDownInput").attr("rid")); //接受者id
+    // var rname =  $("#dropDownInput").val();//接受者name
     var title = $("#reminderTitle").val();
     var content = $("#reminderContent").val();
     var remindDate = formatDateForm(new Date($(".pack_maintain").val()));
@@ -209,8 +224,6 @@ var updateMailReminder = function(id){
 		contentType:'application/json',
 		dataType:'json',
         data:JSON.stringify({"id" : id,
-							 "rid" : rid,
-							 "rname" : rname,
             				 "title" : title,
             				 "content" : content,
             				 "remindDate" : remindDate}),
@@ -224,3 +237,10 @@ var updateMailReminder = function(id){
 		}
 	});
 };
+
+//清空收件人多选项
+var clearReceivers = function() {
+
+    $("#dropDownInput").val("");
+    $("#dropDownInput").attr("rid", "");
+}

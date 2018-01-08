@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.EmergencyProblemMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.EmergencyProblem" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="ROOM_NUM" property="ROOM_NUM" jdbcType="VARCHAR" />
+    <result column="ROOM_STATE" property="ROOM_STATE" jdbcType="VARCHAR" />
+    <result column="GUEST_NAME" property="GUEST_NAME" jdbcType="VARCHAR" />
+    <result column="OCCUR_TIME" property="OCCUR_TIME" jdbcType="TIMESTAMP" />
+    <result column="ATTENDANCE_TIME" property="ATTENDANCE_TIME" jdbcType="TIMESTAMP" />
+    <result column="DECLARANT" property="DECLARANT" jdbcType="VARCHAR" />
+    <result column="DEALING" property="DEALING" jdbcType="VARCHAR" />
+    <result column="DAMAGE_DETAIL" property="DAMAGE_DETAIL" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ROOM_NUM, ROOM_STATE, GUEST_NAME, OCCUR_TIME, ATTENDANCE_TIME, DECLARANT, DEALING, 
+    DAMAGE_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from emergency_problem
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from emergency_problem
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.EmergencyProblem" >
+    insert into emergency_problem (ID, ROOM_NUM, ROOM_STATE, 
+      GUEST_NAME, OCCUR_TIME, ATTENDANCE_TIME, 
+      DECLARANT, DEALING, DAMAGE_DETAIL
+      )
+    values (#{ID,jdbcType=INTEGER}, #{ROOM_NUM,jdbcType=VARCHAR}, #{ROOM_STATE,jdbcType=VARCHAR}, 
+      #{GUEST_NAME,jdbcType=VARCHAR}, #{OCCUR_TIME,jdbcType=TIMESTAMP}, #{ATTENDANCE_TIME,jdbcType=TIMESTAMP}, 
+      #{DECLARANT,jdbcType=VARCHAR}, #{DEALING,jdbcType=VARCHAR}, #{DAMAGE_DETAIL,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.EmergencyProblem" >
+    insert into emergency_problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM,
+      </if>
+      <if test="ROOM_STATE != null" >
+        ROOM_STATE,
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME,
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME,
+      </if>
+      <if test="ATTENDANCE_TIME != null" >
+        ATTENDANCE_TIME,
+      </if>
+      <if test="DECLARANT != null" >
+        DECLARANT,
+      </if>
+      <if test="DEALING != null" >
+        DEALING,
+      </if>
+      <if test="DAMAGE_DETAIL != null" >
+        DAMAGE_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="ROOM_NUM != null" >
+        #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_STATE != null" >
+        #{ROOM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ATTENDANCE_TIME != null" >
+        #{ATTENDANCE_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="DECLARANT != null" >
+        #{DECLARANT,jdbcType=VARCHAR},
+      </if>
+      <if test="DEALING != null" >
+        #{DEALING,jdbcType=VARCHAR},
+      </if>
+      <if test="DAMAGE_DETAIL != null" >
+        #{DAMAGE_DETAIL,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.EmergencyProblem" >
+    update emergency_problem
+    <set >
+      <if test="ROOM_NUM != null" >
+        ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      </if>
+      <if test="ROOM_STATE != null" >
+        ROOM_STATE = #{ROOM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="GUEST_NAME != null" >
+        GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="OCCUR_TIME != null" >
+        OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ATTENDANCE_TIME != null" >
+        ATTENDANCE_TIME = #{ATTENDANCE_TIME,jdbcType=TIMESTAMP},
+      </if>
+      <if test="DECLARANT != null" >
+        DECLARANT = #{DECLARANT,jdbcType=VARCHAR},
+      </if>
+      <if test="DEALING != null" >
+        DEALING = #{DEALING,jdbcType=VARCHAR},
+      </if>
+      <if test="DAMAGE_DETAIL != null" >
+        DAMAGE_DETAIL = #{DAMAGE_DETAIL,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.EmergencyProblem" >
+    update emergency_problem
+    set ROOM_NUM = #{ROOM_NUM,jdbcType=VARCHAR},
+      ROOM_STATE = #{ROOM_STATE,jdbcType=VARCHAR},
+      GUEST_NAME = #{GUEST_NAME,jdbcType=VARCHAR},
+      OCCUR_TIME = #{OCCUR_TIME,jdbcType=TIMESTAMP},
+      ATTENDANCE_TIME = #{ATTENDANCE_TIME,jdbcType=TIMESTAMP},
+      DECLARANT = #{DECLARANT,jdbcType=VARCHAR},
+      DEALING = #{DEALING,jdbcType=VARCHAR},
+      DAMAGE_DETAIL = #{DAMAGE_DETAIL,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+</mapper>

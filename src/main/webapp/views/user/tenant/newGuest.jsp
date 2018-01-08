@@ -235,6 +235,22 @@
 								<input type="text" class="text" value="0" oninput="calActualReturn();"/>
 							</div>
 						</div>
+
+						<div class="item item-heating-spc-recover" style="display:none;">
+							<span class="spanLabel">物业费追缴：</span>
+							<div class="fl">
+								<input type="radio" name="spcRecover" value="不追缴" checked ="checked"/><span style="margin-left:10px;margin-right:10px">不追缴</span>
+								<input type="radio" name="spcRecover" value="追缴"/><span style="margin-left:10px;margin-right:10px">追缴</span>
+							</div>
+
+							<span class="spanLabel">采暖费追缴：</span>
+							<div class="fl">
+								<input type="radio" name="heatingRecover" value="不追缴" checked ="checked"/><span style="margin-left:10px;margin-right:10px">不追缴</span>
+								<input type="radio" name="heatingRecover" value="追缴"/><span style="margin-left:10px;margin-right:10px">追缴</span>
+							</div>
+						</div>
+
+
 						<div class="item item-othermoney">
 							<span class="spanLabel">其它费用：</span>
 							<div class="fl">
@@ -252,6 +268,11 @@
 							<span class="spanLabel">业主账户信息：</span>
 							<div class="fl">
 								<input type="text" class="text" value="98320192830192" />
+							</div>
+
+							<span class="spanLabel">业主账户备注：</span>
+							<div class="fl">
+								<input type="text" class="text" value="中国农业银行北洋支行" />
 							</div>
 						</div>
 					</div>
@@ -334,55 +355,67 @@
 					<div class="form">
 
 						<div class="item-list item-bill">
-							<div class="item item-date">
-								<span class="spanLabel">开发票日期：</span>
-								<div class="fl">
-									<input type="text" class="text pack_maintain" />
-								</div>
-							</div>
 							<div class="item item-cycle">
-								<span class="spanLabel">周期：</span>
+								<span class="spanLabel">开发票周期：</span>
 								<div class="fl">
-									<input type="text" class="text" value="30" />
+									<input type="text" class="text" value="0" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">年</span>
+									<input type="text" class="text" value="1" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">月</span>
 								</div>
-								<span class="spanLabel">提前时间：</span>
-								<div class="fl">
-									<input type="text" class="text" value="30" />
-								</div>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text pack_maintain" />--%>
+								<%--</div>--%>
 							</div>
+
+
+
+
+							<%--<div class="item item-cycle">--%>
+								<%--<span class="spanLabel">周期：</span>--%>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text" value="30" />--%>
+								<%--</div>--%>
+								<%--<span class="spanLabel">提前时间：</span>--%>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text" value="30" />--%>
+								<%--</div>--%>
+							<%--</div>--%>
 						</div>
 
 						<div class="item-list item-rent">
-							<div class="item item-date">
-								<span class="spanLabel">收租金日期：</span>
-								<div class="fl">
-									<input type="text" class="text pack_maintain"/>
-								</div>
-							</div>
 							<div class="item item-cycle">
-								<span class="spanLabel">周期：</span>
-								<div class="fl">
-									<input type="text" class="text" value="30" />
-								</div>
-								<span class="spanLabel">方式：</span>
+								<span class="spanLabel">收租金周期：</span>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text pack_maintain"/>--%>
+								<%--</div>--%>
+								<input type="text" class="text" value="0" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">年</span>
+								<input type="text" class="text" value="1" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">月</span>
+							</div>
+							<div class="item item-paymode">
+								<%--<span class="spanLabel">周期：</span>--%>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text" value="30" />--%>
+								<%--</div>--%>
+								<span class="spanLabel">收租金方式：</span>
 								<div class="fl">
 									<input type="text" class="text" value="现金" />
 								</div>
 							</div>
 						</div>
 						<div class="item-list item-return">
-							<div class="item item-date">
-								<span class="spanLabel">付返款日期：</span>
-								<div class="fl">
-									<input type="text" class="text pack_maintain" />
-								</div>
-							</div>
 							<div class="item item-cycle">
-								<span class="spanLabel">周期：</span>
-								<div class="fl">
-									<input type="text" class="text" value="30" />
-								</div>
+								<span class="spanLabel">付返款周期：</span>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text pack_maintain" />--%>
+								<%--</div>--%>
+								<input type="text" class="text" value="0" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">年</span>
+								<input type="text" class="text" value="1" style="width:50px;"/><span style="margin-left:10px;margin-right:10px">月</span>
 							</div>
+							<%--<div class="item item-cycle">--%>
+								<%--<span class="spanLabel">周期：</span>--%>
+								<%--<div class="fl">--%>
+									<%--<input type="text" class="text" value="30" />--%>
+								<%--</div>--%>
+							<%--</div>--%>
 						</div>
 
 

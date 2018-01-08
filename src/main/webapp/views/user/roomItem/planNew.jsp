@@ -86,7 +86,7 @@
 
 	<!-- 添加采购计划物品弹出框 start -->
 	<div class="shadow"></div>
-	<div class="addItemDiv">
+	<div id="addItemModal" class="addItemDiv">
 		<div class="facContent">
 			<div class="fac-title">
 				<span>添加采购计划中物品</span>
@@ -95,17 +95,20 @@
 			<div class="fac-body">
 				<div id="item-type" class="item">
 					<span class="span">物品种类：</span>
-					<div class="item-content"></div>
+					<div class="item-content" style="margin-bottom:5px;"></div>
+					<div class="item-content1"><a style="color:#2277da; cursor: pointer;" onclick="showNewItemTypeModal();">新增种类</a></div>
 				</div>
-				<div id="item-cat" class="item">
+				<div id="item-cat" class="item" style="margin-top:10px;">
 					<span class="span">物品子类：</span>
-					<div class="item-content"></div>
+					<div class="item-content" style="margin-bottom:5px;"></div>
+					<div class="item-content1" ><a style="color:#2277da; cursor: pointer;" onclick="showNewItemSubTypeModal();">新增子类</a></div>
 				</div>
-   				<div id="item-com" class="item">
+   				<div id="item-com" class="item" style="margin-top:10px;">
    					<span class="span">物品品牌：</span>
-					<div class="item-content"></div>
+					<div class="item-content" style="margin-bottom:5px;"></div>
+					<div class="item-content1" ><a style="color:#2277da; cursor: pointer;" onclick="showNewItemBrandModal();">新增品牌</a></div>
    				</div>
-   				<div id="item-name" class="item">
+   				<div id="item-name" class="item" style="margin-top:10px;">
    					<span class="span">物品名称：</span>
 					<div class="item-content"><input type="text" value="GT双开门冰箱" /></div>
    				</div>
@@ -184,11 +187,96 @@
 				</div>
 			</div>
 			<div class="fac-foot">
-				<a class="btn btn-submit" onclick="addOneItem();">确定</a>
+				<a id="addItemBtn" class="btn btn-submit" onclick="addOneItem();">确定</a>
 			</div>
 		</div>
 	</div>
 	<!-- 添加采购计划物品弹出框 end -->
+
+	<!-- 新增物品种类弹出框 start -->
+	<div id="newItemTypeMenu" class="addItemDiv" style="width:300px; height:300px;left:40%;top:200px;">
+		<div class="facContent">
+			<div class="fac-title">
+				<span>新增物品种类</span>
+				<span class="cross" onclick="closeNewItemTypeDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-type-name" class="item">
+					<span class="span">名称</span>
+					<div class="item-content"><input type="text" value="" /></div>
+				</div>
+			</div>
+
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewItemType();">确定新增</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 新增物品种类弹出框 start -->
+	<div id="newItemSubTypeMenu" class="addItemDiv" style="width:300px; height:300px;left:40%;top:200px;">
+		<div class="facContent">
+			<div class="fac-title">
+				<span>新增物品子类</span>
+				<span class="cross" onclick="closeNewItemSubTypeDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-subtype-name" class="item">
+					<span class="span">名称</span>
+					<div class="item-content"><input type="text" value="" /></div>
+				</div>
+			</div>
+
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewItemSubType();">确定新增</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 新增物品种类弹出框 start -->
+	<div id="newItemBrandMenu" class="addItemDiv" style="width:300px; height:300px;left:40%;top:200px;">
+		<div class="facContent">
+			<div class="fac-title">
+				<span>新增物品品牌</span>
+				<span class="cross" onclick="closeNewItemBrandDiv();">×</span>
+			</div>
+			<div class="fac-body">
+				<div id="item-brand-name" class="item">
+					<span class="span">名称</span>
+					<div class="item-content"><input type="text" value="" /></div>
+				</div>
+			</div>
+
+			<div class="fac-foot">
+				<a class="btn btn-submit" onclick="requestNewItemBrand();">确定新增</a>
+			</div>
+		</div>
+	</div>
+
+
+
+	<%--<div id="newItemTypeMenu" class="addItemDiv">--%>
+		<%--<div class="facContent">--%>
+			<%--<div class="title">--%>
+				<%--新增物品种类--%>
+				<%--<span onclick="closeNewItemTypeDiv();">×</span>--%>
+			<%--</div>--%>
+
+			<%--<div class="fac-body">--%>
+				<%--<div id="type-name" class="item">--%>
+					<%--<span class="span">名称：</span>--%>
+					<%--<div class="item-content"><input type="text" value="XXX" /></div>--%>
+				<%--</div>--%>
+			<%--</div>--%>
+
+			<%--<div class="fac-foot">--%>
+				<%--<a class="btn btn-submit" onclick="requestNewItemType();">确认新增</a>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
+	<!-- 新增物品种类弹出框 end -->
+
+
 
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>

@@ -12,7 +12,7 @@ public interface ItemService {
 	List<RoomItem>  getItemsByRoomNum_Type(String roomNum, String type, Integer st, Integer eachPage);
 	List<RoomItem> getAllRoomItemByType_RoomNum(String roomNum, String type);
 
-
+	boolean isRoomItemExist(String tag);
 
 
 

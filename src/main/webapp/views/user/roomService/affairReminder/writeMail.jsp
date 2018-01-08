@@ -14,7 +14,6 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 start -->
@@ -40,6 +39,7 @@
 								<ul>
 								</ul>
 							</div>
+							<a onclick="clearReceivers();" class="btn" style="margin-left: 10px;">清空</a>
 						</li>
 						<li><span>提醒时间：</span><input type="text" class="pack_maintain"></li>
 						<li><span>主题：</span><input type="text" id="reminderTitle"></li>

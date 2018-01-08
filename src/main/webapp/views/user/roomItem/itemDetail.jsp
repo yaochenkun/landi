@@ -58,7 +58,7 @@
 						<thead>
 							<tr>
 								<th><span>所在房间</span></th>
-								<th><span>标签</span></th>
+								<th><span>物品编号</span></th>
 								<th><span>分配类型</span></th>
 								<th><span>借用时间</span></th>
 								<th><span>归还时间</span></th>
@@ -158,7 +158,7 @@
 					<div class="item-content"><input type="text" value="W34-1" /></div>
 				</div>
 				<div id="tag-name" class="item">
-					<span class="span">标签：</span>
+					<span class="span">物品编号：</span>
 					<div class="item-content"><input type="text" value="123" /></div>
 				</div>
 				<div id="fac-comment" class="item">
@@ -186,7 +186,7 @@
 					<div class="item-content"><input type="text" value="W34-1" /></div>
 				</div>
 				<div id="tag-name" class="item">
-					<span class="span">标签：</span>
+					<span class="span">物品编号：</span>
 					<div class="item-content"><input type="text" value="123" /></div>
 				</div>
 
@@ -235,7 +235,7 @@
 	<!-- 新维修弹出框 end -->
 
 	<!-- 新报废弹出框 start -->
-	<div id="facBadMenu" class="addItemDiv">
+	<div id="newItemTypeMenu" class="addItemDiv">
 		<div class="facContent">
 			<div class="title">
 				新报废物品

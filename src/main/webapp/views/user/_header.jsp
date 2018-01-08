@@ -12,7 +12,7 @@
 				欢迎您，${curUser.USERNAME}
 			</div>
 			<div class="header-logo">
-				<img src="${pageContext.request.contextPath}/img/logo.png">
+				<img src="${pageContext.request.contextPath}/img/logo.png" style="cursor: pointer;" onClick="window.location.href='${pageContext.request.contextPath}/views/user/home/homeUser.jsp'">
 			</div>
 			<div class="navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">

@@ -31,6 +31,8 @@
 							<a href="itemRepoOverview.jsp">库房物品统计</a></li>
 						<li><div class="icon"></div>
 							<a href="planList.jsp">采购管理</a></li>
+						<li style="margin-top:30px;"><div class="icon"></div>
+							<a href="assetRepairOverview.jsp">LE资产报修</a></li>
 					</ul>
 				</div>
 			</div>

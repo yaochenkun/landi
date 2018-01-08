@@ -17,11 +17,14 @@
     <result column="TENET_CHARGE" property="TENET_CHARGE" jdbcType="DOUBLE" />
     <result column="HEATING_CHARGE" property="HEATING_CHARGE" jdbcType="DOUBLE" />
     <result column="ACTUAL_CHARGE" property="ACTUAL_CHARGE" jdbcType="DOUBLE" />
+    <result column="SPC_RECOVER" property="SPC_RECOVER" jdbcType="VARCHAR" />
+    <result column="HEATING_RECOVER" property="HEATING_RECOVER" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_COMMENT" property="ACCOUNT_COMMENT" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, GUEST_ID, HOST_NAME, RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY, OTHER_CHARGE,
     SYS_STATE, HOST_TYPE, HOST_IDENTITY, HOST_ACCOUNT, TAX_CHARGE, TENET_CHARGE, HEATING_CHARGE,
-    ACTUAL_CHARGE
+    ACTUAL_CHARGE, SPC_RECOVER, HEATING_RECOVER, ACCOUNT_COMMENT
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -38,13 +41,15 @@
     RENT_CHARGE, SERVICE_CHARGE, RETURN_MONEY,
     OTHER_CHARGE, SYS_STATE, HOST_TYPE,
     HOST_IDENTITY, HOST_ACCOUNT, TAX_CHARGE,
-    TENET_CHARGE, HEATING_CHARGE, ACTUAL_CHARGE
+    TENET_CHARGE, HEATING_CHARGE, ACTUAL_CHARGE,
+    SPC_RECOVER, HEATING_RECOVER, ACCOUNT_COMMENT
     )
     values (#{ID,jdbcType=INTEGER}, #{GUEST_ID,jdbcType=INTEGER}, #{HOST_NAME,jdbcType=VARCHAR},
     #{RENT_CHARGE,jdbcType=DOUBLE}, #{SERVICE_CHARGE,jdbcType=DOUBLE}, #{RETURN_MONEY,jdbcType=DOUBLE},
     #{OTHER_CHARGE,jdbcType=DOUBLE}, #{SYS_STATE,jdbcType=INTEGER}, #{HOST_TYPE,jdbcType=VARCHAR},
     #{HOST_IDENTITY,jdbcType=VARCHAR}, #{HOST_ACCOUNT,jdbcType=VARCHAR}, #{TAX_CHARGE,jdbcType=DOUBLE},
-    #{TENET_CHARGE,jdbcType=DOUBLE}, #{HEATING_CHARGE,jdbcType=DOUBLE}, #{ACTUAL_CHARGE,jdbcType=DOUBLE}
+    #{TENET_CHARGE,jdbcType=DOUBLE}, #{HEATING_CHARGE,jdbcType=DOUBLE}, #{ACTUAL_CHARGE,jdbcType=DOUBLE},
+    #{SPC_RECOVER,jdbcType=VARCHAR}, #{HEATING_RECOVER,jdbcType=VARCHAR}, #{ACCOUNT_COMMENT,jdbcType=VARCHAR}
     )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.Host" >
@@ -95,6 +100,15 @@
       <if test="ACTUAL_CHARGE != null" >
         ACTUAL_CHARGE,
       </if>
+      <if test="SPC_RECOVER != null" >
+        SPC_RECOVER,
+      </if>
+      <if test="HEATING_RECOVER != null" >
+        HEATING_RECOVER,
+      </if>
+      <if test="ACCOUNT_COMMENT != null" >
+        ACCOUNT_COMMENT,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -141,6 +155,15 @@
       </if>
       <if test="ACTUAL_CHARGE != null" >
         #{ACTUAL_CHARGE,jdbcType=DOUBLE},
+      </if>
+      <if test="SPC_RECOVER != null" >
+        #{SPC_RECOVER,jdbcType=VARCHAR},
+      </if>
+      <if test="HEATING_RECOVER != null" >
+        #{HEATING_RECOVER,jdbcType=VARCHAR},
+      </if>
+      <if test="ACCOUNT_COMMENT != null" >
+        #{ACCOUNT_COMMENT,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -189,6 +212,15 @@
       <if test="ACTUAL_CHARGE != null" >
         ACTUAL_CHARGE = #{ACTUAL_CHARGE,jdbcType=DOUBLE},
       </if>
+      <if test="SPC_RECOVER != null" >
+        SPC_RECOVER = #{SPC_RECOVER,jdbcType=VARCHAR},
+      </if>
+      <if test="HEATING_RECOVER != null" >
+        HEATING_RECOVER = #{HEATING_RECOVER,jdbcType=VARCHAR},
+      </if>
+      <if test="ACCOUNT_COMMENT != null" >
+        ACCOUNT_COMMENT = #{ACCOUNT_COMMENT,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
@@ -207,7 +239,10 @@
       TAX_CHARGE = #{TAX_CHARGE,jdbcType=DOUBLE},
       TENET_CHARGE = #{TENET_CHARGE,jdbcType=DOUBLE},
       HEATING_CHARGE = #{HEATING_CHARGE,jdbcType=DOUBLE},
-      ACTUAL_CHARGE = #{ACTUAL_CHARGE,jdbcType=DOUBLE}
+      ACTUAL_CHARGE = #{ACTUAL_CHARGE,jdbcType=DOUBLE},
+      SPC_RECOVER = #{SPC_RECOVER,jdbcType=VARCHAR},
+      HEATING_RECOVER = #{HEATING_RECOVER,jdbcType=VARCHAR},
+      ACCOUNT_COMMENT = #{ACCOUNT_COMMENT,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -10,7 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/css/ld/user/home/public.css"	rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/css/ld/user/roomItem/roomItem.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/dateRange.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/plugin/calendar/monthPicker.css"/>
 <link href="${pageContext.request.contextPath}/css/ld/user/roomService/maintain/maintainManage.css" rel="stylesheet" type="text/css" />
@@ -19,6 +18,7 @@
 <body>
 
 	<jsp:include page="../../_header.jsp" />
+	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->
 	<div class="main">
@@ -47,6 +47,17 @@
 					</div>
 					<a href ="" class="btn btn-edit btnExcel" style="margin-left:10px;" onclick="printList();">打印</a>
 					<a href="" class="btn btn-edit btnExcel" onclick="exportList();">导出</a>
+
+				</div>
+				<div style="display: block;margin-bottom: 10px">
+					<span>本日新增项目</span><span></span>
+					<span>未解决数量</span><span></span>
+					<span>确认完成数量</span><span></span>
+					<span>搁置问题数量</span><span></span>
+					<a href ="" class="btn btn-edit btnExcel" style="margin-left:400px;" onclick="">查看未完成</a>
+					<a href="" class="btn btn-edit btnExcel" onclick="">查看确认完成</a>
+					<a href="" class="btn btn-edit btnExcel" onclick="">查看搁置处理</a>
+
 				</div>
 
 				<div class="bill-table">
@@ -55,16 +66,26 @@
 						<thead>
 							<tr>
 								<th><span>房间号</span></th>
-								<th><span>报修时间</span></th>
-								<th><span>要求解决时间</span></th>
-								<th><span>问题等级</span></th>
-								<th><span>存在问题</span></th>
-								<th><span>问题分类</span></th>
-								<th><span>问题原因</span></th>
-								<th><span>问题明细</span></th>
-								<th><span>费用</span></th>
+								<th><span>问题位置及描述</span></th>
+								<th><span>问题状态</span></th>
+								<th colspan="2"><span>报修时间</span></th>
+								<th><span>问题需要解决时间</span></th>
+								<th><span>未解决天数</span></th>
+								<th rowspan="2"><span>图片</span></th>
+								<th rowspan="2" colspan="2"><span>最新回复状态更新</span></th>
+								<th><span>信息来源</span></th>
+								<th rowspan="2"><span>维修费用</span></th>
+								<th rowspan="2"><span>操作</span></th>
+							</tr>
+							<tr>
+								<th><span>入住状态</span></th>
 								<th><span>备注</span></th>
-								<th><span>操作</span></th>
+								<th><span>问题等级</span></th>
+								<th><span>问题分类</span></th>
+								<th><span>问题子类</span></th>
+								<th><span>最近回复日期</span></th>
+								<th><span>报修时间状态</span></th>
+								<th><span>分配部门</span></th>
 							</tr>
 						</thead>
 						<tbody id="maintainManageTbody"></tbody>
@@ -80,23 +101,6 @@
 	</div>
 	<!-- 页面内容 end -->
 
-	<!-- 确认修复弹出框 start -->
-	<div class="shadow"></div>	
-	<div id="confirmMenu" class="menuDiv">
-		<div class="menuContent">
-			<div class="menuTitle">
-				确认修复
-				<span onclick="closeConfirmDiv();">×</span>
-			</div>
-			<div class="menuBody">
-				<div class="menuContent"><span class="goodsName"></span>维修费用：&nbsp;
-					<input type="text" value="2"/>
-				</div>
-				<a class="btn btn-submit" onclick="requestConfirmMaintain();">确认修复</a>
-			</div>
-		</div>
-	</div>
-	<!-- 确认修复弹出框 end -->
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/bootstrap/bootstrap.min.js"></script>
@@ -108,7 +112,7 @@
 	var dateRange = new pickerDateRange('date_demo3', {
 			isTodayValid : true,
 			startDate : '2017-01-01',
-			endDate : '2017-01-31',
+			endDate : '2018-01-31',
 			defaultText : ' 至 ',
 			theme : 'ta',
 			success : function(obj) {

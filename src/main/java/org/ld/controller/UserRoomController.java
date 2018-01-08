@@ -1774,87 +1774,87 @@ public class UserRoomController {
 		}
 	}
 	
-	@RequestMapping("/addMaintain") // 添加维修记录
-	@ResponseBody
-	public Integer addMaintain(HttpSession session,  @RequestBody String data) {
-		JSONObject dataJson = JSONObject.parseObject(data);
-		
-		User curUser = (User) session.getAttribute("curUser");
-
-		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
-			return 0;
-		}
-		
-		try{
-			Maintain m = new Maintain();
-			Guest g = guestService.getGuestByRoomNumber(dataJson.getString("roomNum"));
-			m.setGUEST_ID(g.getID());
-			m.setCHARGE(dataJson.getDouble("price"));
-			m.setCOMMENT(dataJson.getString("comment"));
-			m.setETIME(dataJson.getDate("expTime")); // YY-MM-DD HH-MM-SS
-			m.setFOLLOW(dataJson.getString("follow"));
-			m.setGUEST_ID(dataJson.getInteger("guestID"));
-			m.setLEVEL(dataJson.getInteger("problemLevel"));
-			m.setPROBLEM(dataJson.getString("problemExist"));
-			m.setPRO_TYPE(dataJson.getString("problemType"));
-			m.setPRO_CAUSE(dataJson.getString("problemReason"));
-			m.setPRO_DETAIL(dataJson.getString("problemDetail"));
-			m.setROOM_NUMBER(dataJson.getString("roomNum"));
-			m.setSTATE(1); //1 unfinish, 0 finish
-			m.setSTIME(dataJson.getDate("maintainTime")); // YY-MM-DD HH-MM-SS
-			
-			return roomService.addMaintain(m);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
-			return 0;
-		}
-	}
+//	@RequestMapping("/addMaintain") // 添加维修记录
+//	@ResponseBody
+//	public Integer addMaintain(HttpSession session,  @RequestBody String data) {
+//		JSONObject dataJson = JSONObject.parseObject(data);
+//
+//		User curUser = (User) session.getAttribute("curUser");
+//
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("wRoom"))) == 0) {
+//			return 0;
+//		}
+//
+//		try{
+//			Maintain m = new Maintain();
+//			Guest g = guestService.getGuestByRoomNumber(dataJson.getString("roomNum"));
+//			m.setGUEST_ID(g.getID());
+//			m.setCHARGE(dataJson.getDouble("price"));
+//			m.setCOMMENT(dataJson.getString("comment"));
+//			m.setETIME(dataJson.getDate("expTime")); // YY-MM-DD HH-MM-SS
+//			m.setFOLLOW(dataJson.getString("follow"));
+//			m.setGUEST_ID(dataJson.getInteger("guestID"));
+//			m.setLEVEL(dataJson.getInteger("problemLevel"));
+//			m.setPROBLEM(dataJson.getString("problemExist"));
+//			m.setPRO_TYPE(dataJson.getString("problemType"));
+//			m.setPRO_CAUSE(dataJson.getString("problemReason"));
+//			m.setPRO_DETAIL(dataJson.getString("problemDetail"));
+//			m.setROOM_NUMBER(dataJson.getString("roomNum"));
+//			m.setSTATE(1); //1 unfinish, 0 finish
+//			m.setSTIME(dataJson.getDate("maintainTime")); // YY-MM-DD HH-MM-SS
+//
+//			return roomService.addMaintain(m);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//
+//			return 0;
+//		}
+//	}
 	
-	@RequestMapping("/searchMaintainUnfinished") // state 1 : unfinish , 0 finish, null for all; roomNum为null时查询所有记录
-	@ResponseBody
-	public Map<String, Object> searchMaintainUnfinished(HttpSession session, @RequestBody String data) {
-		JSONObject dataJson = JSONObject.parseObject(data);
-
-		User curUser = (User) session.getAttribute("curUser");
-		Map<String, Object> ans = new HashMap<String, Object>();
-
-		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
-			ans.put("State", "Invalid");
-			return ans;
-		} else {
-			ans.put("State", "Valid");
-		}
-
-		int pageNumber = dataJson.getIntValue("pageNum");
-		String roomNum = dataJson.getString("roomNum");
-		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
-		Date to = dataJson.getDate("to");
-		int type = dataJson.getIntValue("type");
-		int cat = dataJson.getIntValue("cat");
-		int state = dataJson.getIntValue("state");
-		int eachPage = Config.getSettingsInt().get("list_size");
-		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
-		System.out.println(recordTotal);
-		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
-
-		if (recordTotal != 0) {
-			if (pageNumber > pageTotal)
-				pageNumber = pageTotal;
-
-			int st = (pageNumber - 1) * eachPage;
-			List<Maintain> record = roomService.getMaintain(type, cat, state, roomNum, st, eachPage, from, to, 0);
-
-			ans.put("dataList", record);
-		}
-
-		ans.put("pageNow", pageNumber);
-		ans.put("pageTotal", pageTotal);
-		ans.put("recordTotal", recordTotal);
-
-		return ans;
-	}
+//	@RequestMapping("/searchMaintainUnfinished") // state 1 : unfinish , 0 finish, null for all; roomNum为null时查询所有记录
+//	@ResponseBody
+//	public Map<String, Object> searchMaintainUnfinished(HttpSession session, @RequestBody String data) {
+//		JSONObject dataJson = JSONObject.parseObject(data);
+//
+//		User curUser = (User) session.getAttribute("curUser");
+//		Map<String, Object> ans = new HashMap<String, Object>();
+//
+//		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rRoom"))) == 0) {
+//			ans.put("State", "Invalid");
+//			return ans;
+//		} else {
+//			ans.put("State", "Valid");
+//		}
+//
+//		int pageNumber = dataJson.getIntValue("pageNum");
+//		String roomNum = dataJson.getString("roomNum");
+//		Date from = dataJson.getDate("from"); // YYYY-MM-DD HH-MM-SS
+//		Date to = dataJson.getDate("to");
+//		int type = dataJson.getIntValue("type");
+//		int cat = dataJson.getIntValue("cat");
+//		int state = dataJson.getIntValue("state");
+//		int eachPage = Config.getSettingsInt().get("list_size");
+//		int recordTotal = roomService.totalMaintain(type, cat, state, roomNum, from, to);
+//		System.out.println(recordTotal);
+//		int pageTotal = (int) Math.ceil((float) recordTotal / eachPage);
+//
+//		if (recordTotal != 0) {
+//			if (pageNumber > pageTotal)
+//				pageNumber = pageTotal;
+//
+//			int st = (pageNumber - 1) * eachPage;
+//			List<Maintain> record = roomService.getMaintain(type, cat, state, roomNum, st, eachPage, from, to, 0);
+//
+//			ans.put("dataList", record);
+//		}
+//
+//		ans.put("pageNow", pageNumber);
+//		ans.put("pageTotal", pageTotal);
+//		ans.put("recordTotal", recordTotal);
+//
+//		return ans;
+//	}
 	
 	@RequestMapping("/updateMaintain") 
 	@ResponseBody
@@ -2426,10 +2426,15 @@ public class UserRoomController {
 		String roomNum = dataJson.getString("roomNum");
 			
 		Guest guest = guestService.getGuestByRoomNumber(roomNum);
-		if(guest == null) 
+		RoomState roomState = roomService.getCertainRSbyRoomNumber(roomNum);
+		if(guest == null) {
 			ans.put("guest_NAME", null);
-		else
+			ans.put("room_STATE", null);
+		}
+		else {
 			ans.put("guest_NAME", guest.getGUEST_NAME());
+			ans.put("room_STATE", roomState.getSTATE() == 0 ? "未入住" : "已入住");
+		}
 		
 		return ans;
 	}

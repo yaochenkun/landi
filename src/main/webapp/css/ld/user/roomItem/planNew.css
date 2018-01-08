@@ -180,6 +180,7 @@
 .fac-body .item{padding: 0 40px;}
 .fac-body .span{width: 15%; font-weight: bold; float: left; clear: left; min-height: 50px;}
 .fac-body .item-content{float: left; width: 85%; margin-bottom: 20px;}
+.fac-body .item-content1{float: left; width: 85%; margin-bottom: 20px; padding-left: 100px; }
 .fac-body .item-content input{padding: 0 10px;}
 .fac-body .btn-item{width: 130px; height: 25px; border-radius: 0; line-height: 11px; border-color: #555; margin-right: 20px; margin-bottom: 5px;}
 .fac-body .btn-item:hover{border-color: #2277da; color: #2277da; background: #fff;}
@@ -188,3 +189,14 @@
 .fac-foot{background: #eee; position: absolute; height: 50px; width: 100%; bottom: 0; border-top: 1px solid #444;}
 .fac-foot .btn-submit{width: 100px; height: 30px; line-height: 17px; float: right; color: #222; border-color: #222; margin: 10px; border-radius: 0;}
 .fac-foot .btn-submit:hover{background: #ccc;}
+
+
+.add-item-type {
+	margin-left: 100px;
+	color:#2277da;
+
+}
+
+.add-item-type:hover{
+	cursor:pointer;
+}

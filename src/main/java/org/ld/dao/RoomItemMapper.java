@@ -17,7 +17,12 @@ public interface RoomItemMapper {
     int updateByPrimaryKeySelective(RoomItem record);
 
     int updateByPrimaryKey(RoomItem record);
-    
+
+
+    List<RoomItem> selectByTag(String tag);
+
+
+
     // add
  	List<RoomItem> getItems(HashMap<String, Object> map);
 

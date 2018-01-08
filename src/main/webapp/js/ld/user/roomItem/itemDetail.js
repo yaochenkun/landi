@@ -342,8 +342,10 @@ var requestNewDistribute = function(){
 				requestFacSta();
 				requestRoomItem(1);
 			} else if(data == 0){
-				showModalBox("error","分配失败！请检查闲置数量是否足够");
-			}
+				showModalBox("error","分配失败！已无可分配的物品");
+			} else if(data == -1){
+                showModalBox("error","分配失败！物品编号重复");
+            }
 		}
 	});
 };
@@ -377,7 +379,9 @@ var requestNewBorrow = function(){
                 requestFacSta();
                 requestRoomItem(1);
             } else if(data == 0){
-                showModalBox("error","借用失败！请检查闲置数量是否足够");
+                showModalBox("error","借用失败！已无可借用的物品");
+            } else if(data == -1){
+                showModalBox("error","借用失败！物品编号重复");
             }
         }
     });

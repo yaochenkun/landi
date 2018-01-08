@@ -18,7 +18,6 @@
 <body>
 
 	<jsp:include page="../../_header.jsp" />
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 strat -->

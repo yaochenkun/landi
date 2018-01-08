@@ -22,7 +22,7 @@
 		});
 
         $(".fac-title span").eq(0).html("添加采购计划中物品");
-        $(".fac-foot a").attr("onclick", "addOneItem();");
+        $("#addItemBtn").attr("onclick", "addOneItem();");
 
 		$("#item-ownerManage").hide();
         $(".btn-item").removeClass("item-active");
@@ -34,10 +34,10 @@
         $("#item-invoiceInfo .btn-item").eq(0).addClass("item-active");
         $("#item-ifReceived .btn-item").eq(0).addClass("item-active");
 		$(".shadow").css("display","block");
-		$(".addItemDiv").css("display","block");
+		$("#addItemModal").css("display","block");
 
-		setTimeout(function(){$('.addItemDiv').addClass('showMenuModal');},50);
-		$(".addItemDiv").addClass("effect-fade");
+		setTimeout(function(){$('#addItemModal').addClass('showMenuModal');},50);
+		$("#addItemModal").addClass("effect-fade");
 	});
 
 	// 改变必填项选中
@@ -47,10 +47,10 @@
 
 	///////////////////// 添加物品弹出框
 	// 1. 关闭弹出框
-	$(".addItemDiv .fac-title span").eq(1).click(function(){
+	$("#addItemModal .fac-title span").eq(1).click(function(){
 		$(".shadow").css("display","none");
-		$(".addItemDiv").removeClass('showMenuModal');
-		setTimeout(function(){$(".addItemDiv").css("display","none");},200);
+		$("#addItemModal").removeClass('showMenuModal');
+		setTimeout(function(){$("#addItemModal").css("display","none");},200);
 	});
 })();
 
@@ -486,6 +486,13 @@ var addPlan = function(){
 	    money = 1000,
 	    ctime = formatDateForm(new Date());
 	console.log(planName);
+
+	if($(".eachItem").length <= 0) {
+
+        showModalBox("error","计划不能为空，请添加物品！");
+	}
+
+
 	// 计划采购物品
 	var itemList = "";
 	for(var i=1; i<=$(".eachItem").length; i++){
@@ -562,3 +569,171 @@ var calTotalPriceByUnitPrice = function(unitPrice){
     var count = $("#item-count input").val();
     $("#item-totalPrice input").val(unitPrice * count);
 };
+
+
+//新增种类、子类、品牌
+var showNewItemTypeModal = function(){
+
+    $(".shadow").css("display","block");
+    $('#newItemTypeMenu').css("display","block");
+
+    setTimeout(function(){$('#newItemTypeMenu').addClass('showMenuModal');},50);
+    $("#newItemTypeMenu").addClass("effect-fade");
+};
+// 关闭新分配物品弹出框
+var closeNewItemTypeDiv = function(){
+
+    $(".shadow").css("display","none");
+    $("#newItemTypeMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newItemTypeMenu").css("display","none");},200);
+};
+
+var requestNewItemType = function() {
+
+	//获取名称
+	var name = $("#item-type-name input").val();
+	if(name == "") {
+        showModalBox("error","名称不能为空！");
+        return;
+	}
+
+    //请求添加种类
+    $.ajax({
+        url:'/LD/userItem/addItemType.action',
+        type:'post',
+        data: JSON.stringify({name: name}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","添加成功！");
+
+                //将新增的类别追加至界面尾部
+                $("#item-type .item-content").append("<a class='btn btn-item' onclick='chooseItemType(this);'>"+ name +"</a>");
+
+				//关闭对话框
+                closeNewItemTypeDiv();
+            }
+            else if(data == 0){
+                showModalBox("error","添加失败！");
+            }
+        }
+    });
+}
+
+var showNewItemSubTypeModal = function(){
+
+    $(".shadow").css("display","block");
+    $('#newItemSubTypeMenu').css("display","block");
+
+    setTimeout(function(){$('#newItemSubTypeMenu').addClass('showMenuModal');},50);
+    $("#newItemSubTypeMenu").addClass("effect-fade");
+};
+// 关闭新分配物品弹出框
+var closeNewItemSubTypeDiv = function(){
+
+    $(".shadow").css("display","none");
+    $("#newItemSubTypeMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newItemSubTypeMenu").css("display","none");},200);
+};
+
+var requestNewItemSubType = function() {
+
+    //获取名称
+    var name = $("#item-subtype-name input").val();
+    if(name == "") {
+        showModalBox("error","名称不能为空！");
+        return;
+    }
+
+    //获取物品大类
+    var typeName = "";
+    $("#item-type .btn-item").each(function(){
+        if($(this).hasClass("item-active")){
+            typeName = $(this).text();
+        }
+    });
+
+
+    //请求添加种类
+    $.ajax({
+        url:'/LD/userItem/addItemSubType.action',
+        type:'post',
+        data: JSON.stringify({typeName: typeName, name: name}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","添加成功！");
+
+                //将新增的类别追加至界面尾部
+                $("#item-cat .item-content").append("<a class='btn btn-item' onclick='changeItemCatState(this);'>" + name +"</a>");
+                //关闭对话框
+                closeNewItemSubTypeDiv();
+            }
+            else if(data == 0){
+                showModalBox("error","添加失败！");
+            }
+        }
+    });
+}
+
+
+var showNewItemBrandModal = function(){
+
+    $(".shadow").css("display","block");
+    $('#newItemBrandMenu').css("display","block");
+
+    setTimeout(function(){$('#newItemBrandMenu').addClass('showMenuModal');},50);
+    $("#newItemBrandMenu").addClass("effect-fade");
+};
+// 关闭新分配物品弹出框
+var closeNewItemBrandDiv = function(){
+
+    $(".shadow").css("display","none");
+    $("#newItemBrandMenu").removeClass('showMenuModal');
+    setTimeout(function(){$("#newItemBrandMenu").css("display","none");},200);
+};
+
+var requestNewItemBrand = function() {
+
+    //获取名称
+    var name = $("#item-brand-name input").val();
+    if(name == "") {
+        showModalBox("error","名称不能为空！");
+        return;
+    }
+
+    //获取物品大类
+    var typeName = "";
+    $("#item-type .btn-item").each(function(){
+        if($(this).hasClass("item-active")){
+            typeName = $(this).text();
+        }
+    });
+
+    //请求添加种类
+    $.ajax({
+        url:'/LD/userItem/addItemBrand.action',
+        type:'post',
+        data: JSON.stringify({typeName: typeName, name: name}),
+        dataType:'json',
+        contentType:'application/json',
+        success:function(data){
+            console.log(data);
+            if(data == 1){
+                showModalBox("success","添加成功！");
+
+                //将新增的类别追加至界面尾部
+                $("#item-com .item-content").append("<a class='btn btn-item' onclick='changeItemComState(this);'>" + name +"</a>");
+                //关闭对话框
+                closeNewItemBrandDiv();
+            }
+            else if(data == 0){
+                showModalBox("error","添加失败！");
+            }
+        }
+    });
+}

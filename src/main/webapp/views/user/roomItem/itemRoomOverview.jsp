@@ -79,7 +79,7 @@
 								<th><span>品牌</span></th>
 								<th><span>名称</span></th>
 								<th><span>归属权</span></th>
-								<th><span>标签</span></th>
+								<th><span>物品编号</span></th>
 								<th><span>分配类型</span></th>
 								<th><span>借用时间</span></th>
 								<th><span>归还时间</span></th>

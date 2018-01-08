@@ -1,9 +1,17 @@
-.main{margin-top: 70px;}
+.main {
+	width: 1100px;
+	margin: 65px auto;
+}
 
+.main-page {
+	margin: 10px 0;
+	position: relative;
+}
+
+/**** 表格上方样式  ****/
 .main-page .nav-path {
 	padding: 20px 0;
 	line-height: 22px;
-	font-size: 14px;
 }
 
 .nav-path a {
@@ -29,6 +37,12 @@
 	width: 8px;
 	height: 11px;
 	background-position: -84px -59px;
+}
+
+.btnnew {
+	position: absolute;
+	right: 0;
+	top: 16px;
 }
 
 .table-title:before,.table-title:after { content:""; display:table;}
@@ -81,7 +95,41 @@
 
 .emptyText{text-align: center; line-height: 60px; border-bottom: 1px solid #aaa; color: #ff4d4d; font-size: 14px;}
 
-.bill-table thead tr th{width: 8%;}
-.bill-table thead tr th:nth-child(2), .bill-table thead tr th:nth-child(3){width: 10%;}
-.bill-table tbody tr td:nth-child(6){color: #555;}
-.bill-table tbody tr td:nth-child(9){color: #ff5722;}
+/*.bill-table thead tr th{width: 8%;}*/
+
+.bill-table thead tr{height: 2em; font-size: 14px; border-bottom: 1px solid #333; border-top: 1px solid #333;}
+.bill-table th{background-color: #2277da; color: #fff; text-align: center;}
+.bill-table td{
+	/*line-height: 26px; */
+	padding: 8px 0;
+	text-align: center;
+	font-size: 14px;
+	border-bottom: 1px solid #ccc;
+	white-space:nowrap;
+	overflow:hidden;}
+
+thead tr th:nth-child(1){
+	width:5%;
+}
+
+thead tr {
+	line-height: 20px;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 15px;
+	background-color: #eee;
+}
+
+thead th {
+	text-align: center;
+	color: #555;
+	position: relative;
+}
+
+thead th span {
+	display: inline-block;
+	/*padding: 15px 0 5px 0;*/
+}
+
+.trOne td {
+	border-bottom-color: white !important;
+}

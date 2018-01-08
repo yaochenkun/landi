@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ld.dao.ProblemReplyMapper" >
+  <resultMap id="BaseResultMap" type="org.ld.model.ProblemReply" >
+    <id column="ID" property="ID" jdbcType="INTEGER" />
+    <result column="PROBLEM_ID" property="PROBLEM_ID" jdbcType="INTEGER" />
+    <result column="LAST_REPLAY_DATE" property="LAST_REPLAY_DATE" jdbcType="DATE" />
+    <result column="LAST_REPLAY_DESCRIPTION" property="LAST_REPLAY_DESCRIPTION" jdbcType="VARCHAR" />
+    <result column="DEPARTMENT" property="DEPARTMENT" jdbcType="VARCHAR" />
+    <result column="FARE" property="FARE" jdbcType="DOUBLE" />
+    <result column="PROBLEM_STATE" property="PROBLEM_STATE" jdbcType="VARCHAR" />
+    <result column="FARE_DETAIL" property="FARE_DETAIL" jdbcType="VARCHAR" />
+    <result column="FARE_PAY" property="FARE_PAY" jdbcType="VARCHAR" />
+    <result column="INFO_SOURCE" property="INFO_SOURCE" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, PROBLEM_ID, LAST_REPLAY_DATE, LAST_REPLAY_DESCRIPTION, DEPARTMENT, FARE, PROBLEM_STATE,
+    FARE_DETAIL, FARE_PAY, INFO_SOURCE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from problem_reply
+    where ID = #{ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from problem_reply
+    where ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ld.model.ProblemReply" >
+    insert into problem_reply (ID, PROBLEM_ID, LAST_REPLAY_DATE,
+    LAST_REPLAY_DESCRIPTION, DEPARTMENT, FARE,
+    PROBLEM_STATE, FARE_DETAIL, FARE_PAY,
+    INFO_SOURCE)
+    values (#{ID,jdbcType=INTEGER}, #{PROBLEM_ID,jdbcType=INTEGER}, #{LAST_REPLAY_DATE,jdbcType=DATE},
+    #{LAST_REPLAY_DESCRIPTION,jdbcType=VARCHAR}, #{DEPARTMENT,jdbcType=VARCHAR}, #{FARE,jdbcType=DOUBLE},
+    #{PROBLEM_STATE,jdbcType=VARCHAR}, #{FARE_DETAIL,jdbcType=VARCHAR}, #{FARE_PAY,jdbcType=VARCHAR},
+    #{INFO_SOURCE,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.ld.model.ProblemReply" >
+    insert into problem_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        ID,
+      </if>
+      <if test="PROBLEM_ID != null" >
+        PROBLEM_ID,
+      </if>
+      <if test="LAST_REPLAY_DATE != null" >
+        LAST_REPLAY_DATE,
+      </if>
+      <if test="LAST_REPLAY_DESCRIPTION != null" >
+        LAST_REPLAY_DESCRIPTION,
+      </if>
+      <if test="DEPARTMENT != null" >
+        DEPARTMENT,
+      </if>
+      <if test="FARE != null" >
+        FARE,
+      </if>
+      <if test="PROBLEM_STATE != null" >
+        PROBLEM_STATE,
+      </if>
+      <if test="FARE_DETAIL != null" >
+        FARE_DETAIL,
+      </if>
+      <if test="FARE_PAY != null" >
+        FARE_PAY,
+      </if>
+      <if test="INFO_SOURCE != null" >
+        INFO_SOURCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ID != null" >
+        #{ID,jdbcType=INTEGER},
+      </if>
+      <if test="PROBLEM_ID != null" >
+        #{PROBLEM_ID,jdbcType=INTEGER},
+      </if>
+      <if test="LAST_REPLAY_DATE != null" >
+        #{LAST_REPLAY_DATE,jdbcType=DATE},
+      </if>
+      <if test="LAST_REPLAY_DESCRIPTION != null" >
+        #{LAST_REPLAY_DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPARTMENT != null" >
+        #{DEPARTMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE != null" >
+        #{FARE,jdbcType=DOUBLE},
+      </if>
+      <if test="PROBLEM_STATE != null" >
+        #{PROBLEM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE_DETAIL != null" >
+        #{FARE_DETAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE_PAY != null" >
+        #{FARE_PAY,jdbcType=VARCHAR},
+      </if>
+      <if test="INFO_SOURCE != null" >
+        #{INFO_SOURCE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ld.model.ProblemReply" >
+    update problem_reply
+    <set >
+      <if test="PROBLEM_ID != null" >
+        PROBLEM_ID = #{PROBLEM_ID,jdbcType=INTEGER},
+      </if>
+      <if test="LAST_REPLAY_DATE != null" >
+        LAST_REPLAY_DATE = #{LAST_REPLAY_DATE,jdbcType=DATE},
+      </if>
+      <if test="LAST_REPLAY_DESCRIPTION != null" >
+        LAST_REPLAY_DESCRIPTION = #{LAST_REPLAY_DESCRIPTION,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPARTMENT != null" >
+        DEPARTMENT = #{DEPARTMENT,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE != null" >
+        FARE = #{FARE,jdbcType=DOUBLE},
+      </if>
+      <if test="PROBLEM_STATE != null" >
+        PROBLEM_STATE = #{PROBLEM_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE_DETAIL != null" >
+        FARE_DETAIL = #{FARE_DETAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="FARE_PAY != null" >
+        FARE_PAY = #{FARE_PAY,jdbcType=VARCHAR},
+      </if>
+      <if test="INFO_SOURCE != null" >
+        INFO_SOURCE = #{INFO_SOURCE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ld.model.ProblemReply" >
+    update problem_reply
+    set PROBLEM_ID = #{PROBLEM_ID,jdbcType=INTEGER},
+      LAST_REPLAY_DATE = #{LAST_REPLAY_DATE,jdbcType=DATE},
+      LAST_REPLAY_DESCRIPTION = #{LAST_REPLAY_DESCRIPTION,jdbcType=VARCHAR},
+      DEPARTMENT = #{DEPARTMENT,jdbcType=VARCHAR},
+      FARE = #{FARE,jdbcType=DOUBLE},
+      PROBLEM_STATE = #{PROBLEM_STATE,jdbcType=VARCHAR},
+      FARE_DETAIL = #{FARE_DETAIL,jdbcType=VARCHAR},
+      FARE_PAY = #{FARE_PAY,jdbcType=VARCHAR},
+      INFO_SOURCE = #{INFO_SOURCE,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=INTEGER}
+  </update>
+  <select id="selectByProblemID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from problem_reply
+    where PROBLEM_ID = #{ProblemID,jdbcType=INTEGER}
+    order by ID DESC
+    limit 0,1
+  </select>
+  <delete id="deleteByProblemID" parameterType="java.lang.Integer" >
+    delete from problem_reply
+    where PROBLEM_ID = #{ID,jdbcType=INTEGER}
+  </delete>
+  <select id="selectAllByProblemID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from problem_reply
+    where PROBLEM_ID = #{ProblemID,jdbcType=INTEGER}
+  </select>
+</mapper>

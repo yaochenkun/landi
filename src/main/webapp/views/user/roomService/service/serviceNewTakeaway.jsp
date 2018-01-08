@@ -22,7 +22,7 @@
 	<div class="main">
 		<div class="main-page">
 			<div class="nav-path">
-				<a href="../../home/opeMenu.jsp" title="回到首页"><i class="icon-home"></i></a>
+				<a href="../../home/homeUser.jsp" title="回到首页"><i class="icon-home"></i></a>
 				<%--<i class="icon-path"></i>--%>
 				<%--<a href="serviceIndex.jsp">客房服务</a>--%>
 				<i class="icon-path"></i>

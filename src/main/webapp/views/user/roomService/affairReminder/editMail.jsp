@@ -14,7 +14,6 @@
 </head>
 <body>
 	<jsp:include page="../../_header.jsp"></jsp:include>
-	<jsp:include page="../../_leftMenu.jsp" />
 	<jsp:include page="../../_modal.jsp" />
 
 	<!-- 页面内容 start -->
@@ -32,9 +31,10 @@
 			<div class="body">
 				<div class="body-content">
 					<ul>
+						<li><span>信件状态：</span><span id="receiveState"></span></li>
 						<li id="dropDownList">
 							<span>收件人：</span>
-							<input type="text" id="dropDownInput" value="" rid="" readonly/>
+							<input type="text" id="dropDownInput" value="" rid="" readonly disabled/>
 							<div class="dropDownMenu">
 								<ul>
 								</ul>
@@ -44,6 +44,8 @@
 						<li><span>主题：</span><input type="text" id="reminderTitle"/></li>
 						<li style="margin-bottom: -15px;"><span>内容：</span></li>
 						<textarea id="reminderContent" cols="155" rows="10"></textarea>
+						<li style="margin-bottom: -15px;margin-top:15px;"><span>收件人回复：</span></li>
+						<textarea id="reminderReply" cols="155" rows="10" disabled></textarea>
 						<li><a onclick="updateMailReminder(${param.id});" class="btn btn-goback goback">更新</a></li>
 					</ul>
 				</div>

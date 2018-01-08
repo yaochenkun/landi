@@ -73,6 +73,14 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	public boolean isRoomItemExist(String tag) {
+
+		List<RoomItem> ris = roomItemMapper.selectByTag(tag);
+
+		return  ris != null && ris.size() > 0;
+	}
+
+	@Override
 	public List<RoomItem> getItems(String roomNum, String type, Integer st, Integer eachPage) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -97,6 +105,11 @@ public class ItemServiceImpl implements ItemService {
 //			return roomItemMapper.getItemsByType(map);
 //		}
 	}
+
+
+
+
+
 
 	// 获取房间物品总数
 	@Override

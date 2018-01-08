@@ -12,10 +12,12 @@
     <result column="REMIND_DATE" property="REMIND_DATE" jdbcType="DATE" />
     <result column="EDIT_TIME" property="EDIT_TIME" jdbcType="TIMESTAMP" />
     <result column="STATE" property="STATE" jdbcType="VARCHAR" />
+    <result column="RECEIVE_STATE" property="RECEIVE_STATE" jdbcType="VARCHAR" />
+    <result column="REPLY" property="REPLY" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ID, SENDER_ID, SENDER_NAME, RECEIVER_ID, RECEIVER_NAME, TITLE, CONTENT, REMIND_DATE,
-    EDIT_TIME, STATE
+    EDIT_TIME, STATE, RECEIVE_STATE, REPLY
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -29,13 +31,15 @@
   </delete>
   <insert id="insert" parameterType="org.ld.model.MailReminder" >
     insert into mail_reminder (ID, SENDER_ID, SENDER_NAME,
-      RECEIVER_ID, RECEIVER_NAME, TITLE,
-      CONTENT, REMIND_DATE, EDIT_TIME,
-      STATE)
+    RECEIVER_ID, RECEIVER_NAME, TITLE,
+    CONTENT, REMIND_DATE, EDIT_TIME,
+    STATE, RECEIVE_STATE, REPLY
+    )
     values (#{ID,jdbcType=INTEGER}, #{SENDER_ID,jdbcType=INTEGER}, #{SENDER_NAME,jdbcType=VARCHAR},
-      #{RECEIVER_ID,jdbcType=INTEGER}, #{RECEIVER_NAME,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR},
-      #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{EDIT_TIME,jdbcType=TIMESTAMP},
-      #{STATE,jdbcType=VARCHAR})
+    #{RECEIVER_ID,jdbcType=INTEGER}, #{RECEIVER_NAME,jdbcType=VARCHAR}, #{TITLE,jdbcType=VARCHAR},
+    #{CONTENT,jdbcType=VARCHAR}, #{REMIND_DATE,jdbcType=DATE}, #{EDIT_TIME,jdbcType=TIMESTAMP},
+    #{STATE,jdbcType=VARCHAR}, #{RECEIVE_STATE,jdbcType=VARCHAR}, #{REPLY,jdbcType=VARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="org.ld.model.MailReminder" >
     insert into mail_reminder
@@ -70,6 +74,12 @@
       <if test="STATE != null" >
         STATE,
       </if>
+      <if test="RECEIVE_STATE != null" >
+        RECEIVE_STATE,
+      </if>
+      <if test="REPLY != null" >
+        REPLY,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ID != null" >
@@ -101,6 +111,12 @@
       </if>
       <if test="STATE != null" >
         #{STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVE_STATE != null" >
+        #{RECEIVE_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="REPLY != null" >
+        #{REPLY,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,20 +150,28 @@
       <if test="STATE != null" >
         STATE = #{STATE,jdbcType=VARCHAR},
       </if>
+      <if test="RECEIVE_STATE != null" >
+        RECEIVE_STATE = #{RECEIVE_STATE,jdbcType=VARCHAR},
+      </if>
+      <if test="REPLY != null" >
+        REPLY = #{REPLY,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="org.ld.model.MailReminder" >
     update mail_reminder
     set SENDER_ID = #{SENDER_ID,jdbcType=INTEGER},
-      SENDER_NAME = #{SENDER_NAME,jdbcType=VARCHAR},
-      RECEIVER_ID = #{RECEIVER_ID,jdbcType=INTEGER},
-      RECEIVER_NAME = #{RECEIVER_NAME,jdbcType=VARCHAR},
-      TITLE = #{TITLE,jdbcType=VARCHAR},
-      CONTENT = #{CONTENT,jdbcType=VARCHAR},
-      REMIND_DATE = #{REMIND_DATE,jdbcType=DATE},
-      EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
-      STATE = #{STATE,jdbcType=VARCHAR}
+    SENDER_NAME = #{SENDER_NAME,jdbcType=VARCHAR},
+    RECEIVER_ID = #{RECEIVER_ID,jdbcType=INTEGER},
+    RECEIVER_NAME = #{RECEIVER_NAME,jdbcType=VARCHAR},
+    TITLE = #{TITLE,jdbcType=VARCHAR},
+    CONTENT = #{CONTENT,jdbcType=VARCHAR},
+    REMIND_DATE = #{REMIND_DATE,jdbcType=DATE},
+    EDIT_TIME = #{EDIT_TIME,jdbcType=TIMESTAMP},
+    STATE = #{STATE,jdbcType=VARCHAR},
+    RECEIVE_STATE = #{RECEIVE_STATE,jdbcType=VARCHAR},
+    REPLY = #{REPLY,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=INTEGER}
   </update>
 
