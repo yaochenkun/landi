@@ -206,4 +206,10 @@
       and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
     </if>
   </select>
+  <select id="getCertainMeals" resultMap="BaseResultMap" parameterType="map">
+    select * from meal where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and date_format(OCCUR_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainMealsByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from meal where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

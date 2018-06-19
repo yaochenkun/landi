@@ -27,4 +27,9 @@ public interface ShoesPolishingMapper {
     List<ShoesPolishing> getAllShoesPolishingServiceRange(Map<String, Object> map);
     
     List<ShoesPolishing> getAll(Map<String , Object> map);
+
+    List<ShoesPolishing> getCertainShoesPolishings(Map<String , Object> map);
+
+    List<ShoesPolishing> getCertainShoesPolishingsByDay(Map<String , Object> map);
+
 }

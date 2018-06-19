@@ -36,4 +36,9 @@ public interface SourcesMapper {
 	//lyd
 	List<Sources> getLookupSource(Map<String, Object> map);
 
+	List<Sources> getCertainSources(Map<String, Object> map);
+
+	List<Sources> getCertainSourcesByDay(Map<String, Object> map);
+
+
 }

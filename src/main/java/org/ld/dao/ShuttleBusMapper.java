@@ -26,4 +26,9 @@ public interface ShuttleBusMapper {
     List<ShuttleBus> getRec(HashMap<String, Object> map);
     
     ShuttleBus getCertainRec(HashMap<String, Object> map);
+
+    List<ShuttleBus> getCertainShuttleBuses(HashMap<String,Object> map);
+
+    List<ShuttleBus> getCertainShuttleBusesByDay(HashMap<String,Object> map);
+
 }

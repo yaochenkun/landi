@@ -3809,6 +3809,272 @@ public class UserRoomController {
 
 
 	}
+
+	@RequestMapping("/statement")
+	@ResponseBody
+	public Map<String,Object> getStatement(HttpSession session,@RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJSON = JSONObject.parseObject(data);
+
+		String num = dataJSON.getString("rNum");
+		String name = dataJSON.getString("name");
+		String date = dataJSON.getString("date");
+//		String page = dataJSON.getString("pageNum");
+
+
+		double sum = 0.0;
+		int recordTotal = 0;
+
+		//洗衣费
+		List<Laundry> laundrys = roomService.getCertainLaundrys(num,guestService.getGuestByRoomNumber(num).getID(),date);
+		for(Laundry laundry :laundrys){
+			sum += laundry.getTOTAL_PRICE();
+		}
+		recordTotal += laundrys.size();
+		//餐费
+		List<Meal> meals = serverService.getCertainMeals(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(Meal meal :meals){
+			sum += meal.getTOTAL_PRICE();
+			System.out.println(meal.toString());
+		}
+		recordTotal += meals.size();
+
+		//饮用水
+		List<DrinkingWater> drinkingWaters = roomService.getCertainDrinkingWaters(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(DrinkingWater drinkingWater :drinkingWaters){
+			sum += drinkingWater.getEXCESS_PRICE();
+		}
+		recordTotal += drinkingWaters.size();
+
+		//擦鞋
+		List<ShoesPolishing> shoesPolishings = serverService.getCertainShoesPolishings(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(ShoesPolishing shoesPolishing :shoesPolishings){
+			sum += shoesPolishing.getTOTAL_PRICE();
+		}
+		recordTotal += shoesPolishings.size();
+
+		//代购费
+		List<AgentPurchase> agentPurchases = serverService.getCertainAgentPurchases(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(AgentPurchase agentPurchase : agentPurchases){
+			sum += agentPurchase.getCOVER_PRICE() + agentPurchase.getSERVICE_PRICE();
+		}
+		recordTotal += agentPurchases.size();
+
+		//车费
+		List<ShuttleBus> shuttleBuses = roomService.getCertainShuttleBuses(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(ShuttleBus shuttleBus :shuttleBuses){
+			sum += shuttleBus.getTOTAL();
+		}
+		recordTotal += shuttleBuses.size();
+
+		List<OtherFare> otherFares = roomService.getCertainOtherFares(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(OtherFare otherFare : otherFares){
+			sum += otherFare.getTOTAL_PRICE();
+		}
+		recordTotal += otherFares.size();
+
+		//能源费
+		//水费
+		List<Sources> waters = serverService.getCertainSources(num,name,"water",date);
+//		RoomMeter meter = roomService.getMeter(roomService.getRoomByNumber(num).getID(),"water");
+//		double waterSum = meter.getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources water : waters){
+			sum += water.getMONEY();
+		}
+		recordTotal += waters.size();
+
+		//电费
+		List<Sources> elecs = serverService.getCertainSources(num,name,"elec",date);
+//		meter = roomService.getMeter(roomService.getRoomByNumber(num).getID(),"elec");
+//		double elecSum = meter.getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources elec : elecs){
+			sum += elec.getMONEY();
+		}
+		recordTotal += waters.size();
+
+		//燃气费
+		List<Sources> gass = serverService.getCertainSources(num,name,"gas",date);
+//		List<RoomMeter> meters = roomService.getMeters(roomService.getRoomByNumber(num).getID(),"gas",0,2);
+//		double gasSum = meters.get(0).getMONEY() + meters.get(1).getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources gas : gass){
+			sum += gas.getMONEY();
+		}
+		recordTotal += waters.size();
+
+
+		//LE承担费用
+		List<CostLe> costLes = roomService.getCertainCostLes(num,name,date);
+		for(CostLe costLe : costLes){
+			sum += costLe.getCOST();
+		}
+		recordTotal += costLes.size();
+
+		ans.put("laundry",laundrys);
+		ans.put("meal",meals);
+		ans.put("drinkingwater",drinkingWaters);
+		ans.put("shoespolishing",shoesPolishings);
+		ans.put("agentpurchase",agentPurchases);
+		ans.put("shuttlebus",shuttleBuses);
+		ans.put("otherfare",otherFares);
+		ans.put("watersource",waters);
+		ans.put("elecsource",elecs);
+		ans.put("gassource",gass);
+//		ans.put("watersum",waterSum);
+//		ans.put("elecsum",elecSum);
+//		ans.put("gassum",gasSum);
+		ans.put("costle",costLes);
+
+
+		ans.put("Total",sum);
+		ans.put("recordTotal",recordTotal);
+
+		return ans;
+	}
+
+	@RequestMapping("/statementByDay")
+	@ResponseBody
+	public Map<String,Object> getStatementByDay(HttpSession session,@RequestBody String data) {
+		//验证权限
+		User curUser = (User) session.getAttribute("curUser");
+		Map<String, Object> ans = new HashMap<>();
+		if ((curUser.getAUTH() & (0x01 << Config.getAuths().get("rDaily"))) == 0) {
+			ans.put("State", "Invalid");
+			return ans;
+		} else {
+			ans.put("State", "Valid");
+		}
+
+		JSONObject dataJSON = JSONObject.parseObject(data);
+
+		String num = dataJSON.getString("rNum");
+		String name = dataJSON.getString("name");
+		String date = dataJSON.getString("date");
+
+
+		System.out.println(date);
+		double sum = 0.0;
+		int recordTotal = 0;
+
+		//洗衣费
+		List<Laundry> laundrys = roomService.getCertainLaundrysByDay(num,guestService.getGuestByRoomNumber(num).getID(),date);
+		for(Laundry laundry :laundrys){
+			sum += laundry.getTOTAL_PRICE();
+		}
+		recordTotal += laundrys.size();
+		//餐费
+		List<Meal> meals = serverService.getCertainMealsByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(Meal meal :meals){
+			sum += meal.getTOTAL_PRICE();
+			System.out.println(meal.toString());
+		}
+		recordTotal += meals.size();
+
+		//饮用水
+		List<DrinkingWater> drinkingWaters = roomService.getCertainDrinkingWatersByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(DrinkingWater drinkingWater :drinkingWaters){
+			sum += drinkingWater.getEXCESS_PRICE();
+		}
+		recordTotal += drinkingWaters.size();
+
+		//擦鞋
+		List<ShoesPolishing> shoesPolishings = serverService.getCertainShoesPolishingsByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(ShoesPolishing shoesPolishing :shoesPolishings){
+			sum += shoesPolishing.getTOTAL_PRICE();
+		}
+		recordTotal += shoesPolishings.size();
+
+		//代购费
+		List<AgentPurchase> agentPurchases = serverService.getCertainAgentPurchasesByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(AgentPurchase agentPurchase : agentPurchases){
+			sum += agentPurchase.getCOVER_PRICE() + agentPurchase.getSERVICE_PRICE();
+		}
+		recordTotal += agentPurchases.size();
+
+		//车费
+		List<ShuttleBus> shuttleBuses = roomService.getCertainShuttleBusesByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(ShuttleBus shuttleBus :shuttleBuses){
+			sum += shuttleBus.getTOTAL();
+		}
+		recordTotal += shuttleBuses.size();
+
+		List<OtherFare> otherFares = roomService.getCertainOtherFaresByDay(num,guestService.getGuestByRoomNumber(num).getID().toString(),date);
+		for(OtherFare otherFare : otherFares){
+			sum += otherFare.getTOTAL_PRICE();
+		}
+		recordTotal += otherFares.size();
+
+		//能源费
+		//水费
+		List<Sources> waters = serverService.getCertainSourcesByDay(num,name,"water",date);
+//		RoomMeter meter = roomService.getMeter(roomService.getRoomByNumber(num).getID(),"water");
+//		double waterSum = meter.getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources water : waters){
+			sum += water.getMONEY();
+		}
+		recordTotal += waters.size();
+
+		//电费
+		List<Sources> elecs = serverService.getCertainSourcesByDay(num,name,"elec",date);
+//		meter = roomService.getMeter(roomService.getRoomByNumber(num).getID(),"elec");
+//		double elecSum = meter.getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources elec : elecs){
+			sum += elec.getMONEY();
+		}
+		recordTotal += waters.size();
+
+		//燃气费
+		List<Sources> gass = serverService.getCertainSourcesByDay(num,name,"gas",date);
+//		List<RoomMeter> meters = roomService.getMeters(roomService.getRoomByNumber(num).getID(),"gas",0,2);
+//		double gasSum = meters.get(0).getMONEY() + meters.get(1).getMONEY();
+//		sum += meter.getMONEY();
+		for(Sources gas : gass){
+			sum += gas.getMONEY();
+		}
+		recordTotal += waters.size();
+
+
+		//LE承担费用
+		List<CostLe> costLes = roomService.getCertainCostLesByDay(num,name,date);
+		for(CostLe costLe : costLes){
+			sum += costLe.getCOST();
+		}
+		recordTotal += costLes.size();
+
+		ans.put("laundry",laundrys);
+		ans.put("meal",meals);
+		ans.put("drinkingwater",drinkingWaters);
+		ans.put("shoespolishing",shoesPolishings);
+		ans.put("agentpurchase",agentPurchases);
+		ans.put("shuttlebus",shuttleBuses);
+		ans.put("otherfare",otherFares);
+		ans.put("watersource",waters);
+		ans.put("elecsource",elecs);
+		ans.put("gassource",gass);
+//		ans.put("watersum",waterSum);
+//		ans.put("elecsum",elecSum);
+//		ans.put("gassum",gasSum);
+		ans.put("costle",costLes);
+
+
+		ans.put("Total",sum);
+		ans.put("recordTotal",recordTotal);
+
+		return ans;
+	}
 }
 
 

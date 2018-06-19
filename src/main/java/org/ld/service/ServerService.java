@@ -17,6 +17,10 @@ public interface ServerService {
 
 	List<Sources> searchSource(String rn, String type, int st, int eachPage);
 
+	List<Sources> getCertainSources(String rn,String guestname, String type,String date);
+
+	List<Sources> getCertainSourcesByDay(String rn,String guestname, String type,String date);
+
 	List<Sources> searchExactSource(String rn, String type, int st, int eachPage);//房间号精切查询
 
 	int addDailyService(DailyService service);
@@ -56,7 +60,11 @@ public interface ServerService {
 	int getTotalShoeCleaningRow(String rn , String date);//lyd
 	
 	List<ShoesPolishing> searchShoeCleaning(String rn, String date , int st, int eachPage);//lyd
-	
+
+	List<ShoesPolishing> getCertainShoesPolishings(String num,String guestId,String date);
+
+	List<ShoesPolishing> getCertainShoesPolishingsByDay(String num,String guestId,String date);
+
 	int deleteShoesPolishing(Integer id);
 	
 	ShoesPolishing getShoesPolishingById(Integer id);
@@ -76,10 +84,18 @@ public interface ServerService {
 	int updateAgentPurchase(AgentPurchase agent);
 	
 	List<AgentPurchase> getAllAgentPurchase(String rn , String date);//lyd
-	
+
+	List<AgentPurchase> getCertainAgentPurchases(String num,String guestId,String date);
+
+	List<AgentPurchase> getCertainAgentPurchasesByDay(String num,String guestId,String date);
+
 	List<ShoesPolishing> getAllShoesPolishing(String rn , String date);//lyd
 	
 	List<Meal> getAllMeal(String rn , String date);//by liyidan
+
+	List<Meal> getCertainMeals(String num,String guestId,String date);
+
+	List<Meal> getCertainMealsByDay(String num,String guestId,String date);
 
 	int addExpenseOfLE(CostLe cost);
 }

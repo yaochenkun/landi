@@ -559,4 +559,10 @@
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
     select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and YEAR = #{YEAR} and MONTH = #{MON}
   </select>
+  <select id="getCertainShuttleBuses" resultMap="BaseResultMap" parameterType="map">
+    select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and date_format(OCCUR_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainShuttleBusesByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from shuttle_bus where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

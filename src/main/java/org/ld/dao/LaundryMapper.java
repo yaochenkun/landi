@@ -24,8 +24,11 @@ public interface LaundryMapper {
     List<Laundry> getAll(HashMap<String, Object> map);
     
     List<Laundry> getRec(HashMap<String, Object> map);
-    
+
     Laundry getCertainRec(HashMap<String, Object> map);
-    
-    
+
+    List<Laundry> getCertainRecs(HashMap<String, Object> map);
+
+    List<Laundry> getCertainRecsByDay(HashMap<String, Object> map);
+
 }

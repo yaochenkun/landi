@@ -24,4 +24,8 @@ public interface OtherFareMapper {
     int getTotal(Map<String, Object> map);
     List<OtherFare> getByPage(Map<String, Object> map);
     List<OtherFare> getAll(Map<String, Object> map);
+
+    List<OtherFare> getCertainOtherFares(Map<String, Object> map);
+    List<OtherFare> getCertainOtherFaresByDay(Map<String, Object> map);
+
 }

@@ -103,7 +103,7 @@
 						<li><a href="${pageContext.request.contextPath}/views/user/office/shopManage.jsp">小卖铺</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/source/sourceIndex.jsp">能源费结算</a></li>
 						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/expenseIndex.jsp">LE承担费用</a></li>
-						<li><a href="#">月结管理</a></li>
+						<li><a href="${pageContext.request.contextPath}/views/user/roomService/expense/statement/statementIndex.jsp">月结管理</a></li>
 					</ul>
 				</div>
 				<!-- 客房服务 end -->

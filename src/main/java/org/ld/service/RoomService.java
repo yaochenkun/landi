@@ -50,6 +50,10 @@ public interface RoomService {
 
 	List<CostLe> searchAllExpense(String rnum,String type);
 
+	List<CostLe> getCertainCostLes(String num,String guestName,String date);
+
+	List<CostLe> getCertainCostLesByDay(String num,String guestName,String date);
+
 
 	/**
 	 * 能源
@@ -82,7 +86,11 @@ public interface RoomService {
 	List<Laundry> getLaundry(String rn, String date, Integer st, Integer eachPage); //date parameter changed
 	
 	Laundry getCertainLaundry(String rn, Integer gid, Date date);
-	
+
+	List<Laundry> getCertainLaundrys(String rn, Integer gid, String date);
+
+	List<Laundry> getCertainLaundrysByDay(String rn, Integer gid, String date);
+
 	int addWash(Laundry l);
 	
 	int updateWash(Laundry l);
@@ -103,7 +111,11 @@ public interface RoomService {
 	List<ShuttleBus> getShuttleBus(String rn, Integer year, Integer mon, Integer st, Integer eachPage);
 	
 	ShuttleBus getCertainShuttleBus(String rn, Integer gid, Integer year, Integer mon);
-	
+
+	List<ShuttleBus> getCertainShuttleBuses(String num,String guestId,String date);
+
+	List<ShuttleBus> getCertainShuttleBusesByDay(String num,String guestId,String date);
+
 	int addShuttleBus(ShuttleBus sb);
 	
 	int updateShuttleBus(ShuttleBus sb);
@@ -153,7 +165,9 @@ public interface RoomService {
 	int getTotalOtherFares(String roomNum, String occurTime); //lyd
     List<OtherFare> getOtherFaresByPage(String roomNum, String occurTime, int startPage, int eachPage);//lyd
     List<OtherFare> getAllOtherFares(String roomNum, String occurTime); //lyd
-    int deleteOtherFareById(Integer id);
+	List<OtherFare> getCertainOtherFares(String num,String guestId,String date);
+	List<OtherFare> getCertainOtherFaresByDay(String num,String guestId,String date);
+	int deleteOtherFareById(Integer id);
     OtherFare getOtherFareById(Integer id);
     int updateOtherFare(OtherFare bean);
     
@@ -167,7 +181,9 @@ public interface RoomService {
     int getTotalDrinkingWaters(String roomNum, String occurTime);//lyd
     List<DrinkingWater> getDrinkingWatersByPage(String roomNum, String occurTime, int startPage, int eachPage);//lyd
     List<DrinkingWater> getAllDrinkingWaters(String roomNum, String occurTime); //lyd
-    int deleteWaterBillById(Integer id);
+	List<DrinkingWater> getCertainDrinkingWaters(String num,String guestId,String date);
+	List<DrinkingWater> getCertainDrinkingWatersByDay(String num,String guestId,String date);
+	int deleteWaterBillById(Integer id);
     DrinkingWater getDrinkingWater(Integer id);
     int updateDrinkingWater(DrinkingWater bean);
     int updateAfterDrinkingWaters(Integer guestId, Date importTime, int barrelCountDiff, int bottleCountDiff, double excessPriceDiff, Date editTime);

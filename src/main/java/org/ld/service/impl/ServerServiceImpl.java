@@ -230,7 +230,38 @@ public class ServerServiceImpl implements ServerService {
 		}
 
 	}
-	
+
+	@Override
+	public List<Meal> getCertainMeals(String num,String guestId,String date){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
+
+		return mealMapper.getCertainMeals(map);
+	}
+
+	@Override
+	public List<Meal> getCertainMealsByDay(String num,String guestId,String date){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("RN", num);
+			map.put("GID", guestId);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return mealMapper.getCertainMealsByDay(map);
+
+		}catch (Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+
 	@Override
 	public List<Meal> searchMeal(String rn, String date,int st, int eachPage){
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -515,5 +546,94 @@ public class ServerServiceImpl implements ServerService {
 			return 0;
 		}
 	}
-	
+
+
+	@Override
+	public List<ShoesPolishing> getCertainShoesPolishings(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
+
+		return shoesPolishingMapper.getCertainShoesPolishings(map);
+	}
+
+	@Override
+	public List<ShoesPolishing> getCertainShoesPolishingsByDay(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", num);
+			map.put("GID", guestId);
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return shoesPolishingMapper.getCertainShoesPolishingsByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<AgentPurchase> getCertainAgentPurchases(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
+
+		return agentPurchaseMapper.getCertainAgentPurchases(map);
+	}
+
+	@Override
+	public List<AgentPurchase> getCertainAgentPurchasesByDay(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", num);
+			map.put("GID", guestId);
+			Date start= new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return agentPurchaseMapper.getCertainAgentPurchasesByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<Sources> getCertainSources(String rn, String guestname , String type, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("GNAME", guestname);
+		map.put("TYPE", type);
+		map.put("DATE", date);
+
+		return sourcesMapper.getCertainSources(map);
+	}
+
+	@Override
+	public List<Sources> getCertainSourcesByDay(String rn, String guestname , String type, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", rn);
+			map.put("GNAME", guestname);
+			map.put("TYPE", type);
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return sourcesMapper.getCertainSourcesByDay(map);
+		}catch (Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
 }

@@ -191,4 +191,10 @@
   <select id="getCertainRec" resultMap="BaseResultMap" parameterType="map">
     select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and DATE = #{DATE}
   </select>
+  <select id="getCertainRecs" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and date_format(DATE,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainRecsByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from laundry where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and DATE >= #{STARTDATE} and DATE &lt;= #{ENDDATE}
+  </select>
 </mapper>

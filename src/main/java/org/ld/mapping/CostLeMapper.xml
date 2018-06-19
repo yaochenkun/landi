@@ -181,4 +181,10 @@
     from cost_le
     where STATE = 1 AND  TYPE = #{TYPE} AND ROOM_NUM like concat('%', #{Room_Number},'%')
   </select>
+  <select id="getCertainCostLes" resultMap="BaseResultMap" parameterType="map">
+    select * from cost_le where ROOM_NUM = #{RN} and GUEST_NAME = #{GNAME} and date_format(OCCUR_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainCostLesByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from cost_le where ROOM_NUM = #{RN} and GUEST_NAME = #{GNAME} and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

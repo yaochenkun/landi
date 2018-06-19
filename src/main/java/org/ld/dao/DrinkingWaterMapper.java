@@ -28,4 +28,7 @@ public interface DrinkingWaterMapper {
     List<DrinkingWater> selectByPage(Map<String, Object> map);
     List<DrinkingWater> selectAll(Map<String, Object> map);
     int updateAfterTime(Map<String, Object> map);
+    List<DrinkingWater> getCertainDrinkingWaters(Map<String,Object> map);
+    List<DrinkingWater> getCertainDrinkingWatersByDay(Map<String,Object> map);
+
 }

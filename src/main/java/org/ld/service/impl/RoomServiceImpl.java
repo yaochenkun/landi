@@ -46,7 +46,8 @@ public class RoomServiceImpl implements RoomService {
 	private CostLeMapper costLeMapper;
 	@Autowired
 	private SourcesMapper sourcesMapper;
-
+	@Autowired
+	private MealMapper mealMapper;
 	@Override
 	public Room getRoomById(int id) {
 		// TODO Auto-generated method stub
@@ -406,6 +407,39 @@ public class RoomServiceImpl implements RoomService {
 		
 		return laundryMapper.getCertainRec(map);
 	}
+
+	@Override
+	public List<Laundry> getCertainLaundrys(String rn, Integer gid, String date) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", rn);
+		map.put("GID", gid);
+		map.put("DATE", date);
+
+		return laundryMapper.getCertainRecs(map);
+	}
+
+	@Override
+	public List<Laundry> getCertainLaundrysByDay(String rn, Integer gid, String date) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+
+			map.put("RN", rn);
+			map.put("GID", gid);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return laundryMapper.getCertainRecsByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
 
 	@Override
 	public int deleteWash(Integer id) {
@@ -1049,5 +1083,120 @@ public class RoomServiceImpl implements RoomService {
 		}
 	}
 
+	@Override
+	public List<DrinkingWater> getCertainDrinkingWaters(String num,String guestId,String date){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
 
+		return drinkingWaterMapper.getCertainDrinkingWaters(map);
+	}
+
+	@Override
+	public List<DrinkingWater> getCertainDrinkingWatersByDay(String num,String guestId,String date){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end  = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("RN", num);
+			map.put("GID", guestId);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return drinkingWaterMapper.getCertainDrinkingWatersByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<ShuttleBus> getCertainShuttleBuses(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
+
+		return shuttleBusMapper.getCertainShuttleBuses(map);
+	}
+
+	@Override
+	public List<ShuttleBus> getCertainShuttleBusesByDay(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", num);
+			map.put("GID", guestId);
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return shuttleBusMapper.getCertainShuttleBusesByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<OtherFare> getCertainOtherFares(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GID", guestId);
+		map.put("DATE", date);
+
+		return otherFareMapper.getCertainOtherFares(map);
+	}
+
+	@Override
+	public List<OtherFare> getCertainOtherFaresByDay(String num, String guestId, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", num);
+			map.put("GID", guestId);
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return otherFareMapper.getCertainOtherFaresByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
+
+	@Override
+	public List<CostLe> getCertainCostLes(String num, String guestName, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("RN", num);
+		map.put("GNAME", guestName);
+		map.put("DATE", date);
+
+		return costLeMapper.getCertainCostLes(map);
+	}
+
+	@Override
+	public List<CostLe> getCertainCostLesByDay(String num, String guestName, String date) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		try{
+			map.put("RN", num);
+			map.put("GNAME", guestName);
+			Date start = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[0]);
+			Date end = new SimpleDateFormat("yyyy-MM-dd").parse(date.split(" ")[2]);
+			map.put("STARTDATE", start);
+			map.put("ENDDATE", end);
+
+			return costLeMapper.getCertainCostLesByDay(map);
+		}catch(Exception e){
+			logger.error(e.getCause());
+			return null;
+		}
+
+	}
 }

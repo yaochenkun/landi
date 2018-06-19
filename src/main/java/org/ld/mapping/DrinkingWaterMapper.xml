@@ -317,4 +317,10 @@
     where GUEST_ID = #{GUEST_ID,jdbcType=INTEGER}
     and   IMPORT_TIME &gt; #{IMPORT_TIME}
   </update>
+  <select id="getCertainDrinkingWaters" resultMap="BaseResultMap" parameterType="map">
+    select * from drinking_water where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and date_format(OCCUR_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainDrinkingWatersByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from drinking_water where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

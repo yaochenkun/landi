@@ -233,4 +233,10 @@
       and SYS_STATE = 1 and GUEST_NAME = #{GUEST}
     </if>
   </select>
+  <select id="getCertainSources" resultMap="BaseResultMap" parameterType="map">
+    select * from sources where ROOM_NUMBER = #{RN} and GUEST_NAME = #{GNAME} and TYPE = #{TYPE} and date_format(READING_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainSourcesByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from sources where ROOM_NUMBER = #{RN} and GUEST_NAME = #{GNAME} and TYPE = #{TYPE} and READING_TIME >= #{STARTDATE} and READING_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

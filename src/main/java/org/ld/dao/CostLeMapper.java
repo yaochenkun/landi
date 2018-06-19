@@ -24,4 +24,8 @@ public interface CostLeMapper {
 
     List<CostLe> getAllExpenseBySearch(Map<String,Object> map);
 
+    List<CostLe> getCertainCostLes(Map<String,Object> map);
+
+    List<CostLe> getCertainCostLesByDay(Map<String,Object> map);
+
 }

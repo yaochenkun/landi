@@ -25,4 +25,9 @@ public interface MealMapper {
 	List<Meal> getAllMealRange(Map<String, Object> map);
 	
 	List<Meal> getAll(Map<String , Object> map);
+
+	List<Meal> getCertainMeals(Map<String,Object> map);
+
+    List<Meal> getCertainMealsByDay(Map<String,Object> map);
+
 }

@@ -229,4 +229,10 @@
       and OCCUR_TIME >= #{START_DATE} and OCCUR_TIME &lt;= #{END_DATE}
     </if>
   </select>
+  <select id="getCertainAgentPurchases" resultMap="BaseResultMap" parameterType="map">
+    select * from agent_purchase where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and date_format(OCCUR_TIME,"%Y年%m月") = #{DATE}
+  </select>
+  <select id="getCertainAgentPurchasesByDay" resultMap="BaseResultMap" parameterType="map">
+    select * from agent_purchase where ROOM_NUM = #{RN} and GUEST_ID = #{GID} and OCCUR_TIME >= #{STARTDATE} and OCCUR_TIME &lt;= #{ENDDATE}
+  </select>
 </mapper>

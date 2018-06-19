@@ -27,4 +27,9 @@ public interface AgentPurchaseMapper {
     List<AgentPurchase> getAllAgentPurchaseServiceRange(Map<String, Object> map);
     
     List<AgentPurchase> getAll(Map<String, Object> map);
+
+    List<AgentPurchase> getCertainAgentPurchases(Map<String, Object> map);
+
+    List<AgentPurchase> getCertainAgentPurchasesByDay(Map<String, Object> map);
+
 }
